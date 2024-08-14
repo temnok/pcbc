@@ -1,4 +1,4 @@
-module temnok/lab/t2d
+module temnok/lab
 
 go 1.22
 
