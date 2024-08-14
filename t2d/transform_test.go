@@ -80,8 +80,8 @@ func TestAscii(t *testing.T) {
 					if val == ' ' {
 						continue
 					}
-					a := test.transform.Point(Vector{float32(x), float32(y)})
-					b := test.transform.Point(Vector{float32(x + 1), float32(y + 1)})
+					a := test.transform.Point(Vector{float64(x), float64(y)})
+					b := test.transform.Point(Vector{float64(x + 1), float64(y + 1)})
 					x0, y0 := int(min(a[0], b[0])), int(min(a[1], b[1]))
 					x1, y1 := int(max(a[0], b[0])), int(max(a[1], b[1]))
 					for len(buf) < y1 {

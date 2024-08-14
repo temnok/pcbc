@@ -2,7 +2,7 @@ package t2d
 
 import "math"
 
-type Vector [2]float32
+type Vector [2]float64
 
 type Transform [3]Vector
 
@@ -51,8 +51,8 @@ func (a Transform) Move(b Vector) Transform {
 func Rotate(a float64) Transform {
 	// cos(a) -sin(a)  0
 	// sin(a)  cos(a)  0
-	sin := float32(math.Sin(a))
-	cos := float32(math.Cos(a))
+	sin := math.Sin(a)
+	cos := math.Cos(a)
 	return Transform{
 		{
 			cos,
