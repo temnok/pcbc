@@ -1,14 +1,14 @@
 package glyph
 
 type Builder struct {
-	addSegment    func(x0, x1, y int)
+	buf           *buffer
 	started       bool
 	x0, x1, y, py int
 }
 
-func New(addSegment func(x0, x1, y int)) *Builder {
+func New() *Builder {
 	return &Builder{
-		addSegment: addSegment,
+		buf: &buffer{},
 	}
 }
 
@@ -28,7 +28,7 @@ func (b *Builder) AddPoint(x, y int) {
 		return
 	}
 
-	b.push(y)
+	b.addSegments(y)
 
 	b.py = b.y
 	b.y = y
@@ -36,14 +36,18 @@ func (b *Builder) AddPoint(x, y int) {
 }
 
 func (b *Builder) FinishContour() {
-	b.push(b.y)
+	b.addSegments(b.y)
 
 	b.started = false
 }
 
-func (b *Builder) push(y int) {
-	b.addSegment(b.x0, b.x1, b.y)
+func (b *Builder) Build() *Glyph {
+	return b.buf.toGlyph()
+}
+
+func (b *Builder) addSegments(y int) {
+	b.buf.addSegment(b.x0, b.x1, b.y)
 	if y == b.py {
-		b.addSegment(b.x0, b.x1, b.y)
+		b.buf.addSegment(b.x0, b.x1, b.y)
 	}
 }
