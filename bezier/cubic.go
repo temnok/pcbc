@@ -4,8 +4,11 @@ import "math"
 
 func CubicPoint(p []Point, t float64) Point {
 	ab := p[0].Mix(p[1], t)
+	bc := p[1].Mix(p[2], t)
 	cd := p[2].Mix(p[3], t)
-	return ab.Mix(cd, t)
+	abc := ab.Mix(bc, t)
+	bcd := bc.Mix(cd, t)
+	return abc.Mix(bcd, t)
 }
 
 func CubicVisit(points []Point, visit func(x, y int)) {
@@ -26,16 +29,16 @@ func CubicVisit(points []Point, visit func(x, y int)) {
 }
 
 func cubicSteps(points []Point) int {
-	return 3 * int(maxDist(points))
+	return 3 * totalDist(points)
 }
 
-func maxDist(points []Point) float64 {
-	maxD := 0.0
+func totalDist(points []Point) int {
+	totalD := 0
 	for i := 1; i < len(points); i++ {
 		a, b := points[i-1], points[i]
-		if d := max(math.Abs(a.X-b.X), math.Abs(a.Y-b.Y)); d > maxD {
-			maxD = d
-		}
+		dx, dy := math.Round(math.Abs(a.X-b.X)), math.Round(math.Abs(a.Y-b.Y))
+		d := int(max(dx, dy))
+		totalD += d
 	}
-	return maxD
+	return totalD
 }
