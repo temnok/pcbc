@@ -5,6 +5,7 @@ import (
 	"image/color"
 	"image/png"
 	"os"
+	"temnok/lab/bezier"
 	"testing"
 )
 
@@ -53,6 +54,36 @@ func xTestBitmap_SavePng(t *testing.T) {
 	assert.NoError(t, err)
 
 	im := bm.ToImage(color.Black, color.White)
+	assert.NoError(t, png.Encode(f, im))
+	assert.NoError(t, f.Close())
+}
+
+func xTestBitmap_SaveBrush(t *testing.T) {
+	b := NewBitmap(40, 40)
+	b.Segments(20, 20, NewRoundBrush(20))
+
+	f, err := os.Create("brush.png")
+	assert.NoError(t, err)
+
+	im := b.ToImage(color.Black, color.White)
+	assert.NoError(t, png.Encode(f, im))
+	assert.NoError(t, f.Close())
+}
+
+func xTestBitmap_SaveBezier(t *testing.T) {
+	b := NewBitmap(100, 100)
+	brush := NewRoundBrush(10)
+
+	b.Segments(35, 25, brush)
+	b.Segments(65, 25, brush)
+	bezier.CubicVisit([]bezier.Point{{25, 50}, {25, 75}, {75, 75}, {75, 50}}, func(x, y int) {
+		b.Segments(x, y, brush)
+	})
+
+	f, err := os.Create("bezier.png")
+	assert.NoError(t, err)
+
+	im := b.ToImage(color.Black, color.White)
 	assert.NoError(t, png.Encode(f, im))
 	assert.NoError(t, f.Close())
 }

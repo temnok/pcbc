@@ -12,10 +12,6 @@ type Bitmap struct {
 	w, h  int
 }
 
-type Segment struct {
-	X0, X1, Y int16
-}
-
 func NewBitmap(w, h int) *Bitmap {
 	if w <= 0 || h <= 0 {
 		panic(fmt.Errorf("invalid bitmap w=%v or h=%v", w, h))
@@ -42,18 +38,19 @@ func (b *Bitmap) Segment(x0, x1, y int) {
 	}
 
 	i0, i1 := b.addr(x0, y), b.addr(x1-1, y)
+	j0, j1 := x0%64, (x1-1)%64+1
 
 	if i0 == i1 {
-		b.elems[i0] |= mask(x0%64, x1%64)
+		b.elems[i0] |= mask(j0, j1)
 
 		return
 	}
 
-	b.elems[i0] |= mask(x0%64, 64)
+	b.elems[i0] |= mask(j0, 64)
 	for i := i0 + 1; i < i1; i++ {
 		b.elems[i] = math.MaxUint64
 	}
-	b.elems[i1] |= mask(0, (x1-1)%64+1)
+	b.elems[i1] |= mask(0, j1)
 }
 
 func (b *Bitmap) Segments(x, y int, segs []Segment) {
