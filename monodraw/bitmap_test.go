@@ -88,7 +88,7 @@ func xTestBitmap_SaveBezier(t *testing.T) {
 	assert.NoError(t, f.Close())
 }
 
-func x	TestBitmap_SaveRect(t *testing.T) {
+func xTestBitmap_SaveRect(t *testing.T) {
 	b := NewBitmap(2000, 2000)
 	brush := NewRoundBrush(10)
 
