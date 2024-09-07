@@ -11,20 +11,23 @@ func CubicPoint(p []Point, t float64) Point {
 	return abc.Mix(bcd, t)
 }
 
-func CubicVisit(points []Point, visit func(x, y int)) {
-	prev := points[0].Round()
+func CubicVisit(allPoints []Point, visit func(x, y int)) {
+	prev := allPoints[0].Round()
 	visit(int(prev.X), int(prev.Y))
 
-	steps := cubicSteps(points)
-	for i := 1; i <= steps; i++ {
-		t := float64(i) / float64(steps)
-		cur := CubicPoint(points, t).Round()
-		if cur == prev {
-			continue
-		}
+	for s := 0; s+3 < len(allPoints); s += 3 {
+		points := allPoints[s : s+4]
+		steps := cubicSteps(points)
+		for i := 1; i <= steps; i++ {
+			t := float64(i) / float64(steps)
+			cur := CubicPoint(points, t).Round()
+			if cur == prev {
+				continue
+			}
 
-		visit(int(cur.X), int(cur.Y))
-		prev = cur
+			visit(int(cur.X), int(cur.Y))
+			prev = cur
+		}
 	}
 }
 
