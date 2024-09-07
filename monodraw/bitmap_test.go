@@ -71,19 +71,19 @@ func xTestBitmap_SaveBrush(t *testing.T) {
 }
 
 func xTestBitmap_SaveBezier(t *testing.T) {
-	b := NewBitmap(100, 100)
-	brush := NewRoundBrush(10)
+	b := NewBitmap(1000, 1000)
+	brush := NewRoundBrush(20)
 
-	b.Segments(35, 25, brush)
-	b.Segments(65, 25, brush)
-	bezier.CubicVisit([]bezier.Point{{25, 50}, {25, 75}, {75, 75}, {75, 50}}, func(x, y int) {
+	b.Segments(350, 250, brush)
+	b.Segments(650, 250, brush)
+	bezier.CubicVisit([]bezier.Point{{250, 500}, {250, 750}, {750, 750}, {750, 500}}, VisitDotted(40, func(x, y int) {
 		b.Segments(x, y, brush)
-	})
+	}))
 
 	f, err := os.Create("bezier.png")
 	assert.NoError(t, err)
 
-	im := b.ToImage(color.Black, color.White)
+	im := b.ToImage(color.RGBA{0, 0x80, 0, 0xff}, color.RGBA{0xff, 0x80, 0, 0xff})
 	assert.NoError(t, png.Encode(f, im))
 	assert.NoError(t, f.Close())
 }
