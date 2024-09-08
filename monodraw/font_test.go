@@ -7,6 +7,7 @@ import (
 	"os"
 	"temnok/lab/bezier"
 	"temnok/lab/font"
+	"temnok/lab/t2d"
 	"testing"
 )
 
@@ -17,6 +18,8 @@ func TestFont_SavePng(t *testing.T) {
 	brush := NewRoundBrush(font.Normal * scale)
 
 	fontData := font.Lines
+
+	transform := t2d.Identity() // t2d.Transform{{1, 0}, {-0.25, 1}}
 
 	for i := 0; i < 14; i++ {
 		for j := 0; j < 16; j++ {
@@ -31,11 +34,14 @@ func TestFont_SavePng(t *testing.T) {
 			for _, stroke := range fontData[c] {
 				var px, py float64
 
-				for _, p := range stroke {
+				for step, p := range stroke {
 					x := x0 + p.X*scale
 					y := y0 + p.Y*scale
 
-					if px != 0 {
+					v := transform.Point(t2d.Vector{x, y})
+					x, y = v[0], v[1]
+
+					if step != 0 {
 						bezier.CubicVisit([]bezier.Point{{px, py}, {px, py}, {x, y}, {x, y}}, func(x, y int) {
 							b.Segments(x, y, brush)
 						})
