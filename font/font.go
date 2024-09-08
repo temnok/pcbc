@@ -1,6 +1,40 @@
-package monodraw
+package font
 
-var font = [][][]byte{
+type Point struct {
+	X, Y float64
+}
+
+const (
+	Width = 0.65 // relative to height = 1
+
+	Light  = 0.08
+	Normal = 0.12
+	Bold   = 0.16
+)
+
+/*
+
+11  12  13  14  15
+
+21  22  23  24  25
+
+31  32  33  34  35
+
+41  42  43  44  45
+
+51  52  53  54  55
+
+61  62  63  64  65
+
+71  72  73  74  75
+
+81  82  83  84  85
+
+91  92  93  94  95
+
+*/
+
+var data = [256][][]byte{
 	'!':  {{13, 53}, {73, 73}},
 	'"':  {{12, 32}, {14, 34}},
 	'#':  {{12, 72}, {14, 74}, {31, 35}, {51, 55}},
@@ -105,24 +139,19 @@ var font = [][][]byte{
 	'~': {{41, 32, 54, 45}},
 }
 
-/*
+var Lines = [256][][]Point{}
 
-11  12  13  14  15
+func init() {
+	for i, lines := range data {
+		Lines[i] = make([][]Point, len(lines))
 
-21  22  23  24  25
-
-31  32  33  34  35
-
-41  42  43  44  45
-
-51  52  53  54  55
-
-61  62  63  64  65
-
-71  72  73  74  75
-
-81  82  83  84  85
-
-91  92  93  94  95
-
-*/
+		for j, points := range lines {
+			for _, p := range points {
+				Lines[i][j] = append(Lines[i][j], Point{
+					X: float64(p%10) / 10.0,
+					Y: float64(p/10) / 10.0,
+				})
+			}
+		}
+	}
+}

@@ -6,29 +6,34 @@ import (
 	"image/png"
 	"os"
 	"temnok/lab/bezier"
+	"temnok/lab/font"
 	"testing"
 )
 
 func TestFont_SavePng(t *testing.T) {
-	b := NewBitmap(16*130, 16*200)
-	brush := NewRoundBrush(24) // light:16, norm:24, bold:32
+	const scale = 200.0
 
-	for i := 0; i < 16; i++ {
+	b := NewBitmap(16*scale*font.Width, 6*scale)
+	brush := NewRoundBrush(font.Normal * scale)
+
+	fontData := font.Lines
+
+	for i := 0; i < 14; i++ {
 		for j := 0; j < 16; j++ {
-			c := i*16 + j
+			c := (i+2)*16 + j
 
-			if c >= len(font) || len(font[c]) == 0 {
+			if fontData[c] == nil {
 				continue
 			}
 
-			x0, y0 := float64(j*130), float64(i*200)
+			x0, y0 := float64(j)*scale*font.Width, float64(i)*scale
 
-			for _, stroke := range font[c] {
+			for _, stroke := range fontData[c] {
 				var px, py float64
 
 				for _, p := range stroke {
-					x := x0 + float64(10+(p%10)*20)
-					y := y0 + float64(10+(p/10)*20)
+					x := x0 + p.X*scale
+					y := y0 + p.Y*scale
 
 					if px != 0 {
 						bezier.CubicVisit([]bezier.Point{{px, py}, {px, py}, {x, y}, {x, y}}, func(x, y int) {
