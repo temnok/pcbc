@@ -12,7 +12,7 @@ func TestFont_SavePng(t *testing.T) {
 	const scale = 200.0
 
 	b := NewBitmap(16*scale*font.Width, 6*scale)
-	brush := NewRoundBrush(0.5 * font.Normal * scale)
+	brush := NewRoundBrush(font.Normal * scale)
 
 	fontData := font.Lines
 

@@ -66,14 +66,14 @@ func TestBitmap_SavePng(t *testing.T) {
 
 func TestBitmap_SaveBrush(t *testing.T) {
 	b := NewBitmap(40, 40)
-	b.Segments(20, 20, NewRoundBrush(10))
+	b.Segments(20, 20, NewRoundBrush(20))
 
 	savePng(t, "brush.png", b.ToImage(color.Black, color.White))
 }
 
 func TestBitmap_SaveBezier(t *testing.T) {
 	b := NewBitmap(1000, 1000)
-	brush := NewRoundBrush(10)
+	brush := NewRoundBrush(20)
 
 	b.Segments(350, 250, brush)
 	b.Segments(650, 250, brush)
@@ -86,7 +86,7 @@ func TestBitmap_SaveBezier(t *testing.T) {
 
 func TestBitmap_SaveRect(t *testing.T) {
 	b := NewBitmap(2000, 2000)
-	brush := NewRoundBrush(5)
+	brush := NewRoundBrush(10)
 
 	bezier.CubicVisit([]bezier.Point{
 		{200, 200}, {200, 200}, {1800, 200},
