@@ -7,7 +7,6 @@ import (
 
 func TestBuilder(t *testing.T) {
 	type point = struct{ x, y int }
-	type segment = struct{ x0, x1, y int }
 
 	tests := []struct {
 		contours [][]point

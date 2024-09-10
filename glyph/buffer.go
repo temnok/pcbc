@@ -25,6 +25,20 @@ func (b *buffer) addSegment(x0, x1, y int) {
 	(*rows)[y] = append((*rows)[y], x0, x1)
 }
 
+func (b *buffer) finishContour(y int) {
+	if b.upper == nil && b.lower == nil {
+		return
+	}
+
+	var row *[]int
+	if y -= b.y0; y >= 0 {
+		row = &b.upper[y]
+	} else {
+		row = &b.lower[^y]
+	}
+	*row = (*row)[:len(*row)&^3] // 4-align
+}
+
 func (b *buffer) rasterize(visit func(x0, x1, y int)) {
 	if b == nil {
 		return
@@ -45,7 +59,7 @@ func (b *buffer) rasterize(visit func(x0, x1, y int)) {
 				continue
 			}
 
-			visit(row[i0], row[i+3], b.y0+y)
+			visit(row[i0], row[i+3]+1, b.y0+y)
 			i0 = i + 4
 		}
 	}

@@ -31,6 +31,7 @@ func (b *Builder) AddContourPoint(x, y int) {
 
 func (b *Builder) FinishContour() {
 	b.addSegments(b.y)
+	b.buf.finishContour(b.y)
 
 	b.started = false
 }

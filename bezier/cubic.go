@@ -28,6 +28,10 @@ func CubicVisit(allPoints []twod.Coord, visit func(x, y int)) {
 				continue
 			}
 
+			if math.Abs(cur.Y-prev.Y) > 1 {
+				panic("CubicVisit(): interpolation error")
+			}
+
 			visit(int(cur.X), int(cur.Y))
 			prev = cur
 		}
