@@ -1,4 +1,4 @@
-package t2d
+package twod
 
 import (
 	"fmt"
@@ -20,7 +20,7 @@ func TestAscii(t *testing.T) {
 				"12",
 				"3.",
 			},
-			transform: Move(Vector{3, 2}),
+			transform: Move(Coord{3, 2}),
 			expected: []string{
 				".....",
 				".....",
@@ -33,7 +33,7 @@ func TestAscii(t *testing.T) {
 				"12",
 				"3.",
 			},
-			transform: Scale(Vector{3, 2}),
+			transform: Scale(Coord{3, 2}),
 			expected: []string{
 				"111222",
 				"111222",
@@ -46,7 +46,7 @@ func TestAscii(t *testing.T) {
 				"12",
 				"3.",
 			},
-			transform: Move(Vector{2, 0}).Rotate(90 * degree),
+			transform: Move(Coord{2, 0}).Rotate(90 * degree),
 			expected: []string{
 				"31",
 				".2",
@@ -57,7 +57,7 @@ func TestAscii(t *testing.T) {
 				"12",
 				"3.",
 			},
-			transform: Move(Vector{3, 2}).Scale(Vector{2, 3}).Move(Vector{0, 2}).Rotate(-90 * degree),
+			transform: Move(Coord{3, 2}).Scale(Coord{2, 3}).Move(Coord{0, 2}).Rotate(-90 * degree),
 			expected: []string{
 				".......",
 				".......",
@@ -80,10 +80,10 @@ func TestAscii(t *testing.T) {
 					if val == ' ' {
 						continue
 					}
-					a := test.transform.Point(Vector{float64(x), float64(y)})
-					b := test.transform.Point(Vector{float64(x + 1), float64(y + 1)})
-					x0, y0 := int(min(a[0], b[0])), int(min(a[1], b[1]))
-					x1, y1 := int(max(a[0], b[0])), int(max(a[1], b[1]))
+					a := test.transform.Point(Coord{float64(x), float64(y)})
+					b := test.transform.Point(Coord{float64(x + 1), float64(y + 1)})
+					x0, y0 := int(min(a.X, b.X)), int(min(a.Y, b.Y))
+					x1, y1 := int(max(a.X, b.X)), int(max(a.Y, b.Y))
 					for len(buf) < y1 {
 						newRow := make([]byte, len(buf[0]))
 						for i := range newRow {

@@ -4,7 +4,7 @@ import (
 	"image/color"
 	"temnok/lab/font"
 	"temnok/lab/line"
-	"temnok/lab/t2d"
+	"temnok/lab/twod"
 	"testing"
 )
 
@@ -16,7 +16,7 @@ func TestFont_SavePng(t *testing.T) {
 
 	fontData := font.Lines
 
-	transform := t2d.Identity() // t2d.Transform{{1, 0}, {-0.25, 1}}
+	transform := twod.Identity() // t2d.Transform{{1, 0}, {-0.25, 1}}
 
 	for i := 0; i < 14; i++ {
 		for j := 0; j < 16; j++ {
@@ -35,11 +35,11 @@ func TestFont_SavePng(t *testing.T) {
 					x := x0 + p.X*scale
 					y := y0 + p.Y*scale
 
-					v := transform.Point(t2d.Vector{x, y})
-					x, y = v[0], v[1]
+					v := transform.Point(twod.Coord{X: x, Y: y})
+					x, y = v.X, v.Y
 
 					if step != 0 {
-						//bezier.CubicVisit([]bezier.Point{{px, py}, {px, py}, {x, y}, {x, y}}, func(x, y int) {
+						//bezier.CubicVisit([]twod.Coord{{px, py}, {px, py}, {x, y}, {x, y}}, func(x, y int) {
 						//	b.Segments(x, y, brush)
 						//})
 						line.Rasterize(int(px), int(py), int(x), int(y), func(x, y int) {

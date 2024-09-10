@@ -3,6 +3,7 @@ package bezier
 import (
 	"math"
 	"math/rand"
+	"temnok/lab/twod"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -13,11 +14,11 @@ func TestCubicVisit_Random(t *testing.T) {
 	for range 10_000 {
 		points := randomPoints(4, random, 2048)
 
-		p := points[0].Round()
+		p := round(points[0])
 		i := 0
 
 		CubicVisit(points, func(x, y int) {
-			p1 := Point{float64(x), float64(y)}
+			p1 := twod.Coord{X: float64(x), Y: float64(y)}
 			if i == 0 {
 				assert.Equal(t, p, p1)
 			} else {
@@ -32,17 +33,17 @@ func TestCubicVisit_Random(t *testing.T) {
 			i++
 		})
 
-		assert.Equal(t, p, points[3].Round())
+		assert.Equal(t, p, round(points[3]))
 		assert.NotZero(t, i)
 	}
 }
 
-func randomPoints(n int, random *rand.Rand, rang float64) []Point {
-	points := make([]Point, n)
+func randomPoints(n int, random *rand.Rand, rang float64) []twod.Coord {
+	points := make([]twod.Coord, n)
 	for i := range points {
-		points[i] = Point{
-			random.Float64() * rang,
-			random.Float64() * rang,
+		points[i] = twod.Coord{
+			X: random.Float64() * rang,
+			Y: random.Float64() * rang,
 		}
 	}
 	return points

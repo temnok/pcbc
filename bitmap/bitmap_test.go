@@ -7,11 +7,12 @@ import (
 	"image/png"
 	"os"
 	"temnok/lab/bezier"
+	"temnok/lab/twod"
 	"testing"
 )
 
 func savePng(t *testing.T, name string, im image.Image) {
-	os.Mkdir("tmp", 0770)
+	_ = os.Mkdir("tmp", 0770)
 
 	f, err := os.Create("tmp/" + name)
 	assert.NoError(t, err)
@@ -77,18 +78,20 @@ func TestBitmap_SaveBezier(t *testing.T) {
 
 	b.Segments(350, 250, brush)
 	b.Segments(650, 250, brush)
-	bezier.CubicVisit([]bezier.Point{{250, 500}, {250, 750}, {750, 750}, {750, 500}}, VisitDotted(40, func(x, y int) {
+	bezier.CubicVisit([]twod.Coord{{250, 500}, {250, 750}, {750, 750}, {750, 500}}, VisitDotted(40, func(x, y int) {
 		b.Segments(x, y, brush)
 	}))
 
-	savePng(t, "bezier.png", b.ToImage(color.RGBA{0, 0x80, 0, 0xff}, color.RGBA{0xff, 0x80, 0, 0xff}))
+	bg := color.RGBA{R: 0, G: 0x80, B: 0, A: 0xff}
+	fg := color.RGBA{R: 0xff, G: 0x80, B: 0, A: 0xff}
+	savePng(t, "bezier.png", b.ToImage(bg, fg))
 }
 
 func TestBitmap_SaveRect(t *testing.T) {
 	b := NewBitmap(2000, 2000)
 	brush := NewRoundBrush(10)
 
-	bezier.CubicVisit([]bezier.Point{
+	bezier.CubicVisit([]twod.Coord{
 		{200, 200}, {200, 200}, {1800, 200},
 		{1800, 200}, {1800, 200}, {1800, 1800},
 		{1800, 1800}, {1800, 1800}, {200, 1800},
@@ -98,7 +101,7 @@ func TestBitmap_SaveRect(t *testing.T) {
 		b.Segments(x, y, brush)
 	})
 
-	bezier.CubicVisit([]bezier.Point{
+	bezier.CubicVisit([]twod.Coord{
 		{500, 500}, {500, 500}, {1500, 500},
 		{1500, 500}, {1500, 500}, {1500, 1500},
 		{1500, 1500}, {1500, 1500}, {500, 1500},

@@ -2,19 +2,20 @@ package bezier
 
 import (
 	"math"
+	"temnok/lab/twod"
 )
 
-func CubicPoint(p []Point, t float64) Point {
-	ab := p[0].Mix(p[1], t)
-	bc := p[1].Mix(p[2], t)
-	cd := p[2].Mix(p[3], t)
-	abc := ab.Mix(bc, t)
-	bcd := bc.Mix(cd, t)
-	return abc.Mix(bcd, t)
+func CubicPoint(p []twod.Coord, t float64) twod.Coord {
+	ab := mix(p[0], p[1], t)
+	bc := mix(p[1], p[2], t)
+	cd := mix(p[2], p[3], t)
+	abc := mix(ab, bc, t)
+	bcd := mix(bc, cd, t)
+	return mix(abc, bcd, t)
 }
 
-func CubicVisit(allPoints []Point, visit func(x, y int)) {
-	prev := allPoints[0].Round()
+func CubicVisit(allPoints []twod.Coord, visit func(x, y int)) {
+	prev := round(allPoints[0])
 	visit(int(prev.X), int(prev.Y))
 
 	for s := 0; s+3 < len(allPoints); s += 3 {
@@ -22,7 +23,7 @@ func CubicVisit(allPoints []Point, visit func(x, y int)) {
 		steps := cubicSteps(points)
 		for i := 1; i <= steps; i++ {
 			t := float64(i) / float64(steps)
-			cur := CubicPoint(points, t).Round()
+			cur := round(CubicPoint(points, t))
 			if cur == prev {
 				continue
 			}
@@ -33,11 +34,11 @@ func CubicVisit(allPoints []Point, visit func(x, y int)) {
 	}
 }
 
-func cubicSteps(points []Point) int {
+func cubicSteps(points []twod.Coord) int {
 	return 3 * totalDist(points)
 }
 
-func totalDist(points []Point) int {
+func totalDist(points []twod.Coord) int {
 	totalD := 0
 	for i := 1; i < len(points); i++ {
 		a, b := points[i-1], points[i]
@@ -46,4 +47,14 @@ func totalDist(points []Point) int {
 		totalD += d
 	}
 	return totalD
+}
+
+//go:inline
+func mix(a, b twod.Coord, t float64) twod.Coord {
+	return twod.Coord{X: a.X*(1-t) + b.X*t, Y: a.Y*(1-t) + b.Y*t}
+}
+
+//go:inline
+func round(a twod.Coord) twod.Coord {
+	return twod.Coord{X: math.Round(a.X), Y: math.Round(a.Y)}
 }

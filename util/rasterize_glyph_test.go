@@ -7,18 +7,17 @@ import (
 	"image/png"
 	"math"
 	"os"
-	"temnok/lab/bezier"
 	"temnok/lab/bitmap"
-	"temnok/lab/t2d"
+	"temnok/lab/twod"
 	"testing"
 )
 
 func TestGlyph(t *testing.T) {
 	bm := bitmap.NewBitmap(1000, 1000)
 
-	transform := t2d.Move(t2d.Vector{500, 500}).ScaleLocked(200).Rotate(150 * math.Pi / 180)
+	transform := twod.Move(twod.Coord{X: 500, Y: 500}).ScaleLocked(200).Rotate(150 * math.Pi / 180)
 
-	glyph := TransformAllPoints(transform, [][]bezier.Point{
+	glyph := TransformAllPoints(transform, [][]twod.Coord{
 		{
 			{-1, -1}, {-1, -1},
 			{1, -1}, {1, -1}, {1, -1},
@@ -37,7 +36,7 @@ func TestGlyph(t *testing.T) {
 }
 
 func savePng(t *testing.T, name string, im image.Image) {
-	os.Mkdir("tmp", 0770)
+	_ = os.Mkdir("tmp", 0770)
 
 	f, err := os.Create("tmp/" + name)
 	assert.NoError(t, err)
