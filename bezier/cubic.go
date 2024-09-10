@@ -1,6 +1,9 @@
 package bezier
 
-import "math"
+import (
+	"math"
+	"temnok/lab/t2d"
+)
 
 func CubicPoint(p []Point, t float64) Point {
 	ab := p[0].Mix(p[1], t)
@@ -9,6 +12,17 @@ func CubicPoint(p []Point, t float64) Point {
 	abc := ab.Mix(bc, t)
 	bcd := bc.Mix(cd, t)
 	return abc.Mix(bcd, t)
+}
+
+func TransformPoints(t t2d.Transform, points []Point) []Point {
+	res := make([]Point, len(points))
+
+	for i, p := range points {
+		r := t.Point(t2d.Vector{p.X, p.Y})
+		res[i].X, res[i].Y = r[0], r[1]
+	}
+
+	return res
 }
 
 func CubicVisit(allPoints []Point, visit func(x, y int)) {

@@ -96,6 +96,14 @@ func (a Transform) Scale(b Vector) Transform {
 	return a.Multiply(Scale(b))
 }
 
+func ScaleLocked(k float64) Transform {
+	return Scale(Vector{k, k})
+}
+
+func (a Transform) ScaleLocked(k float64) Transform {
+	return a.Multiply(ScaleLocked(k))
+}
+
 func (a Transform) Multiply(b Transform) Transform {
 	// a[0][0] a[1][0] a[2][0]     b[0][0] b[1][0] b[2][0]
 	// a[0][1] a[1][1] a[2][1]  *  b[0][1] b[1][1] b[2][1]
