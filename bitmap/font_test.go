@@ -1,12 +1,9 @@
-package monodraw
+package bitmap
 
 import (
-	"github.com/stretchr/testify/assert"
 	"image/color"
-	"image/png"
-	"os"
-	"temnok/lab/bezier"
 	"temnok/lab/font"
+	"temnok/lab/line"
 	"temnok/lab/t2d"
 	"testing"
 )
@@ -15,7 +12,7 @@ func TestFont_SavePng(t *testing.T) {
 	const scale = 200.0
 
 	b := NewBitmap(16*scale*font.Width, 6*scale)
-	brush := NewRoundBrush(font.Normal * scale)
+	brush := NewRoundBrush(0.5 * font.Normal * scale)
 
 	fontData := font.Lines
 
@@ -42,7 +39,10 @@ func TestFont_SavePng(t *testing.T) {
 					x, y = v[0], v[1]
 
 					if step != 0 {
-						bezier.CubicVisit([]bezier.Point{{px, py}, {px, py}, {x, y}, {x, y}}, func(x, y int) {
+						//bezier.CubicVisit([]bezier.Point{{px, py}, {px, py}, {x, y}, {x, y}}, func(x, y int) {
+						//	b.Segments(x, y, brush)
+						//})
+						line.Rasterize(int(px), int(py), int(x), int(y), func(x, y int) {
 							b.Segments(x, y, brush)
 						})
 					}
@@ -52,11 +52,5 @@ func TestFont_SavePng(t *testing.T) {
 		}
 	}
 
-	f, err := os.Create("font.png")
-	assert.NoError(t, err)
-
-	im := b.ToImage(color.White, color.Black)
-	assert.NoError(t, png.Encode(f, im))
-	assert.NoError(t, f.Close())
-
+	savePng(t, "font.png", b.ToImage(color.White, color.Black))
 }

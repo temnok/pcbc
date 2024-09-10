@@ -1,11 +1,8 @@
-package monodraw
+package bitmap
 
 import (
-	"github.com/stretchr/testify/assert"
 	"image/color"
-	"image/png"
 	"math"
-	"os"
 	"temnok/lab/bezier"
 	"temnok/lab/glyph"
 	"temnok/lab/t2d"
@@ -43,10 +40,5 @@ func TestGlyph(t *testing.T) {
 		bm.Segment(x0, x1, y)
 	})
 
-	f, err := os.Create("glyph.png")
-	assert.NoError(t, err)
-
-	im := bm.ToImage(color.Black, color.White)
-	assert.NoError(t, png.Encode(f, im))
-	assert.NoError(t, f.Close())
+	savePng(t, "glyph.png", bm.ToImage(color.Black, color.White))
 }

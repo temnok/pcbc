@@ -1,4 +1,4 @@
-package monodraw
+package bitmap
 
 import (
 	"image"

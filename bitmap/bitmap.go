@@ -1,4 +1,4 @@
-package monodraw
+package bitmap
 
 import (
 	"fmt"
@@ -17,11 +17,9 @@ func NewBitmap(w, h int) *Bitmap {
 		panic(fmt.Errorf("invalid bitmap w=%v or h=%v", w, h))
 	}
 
-	return &Bitmap{
-		elems: make([]uint64, ((w+63)/64)*h),
-		w:     w,
-		h:     h,
-	}
+	b := &Bitmap{w: w, h: h}
+	b.elems = make([]uint64, b.addr(w, h))
+	return b
 }
 
 func (b *Bitmap) Segment(x0, x1, y int) {

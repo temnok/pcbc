@@ -1,4 +1,4 @@
-package monodraw
+package bitmap
 
 func VisitDotted(d int, visit func(x, y int)) func(x, y int) {
 	type point struct{ x, y int32 }

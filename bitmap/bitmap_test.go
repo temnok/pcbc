@@ -1,13 +1,24 @@
-package monodraw
+package bitmap
 
 import (
 	"github.com/stretchr/testify/assert"
+	"image"
 	"image/color"
 	"image/png"
 	"os"
 	"temnok/lab/bezier"
 	"testing"
 )
+
+func savePng(t *testing.T, name string, im image.Image) {
+	os.Mkdir("tmp", 0770)
+
+	f, err := os.Create("tmp/" + name)
+	assert.NoError(t, err)
+
+	assert.NoError(t, png.Encode(f, im))
+	assert.NoError(t, f.Close())
+}
 
 func TestBitmap_Mask(t *testing.T) {
 	tests := []struct {
@@ -34,7 +45,7 @@ func TestBitmap_Mask(t *testing.T) {
 	}
 }
 
-func xTestBitmap_SavePng(t *testing.T) {
+func TestBitmap_SavePng(t *testing.T) {
 	const d = 1_000
 	bm := NewBitmap(8*d, 8*d)
 	for i := 0; i < 8; i++ {
@@ -50,29 +61,19 @@ func xTestBitmap_SavePng(t *testing.T) {
 		}
 	}
 
-	f, err := os.Create("chess.png")
-	assert.NoError(t, err)
-
-	im := bm.ToImage(color.Black, color.White)
-	assert.NoError(t, png.Encode(f, im))
-	assert.NoError(t, f.Close())
+	savePng(t, "chess.png", bm.ToImage(color.Black, color.White))
 }
 
-func xTestBitmap_SaveBrush(t *testing.T) {
+func TestBitmap_SaveBrush(t *testing.T) {
 	b := NewBitmap(40, 40)
-	b.Segments(20, 20, NewRoundBrush(20))
+	b.Segments(20, 20, NewRoundBrush(10))
 
-	f, err := os.Create("brush.png")
-	assert.NoError(t, err)
-
-	im := b.ToImage(color.Black, color.White)
-	assert.NoError(t, png.Encode(f, im))
-	assert.NoError(t, f.Close())
+	savePng(t, "brush.png", b.ToImage(color.Black, color.White))
 }
 
-func xTestBitmap_SaveBezier(t *testing.T) {
+func TestBitmap_SaveBezier(t *testing.T) {
 	b := NewBitmap(1000, 1000)
-	brush := NewRoundBrush(20)
+	brush := NewRoundBrush(10)
 
 	b.Segments(350, 250, brush)
 	b.Segments(650, 250, brush)
@@ -80,17 +81,12 @@ func xTestBitmap_SaveBezier(t *testing.T) {
 		b.Segments(x, y, brush)
 	}))
 
-	f, err := os.Create("bezier.png")
-	assert.NoError(t, err)
-
-	im := b.ToImage(color.RGBA{0, 0x80, 0, 0xff}, color.RGBA{0xff, 0x80, 0, 0xff})
-	assert.NoError(t, png.Encode(f, im))
-	assert.NoError(t, f.Close())
+	savePng(t, "bezier.png", b.ToImage(color.RGBA{0, 0x80, 0, 0xff}, color.RGBA{0xff, 0x80, 0, 0xff}))
 }
 
-func xTestBitmap_SaveRect(t *testing.T) {
+func TestBitmap_SaveRect(t *testing.T) {
 	b := NewBitmap(2000, 2000)
-	brush := NewRoundBrush(10)
+	brush := NewRoundBrush(5)
 
 	bezier.CubicVisit([]bezier.Point{
 		{200, 200}, {200, 200}, {1800, 200},
@@ -112,10 +108,5 @@ func xTestBitmap_SaveRect(t *testing.T) {
 		b.Segments(x, y, brush)
 	}))
 
-	f, err := os.Create("rect.png")
-	assert.NoError(t, err)
-
-	im := b.ToImage(color.Black, color.White)
-	assert.NoError(t, png.Encode(f, im))
-	assert.NoError(t, f.Close())
+	savePng(t, "rect.png", b.ToImage(color.Black, color.White))
 }
