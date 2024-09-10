@@ -110,10 +110,10 @@ func TestBuilder(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		builder := New()
+		builder := new(Builder)
 		for _, contour := range test.contours {
 			for _, p := range contour {
-				builder.AddPoint(p.x, p.y)
+				builder.AddContourPoint(p.x, p.y)
 			}
 			builder.FinishContour()
 		}
