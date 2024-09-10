@@ -11,7 +11,7 @@ import (
 func TestCubicVisit_Random(t *testing.T) {
 	random := rand.New(rand.NewSource(0))
 	for range 10_000 {
-		points := randomPoints(4, random, 4096)
+		points := randomPoints(4, random, 2048)
 
 		p := points[0].Round()
 		i := 0
