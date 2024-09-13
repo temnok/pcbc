@@ -2,10 +2,6 @@ package twod
 
 import "math"
 
-type Coord struct {
-	X, Y float64
-}
-
 type Transform struct {
 	I, J, K Coord
 }

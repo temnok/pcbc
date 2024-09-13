@@ -1,7 +1,8 @@
 package line
 
-// Rasterize calls onPix callback for each pixel on the line from (x0, y0) to (x1, y1), inclusive.
-func Rasterize(x0, y0, x1, y1 int, onPix func(x, y int)) {
+// Visit iterates over all coordinates with integer X and Y values on
+// line with end points (x0, y0) and (x1, y1).
+func Visit(x0, y0, x1, y1 int, onPix func(x, y int)) {
 	dx, ix := x1-x0, 1
 	if dx < 0 {
 		dx, ix = -dx, -ix

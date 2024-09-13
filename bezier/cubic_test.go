@@ -9,15 +9,15 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestCubicVisit_Random(t *testing.T) {
+func TestVisit_Random(t *testing.T) {
 	random := rand.New(rand.NewSource(0))
 	for range 10_000 {
 		points := randomPoints(4, random, 2048)
 
-		p := round(points[0])
+		p := points[0].Round()
 		i := 0
 
-		CubicVisit(points, func(x, y int) {
+		Visit(points, func(x, y int) {
 			p1 := twod.Coord{X: float64(x), Y: float64(y)}
 			if i == 0 {
 				assert.Equal(t, p, p1)
@@ -33,7 +33,7 @@ func TestCubicVisit_Random(t *testing.T) {
 			i++
 		})
 
-		assert.Equal(t, p, round(points[3]))
+		assert.Equal(t, p, points[3].Round())
 		assert.NotZero(t, i)
 	}
 }

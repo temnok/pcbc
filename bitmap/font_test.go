@@ -42,7 +42,7 @@ func TestFont_SavePng(t *testing.T) {
 						//bezier.CubicVisit([]twod.Coord{{px, py}, {px, py}, {x, y}, {x, y}}, func(x, y int) {
 						//	b.Segments(x, y, brush)
 						//})
-						line.Rasterize(int(px), int(py), int(x), int(y), func(x, y int) {
+						line.Visit(int(px), int(py), int(x), int(y), func(x, y int) {
 							b.Segments(x, y, brush)
 						})
 					}

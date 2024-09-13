@@ -22,7 +22,7 @@ func (i *Interpolator) AddContourPoint(x, y int) {
 	if d := i.lastY - y; -1 <= d && d <= 1 {
 		i.Builder.AddContourPoint(x, y)
 	} else {
-		line.Rasterize(i.lastX, i.lastY, x, y, i.Builder.AddContourPoint)
+		line.Visit(i.lastX, i.lastY, x, y, i.Builder.AddContourPoint)
 	}
 
 	i.lastX, i.lastY = x, y
@@ -34,7 +34,7 @@ func (i *Interpolator) FinishContour() {
 	}
 
 	if i.lastY != i.startY {
-		line.Rasterize(i.lastX, i.lastY, i.startX, i.startY, i.Builder.AddContourPoint)
+		line.Visit(i.lastX, i.lastY, i.startX, i.startY, i.Builder.AddContourPoint)
 	}
 	i.started = false
 

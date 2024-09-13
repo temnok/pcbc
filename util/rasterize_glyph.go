@@ -2,9 +2,9 @@ package util
 
 import (
 	"math"
-	"temnok/lab/bezier"
 	"temnok/lab/bitmap"
 	"temnok/lab/glyph"
+	"temnok/lab/path"
 	"temnok/lab/twod"
 )
 
@@ -12,7 +12,7 @@ func RasterizeGlyph(bm *bitmap.Bitmap, glph [][]twod.Coord) {
 	gb := new(glyph.Builder)
 
 	for _, contour := range glph {
-		bezier.CubicVisit(contour, gb.AddContourPoint)
+		path.Visit(contour, gb.AddContourPoint)
 
 		gb.FinishContour()
 	}

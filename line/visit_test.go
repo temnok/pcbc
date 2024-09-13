@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func TestRasterize(t *testing.T) {
+func TestVisit(t *testing.T) {
 	tests := []struct {
 		x0, y0, x1, y1 int
 		expected       [][2]int
@@ -20,18 +20,18 @@ func TestRasterize(t *testing.T) {
 	for _, test := range tests {
 		actual := [][2]int{}
 
-		Rasterize(test.x0, test.y0, test.x1, test.y1, func(x, y int) {
+		Visit(test.x0, test.y0, test.x1, test.y1, func(x, y int) {
 			actual = append(actual, [2]int{x, y})
 		})
 
 		if !reflect.DeepEqual(actual, test.expected) {
-			t.Errorf("Rasterize(%v,%v,%v,%v):\nwant %v\n got %v\n",
+			t.Errorf("Visit(%v,%v,%v,%v):\nwant %v\n got %v\n",
 				test.x0, test.y0, test.x1, test.y1, test.expected, actual)
 		}
 	}
 }
 
-func TestRasterize_Random(t *testing.T) {
+func TestVisit_Random(t *testing.T) {
 	for i := 0; i < 10_000; i++ {
 		m := 1 + rand.IntN(1000)
 		x0, y0, x1, y1 := rand.IntN(m), rand.IntN(m), rand.IntN(m), rand.IntN(m)
@@ -39,12 +39,12 @@ func TestRasterize_Random(t *testing.T) {
 		expectedCalls := max(x0-x1, x1-x0, y0-y1, y1-y0) + 1
 		actualCalls := 0
 
-		Rasterize(x0, y0, x1, y1, func(x, y int) {
+		Visit(x0, y0, x1, y1, func(x, y int) {
 			actualCalls++
 		})
 
 		if actualCalls != expectedCalls {
-			t.Errorf("Rasterize(%v,%v,%v,%v) calls:\nwant %v\n got %v\n",
+			t.Errorf("Visit(%v,%v,%v,%v) calls:\nwant %v\n got %v\n",
 				x0, y0, x1, y1, expectedCalls, actualCalls)
 		}
 	}
