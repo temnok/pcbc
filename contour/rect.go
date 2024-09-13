@@ -1,30 +1,34 @@
-package util
+package contour
 
 import (
 	"math"
-	"temnok/lab/bitmap"
 	"temnok/lab/geom"
-	"temnok/lab/glyph"
-	"temnok/lab/path"
 )
 
-func RasterizeGlyph(bm *bitmap.Bitmap, glph [][]geom.XY) {
-	gb := new(glyph.Builder)
+var magic = 4 * (math.Sqrt(2) - 1) / 3
 
-	for _, contour := range glph {
-		path.Visit(contour, gb.AddContourPoint)
+func Rect(w, h float64) []geom.XY {
+	x, y := w/2, h/2
 
-		gb.FinishContour()
+	return []geom.XY{
+		{x, y},
+		{x, y}, {x, -y},
+		{x, -y},
+		{x, -y}, {-x, -y},
+		{-x, -y},
+		{-x, -y}, {-x, y},
+		{-x, y},
+		{-x, y}, {x, y},
+		{x, y},
 	}
-
-	gb.Rasterize(bm.Segment)
 }
 
-func RoundedRectContour(w, h, r float64) []geom.XY {
+func RoundRect(w, h, r float64) []geom.XY {
 	x1, y1 := w/2, h/2
 	r = min(r, x1, y1)
-	m := r * 4 * (math.Sqrt(2) - 1) / 3
 	x0, y0 := x1-r, y1-r
+
+	m := r * magic
 
 	return []geom.XY{
 		{x1, y0},

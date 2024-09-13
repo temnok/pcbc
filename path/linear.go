@@ -1,8 +1,12 @@
-package line
+package path
 
-// Visit iterates over all coordinates with integer X and Y values on
-// line with end points (x0, y0) and (x1, y1).
-func Visit(x0, y0, x1, y1 int, visit func(x, y int)) {
+import "temnok/lab/geom"
+
+// linearIterate iterates over all line pixels, except the first one.
+func linearIterate(a, b geom.XY, iterate func(x, y int)) {
+	x0, y0 := a.Ints()
+	x1, y1 := b.Ints()
+
 	dx, ix := x1-x0, 1
 	if dx < 0 {
 		dx, ix = -dx, -ix
@@ -16,7 +20,7 @@ func Visit(x0, y0, x1, y1 int, visit func(x, y int)) {
 	ax, ay := (dy+1)/2, (dx+1)/2
 	d := min(dx, dy)
 
-	visit(x0, y0)
+	//iterate(x0, y0)
 
 	for x, y := x0, y0; x != x1 || y != y1; {
 		ax -= d
@@ -32,6 +36,6 @@ func Visit(x0, y0, x1, y1 int, visit func(x, y int)) {
 			ay += dx
 		}
 
-		visit(x, y)
+		iterate(x, y)
 	}
 }

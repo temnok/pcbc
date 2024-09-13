@@ -1,15 +1,13 @@
-package bezier
+package path
 
 import (
 	"math"
 	"temnok/lab/geom"
 )
 
-// Visit iterates over all coordinates with integer X and Y values on the cubic Bezier curve.
-// Cubic Bezier curve is represented by a slice of 4 points
-func Visit(points []geom.XY, visit func(x, y int)) {
+func cubicIterate(points []geom.XY, visit func(x, y int)) {
 	prev := points[0].Round()
-	visit(int(prev.X), int(prev.Y))
+	//visit(int(prev.X), int(prev.Y))
 
 	steps := cubicSteps(points)
 	for i := 1; i <= steps; i++ {
@@ -35,10 +33,10 @@ func cubicPoint(p []geom.XY, t float64) geom.XY {
 }
 
 func cubicSteps(points []geom.XY) int {
-	return 3 * totalDist(points)
+	return 3 * cubicDist(points)
 }
 
-func totalDist(points []geom.XY) int {
+func cubicDist(points []geom.XY) int {
 	totalD := 0
 	for i := 1; i < len(points); i++ {
 		a, b := points[i-1], points[i]

@@ -9,3 +9,7 @@ type XY struct {
 func (xy XY) Round() XY {
 	return XY{math.Round(xy.X), math.Round(xy.Y)}
 }
+
+func (xy XY) Ints() (x, y int) {
+	return int(math.Round(xy.X)), int(math.Round(xy.Y))
+}
