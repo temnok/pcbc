@@ -1,22 +1,20 @@
 package util
 
-import (
-	"temnok/lab/twod"
-)
+import "temnok/lab/geom"
 
-func TransformPoints(t twod.Transform, points []twod.Coord) []twod.Coord {
-	res := make([]twod.Coord, len(points))
+func TransformPoints(t geom.Transform, points []geom.XY) []geom.XY {
+	res := make([]geom.XY, len(points))
 
 	for i, p := range points {
-		r := t.Point(twod.Coord{X: p.X, Y: p.Y})
+		r := t.Point(geom.XY{X: p.X, Y: p.Y})
 		res[i].X, res[i].Y = r.X, r.Y
 	}
 
 	return res
 }
 
-func TransformAllPoints(t twod.Transform, allPoints [][]twod.Coord) [][]twod.Coord {
-	res := make([][]twod.Coord, len(allPoints))
+func TransformAllPoints(t geom.Transform, allPoints [][]geom.XY) [][]geom.XY {
+	res := make([][]geom.XY, len(allPoints))
 
 	for i, points := range allPoints {
 		res[i] = TransformPoints(t, points)

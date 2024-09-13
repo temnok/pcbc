@@ -2,12 +2,12 @@ package bezier
 
 import (
 	"math"
-	"temnok/lab/twod"
+	"temnok/lab/geom"
 )
 
 // Visit iterates over all coordinates with integer X and Y values on the cubic Bezier curve.
 // Cubic Bezier curve is represented by a slice of 4 points
-func Visit(points []twod.Coord, visit func(x, y int)) {
+func Visit(points []geom.XY, visit func(x, y int)) {
 	prev := points[0].Round()
 	visit(int(prev.X), int(prev.Y))
 
@@ -25,7 +25,7 @@ func Visit(points []twod.Coord, visit func(x, y int)) {
 	}
 }
 
-func cubicPoint(p []twod.Coord, t float64) twod.Coord {
+func cubicPoint(p []geom.XY, t float64) geom.XY {
 	ab := mix(p[0], p[1], t)
 	bc := mix(p[1], p[2], t)
 	cd := mix(p[2], p[3], t)
@@ -34,11 +34,11 @@ func cubicPoint(p []twod.Coord, t float64) twod.Coord {
 	return mix(abc, bcd, t)
 }
 
-func cubicSteps(points []twod.Coord) int {
+func cubicSteps(points []geom.XY) int {
 	return 3 * totalDist(points)
 }
 
-func totalDist(points []twod.Coord) int {
+func totalDist(points []geom.XY) int {
 	totalD := 0
 	for i := 1; i < len(points); i++ {
 		a, b := points[i-1], points[i]
@@ -50,6 +50,6 @@ func totalDist(points []twod.Coord) int {
 }
 
 //go:inline
-func mix(a, b twod.Coord, t float64) twod.Coord {
-	return twod.Coord{X: a.X*(1-t) + b.X*t, Y: a.Y*(1-t) + b.Y*t}
+func mix(a, b geom.XY, t float64) geom.XY {
+	return geom.XY{X: a.X*(1-t) + b.X*t, Y: a.Y*(1-t) + b.Y*t}
 }

@@ -6,8 +6,8 @@ import (
 	"image/color"
 	"image/png"
 	"os"
+	"temnok/lab/geom"
 	"temnok/lab/path"
-	"temnok/lab/twod"
 	"testing"
 )
 
@@ -78,7 +78,7 @@ func TestBitmap_SaveBezier(t *testing.T) {
 
 	b.Segments(350, 250, brush)
 	b.Segments(650, 250, brush)
-	path.Visit([]twod.Coord{{250, 500}, {250, 750}, {750, 750}, {750, 500}}, VisitDotted(40, func(x, y int) {
+	path.Visit([]geom.XY{{250, 500}, {250, 750}, {750, 750}, {750, 500}}, VisitDotted(40, func(x, y int) {
 		b.Segments(x, y, brush)
 	}))
 
@@ -91,7 +91,7 @@ func TestBitmap_SaveRect(t *testing.T) {
 	b := NewBitmap(2000, 2000)
 	brush := NewRoundBrush(10)
 
-	path.Visit([]twod.Coord{
+	path.Visit([]geom.XY{
 		{200, 200}, {200, 200}, {1800, 200},
 		{1800, 200}, {1800, 200}, {1800, 1800},
 		{1800, 1800}, {1800, 1800}, {200, 1800},
@@ -101,7 +101,7 @@ func TestBitmap_SaveRect(t *testing.T) {
 		b.Segments(x, y, brush)
 	})
 
-	path.Visit([]twod.Coord{
+	path.Visit([]geom.XY{
 		{500, 500}, {500, 500}, {1500, 500},
 		{1500, 500}, {1500, 500}, {1500, 1500},
 		{1500, 1500}, {1500, 1500}, {500, 1500},

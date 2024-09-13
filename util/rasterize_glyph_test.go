@@ -8,16 +8,16 @@ import (
 	"math"
 	"os"
 	"temnok/lab/bitmap"
-	"temnok/lab/twod"
+	"temnok/lab/geom"
 	"testing"
 )
 
 func TestGlyph(t *testing.T) {
 	bm := bitmap.NewBitmap(1000, 1000)
 
-	transform := twod.Move(twod.Coord{X: 500, Y: 500}).ScaleLocked(200).Rotate(150 * math.Pi / 180)
+	transform := geom.Move(geom.XY{X: 500, Y: 500}).ScaleLocked(200).Rotate(150 * math.Pi / 180)
 
-	glyph := [][]twod.Coord{
+	glyph := [][]geom.XY{
 		{
 			{-1, -1}, {-1, -1},
 			{1, -1}, {1, -1}, {1, -1},
@@ -48,7 +48,7 @@ func savePng(t *testing.T, name string, im image.Image) {
 func TestCircleGlyph(t *testing.T) {
 	var magic = 4 * (math.Sqrt(2) - 1) / 3
 
-	glyph := [][]twod.Coord{{
+	glyph := [][]geom.XY{{
 		{1, 0},
 		{1, magic}, {magic, 1},
 		{0, 1},
@@ -63,7 +63,7 @@ func TestCircleGlyph(t *testing.T) {
 	bm := bitmap.NewBitmap(1500, 100)
 
 	for d := 1.0; d < 30; d++ {
-		transform := twod.Move(twod.Coord{X: 50 * d, Y: 50}).ScaleLocked(d)
+		transform := geom.Move(geom.XY{X: 50 * d, Y: 50}).ScaleLocked(d)
 		RasterizeGlyph(bm, TransformAllPoints(transform, glyph))
 	}
 
@@ -71,7 +71,7 @@ func TestCircleGlyph(t *testing.T) {
 }
 
 func TestRoundedRectGlyph(t *testing.T) {
-	glyph := [][]twod.Coord{
+	glyph := [][]geom.XY{
 		RoundedRectContour(3, 4, 1),
 		RoundedRectContour(3-0.4, 4-0.4, 0.8),
 	}
@@ -79,7 +79,7 @@ func TestRoundedRectGlyph(t *testing.T) {
 	bm := bitmap.NewBitmap(1500, 100)
 
 	for d := 1.0; d < 20; d++ {
-		transform := twod.Move(twod.Coord{X: 75 * d, Y: 50}).ScaleLocked(d)
+		transform := geom.Move(geom.XY{X: 75 * d, Y: 50}).ScaleLocked(d)
 		RasterizeGlyph(bm, TransformAllPoints(transform, glyph))
 	}
 

@@ -3,7 +3,7 @@ package bezier
 import (
 	"math"
 	"math/rand"
-	"temnok/lab/twod"
+	"temnok/lab/geom"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -18,7 +18,7 @@ func TestVisit_Random(t *testing.T) {
 		i := 0
 
 		Visit(points, func(x, y int) {
-			p1 := twod.Coord{X: float64(x), Y: float64(y)}
+			p1 := geom.XY{X: float64(x), Y: float64(y)}
 			if i == 0 {
 				assert.Equal(t, p, p1)
 			} else {
@@ -38,10 +38,10 @@ func TestVisit_Random(t *testing.T) {
 	}
 }
 
-func randomPoints(n int, random *rand.Rand, rang float64) []twod.Coord {
-	points := make([]twod.Coord, n)
+func randomPoints(n int, random *rand.Rand, rang float64) []geom.XY {
+	points := make([]geom.XY, n)
 	for i := range points {
-		points[i] = twod.Coord{
+		points[i] = geom.XY{
 			X: random.Float64() * rang,
 			Y: random.Float64() * rang,
 		}
