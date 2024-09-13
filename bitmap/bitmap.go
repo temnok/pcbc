@@ -22,7 +22,7 @@ func NewBitmap(w, h int) *Bitmap {
 	return b
 }
 
-func (b *Bitmap) Row(x0, x1, y int) {
+func (b *Bitmap) SetRow(x0, x1, y int) {
 	if x0 < 0 {
 		x0 = 0
 	}

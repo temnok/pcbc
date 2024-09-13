@@ -21,9 +21,9 @@ func TestFont_SavePng(t *testing.T) {
 		for j := 0; j < 16; j++ {
 			c := (i+2)*16 + j
 
-			transform := geom.ScaleLocked(scale).Move(geom.XY{float64(j) * Width, float64(i)})
+			transform := geom.ScaleK(scale).Move(geom.XY{float64(j) * Width, float64(i)})
 			path.IterateAll(Paths[c], transform, func(x, y int) {
-				brush.IterateRows(x, y, bm.Row)
+				brush.IterateRowsXY(x, y, bm.SetRow)
 			})
 		}
 	}

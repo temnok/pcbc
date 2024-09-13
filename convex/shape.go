@@ -1,5 +1,10 @@
 package convex
 
+import (
+	"temnok/lab/geom"
+	"temnok/lab/path"
+)
+
 type row = struct{ x0, x1 int32 }
 
 type Shape struct {
@@ -31,7 +36,11 @@ func (s *Shape) AddPoint(x, y int) {
 	}
 }
 
-func (s *Shape) IterateRows(x0, y0 int, iterator func(x0, x1, y int)) {
+func (s *Shape) IterateRows(iterator func(x0, x1, y int)) {
+	s.IterateRowsXY(0, 0, iterator)
+}
+
+func (s *Shape) IterateRowsXY(x0, y0 int, iterator func(x0, x1, y int)) {
 	for y := -len(s.lower); y < len(s.upper); y++ {
 		var r *row
 		if y < 0 {
@@ -43,5 +52,13 @@ func (s *Shape) IterateRows(x0, y0 int, iterator func(x0, x1, y int)) {
 		if r.x0 < r.x1 {
 			iterator(x0+int(r.x0), x0+int(r.x1), y0+s.y0+y)
 		}
+	}
+}
+
+func IterateContoursRows(contours [][]geom.XY, transform geom.Transform, iterator func(x0, x1, y int)) {
+	for _, contour := range contours {
+		shape := new(Shape)
+		path.Iterate(contour, transform, shape.AddPoint)
+		shape.IterateRows(iterator)
 	}
 }

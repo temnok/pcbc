@@ -11,7 +11,7 @@ func padRow(n int, d, w, h float64) [][]geom.XY {
 	totalD := float64(n-1) * d
 
 	for i := range n {
-		x := d*float64(n) - totalD*0.5
+		x := d*float64(i) - totalD*0.5
 		row[i] = geom.Move(geom.XY{x, 0}).Points(contour.Rect(w, h))
 	}
 

@@ -16,7 +16,7 @@ func TestBrushes(t *testing.T) {
 
 	for d := 1; d < 20; d++ {
 		circle := Circle(d)
-		circle.IterateRows(50*d, 50, bm.Row)
+		circle.IterateRowsXY(50*d, 50, bm.SetRow)
 
 		rect := new(Shape)
 		path.Iterate(
@@ -25,7 +25,7 @@ func TestBrushes(t *testing.T) {
 			rect.AddPoint,
 		)
 
-		rect.IterateRows(50*d, 100, bm.Row)
+		rect.IterateRowsXY(50*d, 100, bm.SetRow)
 	}
 
 	assert.NoError(t, util.SaveTmpPng("brush.png", bm.ToImage(color.Black, color.White)))
