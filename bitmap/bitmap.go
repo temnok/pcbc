@@ -51,12 +51,6 @@ func (b *Bitmap) Segment(x0, x1, y int) {
 	b.elems[i1] |= mask(0, j1)
 }
 
-func (b *Bitmap) Segments(x, y int, segs []Segment) {
-	for _, seg := range segs {
-		b.Segment(x+int(seg.X0), x+int(seg.X1), y+int(seg.Y))
-	}
-}
-
 //go:inline
 func (b *Bitmap) addr(x, y int) int {
 	return ((b.w+63)/64)*y + x/64
