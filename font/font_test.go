@@ -23,7 +23,7 @@ func TestFont_SavePng(t *testing.T) {
 
 			transform := geom.ScaleLocked(scale).Move(geom.XY{float64(j) * Width, float64(i)})
 			path.IterateAll(Paths[c], transform, func(x, y int) {
-				brush.IterateRows(x, y, bm.Segment)
+				brush.IterateRows(x, y, bm.Row)
 			})
 		}
 	}
