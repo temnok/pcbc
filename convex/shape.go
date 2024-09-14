@@ -55,10 +55,14 @@ func (s *Shape) IterateRowsXY(x0, y0 int, iterator func(x0, x1, y int)) {
 	}
 }
 
+func IterateContourRows(contour []geom.XY, transform geom.Transform, iterator func(x0, x1, y int)) {
+	shape := new(Shape)
+	path.Iterate(contour, transform, shape.AddPoint)
+	shape.IterateRows(iterator)
+}
+
 func IterateContoursRows(contours [][]geom.XY, transform geom.Transform, iterator func(x0, x1, y int)) {
 	for _, contour := range contours {
-		shape := new(Shape)
-		path.Iterate(contour, transform, shape.AddPoint)
-		shape.IterateRows(iterator)
+		IterateContourRows(contour, transform, iterator)
 	}
 }
