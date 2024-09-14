@@ -1,4 +1,4 @@
-package convex
+package shape
 
 import (
 	"temnok/lab/geom"
@@ -10,6 +10,12 @@ type row = struct{ x0, x1 int32 }
 type Shape struct {
 	y0           int
 	lower, upper []row
+}
+
+func FromContour(contour []geom.XY, transform geom.Transform) *Shape {
+	shape := new(Shape)
+	path.Iterate(contour, transform, shape.AddPoint)
+	return shape
 }
 
 func (s *Shape) AddPoint(x, y int) {
@@ -55,10 +61,14 @@ func (s *Shape) IterateRowsXY(x0, y0 int, iterator func(x0, x1, y int)) {
 	}
 }
 
+func (s *Shape) IterateContour(contour []geom.XY, transform geom.Transform, iterator func(x0, x1, y int)) {
+	path.Iterate(contour, transform, func(x, y int) {
+		s.IterateRowsXY(x, y, iterator)
+	})
+}
+
 func IterateContourRows(contour []geom.XY, transform geom.Transform, iterator func(x0, x1, y int)) {
-	shape := new(Shape)
-	path.Iterate(contour, transform, shape.AddPoint)
-	shape.IterateRows(iterator)
+	FromContour(contour, transform).IterateRows(iterator)
 }
 
 func IterateContoursRows(contours [][]geom.XY, transform geom.Transform, iterator func(x0, x1, y int)) {

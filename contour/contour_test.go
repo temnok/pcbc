@@ -4,9 +4,9 @@ import (
 	"github.com/stretchr/testify/assert"
 	"image/color"
 	"temnok/lab/bitmap"
-	"temnok/lab/convex"
 	"temnok/lab/geom"
 	"temnok/lab/path"
+	"temnok/lab/shape"
 	"temnok/lab/util"
 	"testing"
 )
@@ -14,7 +14,7 @@ import (
 func TestContours(t *testing.T) {
 	bm := bitmap.NewBitmap(1000, 100)
 
-	brush := convex.Circle(3)
+	brush := shape.Circle(3)
 
 	for d := 5.0; d < 24; d++ {
 		cnt := Circle(d)

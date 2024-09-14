@@ -4,9 +4,9 @@ import (
 	"github.com/stretchr/testify/assert"
 	"image/color"
 	"temnok/lab/bitmap"
-	"temnok/lab/convex"
 	"temnok/lab/geom"
 	"temnok/lab/path"
+	"temnok/lab/shape"
 	"temnok/lab/util"
 	"testing"
 )
@@ -15,7 +15,7 @@ func TestFont_SavePng(t *testing.T) {
 	const scale = 200.0
 
 	bm := bitmap.NewBitmap(16*scale*Width, 6*scale)
-	brush := convex.Circle(Normal * scale)
+	brush := shape.Circle(Normal * scale)
 
 	for i := 0; i < 14; i++ {
 		for j := 0; j < 16; j++ {

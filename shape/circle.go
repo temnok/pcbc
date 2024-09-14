@@ -1,4 +1,4 @@
-package convex
+package shape
 
 func Circle(d int) *Shape {
 	shape := new(Shape)
