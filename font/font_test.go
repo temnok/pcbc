@@ -5,7 +5,6 @@ import (
 	"image/color"
 	"temnok/lab/bitmap"
 	"temnok/lab/geom"
-	"temnok/lab/path"
 	"temnok/lab/shape"
 	"temnok/lab/util"
 	"testing"
@@ -21,10 +20,8 @@ func TestFont_SavePng(t *testing.T) {
 		for j := 0; j < 16; j++ {
 			c := (i+2)*16 + j
 
-			transform := geom.ScaleK(scale).Move(geom.XY{float64(j) * Width, float64(i)})
-			path.IterateAll(Paths[c], transform, func(x, y int) {
-				brush.IterateRowsXY(x, y, bm.SetRow)
-			})
+			transform := geom.ScaleK(scale).Move(geom.XY{float64(j) * Width, float64(6 - i)})
+			brush.IterateContours(Paths[c], transform, bm.SetRow1)
 		}
 	}
 

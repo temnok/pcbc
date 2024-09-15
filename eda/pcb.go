@@ -4,7 +4,10 @@ import (
 	"image"
 	"image/color"
 	"temnok/lab/bitmap"
+	"temnok/lab/contour"
+	"temnok/lab/font"
 	"temnok/lab/geom"
+	"temnok/lab/path"
 	"temnok/lab/shape"
 	"temnok/lab/util"
 )
@@ -40,23 +43,43 @@ func (pcb *PCB) With(block func()) {
 
 func (pcb *PCB) Track(points ...geom.XY) {
 	brush := shape.Circle(int(pcb.TrackWidth * pcb.scale))
-	brush.IterateContour(points, pcb.Transform, pcb.cu.SetRow)
+	brush.IterateContour(contour.Lines(points), pcb.Transform, pcb.cu.SetRow1)
 }
 
-func (pcb *PCB) Pads(t geom.Transform, padContours [][]geom.XY) {
-
+func (pcb *PCB) Pad(t geom.Transform, padContours ...[]geom.XY) {
 	t = pcb.Transform.Multiply(t)
-	shape.IterateContoursRows(padContours, t, pcb.cu.SetRow)
-	brush := shape.Circle(int(0.1 * pcb.scale))
-	brush.IterateContours(padContours, t, pcb.cu.SetRow)
+	shape.IterateContoursRows(padContours, t, pcb.cu.SetRow1)
 
-	brush = shape.Circle(int(0.2 * pcb.scale))
-	brush.IterateContours(padContours, t, pcb.mask.SetRow)
+	brush := shape.Circle(int(0.1 * pcb.scale))
+	brush.IterateContours(padContours, t, pcb.mask.SetRow1)
 }
 
 func (pcb *PCB) SilkContour(t geom.Transform, w float64, contour []geom.XY) {
 	brush := shape.Circle(int(w * pcb.scale))
-	brush.IterateContour(contour, pcb.Transform.Multiply(t), pcb.silk.SetRow)
+	brush.IterateContour(contour, pcb.Transform.Multiply(t), pcb.silk.SetRow1)
+}
+
+func (pcb *PCB) SilkText(t geom.Transform, height float64, text string) {
+	brush := shape.Circle(int(font.Normal * height * pcb.scale))
+
+	for i, c := range text {
+		if c := int(c); c < len(font.Paths) {
+			t := pcb.Transform.Multiply(t).ScaleK(height).MoveXY(float64(i)*font.Width, 0.4)
+			brush.IterateContours(font.Paths[c], t, pcb.silk.SetRow1)
+		}
+	}
+}
+
+func (pcb *PCB) Hole(t geom.Transform, contour []geom.XY) {
+	shape.IterateContourRows(contour, pcb.Transform.Multiply(t), pcb.cu.SetRow0)
+}
+
+func (pcb *PCB) Cut(contour []geom.XY) {
+	brush := shape.Circle(int(0.1 * pcb.scale))
+
+	path.IterateDotted(contour, pcb.Transform, int(0.2*pcb.scale), func(x, y int) {
+		brush.IterateRowsXY(x, y, pcb.mask.SetRow1)
+	})
 }
 
 func (pcb *PCB) SaveFiles() {
@@ -64,7 +87,7 @@ func (pcb *PCB) SaveFiles() {
 	util.SaveTmpPng("mask.png", pcb.mask.ToImage(color.White, color.Black))
 	util.SaveTmpPng("silk.png", pcb.silk.ToImage(color.White, color.Black))
 
-	util.SaveTmpPng("pcb.png", &util.MultiImage{
+	util.SaveTmpPng("overview.png", &util.MultiImage{
 		Images: []image.Image{
 			pcb.cu.ToImage(color.RGBA{0, 0x40, 0x10, 0xFF}, color.RGBA{0xFF, 0x80, 0, 0x7F}),
 			pcb.mask.ToImage(color.RGBA{0, 0, 0, 0}, color.RGBA{0xFF, 0xFF, 0xFF, 0x40}),

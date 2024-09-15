@@ -46,3 +46,14 @@ func RoundRect(w, h, r float64) []geom.XY {
 		{x1, y0},
 	}
 }
+
+func CutRect(w, h, r float64) []geom.XY {
+	x, y := w/2, h/2
+	return Lines([]geom.XY{
+		{x - r, y}, {-x + r, y},
+		{-x, y - r}, {-x, -y + r},
+		{-x + r, -y}, {x - r, -y},
+		{x, -y + r}, {x, y - r},
+		{x - r, y},
+	})
+}

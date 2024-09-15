@@ -48,6 +48,10 @@ func (a Transform) Multiply(b Transform) Transform {
 	}
 }
 
+func (a Transform) PointXY(x, y float64) XY {
+	return a.Point(XY{x, y})
+}
+
 func (a Transform) Point(b XY) XY {
 	// a.I.X  a.J.X  a.K.X     b.I.X
 	// a.I.Y  a.J.Y  a.K.Y  *  b.I.Y

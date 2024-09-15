@@ -15,10 +15,10 @@ func TestBrushes(t *testing.T) {
 
 	for d := 1; d < 20; d++ {
 		circle := Circle(d)
-		circle.IterateRowsXY(50*d, 50, bm.SetRow)
+		circle.IterateRowsXY(50*d, 50, bm.SetRow1)
 
 		rect := FromContour(contour.RoundRect(float64(d), float64(d)*2, 1+float64(d)/4), geom.Identity())
-		rect.IterateRowsXY(50*d, 100, bm.SetRow)
+		rect.IterateRowsXY(50*d, 100, bm.SetRow1)
 	}
 
 	assert.NoError(t, util.SaveTmpPng("brush.png", bm.ToImage(color.Black, color.White)))

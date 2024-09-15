@@ -160,6 +160,6 @@ func init() {
 func pToXY(p byte) geom.XY {
 	return geom.XY{
 		X: float64(p%10) / 10.0,
-		Y: float64(p/10) / 10.0,
+		Y: -float64(p/10) / 10.0,
 	}
 }

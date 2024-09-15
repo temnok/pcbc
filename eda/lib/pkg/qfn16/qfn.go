@@ -44,12 +44,12 @@ var PadContours = [][]geom.XY{
 	15: vPad,
 	16: vPad,
 	//17: contour.Rect(1.6, 1.6),
-	17: keyedRect(1.5, 1.5, 0.35),
+	17: keyedRect(1.6, 1.6, 0.35),
 }[1:]
 
 var (
-	hPad = contour.RoundRect(0.5, 0.15, 0.12)
-	vPad = contour.RoundRect(0.15, 0.5, 0.12)
+	hPad = contour.RoundRect(0.6, 0.24, 0.12)
+	vPad = contour.RoundRect(0.24, 0.6, 0.12)
 )
 
 func init() {
@@ -64,8 +64,9 @@ func keyedRect(w, h, k float64) []geom.XY {
 }
 
 func Add(pcb *eda.PCB, transform geom.Transform) []geom.XY {
-	pcb.Pads(transform, PadContours)
-	pcb.SilkContour(transform, 0.1, keyedRect(3, 3, 0.25))
+	pcb.Pad(transform, PadContours...)
+	pcb.SilkContour(transform, 0.1, contour.Rect(3, 3))
+	pcb.SilkText(transform.MoveXY(-2, 1.3), 0.6, "1")
 
 	return transform.Points(PadCenters)
 }

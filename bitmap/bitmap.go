@@ -22,7 +22,15 @@ func NewBitmap(w, h int) *Bitmap {
 	return b
 }
 
-func (b *Bitmap) SetRow(x0, x1, y int) {
+func (b *Bitmap) SetRow1(x0, x1, y int) {
+	b.SetRowVal(x0, x1, y, 1)
+}
+
+func (b *Bitmap) SetRow0(x0, x1, y int) {
+	b.SetRowVal(x0, x1, y, 0)
+}
+
+func (b *Bitmap) SetRowVal(x0, x1, y, val int) {
 	if x0 < 0 {
 		x0 = 0
 	}
@@ -38,17 +46,31 @@ func (b *Bitmap) SetRow(x0, x1, y int) {
 	i0, i1 := b.addr(x0, y), b.addr(x1-1, y)
 	j0, j1 := x0%64, (x1-1)%64+1
 
-	if i0 == i1 {
-		b.elems[i0] |= mask(j0, j1)
+	if (val & 1) != 0 {
+		if i0 == i1 {
+			b.elems[i0] |= mask(j0, j1)
 
-		return
-	}
+			return
+		}
 
-	b.elems[i0] |= mask(j0, 64)
-	for i := i0 + 1; i < i1; i++ {
-		b.elems[i] = math.MaxUint64
+		b.elems[i0] |= mask(j0, 64)
+		for i := i0 + 1; i < i1; i++ {
+			b.elems[i] = math.MaxUint64
+		}
+		b.elems[i1] |= mask(0, j1)
+	} else {
+		if i0 == i1 {
+			b.elems[i0] &^= mask(j0, j1)
+
+			return
+		}
+
+		b.elems[i0] &^= mask(j0, 64)
+		for i := i0 + 1; i < i1; i++ {
+			b.elems[i] = 0
+		}
+		b.elems[i1] &^= mask(0, j1)
 	}
-	b.elems[i1] |= mask(0, j1)
 }
 
 //go:inline
