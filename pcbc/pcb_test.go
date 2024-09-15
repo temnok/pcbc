@@ -77,7 +77,7 @@ func TestPCB(t *testing.T) {
 		pcb.Hole(t, contour.Circle(0.8))
 	}
 
-	pcb.Cut(contour.CutRect(24, 16, 1))
+	pcb.Cut(contour.RoundRect(24, 16, 2))
 
 	pcb.SaveFiles()
 }

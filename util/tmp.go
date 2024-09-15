@@ -24,3 +24,9 @@ func SaveTmpPng(name string, im image.Image) error {
 
 	return nil
 }
+
+func SaveTmpFile(name string, data []byte) error {
+	_ = os.Mkdir("tmp", 0770)
+
+	return os.WriteFile("tmp/"+name, data, 0770)
+}
