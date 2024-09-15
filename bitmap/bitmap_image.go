@@ -24,6 +24,8 @@ func (bi *bitmapImage) At(x, y int) color.Color {
 
 func (bi *bitmapImage) ColorIndexAt(x, y int) uint8 {
 	b := bi.bitmap
+	y = b.h - 1 - y
+
 	if x < 0 || x >= b.w || y < 0 || y >= b.h || b.elems[b.addr(x, y)]&(1<<(x%64)) == 0 {
 		return 0
 	}

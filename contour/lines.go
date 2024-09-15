@@ -9,8 +9,8 @@ func Lines(points []geom.XY) []geom.XY {
 
 	res := []geom.XY{points[0]}
 
-	for i, p := range points[1:] {
-		res = append(res, res[i], p, p)
+	for _, p := range points[1:] {
+		res = append(res, res[len(res)-1], p, p)
 	}
 
 	return res

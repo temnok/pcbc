@@ -67,6 +67,12 @@ func (s *Shape) IterateContour(contour []geom.XY, transform geom.Transform, iter
 	})
 }
 
+func (s *Shape) IterateContours(contours [][]geom.XY, transform geom.Transform, iterator func(x0, x1, y int)) {
+	for _, contour := range contours {
+		s.IterateContour(contour, transform, iterator)
+	}
+}
+
 func IterateContourRows(contour []geom.XY, transform geom.Transform, iterator func(x0, x1, y int)) {
 	FromContour(contour, transform).IterateRows(iterator)
 }

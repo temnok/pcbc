@@ -5,6 +5,7 @@ import (
 	"image/color"
 	"temnok/lab/bitmap"
 	"temnok/lab/contour"
+	"temnok/lab/eda/lib/pkg/qfn16"
 	"temnok/lab/geom"
 	"temnok/lab/shape"
 	"temnok/lab/util"
@@ -15,7 +16,7 @@ func TestPadRow_SavePNG(t *testing.T) {
 	bm := bitmap.NewBitmap(1000, 1000)
 	transform := geom.Move(geom.XY{500, 500}).RotateD(45).ScaleK(100)
 
-	shape.IterateContoursRows(QFN16PadContours, transform, bm.SetRow)
+	shape.IterateContoursRows(qfn16.PadContours, transform, bm.SetRow)
 	shape.Circle(3).IterateContour(contour.Rect(3, 3), transform, bm.SetRow)
 	shape.Circle(20).IterateContour(contour.Lines([]geom.XY{{-3, 3}, {3, -3}}), transform, bm.SetRow)
 

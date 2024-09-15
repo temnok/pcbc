@@ -10,17 +10,13 @@ var magic = 4 * (math.Sqrt(2) - 1) / 3
 func Rect(w, h float64) []geom.XY {
 	x, y := w/2, h/2
 
-	return []geom.XY{
+	return Lines([]geom.XY{
 		{x, y},
-		{x, y}, {x, -y},
 		{x, -y},
-		{x, -y}, {-x, -y},
 		{-x, -y},
-		{-x, -y}, {-x, y},
 		{-x, y},
-		{-x, y}, {x, y},
 		{x, y},
-	}
+	})
 }
 
 func RoundRect(w, h, r float64) []geom.XY {
