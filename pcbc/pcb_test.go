@@ -12,7 +12,19 @@ import (
 type XY = geom.XY
 
 func TestPCB(t *testing.T) {
-	pcb := eda.NewPCB(26, 18)
+	pcb := eda.NewPCB(38, 48)
+	for y := -9.0; y <= 9; y += 18 {
+		pcb.With(func() {
+			pcb.Transform = pcb.Transform.Multiply(geom.MoveXY(0, y))
+
+			qfn16pinout(t, pcb)
+		})
+	}
+
+	pcb.SaveFiles()
+}
+
+func qfn16pinout(t *testing.T, pcb *eda.PCB) {
 	textScale := geom.Scale(XY{0.75, 1})
 	textHeight := 1.5
 
@@ -67,7 +79,7 @@ func TestPCB(t *testing.T) {
 	}
 	for i := 0; i < n; i++ {
 		pcb.SilkText(geom.Move(pads[i]).MoveXY(0, 1.5).RotateD(90).Multiply(textScale), textHeight, loPinNames[i])
-		pcb.SilkText(geom.Move(pads[i]).MoveXY(0, 8.5).RotateD(90).Multiply(textScale), textHeight, hiPinNames[i])
+		pcb.SilkText(geom.Move(pads[i]).MoveXY(0, 8.3).RotateD(90).Multiply(textScale), textHeight, hiPinNames[i])
 	}
 
 	pad.Row(pcb, geom.Identity(), contour.Circle(1.3), 2, 20)
@@ -78,6 +90,4 @@ func TestPCB(t *testing.T) {
 	}
 
 	pcb.Cut(contour.RoundRect(24, 16, 2))
-
-	pcb.SaveFiles()
 }

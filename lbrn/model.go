@@ -3,14 +3,16 @@ package lbrn
 import (
 	"encoding/xml"
 	"fmt"
+	"temnok/lab/geom"
 )
 
 type LightBurnProject struct {
-	XMLName        xml.Name      `xml:"LightBurnProject"`
-	AppVersion     string        `xml:"AppVersion,attr"`
-	FormatVersion  string        `xml:"FormatVersion,attr"`
-	CutSetting_Img []*CutSetting `xml:"CutSetting_Img"`
-	Shape          []*Shape      `xml:"Shape"`
+	XMLName       xml.Name     `xml:"LightBurnProject"`
+	AppVersion    string       `xml:"AppVersion,attr,omitempty"`
+	FormatVersion string       `xml:"FormatVersion,attr,omitempty"`
+	CutSetting    []CutSetting `xml:"CutSetting"`
+	CutSettingImg []CutSetting `xml:"CutSetting_Img"`
+	Shape         []Shape      `xml:"Shape"`
 }
 
 type CutSetting struct {
@@ -19,93 +21,109 @@ type CutSetting struct {
 	Name     Param  `xml:"name"`
 	Priority Param  `xml:"priority"`
 
-	NumPasses   Param `xml:"numPasses"`
-	MaxPower    Param `xml:"maxPower"`
-	QPulseWidth Param `xml:"QPulseWidth"`
-	Frequency   Param `xml:"frequency"`
+	Speed        Param `xml:"speed"`
+	NumPasses    Param `xml:"numPasses"`
+	GlobalRepeat Param `xml:"globalRepeat"`
+	MaxPower     Param `xml:"maxPower"`
+	QPulseWidth  Param `xml:"QPulseWidth"`
+	Frequency    Param `xml:"frequency"`
 
-	Speed      Param `xml:"speed"`
-	Interval   Param `xml:"interval"`
-	CrossHatch Param `xml:"crossHatch"`
-
+	Interval         Param `xml:"interval"`
 	DPI              Param `xml:"dpi"`
 	DitherMode       Param `xml:"ditherMode"`
 	UseDotCorrection Param `xml:"useDotCorrection"`
 	DotWidth         Param `xml:"dotWidth"`
+
+	TabsEnabled Param `xml:"tabsEnabled"`
+	TabSize     Param `xml:"tabSize"`
 }
 
 type Shape struct {
 	Type     string `xml:"Type,attr"`
 	CutIndex string `xml:"CutIndex,attr"`
-	W        string `xml:"W,attr"`
-	H        string `xml:"H,attr"`
-	File     string `xml:"File,attr"`
-	Data     string `xml:"Data,attr"`
+	W        string `xml:"W,attr,omitempty"`
+	H        string `xml:"H,attr,omitempty"`
+	Rx       string `xml:"Rx,attr,omitempty"`
+	Ry       string `xml:"Ry,attr,omitempty"`
 	XForm    string `xml:"XForm"`
+	Tabs     string `xml:"Tabs"`
+
+	V []V `xml:"V"`
+	P []P `xml:"P"`
+
+	File string `xml:"File,attr,omitempty"`
+	Data string `xml:"Data,attr,omitempty"`
 }
 
 type Param struct {
 	Value string `xml:"Value,attr"`
 }
 
-func (p *LightBurnProject) SetDefaults() *LightBurnProject {
-	p.AppVersion = "1.6.03"
-	p.FormatVersion = "1"
-
-	return p
+type V struct {
+	Vx  string `xml:"vx,attr"`
+	Vy  string `xml:"vy,attr"`
+	C0x string `xml:"c0x,attr,omitempty"`
+	C0y string `xml:"c0y,attr,omitempty"`
+	C1x string `xml:"c1x,attr,omitempty"`
+	C1y string `xml:"c1y,attr,omitempty"`
 }
 
-func (c *CutSetting) SetDefaults(i int) *CutSetting {
-	c.Type = "Image"
-	c.Index.SetDefault(fmt.Sprint(i))
-	c.Name.SetDefault(fmt.Sprintf("C%02d", i))
-	c.Priority.SetDefault(c.Index.Value)
-
-	c.NumPasses.SetDefault("1")
-	c.MaxPower.SetDefault("20")
-	c.QPulseWidth.SetDefault("200")
-	c.Frequency.SetDefault("20000")
-
-	c.Speed.SetDefault("600")
-	c.Interval.SetDefault("0.01")
-	c.CrossHatch.SetDefault("1")
-
-	c.DPI.SetDefault("2540")
-	c.DitherMode.SetDefault("threshold")
-	c.UseDotCorrection.SetDefault("1")
-	c.DotWidth.SetDefault("0.05")
-
-	return c
+type P struct {
+	T  string `xml:"T,attr"`
+	P0 string `xml:"p0,attr"`
+	P1 string `xml:"p1,attr"`
 }
 
-func (s *Shape) SetDefaults(i int) *Shape {
-	s.Type = "Bitmap"
-	s.CutIndex = fmt.Sprint(i)
-	if s.W == "" && s.H == "" {
-		s.SetSize(10, 10)
-	}
-	if s.XForm == "" {
-		s.SetPosition(55, 55)
+func (s *Shape) SetTabs(tabs []geom.XY) {
+	var buf []byte
+
+	for _, xy := range tabs {
+		if len(buf) > 0 {
+			buf = append(buf, ' ')
+		}
+		buf = append(buf, fmt.Sprint(xy.X)...)
+		buf = append(buf, ',')
+		buf = append(buf, fmt.Sprint(xy.Y)...)
 	}
 
-	return s
+	s.Tabs = string(buf)
 }
 
-func (s *Shape) SetSize(w, h float64) *Shape {
-	s.W = fmt.Sprint(w)
-	s.H = fmt.Sprint(h)
+func (s *Shape) SetPath(path []geom.XY) {
+	s.Type = "Path"
+	s.V = nil
+	s.P = nil
 
-	return s
-}
+	for i := 0; i < len(path); i += 3 {
+		xy := path[i]
 
-func (s *Shape) SetPosition(x, y float64) *Shape {
-	s.XForm = fmt.Sprintf("1 0 0 -1 %v %v", x, y)
+		v := V{
+			Vx: fmt.Sprint(xy.X),
+			Vy: fmt.Sprint(xy.Y),
+		}
+		if i > 0 && path[i-1] != xy {
+			v.C1x = fmt.Sprint(path[i-1].X)
+			v.C1y = fmt.Sprint(path[i-1].Y)
+		}
+		if i+1 < len(path) && path[i+1] != xy {
+			v.C0x = fmt.Sprint(path[i+1].X)
+			v.C0y = fmt.Sprint(path[i+1].Y)
+		}
 
-	return s
-}
+		s.V = append(s.V, v)
 
-func (p *Param) SetDefault(val string) {
-	if p.Value == "" {
-		p.Value = val
+		if n := len(s.V); n > 1 {
+			u := s.V[n-2]
+			p := P{
+				P0: fmt.Sprint(n - 2),
+				P1: fmt.Sprint(n - 1),
+			}
+			if isLine := u.C0x == "" && v.C1x == ""; isLine {
+				p.T = "L"
+			} else {
+				p.T = "B"
+			}
+			s.P = append(s.P, p)
+		}
 	}
 }
