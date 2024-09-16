@@ -12,11 +12,15 @@ import (
 	"temnok/lab/util"
 )
 
+type XY = geom.XY
+
 type PCB struct {
-	Transform  geom.Transform
-	TrackWidth float64
+	scaleTransform geom.Transform
+	Transform      geom.Transform
+	TrackWidth     float64
 
 	scale          float64
+	cuts, holes    [][]XY
 	cu, mask, silk *bitmap.Bitmap
 }
 
@@ -26,37 +30,45 @@ func NewPCB(w, h float64) *PCB {
 	wi, hi := int(w*scale), int(h*scale)
 
 	return &PCB{
-		Transform:  geom.ScaleK(scale).MoveXY(w/2, h/2),
-		TrackWidth: 0.2,
-		scale:      scale,
-		cu:         bitmap.NewBitmap(wi, hi),
-		mask:       bitmap.NewBitmap(wi, hi),
-		silk:       bitmap.NewBitmap(wi, hi),
+		scaleTransform: geom.ScaleK(scale).MoveXY(w/2, h/2),
+		Transform:      geom.Identity(),
+		TrackWidth:     0.2,
+		scale:          scale,
+		cu:             bitmap.NewBitmap(wi, hi),
+		mask:           bitmap.NewBitmap(wi, hi),
+		silk:           bitmap.NewBitmap(wi, hi),
 	}
+}
+
+func (pcb *PCB) scaled() geom.Transform {
+	return pcb.scaleTransform.Multiply(pcb.Transform)
 }
 
 func (pcb *PCB) With(block func()) {
 	saved := *pcb
 	block()
+
+	cuts, holes := pcb.cuts, pcb.holes
 	*pcb = saved
+	pcb.cuts, pcb.holes = cuts, holes
 }
 
-func (pcb *PCB) Track(points ...geom.XY) {
+func (pcb *PCB) Track(points ...XY) {
 	brush := shape.Circle(int(pcb.TrackWidth * pcb.scale))
-	brush.IterateContour(contour.Lines(points), pcb.Transform, pcb.cu.SetRow1)
+	brush.IterateContour(contour.Lines(points), pcb.scaled(), pcb.cu.SetRow1)
 }
 
-func (pcb *PCB) Pad(t geom.Transform, padContours ...[]geom.XY) {
-	t = pcb.Transform.Multiply(t)
+func (pcb *PCB) Pad(t geom.Transform, padContours ...[]XY) {
+	t = pcb.scaled().Multiply(t)
 	shape.IterateContoursRows(padContours, t, pcb.cu.SetRow1)
 
 	brush := shape.Circle(int(0.1 * pcb.scale))
 	brush.IterateContours(padContours, t, pcb.mask.SetRow1)
 }
 
-func (pcb *PCB) SilkContour(t geom.Transform, w float64, contour []geom.XY) {
+func (pcb *PCB) SilkContour(t geom.Transform, w float64, contour []XY) {
 	brush := shape.Circle(int(w * pcb.scale))
-	brush.IterateContour(contour, pcb.Transform.Multiply(t), pcb.silk.SetRow1)
+	brush.IterateContour(contour, pcb.scaled().Multiply(t), pcb.silk.SetRow1)
 }
 
 func (pcb *PCB) SilkText(t geom.Transform, height float64, text string) {
@@ -64,28 +76,34 @@ func (pcb *PCB) SilkText(t geom.Transform, height float64, text string) {
 
 	for i, c := range text {
 		if c := int(c); c < len(font.Paths) {
-			t := pcb.Transform.Multiply(t).ScaleK(height).MoveXY(float64(i)*font.Width, 0.4)
+			t := pcb.scaled().Multiply(t).ScaleK(height).MoveXY(float64(i)*font.Width, 0.4)
 			brush.IterateContours(font.Paths[c], t, pcb.silk.SetRow1)
 		}
 	}
 }
 
-func (pcb *PCB) Hole(t geom.Transform, contour []geom.XY) {
-	shape.IterateContourRows(contour, pcb.Transform.Multiply(t), pcb.cu.SetRow0)
-}
+func (pcb *PCB) Cut(contour []XY) {
+	pcb.cuts = append(pcb.cuts, pcb.Transform.Points(contour))
 
-func (pcb *PCB) Cut(contour []geom.XY) {
 	brush := shape.Circle(int(0.1 * pcb.scale))
 
-	path.IterateDotted(contour, pcb.Transform, int(0.2*pcb.scale), func(x, y int) {
+	path.IterateDotted(contour, pcb.scaled(), int(0.2*pcb.scale), func(x, y int) {
 		brush.IterateRowsXY(x, y, pcb.mask.SetRow1)
 	})
 }
 
-func (pcb *PCB) SaveFiles() {
-	util.SaveTmpPng("cu.png", pcb.cu.ToImage(color.Black, color.White))
-	util.SaveTmpPng("mask.png", pcb.mask.ToImage(color.White, color.Black))
-	util.SaveTmpPng("silk.png", pcb.silk.ToImage(color.White, color.Black))
+func (pcb *PCB) Hole(t geom.Transform, hole []XY) {
+	pcb.holes = append(pcb.holes, pcb.Transform.Multiply(t).Points(hole))
+
+	w := contour.Size(hole).X
+	k := (w + 0.2) / w
+	shape.IterateContourRows(hole, pcb.scaled().Multiply(t).ScaleK(k), pcb.cu.SetRow0)
+}
+
+func (pcb *PCB) SaveFiles() error {
+	//util.SaveTmpPng("cu.png", pcb.cu.ToImage(color.Black, color.White))
+	//util.SaveTmpPng("mask.png", pcb.mask.ToImage(color.White, color.Black))
+	//util.SaveTmpPng("silk.png", pcb.silk.ToImage(color.White, color.Black))
 
 	util.SaveTmpPng("overview.png", &util.MultiImage{
 		Images: []image.Image{
@@ -94,4 +112,10 @@ func (pcb *PCB) SaveFiles() {
 			pcb.silk.ToImage(color.RGBA{0, 0, 0, 0}, color.RGBA{0xFF, 0xFF, 0xFF, 0x40}),
 		},
 	})
+
+	if err := pcb.SaveEtch("tmp/etch.lbrn"); err != nil {
+		return err
+	}
+
+	return nil
 }

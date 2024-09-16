@@ -1,6 +1,7 @@
 package pcbc
 
 import (
+	"github.com/stretchr/testify/assert"
 	"temnok/lab/contour"
 	"temnok/lab/eda"
 	"temnok/lab/eda/lib/pkg/pad"
@@ -15,16 +16,16 @@ func TestPCB(t *testing.T) {
 	pcb := eda.NewPCB(38, 48)
 	for y := -9.0; y <= 9; y += 18 {
 		pcb.With(func() {
-			pcb.Transform = pcb.Transform.Multiply(geom.MoveXY(0, y))
+			pcb.Transform = geom.Move(XY{0, y})
 
-			qfn16pinout(t, pcb)
+			qfn16pinout(pcb)
 		})
 	}
 
-	pcb.SaveFiles()
+	assert.NoError(t, pcb.SaveFiles())
 }
 
-func qfn16pinout(t *testing.T, pcb *eda.PCB) {
+func qfn16pinout(pcb *eda.PCB) {
 	textScale := geom.Scale(XY{0.75, 1})
 	textHeight := 1.5
 

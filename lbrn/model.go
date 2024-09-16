@@ -1,10 +1,18 @@
 package lbrn
 
 import (
+	"bytes"
+	"encoding/base64"
 	"encoding/xml"
 	"fmt"
+	"image"
+	"image/png"
+	"os"
+	"path/filepath"
 	"temnok/lab/geom"
 )
+
+type XY = geom.XY
 
 type LightBurnProject struct {
 	XMLName       xml.Name     `xml:"LightBurnProject"`
@@ -74,7 +82,7 @@ type P struct {
 	P1 string `xml:"p1,attr"`
 }
 
-func (s *Shape) SetTabs(tabs []geom.XY) {
+func (s *Shape) SetTabs(tabs []XY) {
 	var buf []byte
 
 	for _, xy := range tabs {
@@ -89,8 +97,7 @@ func (s *Shape) SetTabs(tabs []geom.XY) {
 	s.Tabs = string(buf)
 }
 
-func (s *Shape) SetPath(path []geom.XY) {
-	s.Type = "Path"
+func (s *Shape) SetPath(path []XY) {
 	s.V = nil
 	s.P = nil
 
@@ -126,4 +133,79 @@ func (s *Shape) SetPath(path []geom.XY) {
 			s.P = append(s.P, p)
 		}
 	}
+}
+
+func NewPath(i int, t geom.Transform, path []XY) Shape {
+	s := Shape{
+		Type:     "Path",
+		CutIndex: fmt.Sprint(i),
+		XForm:    XForm(t),
+	}
+
+	s.SetPath(path)
+	//s.SetTabs(tabs)
+
+	return s
+}
+
+func NewPathWithTabs(index int, t geom.Transform, path []XY) Shape {
+	s := NewPath(index, t, path)
+
+	var tabs []XY
+	for i := 0; i < len(path); i += 3 {
+		if isLine := i > 0 && path[i-3] == path[i-2] && path[i-1] == path[i]; isLine {
+			u, v := path[i-2], path[i-1]
+			tabs = append(tabs, XY{(u.X + v.X) / 2, (u.Y + v.Y) / 2})
+		}
+	}
+	s.SetTabs(tabs)
+
+	return s
+}
+
+func NewCircle(i int, t geom.Transform, r float64) Shape {
+	return Shape{
+		Type:     "Ellipse",
+		CutIndex: fmt.Sprint(i),
+		XForm:    XForm(t),
+		Rx:       fmt.Sprint(r),
+		Ry:       fmt.Sprint(r),
+	}
+}
+
+func NewBitmap(i int, t geom.Transform, im image.Image) Shape {
+	buf := new(bytes.Buffer)
+	if err := png.Encode(buf, im); err != nil {
+		panic(err)
+	}
+
+	return Shape{
+		Type:     "Bitmap",
+		CutIndex: fmt.Sprint(i),
+		XForm:    XForm(t),
+		W:        fmt.Sprint(im.Bounds().Dx()),
+		H:        fmt.Sprint(im.Bounds().Dy()),
+		Data:     base64.StdEncoding.EncodeToString(buf.Bytes()),
+	}
+}
+
+func XForm(t geom.Transform) string {
+	return fmt.Sprintf("%v %v %v %v %v %v", t.I.X, t.I.Y, t.J.X, t.J.Y, t.K.X, t.K.Y)
+}
+
+func (p *LightBurnProject) SaveToFile(filename string) error {
+	if err := os.MkdirAll(filepath.Dir(filename), 0770); err != nil {
+		return err
+	}
+
+	file, err := os.Create(filename)
+	if err != nil {
+		return err
+	}
+
+	defer file.Close()
+
+	enc := xml.NewEncoder(file)
+	enc.Indent("", "\t")
+	return enc.Encode(p)
 }

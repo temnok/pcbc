@@ -48,8 +48,8 @@ var PadContours = [][]geom.XY{
 }[1:]
 
 var (
-	hPad = contour.RoundRect(0.6, 0.24, 0.12)
-	vPad = contour.RoundRect(0.24, 0.6, 0.12)
+	hPad = contour.RoundRect(0.6, 0.25, 0.12)
+	vPad = contour.RoundRect(0.25, 0.6, 0.12)
 )
 
 func init() {
