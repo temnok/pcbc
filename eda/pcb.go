@@ -59,11 +59,13 @@ func (pcb *PCB) Track(points ...XY) {
 }
 
 func (pcb *PCB) Pad(t geom.Transform, padContours ...[]XY) {
-	t = pcb.scaled().Multiply(t)
-	shape.IterateContoursRows(padContours, t, pcb.cu.SetRow1)
+	shape.IterateContoursRows(padContours, pcb.scaled().Multiply(t), pcb.cu.SetRow1)
+	pcb.PadMask(t, padContours...)
+}
 
+func (pcb *PCB) PadMask(t geom.Transform, padContours ...[]XY) {
 	brush := shape.Circle(int(0.1 * pcb.scale))
-	brush.IterateContours(padContours, t, pcb.mask.SetRow1)
+	brush.IterateContours(padContours, pcb.scaled().Multiply(t), pcb.mask.SetRow1)
 }
 
 func (pcb *PCB) SilkContour(t geom.Transform, w float64, contour []XY) {
@@ -105,6 +107,8 @@ func (pcb *PCB) SaveFiles() error {
 	//util.SaveTmpPng("mask.png", pcb.mask.ToImage(color.White, color.Black))
 	//util.SaveTmpPng("silk.png", pcb.silk.ToImage(color.White, color.Black))
 
+	pcb.technologicalHoles()
+
 	util.SaveTmpPng("overview.png", &util.MultiImage{
 		Images: []image.Image{
 			pcb.cu.ToImage(color.RGBA{0, 0x40, 0x10, 0xFF}, color.RGBA{0xFF, 0x80, 0, 0x7F}),
@@ -117,5 +121,30 @@ func (pcb *PCB) SaveFiles() error {
 		return err
 	}
 
+	if err := pcb.SaveMask("tmp/mask.lbrn"); err != nil {
+		return err
+	}
+
 	return nil
+}
+
+func (pcb *PCB) technologicalHoles() {
+	holders = []XY{
+		{-14.5, 19.5},
+		{14, 19},
+		{-14, -19},
+		{14, -19},
+	}
+
+	holder := contour.Circle(1)
+	for _, h := range holders {
+		t := geom.Move(h)
+
+		pcb.Hole(t, holder)
+		pcb.PadMask(t, holder)
+	}
+
+	for r := 1.5; r <= 3; r += 1.5 {
+		pcb.PadMask(geom.Move(XY{-15.5, 0}), contour.Circle(r))
+	}
 }

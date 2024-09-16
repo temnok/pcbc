@@ -9,10 +9,23 @@ import (
 
 type Param = lbrn.Param
 
-var lbrnCenter = geom.Move(XY{55, 55})
+var (
+	lbrnCenter = geom.Move(XY{55, 55})
+
+	holders = []XY{
+		{-14.5, 19.5},
+		{14, 19},
+		{-14, -19},
+		{14, -19},
+	}
+
+	holdersR = 1.0
+)
 
 func (pcb *PCB) SaveEtch(filename string) error {
 	im := pcb.cu.ToImage(color.Black, color.White)
+
+	k := 1 / pcb.scale
 
 	p := lbrn.LightBurnProject{
 		CutSettingImg: []lbrn.CutSetting{
@@ -68,13 +81,9 @@ func (pcb *PCB) SaveEtch(filename string) error {
 			},
 		},
 		Shape: []lbrn.Shape{
-			lbrn.NewBitmap(0, lbrnCenter.Scale(XY{1 / pcb.scale, -1 / pcb.scale}), im),
-			lbrn.NewBitmap(1, lbrnCenter.Scale(XY{1 / pcb.scale, -1 / pcb.scale}), im),
+			lbrn.NewBitmap(0, lbrnCenter.Scale(XY{k, -k}), im),
+			lbrn.NewBitmap(1, lbrnCenter.Scale(XY{k, -k}), im),
 			lbrn.NewPathWithTabs(2, lbrnCenter, contour.RoundRect(36, 46, 4)),
-			lbrn.NewCircle(2, lbrnCenter.Move(XY{-14, -19}), 1),
-			lbrn.NewCircle(2, lbrnCenter.Move(XY{14, -19}), 1),
-			lbrn.NewCircle(2, lbrnCenter.Move(XY{14, 19}), 1),
-			lbrn.NewCircle(2, lbrnCenter.Move(XY{-14.5, 19.5}), 1),
 		},
 	}
 

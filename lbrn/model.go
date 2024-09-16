@@ -44,6 +44,9 @@ type CutSetting struct {
 
 	TabsEnabled Param `xml:"tabsEnabled"`
 	TabSize     Param `xml:"tabSize"`
+
+	CrossHatch Param `xml:"crossHatch"`
+	Angle      Param `xml:"angle"`
 }
 
 type Shape struct {
