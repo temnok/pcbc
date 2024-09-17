@@ -13,7 +13,9 @@ import (
 type XY = geom.XY
 
 func TestPCB(t *testing.T) {
-	pcb := eda.NewPCB(38, 48)
+	pcb := eda.NewPCB(36, 46)
+	pcb.Cut(contour.RoundRect(35, 45, 2.5))
+
 	for y := -9.0; y <= 9; y += 18 {
 		pcb.With(func() {
 			pcb.Transform = geom.Move(XY{0, y})

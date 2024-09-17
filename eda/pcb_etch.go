@@ -2,7 +2,6 @@ package eda
 
 import (
 	"image/color"
-	"temnok/lab/contour"
 	"temnok/lab/geom"
 	"temnok/lab/lbrn"
 )
@@ -83,7 +82,7 @@ func (pcb *PCB) SaveEtch(filename string) error {
 		Shape: []lbrn.Shape{
 			lbrn.NewBitmap(0, lbrnCenter.Scale(XY{k, -k}), im),
 			lbrn.NewBitmap(1, lbrnCenter.Scale(XY{k, -k}), im),
-			lbrn.NewPathWithTabs(2, lbrnCenter, contour.RoundRect(36, 46, 4)),
+			//			lbrn.NewPathWithTabs(2, lbrnCenter, contour.RoundRect(35, 45, 2.5)),
 		},
 	}
 

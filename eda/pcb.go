@@ -107,7 +107,7 @@ func (pcb *PCB) SaveFiles() error {
 	//util.SaveTmpPng("mask.png", pcb.mask.ToImage(color.White, color.Black))
 	//util.SaveTmpPng("silk.png", pcb.silk.ToImage(color.White, color.Black))
 
-	pcb.technologicalHoles()
+	pcb.technologicalParts()
 
 	util.SaveTmpPng("overview.png", &util.MultiImage{
 		Images: []image.Image{
@@ -128,12 +128,12 @@ func (pcb *PCB) SaveFiles() error {
 	return nil
 }
 
-func (pcb *PCB) technologicalHoles() {
+func (pcb *PCB) technologicalParts() {
 	holders = []XY{
-		{-14.5, 19.5},
-		{14, 19},
-		{-14, -19},
-		{14, -19},
+		{-15, 20},
+		{15, 20},
+		{-15, -20},
+		{15, -20},
 	}
 
 	holder := contour.Circle(1)
@@ -144,7 +144,17 @@ func (pcb *PCB) technologicalHoles() {
 		pcb.PadMask(t, holder)
 	}
 
-	for r := 1.5; r <= 3; r += 1.5 {
-		pcb.PadMask(geom.Move(XY{-15.5, 0}), contour.Circle(r))
+	key := []XY{
+		{-0.4, 0.4},
+		{0.4, 0.25},
+		{-0.25, -0.4},
+		{-0.4, 0.4},
 	}
+	t := geom.Move(XY{-13.5, 18.5})
+	pcb.Track(t.Points(key)...)
+	pcb.SilkContour(t, 0.2, contour.Lines(key))
+
+	//for r := 1.5; r <= 3; r += 1.5 {
+	//	pcb.PadMask(geom.Move(XY{-15.5, 0}), contour.Circle(r))
+	//}
 }
