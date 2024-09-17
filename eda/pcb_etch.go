@@ -28,6 +28,7 @@ func (pcb *PCB) SaveEtch(filename string) error {
 
 	p := lbrn.LightBurnProject{
 		CutSettingImg: []lbrn.CutSetting{
+			// Etch
 			{
 				Type:     "Image",
 				Index:    Param{"0"},
@@ -44,11 +45,12 @@ func (pcb *PCB) SaveEtch(filename string) error {
 				UseDotCorrection: Param{"1"},
 				DotWidth:         Param{"0.05"},
 			},
+			// Clean Pass 1
 			{
 				Type:     "Image",
 				Index:    Param{"1"},
 				Name:     Param{"C01"},
-				Priority: Param{"2"},
+				Priority: Param{"1"},
 
 				MaxPower:    Param{"50"},
 				QPulseWidth: Param{"2"},
@@ -60,16 +62,35 @@ func (pcb *PCB) SaveEtch(filename string) error {
 				UseDotCorrection: Param{"1"},
 				DotWidth:         Param{"0.05"},
 			},
+			// Clean Pass 2
+			{
+				Type:     "Image",
+				Index:    Param{"3"},
+				Name:     Param{"C03"},
+				Priority: Param{"3"},
+
+				MaxPower:    Param{"50"},
+				QPulseWidth: Param{"2"},
+				Frequency:   Param{"280000"},
+
+				Speed:            Param{"2000"},
+				Interval:         Param{"0.01"},
+				DPI:              Param{"2540"},
+				UseDotCorrection: Param{"1"},
+				DotWidth:         Param{"0.05"},
+
+				Angle: Param{"90"},
+			},
 		},
 		CutSetting: []lbrn.CutSetting{
 			{
 				Type:     "Cut",
 				Index:    Param{"2"},
 				Name:     Param{"C02"},
-				Priority: Param{"1"},
+				Priority: Param{"2"},
 
 				Speed:        Param{"100"},
-				GlobalRepeat: Param{"100"},
+				GlobalRepeat: Param{"80"},
 
 				MaxPower:    Param{"90"},
 				QPulseWidth: Param{"200"},
@@ -82,7 +103,7 @@ func (pcb *PCB) SaveEtch(filename string) error {
 		Shape: []lbrn.Shape{
 			lbrn.NewBitmap(0, lbrnCenter.Scale(XY{k, -k}), im),
 			lbrn.NewBitmap(1, lbrnCenter.Scale(XY{k, -k}), im),
-			//			lbrn.NewPathWithTabs(2, lbrnCenter, contour.RoundRect(35, 45, 2.5)),
+			lbrn.NewBitmap(3, lbrnCenter.Scale(XY{k, -k}), im),
 		},
 	}
 
