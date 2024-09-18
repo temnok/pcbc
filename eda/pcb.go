@@ -146,7 +146,7 @@ func (pcb *PCB) technologicalParts() {
 	}
 
 	holder := contour.Circle(1)
-	maskHole := contour.Circle(0.5)
+	maskHole := contour.Circle(0.65)
 
 	for _, h := range holders {
 		t := geom.Move(h)
