@@ -68,5 +68,5 @@ func Add(pcb *eda.PCB, transform geom.Transform) []geom.XY {
 	//pcb.SilkContour(transform, 0.1, contour.Rect(3, 3))
 	pcb.SilkText(transform.MoveXY(-2.3, 0.8), 0.6, "1")
 
-	return transform.Points(PadCenters)
+	return PadCenters
 }

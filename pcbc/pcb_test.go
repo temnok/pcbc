@@ -17,13 +17,7 @@ func TestPCB(t *testing.T) {
 	pcb.Cut(geom.Identity(), contour.RoundRect(35, 45, 2.5))
 
 	for y := -9.0; y <= 9; y += 18 {
-		//py32f002aBoard(pcb.Transform.Move(XY{0, y}), pcb)
-
-		pcb.With(func() {
-			pcb.Transform = geom.Move(XY{0, y})
-
-			py32f002aBoard(geom.Identity(), pcb)
-		})
+		py32f002aBoard(geom.Move(XY{0, y}), pcb)
 	}
 
 	assert.NoError(t, pcb.SaveFiles())
@@ -37,10 +31,12 @@ func py32f002aBoard(t geom.Transform, pcb *eda.PCB) {
 	pcb.SilkText(t.MoveXY(-7, 0).Multiply(textScale), titleHeight, "PY32")
 	pcb.SilkText(t.MoveXY(2.75, 0).Multiply(textScale), titleHeight, "F002A")
 
-	pins := qfn16.Add(pcb, geom.RotateD(45))
+	qfnT := geom.RotateD(45)
+	pins := qfnT.Points(qfn16.Add(pcb, t.Multiply(qfnT)))
 
 	n := 9
-	pads := pad.Row(pcb, t.MoveXY(0, -6), contour.Circle(0.75), n, 2.54)
+	padT := geom.MoveXY(0, -6)
+	pads := padT.Points(pad.Row(pcb, t.Multiply(padT), contour.Circle(0.75), n, 2.54))
 	pad.Row(pcb, t.MoveXY(0, 6), contour.Circle(0.75), n, 2.54)
 
 	for _, t := range []geom.Transform{t, t.RotateD(180)} {

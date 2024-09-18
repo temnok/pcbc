@@ -15,11 +15,10 @@ import (
 type XY = geom.XY
 
 type PCB struct {
-	scaleTransform geom.Transform
-	Transform      geom.Transform
-	TrackWidth     float64
+	width, height, scale float64
+	scaleTransform       geom.Transform
+	TrackWidth           float64
 
-	scale                  float64
 	cuts, maskHoles, holes [][]XY
 	cu, mask, silk         *bitmap.Bitmap
 }
@@ -30,18 +29,18 @@ func NewPCB(w, h float64) *PCB {
 	wi, hi := int(w*scale), int(h*scale)
 
 	return &PCB{
-		scaleTransform: geom.ScaleK(scale).MoveXY(w/2, h/2),
-		Transform:      geom.Identity(),
-		TrackWidth:     0.2,
-		scale:          scale,
-		cu:             bitmap.NewBitmap(wi, hi),
-		mask:           bitmap.NewBitmap(wi, hi),
-		silk:           bitmap.NewBitmap(wi, hi),
+		width:      w,
+		height:     h,
+		TrackWidth: 0.2,
+		scale:      scale,
+		cu:         bitmap.NewBitmap(wi, hi),
+		mask:       bitmap.NewBitmap(wi, hi),
+		silk:       bitmap.NewBitmap(wi, hi),
 	}
 }
 
-func (pcb *PCB) scaled() geom.Transform {
-	return pcb.scaleTransform.Multiply(pcb.Transform)
+func (pcb *PCB) bitmapTransform() geom.Transform {
+	return geom.ScaleK(pcb.scale).MoveXY(pcb.width/2, pcb.height/2)
 }
 
 func (pcb *PCB) With(block func()) {
@@ -55,11 +54,11 @@ func (pcb *PCB) With(block func()) {
 
 func (pcb *PCB) Track(t geom.Transform, points ...XY) {
 	brush := shape.Circle(int(pcb.TrackWidth * pcb.scale))
-	brush.IterateContour(contour.Lines(t.Points(points)), pcb.scaled(), pcb.cu.SetRow1)
+	brush.IterateContour(contour.Lines(points), pcb.bitmapTransform().Multiply(t), pcb.cu.SetRow1)
 }
 
 func (pcb *PCB) Pad(t geom.Transform, padContours ...[]XY) {
-	shape.IterateContoursRows(padContours, pcb.scaled().Multiply(t), pcb.cu.SetRow1)
+	shape.IterateContoursRows(padContours, pcb.bitmapTransform().Multiply(t), pcb.cu.SetRow1)
 	pcb.MaskPad(t, padContours...)
 }
 
@@ -69,17 +68,17 @@ func (pcb *PCB) MaskPad(t geom.Transform, padContours ...[]XY) {
 
 func (pcb *PCB) MaskContour(t geom.Transform, w float64, contour ...[]XY) {
 	brush := shape.Circle(int(w * pcb.scale))
-	brush.IterateContours(contour, pcb.scaled().Multiply(t), pcb.mask.SetRow1)
+	brush.IterateContours(contour, pcb.bitmapTransform().Multiply(t), pcb.mask.SetRow1)
 }
 
 func (pcb *PCB) MaskHole(t geom.Transform, contour []XY) {
-	pcb.MaskContour(geom.Identity(), 0.2, contour)
-	pcb.maskHoles = append(pcb.maskHoles, pcb.Transform.Points(contour))
+	pcb.MaskContour(t, 0.2, contour)
+	pcb.maskHoles = append(pcb.maskHoles, t.Points(contour))
 }
 
 func (pcb *PCB) SilkContour(t geom.Transform, w float64, contour []XY) {
 	brush := shape.Circle(int(w * pcb.scale))
-	brush.IterateContour(contour, pcb.scaled().Multiply(t), pcb.silk.SetRow1)
+	brush.IterateContour(contour, pcb.bitmapTransform().Multiply(t), pcb.silk.SetRow1)
 }
 
 func (pcb *PCB) SilkText(t geom.Transform, height float64, text string) {
@@ -87,7 +86,7 @@ func (pcb *PCB) SilkText(t geom.Transform, height float64, text string) {
 
 	for i, c := range text {
 		if c := int(c); c < len(font.Paths) {
-			t := pcb.scaled().Multiply(t).ScaleK(height).MoveXY(float64(i)*font.Width, 0.4)
+			t := pcb.bitmapTransform().Multiply(t).ScaleK(height).MoveXY(float64(i)*font.Width, 0.4)
 			brush.IterateContours(font.Paths[c], t, pcb.silk.SetRow1)
 		}
 	}
@@ -98,17 +97,17 @@ func (pcb *PCB) Cut(t geom.Transform, contour []XY) {
 
 	brush := shape.Circle(int(0.1 * pcb.scale))
 
-	path.IterateDotted(contour, pcb.scaled().Multiply(t), int(0.2*pcb.scale), func(x, y int) {
+	path.IterateDotted(contour, pcb.bitmapTransform().Multiply(t), int(0.2*pcb.scale), func(x, y int) {
 		brush.IterateRowsXY(x, y, pcb.mask.SetRow1)
 	})
 }
 
 func (pcb *PCB) Hole(t geom.Transform, hole []XY) {
-	pcb.holes = append(pcb.holes, pcb.Transform.Multiply(t).Points(hole))
+	pcb.holes = append(pcb.holes, t.Points(hole))
 
 	w := contour.Size(hole).X
 	k := (w + 0.2) / w
-	shape.IterateContourRows(hole, pcb.scaled().Multiply(t).ScaleK(k), pcb.cu.SetRow0)
+	shape.IterateContourRows(hole, pcb.bitmapTransform().Multiply(t).ScaleK(k), pcb.cu.SetRow0)
 }
 
 func (pcb *PCB) SaveFiles() error {
