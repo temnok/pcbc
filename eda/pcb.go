@@ -53,9 +53,9 @@ func (pcb *PCB) With(block func()) {
 	pcb.cuts, pcb.holes, pcb.maskHoles = cuts, holes, maskHoles
 }
 
-func (pcb *PCB) Track(points ...XY) {
+func (pcb *PCB) Track(t geom.Transform, points ...XY) {
 	brush := shape.Circle(int(pcb.TrackWidth * pcb.scale))
-	brush.IterateContour(contour.Lines(points), pcb.scaled(), pcb.cu.SetRow1)
+	brush.IterateContour(contour.Lines(t.Points(points)), pcb.scaled(), pcb.cu.SetRow1)
 }
 
 func (pcb *PCB) Pad(t geom.Transform, padContours ...[]XY) {
@@ -72,7 +72,7 @@ func (pcb *PCB) MaskContour(t geom.Transform, w float64, contour ...[]XY) {
 	brush.IterateContours(contour, pcb.scaled().Multiply(t), pcb.mask.SetRow1)
 }
 
-func (pcb *PCB) MaskHole(contour []XY) {
+func (pcb *PCB) MaskHole(t geom.Transform, contour []XY) {
 	pcb.MaskContour(geom.Identity(), 0.2, contour)
 	pcb.maskHoles = append(pcb.maskHoles, pcb.Transform.Points(contour))
 }
@@ -93,12 +93,12 @@ func (pcb *PCB) SilkText(t geom.Transform, height float64, text string) {
 	}
 }
 
-func (pcb *PCB) Cut(contour []XY) {
-	pcb.cuts = append(pcb.cuts, pcb.Transform.Points(contour))
+func (pcb *PCB) Cut(t geom.Transform, contour []XY) {
+	pcb.cuts = append(pcb.cuts, t.Points(contour))
 
 	brush := shape.Circle(int(0.1 * pcb.scale))
 
-	path.IterateDotted(contour, pcb.scaled(), int(0.2*pcb.scale), func(x, y int) {
+	path.IterateDotted(contour, pcb.scaled().Multiply(t), int(0.2*pcb.scale), func(x, y int) {
 		brush.IterateRowsXY(x, y, pcb.mask.SetRow1)
 	})
 }
@@ -154,7 +154,7 @@ func (pcb *PCB) technologicalParts() {
 		pcb.Hole(t, holder)
 		pcb.MaskPad(t, holder)
 
-		pcb.MaskHole(t.Points(maskHole))
+		pcb.MaskHole(t, maskHole)
 	}
 
 	key := []XY{
@@ -164,6 +164,6 @@ func (pcb *PCB) technologicalParts() {
 		{0.2, -0.2},
 	}
 	t := geom.Move(XY{-16.3, 21.3})
-	pcb.Track(t.Points(key)...)
+	pcb.Track(t, key...)
 	pcb.SilkContour(t, 0.2, contour.Lines(key))
 }
