@@ -63,10 +63,10 @@ func keyedRect(w, h, k float64) []geom.XY {
 	return contour.Lines([]geom.XY{{-x + k, y}, {x, y}, {x, -y}, {-x, -y}, {-x, y - k}, {-x + k, y}})
 }
 
-func Add(pcb *eda.PCB, transform geom.Transform) []geom.XY {
-	pcb.Pad(transform, PadContours...)
-	//pcb.SilkContour(transform, 0.1, contour.Rect(3, 3))
-	pcb.SilkText(transform.MoveXY(-2.3, 0.8), 0.6, "1")
+func Add(pcb *eda.PCB, t geom.Transform) []geom.XY {
+	pcb.Pad(t.PointsAll(PadContours)...)
+	//pcb.SilkContour(t, 0.1, contour.Rect(3, 3))
+	pcb.SilkText(t.MoveXY(-2.3, 0.8), 0.6, "1")
 
 	return PadCenters
 }

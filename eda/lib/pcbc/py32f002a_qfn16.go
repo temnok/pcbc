@@ -29,15 +29,15 @@ func PY32F002A_QFN16(pcb *eda.PCB, t geom.Transform) {
 	pad.Row(pcb, t.MoveXY(0, 6), contour.Circle(0.75), n, 2.54)
 
 	for _, t := range []geom.Transform{t, t.RotateD(180)} {
-		pcb.Track(t, pads[0], XY{-7.5, -3.2}, XY{-4.5, -3.2}, pins[0])
-		pcb.Track(t, pads[1], XY{-6, -4.2}, XY{-4.8, -4.2}, pins[1])
-		pcb.Track(t, pads[2], XY{-3.8, -4.5}, XY{-3.8, -4}, pins[2])
-		pcb.Track(t, pads[3], XY{pads[3].X, -3.5}, pins[3])
-		pcb.Track(t, pads[4], XY{1.5, -4.5}, XY{1.5, -2.5}, pins[4])
-		pcb.Track(t, pads[5], XY{pads[5].X, -2.8}, pins[5])
-		pcb.Track(t, pads[6], XY{pads[6].X, -4.5}, pins[6])
-		pcb.Track(t, pads[7], XY{pads[7].X, -6.2}, pins[7])
-		pcb.Track(t, pads[8], XY{pads[8].X, pins[16].Y}, pins[16])
+		pcb.Track(t.Points([]XY{pads[0], {-7.5, -3.2}, {-4.5, -3.2}, pins[0]}))
+		pcb.Track(t.Points([]XY{pads[1], {-6, -4.2}, {-4.8, -4.2}, pins[1]}))
+		pcb.Track(t.Points([]XY{pads[2], {-3.8, -4.5}, {-3.8, -4}, pins[2]}))
+		pcb.Track(t.Points([]XY{pads[3], {pads[3].X, -3.5}, pins[3]}))
+		pcb.Track(t.Points([]XY{pads[4], {1.5, -4.5}, {1.5, -2.5}, pins[4]}))
+		pcb.Track(t.Points([]XY{pads[5], {pads[5].X, -2.8}, pins[5]}))
+		pcb.Track(t.Points([]XY{pads[6], {pads[6].X, -4.5}, pins[6]}))
+		pcb.Track(t.Points([]XY{pads[7], {pads[7].X, -6.2}, pins[7]}))
+		pcb.Track(t.Points([]XY{pads[8], {pads[8].X, pins[16].Y}, pins[16]}))
 	}
 
 	loPinNames := []string{
@@ -70,7 +70,7 @@ func PY32F002A_QFN16(pcb *eda.PCB, t geom.Transform) {
 	pad.Row(pcb, t, contour.Circle(1.3), 2, 20)
 	for x := -10.0; x <= 10; x += 20 {
 		t := t.Move(XY{x, 0})
-		pcb.Pad(t, contour.Circle(1.35))
-		pcb.Hole(t, contour.Circle(0.85))
+		pcb.Pad(t.Points(contour.Circle(1.35)))
+		pcb.Hole(t.Points(contour.Circle(0.85)))
 	}
 }
