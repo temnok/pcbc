@@ -19,9 +19,9 @@ type PCB struct {
 	Transform      geom.Transform
 	TrackWidth     float64
 
-	scale          float64
-	cuts, holes    [][]XY
-	cu, mask, silk *bitmap.Bitmap
+	scale                  float64
+	cuts, maskHoles, holes [][]XY
+	cu, mask, silk         *bitmap.Bitmap
 }
 
 func NewPCB(w, h float64) *PCB {
@@ -48,9 +48,9 @@ func (pcb *PCB) With(block func()) {
 	saved := *pcb
 	block()
 
-	cuts, holes := pcb.cuts, pcb.holes
+	cuts, holes, maskHoles := pcb.cuts, pcb.holes, pcb.maskHoles
 	*pcb = saved
-	pcb.cuts, pcb.holes = cuts, holes
+	pcb.cuts, pcb.holes, pcb.maskHoles = cuts, holes, maskHoles
 }
 
 func (pcb *PCB) Track(points ...XY) {
@@ -60,12 +60,21 @@ func (pcb *PCB) Track(points ...XY) {
 
 func (pcb *PCB) Pad(t geom.Transform, padContours ...[]XY) {
 	shape.IterateContoursRows(padContours, pcb.scaled().Multiply(t), pcb.cu.SetRow1)
-	pcb.PadMask(t, padContours...)
+	pcb.MaskPad(t, padContours...)
 }
 
-func (pcb *PCB) PadMask(t geom.Transform, padContours ...[]XY) {
-	brush := shape.Circle(int(0.1 * pcb.scale))
-	brush.IterateContours(padContours, pcb.scaled().Multiply(t), pcb.mask.SetRow1)
+func (pcb *PCB) MaskPad(t geom.Transform, padContours ...[]XY) {
+	pcb.MaskContour(t, 0.1, padContours...)
+}
+
+func (pcb *PCB) MaskContour(t geom.Transform, w float64, contour ...[]XY) {
+	brush := shape.Circle(int(w * pcb.scale))
+	brush.IterateContours(contour, pcb.scaled().Multiply(t), pcb.mask.SetRow1)
+}
+
+func (pcb *PCB) MaskHole(contour []XY) {
+	pcb.MaskContour(geom.Identity(), 0.2, contour)
+	pcb.maskHoles = append(pcb.maskHoles, pcb.Transform.Points(contour))
 }
 
 func (pcb *PCB) SilkContour(t geom.Transform, w float64, contour []XY) {
@@ -137,24 +146,24 @@ func (pcb *PCB) technologicalParts() {
 	}
 
 	holder := contour.Circle(1)
+	maskHole := contour.Circle(0.5)
+
 	for _, h := range holders {
 		t := geom.Move(h)
 
 		pcb.Hole(t, holder)
-		pcb.PadMask(t, holder)
+		pcb.MaskPad(t, holder)
+
+		pcb.MaskHole(t.Points(maskHole))
 	}
 
 	key := []XY{
-		{-0.4, 0.4},
-		{0.4, 0.25},
-		{-0.25, -0.4},
-		{-0.4, 0.4},
+		{0.2, -0.2},
+		{0.15, 0.2},
+		{-0.2, -0.15},
+		{0.2, -0.2},
 	}
-	t := geom.Move(XY{-13.5, 18.5})
+	t := geom.Move(XY{-16.3, 21.3})
 	pcb.Track(t.Points(key)...)
 	pcb.SilkContour(t, 0.2, contour.Lines(key))
-
-	//for r := 1.5; r <= 3; r += 1.5 {
-	//	pcb.PadMask(geom.Move(XY{-15.5, 0}), contour.Circle(r))
-	//}
 }

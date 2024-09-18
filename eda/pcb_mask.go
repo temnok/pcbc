@@ -93,8 +93,11 @@ func (pcb *PCB) SaveMask(filename string) error {
 			lbrn.NewBitmap(0, lbrnCenter.Scale(XY{k, -k}), silk),
 			lbrn.NewBitmap(1, lbrnCenter.Scale(XY{k, -k}), mask),
 			lbrn.NewBitmap(2, lbrnCenter.Scale(XY{k, -k}), mask),
-			//lbrn.NewCircle(3, lbrnCenter.Move(XY{-15.5, 0}), 1.5),
 		},
+	}
+
+	for _, cut := range pcb.maskHoles {
+		p.Shape = append(p.Shape, lbrn.NewPathWithTabs(3, lbrnCenter, cut))
 	}
 
 	return p.SaveToFile(filename)

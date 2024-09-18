@@ -29,12 +29,11 @@ func TestPCB(t *testing.T) {
 
 func qfn16pinout(pcb *eda.PCB) {
 	textScale := geom.Scale(XY{0.75, 1})
+	titleHeight := 2.0
 	textHeight := 1.5
 
-	pcb.SilkText(geom.MoveXY(-5.5, 0.75).Multiply(textScale), textHeight, "PY32")
-	pcb.SilkText(geom.MoveXY(-6.25, -0.75).Multiply(textScale), textHeight, "F002A")
-	pcb.SilkText(geom.MoveXY(2.75, 0.75).Multiply(textScale), textHeight, "W15U")
-	pcb.SilkText(geom.MoveXY(2.75, -0.75).Multiply(textScale), textHeight, "6TR")
+	pcb.SilkText(geom.MoveXY(-7, 0).Multiply(textScale), titleHeight, "PY32")
+	pcb.SilkText(geom.MoveXY(2.75, 0).Multiply(textScale), titleHeight, "F002A")
 
 	pins := qfn16.Add(pcb, geom.RotateD(45))
 
@@ -48,7 +47,7 @@ func qfn16pinout(pcb *eda.PCB) {
 
 			pcb.Track(pads[0], XY{-7.5, -3.2}, XY{-4.5, -3.2}, pins[0])
 			pcb.Track(pads[1], XY{-6, -4.2}, XY{-4.8, -4.2}, pins[1])
-			pcb.Track(pads[2], XY{pads[2].X, -5.2}, pins[2])
+			pcb.Track(pads[2], XY{-3.8, -4.5}, XY{-3.8, -4}, pins[2])
 			pcb.Track(pads[3], XY{pads[3].X, -3.5}, pins[3])
 			pcb.Track(pads[4], XY{1.5, -4.5}, XY{1.5, -2.5}, pins[4])
 			pcb.Track(pads[5], XY{pads[5].X, -2.8}, pins[5])
@@ -88,9 +87,9 @@ func qfn16pinout(pcb *eda.PCB) {
 	pad.Row(pcb, geom.Identity(), contour.Circle(1.3), 2, 20)
 	for x := -10.0; x <= 10; x += 20 {
 		t := geom.Move(XY{x, 0})
-		pcb.Pad(t, contour.Circle(1.3))
-		pcb.Hole(t, contour.Circle(0.8))
+		pcb.Pad(t, contour.Circle(1.35))
+		pcb.Hole(t, contour.Circle(0.85))
 	}
 
-	pcb.Cut(contour.RoundRect(24, 16, 2))
+	pcb.Cut(contour.RoundRect(24, 16, 1.5))
 }
