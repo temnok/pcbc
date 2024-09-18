@@ -9,7 +9,7 @@ func (pcb *PCB) SaveMask(filename string) error {
 	silk := pcb.silk.ToImage(color.White, color.Black)
 	mask := pcb.mask.ToImage(color.Transparent, color.Black)
 
-	k := 1 / pcb.scale
+	k := 1 / pcb.resolution
 
 	p := lbrn.LightBurnProject{
 		CutSettingImg: []lbrn.CutSetting{

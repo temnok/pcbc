@@ -24,7 +24,7 @@ var (
 func (pcb *PCB) SaveEtch(filename string) error {
 	im := pcb.cu.ToImage(color.Black, color.White)
 
-	k := 1 / pcb.scale
+	k := 1 / pcb.resolution
 
 	p := lbrn.LightBurnProject{
 		CutSettingImg: []lbrn.CutSetting{

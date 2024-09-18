@@ -19,7 +19,7 @@ func TestContours(t *testing.T) {
 	for d := 5.0; d < 24; d++ {
 		cnt := Circle(d)
 
-		transform := geom.Move(geom.XY{(d - 4) * 50, 50})
+		transform := geom.MoveXY((d-4)*50, 50)
 		path.Iterate(cnt, transform, func(x, y int) {
 			brush.IterateRowsXY(x, y, bm.SetRow1)
 		})
