@@ -18,8 +18,9 @@ type PCB struct {
 	width, height, resolution float64
 	trackWidth                float64
 
-	cuts, holes, maskHoles [][]XY
-	cu, mask, silk         *bitmap.Bitmap
+	cuts, stencilCuts              [][]XY
+	holes, maskHoles, stencilHoles [][]XY
+	cu, mask, silk                 *bitmap.Bitmap
 }
 
 func NewPCB(w, h float64) *PCB {
@@ -52,8 +53,13 @@ func (pcb *PCB) Cut(contour []XY) {
 	})
 }
 
+func (pcb *PCB) StencilCut(contours ...[]XY) {
+	pcb.stencilCuts = append(pcb.stencilCuts, contours...)
+}
+
 func (pcb *PCB) Hole(hole []XY) {
 	pcb.holes = append(pcb.holes, hole)
+	pcb.stencilHoles = append(pcb.stencilHoles, hole)
 
 	//w := contour.Size(hole).X
 	//k := (w + 0.2) / w
@@ -70,6 +76,8 @@ func (pcb *PCB) Track(points []XY) {
 func (pcb *PCB) Pad(padContours ...[]XY) {
 	shape.IterateContoursRows(padContours, pcb.bitmapTransform(geom.Identity()), pcb.cu.SetRow1)
 	pcb.MaskPad(padContours...)
+
+	pcb.stencilHoles = append(pcb.stencilHoles, padContours...)
 }
 
 func (pcb *PCB) MaskPad(padContours ...[]XY) {
@@ -122,6 +130,10 @@ func (pcb *PCB) SaveFiles() error {
 	}
 
 	if err := pcb.SaveMask("tmp/mask.lbrn"); err != nil {
+		return err
+	}
+
+	if err := pcb.SaveStencil("tmp/stencil.lbrn"); err != nil {
 		return err
 	}
 
