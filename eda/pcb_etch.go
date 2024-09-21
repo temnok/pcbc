@@ -17,8 +17,6 @@ var (
 		{-14, -19},
 		{14, -19},
 	}
-
-	holdersR = 1.0
 )
 
 func (pcb *PCB) SaveEtch(filename string) error {

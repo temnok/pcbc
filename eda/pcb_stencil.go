@@ -31,7 +31,7 @@ func (pcb *PCB) SaveStencil(filename string) error {
 	}
 
 	for _, hole := range pcb.stencilHoles {
-		p.Shape = append(p.Shape, lbrn.NewPathWithTabs(0, lbrnCenter, hole))
+		p.Shape = append(p.Shape, lbrn.NewPath(0, lbrnCenter, hole))
 	}
 
 	return p.SaveToFile(filename)
