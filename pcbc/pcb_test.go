@@ -19,5 +19,5 @@ func TestPCB(t *testing.T) {
 		pcbc.PY32F002A_QFN16(pcb, geom.MoveXY(0, y))
 	}
 
-	assert.NoError(t, pcb.SaveFiles())
+	assert.NoError(t, pcb.SaveFiles("out/"))
 }

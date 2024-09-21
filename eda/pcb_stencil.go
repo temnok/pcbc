@@ -13,8 +13,8 @@ func (pcb *PCB) SaveStencil(filename string) error {
 				Name:     Param{"C00"},
 				Priority: Param{"0"},
 
-				Speed:     Param{"400"},
-				NumPasses: Param{"10"},
+				Speed:        Param{"400"},
+				GlobalRepeat: Param{"10"},
 
 				MaxPower:    Param{"90"},
 				QPulseWidth: Param{"200"},
@@ -30,8 +30,8 @@ func (pcb *PCB) SaveStencil(filename string) error {
 		p.Shape = append(p.Shape, lbrn.NewPathWithTabs(0, lbrnCenter, cut))
 	}
 
-	for _, cut := range pcb.stencilHoles {
-		p.Shape = append(p.Shape, lbrn.NewPathWithTabs(0, lbrnCenter, cut))
+	for _, hole := range pcb.stencilHoles {
+		p.Shape = append(p.Shape, lbrn.NewPathWithTabs(0, lbrnCenter, hole))
 	}
 
 	return p.SaveToFile(filename)

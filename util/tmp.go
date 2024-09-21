@@ -4,14 +4,19 @@ import (
 	"image"
 	"image/png"
 	"os"
+	"path/filepath"
 )
 
 func SaveTmpPng(name string, im image.Image) error {
-	if err := os.MkdirAll("tmp", 0770); err != nil {
+	return SavePng("tmp/"+name, im)
+}
+
+func SavePng(name string, im image.Image) error {
+	if err := os.MkdirAll(filepath.Dir(name), 0770); err != nil {
 		return err
 	}
 
-	f, err := os.Create("tmp/" + name)
+	f, err := os.Create(name)
 	if err != nil {
 		return err
 	}

@@ -58,8 +58,19 @@ func (pcb *PCB) StencilCut(contours ...[]XY) {
 }
 
 func (pcb *PCB) Hole(hole []XY) {
-	pcb.holes = append(pcb.holes, hole)
+	pcb.HoleNoStencil(hole)
+	pcb.StencilHole(hole)
+}
+
+func (pcb *PCB) StencilHole(hole []XY) {
 	pcb.stencilHoles = append(pcb.stencilHoles, hole)
+}
+
+func (pcb *PCB) StencilDottedHoles(contour []XY, r float64) {
+}
+
+func (pcb *PCB) HoleNoStencil(hole []XY) {
+	pcb.holes = append(pcb.holes, hole)
 
 	//w := contour.Size(hole).X
 	//k := (w + 0.2) / w
@@ -74,10 +85,13 @@ func (pcb *PCB) Track(points []XY) {
 }
 
 func (pcb *PCB) Pad(padContours ...[]XY) {
+	pcb.PadNoStencil(padContours...)
+	pcb.stencilHoles = append(pcb.stencilHoles, padContours...)
+}
+
+func (pcb *PCB) PadNoStencil(padContours ...[]XY) {
 	shape.IterateContoursRows(padContours, pcb.bitmapTransform(geom.Identity()), pcb.cu.SetRow1)
 	pcb.MaskPad(padContours...)
-
-	pcb.stencilHoles = append(pcb.stencilHoles, padContours...)
 }
 
 func (pcb *PCB) MaskPad(padContours ...[]XY) {
@@ -110,14 +124,14 @@ func (pcb *PCB) SilkText(t geom.Transform, height float64, text string) {
 	}
 }
 
-func (pcb *PCB) SaveFiles() error {
+func (pcb *PCB) SaveFiles(path string) error {
 	//util.SaveTmpPng("cu.png", pcb.cu.ToImage(color.Black, color.White))
 	//util.SaveTmpPng("mask.png", pcb.mask.ToImage(color.White, color.Black))
 	//util.SaveTmpPng("silk.png", pcb.silk.ToImage(color.White, color.Black))
 
 	pcb.technologicalParts()
 
-	util.SaveTmpPng("overview.png", &util.MultiImage{
+	util.SavePng(path+"overview.png", &util.MultiImage{
 		Images: []image.Image{
 			pcb.cu.ToImage(color.RGBA{0, 0x40, 0x10, 0xFF}, color.RGBA{0xFF, 0x80, 0, 0x7F}),
 			pcb.mask.ToImage(color.RGBA{0, 0, 0, 0}, color.RGBA{0xFF, 0xFF, 0xFF, 0x40}),
@@ -125,15 +139,15 @@ func (pcb *PCB) SaveFiles() error {
 		},
 	})
 
-	if err := pcb.SaveEtch("tmp/etch.lbrn"); err != nil {
+	if err := pcb.SaveEtch(path + "etch.lbrn"); err != nil {
 		return err
 	}
 
-	if err := pcb.SaveMask("tmp/mask.lbrn"); err != nil {
+	if err := pcb.SaveMask(path + "mask.lbrn"); err != nil {
 		return err
 	}
 
-	if err := pcb.SaveStencil("tmp/stencil.lbrn"); err != nil {
+	if err := pcb.SaveStencil(path + "stencil.lbrn"); err != nil {
 		return err
 	}
 

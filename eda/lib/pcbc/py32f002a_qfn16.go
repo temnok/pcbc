@@ -67,10 +67,11 @@ func PY32F002A_QFN16(pcb *eda.PCB, t geom.Transform) {
 		pcb.SilkText(t.Move(pads[i]).MoveXY(0, 8.3).RotateD(90).Multiply(textScale), textHeight, hiPinNames[i])
 	}
 
-	pad.Row(pcb, t, contour.Circle(1.3), 2, 20)
 	for x := -10.0; x <= 10; x += 20 {
 		t := t.Move(XY{x, 0})
-		pcb.Pad(t.Points(contour.Circle(1.35)))
-		pcb.Hole(t.Points(contour.Circle(0.85)))
+		pcb.PadNoStencil(t.Points(contour.Circle(1.35)))
+		pcb.HoleNoStencil(t.Points(contour.Circle(0.85)))
+
+		pcb.StencilDottedHoles(t.Points(contour.Circle(1.1)), 0.15)
 	}
 }
