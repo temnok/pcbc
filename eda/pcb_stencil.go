@@ -3,6 +3,7 @@ package eda
 import (
 	"temnok/lab/contour"
 	"temnok/lab/lbrn"
+	"temnok/lab/shape"
 )
 
 func (pcb *PCB) SaveStencil(filename string) error {
@@ -57,6 +58,8 @@ func (pcb *PCB) SaveStencil(filename string) error {
 		},
 	}
 
+	brush := shape.Circle(1)
+
 	for _, mark := range pcb.stencilMarks {
 		p.Shape = append(p.Shape, lbrn.NewPath(0, lbrnCenter, mark))
 	}
@@ -64,10 +67,12 @@ func (pcb *PCB) SaveStencil(filename string) error {
 	for _, hole := range pcb.stencilHoles {
 		resizedHole := contour.Resize(hole, -0.1)
 		p.Shape = append(p.Shape, lbrn.NewPath(1, lbrnCenter, resizedHole))
+		brush.IterateContour(resizedHole, pcb.bitmapTransform(), pcb.stencil.SetRow1)
 	}
 
 	for _, cut := range pcb.stencilCuts {
 		p.Shape = append(p.Shape, lbrn.NewPathWithTabs(2, lbrnCenter, cut))
+		brush.IterateContour(cut, pcb.bitmapTransform(), pcb.stencil.SetRow1)
 	}
 
 	return p.SaveToFile(filename)

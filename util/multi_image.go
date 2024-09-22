@@ -23,9 +23,9 @@ func (mi *MultiImage) At(x, y int) color.Color {
 	for _, i := range mi.Images {
 		r, g, b, a := i.At(x, y).RGBA()
 		k := float64(a) / 0xFFFF
-		tr += (float64(r) / 0xFFFF) * k
-		tg += (float64(g) / 0xFFFF) * k
-		tb += (float64(b) / 0xFFFF) * k
+		tr = tr*(1-k) + (float64(r)/0xFFFF)*k
+		tg = tg*(1-k) + (float64(g)/0xFFFF)*k
+		tb = tb*(1-k) + (float64(b)/0xFFFF)*k
 	}
 
 	return color.RGBA{byte(tr * 0xFF), byte(tg * 0xFF), byte(tb * 0xFF), 0xFF}

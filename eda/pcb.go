@@ -21,7 +21,7 @@ type PCB struct {
 	cuts                                    [][]XY
 	holes, maskHoles                        [][]XY
 	stencilCuts, stencilHoles, stencilMarks [][]XY
-	cu, mask, silk                          *bitmap.Bitmap
+	cu, mask, silk, stencil                 *bitmap.Bitmap
 }
 
 func NewPCB(w, h float64) *PCB {
@@ -37,6 +37,7 @@ func NewPCB(w, h float64) *PCB {
 		cu:         bitmap.NewBitmap(wi, hi),
 		mask:       bitmap.NewBitmap(wi, hi),
 		silk:       bitmap.NewBitmap(wi, hi),
+		stencil:    bitmap.NewBitmap(wi, hi),
 	}
 }
 
@@ -134,14 +135,6 @@ func (pcb *PCB) SaveFiles(path string) error {
 
 	pcb.technologicalParts()
 
-	util.SavePng(path+"overview.png", &util.MultiImage{
-		Images: []image.Image{
-			pcb.cu.ToImage(color.RGBA{0, 0x40, 0x10, 0xFF}, color.RGBA{0xFF, 0x80, 0, 0x7F}),
-			pcb.mask.ToImage(color.RGBA{0, 0, 0, 0}, color.RGBA{0xFF, 0xFF, 0xFF, 0x40}),
-			pcb.silk.ToImage(color.RGBA{0, 0, 0, 0}, color.RGBA{0xFF, 0xFF, 0xFF, 0x40}),
-		},
-	})
-
 	if err := pcb.SaveEtch(path + "etch.lbrn"); err != nil {
 		return err
 	}
@@ -151,6 +144,17 @@ func (pcb *PCB) SaveFiles(path string) error {
 	}
 
 	if err := pcb.SaveStencil(path + "stencil.lbrn"); err != nil {
+		return err
+	}
+
+	if err := util.SavePng(path+"overview.png", &util.MultiImage{
+		Images: []image.Image{
+			pcb.cu.ToImage(color.RGBA{0, 0x40, 0x10, 0xFF}, color.RGBA{0xFF, 0x80, 0, 0x7F}),
+			pcb.mask.ToImage(color.RGBA{0, 0, 0, 0}, color.RGBA{0xFF, 0xFF, 0xFF, 0x40}),
+			pcb.silk.ToImage(color.RGBA{0, 0, 0, 0}, color.RGBA{0xFF, 0xFF, 0xFF, 0x40}),
+			pcb.stencil.ToImage(color.RGBA{0, 0, 0, 0}, color.RGBA{0xFF, 0xFF, 0xFF, 0xFF}),
+		},
+	}); err != nil {
 		return err
 	}
 
