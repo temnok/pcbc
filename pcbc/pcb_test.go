@@ -15,7 +15,7 @@ func TestPCB(t *testing.T) {
 	pcb.Cut(board)
 	pcb.StencilCut(board)
 
-	for y := -9.0; y <= 9; y += 18 {
+	for y := -9.5; y <= 9.5; y += 19 {
 		pcbc.PY32F002A_QFN16(pcb, geom.MoveXY(0, y))
 	}
 

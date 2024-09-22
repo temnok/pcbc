@@ -11,7 +11,7 @@ import (
 type XY = geom.XY
 
 func PY32F002A_QFN16(pcb *eda.PCB, t geom.Transform) {
-	pcb.Cut(t.Points(contour.RoundRect(24, 16, 1.5)))
+	pcb.Cut(t.Points(contour.RoundRect(24, 17, 1.5)))
 
 	textScale := geom.Scale(XY{0.75, 1})
 	titleHeight := 2.0
@@ -24,9 +24,15 @@ func PY32F002A_QFN16(pcb *eda.PCB, t geom.Transform) {
 	pins := qfnT.Points(qfn16.Add(pcb, t.Multiply(qfnT)))
 
 	n := 9
+
 	padT := geom.MoveXY(0, -6)
-	pads := padT.Points(pad.Row(pcb, t.Multiply(padT), contour.Circle(0.75), n, 2.54))
-	pad.Row(pcb, t.MoveXY(0, 6), contour.Circle(0.75), n, 2.54)
+	pads := padT.Points(pad.Row(pcb, t.Multiply(padT), contour.Circle(0.75), n, 2.54, 0))
+	pad.Row(pcb, t.MoveXY(0, 6), contour.Circle(0.75), n, 2.54, 0)
+
+	//padT := geom.MoveXY(0, -5)
+	//padC := contour.Rect(0.8, 3.1)
+	//pads := padT.Points(pad.Row(pcb, t.Multiply(padT), padC, n, 2.54, 1.3))
+	//pad.Row(pcb, t.MoveXY(0, 5), padC, n, 2.54, -1.3)
 
 	for _, t := range []geom.Transform{t, t.RotateD(180)} {
 		pcb.Track(t.Points([]XY{pads[0], {-7.5, -3.2}, {-4.5, -3.2}, pins[0]}))
