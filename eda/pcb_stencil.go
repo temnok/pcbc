@@ -11,7 +11,7 @@ func (pcb *PCB) SaveStencil(filename string) error {
 				Type:     "Cut",
 				Index:    Param{"0"},
 				Name:     Param{"C00"},
-				Priority: Param{"0"},
+				Priority: Param{"1"},
 
 				Speed:        Param{"400"},
 				GlobalRepeat: Param{"10"},
@@ -23,6 +23,20 @@ func (pcb *PCB) SaveStencil(filename string) error {
 				TabsEnabled: Param{"1"},
 				TabSize:     Param{"0.2"},
 			},
+			{
+				Type:     "Scan",
+				Index:    Param{"1"},
+				Name:     Param{"C01"},
+				Priority: Param{"0"},
+
+				Speed: Param{"200"},
+
+				MaxPower:    Param{"25"},
+				QPulseWidth: Param{"200"},
+				Frequency:   Param{"20000"},
+
+				Interval: Param{"0.02"},
+			},
 		},
 	}
 
@@ -32,6 +46,10 @@ func (pcb *PCB) SaveStencil(filename string) error {
 
 	for _, hole := range pcb.stencilHoles {
 		p.Shape = append(p.Shape, lbrn.NewPath(0, lbrnCenter, hole))
+	}
+
+	for _, mark := range pcb.stencilMarks {
+		p.Shape = append(p.Shape, lbrn.NewPath(1, lbrnCenter, mark))
 	}
 
 	return p.SaveToFile(filename)

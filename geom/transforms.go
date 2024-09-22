@@ -2,6 +2,8 @@ package geom
 
 import "math"
 
+const Degree = math.Pi / 180
+
 func Identity() Transform {
 	// 1 0 0
 	// 0 1 0
@@ -66,7 +68,7 @@ func Rotate(a float64) Transform {
 }
 
 func RotateD(d float64) Transform {
-	return Rotate(d * math.Pi / 180)
+	return Rotate(d * Degree)
 }
 
 func Scale(p XY) Transform {

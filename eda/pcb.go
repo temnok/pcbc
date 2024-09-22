@@ -18,9 +18,10 @@ type PCB struct {
 	width, height, resolution float64
 	trackWidth                float64
 
-	cuts, stencilCuts              [][]XY
-	holes, maskHoles, stencilHoles [][]XY
-	cu, mask, silk                 *bitmap.Bitmap
+	cuts                                    [][]XY
+	holes, maskHoles                        [][]XY
+	stencilCuts, stencilHoles, stencilMarks [][]XY
+	cu, mask, silk                          *bitmap.Bitmap
 }
 
 func NewPCB(w, h float64) *PCB {
@@ -62,11 +63,12 @@ func (pcb *PCB) Hole(hole []XY) {
 	pcb.StencilHole(hole)
 }
 
-func (pcb *PCB) StencilHole(hole []XY) {
-	pcb.stencilHoles = append(pcb.stencilHoles, hole)
+func (pcb *PCB) StencilHole(hole ...[]XY) {
+	pcb.stencilHoles = append(pcb.stencilHoles, hole...)
 }
 
-func (pcb *PCB) StencilDottedHoles(contour []XY, r float64) {
+func (pcb *PCB) StencilMark(mark ...[]XY) {
+	pcb.stencilMarks = append(pcb.stencilMarks, mark...)
 }
 
 func (pcb *PCB) HoleNoStencil(hole []XY) {
@@ -184,4 +186,5 @@ func (pcb *PCB) technologicalParts() {
 	t := geom.Move(XY{-16.3, 21.3})
 	pcb.Track(t.Points(key))
 	pcb.SilkContour(0.2, t.Points(contour.Lines(key)))
+	pcb.StencilMark(t.Points(contour.Lines(key)))
 }
