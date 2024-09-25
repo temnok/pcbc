@@ -58,7 +58,7 @@ func (pcb *PCB) SaveStencil(filename string) error {
 		},
 	}
 
-	brush := shape.Circle(1)
+	brush := shape.Circle(2)
 
 	for _, mark := range pcb.stencilMarks {
 		p.Shape = append(p.Shape, lbrn.NewPath(0, lbrnCenter, mark))
