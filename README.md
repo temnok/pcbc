@@ -11,7 +11,8 @@
 
 * Red: copper layer
 * Dark green: FR4
-* Light green: soldermask cuts / marks (silkscreen)
+* Light green: soldermask cuts
+* Blue: soldermask marks (silkscreen)
 * White: stencil cuts
 
 ![PCB Overview](./pcbc/out/overview.png)

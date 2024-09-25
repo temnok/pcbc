@@ -151,7 +151,7 @@ func (pcb *PCB) SaveFiles(path string) error {
 		Images: []image.Image{
 			pcb.cu.ToImage(color.RGBA{0, 0x40, 0x10, 0xFF}, color.RGBA{0xFF, 0x80, 0, 0x7F}),
 			pcb.mask.ToImage(color.RGBA{0, 0, 0, 0}, color.RGBA{0xFF, 0xFF, 0xFF, 0x40}),
-			pcb.silk.ToImage(color.RGBA{0, 0, 0, 0}, color.RGBA{0xFF, 0xFF, 0xFF, 0x40}),
+			pcb.silk.ToImage(color.RGBA{0, 0, 0, 0}, color.RGBA{0x7F, 0x7F, 0xFF, 0x80}),
 			pcb.stencil.ToImage(color.RGBA{0, 0, 0, 0}, color.RGBA{0xFF, 0xFF, 0xFF, 0xFF}),
 		},
 	}); err != nil {
