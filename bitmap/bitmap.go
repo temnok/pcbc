@@ -8,38 +8,38 @@ import (
 )
 
 type Bitmap struct {
-	elems []uint64
-	w, h  int
+	elems         []uint64
+	width, height int
 }
 
 func NewBitmap(w, h int) *Bitmap {
 	if w <= 0 || h <= 0 {
-		panic(fmt.Errorf("invalid bitmap w=%v or h=%v", w, h))
+		panic(fmt.Errorf("invalid bitmap width=%v or height=%v", w, h))
 	}
 
-	b := &Bitmap{w: w, h: h}
+	b := &Bitmap{width: w, height: h}
 	b.elems = make([]uint64, b.addr(w, h))
 	return b
 }
 
-func (b *Bitmap) SetRow1(x0, x1, y int) {
-	b.SetRowVal(x0, x1, y, 1)
+func (b *Bitmap) Set1(x0, x1, y int) {
+	b.Set(x0, x1, y, 1)
 }
 
-func (b *Bitmap) SetRow0(x0, x1, y int) {
-	b.SetRowVal(x0, x1, y, 0)
+func (b *Bitmap) Set0(x0, x1, y int) {
+	b.Set(x0, x1, y, 0)
 }
 
-func (b *Bitmap) SetRowVal(x0, x1, y, val int) {
+func (b *Bitmap) Set(x0, x1, y, val int) {
 	if x0 < 0 {
 		x0 = 0
 	}
 
-	if x1 > b.w {
-		x1 = b.w
+	if x1 > b.width {
+		x1 = b.width
 	}
 
-	if x0 >= x1 || y < 0 || y >= b.h {
+	if x0 >= x1 || y < 0 || y >= b.height {
 		return
 	}
 
@@ -79,11 +79,11 @@ func (b *Bitmap) Get(x, y int) int {
 
 //go:inline
 func (b *Bitmap) addr(x, y int) int {
-	return ((b.w+63)/64)*y + x/64
+	return ((b.width+63)/64)*y + x/64
 }
 
 func (b *Bitmap) ToImage(zero, one color.Color) image.Image {
-	return NewBitmapsImage([]*Bitmap{b}, [][2]color.Color{{zero, one}})
+	return NewBitmapsImage([]*Bitmap{b}, [][2]color.Color{{zero, one}}, false)
 }
 
 //go:inline

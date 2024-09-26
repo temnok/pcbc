@@ -21,7 +21,7 @@ func TestPie(t *testing.T) {
 
 		transform := geom.MoveXY(d*400, 200)
 		path.IterateAll(c, transform, func(x, y int) {
-			brush.IterateRowsXY(x, y, bm.SetRow1)
+			brush.IterateRowsXY(x, y, bm.Set1)
 		})
 	}
 

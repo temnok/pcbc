@@ -8,13 +8,10 @@ import (
 type bitmapsImage struct {
 	bitmaps []*Bitmap
 	palette color.Palette
+	flipY   bool
 }
 
-func NewBitmapImage(bitmap *Bitmap, zero, one color.Color) image.Image {
-	return NewBitmapsImage([]*Bitmap{bitmap}, [][2]color.Color{{zero, one}})
-}
-
-func NewBitmapsImage(bitmaps []*Bitmap, bitmapColors [][2]color.Color) image.Image {
+func NewBitmapsImage(bitmaps []*Bitmap, bitmapColors [][2]color.Color, flipY bool) image.Image {
 	palette := make(color.Palette, 1<<len(bitmaps))
 
 	for i := range palette {
@@ -35,6 +32,7 @@ func NewBitmapsImage(bitmaps []*Bitmap, bitmapColors [][2]color.Color) image.Ima
 	return &bitmapsImage{
 		bitmaps: bitmaps,
 		palette: palette,
+		flipY:   flipY,
 	}
 }
 
@@ -44,7 +42,7 @@ func (bi *bitmapsImage) ColorModel() color.Model {
 
 func (bi *bitmapsImage) Bounds() image.Rectangle {
 	b := bi.bitmaps[0]
-	return image.Rect(0, 0, b.w, b.h)
+	return image.Rect(0, 0, b.width, b.height)
 }
 
 func (bi *bitmapsImage) At(x, y int) color.Color {
@@ -52,7 +50,9 @@ func (bi *bitmapsImage) At(x, y int) color.Color {
 }
 
 func (bi *bitmapsImage) ColorIndexAt(x, y int) uint8 {
-	y = bi.bitmaps[0].h - 1 - y
+	if bi.flipY {
+		y = bi.bitmaps[0].height - 1 - y
+	}
 
 	index := 0
 
@@ -64,6 +64,10 @@ func (bi *bitmapsImage) ColorIndexAt(x, y int) uint8 {
 }
 
 func combineColors(colors []color.Color) color.Color {
+	if len(colors) == 1 {
+		return colors[0]
+	}
+
 	const f = 0xFFFF
 
 	var tr, tg, tb float64

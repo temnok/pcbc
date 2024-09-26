@@ -21,7 +21,7 @@ func TestContours(t *testing.T) {
 
 		transform := geom.MoveXY((d-4)*50, 50)
 		path.Iterate(cnt, transform, func(x, y int) {
-			brush.IterateRowsXY(x, y, bm.SetRow1)
+			brush.IterateRowsXY(x, y, bm.Set1)
 		})
 	}
 

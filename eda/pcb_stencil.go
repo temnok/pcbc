@@ -67,12 +67,12 @@ func (pcb *PCB) SaveStencil(filename string) error {
 	for _, hole := range pcb.stencilHoles {
 		resizedHole := contour.Resize(hole, -0.1)
 		p.Shape = append(p.Shape, lbrn.NewPath(1, lbrnCenter, resizedHole))
-		brush.IterateContour(resizedHole, pcb.bitmapTransform(), pcb.stencil.SetRow1)
+		brush.IterateContour(resizedHole, pcb.bitmapTransform(), pcb.stencil.Set1)
 	}
 
 	for _, cut := range pcb.stencilCuts {
 		p.Shape = append(p.Shape, lbrn.NewPathWithTabs(2, lbrnCenter, cut))
-		brush.IterateContour(cut, pcb.bitmapTransform(), pcb.stencil.SetRow1)
+		brush.IterateContour(cut, pcb.bitmapTransform(), pcb.stencil.Set1)
 	}
 
 	return p.SaveToFile(filename)

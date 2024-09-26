@@ -22,7 +22,7 @@ var (
 func (pcb *PCB) SaveEtch(filename string) error {
 	im := pcb.cu.ToImage(color.Black, color.White)
 
-	k := 1 / pcb.resolution
+	bitmapTransform := lbrnCenter.ScaleK(1 / pcb.resolution)
 
 	p := lbrn.LightBurnProject{
 		CutSettingImg: []lbrn.CutSetting{
@@ -99,9 +99,9 @@ func (pcb *PCB) SaveEtch(filename string) error {
 			},
 		},
 		Shape: []lbrn.Shape{
-			lbrn.NewBitmap(0, lbrnCenter.Scale(XY{k, -k}), im),
-			lbrn.NewBitmap(1, lbrnCenter.Scale(XY{k, -k}), im),
-			lbrn.NewBitmap(3, lbrnCenter.Scale(XY{k, -k}), im),
+			lbrn.NewBitmap(0, bitmapTransform, im),
+			lbrn.NewBitmap(1, bitmapTransform, im),
+			lbrn.NewBitmap(3, bitmapTransform, im),
 		},
 	}
 

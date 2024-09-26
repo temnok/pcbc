@@ -50,7 +50,7 @@ func (pcb *PCB) Cut(contour []XY) {
 	brush := shape.Circle(int(0.1 * pcb.resolution))
 
 	path.IterateDotted(contour, pcb.bitmapTransform(), int(0.2*pcb.resolution), func(x, y int) {
-		brush.IterateRowsXY(x, y, pcb.mask.SetRow1)
+		brush.IterateRowsXY(x, y, pcb.mask.Set1)
 	})
 }
 
@@ -76,14 +76,14 @@ func (pcb *PCB) HoleNoStencil(hole []XY) {
 
 	//w := contour.Size(hole).X
 	//k := (w + 0.2) / w
-	//shape.IterateContourRows(hole, pcb.bitmapTransform(geom.Identity()).ScaleK(k), pcb.cu.SetRow0)
+	//shape.IterateContourRows(hole, pcb.bitmapTransform(geom.Identity()).ScaleK(k), pcb.cu.Set0)
 
-	shape.IterateContourRows(hole, pcb.bitmapTransform(), pcb.cu.SetRow0)
+	shape.IterateContourRows(hole, pcb.bitmapTransform(), pcb.cu.Set0)
 }
 
 func (pcb *PCB) Track(points []XY) {
 	brush := shape.Circle(int(pcb.trackWidth * pcb.resolution))
-	brush.IterateContour(contour.Lines(points), pcb.bitmapTransform(), pcb.cu.SetRow1)
+	brush.IterateContour(contour.Lines(points), pcb.bitmapTransform(), pcb.cu.Set1)
 }
 
 func (pcb *PCB) Pad(padContours ...[]XY) {
@@ -93,7 +93,7 @@ func (pcb *PCB) Pad(padContours ...[]XY) {
 }
 
 func (pcb *PCB) PadNoStencil(padContours ...[]XY) {
-	shape.IterateContoursRows(padContours, pcb.bitmapTransform(), pcb.cu.SetRow1)
+	shape.IterateContoursRows(padContours, pcb.bitmapTransform(), pcb.cu.Set1)
 	pcb.MaskPad(padContours...)
 }
 
@@ -103,7 +103,7 @@ func (pcb *PCB) MaskPad(padContours ...[]XY) {
 
 func (pcb *PCB) MaskContour(w float64, contour ...[]XY) {
 	brush := shape.Circle(int(w * pcb.resolution))
-	brush.IterateContours(contour, pcb.bitmapTransform(), pcb.mask.SetRow1)
+	brush.IterateContours(contour, pcb.bitmapTransform(), pcb.mask.Set1)
 }
 
 func (pcb *PCB) MaskHole(contour []XY) {
@@ -113,7 +113,7 @@ func (pcb *PCB) MaskHole(contour []XY) {
 
 func (pcb *PCB) SilkContour(w float64, contour []XY) {
 	brush := shape.Circle(int(w * pcb.resolution))
-	brush.IterateContour(contour, pcb.bitmapTransform(), pcb.silk.SetRow1)
+	brush.IterateContour(contour, pcb.bitmapTransform(), pcb.silk.Set1)
 }
 
 func (pcb *PCB) SilkText(t geom.Transform, height float64, text string) {
@@ -122,7 +122,7 @@ func (pcb *PCB) SilkText(t geom.Transform, height float64, text string) {
 	for i, c := range text {
 		if c := int(c); c < len(font.Paths) {
 			t := pcb.bitmapTransform().Multiply(t).ScaleK(height).MoveXY(float64(i)*font.Width, 0.4)
-			brush.IterateContours(font.Paths[c], t, pcb.silk.SetRow1)
+			brush.IterateContours(font.Paths[c], t, pcb.silk.Set1)
 		}
 	}
 }
@@ -150,6 +150,7 @@ func (pcb *PCB) SaveFiles(path string) error {
 			{color.RGBA{0, 0, 0, 0}, color.RGBA{0x7F, 0x7F, 0xFF, 0x80}},
 			{color.RGBA{0, 0, 0, 0}, color.RGBA{0xFF, 0xFF, 0xFF, 0xFF}},
 		},
+		true,
 	)
 	if err := util.SavePng(path+"overview.png", image); err != nil {
 		return err
