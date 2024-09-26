@@ -10,6 +10,7 @@ import (
 	"os"
 	"path/filepath"
 	"temnok/lab/geom"
+	"temnok/lab/path"
 )
 
 type XY = geom.XY
@@ -102,7 +103,7 @@ func (s *Shape) SetTabs(tabs []XY) {
 	s.Tabs = string(buf)
 }
 
-func (s *Shape) SetPath(path []XY) {
+func (s *Shape) SetPath(path path.Path) {
 	s.V = nil
 	s.P = nil
 
@@ -140,7 +141,7 @@ func (s *Shape) SetPath(path []XY) {
 	}
 }
 
-func NewPath(i int, t geom.Transform, path []XY) Shape {
+func NewPath(i int, t geom.Transform, path path.Path) Shape {
 	s := Shape{
 		Type:     "Path",
 		CutIndex: fmt.Sprint(i),
@@ -148,12 +149,11 @@ func NewPath(i int, t geom.Transform, path []XY) Shape {
 	}
 
 	s.SetPath(path)
-	//s.SetTabs(tabs)
 
 	return s
 }
 
-func NewPathWithTabs(index int, t geom.Transform, path []XY) Shape {
+func NewPathWithTabs(index int, t geom.Transform, path path.Path) Shape {
 	s := NewPath(index, t, path)
 
 	var tabs []XY

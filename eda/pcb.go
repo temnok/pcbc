@@ -11,15 +11,19 @@ import (
 	"temnok/lab/util"
 )
 
-type XY = geom.XY
+type (
+	XY    = geom.XY
+	Path  = path.Path
+	Paths = path.Paths
+)
 
 type PCB struct {
 	width, height, resolution float64
 	trackWidth                float64
 
-	cuts, holes                             path.Paths
-	maskHoles                               path.Paths
-	stencilCuts, stencilHoles, stencilMarks path.Paths
+	cuts, holes                             Paths
+	maskHoles                               Paths
+	stencilCuts, stencilHoles, stencilMarks Paths
 	copper, mask, silk, stencil             *bitmap.Bitmap
 }
 
@@ -44,7 +48,7 @@ func (pcb *PCB) bitmapTransform() geom.Transform {
 	return geom.ScaleK(pcb.resolution).MoveXY(pcb.width/2, pcb.height/2)
 }
 
-func (pcb *PCB) Cut(contour path.Path) {
+func (pcb *PCB) Cut(contour Path) {
 	pcb.cuts = append(pcb.cuts, contour)
 
 	brush := shape.Circle(int(0.1 * pcb.resolution))
@@ -54,24 +58,24 @@ func (pcb *PCB) Cut(contour path.Path) {
 	})
 }
 
-func (pcb *PCB) StencilCut(contours ...path.Path) {
+func (pcb *PCB) StencilCut(contours ...Path) {
 	pcb.stencilCuts = append(pcb.stencilCuts, contours...)
 }
 
-func (pcb *PCB) Hole(hole path.Path) {
+func (pcb *PCB) Hole(hole Path) {
 	pcb.HoleNoStencil(hole)
 	pcb.StencilHole(hole)
 }
 
-func (pcb *PCB) StencilHole(hole ...path.Path) {
+func (pcb *PCB) StencilHole(hole ...Path) {
 	pcb.stencilHoles = append(pcb.stencilHoles, hole...)
 }
 
-func (pcb *PCB) StencilMark(mark ...path.Path) {
+func (pcb *PCB) StencilMark(mark ...Path) {
 	pcb.stencilMarks = append(pcb.stencilMarks, mark...)
 }
 
-func (pcb *PCB) HoleNoStencil(hole path.Path) {
+func (pcb *PCB) HoleNoStencil(hole Path) {
 	pcb.holes = append(pcb.holes, hole)
 
 	brush := shape.Circle(int(0.2 * pcb.resolution))
@@ -83,31 +87,31 @@ func (pcb *PCB) Track(points []XY) {
 	brush.IterateContour(contour.Lines(points), pcb.bitmapTransform(), pcb.copper.Set1)
 }
 
-func (pcb *PCB) Pad(padContours ...path.Path) {
+func (pcb *PCB) Pad(padContours ...Path) {
 	pcb.PadNoStencil(padContours...)
 	pcb.stencilHoles = append(pcb.stencilHoles, padContours...)
 }
 
-func (pcb *PCB) PadNoStencil(padContours ...path.Path) {
+func (pcb *PCB) PadNoStencil(padContours ...Path) {
 	shape.IterateContoursRows(padContours, pcb.bitmapTransform(), pcb.copper.Set1)
 	pcb.MaskPad(padContours...)
 }
 
-func (pcb *PCB) MaskPad(padContours ...path.Path) {
+func (pcb *PCB) MaskPad(padContours ...Path) {
 	pcb.MaskContour(0.1, padContours...)
 }
 
-func (pcb *PCB) MaskContour(w float64, contour ...path.Path) {
+func (pcb *PCB) MaskContour(w float64, contour ...Path) {
 	brush := shape.Circle(int(w * pcb.resolution))
 	brush.IterateContours(contour, pcb.bitmapTransform(), pcb.mask.Set1)
 }
 
-func (pcb *PCB) MaskHole(contour []XY) {
+func (pcb *PCB) MaskHole(contour Path) {
 	pcb.MaskContour(0.2, contour)
 	pcb.maskHoles = append(pcb.maskHoles, contour)
 }
 
-func (pcb *PCB) SilkContour(w float64, contour []XY) {
+func (pcb *PCB) SilkContour(w float64, contour Path) {
 	brush := shape.Circle(int(w * pcb.resolution))
 	brush.IterateContour(contour, pcb.bitmapTransform(), pcb.silk.Set1)
 }
@@ -175,7 +179,7 @@ func (pcb *PCB) technologicalParts() {
 		pcb.MaskHole(maskHole.Transform(t))
 	}
 
-	key := path.Path{
+	key := Path{
 		{0.25, -0.25},
 		{0.2, 0.25},
 		{-0.25, -0.2},
