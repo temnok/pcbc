@@ -2,16 +2,16 @@ package pcbc
 
 import (
 	"github.com/stretchr/testify/assert"
-	"temnok/lab/contour"
 	"temnok/lab/eda"
 	"temnok/lab/eda/lib/pcbc"
 	"temnok/lab/geom"
+	"temnok/lab/path"
 	"testing"
 )
 
 func TestPCB(t *testing.T) {
 	pcb := eda.NewPCB(36, 46)
-	board := contour.RoundRect(35, 45, 2.5)
+	board := path.RoundRect(35, 45, 2.5)
 	pcb.Cut(board)
 	pcb.StencilCut(board)
 

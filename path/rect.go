@@ -1,14 +1,10 @@
-package contour
+package path
 
 import (
-	"math"
 	"temnok/lab/geom"
-	"temnok/lab/path"
 )
 
-var magic = 4 * (math.Sqrt(2) - 1) / 3
-
-func Rect(w, h float64) path.Path {
+func Rect(w, h float64) Path {
 	x, y := w/2, h/2
 
 	return Lines([]geom.XY{
@@ -20,12 +16,12 @@ func Rect(w, h float64) path.Path {
 	})
 }
 
-func RoundRect(w, h, r float64) path.Path {
+func RoundRect(w, h, r float64) Path {
 	x1, y1 := w/2, h/2
 	r = min(r, x1, y1)
 	x0, y0 := x1-r, y1-r
 
-	m := r * magic
+	m := r * roundK
 
 	return []geom.XY{
 		{x1, y0},
@@ -48,7 +44,7 @@ func RoundRect(w, h, r float64) path.Path {
 	}
 }
 
-func CutRect(w, h, r float64) path.Path {
+func CutRect(w, h, r float64) Path {
 	x, y := w/2, h/2
 	return Lines([]geom.XY{
 		{x - r, y}, {-x + r, y},

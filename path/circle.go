@@ -1,13 +1,13 @@
-package contour
+package path
 
-import (
-	"temnok/lab/path"
-)
+import "math"
 
-func Circle(r float64) path.Path {
-	m := r * magic
+var roundK = 4 * (math.Sqrt(2) - 1) / 3
 
-	return path.Path{
+func Circle(r float64) Path {
+	m := r * roundK
+
+	return Path{
 		{r, 0},
 		{r, m}, {m, r},
 		{0, r},

@@ -1,7 +1,6 @@
 package qfn16
 
 import (
-	"temnok/lab/contour"
 	"temnok/lab/eda"
 	"temnok/lab/geom"
 	"temnok/lab/path"
@@ -49,8 +48,8 @@ var PadContours = path.Paths{
 }[1:]
 
 var (
-	hPad = contour.RoundRect(0.6, 0.25, 0.12)
-	vPad = contour.RoundRect(0.25, 0.6, 0.12)
+	hPad = path.RoundRect(0.6, 0.25, 0.12)
+	vPad = path.RoundRect(0.25, 0.6, 0.12)
 )
 
 func init() {
@@ -61,7 +60,7 @@ func init() {
 
 func keyedRect(w, h, k float64) []geom.XY {
 	x, y := w/2, h/2
-	return contour.Lines([]geom.XY{{-x + k, y}, {x, y}, {x, -y}, {-x, -y}, {-x, y - k}, {-x + k, y}})
+	return path.Lines([]geom.XY{{-x + k, y}, {x, y}, {x, -y}, {-x, -y}, {-x, y - k}, {-x + k, y}})
 }
 
 func Add(pcb *eda.PCB, t geom.Transform) path.Path {

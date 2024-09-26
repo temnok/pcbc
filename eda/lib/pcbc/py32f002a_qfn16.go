@@ -1,7 +1,6 @@
 package pcbc
 
 import (
-	"temnok/lab/contour"
 	"temnok/lab/eda"
 	"temnok/lab/eda/lib/pkg/pad"
 	"temnok/lab/eda/lib/pkg/qfn16"
@@ -12,7 +11,7 @@ import (
 type XY = geom.XY
 
 func PY32F002A_QFN16(pcb *eda.PCB, t geom.Transform) {
-	pcb.Cut(contour.RoundRect(24, 17, 1.5).Transform(t))
+	pcb.Cut(path.RoundRect(24, 17, 1.5).Transform(t))
 
 	textScale := geom.Scale(XY{0.75, 1})
 	titleHeight := 2.0
@@ -27,8 +26,8 @@ func PY32F002A_QFN16(pcb *eda.PCB, t geom.Transform) {
 	n := 9
 
 	padT := geom.MoveXY(0, -6)
-	pads := pad.Row(pcb, t.Multiply(padT), contour.Circle(0.75), n, 2.54, 0).Transform(padT)
-	pad.Row(pcb, t.MoveXY(0, 6), contour.Circle(0.75), n, 2.54, 0)
+	pads := pad.Row(pcb, t.Multiply(padT), path.Circle(0.75), n, 2.54, 0).Transform(padT)
+	pad.Row(pcb, t.MoveXY(0, 6), path.Circle(0.75), n, 2.54, 0)
 
 	for _, t := range []geom.Transform{t, t.RotateD(180)} {
 		pcb.Track(path.Path{pads[0], {-7.5, -3.2}, {-4.5, -3.2}, pins[0]}.Transform(t))
@@ -71,9 +70,9 @@ func PY32F002A_QFN16(pcb *eda.PCB, t geom.Transform) {
 
 	for x := -10.0; x <= 10; x += 20 {
 		t := t.Move(XY{x, 0})
-		pcb.PadNoStencil(contour.Circle(1.3).Transform(t))
-		pcb.HoleNoStencil(contour.Circle(0.9).Transform(t))
+		pcb.PadNoStencil(path.Circle(1.3).Transform(t))
+		pcb.HoleNoStencil(path.Circle(0.9).Transform(t))
 
-		pcb.StencilHole(contour.Pie(8, 1.05, 1.3, 10*geom.Degree).Transform(t)...)
+		pcb.StencilHole(path.Pie(8, 1.05, 1.3, 10*geom.Degree).Transform(t)...)
 	}
 }

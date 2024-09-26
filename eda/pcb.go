@@ -3,7 +3,6 @@ package eda
 import (
 	"image/color"
 	"temnok/lab/bitmap"
-	"temnok/lab/contour"
 	"temnok/lab/font"
 	"temnok/lab/geom"
 	"temnok/lab/path"
@@ -84,7 +83,7 @@ func (pcb *PCB) HoleNoStencil(hole Path) {
 
 func (pcb *PCB) Track(points []XY) {
 	brush := shape.Circle(int(pcb.trackWidth * pcb.resolution))
-	brush.IterateContour(contour.Lines(points), pcb.bitmapTransform(), pcb.copper.Set1)
+	brush.IterateContour(path.Lines(points), pcb.bitmapTransform(), pcb.copper.Set1)
 }
 
 func (pcb *PCB) Pad(padContours ...Path) {
@@ -146,7 +145,7 @@ func (pcb *PCB) SaveFiles(path string) error {
 		[]*bitmap.Bitmap{pcb.copper, pcb.mask, pcb.silk, pcb.stencil},
 		[][2]color.Color{
 			{color.RGBA{0, 0x40, 0x10, 0xFF}, color.RGBA{0xFF, 0x40, 0, 0xFF}},
-			{color.RGBA{0, 0, 0, 0}, color.RGBA{0x80, 0x80, 0xFF, 0xA0}},
+			{color.RGBA{0, 0, 0, 0}, color.RGBA{0x80, 0x80, 0xFF, 0x80}},
 			{color.RGBA{0, 0, 0, 0}, color.RGBA{0xFF, 0xFF, 0xFF, 0x60}},
 			{color.RGBA{0, 0, 0, 0}, color.RGBA{0xFF, 0xFF, 0xFF, 0xFF}},
 		},
@@ -167,8 +166,8 @@ func (pcb *PCB) technologicalParts() {
 		{15, -20},
 	}
 
-	holder := contour.Circle(1)
-	maskHole := contour.Circle(0.65)
+	holder := path.Circle(1)
+	maskHole := path.Circle(0.65)
 
 	for _, h := range holders {
 		t := geom.Move(h)
@@ -187,6 +186,6 @@ func (pcb *PCB) technologicalParts() {
 	}
 	t := geom.Move(XY{-16.3, 21.3})
 	pcb.Track(key.Transform(t))
-	pcb.SilkContour(0.2, contour.Lines(key).Transform(t))
-	pcb.StencilMark(contour.Lines(key).Transform(t))
+	pcb.SilkContour(0.2, path.Lines(key).Transform(t))
+	pcb.StencilMark(path.Lines(key).Transform(t))
 }
