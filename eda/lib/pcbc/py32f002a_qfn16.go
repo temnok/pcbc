@@ -11,36 +11,39 @@ import (
 type XY = geom.XY
 
 func PY32F002A_QFN16(pcb *eda.PCB, t geom.Transform) {
-	pcb.Cut(path.RoundRect(24, 17, 1.5).Transform(t))
+	pcb.Cut(path.CutRect(18, 10.5, 0.3).Transform(t))
 
 	textScale := geom.Scale(XY{0.75, 1})
-	titleHeight := 2.0
-	textHeight := 1.5
-
-	pcb.SilkText(t.MoveXY(-7, 0).Multiply(textScale), titleHeight, "PY32")
-	pcb.SilkText(t.MoveXY(2.75, 0).Multiply(textScale), titleHeight, "F002A")
+	const titleHeight = 1.5
+	pcb.SilkText(t.MoveXY(-2.8, -1.5).RotateD(90).Multiply(textScale), titleHeight, "PY32")
+	pcb.SilkText(t.MoveXY(2.8, -1.8).RotateD(90).Multiply(textScale), titleHeight, "F002A")
 
 	qfnT := geom.RotateD(45)
 	pins := qfn16.Add(pcb, t.Multiply(qfnT)).Transform(qfnT)
 
-	n := 9
+	const tenth = 2.54
 
-	padT := geom.MoveXY(0, -6)
-	pads := pad.Row(pcb, t.Multiply(padT), path.Circle(0.75), n, 2.54, 0).Transform(padT)
-	pad.Row(pcb, t.MoveXY(0, 6), path.Circle(0.75), n, 2.54, 0)
+	//in := path.CutRect(tenth, tenth, 0.3)
 
 	for _, t := range []geom.Transform{t, t.RotateD(180)} {
-		pcb.Track(path.Path{pads[0], {-7.5, -3.2}, {-4.5, -3.2}, pins[0]}.Transform(t))
-		pcb.Track(path.Path{pads[1], {-6, -4.2}, {-4.8, -4.2}, pins[1]}.Transform(t))
-		pcb.Track(path.Path{pads[2], {-3.8, -4.5}, {-3.8, -4}, pins[2]}.Transform(t))
-		pcb.Track(path.Path{pads[3], {pads[3].X, -3.5}, pins[3]}.Transform(t))
-		pcb.Track(path.Path{pads[4], {1.5, -4.5}, {1.5, -2.5}, pins[4]}.Transform(t))
-		pcb.Track(path.Path{pads[5], {pads[5].X, -2.8}, pins[5]}.Transform(t))
-		pcb.Track(path.Path{pads[6], {pads[6].X, -4.5}, pins[6]}.Transform(t))
-		pcb.Track(path.Path{pads[7], {pads[7].X, -6.2}, pins[7]}.Transform(t))
-		pcb.Track(path.Path{pads[8], {pads[8].X, pins[16].Y}, pins[16]}.Transform(t))
+		ht := geom.MoveXY(0, -1.5*tenth)
+		h := pad.Row(pcb, t.Multiply(ht), path.Circle(0.75), nil, 7, 2.54, 0).Transform(ht)
+
+		vt := geom.RotateD(90).MoveXY(0, -3*tenth)
+		v := pad.Row(pcb, t.Multiply(vt), path.Circle(0.75), nil, 2, 2.54, 0).Transform(vt)
+
+		pcb.Track(path.Path{pins[0], h[0]}.Transform(t))
+		pcb.Track(path.Path{pins[1], h[1]}.Transform(t))
+		pcb.Track(path.Path{pins[2], h[2]}.Transform(t))
+		pcb.Track(path.Path{pins[3], h[3]}.Transform(t))
+		pcb.Track(path.Path{pins[4], h[4]}.Transform(t))
+		pcb.Track(path.Path{pins[5], h[5]}.Transform(t))
+		pcb.Track(path.Path{pins[6], h[6]}.Transform(t))
+		pcb.Track(path.Path{pins[7], {5, -2}, v[0]}.Transform(t))
+		pcb.Track(path.Path{{0, 0}, {5, 0}, v[1]}.Transform(t))
 	}
 
+	const textHeight = 0.5
 	loPinNames := []string{
 		"PB1",
 		"PA12",
@@ -63,12 +66,19 @@ func PY32F002A_QFN16(pcb *eda.PCB, t geom.Transform) {
 		"PA4",
 		"PA3",
 	}
-	for i := 0; i < n; i++ {
-		pcb.SilkText(t.Move(pads[i]).MoveXY(0, 1.5).RotateD(90).Multiply(textScale), textHeight, loPinNames[i])
-		pcb.SilkText(t.Move(pads[i]).MoveXY(0, 8.3).RotateD(90).Multiply(textScale), textHeight, hiPinNames[i])
+
+	textScale = geom.Scale(XY{1.4, 1})
+	for i := 0; i < 7; i++ {
+		pcb.SilkText(t.MoveXY(1.85*float64(i-2)-2.5, -2.2).Multiply(textScale), textHeight, loPinNames[i])
+		pcb.SilkText(t.MoveXY(4.9, -1.6).Multiply(textScale), textHeight, loPinNames[7])
+		pcb.SilkText(t.MoveXY(4.9, 1.6).Multiply(textScale), textHeight, loPinNames[8])
+
+		pcb.SilkText(t.MoveXY(1.85*float64(i-2)-2.5, 2.2).Multiply(textScale), textHeight, hiPinNames[i+2])
+		pcb.SilkText(t.MoveXY(-6.2, 1.6).Multiply(textScale), textHeight, hiPinNames[1])
+		pcb.SilkText(t.MoveXY(-6.2, -1.6).Multiply(textScale), textHeight, hiPinNames[0])
 	}
 
-	for x := -10.0; x <= 10; x += 20 {
+	for x := -5.0; x <= 5; x += 10 {
 		t := t.Move(XY{x, 0})
 		pcb.PadNoStencil(path.Circle(1.3).Transform(t))
 		pcb.HoleNoStencil(path.Circle(0.9).Transform(t))

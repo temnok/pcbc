@@ -116,7 +116,7 @@ func (pcb *PCB) SilkContour(w float64, contour Path) {
 }
 
 func (pcb *PCB) SilkText(t geom.Transform, height float64, text string) {
-	brush := shape.Circle(int(font.Normal * height * pcb.resolution))
+	brush := shape.Circle(int(font.Bold * height * pcb.resolution))
 
 	for i, c := range text {
 		if c := int(c); c < len(font.Paths) {
