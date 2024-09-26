@@ -24,7 +24,7 @@
 		<name Value="C00"></name>
 		<priority Value="0"></priority>
 		<speed Value="1000"></speed>
-		<numPasses Value="8"></numPasses>
+		<numPasses Value="6"></numPasses>
 		<globalRepeat Value=""></globalRepeat>
 		<maxPower Value="6"></maxPower>
 		<QPulseWidth Value="80"></QPulseWidth>
@@ -44,7 +44,7 @@
 		<name Value="C01"></name>
 		<priority Value="1"></priority>
 		<speed Value="500"></speed>
-		<numPasses Value="8"></numPasses>
+		<numPasses Value="6"></numPasses>
 		<globalRepeat Value=""></globalRepeat>
 		<maxPower Value="10"></maxPower>
 		<QPulseWidth Value="80"></QPulseWidth>
@@ -64,7 +64,7 @@
 		<name Value="C02"></name>
 		<priority Value="2"></priority>
 		<speed Value="500"></speed>
-		<numPasses Value="8"></numPasses>
+		<numPasses Value="6"></numPasses>
 		<globalRepeat Value=""></globalRepeat>
 		<maxPower Value="20"></maxPower>
 		<QPulseWidth Value="80"></QPulseWidth>

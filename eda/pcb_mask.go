@@ -23,7 +23,7 @@ func (pcb *PCB) SaveMask(filename string) error {
 				QPulseWidth: Param{"80"},
 				Frequency:   Param{"2000000"},
 
-				NumPasses:        Param{"8"},
+				NumPasses:        Param{"6"},
 				Speed:            Param{"1000"},
 				Interval:         Param{"0.02"},
 				DPI:              Param{"1270"},
@@ -43,7 +43,7 @@ func (pcb *PCB) SaveMask(filename string) error {
 				QPulseWidth: Param{"80"},
 				Frequency:   Param{"2000000"},
 
-				NumPasses:        Param{"8"},
+				NumPasses:        Param{"6"},
 				Speed:            Param{"500"},
 				Interval:         Param{"0.01"},
 				DPI:              Param{"2540"},
@@ -63,7 +63,7 @@ func (pcb *PCB) SaveMask(filename string) error {
 				QPulseWidth: Param{"80"},
 				Frequency:   Param{"2000000"},
 
-				NumPasses:        Param{"8"},
+				NumPasses:        Param{"6"},
 				Speed:            Param{"500"},
 				Interval:         Param{"0.01"},
 				DPI:              Param{"2540"},
