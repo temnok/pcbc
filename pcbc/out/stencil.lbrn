@@ -18,6 +18,7 @@
 		<tabSize Value=""></tabSize>
 		<crossHatch Value=""></crossHatch>
 		<angle Value=""></angle>
+		<negative Value=""></negative>
 	</CutSetting>
 	<CutSetting type="Cut">
 		<index Value="1"></index>
@@ -38,6 +39,7 @@
 		<tabSize Value="0.2"></tabSize>
 		<crossHatch Value=""></crossHatch>
 		<angle Value=""></angle>
+		<negative Value=""></negative>
 	</CutSetting>
 	<CutSetting type="Cut">
 		<index Value="2"></index>
@@ -58,6 +60,7 @@
 		<tabSize Value="0.2"></tabSize>
 		<crossHatch Value=""></crossHatch>
 		<angle Value=""></angle>
+		<negative Value=""></negative>
 	</CutSetting>
 	<Shape Type="Path" CutIndex="0">
 		<XForm>1 0 0 1 55 55</XForm>

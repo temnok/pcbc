@@ -47,6 +47,8 @@ type CutSetting struct {
 
 	CrossHatch Param `xml:"crossHatch"`
 	Angle      Param `xml:"angle"`
+
+	Negative Param `xml:"negative"`
 }
 
 type Shape struct {

@@ -20,7 +20,7 @@ var (
 )
 
 func (pcb *PCB) SaveEtch(filename string) error {
-	im := pcb.cu.ToImage(color.Black, color.White)
+	im := pcb.cu.ToImage(color.White, color.Black)
 
 	bitmapTransform := lbrnCenter.ScaleK(1 / pcb.resolution)
 
@@ -42,6 +42,8 @@ func (pcb *PCB) SaveEtch(filename string) error {
 				DPI:              Param{"2540"},
 				UseDotCorrection: Param{"1"},
 				DotWidth:         Param{"0.05"},
+
+				Negative: Param{"1"},
 			},
 			// Clean Pass 1
 			{

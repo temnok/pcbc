@@ -74,11 +74,8 @@ func (pcb *PCB) StencilMark(mark ...[]XY) {
 func (pcb *PCB) HoleNoStencil(hole []XY) {
 	pcb.holes = append(pcb.holes, hole)
 
-	//w := contour.Size(hole).X
-	//k := (w + 0.2) / w
-	//shape.IterateContourRows(hole, pcb.bitmapTransform(geom.Identity()).ScaleK(k), pcb.cu.Set0)
-
-	shape.IterateContourRows(hole, pcb.bitmapTransform(), pcb.cu.Set0)
+	brush := shape.Circle(int(0.2 * pcb.resolution))
+	brush.IterateContour(hole, pcb.bitmapTransform(), pcb.cu.Set0)
 }
 
 func (pcb *PCB) Track(points []XY) {
@@ -87,7 +84,6 @@ func (pcb *PCB) Track(points []XY) {
 }
 
 func (pcb *PCB) Pad(padContours ...[]XY) {
-
 	pcb.PadNoStencil(padContours...)
 	pcb.stencilHoles = append(pcb.stencilHoles, padContours...)
 }
