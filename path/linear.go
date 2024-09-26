@@ -2,8 +2,8 @@ package path
 
 import "temnok/lab/geom"
 
-// linearIterate iterates over all line pixels, except the first one.
-func linearIterate(a, b geom.XY, iterate func(x, y int)) {
+// linearVisit iterates over all line pixels, except the first one.
+func linearVisit(a, b geom.XY, iterate func(x, y int)) {
 	x0, y0 := a.Ints()
 	x1, y1 := b.Ints()
 

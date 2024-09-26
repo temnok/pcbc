@@ -7,7 +7,7 @@ import (
 	"testing"
 )
 
-func TestLinearIterate(t *testing.T) {
+func TestLinearVisit(t *testing.T) {
 	tests := []struct {
 		a, b     geom.XY
 		expected [][2]int
@@ -21,18 +21,18 @@ func TestLinearIterate(t *testing.T) {
 	for _, test := range tests {
 		actual := [][2]int{}
 
-		linearIterate(test.a, test.b, func(x, y int) {
+		linearVisit(test.a, test.b, func(x, y int) {
 			actual = append(actual, [2]int{x, y})
 		})
 
 		if !reflect.DeepEqual(actual, test.expected) {
-			t.Errorf("linearIterate(%v,%v):\nwant %v\n got %v\n",
+			t.Errorf("linearVisit(%v,%v):\nwant %v\n got %v\n",
 				test.a, test.b, test.expected, actual)
 		}
 	}
 }
 
-func TestVisit_Random(t *testing.T) {
+func TestLinearVisit_Random(t *testing.T) {
 	for i := 0; i < 10_000; i++ {
 		m := 1 + rand.IntN(1000)
 		x0, y0, x1, y1 := rand.IntN(m), rand.IntN(m), rand.IntN(m), rand.IntN(m)
@@ -42,12 +42,12 @@ func TestVisit_Random(t *testing.T) {
 
 		a := geom.XY{float64(x0), float64(y0)}
 		b := geom.XY{float64(x1), float64(y1)}
-		linearIterate(a, b, func(x, y int) {
+		linearVisit(a, b, func(x, y int) {
 			actualCalls++
 		})
 
 		if actualCalls != expectedCalls {
-			t.Errorf("linearIterate(%v,%v) calls:\nwant %v\n got %v\n",
+			t.Errorf("linearVisit(%v,%v) calls:\nwant %v\n got %v\n",
 				a, b, expectedCalls, actualCalls)
 		}
 	}

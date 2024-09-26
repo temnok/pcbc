@@ -17,9 +17,9 @@ type PCB struct {
 	width, height, resolution float64
 	trackWidth                float64
 
-	cuts                                    [][]XY
-	holes, maskHoles                        [][]XY
-	stencilCuts, stencilHoles, stencilMarks [][]XY
+	cuts                                    path.Paths
+	holes, maskHoles                        path.Paths
+	stencilCuts, stencilHoles, stencilMarks path.Paths
 	cu, mask, silk, stencil                 *bitmap.Bitmap
 }
 
@@ -49,12 +49,12 @@ func (pcb *PCB) Cut(contour []XY) {
 
 	brush := shape.Circle(int(0.1 * pcb.resolution))
 
-	path.IterateDotted(contour, pcb.bitmapTransform(), int(0.2*pcb.resolution), func(x, y int) {
+	path.Path(contour).Transform(pcb.bitmapTransform()).Jump(int(0.2*pcb.resolution), func(x, y int) {
 		brush.IterateRowsXY(x, y, pcb.mask.Set1)
 	})
 }
 
-func (pcb *PCB) StencilCut(contours ...[]XY) {
+func (pcb *PCB) StencilCut(contours ...path.Path) {
 	pcb.stencilCuts = append(pcb.stencilCuts, contours...)
 }
 
@@ -63,15 +63,15 @@ func (pcb *PCB) Hole(hole []XY) {
 	pcb.StencilHole(hole)
 }
 
-func (pcb *PCB) StencilHole(hole ...[]XY) {
+func (pcb *PCB) StencilHole(hole ...path.Path) {
 	pcb.stencilHoles = append(pcb.stencilHoles, hole...)
 }
 
-func (pcb *PCB) StencilMark(mark ...[]XY) {
+func (pcb *PCB) StencilMark(mark ...path.Path) {
 	pcb.stencilMarks = append(pcb.stencilMarks, mark...)
 }
 
-func (pcb *PCB) HoleNoStencil(hole []XY) {
+func (pcb *PCB) HoleNoStencil(hole path.Path) {
 	pcb.holes = append(pcb.holes, hole)
 
 	brush := shape.Circle(int(0.2 * pcb.resolution))
@@ -83,21 +83,21 @@ func (pcb *PCB) Track(points []XY) {
 	brush.IterateContour(contour.Lines(points), pcb.bitmapTransform(), pcb.cu.Set1)
 }
 
-func (pcb *PCB) Pad(padContours ...[]XY) {
+func (pcb *PCB) Pad(padContours ...path.Path) {
 	pcb.PadNoStencil(padContours...)
 	pcb.stencilHoles = append(pcb.stencilHoles, padContours...)
 }
 
-func (pcb *PCB) PadNoStencil(padContours ...[]XY) {
+func (pcb *PCB) PadNoStencil(padContours ...path.Path) {
 	shape.IterateContoursRows(padContours, pcb.bitmapTransform(), pcb.cu.Set1)
 	pcb.MaskPad(padContours...)
 }
 
-func (pcb *PCB) MaskPad(padContours ...[]XY) {
+func (pcb *PCB) MaskPad(padContours ...path.Path) {
 	pcb.MaskContour(0.1, padContours...)
 }
 
-func (pcb *PCB) MaskContour(w float64, contour ...[]XY) {
+func (pcb *PCB) MaskContour(w float64, contour ...path.Path) {
 	brush := shape.Circle(int(w * pcb.resolution))
 	brush.IterateContours(contour, pcb.bitmapTransform(), pcb.mask.Set1)
 }
@@ -169,20 +169,20 @@ func (pcb *PCB) technologicalParts() {
 	for _, h := range holders {
 		t := geom.Move(h)
 
-		pcb.Hole(t.Points(holder))
-		pcb.MaskPad(t.Points(holder))
+		pcb.Hole(holder.Transform(t))
+		pcb.MaskPad(holder.Transform(t))
 
-		pcb.MaskHole(t.Points(maskHole))
+		pcb.MaskHole(maskHole.Transform(t))
 	}
 
-	key := []XY{
+	key := path.Path{
 		{0.25, -0.25},
 		{0.2, 0.25},
 		{-0.25, -0.2},
 		{0.25, -0.25},
 	}
 	t := geom.Move(XY{-16.3, 21.3})
-	pcb.Track(t.Points(key))
-	pcb.SilkContour(0.2, t.Points(contour.Lines(key)))
-	pcb.StencilMark(t.Points(contour.Lines(key)))
+	pcb.Track(key.Transform(t))
+	pcb.SilkContour(0.2, contour.Lines(key).Transform(t))
+	pcb.StencilMark(contour.Lines(key).Transform(t))
 }

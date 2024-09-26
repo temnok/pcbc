@@ -5,9 +5,9 @@ import (
 	"temnok/lab/geom"
 )
 
-func cubicIterate(points []geom.XY, visit func(x, y int)) {
+// cubicVisit iterates over all pixels for a given cubic Bezier curve.
+func cubicVisit(points []geom.XY, visit func(x, y int)) {
 	prev := points[0].Round()
-	//visit(int(prev.X), int(prev.Y))
 
 	steps := cubicSteps(points)
 	for i := 1; i <= steps; i++ {

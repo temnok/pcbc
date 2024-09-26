@@ -12,9 +12,9 @@ type Shape struct {
 	lower, upper []row
 }
 
-func FromContour(contour []geom.XY, transform geom.Transform) *Shape {
+func FromContour(contour path.Path, transform geom.Transform) *Shape {
 	shape := new(Shape)
-	path.Iterate(contour, transform, shape.AddPoint)
+	path.Path(contour).Transform(transform).Visit(shape.AddPoint)
 	return shape
 }
 
@@ -61,23 +61,23 @@ func (s *Shape) IterateRowsXY(x0, y0 int, iterator func(x0, x1, y int)) {
 	}
 }
 
-func (s *Shape) IterateContour(contour []geom.XY, transform geom.Transform, iterator func(x0, x1, y int)) {
-	path.Iterate(contour, transform, func(x, y int) {
+func (s *Shape) IterateContour(contour path.Path, transform geom.Transform, iterator func(x0, x1, y int)) {
+	path.Path(contour).Transform(transform).Visit(func(x, y int) {
 		s.IterateRowsXY(x, y, iterator)
 	})
 }
 
-func (s *Shape) IterateContours(contours [][]geom.XY, transform geom.Transform, iterator func(x0, x1, y int)) {
+func (s *Shape) IterateContours(contours path.Paths, transform geom.Transform, iterator func(x0, x1, y int)) {
 	for _, contour := range contours {
 		s.IterateContour(contour, transform, iterator)
 	}
 }
 
-func IterateContourRows(contour []geom.XY, transform geom.Transform, iterator func(x0, x1, y int)) {
+func IterateContourRows(contour path.Path, transform geom.Transform, iterator func(x0, x1, y int)) {
 	FromContour(contour, transform).IterateRows(iterator)
 }
 
-func IterateContoursRows(contours [][]geom.XY, transform geom.Transform, iterator func(x0, x1, y int)) {
+func IterateContoursRows(contours path.Paths, transform geom.Transform, iterator func(x0, x1, y int)) {
 	for _, contour := range contours {
 		IterateContourRows(contour, transform, iterator)
 	}

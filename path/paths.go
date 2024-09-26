@@ -1,0 +1,31 @@
+package path
+
+import "temnok/lab/geom"
+
+// Paths represent a sequence of paths.
+type Paths []Path
+
+// Transform returns list of transformed paths.
+func (paths Paths) Transform(transform geom.Transform) Paths {
+	res := make(Paths, len(paths))
+
+	for i, path := range paths {
+		res[i] = path.Transform(transform)
+	}
+
+	return res
+}
+
+// Visit calls provided callback for each path.
+func (paths Paths) Visit(visit func(x, y int)) {
+	for _, path := range paths {
+		path.Visit(visit)
+	}
+}
+
+// Jump calls provided callback for each path.
+func (paths Paths) Jump(dist int, jump func(x, y int)) {
+	for _, path := range paths {
+		path.Jump(dist, jump)
+	}
+}

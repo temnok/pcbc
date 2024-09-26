@@ -1,6 +1,9 @@
 package font
 
-import "temnok/lab/geom"
+import (
+	"temnok/lab/geom"
+	"temnok/lab/path"
+)
 
 const (
 	Width = 0.65 // relative to height = 1
@@ -137,11 +140,11 @@ var data = [][][]byte{
 	'~': {{41, 32, 54, 45}},
 }
 
-var Paths = [256][][]geom.XY{}
+var Paths = [256]path.Paths{}
 
 func init() {
 	for i, paths := range data {
-		Paths[i] = make([][]geom.XY, len(paths))
+		Paths[i] = make(path.Paths, len(paths))
 
 		for j, path := range paths {
 			a := pToXY(path[0])

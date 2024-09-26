@@ -1,11 +1,13 @@
 package contour
 
-import "temnok/lab/geom"
+import (
+	"temnok/lab/path"
+)
 
-func Circle(r float64) []geom.XY {
+func Circle(r float64) path.Path {
 	m := r * magic
 
-	return []geom.XY{
+	return path.Path{
 		{r, 0},
 		{r, m}, {m, r},
 		{0, r},

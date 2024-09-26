@@ -61,23 +61,3 @@ func (a Transform) Point(b XY) XY {
 		a.I.Y*b.X + a.J.Y*b.Y + a.K.Y,
 	}
 }
-
-func (a Transform) Points(points []XY) []XY {
-	res := make([]XY, len(points))
-
-	for i, p := range points {
-		res[i] = a.Point(p)
-	}
-
-	return res
-}
-
-func (a Transform) PointsAll(pointArrays [][]XY) [][]XY {
-	res := make([][]XY, len(pointArrays))
-
-	for i, pa := range pointArrays {
-		res[i] = a.Points(pa)
-	}
-
-	return res
-}

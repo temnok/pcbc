@@ -3,22 +3,23 @@ package contour
 import (
 	"math"
 	"temnok/lab/geom"
+	"temnok/lab/path"
 )
 
-func Pie(n int, r1, r2, a1 float64) [][]geom.XY {
-	var res [][]geom.XY
+func Pie(n int, r1, r2, a1 float64) path.Paths {
+	var res path.Paths
 
 	angle := 2 * math.Pi / float64(n)
 	for i := 0; i < n; i++ {
 		a := a1/2 + float64(i)*angle
-		c := geom.Rotate(a).Points(PiePiece(r1, r2, angle-a1))
+		c := PiePiece(r1, r2, angle-a1).Transform(geom.Rotate(a))
 		res = append(res, c)
 	}
 
 	return res
 }
 
-func PiePiece(r1, r2, angle float64) []geom.XY {
+func PiePiece(r1, r2, angle float64) path.Path {
 	a1 := geom.XY{r1, 0}
 	b1 := geom.XY{r1 * math.Cos(angle), r1 * math.Sin(angle)}
 	p11, p12 := arc(a1, b1)
@@ -27,7 +28,7 @@ func PiePiece(r1, r2, angle float64) []geom.XY {
 	b2 := geom.XY{r2 * math.Cos(angle), r2 * math.Sin(angle)}
 	p21, p22 := arc(a2, b2)
 
-	return []geom.XY{
+	return path.Path{
 		a1, a1,
 		a2, a2, p21,
 		p22, b2, b2,

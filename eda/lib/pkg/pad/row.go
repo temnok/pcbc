@@ -3,9 +3,10 @@ package pad
 import (
 	"temnok/lab/eda"
 	"temnok/lab/geom"
+	"temnok/lab/path"
 )
 
-func Row(pcb *eda.PCB, transform geom.Transform, padContour []geom.XY, n int, d, jump float64) []geom.XY {
+func Row(pcb *eda.PCB, transform geom.Transform, padContour path.Path, n int, d, jump float64) path.Path {
 	if n <= 0 || d <= 0 {
 		return nil
 	}
@@ -21,7 +22,7 @@ func Row(pcb *eda.PCB, transform geom.Transform, padContour []geom.XY, n int, d,
 		}
 		centers[i] = geom.XY{x, y}
 
-		pcb.Pad(transform.MoveXY(x, y).Points(padContour))
+		pcb.Pad(padContour.Transform(transform.MoveXY(x, y)))
 	}
 
 	return centers

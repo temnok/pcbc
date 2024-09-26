@@ -9,7 +9,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestCubicIterate_Random(t *testing.T) {
+func TestCubicVisit_Random(t *testing.T) {
 	random := rand.New(rand.NewSource(0))
 	rang := 2048.0
 
@@ -24,7 +24,7 @@ func TestCubicIterate_Random(t *testing.T) {
 		p := points[0].Round()
 		i := 0
 
-		cubicIterate(points, func(x, y int) {
+		cubicVisit(points, func(x, y int) {
 			c := geom.XY{X: float64(x), Y: float64(y)}
 			assert.NotEqual(t, p, c)
 
