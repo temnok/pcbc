@@ -20,7 +20,7 @@ var (
 )
 
 func (pcb *PCB) SaveEtch(filename string) error {
-	im := pcb.cu.ToImage(color.White, color.Black)
+	im := pcb.copper.ToImage(color.White, color.Black)
 
 	bitmapTransform := lbrnCenter.ScaleK(1 / pcb.resolution)
 

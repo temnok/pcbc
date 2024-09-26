@@ -9,10 +9,10 @@
 
 ### Example Overview
 
-* Red: copper layer
+* Red: copper
 * Dark green: FR4
-* Light green: soldermask cuts
-* Blue: soldermask marks (silkscreen)
+* Blue: soldermask cuts
+* Light Green: soldermask marks (silkscreen)
 * White: stencil cuts
 
 ![PCB Overview](./pcbc/out/overview.png)

@@ -17,10 +17,10 @@ type PCB struct {
 	width, height, resolution float64
 	trackWidth                float64
 
-	cuts                                    path.Paths
-	holes, maskHoles                        path.Paths
+	cuts, holes                             path.Paths
+	maskHoles                               path.Paths
 	stencilCuts, stencilHoles, stencilMarks path.Paths
-	cu, mask, silk, stencil                 *bitmap.Bitmap
+	copper, mask, silk, stencil             *bitmap.Bitmap
 }
 
 func NewPCB(w, h float64) *PCB {
@@ -33,7 +33,7 @@ func NewPCB(w, h float64) *PCB {
 		height:     h,
 		resolution: scale,
 		trackWidth: 0.2,
-		cu:         bitmap.NewBitmap(wi, hi),
+		copper:     bitmap.NewBitmap(wi, hi),
 		mask:       bitmap.NewBitmap(wi, hi),
 		silk:       bitmap.NewBitmap(wi, hi),
 		stencil:    bitmap.NewBitmap(wi, hi),
@@ -44,12 +44,12 @@ func (pcb *PCB) bitmapTransform() geom.Transform {
 	return geom.ScaleK(pcb.resolution).MoveXY(pcb.width/2, pcb.height/2)
 }
 
-func (pcb *PCB) Cut(contour []XY) {
+func (pcb *PCB) Cut(contour path.Path) {
 	pcb.cuts = append(pcb.cuts, contour)
 
 	brush := shape.Circle(int(0.1 * pcb.resolution))
 
-	path.Path(contour).Transform(pcb.bitmapTransform()).Jump(int(0.2*pcb.resolution), func(x, y int) {
+	contour.Transform(pcb.bitmapTransform()).Jump(int(0.2*pcb.resolution), func(x, y int) {
 		brush.IterateRowsXY(x, y, pcb.mask.Set1)
 	})
 }
@@ -58,7 +58,7 @@ func (pcb *PCB) StencilCut(contours ...path.Path) {
 	pcb.stencilCuts = append(pcb.stencilCuts, contours...)
 }
 
-func (pcb *PCB) Hole(hole []XY) {
+func (pcb *PCB) Hole(hole path.Path) {
 	pcb.HoleNoStencil(hole)
 	pcb.StencilHole(hole)
 }
@@ -75,12 +75,12 @@ func (pcb *PCB) HoleNoStencil(hole path.Path) {
 	pcb.holes = append(pcb.holes, hole)
 
 	brush := shape.Circle(int(0.2 * pcb.resolution))
-	brush.IterateContour(hole, pcb.bitmapTransform(), pcb.cu.Set0)
+	brush.IterateContour(hole, pcb.bitmapTransform(), pcb.copper.Set0)
 }
 
 func (pcb *PCB) Track(points []XY) {
 	brush := shape.Circle(int(pcb.trackWidth * pcb.resolution))
-	brush.IterateContour(contour.Lines(points), pcb.bitmapTransform(), pcb.cu.Set1)
+	brush.IterateContour(contour.Lines(points), pcb.bitmapTransform(), pcb.copper.Set1)
 }
 
 func (pcb *PCB) Pad(padContours ...path.Path) {
@@ -89,7 +89,7 @@ func (pcb *PCB) Pad(padContours ...path.Path) {
 }
 
 func (pcb *PCB) PadNoStencil(padContours ...path.Path) {
-	shape.IterateContoursRows(padContours, pcb.bitmapTransform(), pcb.cu.Set1)
+	shape.IterateContoursRows(padContours, pcb.bitmapTransform(), pcb.copper.Set1)
 	pcb.MaskPad(padContours...)
 }
 
@@ -139,11 +139,11 @@ func (pcb *PCB) SaveFiles(path string) error {
 	}
 
 	image := bitmap.NewBitmapsImage(
-		[]*bitmap.Bitmap{pcb.cu, pcb.mask, pcb.silk, pcb.stencil},
+		[]*bitmap.Bitmap{pcb.copper, pcb.mask, pcb.silk, pcb.stencil},
 		[][2]color.Color{
-			{color.RGBA{0, 0x40, 0x10, 0xFF}, color.RGBA{0xFF, 0x80, 0, 0x7F}},
-			{color.RGBA{0, 0, 0, 0}, color.RGBA{0xFF, 0xFF, 0xFF, 0x40}},
-			{color.RGBA{0, 0, 0, 0}, color.RGBA{0x7F, 0x7F, 0xFF, 0x80}},
+			{color.RGBA{0, 0x40, 0x10, 0xFF}, color.RGBA{0xFF, 0x40, 0, 0xFF}},
+			{color.RGBA{0, 0, 0, 0}, color.RGBA{0x80, 0x80, 0xFF, 0xA0}},
+			{color.RGBA{0, 0, 0, 0}, color.RGBA{0xFF, 0xFF, 0xFF, 0x60}},
 			{color.RGBA{0, 0, 0, 0}, color.RGBA{0xFF, 0xFF, 0xFF, 0xFF}},
 		},
 		true,
