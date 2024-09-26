@@ -73,16 +73,17 @@ func (b *Bitmap) SetRowVal(x0, x1, y, val int) {
 	}
 }
 
+func (b *Bitmap) Get(x, y int) int {
+	return int(b.elems[b.addr(x, y)]>>(x%64)) & 1
+}
+
 //go:inline
 func (b *Bitmap) addr(x, y int) int {
 	return ((b.w+63)/64)*y + x/64
 }
 
 func (b *Bitmap) ToImage(zero, one color.Color) image.Image {
-	return &bitmapImage{
-		bitmap:  b,
-		palette: color.Palette{zero, one},
-	}
+	return NewBitmapsImage([]*Bitmap{b}, [][2]color.Color{{zero, one}})
 }
 
 //go:inline

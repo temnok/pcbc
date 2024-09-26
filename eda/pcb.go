@@ -1,7 +1,6 @@
 package eda
 
 import (
-	"image"
 	"image/color"
 	"temnok/lab/bitmap"
 	"temnok/lab/contour"
@@ -129,10 +128,6 @@ func (pcb *PCB) SilkText(t geom.Transform, height float64, text string) {
 }
 
 func (pcb *PCB) SaveFiles(path string) error {
-	//util.SaveTmpPng("cu.png", pcb.cu.ToImage(color.Black, color.White))
-	//util.SaveTmpPng("mask.png", pcb.mask.ToImage(color.White, color.Black))
-	//util.SaveTmpPng("silk.png", pcb.silk.ToImage(color.White, color.Black))
-
 	pcb.technologicalParts()
 
 	if err := pcb.SaveEtch(path + "etch.lbrn"); err != nil {
@@ -147,14 +142,16 @@ func (pcb *PCB) SaveFiles(path string) error {
 		return err
 	}
 
-	if err := util.SavePng(path+"overview.png", &util.MultiImage{
-		Images: []image.Image{
-			pcb.cu.ToImage(color.RGBA{0, 0x40, 0x10, 0xFF}, color.RGBA{0xFF, 0x80, 0, 0x7F}),
-			pcb.mask.ToImage(color.RGBA{0, 0, 0, 0}, color.RGBA{0xFF, 0xFF, 0xFF, 0x40}),
-			pcb.silk.ToImage(color.RGBA{0, 0, 0, 0}, color.RGBA{0x7F, 0x7F, 0xFF, 0x80}),
-			pcb.stencil.ToImage(color.RGBA{0, 0, 0, 0}, color.RGBA{0xFF, 0xFF, 0xFF, 0xFF}),
+	image := bitmap.NewBitmapsImage(
+		[]*bitmap.Bitmap{pcb.cu, pcb.mask, pcb.silk, pcb.stencil},
+		[][2]color.Color{
+			{color.RGBA{0, 0x40, 0x10, 0xFF}, color.RGBA{0xFF, 0x80, 0, 0x7F}},
+			{color.RGBA{0, 0, 0, 0}, color.RGBA{0xFF, 0xFF, 0xFF, 0x40}},
+			{color.RGBA{0, 0, 0, 0}, color.RGBA{0x7F, 0x7F, 0xFF, 0x80}},
+			{color.RGBA{0, 0, 0, 0}, color.RGBA{0xFF, 0xFF, 0xFF, 0xFF}},
 		},
-	}); err != nil {
+	)
+	if err := util.SavePng(path+"overview.png", image); err != nil {
 		return err
 	}
 
