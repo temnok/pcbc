@@ -2,12 +2,9 @@ package geom
 
 import (
 	"fmt"
-	"math"
 	"strings"
 	"testing"
 )
-
-const degree = math.Pi / 180
 
 func TestAscii(t *testing.T) {
 	tests := []struct {
@@ -20,7 +17,7 @@ func TestAscii(t *testing.T) {
 				"12",
 				"3.",
 			},
-			transform: Move(XY{3, 2}),
+			transform: MoveXY(3, 2),
 			expected: []string{
 				".....",
 				".....",
@@ -33,7 +30,7 @@ func TestAscii(t *testing.T) {
 				"12",
 				"3.",
 			},
-			transform: Scale(XY{3, 2}),
+			transform: ScaleXY(3, 2),
 			expected: []string{
 				"111222",
 				"111222",
@@ -46,7 +43,7 @@ func TestAscii(t *testing.T) {
 				"12",
 				"3.",
 			},
-			transform: Move(XY{2, 0}).Rotate(90 * degree),
+			transform: MoveXY(2, 0).RotateD(90),
 			expected: []string{
 				"31",
 				".2",
@@ -57,7 +54,7 @@ func TestAscii(t *testing.T) {
 				"12",
 				"3.",
 			},
-			transform: Move(XY{3, 2}).Scale(XY{2, 3}).Move(XY{0, 2}).Rotate(-90 * degree),
+			transform: MoveXY(3, 2).ScaleXY(2, 3).MoveXY(0, 2).RotateD(-90),
 			expected: []string{
 				".......",
 				".......",

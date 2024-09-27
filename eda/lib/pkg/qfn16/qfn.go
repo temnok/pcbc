@@ -2,7 +2,6 @@ package qfn16
 
 import (
 	"temnok/lab/eda"
-	"temnok/lab/font"
 	"temnok/lab/geom"
 	"temnok/lab/path"
 )
@@ -66,8 +65,7 @@ func keyedRect(w, h, k float64) []geom.XY {
 
 func Add(pcb *eda.PCB, t geom.Transform) path.Path {
 	pcb.Pad(PadContours.Transform(t)...)
-	//pcb.SilkContour(t, 0.1, contour.Rect(3, 3))
-	pcb.SilkText(t.MoveXY(-1.6, 1.3), 0.6, font.Bold, "1")
+	pcb.SilkText(t.MoveXY(-2.1, 0.8).ScaleK(0.5), "1")
 
 	return PadCenters
 }

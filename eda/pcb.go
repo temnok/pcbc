@@ -2,6 +2,7 @@ package eda
 
 import (
 	"image/color"
+	"math"
 	"temnok/lab/bitmap"
 	"temnok/lab/font"
 	"temnok/lab/geom"
@@ -115,15 +116,12 @@ func (pcb *PCB) SilkContour(w float64, contour Path) {
 	brush.IterateContour(contour, pcb.bitmapTransform(), pcb.silk.Set1)
 }
 
-func (pcb *PCB) SilkText(t geom.Transform, height float64, kind float64, text string) {
-	brush := shape.Circle(int(kind * height * pcb.resolution))
+func (pcb *PCB) SilkText(t geom.Transform, text string) {
+	height := min(math.Sqrt(t.I.X*t.I.X+t.I.Y*t.I.Y), math.Sqrt(t.J.X*t.J.X+t.J.Y*t.J.Y))
+	brush := shape.Circle(int(font.Bold * height * pcb.resolution))
 
-	for i, c := range text {
-		if c := int(c); c < len(font.Paths) {
-			t := pcb.bitmapTransform().Multiply(t).ScaleK(height).MoveXY(float64(i)*font.Width, 0.4)
-			brush.IterateContours(font.Paths[c], t, pcb.silk.Set1)
-		}
-	}
+	t1 := pcb.bitmapTransform().Multiply(t)
+	brush.IterateContours(font.StringPaths(text, font.AlignCenter), t1, pcb.silk.Set1)
 }
 
 func (pcb *PCB) SaveFiles(path string) error {
@@ -144,7 +142,7 @@ func (pcb *PCB) SaveFiles(path string) error {
 	image := bitmap.NewBitmapsImage(
 		[]*bitmap.Bitmap{pcb.copper, pcb.mask, pcb.silk, pcb.stencil},
 		[][2]color.Color{
-			{color.RGBA{0, 0x40, 0x10, 0xFF}, color.RGBA{0xFF, 0x40, 0, 0xFF}},
+			{color.RGBA{0, 0x40, 0x10, 0xFF}, color.RGBA{0xFF, 0x50, 0, 0xFF}},
 			{color.RGBA{0, 0, 0, 0}, color.RGBA{0x80, 0x80, 0xFF, 0x80}},
 			{color.RGBA{0, 0, 0, 0}, color.RGBA{0xFF, 0xFF, 0xFF, 0x60}},
 			{color.RGBA{0, 0, 0, 0}, color.RGBA{0xFF, 0xFF, 0xFF, 0xFF}},
@@ -184,7 +182,7 @@ func (pcb *PCB) technologicalParts() {
 		{-0.25, -0.2},
 		{0.25, -0.25},
 	}
-	t := geom.Move(XY{-16.3, 21.3})
+	t := geom.MoveXY(-16.3, 21.3)
 	pcb.Track(key.Transform(t))
 	pcb.SilkContour(0.2, path.Lines(key).Transform(t))
 	pcb.StencilMark(path.Lines(key).Transform(t))

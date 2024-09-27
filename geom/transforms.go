@@ -90,6 +90,10 @@ func Scale(p XY) Transform {
 	}
 }
 
+func ScaleXY(x, y float64) Transform {
+	return Scale(XY{x, y})
+}
+
 func ScaleK(k float64) Transform {
-	return Scale(XY{k, k})
+	return ScaleXY(k, k)
 }

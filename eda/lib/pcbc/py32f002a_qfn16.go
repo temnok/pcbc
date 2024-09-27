@@ -4,7 +4,6 @@ import (
 	"temnok/lab/eda"
 	"temnok/lab/eda/lib/pkg/pad"
 	"temnok/lab/eda/lib/pkg/qfn16"
-	"temnok/lab/font"
 	"temnok/lab/geom"
 	"temnok/lab/path"
 )
@@ -14,10 +13,13 @@ type XY = geom.XY
 func PY32F002A_QFN16(pcb *eda.PCB, t geom.Transform) {
 	pcb.Cut(path.RoundRect(23.5, 11.5, 1).Transform(t))
 
-	textScale := geom.Scale(XY{0.75, 1})
-	const titleHeight = 1.5
-	pcb.SilkText(t.MoveXY(-5.5, 0).Multiply(textScale), titleHeight, font.Bold, "PY32")
-	pcb.SilkText(t.MoveXY(2.3, 0).Multiply(textScale), titleHeight, font.Bold, "F002A")
+	pcb.SilkText(t.MoveXY(-10.6, 0.3).RotateD(45).ScaleK(1.25), "pc")
+	pcb.SilkText(t.MoveXY(-10, -0.3).RotateD(45).ScaleK(1.25), "bc")
+	pcb.SilkText(t.MoveXY(10.2, 0.3).ScaleXY(0.75, 0.5), "TMNK")
+	pcb.SilkText(t.MoveXY(10.2, -0.3).ScaleXY(0.75, 0.5), "TECH")
+
+	pcb.SilkText(t.MoveXY(-4, 0).ScaleXY(1.2, 2), "PY32")
+	pcb.SilkText(t.MoveXY(4, 0).ScaleXY(1.2, 2), "F002A")
 
 	qfnT := geom.RotateD(45)
 	pins := qfn16.Add(pcb, t.Multiply(qfnT)).Transform(qfnT)
@@ -58,15 +60,13 @@ func PY32F002A_QFN16(pcb *eda.PCB, t geom.Transform) {
 		"PA3",
 	}
 
-	const textHeight = 1
-	textScale = geom.Scale(XY{0.8, 1.2})
 	for i := 0; i < 9; i++ {
-		pcb.SilkText(t.MoveXY(tenth*float64(i)-11, -2.4).Multiply(textScale), textHeight, font.Bold, pinNames[i])
-		pcb.SilkText(t.MoveXY(tenth*float64(i)-11, 2.4).Multiply(textScale), textHeight, font.Bold, pinNames[i+9])
+		pcb.SilkText(t.MoveXY(tenth*float64(i-4), -2.4).ScaleXY(0.9, 1.2), pinNames[i])
+		pcb.SilkText(t.MoveXY(tenth*float64(i-4), 2.4).ScaleXY(0.9, 1.2), pinNames[i+9])
 	}
 
 	for x := -7.50; x <= 7.5; x += 15 {
-		t := t.Move(XY{x, 0})
+		t := t.MoveXY(x, 0)
 		pcb.PadNoStencil(path.Circle(1.3).Transform(t))
 		pcb.HoleNoStencil(path.Circle(0.9).Transform(t))
 

@@ -24,6 +24,10 @@ func (a Transform) Scale(p XY) Transform {
 	return a.Multiply(Scale(p))
 }
 
+func (a Transform) ScaleXY(x, y float64) Transform {
+	return a.Multiply(ScaleXY(x, y))
+}
+
 func (a Transform) ScaleK(k float64) Transform {
 	return a.Multiply(ScaleK(k))
 }

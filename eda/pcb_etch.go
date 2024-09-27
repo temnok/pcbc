@@ -9,7 +9,7 @@ import (
 type Param = lbrn.Param
 
 var (
-	lbrnCenter = geom.Move(XY{55, 55})
+	lbrnCenter = geom.MoveXY(55, 55)
 
 	holders = []XY{
 		{-14.5, 19.5},

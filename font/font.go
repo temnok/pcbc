@@ -6,11 +6,15 @@ import (
 )
 
 const (
-	Width = 0.65 // relative to height = 1
+	Width = 0.65 // relative to height 1.0
 
 	Light  = 0.08
 	Normal = 0.12
 	Bold   = 0.16
+
+	AlignLeft   = 0.0
+	AlignCenter = 0.5
+	AlignRight  = 1.0
 )
 
 /*
@@ -61,7 +65,6 @@ var data = [][][]byte{
 	'6': {{25, 14, 12, 21, 31, 61, 72, 74, 65, 55, 44, 41}},
 	'7': {{11, 15, 72}},
 	'8': {{42, 31, 21, 12, 14, 25, 35, 44, 42, 51, 61, 72, 74, 65, 55, 44}},
-	//	'9': {{45, 42, 31, 21, 12, 14, 25, 65, 74, 72, 61}},
 	'9': {{45, 42, 31, 21, 12, 14, 25, 45, 72}},
 
 	':': {{23}, {73}},
@@ -141,6 +144,23 @@ var data = [][][]byte{
 }
 
 var Paths = [256]path.Paths{}
+
+func StringPaths(str string, alignment float64) path.Paths {
+	var paths path.Paths
+
+	n := float64(len(str))
+	for i, c := range str {
+		c := int(c)
+		if c >= len(Paths) {
+			c = '?'
+		}
+
+		t := geom.MoveXY(Width*(float64(i)-n*alignment), 0.4)
+		paths = append(paths, Paths[c].Transform(t)...)
+	}
+
+	return paths
+}
 
 func init() {
 	for i, paths := range data {

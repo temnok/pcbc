@@ -62,7 +62,7 @@ func (s *Shape) IterateRowsXY(x0, y0 int, iterator func(x0, x1, y int)) {
 }
 
 func (s *Shape) IterateContour(contour path.Path, transform geom.Transform, iterator func(x0, x1, y int)) {
-	path.Path(contour).Transform(transform).Visit(func(x, y int) {
+	contour.Transform(transform).Visit(func(x, y int) {
 		s.IterateRowsXY(x, y, iterator)
 	})
 }

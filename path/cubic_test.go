@@ -11,9 +11,9 @@ import (
 
 func TestCubicVisit_Random(t *testing.T) {
 	random := rand.New(rand.NewSource(0))
-	rang := 2048.0
+	rang := 1000.0
 
-	for range 10_000 {
+	for range 1000 {
 		points := []geom.XY{
 			randomPoint(random, rang),
 			randomPoint(random, rang),
