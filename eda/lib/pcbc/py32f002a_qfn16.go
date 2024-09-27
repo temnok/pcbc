@@ -18,24 +18,30 @@ func PY32F002A_QFN16(pcb *eda.PCB, t geom.Transform) {
 	pcb.SilkText(t.MoveXY(10.2, 0.3).ScaleXY(0.75, 0.5), "TMNK")
 	pcb.SilkText(t.MoveXY(10.2, -0.3).ScaleXY(0.75, 0.5), "TECH")
 
-	pcb.SilkText(t.MoveXY(-4, 0).ScaleXY(1.2, 2), "PY32")
-	pcb.SilkText(t.MoveXY(4, 0).ScaleXY(1.2, 2), "F002A")
+	pcb.SilkText(t.MoveXY(-4, 0).ScaleXY(1.3, 2.5), "PY32")
+	pcb.SilkText(t.MoveXY(4, 0).ScaleXY(1, 2.5), "F002A")
 
 	qfnT := geom.RotateD(45)
 	pins := qfn16.Add(pcb, t.Multiply(qfnT)).Transform(qfnT)
 
 	const tenth = 2.54
 
-	in := path.CutRect(tenth, tenth, 0.3)
+	//ins := path.CutRect(tenth, tenth, 0.3)
 
 	for _, t := range []geom.Transform{t, t.RotateD(180)} {
 		padT := geom.MoveXY(0, -4.25)
-		pads := pad.Row(pcb, t.Multiply(padT), path.Circle(0.7), in, 9, 2.54, 0).Transform(padT)
+		pads := pad.Row(pcb, t.Multiply(padT), path.Circle(0.75), nil, 9, 2.54, 0).Transform(padT)
 
-		for i := 0; i < 8; i++ {
-			pcb.Track(path.Path{pins[i], pads[i]}.Transform(t))
-		}
-		pcb.Track(path.Path{{0, 0}, {7.5, 0}, pads[8]}.Transform(t))
+		pcb.Track(eda.Track{pads[0]}.Y(-2).X(pins[0].X).Y(pins[0].Y).Transform(t))
+		pcb.Track(eda.Track{pads[1]}.Y(-2.5).X(pins[1].X).Y(pins[1].Y).Transform(t))
+		pcb.Track(eda.Track{pads[2]}.Y(-3).X(pins[2].X).Y(pins[2].Y).Transform(t))
+		pcb.Track(eda.Track{pads[3]}.X(-1.25).Y(pins[3].Y).X(pins[3].X).Transform(t))
+		pcb.Track(eda.Track{pads[4]}.X(1.25).Y(pins[4].Y).X(pins[4].X).Transform(t))
+		pcb.Track(eda.Track{pads[5]}.Y(pins[5].Y).X(pins[5].X).Transform(t))
+		pcb.Track(eda.Track{pads[6]}.Y(-2.5).X(pins[6].X).Y(pins[6].Y).Transform(t))
+		pcb.Track(eda.Track{pads[7]}.Y(-2).X(pins[7].X).Y(pins[7].Y).Transform(t))
+
+		pcb.Track(eda.Track{{0, 0}}.X(7.5).X(pads[8].X).Y(pads[8].Y).Transform(t))
 	}
 
 	pinNames := []string{

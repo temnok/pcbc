@@ -117,8 +117,8 @@ func (pcb *PCB) SilkContour(w float64, contour Path) {
 }
 
 func (pcb *PCB) SilkText(t geom.Transform, text string) {
-	height := min(math.Sqrt(t.I.X*t.I.X+t.I.Y*t.I.Y), math.Sqrt(t.J.X*t.J.X+t.J.Y*t.J.Y))
-	brush := shape.Circle(int(font.Bold * height * pcb.resolution))
+	scale := min(math.Sqrt(t.I.X*t.I.X+t.I.Y*t.I.Y), math.Sqrt(t.J.X*t.J.X+t.J.Y*t.J.Y))
+	brush := shape.Circle(int(font.Bold * scale * pcb.resolution))
 
 	t1 := pcb.bitmapTransform().Multiply(t)
 	brush.IterateContours(font.StringPaths(text, font.AlignCenter), t1, pcb.silk.Set1)
@@ -143,7 +143,7 @@ func (pcb *PCB) SaveFiles(path string) error {
 		[]*bitmap.Bitmap{pcb.copper, pcb.mask, pcb.silk, pcb.stencil},
 		[][2]color.Color{
 			{color.RGBA{0, 0x40, 0x10, 0xFF}, color.RGBA{0xFF, 0x50, 0, 0xFF}},
-			{color.RGBA{0, 0, 0, 0}, color.RGBA{0x80, 0x80, 0xFF, 0x80}},
+			{color.RGBA{0, 0, 0, 0}, color.RGBA{0x80, 0x80, 0xFF, 0xA0}},
 			{color.RGBA{0, 0, 0, 0}, color.RGBA{0xFF, 0xFF, 0xFF, 0x60}},
 			{color.RGBA{0, 0, 0, 0}, color.RGBA{0xFF, 0xFF, 0xFF, 0xFF}},
 		},
