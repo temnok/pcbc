@@ -61,6 +61,8 @@ func (pcb *PCB) SaveEtch(filename string) error {
 				DPI:              Param{"2540"},
 				UseDotCorrection: Param{"1"},
 				DotWidth:         Param{"0.05"},
+
+				Negative: Param{"1"},
 			},
 			// Clean Pass 2
 			{
@@ -79,7 +81,8 @@ func (pcb *PCB) SaveEtch(filename string) error {
 				UseDotCorrection: Param{"1"},
 				DotWidth:         Param{"0.05"},
 
-				Angle: Param{"90"},
+				Angle:    Param{"90"},
+				Negative: Param{"1"},
 			},
 		},
 		CutSetting: []lbrn.CutSetting{
