@@ -15,10 +15,8 @@ func TestPCB(t *testing.T) {
 	pcb.Cut(board)
 	pcb.StencilCut(board)
 
-	for x := -6.0; x <= 6; x += 12 {
-		for y := -10.0; y <= 10; y += 20 {
-			pcbc.PY32F002A_QFN16(pcb, geom.MoveXY(x, y).RotateD(-90))
-		}
+	for y := -12.5; y <= 12.5; y += 12.5 {
+		pcbc.PY32F002A_QFN16(pcb, geom.MoveXY(0, y))
 	}
 
 	assert.NoError(t, pcb.SaveFiles("out/"))

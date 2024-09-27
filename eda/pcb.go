@@ -115,8 +115,8 @@ func (pcb *PCB) SilkContour(w float64, contour Path) {
 	brush.IterateContour(contour, pcb.bitmapTransform(), pcb.silk.Set1)
 }
 
-func (pcb *PCB) SilkText(t geom.Transform, height float64, text string) {
-	brush := shape.Circle(int(font.Bold * height * pcb.resolution))
+func (pcb *PCB) SilkText(t geom.Transform, height float64, kind float64, text string) {
+	brush := shape.Circle(int(kind * height * pcb.resolution))
 
 	for i, c := range text {
 		if c := int(c); c < len(font.Paths) {
