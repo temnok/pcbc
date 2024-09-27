@@ -11,13 +11,7 @@ type Path []geom.XY
 
 // Transform returns new path transformed by a given 2D transformation.
 func (path Path) Transform(transform geom.Transform) Path {
-	res := make(Path, len(path))
-
-	for i, point := range path {
-		res[i] = transform.Point(point)
-	}
-
-	return res
+	return Points(path).Transform(transform)
 }
 
 // Visit calls provided callback for each interpolated point on the path with integer coordinates.
@@ -62,4 +56,35 @@ func (path Path) Jump(dist int, jump func(x, y int)) {
 		jump(x, y)
 		prevX, prevY = x, y
 	})
+}
+
+func (path Path) Clone(n int, dx, dy float64) Paths {
+	paths := make(Paths, n)
+
+	for i := 0; i < n; i++ {
+		k := float64(i) - float64(n-1)/2
+		paths[i] = path.Transform(geom.MoveXY(dx*k, dy*k))
+	}
+
+	return paths
+}
+
+func (path Path) Center() geom.XY {
+	mi, ma := path.MinMax()
+
+	return geom.XY{(mi.X + ma.X) / 2, (mi.Y + ma.Y) / 2}
+}
+
+func (path Path) MinMax() (mi, ma geom.XY) {
+	if len(path) == 0 {
+		return
+	}
+
+	mi, ma = path[0], path[0]
+	for _, p := range path[1:] {
+		mi.X, mi.Y = min(mi.X, p.X), min(mi.Y, p.Y)
+		ma.X, ma.Y = max(ma.X, p.X), max(ma.Y, p.Y)
+	}
+
+	return
 }

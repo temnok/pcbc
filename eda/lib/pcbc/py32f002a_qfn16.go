@@ -2,8 +2,7 @@ package pcbc
 
 import (
 	"temnok/lab/eda"
-	"temnok/lab/eda/lib/pkg/pad"
-	"temnok/lab/eda/lib/pkg/qfn16"
+	"temnok/lab/eda/lib/pkg/qfn"
 	"temnok/lab/geom"
 	"temnok/lab/path"
 )
@@ -21,16 +20,19 @@ func PY32F002A_QFN16(pcb *eda.PCB, t geom.Transform) {
 	pcb.SilkText(t.MoveXY(-4, 0).ScaleXY(1.3, 2.5), "PY32")
 	pcb.SilkText(t.MoveXY(4, 0).ScaleXY(1, 2.5), "F002A")
 
-	qfnT := geom.RotateD(45)
-	pins := qfn16.Add(pcb, t.Multiply(qfnT)).Transform(qfnT)
+	qfnPads := qfn.QFN16G().Transform(geom.RotateD(45))
+
+	pcb.Pad(qfnPads.Transform(t)...)
+	pins := qfnPads.Centers()
 
 	const tenth = 2.54
 
 	//ins := path.CutRect(tenth, tenth, 0.3)
 
 	for _, t := range []geom.Transform{t, t.RotateD(180)} {
-		padT := geom.MoveXY(0, -4.25)
-		pads := pad.Row(pcb, t.Multiply(padT), path.Circle(0.75), nil, 9, 2.54, 0).Transform(padT)
+		headerPads := path.Circle(0.75).Clone(9, 2.54, 0).Transform(geom.MoveXY(0, -4.25))
+		pcb.Pad(headerPads.Transform(t)...)
+		pads := headerPads.Centers()
 
 		pcb.Track(eda.Track{pads[0]}.Y(-2).X(pins[0].X).Y(pins[0].Y).Transform(t))
 		pcb.Track(eda.Track{pads[1]}.Y(-2.5).X(pins[1].X).Y(pins[1].Y).Transform(t))

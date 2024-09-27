@@ -176,7 +176,7 @@ func (pcb *PCB) technologicalParts() {
 		pcb.MaskHole(maskHole.Transform(t))
 	}
 
-	key := Path{
+	key := path.Points{
 		{0.25, -0.25},
 		{0.2, 0.25},
 		{-0.25, -0.2},

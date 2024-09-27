@@ -29,3 +29,14 @@ func (paths Paths) Jump(dist int, jump func(x, y int)) {
 		path.Jump(dist, jump)
 	}
 }
+
+// Centers returns center points for paths.
+func (paths Paths) Centers() Points {
+	centers := make(Points, len(paths))
+
+	for i, path := range paths {
+		centers[i] = path.Center()
+	}
+
+	return centers
+}

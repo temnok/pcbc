@@ -1,10 +1,6 @@
 package path
 
-import (
-	"temnok/lab/geom"
-)
-
-func Lines(points []geom.XY) Path {
+func Lines(points Points) Path {
 	if len(points) == 0 {
 		return nil
 	}
