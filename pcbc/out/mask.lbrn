@@ -4,8 +4,8 @@
 		<name Value="C03"></name>
 		<priority Value="3"></priority>
 		<speed Value="200"></speed>
-		<numPasses Value="15"></numPasses>
-		<globalRepeat Value=""></globalRepeat>
+		<numPasses Value=""></numPasses>
+		<globalRepeat Value="15"></globalRepeat>
 		<maxPower Value="90"></maxPower>
 		<QPulseWidth Value="200"></QPulseWidth>
 		<frequency Value="20000"></frequency>

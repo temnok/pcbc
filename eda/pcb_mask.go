@@ -81,8 +81,8 @@ func (pcb *PCB) SaveMask(filename string) error {
 				Name:     Param{"C03"},
 				Priority: Param{"3"},
 
-				Speed:     Param{"200"},
-				NumPasses: Param{"15"},
+				Speed:        Param{"200"},
+				GlobalRepeat: Param{"15"},
 
 				MaxPower:    Param{"90"},
 				QPulseWidth: Param{"200"},
