@@ -15,7 +15,7 @@ func (pcb *PCB) SaveStencil(filename string) error {
 				Priority: Param{"1"},
 
 				Speed:        Param{"400"},
-				GlobalRepeat: Param{"30"},
+				GlobalRepeat: Param{"40"},
 
 				MaxPower:    Param{"90"},
 				QPulseWidth: Param{"200"},

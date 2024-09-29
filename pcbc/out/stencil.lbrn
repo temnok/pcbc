@@ -5,7 +5,7 @@
 		<priority Value="1"></priority>
 		<speed Value="400"></speed>
 		<numPasses Value=""></numPasses>
-		<globalRepeat Value="30"></globalRepeat>
+		<globalRepeat Value="40"></globalRepeat>
 		<maxPower Value="90"></maxPower>
 		<QPulseWidth Value="200"></QPulseWidth>
 		<frequency Value="20000"></frequency>
