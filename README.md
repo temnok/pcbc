@@ -5,7 +5,7 @@
 * Etch
 * Mask
 * Stencil
-* Part Positioner
+* Placer
 
 ### Example Overview
 

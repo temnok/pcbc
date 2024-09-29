@@ -1,11 +1,12 @@
 package qfn
 
 import (
+	"temnok/lab/eda/lib"
 	"temnok/lab/geom"
 	"temnok/lab/path"
 )
 
-func QFN16G() path.Paths {
+func QFN16G() *lib.Component {
 	pad := path.RoundRect(0.6, 0.25, 0.12)
 
 	col := pad.Clone(4, 0, -0.5).Transform(geom.MoveXY(-1.5, 0))
@@ -15,7 +16,12 @@ func QFN16G() path.Paths {
 		pads = append(pads, col.Transform(geom.RotateD(a))...)
 	}
 
-	return append(pads, keyedRect(1.6, 1.6, 0.35))
+	pads = append(pads, keyedRect(1.6, 1.6, 0.35))
+
+	return &lib.Component{
+		Pads:   pads,
+		Placer: path.Rect(3.1, 3.1),
+	}
 }
 
 func keyedRect(w, h, k float64) []geom.XY {

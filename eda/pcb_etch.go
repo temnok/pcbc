@@ -103,7 +103,7 @@ func (pcb *PCB) SaveEtch(filename string) error {
 				TabSize:     Param{"0.2"},
 			},
 		},
-		Shape: []lbrn.Shape{
+		Shape: []*lbrn.Shape{
 			lbrn.NewBitmap(0, bitmapTransform, im),
 			lbrn.NewBitmap(1, bitmapTransform, im),
 			lbrn.NewBitmap(3, bitmapTransform, im),

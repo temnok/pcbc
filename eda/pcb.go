@@ -4,6 +4,7 @@ import (
 	"image/color"
 	"math"
 	"temnok/lab/bitmap"
+	"temnok/lab/eda/lib"
 	"temnok/lab/font"
 	"temnok/lab/geom"
 	"temnok/lab/path"
@@ -24,7 +25,9 @@ type PCB struct {
 	cuts, holes                             Paths
 	maskHoles                               Paths
 	stencilCuts, stencilHoles, stencilMarks Paths
-	copper, mask, silk, stencil             *bitmap.Bitmap
+	placerCuts, placerHoles, placerMarks    Paths
+
+	copper, mask, silk, stencil *bitmap.Bitmap
 }
 
 func NewPCB(w, h float64) *PCB {
@@ -62,6 +65,10 @@ func (pcb *PCB) StencilCut(contours ...Path) {
 	pcb.stencilCuts = append(pcb.stencilCuts, contours...)
 }
 
+func (pcb *PCB) PlacerCut(contours ...Path) {
+	pcb.placerCuts = append(pcb.placerCuts, contours...)
+}
+
 func (pcb *PCB) Hole(hole Path) {
 	pcb.HoleNoStencil(hole)
 	pcb.StencilHole(hole)
@@ -69,10 +76,6 @@ func (pcb *PCB) Hole(hole Path) {
 
 func (pcb *PCB) StencilHole(hole ...Path) {
 	pcb.stencilHoles = append(pcb.stencilHoles, hole...)
-}
-
-func (pcb *PCB) StencilMark(mark ...Path) {
-	pcb.stencilMarks = append(pcb.stencilMarks, mark...)
 }
 
 func (pcb *PCB) HoleNoStencil(hole Path) {
@@ -87,6 +90,12 @@ func (pcb *PCB) HoleNoStencil(hole Path) {
 func (pcb *PCB) Track(points []XY) {
 	brush := shape.Circle(int(pcb.trackWidth * pcb.resolution))
 	brush.IterateContour(path.Lines(points), pcb.bitmapTransform(), pcb.copper.Set1)
+}
+
+func (pcb *PCB) Component(c *lib.Component) {
+	pcb.Pad(c.Pads...)
+
+	pcb.placerHoles = append(pcb.placerHoles, c.Placer)
 }
 
 func (pcb *PCB) Pad(padContours ...Path) {
@@ -141,6 +150,10 @@ func (pcb *PCB) SaveFiles(path string) error {
 		return err
 	}
 
+	if err := pcb.SavePlacer(path + "placer.lbrn"); err != nil {
+		return err
+	}
+
 	image := bitmap.NewBitmapsImage(
 		[]*bitmap.Bitmap{pcb.copper, pcb.mask, pcb.silk, pcb.stencil},
 		[][2]color.Color{
@@ -176,16 +189,21 @@ func (pcb *PCB) technologicalParts() {
 		pcb.MaskPad(holder.Transform(t))
 
 		pcb.MaskHole(maskHole.Transform(t))
+
+		pcb.placerHoles = append(pcb.placerHoles, holder.Transform(t))
 	}
 
 	key := path.Points{
-		{0.25, -0.25},
-		{0.2, 0.25},
-		{-0.25, -0.2},
-		{0.25, -0.25},
+		{0.5, -0.5},
+		{0.3, 0.5},
+		{-0.5, -0.3},
+		{0.5, -0.5},
 	}
-	t := geom.MoveXY(-16.3, 21.3)
+	t := geom.MoveXY(-16.4, 21.4)
 	pcb.Track(key.Transform(t))
 	pcb.SilkContour(0.2, path.Lines(key).Transform(t))
-	pcb.StencilMark(path.Lines(key).Transform(t))
+
+	mark := path.Lines(key).Transform(t)
+	pcb.stencilMarks = append(pcb.stencilMarks, mark)
+	pcb.placerMarks = append(pcb.placerMarks, mark)
 }

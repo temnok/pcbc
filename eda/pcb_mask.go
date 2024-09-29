@@ -89,7 +89,7 @@ func (pcb *PCB) SaveMask(filename string) error {
 				Frequency:   Param{"20000"},
 			},
 		},
-		Shape: []lbrn.Shape{
+		Shape: []*lbrn.Shape{
 			lbrn.NewBitmap(0, bitmapTransform, silk),
 			lbrn.NewBitmap(1, bitmapTransform, mask),
 			lbrn.NewBitmap(2, bitmapTransform, mask),
