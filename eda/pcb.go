@@ -78,6 +78,8 @@ func (pcb *PCB) StencilMark(mark ...Path) {
 func (pcb *PCB) HoleNoStencil(hole Path) {
 	pcb.holes = append(pcb.holes, hole)
 
+	shape.IterateContourRows(hole, pcb.bitmapTransform(), pcb.copper.Set0)
+
 	brush := shape.Circle(int(0.2 * pcb.resolution))
 	brush.IterateContour(hole, pcb.bitmapTransform(), pcb.copper.Set0)
 }

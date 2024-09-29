@@ -6,9 +6,9 @@ import (
 )
 
 func QFN16G() path.Paths {
-	col := path.RoundRect(0.6, 0.25, 0.12).
-		Clone(4, 0, -0.5).
-		Transform(geom.MoveXY(-1.5, 0))
+	pad := path.RoundRect(0.6, 0.25, 0.12)
+
+	col := pad.Clone(4, 0, -0.5).Transform(geom.MoveXY(-1.5, 0))
 
 	pads := path.Paths{}
 	for a := 0.0; a < 360; a += 90 {
