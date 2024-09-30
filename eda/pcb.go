@@ -69,6 +69,10 @@ func (pcb *PCB) PlacerCut(contours ...Path) {
 	pcb.placerCuts = append(pcb.placerCuts, contours...)
 }
 
+func (pcb *PCB) PlacerHole(contours ...Path) {
+	pcb.placerHoles = append(pcb.placerHoles, contours...)
+}
+
 func (pcb *PCB) Hole(hole Path) {
 	pcb.HoleNoStencil(hole)
 	pcb.StencilHole(hole)
@@ -94,8 +98,7 @@ func (pcb *PCB) Track(points []XY) {
 
 func (pcb *PCB) Component(c *lib.Component) {
 	pcb.Pad(c.Pads...)
-
-	pcb.placerHoles = append(pcb.placerHoles, c.Placer)
+	pcb.PlacerHole(c.Placer)
 }
 
 func (pcb *PCB) Pad(padContours ...Path) {
@@ -199,8 +202,10 @@ func (pcb *PCB) technologicalParts() {
 
 		pcb.MaskHole(maskHole.Transform(t))
 
-		pcb.placerHoles = append(pcb.placerHoles, holder.Transform(t))
-		pcb.placerHoles = append(pcb.placerHoles, holder.Transform(geom.Move(placerHolders[i])))
+		pcb.PlacerHole(
+			holder.Transform(t),
+			holder.Transform(geom.Move(placerHolders[i])),
+		)
 	}
 
 	key := path.Points{
