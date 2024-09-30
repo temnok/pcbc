@@ -9,8 +9,8 @@ func (pcb *PCB) SavePlacer(filename string) error {
 		CutSetting: []lbrn.CutSetting{
 			{
 				Type:     "Scan",
-				Index:    Param{"1"},
-				Name:     Param{"C01"},
+				Index:    Param{"0"},
+				Name:     Param{"C00"},
 				Priority: Param{"0"},
 
 				Speed: Param{"200"},
@@ -23,9 +23,22 @@ func (pcb *PCB) SavePlacer(filename string) error {
 			},
 			{
 				Type:     "Cut",
-				Index:    Param{"0"},
-				Name:     Param{"C00"},
+				Index:    Param{"1"},
+				Name:     Param{"C01"},
 				Priority: Param{"1"},
+
+				Speed:        Param{"200"},
+				GlobalRepeat: Param{"15"},
+
+				MaxPower:    Param{"90"},
+				QPulseWidth: Param{"200"},
+				Frequency:   Param{"20000"},
+			},
+			{
+				Type:     "Cut",
+				Index:    Param{"2"},
+				Name:     Param{"C02"},
+				Priority: Param{"2"},
 
 				Speed:        Param{"200"},
 				GlobalRepeat: Param{"15"},
@@ -41,15 +54,15 @@ func (pcb *PCB) SavePlacer(filename string) error {
 	}
 
 	for _, mark := range pcb.placerMarks {
-		p.Shape = append(p.Shape, lbrn.NewPath(1, lbrnCenter, mark))
+		p.Shape = append(p.Shape, lbrn.NewPath(0, lbrnCenter, mark))
 	}
 
 	for _, hole := range pcb.placerHoles {
-		p.Shape = append(p.Shape, lbrn.NewPath(0, lbrnCenter, hole).SetCutOrder(1))
+		p.Shape = append(p.Shape, lbrn.NewPath(1, lbrnCenter, hole))
 	}
 
 	for _, cut := range pcb.placerCuts {
-		p.Shape = append(p.Shape, lbrn.NewPathWithTabs(0, lbrnCenter, cut).SetCutOrder(2))
+		p.Shape = append(p.Shape, lbrn.NewPathWithTabs(2, lbrnCenter, cut))
 	}
 
 	return p.SaveToFile(filename)

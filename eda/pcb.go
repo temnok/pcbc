@@ -172,25 +172,35 @@ func (pcb *PCB) SaveFiles(path string) error {
 }
 
 func (pcb *PCB) technologicalParts() {
-	holders = []XY{
+	holders := []XY{
 		{-15, 20},
 		{15, 20},
 		{-15, -20},
 		{15, -20},
 	}
 
-	holder := path.Circle(1)
+	placerHolders := []XY{
+		{-15, 12.5},
+		{15, 12.5},
+		{-15, -12.5},
+		{15, -12.5},
+	}
+
+	holder := path.Circle(1.05)
+	holderStencil := path.Circle(1.1)
 	maskHole := path.Circle(0.65)
 
-	for _, h := range holders {
+	for i, h := range holders {
 		t := geom.Move(h)
 
-		pcb.Hole(holder.Transform(t))
+		pcb.HoleNoStencil(holder.Transform(t))
+		pcb.StencilHole(holderStencil.Transform(t))
 		pcb.MaskPad(holder.Transform(t))
 
 		pcb.MaskHole(maskHole.Transform(t))
 
 		pcb.placerHoles = append(pcb.placerHoles, holder.Transform(t))
+		pcb.placerHoles = append(pcb.placerHoles, holder.Transform(geom.Move(placerHolders[i])))
 	}
 
 	key := path.Points{
