@@ -11,7 +11,7 @@ func (pcb *PCB) SaveStencil(filename string) error {
 			{
 				Type:     "Scan",
 				Index:    Param{"0"},
-				Name:     Param{"C00"},
+				Name:     Param{"Key"},
 				Priority: Param{"0"},
 
 				Speed: Param{"200"},
@@ -25,7 +25,7 @@ func (pcb *PCB) SaveStencil(filename string) error {
 			{
 				Type:     "Cut",
 				Index:    Param{"1"},
-				Name:     Param{"C01"},
+				Name:     Param{"Apertures"},
 				Priority: Param{"1"},
 
 				Speed:        Param{"400"},
@@ -38,7 +38,7 @@ func (pcb *PCB) SaveStencil(filename string) error {
 			{
 				Type:     "Cut",
 				Index:    Param{"2"},
-				Name:     Param{"C02"},
+				Name:     Param{"Perimeter"},
 				Priority: Param{"2"},
 
 				Speed:        Param{"400"},
@@ -51,6 +51,23 @@ func (pcb *PCB) SaveStencil(filename string) error {
 				TabsEnabled: Param{"1"},
 				TabSize:     Param{"0.2"},
 			},
+			{
+				Type:     "Scan",
+				Index:    Param{"3"},
+				Name:     Param{"Clean"},
+				Priority: Param{"3"},
+
+				MaxPower:    Param{"50"},
+				QPulseWidth: Param{"2"},
+				Frequency:   Param{"280000"},
+
+				Speed:      Param{"2000"},
+				Interval:   Param{"0.01"},
+				CrossHatch: Param{"1"},
+			},
+		},
+		Shape: []*lbrn.Shape{
+			lbrn.NewRect(3, lbrnCenter, 36, 46, 0),
 		},
 	}
 

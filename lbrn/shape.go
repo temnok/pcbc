@@ -125,6 +125,17 @@ func NewCircle(i int, t geom.Transform, r float64) *Shape {
 	}
 }
 
+func NewRect(i int, t geom.Transform, w, h, r float64) *Shape {
+	return &Shape{
+		Type:     "Rect",
+		CutIndex: fmt.Sprint(i),
+		XForm:    XForm(t),
+		W:        fmt.Sprint(w),
+		H:        fmt.Sprint(h),
+		Cr:       fmt.Sprint(r),
+	}
+}
+
 func NewBitmap(i int, t geom.Transform, im image.Image) *Shape {
 	buf := new(bytes.Buffer)
 	if err := png.Encode(buf, im); err != nil {

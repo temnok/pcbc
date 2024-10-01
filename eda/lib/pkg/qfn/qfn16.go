@@ -7,7 +7,7 @@ import (
 )
 
 func QFN16G() *lib.Component {
-	pad := path.RoundRect(0.6, 0.25, 0.12)
+	pad := path.RoundRect(0.7, 0.3, 0.12)
 
 	col := pad.Clone(4, 0, -0.5).Transform(geom.MoveXY(-1.5, 0))
 
@@ -16,7 +16,13 @@ func QFN16G() *lib.Component {
 		pads = append(pads, col.Transform(geom.RotateD(a))...)
 	}
 
-	pads = append(pads, keyedRect(1.6, 1.6, 0.35))
+	for x := -0.4; x <= 0.4; x += 0.8 {
+		for y := -0.4; y <= 0.4; y += 0.8 {
+			pads = append(pads, path.Rect(0.6, 0.6).Transform(geom.MoveXY(x, y)))
+		}
+	}
+
+	//pads = append(pads, keyedRect(1.6, 1.6, 0.35))
 
 	return &lib.Component{
 		Pads:   pads,
