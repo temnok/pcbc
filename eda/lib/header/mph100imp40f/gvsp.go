@@ -10,6 +10,6 @@ func Gvsp(n int) *lib.Component {
 
 	return &lib.Component{
 		Pads:   path.Circle(0.75).Clone(n, tenth, 0),
-		Placer: path.Rect(float64(n)*tenth+0.2, tenth+0.1),
+		Placer: path.Rect(float64(n)*tenth+0.3, tenth+0.3),
 	}
 }

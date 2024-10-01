@@ -14,7 +14,8 @@ func TestPCB(t *testing.T) {
 	board := path.RoundRect(35, 45, 2.5)
 	pcb.Cut(board)
 	pcb.StencilCut(board)
-	pcb.PlacerCut(board)
+
+	pcb.PlacerCut(path.RoundRect(42, 44, 2.5))
 
 	for y := -12.5; y <= 12.5; y += 12.5 {
 		pcbc.PY32F002A_QFN16(pcb, geom.MoveXY(0, y))

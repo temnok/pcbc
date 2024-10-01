@@ -14,6 +14,7 @@ type Shape struct {
 	Type     string `xml:"Type,attr"`
 	CutIndex string `xml:"CutIndex,attr"`
 	CutOrder string `xml:"CutOrder,attr,omitempty"`
+	Cr       string `xml:"Cr,attr,omitempty"`
 	W        string `xml:"W,attr,omitempty"`
 	H        string `xml:"H,attr,omitempty"`
 	Rx       string `xml:"Rx,attr,omitempty"`

@@ -183,14 +183,15 @@ func (pcb *PCB) technologicalParts() {
 	}
 
 	placerHolders := []XY{
-		{-15, 12.5},
-		{15, 12.5},
-		{-15, -12.5},
-		{15, -12.5},
+		{-19, 13},
+		{19, 13},
+		{-19, -13},
+		{19, -13},
 	}
 
 	holder := path.Circle(1.05)
 	holderStencil := path.Circle(1.1)
+	holderPlacer := path.Circle(1.65 * 0.5)
 	maskHole := path.Circle(0.65)
 
 	for i, h := range holders {
@@ -204,7 +205,7 @@ func (pcb *PCB) technologicalParts() {
 
 		pcb.PlacerHole(
 			holder.Transform(t),
-			holder.Transform(geom.Move(placerHolders[i])),
+			holderPlacer.Transform(geom.Move(placerHolders[i])),
 		)
 	}
 
@@ -220,5 +221,12 @@ func (pcb *PCB) technologicalParts() {
 
 	mark := path.Lines(key).Transform(t)
 	pcb.stencilMarks = append(pcb.stencilMarks, mark)
-	pcb.placerMarks = append(pcb.placerMarks, mark)
+
+	placerKey := path.Points{
+		{1, -1},
+		{0.6, 1},
+		{-1, -0.6},
+		{1, -1},
+	}
+	pcb.placerMarks = append(pcb.placerMarks, path.Lines(placerKey).Transform(geom.MoveXY(-19, 20)))
 }
