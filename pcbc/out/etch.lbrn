@@ -1,7 +1,7 @@
 <LightBurnProject>
 	<CutSetting type="Cut">
 		<index Value="2"></index>
-		<name Value="C02"></name>
+		<name Value="FR4 Cut"></name>
 		<priority Value="2"></priority>
 		<speed Value="100"></speed>
 		<numPasses Value=""></numPasses>
@@ -22,7 +22,7 @@
 	</CutSetting>
 	<CutSetting_Img type="Image">
 		<index Value="0"></index>
-		<name Value="C00"></name>
+		<name Value="Etch"></name>
 		<priority Value="0"></priority>
 		<speed Value="600"></speed>
 		<numPasses Value=""></numPasses>
@@ -43,7 +43,7 @@
 	</CutSetting_Img>
 	<CutSetting_Img type="Image">
 		<index Value="1"></index>
-		<name Value="C01"></name>
+		<name Value="Clean 1"></name>
 		<priority Value="1"></priority>
 		<speed Value="2000"></speed>
 		<numPasses Value=""></numPasses>
@@ -64,7 +64,7 @@
 	</CutSetting_Img>
 	<CutSetting_Img type="Image">
 		<index Value="3"></index>
-		<name Value="C03"></name>
+		<name Value="Clean 2"></name>
 		<priority Value="3"></priority>
 		<speed Value="2000"></speed>
 		<numPasses Value=""></numPasses>

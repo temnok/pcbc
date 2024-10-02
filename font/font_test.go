@@ -21,7 +21,7 @@ func TestFont_SavePng(t *testing.T) {
 			c := (i+2)*16 + j
 
 			transform := geom.ScaleK(scale).MoveXY(float64(j)*Width, float64(6-i))
-			brush.IterateContours(Paths[c], transform, bm.Set1)
+			brush.IterateContours(Paths[c].Transform(transform), bm.Set1)
 		}
 	}
 

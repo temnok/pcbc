@@ -4,7 +4,6 @@ import (
 	"github.com/stretchr/testify/assert"
 	"image/color"
 	"temnok/lab/bitmap"
-	"temnok/lab/geom"
 	"temnok/lab/path"
 	"temnok/lab/util"
 	"testing"
@@ -17,7 +16,7 @@ func TestBrushes(t *testing.T) {
 		circle := Circle(d)
 		circle.IterateRowsXY(50*d, 50, bm.Set1)
 
-		rect := FromContour(path.RoundRect(float64(d), float64(d)*2, 1+float64(d)/4), geom.Identity())
+		rect := FromContour(path.RoundRect(float64(d), float64(d)*2, 1+float64(d)/4))
 		rect.IterateRowsXY(50*d, 100, bm.Set1)
 	}
 

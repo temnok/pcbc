@@ -19,11 +19,10 @@ func (pcb *PCB) SaveEtch(filename string) error {
 
 	p := lbrn.LightBurnProject{
 		CutSettingImg: []lbrn.CutSetting{
-			// Etch
 			{
 				Type:     "Image",
+				Name:     Param{"Etch"},
 				Index:    Param{"0"},
-				Name:     Param{"C00"},
 				Priority: Param{"0"},
 
 				MaxPower:    Param{"20"},
@@ -38,11 +37,10 @@ func (pcb *PCB) SaveEtch(filename string) error {
 
 				Negative: Param{"1"},
 			},
-			// Clean Pass 1
 			{
 				Type:     "Image",
+				Name:     Param{"Clean 1"},
 				Index:    Param{"1"},
-				Name:     Param{"C01"},
 				Priority: Param{"1"},
 
 				MaxPower:    Param{"50"},
@@ -57,11 +55,10 @@ func (pcb *PCB) SaveEtch(filename string) error {
 
 				Negative: Param{"1"},
 			},
-			// Clean Pass 2
 			{
 				Type:     "Image",
+				Name:     Param{"Clean 2"},
 				Index:    Param{"3"},
-				Name:     Param{"C03"},
 				Priority: Param{"3"},
 
 				MaxPower:    Param{"50"},
@@ -81,8 +78,8 @@ func (pcb *PCB) SaveEtch(filename string) error {
 		CutSetting: []lbrn.CutSetting{
 			{
 				Type:     "Cut",
+				Name:     Param{"FR4 Cut"},
 				Index:    Param{"2"},
-				Name:     Param{"C02"},
 				Priority: Param{"2"},
 
 				Speed:        Param{"100"},

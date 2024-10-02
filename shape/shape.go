@@ -1,7 +1,6 @@
 package shape
 
 import (
-	"temnok/lab/geom"
 	"temnok/lab/path"
 )
 
@@ -12,9 +11,9 @@ type Shape struct {
 	lower, upper []row
 }
 
-func FromContour(contour path.Path, transform geom.Transform) *Shape {
+func FromContour(contour path.Path) *Shape {
 	shape := new(Shape)
-	path.Path(contour).Transform(transform).Visit(shape.AddPoint)
+	contour.Visit(shape.AddPoint)
 	return shape
 }
 
@@ -61,24 +60,24 @@ func (s *Shape) IterateRowsXY(x0, y0 int, iterator func(x0, x1, y int)) {
 	}
 }
 
-func (s *Shape) IterateContour(contour path.Path, transform geom.Transform, iterator func(x0, x1, y int)) {
-	contour.Transform(transform).Visit(func(x, y int) {
+func (s *Shape) IterateContour(contour path.Path, iterator func(x0, x1, y int)) {
+	contour.Visit(func(x, y int) {
 		s.IterateRowsXY(x, y, iterator)
 	})
 }
 
-func (s *Shape) IterateContours(contours path.Paths, transform geom.Transform, iterator func(x0, x1, y int)) {
+func (s *Shape) IterateContours(contours path.Paths, iterator func(x0, x1, y int)) {
 	for _, contour := range contours {
-		s.IterateContour(contour, transform, iterator)
+		s.IterateContour(contour, iterator)
 	}
 }
 
-func IterateContourRows(contour path.Path, transform geom.Transform, iterator func(x0, x1, y int)) {
-	FromContour(contour, transform).IterateRows(iterator)
+func IterateContourRows(contour path.Path, iterator func(x0, x1, y int)) {
+	FromContour(contour).IterateRows(iterator)
 }
 
-func IterateContoursRows(contours path.Paths, transform geom.Transform, iterator func(x0, x1, y int)) {
+func IterateContoursRows(contours path.Paths, iterator func(x0, x1, y int)) {
 	for _, contour := range contours {
-		IterateContourRows(contour, transform, iterator)
+		IterateContourRows(contour, iterator)
 	}
 }

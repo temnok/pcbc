@@ -26,14 +26,24 @@ type Component struct {
 	// Mask: solid mark strokes
 	Marks path.Strokes
 
-	// Mask: solid cut strokes; base cuts without tabs
-	ExtraMaskHoles path.Paths
-
+	// FR4: cuts with tabs
+	// Mask: dotted cut strokes
 	// Stencil: cuts with tabs
-	ExtraStencilCuts path.Paths
+	GlobalCuts path.Paths
 
+	// FR4: cuts without tabs
+	// Mask: solid cut strokes
 	// Stencil: cuts without tabs
-	ExtraStencilHoles path.Paths
+	GlobalHoles path.Paths
+
+	// FR4: copper
+	// Mask: solid mark strokes
+	// Stencil: solid mark strokes
+	GlobalMarks path.Strokes
+
+	// Mask: extra-wide solid cut strokes
+	// Mask: base cuts without tabs
+	MaskBaseHoles path.Paths
 }
 
 // Merge combines two components into one without changing the originals.
@@ -45,9 +55,11 @@ func (c *Component) Merge(d *Component) *Component {
 		Tracks: c.Tracks.Merge(d.Tracks),
 		Marks:  c.Marks.Merge(d.Marks),
 
-		ExtraMaskHoles:    c.ExtraMaskHoles.Merge(d.ExtraMaskHoles),
-		ExtraStencilCuts:  c.ExtraStencilCuts.Merge(d.ExtraStencilCuts),
-		ExtraStencilHoles: c.ExtraStencilHoles.Merge(d.ExtraStencilHoles),
+		GlobalCuts:  c.GlobalCuts.Merge(d.GlobalCuts),
+		GlobalHoles: c.GlobalHoles.Merge(d.GlobalHoles),
+		GlobalMarks: c.GlobalMarks.Merge(d.GlobalMarks),
+
+		MaskBaseHoles: c.MaskBaseHoles.Merge(d.MaskBaseHoles),
 	}
 }
 
@@ -60,8 +72,6 @@ func (c *Component) Transform(t geom.Transform) *Component {
 		Tracks: c.Tracks.Transform(t),
 		Marks:  c.Marks.Transform(t),
 
-		ExtraMaskHoles:    c.ExtraMaskHoles.Transform(t),
-		ExtraStencilCuts:  c.ExtraStencilCuts.Transform(t),
-		ExtraStencilHoles: c.ExtraStencilHoles.Transform(t),
+		MaskBaseHoles: c.MaskBaseHoles.Transform(t),
 	}
 }

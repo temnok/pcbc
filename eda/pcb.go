@@ -76,15 +76,15 @@ func (pcb *PCB) StencilHole(hole ...Path) {
 func (pcb *PCB) HoleNoStencil(hole Path) {
 	pcb.holes = append(pcb.holes, hole)
 
-	shape.IterateContourRows(hole, pcb.bitmapTransform(), pcb.copper.Set0)
+	shape.IterateContourRows(hole.Transform(pcb.bitmapTransform()), pcb.copper.Set0)
 
 	brush := shape.Circle(int(0.2 * pcb.resolution))
-	brush.IterateContour(hole, pcb.bitmapTransform(), pcb.copper.Set0)
+	brush.IterateContour(hole.Transform(pcb.bitmapTransform()), pcb.copper.Set0)
 }
 
 func (pcb *PCB) Track(points []XY) {
 	brush := shape.Circle(int(pcb.trackWidth * pcb.resolution))
-	brush.IterateContour(path.Lines(points), pcb.bitmapTransform(), pcb.copper.Set1)
+	brush.IterateContour(path.Lines(points).Transform(pcb.bitmapTransform()), pcb.copper.Set1)
 }
 
 func (pcb *PCB) Component(c *lib.Component) {
@@ -97,7 +97,7 @@ func (pcb *PCB) Pad(padContours ...Path) {
 }
 
 func (pcb *PCB) PadNoStencil(padContours ...Path) {
-	shape.IterateContoursRows(padContours, pcb.bitmapTransform(), pcb.copper.Set1)
+	shape.IterateContoursRows(Paths(padContours).Transform(pcb.bitmapTransform()), pcb.copper.Set1)
 	pcb.MaskPad(padContours...)
 }
 
@@ -107,7 +107,7 @@ func (pcb *PCB) MaskPad(padContours ...Path) {
 
 func (pcb *PCB) MaskContour(w float64, contour ...Path) {
 	brush := shape.Circle(int(w * pcb.resolution))
-	brush.IterateContours(contour, pcb.bitmapTransform(), pcb.mask.Set1)
+	brush.IterateContours(Paths(contour).Transform(pcb.bitmapTransform()), pcb.mask.Set1)
 }
 
 func (pcb *PCB) MaskHole(contour Path) {
@@ -117,7 +117,7 @@ func (pcb *PCB) MaskHole(contour Path) {
 
 func (pcb *PCB) SilkContour(w float64, contour Path) {
 	brush := shape.Circle(int(w * pcb.resolution))
-	brush.IterateContour(contour, pcb.bitmapTransform(), pcb.silk.Set1)
+	brush.IterateContour(contour.Transform(pcb.bitmapTransform()), pcb.silk.Set1)
 }
 
 func (pcb *PCB) SilkText(t geom.Transform, text string) {
@@ -125,7 +125,7 @@ func (pcb *PCB) SilkText(t geom.Transform, text string) {
 	brush := shape.Circle(int(font.Bold * scale * pcb.resolution))
 
 	t1 := pcb.bitmapTransform().Multiply(t)
-	brush.IterateContours(font.StringPaths(text, font.AlignCenter), t1, pcb.silk.Set1)
+	brush.IterateContours(font.StringPaths(text, font.AlignCenter).Transform(t1), pcb.silk.Set1)
 }
 
 func (pcb *PCB) SaveFiles(path string) error {
