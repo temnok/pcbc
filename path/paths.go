@@ -5,6 +5,15 @@ import "temnok/lab/geom"
 // Paths represent a sequence of paths.
 type Paths []Path
 
+func (paths Paths) Merge(others Paths) Paths {
+	res := make(Paths, 0, len(paths)+len(others))
+
+	res = append(res, paths...)
+	res = append(res, others...)
+
+	return res
+}
+
 // Transform returns list of transformed paths.
 func (paths Paths) Transform(transform geom.Transform) Paths {
 	res := make(Paths, len(paths))
