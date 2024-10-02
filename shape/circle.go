@@ -1,10 +1,10 @@
 package shape
 
 func Circle(d int) *Shape {
-	shape := new(Shape)
+	builder := new(Builder)
 
 	if d <= 0 {
-		return shape
+		return builder.Build()
 	}
 
 	off := (d + 1) % 2
@@ -15,11 +15,11 @@ func Circle(d int) *Shape {
 			x++
 		}
 
-		shape.AddPoint(-x-off, -y-off)
-		shape.AddPoint(x, -y-off)
-		shape.AddPoint(-x-off, y)
-		shape.AddPoint(x, y)
+		builder.AddPoint(-x-off, -y-off)
+		builder.AddPoint(x, -y-off)
+		builder.AddPoint(-x-off, y)
+		builder.AddPoint(x, y)
 	}
 
-	return shape
+	return builder.Build()
 }
