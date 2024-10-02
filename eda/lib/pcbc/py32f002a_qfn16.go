@@ -83,7 +83,5 @@ func PY32F002A_QFN16(pcb *eda.PCB, t geom.Transform) {
 		pcb.HoleNoStencil(path.Circle(0.9).Transform(t))
 
 		pcb.StencilHole(path.Pie(6, 1.0, 1.3, 10*geom.Degree).Transform(t)...)
-
-		pcb.PlacerHole(outC)
 	}
 }

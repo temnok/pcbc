@@ -25,8 +25,7 @@ func QFN16G() *lib.Component {
 	//pads = append(pads, keyedRect(1.6, 1.6, 0.35))
 
 	return &lib.Component{
-		Pads:   pads,
-		Placer: path.Rect(3.1, 3.1),
+		Pads: pads,
 	}
 }
 

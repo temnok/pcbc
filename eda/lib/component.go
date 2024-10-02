@@ -6,13 +6,11 @@ import (
 )
 
 type Component struct {
-	Pads   path.Paths
-	Placer path.Path
+	Pads path.Paths
 }
 
 func (c *Component) Transform(t geom.Transform) *Component {
 	return &Component{
-		Pads:   c.Pads.Transform(t),
-		Placer: c.Placer.Transform(t),
+		Pads: c.Pads.Transform(t),
 	}
 }

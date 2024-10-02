@@ -5,7 +5,6 @@
 * Etch
 * Mask
 * Stencil
-* Placer
 
 ### Example Overview
 

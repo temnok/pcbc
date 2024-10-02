@@ -25,7 +25,6 @@ type PCB struct {
 	cuts, holes                             Paths
 	maskHoles                               Paths
 	stencilCuts, stencilHoles, stencilMarks Paths
-	placerCuts, placerHoles, placerMarks    Paths
 
 	copper, mask, silk, stencil *bitmap.Bitmap
 }
@@ -65,14 +64,6 @@ func (pcb *PCB) StencilCut(contours ...Path) {
 	pcb.stencilCuts = append(pcb.stencilCuts, contours...)
 }
 
-func (pcb *PCB) PlacerCut(contours ...Path) {
-	pcb.placerCuts = append(pcb.placerCuts, contours...)
-}
-
-func (pcb *PCB) PlacerHole(contours ...Path) {
-	pcb.placerHoles = append(pcb.placerHoles, contours...)
-}
-
 func (pcb *PCB) Hole(hole Path) {
 	pcb.HoleNoStencil(hole)
 	pcb.StencilHole(hole)
@@ -98,7 +89,6 @@ func (pcb *PCB) Track(points []XY) {
 
 func (pcb *PCB) Component(c *lib.Component) {
 	pcb.Pad(c.Pads...)
-	pcb.PlacerHole(c.Placer)
 }
 
 func (pcb *PCB) Pad(padContours ...Path) {
@@ -153,10 +143,6 @@ func (pcb *PCB) SaveFiles(path string) error {
 		return err
 	}
 
-	if err := pcb.SavePlacer(path + "placer.lbrn"); err != nil {
-		return err
-	}
-
 	image := bitmap.NewBitmapsImage(
 		[]*bitmap.Bitmap{pcb.copper, pcb.mask, pcb.silk, pcb.stencil},
 		[][2]color.Color{
@@ -182,19 +168,11 @@ func (pcb *PCB) technologicalParts() {
 		{15, -20},
 	}
 
-	placerHolders := []XY{
-		{-19, 13},
-		{19, 13},
-		{-19, -13},
-		{19, -13},
-	}
-
 	holder := path.Circle(1.05)
 	holderStencil := path.Circle(1.1)
-	holderPlacer := path.Circle(1.65 * 0.5)
 	maskHole := path.Circle(0.65)
 
-	for i, h := range holders {
+	for _, h := range holders {
 		t := geom.Move(h)
 
 		pcb.HoleNoStencil(holder.Transform(t))
@@ -202,11 +180,6 @@ func (pcb *PCB) technologicalParts() {
 		pcb.MaskPad(holder.Transform(t))
 
 		pcb.MaskHole(maskHole.Transform(t))
-
-		pcb.PlacerHole(
-			holder.Transform(t),
-			holderPlacer.Transform(geom.Move(placerHolders[i])),
-		)
 	}
 
 	key := path.Points{
@@ -221,12 +194,4 @@ func (pcb *PCB) technologicalParts() {
 
 	mark := path.Lines(key).Transform(t)
 	pcb.stencilMarks = append(pcb.stencilMarks, mark)
-
-	placerKey := path.Points{
-		{1, -1},
-		{0.6, 1},
-		{-1, -0.6},
-		{1, -1},
-	}
-	pcb.placerMarks = append(pcb.placerMarks, path.Lines(placerKey).Transform(geom.MoveXY(-19, 20)))
 }
