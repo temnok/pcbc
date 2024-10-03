@@ -5,11 +5,13 @@ import "temnok/lab/geom"
 // Paths represent a sequence of paths.
 type Paths []Path
 
-func (paths Paths) Merge(others Paths) Paths {
+func (paths Paths) Merge(others ...Paths) Paths {
 	res := make(Paths, 0, len(paths)+len(others))
 
 	res = append(res, paths...)
-	res = append(res, others...)
+	for _, other := range others {
+		res = append(res, other...)
+	}
 
 	return res
 }

@@ -8,11 +8,13 @@ import (
 // Strokes are Paths with added thickness (brush diameter) that serves as a Paths group key.
 type Strokes map[float64]Paths
 
-func (strokes Strokes) Merge(other Strokes) Strokes {
+func (strokes Strokes) Merge(others ...Strokes) Strokes {
 	res := Strokes{}
 
 	res.Add(strokes)
-	res.Add(other)
+	for _, other := range others {
+		res.Add(other)
+	}
 
 	return res
 }

@@ -88,12 +88,44 @@ func (pcb *PCB) Track(points []XY) {
 }
 
 func (pcb *PCB) Component(c *lib.Component) {
-	pcb.Pad(c.Pads...)
+	brush1 := shape.Circle(int(0.1 * pcb.resolution))
+	brush2 := shape.Circle(int(0.2 * pcb.resolution))
 
+	// Cuts
+	pcb.cuts = append(pcb.cuts, c.Cuts...)
+	c.Cuts.Transform(pcb.bitmapTransform()).Jump(int(0.2*pcb.resolution), func(x, y int) {
+		brush1.IterateRowsXY(x, y, pcb.mask.Set1)
+	})
+
+	// Pads
+	shape.IterateContoursRows(c.Pads.Transform(pcb.bitmapTransform()), pcb.copper.Set1)
+	pcb.stencilHoles = append(pcb.stencilHoles, c.Pads...)
+
+	// Tracks
 	for brushW, tracks := range c.Tracks {
+		if brushW == 0 {
+			brushW = pcb.trackWidth
+		}
 		brush := shape.Circle(int(brushW * pcb.resolution))
 		brush.IterateContours(tracks.Transform(pcb.bitmapTransform()), pcb.copper.Set1)
 	}
+
+	// Openings
+	brush1.IterateContours(c.Openings.Transform(pcb.bitmapTransform()), pcb.mask.Set1)
+
+	// Marks
+	for brushW, marks := range c.Marks {
+		if brushW == 0 {
+			brushW = font.Bold
+		}
+		brush := shape.Circle(int(brushW * pcb.resolution))
+		brush.IterateContours(marks.Transform(pcb.bitmapTransform()), pcb.silk.Set1)
+	}
+
+	// Holes
+	pcb.holes = append(pcb.holes, c.Holes...)
+	shape.IterateContoursRows(c.Holes.Transform(pcb.bitmapTransform()), pcb.copper.Set0)
+	brush2.IterateContours(c.Holes.Transform(pcb.bitmapTransform()), pcb.copper.Set0)
 }
 
 func (pcb *PCB) Pad(padContours ...Path) {

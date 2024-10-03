@@ -3,9 +3,20 @@ package eda
 import (
 	"math"
 	"temnok/lab/geom"
+	"temnok/lab/path"
 )
 
-type Track []XY
+type Track path.Points
+
+func TrackPaths(lines ...Track) Paths {
+	res := make(Paths, len(lines))
+
+	for i, l := range lines {
+		res[i] = path.Lines(path.Points(l))
+	}
+
+	return res
+}
 
 func (track Track) Transform(t geom.Transform) Track {
 	return Track(Path(track).Transform(t))

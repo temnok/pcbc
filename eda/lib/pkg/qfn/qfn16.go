@@ -27,15 +27,9 @@ func QFN16G() *lib.Component {
 		}
 	}
 
-	//pads = append(pads, keyedRect(1.6, 1.6, 0.35))
-
 	return &lib.Component{
-		Pads:   pads,
-		Tracks: path.Strokes{0.2: tracks},
+		Pads:     pads,
+		Tracks:   path.Strokes{0.2: tracks},
+		Openings: pads,
 	}
-}
-
-func keyedRect(w, h, k float64) []geom.XY {
-	x, y := w/2, h/2
-	return path.Lines([]geom.XY{{-x + k, y}, {x, y}, {x, -y}, {-x, -y}, {-x, y - k}, {-x + k, y}})
 }

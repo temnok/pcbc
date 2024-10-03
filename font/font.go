@@ -145,6 +145,12 @@ var data = [][][]byte{
 
 var Paths = [256]path.Paths{}
 
+func CenterBold(str string) path.Strokes {
+	return path.Strokes{
+		Bold: StringPaths(str, AlignCenter),
+	}
+}
+
 func StringPaths(str string, alignment float64) path.Paths {
 	var paths path.Paths
 
