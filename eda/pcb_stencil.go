@@ -78,9 +78,9 @@ func (pcb *PCB) SaveStencil(filename string) error {
 	}
 
 	for _, hole := range pcb.stencilHoles {
-		resizedHole := hole.Resize(-0.1)
-		p.Shape = append(p.Shape, lbrn.NewPath(1, lbrnCenter, resizedHole))
-		brush.IterateContour(resizedHole.Transform(pcb.bitmapTransform()), pcb.stencil.Set1)
+		//resizedHole := hole.Resize(-0.1)
+		p.Shape = append(p.Shape, lbrn.NewPath(1, lbrnCenter, hole))
+		brush.IterateContour(hole.Transform(pcb.bitmapTransform()), pcb.stencil.Set1)
 	}
 
 	for _, cut := range pcb.stencilCuts {

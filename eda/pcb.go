@@ -89,6 +89,11 @@ func (pcb *PCB) Track(points []XY) {
 
 func (pcb *PCB) Component(c *lib.Component) {
 	pcb.Pad(c.Pads...)
+
+	for brushW, tracks := range c.Tracks {
+		brush := shape.Circle(int(brushW * pcb.resolution))
+		brush.IterateContours(tracks.Transform(pcb.bitmapTransform()), pcb.copper.Set1)
+	}
 }
 
 func (pcb *PCB) Pad(padContours ...Path) {

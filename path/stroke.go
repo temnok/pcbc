@@ -35,7 +35,7 @@ func (strokes Strokes) Transform(t geom.Transform) Strokes {
 	res := Strokes{}
 
 	for brushD, paths := range strokes {
-		scale := min(math.Sqrt(t.I.X*t.I.X+t.I.Y*t.I.Y) + math.Sqrt(t.J.X*t.J.X+t.J.Y*t.J.Y))
+		scale := min(math.Sqrt(t.I.X*t.I.X+t.I.Y*t.I.Y), math.Sqrt(t.J.X*t.J.X+t.J.Y*t.J.Y))
 
 		newBrushD := scale * brushD
 		res[newBrushD] = append(res[newBrushD], paths.Transform(t)...)
