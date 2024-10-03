@@ -33,15 +33,15 @@ type Component struct {
 }
 
 // Merge combines two components into one without changing the originals.
-func (c *Component) Merge(d *Component) *Component {
+func (c *Component) Merge(others *Component) *Component {
 	return &Component{
-		Cuts:          c.Cuts.Merge(d.Cuts),
-		Holes:         c.Holes.Merge(d.Holes),
-		Pads:          c.Pads.Merge(d.Pads),
-		Tracks:        c.Tracks.Merge(d.Tracks),
-		Openings:      c.Openings.Merge(d.Openings),
-		Marks:         c.Marks.Merge(d.Marks),
-		MaskBaseHoles: c.MaskBaseHoles.Merge(d.MaskBaseHoles),
+		Cuts:          c.Cuts.Merge(others.Cuts),
+		Holes:         c.Holes.Merge(others.Holes),
+		Pads:          c.Pads.Merge(others.Pads),
+		Tracks:        c.Tracks.Merge(others.Tracks),
+		Openings:      c.Openings.Merge(others.Openings),
+		Marks:         c.Marks.Merge(others.Marks),
+		MaskBaseHoles: c.MaskBaseHoles.Merge(others.MaskBaseHoles),
 	}
 }
 

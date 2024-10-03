@@ -29,9 +29,9 @@ func PY32F002A_QFN16() *lib.Component {
 
 	const tenth = 2.54
 
-	for _, dt := range []geom.Transform{geom.Identity(), geom.RotateD(180)} {
+	for _, t := range []geom.Transform{geom.Identity(), geom.RotateD(180)} {
 		header := mph100imp40f.Gvsp(9).Transform(geom.MoveXY(0, -4.25))
-		comp = comp.Merge(header.Transform(dt))
+		comp = comp.Merge(header.Transform(t))
 
 		pads := header.Pads.Centers()
 
@@ -44,8 +44,9 @@ func PY32F002A_QFN16() *lib.Component {
 			eda.Track{pads[5]}.Y(pins[5].Y).X(pins[5].X),
 			eda.Track{pads[6]}.Y(-2.5).X(pins[6].X).Y(pins[6].Y),
 			eda.Track{pads[7]}.Y(-2).X(pins[7].X).Y(pins[7].Y),
-			eda.Track{{0, 0}}.X(7.5).X(pads[8].X).Y(pads[8].Y),
-		).Transform(dt)...)
+			eda.Track{pads[8]}.Y(-2).X(4.5).Y(0).X(pins[16].X),
+			eda.Track{{7.5, 0}}.Y(-2),
+		).Transform(t)...)
 	}
 
 	pinNames := []string{
@@ -77,16 +78,7 @@ func PY32F002A_QFN16() *lib.Component {
 		)
 	}
 
-	for x := -7.50; x <= 7.5; x += 15 {
-		dt := geom.MoveXY(x, 0)
-		outC := path.Circle(2.6).Transform(dt)
-		inC := path.Circle(1.8).Transform(dt)
-		comp.Openings = append(comp.Openings, outC)
-		comp.Pads = append(comp.Pads, outC)
-		comp.Pads = append(comp.Pads, path.Pie(6, 1.0, 1.3, 10*geom.Degree).Transform(dt)...)
-		comp.Pads = append(comp.Pads, path.Pie(6, 1.0, 1.3, 10*geom.Degree).Transform(dt)...)
-		comp.Holes = append(comp.Holes, inC)
-	}
-
-	return comp
+	return comp.
+		Merge(MountHole().Transform(geom.MoveXY(-7.5, 0))).
+		Merge(MountHole().Transform(geom.MoveXY(7.5, 0)))
 }

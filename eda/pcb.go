@@ -2,7 +2,6 @@ package eda
 
 import (
 	"image/color"
-	"math"
 	"temnok/lab/bitmap"
 	"temnok/lab/eda/lib"
 	"temnok/lab/font"
@@ -64,11 +63,6 @@ func (pcb *PCB) StencilCut(contours ...Path) {
 	pcb.stencilCuts = append(pcb.stencilCuts, contours...)
 }
 
-func (pcb *PCB) Hole(hole Path) {
-	pcb.HoleNoStencil(hole)
-	pcb.StencilHole(hole)
-}
-
 func (pcb *PCB) StencilHole(hole ...Path) {
 	pcb.stencilHoles = append(pcb.stencilHoles, hole...)
 }
@@ -128,16 +122,6 @@ func (pcb *PCB) Component(c *lib.Component) {
 	brush2.IterateContours(c.Holes.Transform(pcb.bitmapTransform()), pcb.copper.Set0)
 }
 
-func (pcb *PCB) Pad(padContours ...Path) {
-	pcb.PadNoStencil(padContours...)
-	pcb.stencilHoles = append(pcb.stencilHoles, padContours...)
-}
-
-func (pcb *PCB) PadNoStencil(padContours ...Path) {
-	shape.IterateContoursRows(Paths(padContours).Transform(pcb.bitmapTransform()), pcb.copper.Set1)
-	pcb.MaskPad(padContours...)
-}
-
 func (pcb *PCB) MaskPad(padContours ...Path) {
 	pcb.MaskContour(0.1, padContours...)
 }
@@ -155,14 +139,6 @@ func (pcb *PCB) MaskHole(contour Path) {
 func (pcb *PCB) SilkContour(w float64, contour Path) {
 	brush := shape.Circle(int(w * pcb.resolution))
 	brush.IterateContour(contour.Transform(pcb.bitmapTransform()), pcb.silk.Set1)
-}
-
-func (pcb *PCB) SilkText(t geom.Transform, text string) {
-	scale := min(math.Sqrt(t.I.X*t.I.X+t.I.Y*t.I.Y), math.Sqrt(t.J.X*t.J.X+t.J.Y*t.J.Y))
-	brush := shape.Circle(int(font.Bold * scale * pcb.resolution))
-
-	t1 := pcb.bitmapTransform().Multiply(t)
-	brush.IterateContours(font.StringPaths(text, font.AlignCenter).Transform(t1), pcb.silk.Set1)
 }
 
 func (pcb *PCB) SaveFiles(path string) error {
