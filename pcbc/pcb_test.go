@@ -3,6 +3,7 @@ package pcbc
 import (
 	"github.com/stretchr/testify/assert"
 	"temnok/lab/eda"
+	"temnok/lab/eda/lib"
 	"temnok/lab/eda/lib/pcbc"
 	"temnok/lab/geom"
 	"temnok/lab/path"
@@ -15,10 +16,31 @@ func TestPCB(t *testing.T) {
 	pcb.Cut(board)
 	pcb.StencilCut(board)
 
-	for y := -12.5; y <= 12.5; y += 12.5 {
-		c := pcbc.PY32F002A_QFN16()
-		pcb.Component(c.Transform(geom.MoveXY(0, y)))
-	}
+	pcb.Component(&lib.Component{
+		Components: lib.Components{
+			{
+				Description:    "Copy 1",
+				Transformation: geom.MoveXY(0, -12.5),
+				Components: lib.Components{
+					pcbc.PY32F002A_QFN16(),
+				},
+			},
+			{
+				Description:    "Copy 2",
+				Transformation: geom.MoveXY(0, 0),
+				Components: lib.Components{
+					pcbc.PY32F002A_QFN16(),
+				},
+			},
+			{
+				Description:    "Copy 3",
+				Transformation: geom.MoveXY(0, 12.5),
+				Components: lib.Components{
+					pcbc.PY32F002A_QFN16(),
+				},
+			},
+		},
+	})
 
 	assert.NoError(t, pcb.SaveFiles("out/"))
 }

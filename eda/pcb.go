@@ -4,7 +4,6 @@ import (
 	"image/color"
 	"temnok/lab/bitmap"
 	"temnok/lab/eda/lib"
-	"temnok/lab/font"
 	"temnok/lab/geom"
 	"temnok/lab/path"
 	"temnok/lab/shape"
@@ -82,18 +81,29 @@ func (pcb *PCB) Track(points []XY) {
 }
 
 func (pcb *PCB) Component(c *lib.Component) {
+	pcb.component(c, geom.Identity())
+}
+
+func (pcb *PCB) component(c *lib.Component, t geom.Transform) {
+	if !c.Transformation.IsZero() {
+		t = t.Multiply(c.Transformation)
+	}
+	bt := pcb.bitmapTransform().Multiply(t)
+
 	brush1 := shape.Circle(int(0.1 * pcb.resolution))
 	brush2 := shape.Circle(int(0.2 * pcb.resolution))
 
 	// Cuts
-	pcb.cuts = append(pcb.cuts, c.Cuts...)
-	c.Cuts.Transform(pcb.bitmapTransform()).Jump(int(0.2*pcb.resolution), func(x, y int) {
-		brush1.IterateRowsXY(x, y, pcb.mask.Set1)
-	})
+	pcb.cuts = append(pcb.cuts, c.Cuts.Transform(t)...)
+	c.Cuts.Transform(bt).Jump(int(0.2*pcb.resolution),
+		func(x, y int) {
+			brush1.IterateRowsXY(x, y, pcb.mask.Set1)
+		},
+	)
 
 	// Pads
-	shape.IterateContoursRows(c.Pads.Transform(pcb.bitmapTransform()), pcb.copper.Set1)
-	pcb.stencilHoles = append(pcb.stencilHoles, c.Pads...)
+	shape.IterateContoursRows(c.Pads.Transform(bt), pcb.copper.Set1)
+	pcb.stencilHoles = append(pcb.stencilHoles, c.Pads.Transform(t)...)
 
 	// Tracks
 	for brushW, tracks := range c.Tracks {
@@ -101,25 +111,27 @@ func (pcb *PCB) Component(c *lib.Component) {
 			brushW = pcb.trackWidth
 		}
 		brush := shape.Circle(int(brushW * pcb.resolution))
-		brush.IterateContours(tracks.Transform(pcb.bitmapTransform()), pcb.copper.Set1)
+		brush.IterateContours(tracks.Transform(bt), pcb.copper.Set1)
 	}
 
 	// Openings
-	brush1.IterateContours(c.Openings.Transform(pcb.bitmapTransform()), pcb.mask.Set1)
+	brush1.IterateContours(c.Openings.Transform(bt), pcb.mask.Set1)
 
 	// Marks
 	for brushW, marks := range c.Marks {
-		if brushW == 0 {
-			brushW = font.Bold
-		}
 		brush := shape.Circle(int(brushW * pcb.resolution))
-		brush.IterateContours(marks.Transform(pcb.bitmapTransform()), pcb.silk.Set1)
+		brush.IterateContours(marks.Transform(bt), pcb.silk.Set1)
 	}
 
 	// Holes
-	pcb.holes = append(pcb.holes, c.Holes...)
-	shape.IterateContoursRows(c.Holes.Transform(pcb.bitmapTransform()), pcb.copper.Set0)
-	brush2.IterateContours(c.Holes.Transform(pcb.bitmapTransform()), pcb.copper.Set0)
+	pcb.holes = append(pcb.holes, c.Holes.Transform(t)...)
+	shape.IterateContoursRows(c.Holes.Transform(bt), pcb.copper.Set0)
+	brush2.IterateContours(c.Holes.Transform(bt), pcb.copper.Set0)
+
+	// Sub-components
+	for _, sub := range c.Components {
+		pcb.component(sub, t)
+	}
 }
 
 func (pcb *PCB) MaskPad(padContours ...Path) {

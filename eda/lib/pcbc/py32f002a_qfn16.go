@@ -1,6 +1,7 @@
 package pcbc
 
 import (
+	"fmt"
 	"temnok/lab/eda"
 	"temnok/lab/eda/lib"
 	"temnok/lab/eda/lib/header/mph100imp40f"
@@ -11,8 +12,40 @@ import (
 )
 
 func PY32F002A_QFN16() *lib.Component {
-	comp := &lib.Component{
-		Cuts: path.Paths{path.RoundRect(23.5, 11.5, 1)},
+	chipTransform := geom.RotateD(45)
+	chip := qfn.QFN16G()
+
+	board := &lib.Component{
+		Description: "PCBC PY32F002A QFN-16 board",
+
+		Components: lib.Components{
+			{
+				Description:    "Left mount hole",
+				Transformation: geom.MoveXY(-7.5, 0),
+				Components: lib.Components{
+					MountHole(),
+				},
+			},
+			{
+				Description:    "Right mount hole",
+				Transformation: geom.MoveXY(7.5, 0),
+				Components: lib.Components{
+					MountHole(),
+				},
+			},
+			{
+				Description:    "Chip",
+				Transformation: chipTransform,
+				Components: lib.Components{
+					chip,
+				},
+			},
+		},
+
+		Cuts: path.Paths{
+			path.RoundRect(23.5, 11.5, 1),
+		},
+
 		Marks: path.Strokes{}.Merge(
 			font.CenterBold("pc").Transform(geom.MoveXY(-10.6, 0.3).RotateD(45).ScaleK(1.25)),
 			font.CenterBold("bc").Transform(geom.MoveXY(-10, -0.3).RotateD(45).ScaleK(1.25)),
@@ -21,21 +54,29 @@ func PY32F002A_QFN16() *lib.Component {
 			font.CenterBold("PY32").Transform(geom.MoveXY(-4, 0).ScaleXY(1.3, 2.5)),
 			font.CenterBold("F002A").Transform(geom.MoveXY(4, 0).ScaleXY(1, 2.5)),
 		),
+
+		Tracks: path.Strokes{},
 	}
 
-	chip := qfn.QFN16G().Transform(geom.RotateD(45))
-	comp = comp.Merge(chip)
-	pins := chip.Pads.Centers()
+	pins := chip.Pads.Transform(chipTransform).Centers()
+	header := mph100imp40f.Gvsp(9)
 
-	const tenth = 2.54
+	for i, t := range []geom.Transform{geom.Identity(), geom.RotateD(180)} {
+		headerT := geom.MoveXY(0, -4.25)
 
-	for _, t := range []geom.Transform{geom.Identity(), geom.RotateD(180)} {
-		header := mph100imp40f.Gvsp(9).Transform(geom.MoveXY(0, -4.25))
-		comp = comp.Merge(header.Transform(t))
+		board.Components = append(board.Components,
+			&lib.Component{
+				Description:    fmt.Sprintf("Header %v", i+1),
+				Transformation: t.Multiply(headerT),
+				Components: lib.Components{
+					header,
+				},
+			},
+		)
 
-		pads := header.Pads.Centers()
+		pads := header.Pads.Transform(headerT).Centers()
 
-		comp.Tracks[0] = append(comp.Tracks[0], eda.TrackPaths(
+		board.Tracks[0] = append(board.Tracks[0], eda.TrackPaths(
 			eda.Track{pads[0]}.Y(-2).X(pins[0].X).Y(pins[0].Y),
 			eda.Track{pads[1]}.Y(-2.5).X(pins[1].X).Y(pins[1].Y),
 			eda.Track{pads[2]}.Y(-3).X(pins[2].X).Y(pins[2].Y),
@@ -71,14 +112,14 @@ func PY32F002A_QFN16() *lib.Component {
 		"PA3",
 	}
 
+	const tenth = 2.54
+
 	for i := 0; i < 9; i++ {
-		comp.Marks = comp.Marks.Merge(
+		board.Marks = board.Marks.Merge(
 			font.CenterBold(pinNames[i]).Transform(geom.MoveXY(tenth*float64(i-4), -2.4).ScaleXY(0.9, 1.2)),
 			font.CenterBold(pinNames[i+9]).Transform(geom.MoveXY(tenth*float64(i-4), 2.4).ScaleXY(0.9, 1.2)),
 		)
 	}
 
-	return comp.
-		Merge(MountHole().Transform(geom.MoveXY(-7.5, 0))).
-		Merge(MountHole().Transform(geom.MoveXY(7.5, 0)))
+	return board
 }

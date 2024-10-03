@@ -8,9 +8,10 @@ import (
 
 func MountHole() *lib.Component {
 	return &lib.Component{
-		Tracks:   path.Strokes{0.2: {path.Circle(2.7)}},
-		Openings: path.Paths{path.Circle(2.6)},
-		Pads:     path.Pie(6, 1.0, 1.3, 10*geom.Degree),
-		Holes:    path.Paths{path.Circle(1.8)},
+		Description: "PCBC mount hole",
+		Tracks:      path.Strokes{0.2: {path.Circle(2.7)}},
+		Openings:    path.Paths{path.Circle(2.6)},
+		Pads:        path.Pie(6, 1.0, 1.3, 10*geom.Degree),
+		Holes:       path.Paths{path.Circle(1.8)},
 	}
 }

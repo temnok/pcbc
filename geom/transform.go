@@ -4,6 +4,10 @@ type Transform struct {
 	I, J, K XY
 }
 
+func (a Transform) IsZero() bool {
+	return a == (Transform{})
+}
+
 func (a Transform) Move(p XY) Transform {
 	return a.Multiply(Move(p))
 }
