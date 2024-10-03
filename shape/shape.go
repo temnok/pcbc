@@ -13,9 +13,9 @@ type Shape struct {
 }
 
 func FromContour(contour path.Path) *Shape {
-	builder := new(Builder)
-	contour.Visit(builder.AddPoint)
-	return builder.Build()
+	builder := new(builder)
+	contour.Visit(builder.addPoint)
+	return builder.build()
 }
 
 func (s *Shape) IterateRows(iterator func(x0, x1, y int)) {

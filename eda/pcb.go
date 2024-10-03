@@ -168,9 +168,9 @@ func (pcb *PCB) technologicalParts() {
 		{15, -20},
 	}
 
-	holder := path.Circle(1.05)
-	holderStencil := path.Circle(1.1)
-	maskHole := path.Circle(0.65)
+	holder := path.Circle(2.1)
+	holderStencil := path.Circle(2.2)
+	maskHole := path.Circle(1.3)
 
 	for _, h := range holders {
 		t := geom.Move(h)

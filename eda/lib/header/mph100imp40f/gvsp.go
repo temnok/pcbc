@@ -9,6 +9,6 @@ func Gvsp(n int) *lib.Component {
 	const tenth = 2.54
 
 	return &lib.Component{
-		Pads: path.Circle(0.75).Clone(n, tenth, 0),
+		Pads: path.Circle(1.5).Clone(n, tenth, 0),
 	}
 }

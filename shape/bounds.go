@@ -10,7 +10,7 @@ type bounds struct {
 }
 
 func (b *bounds) getBounds() (int, int) {
-	return b.start - len(b.upper), b.start + len(b.lower)
+	return b.start - len(b.lower), b.start + len(b.upper)
 }
 
 func (b *bounds) getBound(i int) (int, int) {

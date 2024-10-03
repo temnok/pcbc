@@ -10,14 +10,17 @@ import (
 )
 
 func TestBrushes(t *testing.T) {
-	bm := bitmap.NewBitmap(1000, 200)
+	bm := bitmap.NewBitmap(1000, 300)
 
 	for d := 1; d < 20; d++ {
 		circle := Circle(d)
 		circle.IterateRowsXY(50*d, 50, bm.Set1)
 
+		circle = FromContour(path.Circle(float64(d)))
+		circle.IterateRowsXY(50*d, 100, bm.Set1)
+
 		rect := FromContour(path.RoundRect(float64(d), float64(d)*2, 1+float64(d)/4))
-		rect.IterateRowsXY(50*d, 100, bm.Set1)
+		rect.IterateRowsXY(50*d, 200, bm.Set1)
 	}
 
 	assert.NoError(t, util.SaveTmpPng("brush.png", bm.ToImage(color.Black, color.White)))

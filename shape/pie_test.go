@@ -20,5 +20,5 @@ func TestPie(t *testing.T) {
 		shape.IterateRowsXY(200, 200, bm.Set1)
 	}
 
-	assert.NoError(t, util.SaveTmpPng("pie.png", bm.ToImage(color.White, color.Black)))
+	assert.NoError(t, util.SaveTmpPng("pie.png", bm.ToImage(color.Black, color.White)))
 }

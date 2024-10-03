@@ -78,9 +78,9 @@ func PY32F002A_QFN16(pcb *eda.PCB, t geom.Transform) {
 	for x := -7.50; x <= 7.5; x += 15 {
 		t := t.MoveXY(x, 0)
 
-		outC := path.Circle(1.3).Transform(t)
+		outC := path.Circle(2.6).Transform(t)
 		pcb.PadNoStencil(outC)
-		pcb.HoleNoStencil(path.Circle(0.9).Transform(t))
+		pcb.HoleNoStencil(path.Circle(1.8).Transform(t))
 
 		pcb.StencilHole(path.Pie(6, 1.0, 1.3, 10*geom.Degree).Transform(t)...)
 	}

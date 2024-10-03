@@ -1,15 +1,15 @@
 package shape
 
-type Builder struct {
+type builder struct {
 	rows, cols bounds
 }
 
-func (b *Builder) AddPoint(x, y int) {
+func (b *builder) addPoint(x, y int) {
 	b.rows.addPoint(y, x)
 	b.cols.addPoint(x, y)
 }
 
-func (b *Builder) Build() *Shape {
+func (b *builder) build() *Shape {
 	s := &Shape{}
 
 	minY, maxY := b.rows.getBounds()
