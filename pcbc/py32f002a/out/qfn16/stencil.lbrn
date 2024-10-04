@@ -20,31 +20,6 @@
 		<angle Value=""></angle>
 		<negative Value=""></negative>
 	</CutSetting>
-	<CutSetting type="Scan">
-		<index Value="2"></index>
-		<name Value="Clean"></name>
-		<priority Value="2"></priority>
-		<speed Value="2000"></speed>
-		<numPasses Value=""></numPasses>
-		<globalRepeat Value=""></globalRepeat>
-		<maxPower Value="50"></maxPower>
-		<QPulseWidth Value="2"></QPulseWidth>
-		<frequency Value="280000"></frequency>
-		<interval Value="0.01"></interval>
-		<dpi Value=""></dpi>
-		<ditherMode Value=""></ditherMode>
-		<useDotCorrection Value=""></useDotCorrection>
-		<dotWidth Value=""></dotWidth>
-		<tabsEnabled Value=""></tabsEnabled>
-		<tabSize Value=""></tabSize>
-		<crossHatch Value="1"></crossHatch>
-		<angle Value=""></angle>
-		<negative Value=""></negative>
-	</CutSetting>
-	<Shape Type="Rect" CutIndex="1" Cr="0" W="36" H="46">
-		<XForm>1 0 0 1 55 55</XForm>
-		<Tabs></Tabs>
-	</Shape>
 	<Shape Type="Path" CutIndex="0">
 		<XForm>1 0 0 1 55 55</XForm>
 		<Tabs></Tabs>

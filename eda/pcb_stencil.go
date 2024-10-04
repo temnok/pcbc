@@ -20,23 +20,6 @@ func (pcb *PCB) SaveStencil(filename string) error {
 				QPulseWidth: Param{"200"},
 				Frequency:   Param{"20000"},
 			},
-			{
-				Type:     "Scan",
-				Name:     Param{"Clean"},
-				Index:    Param{"2"},
-				Priority: Param{"2"},
-
-				MaxPower:    Param{"50"},
-				QPulseWidth: Param{"2"},
-				Frequency:   Param{"280000"},
-
-				Speed:      Param{"2000"},
-				Interval:   Param{"0.01"},
-				CrossHatch: Param{"1"},
-			},
-		},
-		Shape: []*lbrn.Shape{
-			lbrn.NewRect(1, lbrnCenter, 36, 46, 0),
 		},
 	}
 
