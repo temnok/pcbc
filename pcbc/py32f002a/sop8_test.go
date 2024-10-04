@@ -18,19 +18,19 @@ func Test_SOP8(t *testing.T) {
 			{
 				Transform: geom.MoveXY(0, 9),
 				Components: lib.Components{
-					QFN16(),
+					QFN16,
 				},
 			},
 			{
 				Transform: geom.MoveXY(-6.5, -7),
 				Components: lib.Components{
-					SOP8(),
+					SOP8,
 				},
 			},
 			{
 				Transform: geom.MoveXY(6.5, -7),
 				Components: lib.Components{
-					SOP8(),
+					SOP8,
 				},
 			},
 		},

@@ -11,7 +11,9 @@ import (
 	"temnok/lab/pcbc"
 )
 
-func SOP8() *lib.Component {
+var SOP8 *lib.Component
+
+func init() {
 	chipTransform := geom.MoveXY(2.3, 0)
 	pins := sop.SOP8.Pads.Transform(chipTransform).Centers()
 
@@ -71,14 +73,14 @@ func SOP8() *lib.Component {
 		},
 
 		Cuts: path.Paths{
-			path.RoundRect(11, 15, 1),
+			path.RoundRect(10.75, 15, 1),
 		},
 
 		Marks: path.Strokes{}.Merge(
 			font.CenterBold("PY32").Transform(geom.MoveXY(-2.8, 2.4).ScaleXY(1.4, 2)),
 			font.CenterBold("F002A").Transform(geom.MoveXY(-2.8, -2.4).ScaleXY(1.2, 2)),
-			font.CenterBold("pc").Transform(geom.MoveXY(-4.8, 0.2).RotateD(45).ScaleK(0.8)),
-			font.CenterBold("bc").Transform(geom.MoveXY(-4.4, -0.2).RotateD(45).ScaleK(0.8)),
+			font.CenterBold("pc").Transform(geom.MoveXY(-4.7, 0.2).RotateD(45).ScaleK(0.8)),
+			font.CenterBold("bc").Transform(geom.MoveXY(-4.3, -0.2).RotateD(45).ScaleK(0.8)),
 			//font.CenterBold("TMNK").Transform(geom.MoveXY(4.7, 0.2).ScaleXY(0.5, 0.3)),
 			//font.CenterBold("TECH").Transform(geom.MoveXY(4.7, -0.2).ScaleXY(0.5, 0.3)),
 		),
@@ -110,5 +112,5 @@ func SOP8() *lib.Component {
 		)
 	}
 
-	return board
+	SOP8 = board
 }

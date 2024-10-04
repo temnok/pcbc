@@ -11,7 +11,9 @@ import (
 	"temnok/lab/pcbc"
 )
 
-func QFN16() *lib.Component {
+var QFN16 *lib.Component
+
+func init() {
 	chipTransform := geom.RotateD(45)
 	pins := qfn.QFN16G.Pads.Transform(chipTransform).Centers()
 
@@ -130,5 +132,5 @@ func QFN16() *lib.Component {
 		)
 	}
 
-	return board
+	QFN16 = board
 }

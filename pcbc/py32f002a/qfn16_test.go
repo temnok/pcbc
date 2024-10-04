@@ -19,21 +19,21 @@ func Test_QFN16(t *testing.T) {
 				Description: "Copy 1",
 				Transform:   geom.MoveXY(0, -12.5),
 				Components: lib.Components{
-					QFN16(),
+					QFN16,
 				},
 			},
 			{
 				Description: "Copy 2",
 				Transform:   geom.MoveXY(0, 0),
 				Components: lib.Components{
-					QFN16(),
+					QFN16,
 				},
 			},
 			{
 				Description: "Copy 3",
 				Transform:   geom.MoveXY(0, 12.5),
 				Components: lib.Components{
-					QFN16(),
+					QFN16,
 				},
 			},
 		},
