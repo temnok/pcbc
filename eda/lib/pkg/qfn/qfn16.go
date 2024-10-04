@@ -18,20 +18,22 @@ func init() {
 		pads = append(pads, col.Transform(geom.RotateD(a))...)
 	}
 
-	const g = 0.6
-	tracks := path.Paths{
-		path.Lines([]geom.XY{{-g, -g}, {g, -g}, {g, g}, {-g, g}, {-g, -g}}),
-	}
-
-	for x := -g; x <= g; x += g {
-		for y := -g; y <= g; y += g {
-			pads = append(pads, path.Rect(0.35, 0.35).Transform(geom.MoveXY(x, y)))
-		}
-	}
+	//const g = 0.6
+	//tracks := path.Paths{
+	//	path.Lines([]geom.XY{{-g, -g}, {g, -g}, {g, g}, {-g, g}, {-g, -g}}),
+	//}
+	//
+	//for x := -g; x <= g; x += g {
+	//	for y := -g; y <= g; y += g {
+	//		pads = append(pads, path.Rect(0.35, 0.35).Transform(geom.MoveXY(x, y)))
+	//	}
+	//}
+	//
+	pads = append(pads, path.Rect(1, 1))
 
 	QFN16G = &lib.Component{
-		Pads:     pads,
-		Tracks:   path.Strokes{0.2: tracks},
+		Pads: pads,
+		//Tracks:   path.Strokes{0.2: tracks},
 		Openings: pads,
 	}
 }

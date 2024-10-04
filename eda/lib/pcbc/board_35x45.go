@@ -7,8 +7,6 @@ import (
 )
 
 var (
-	board35x45contour = path.Paths{path.RoundRect(35, 45, 2.5)}
-
 	boardHoleContour = path.Paths{path.Circle(2.1)}
 
 	boardHolderHole = &lib.Component{
@@ -26,8 +24,7 @@ var (
 	})}.Transform(geom.MoveXY(-16.4, 21.4))
 
 	Board35x45 = &lib.Component{
-		Cuts:        board35x45contour,
-		StencilCuts: board35x45contour,
+		Cuts: path.Paths{path.RoundRect(35, 45, 2.5)},
 
 		Pads: boardKey,
 		Marks: path.Strokes{

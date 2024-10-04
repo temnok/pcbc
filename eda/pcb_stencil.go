@@ -22,22 +22,6 @@ func (pcb *PCB) SaveStencil(filename string) error {
 				Frequency:   Param{"20000"},
 			},
 			{
-				Type:     "Cut",
-				Name:     Param{"Cut"},
-				Index:    Param{"1"},
-				Priority: Param{"1"},
-
-				Speed:        Param{"400"},
-				GlobalRepeat: Param{"40"},
-
-				MaxPower:    Param{"90"},
-				QPulseWidth: Param{"200"},
-				Frequency:   Param{"20000"},
-
-				TabsEnabled: Param{"1"},
-				TabSize:     Param{"0.2"},
-			},
-			{
 				Type:     "Scan",
 				Name:     Param{"Clean"},
 				Index:    Param{"2"},
@@ -53,21 +37,14 @@ func (pcb *PCB) SaveStencil(filename string) error {
 			},
 		},
 		Shape: []*lbrn.Shape{
-			lbrn.NewRect(2, lbrnCenter, 36, 46, 0),
+			lbrn.NewRect(1, lbrnCenter, 36, 46, 0),
 		},
 	}
 
 	brush := shape.Circle(2)
-
 	for _, hole := range pcb.stencilHoles {
-		//resizedHole := hole.Resize(-0.1)
 		p.Shape = append(p.Shape, lbrn.NewPath(0, lbrnCenter, hole))
 		brush.IterateContour(hole.Transform(pcb.bitmapTransform()), pcb.stencil.Set1)
-	}
-
-	for _, cut := range pcb.stencilCuts {
-		p.Shape = append(p.Shape, lbrn.NewPathWithTabs(1, lbrnCenter, cut))
-		brush.IterateContour(cut.Transform(pcb.bitmapTransform()), pcb.stencil.Set1)
 	}
 
 	return p.SaveToFile(filename)

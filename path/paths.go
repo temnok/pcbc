@@ -51,3 +51,19 @@ func (paths Paths) Centers() Points {
 
 	return centers
 }
+
+func (paths Paths) Bounds() (lt, rb geom.XY) {
+	if len(paths) == 0 {
+		return
+	}
+
+	lt, rb = paths[0].Bounds()
+	for _, p := range paths[1:] {
+		a, b := p.Bounds()
+
+		lt.X, lt.Y = min(lt.X, a.X), min(lt.Y, a.Y)
+		rb.X, rb.Y = max(rb.X, b.X), max(rb.Y, b.Y)
+	}
+
+	return
+}

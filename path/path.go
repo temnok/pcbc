@@ -70,20 +70,20 @@ func (path Path) Clone(n int, dx, dy float64) Paths {
 }
 
 func (path Path) Center() geom.XY {
-	mi, ma := path.MinMax()
+	mi, ma := path.Bounds()
 
 	return geom.XY{(mi.X + ma.X) / 2, (mi.Y + ma.Y) / 2}
 }
 
-func (path Path) MinMax() (mi, ma geom.XY) {
+func (path Path) Bounds() (lt, rb geom.XY) {
 	if len(path) == 0 {
 		return
 	}
 
-	mi, ma = path[0], path[0]
+	lt, rb = path[0], path[0]
 	for _, p := range path[1:] {
-		mi.X, mi.Y = min(mi.X, p.X), min(mi.Y, p.Y)
-		ma.X, ma.Y = max(ma.X, p.X), max(ma.Y, p.Y)
+		lt.X, lt.Y = min(lt.X, p.X), min(lt.Y, p.Y)
+		rb.X, rb.Y = max(rb.X, p.X), max(rb.Y, p.Y)
 	}
 
 	return

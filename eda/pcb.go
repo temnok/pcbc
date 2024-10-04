@@ -69,9 +69,6 @@ func (pcb *PCB) component(c *lib.Component, t geom.Transform) {
 		},
 	)
 
-	// Stencil Cuts
-	pcb.stencilCuts = append(pcb.stencilCuts, c.StencilCuts.Transform(t)...)
-
 	// Pads
 	shape.IterateContoursRows(c.Pads.Transform(bt), pcb.copper.Set1)
 	pcb.stencilHoles = append(pcb.stencilHoles, c.Pads.Transform(t)...)
