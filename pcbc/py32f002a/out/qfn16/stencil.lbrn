@@ -3,9 +3,9 @@
 		<index Value="0"></index>
 		<name Value="Apertures"></name>
 		<priority Value="0"></priority>
-		<speed Value="400"></speed>
+		<speed Value="200"></speed>
 		<numPasses Value=""></numPasses>
-		<globalRepeat Value="40"></globalRepeat>
+		<globalRepeat Value="20"></globalRepeat>
 		<maxPower Value="90"></maxPower>
 		<QPulseWidth Value="200"></QPulseWidth>
 		<frequency Value="20000"></frequency>

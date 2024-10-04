@@ -1,4 +1,4 @@
-package pcbc
+package py32f002a
 
 import (
 	"temnok/lab/eda"
@@ -8,21 +8,22 @@ import (
 	"temnok/lab/font"
 	"temnok/lab/geom"
 	"temnok/lab/path"
+	"temnok/lab/pcbc"
 )
 
-func PY32F002A_QFN16() *lib.Component {
+func QFN16() *lib.Component {
 	chipTransform := geom.RotateD(45)
 	pins := qfn.QFN16G.Pads.Transform(chipTransform).Centers()
 
 	headerTransform := geom.MoveXY(0, -4.25)
-	pads := mph100imp40f.G_V_SP_9.Pads.Transform(headerTransform).Centers()
+	pads := mph100imp40f.G_V_SP_x9.Pads.Transform(headerTransform).Centers()
 
 	headerWithTracks := &lib.Component{
 		Components: lib.Components{
 			{
 				Transform: headerTransform,
 				Components: lib.Components{
-					mph100imp40f.G_V_SP_9,
+					mph100imp40f.G_V_SP_x9,
 				},
 			},
 		},
@@ -70,14 +71,14 @@ func PY32F002A_QFN16() *lib.Component {
 				Description: "Left mount hole",
 				Transform:   geom.MoveXY(-7.5, 0),
 				Components: lib.Components{
-					MountHole,
+					pcbc.MountHole,
 				},
 			},
 			{
 				Description: "Right mount hole",
 				Transform:   geom.MoveXY(7.5, 0),
 				Components: lib.Components{
-					MountHole,
+					pcbc.MountHole,
 				},
 			},
 		},

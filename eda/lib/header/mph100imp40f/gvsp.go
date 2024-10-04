@@ -5,7 +5,10 @@ import (
 	"temnok/lab/path"
 )
 
-var G_V_SP_9 = G_V_SP(9)
+var (
+	G_V_SP_x4 = G_V_SP(4)
+	G_V_SP_x9 = G_V_SP(9)
+)
 
 func G_V_SP(n int) *lib.Component {
 	const tenth = 2.54
