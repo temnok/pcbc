@@ -20,9 +20,9 @@ type PCB struct {
 	width, height, resolution float64
 	trackWidth                float64
 
-	cuts, holes                             Paths
-	maskHoles                               Paths
-	stencilCuts, stencilHoles, stencilMarks Paths
+	cuts, holes               Paths
+	maskHoles                 Paths
+	stencilCuts, stencilHoles Paths
 
 	copper, mask, silk, stencil *bitmap.Bitmap
 }
@@ -48,38 +48,6 @@ func (pcb *PCB) bitmapTransform() geom.Transform {
 	return geom.ScaleK(pcb.resolution).MoveXY(pcb.width/2, pcb.height/2)
 }
 
-func (pcb *PCB) Cut(contour Path) {
-	pcb.cuts = append(pcb.cuts, contour)
-
-	brush := shape.Circle(int(0.1 * pcb.resolution))
-
-	contour.Transform(pcb.bitmapTransform()).Jump(int(0.2*pcb.resolution), func(x, y int) {
-		brush.IterateRowsXY(x, y, pcb.mask.Set1)
-	})
-}
-
-func (pcb *PCB) StencilCut(contours ...Path) {
-	pcb.stencilCuts = append(pcb.stencilCuts, contours...)
-}
-
-func (pcb *PCB) StencilHole(hole ...Path) {
-	pcb.stencilHoles = append(pcb.stencilHoles, hole...)
-}
-
-func (pcb *PCB) HoleNoStencil(hole Path) {
-	pcb.holes = append(pcb.holes, hole)
-
-	shape.IterateContourRows(hole.Transform(pcb.bitmapTransform()), pcb.copper.Set0)
-
-	brush := shape.Circle(int(0.2 * pcb.resolution))
-	brush.IterateContour(hole.Transform(pcb.bitmapTransform()), pcb.copper.Set0)
-}
-
-func (pcb *PCB) Track(points []XY) {
-	brush := shape.Circle(int(pcb.trackWidth * pcb.resolution))
-	brush.IterateContour(path.Lines(points).Transform(pcb.bitmapTransform()), pcb.copper.Set1)
-}
-
 func (pcb *PCB) Component(c *lib.Component) {
 	pcb.component(c, geom.Identity())
 }
@@ -100,6 +68,9 @@ func (pcb *PCB) component(c *lib.Component, t geom.Transform) {
 			brush1.IterateRowsXY(x, y, pcb.mask.Set1)
 		},
 	)
+
+	// Stencil Cuts
+	pcb.stencilCuts = append(pcb.stencilCuts, c.StencilCuts.Transform(t)...)
 
 	// Pads
 	shape.IterateContoursRows(c.Pads.Transform(bt), pcb.copper.Set1)
@@ -123,6 +94,10 @@ func (pcb *PCB) component(c *lib.Component, t geom.Transform) {
 		brush.IterateContours(marks.Transform(bt), pcb.silk.Set1)
 	}
 
+	// MaskBaseHoles
+	brush2.IterateContours(c.MaskBaseHoles.Transform(bt), pcb.mask.Set1)
+	pcb.maskHoles = append(pcb.maskHoles, c.MaskBaseHoles.Transform(t)...)
+
 	// Holes
 	pcb.holes = append(pcb.holes, c.Holes.Transform(t)...)
 	shape.IterateContoursRows(c.Holes.Transform(bt), pcb.copper.Set0)
@@ -134,28 +109,7 @@ func (pcb *PCB) component(c *lib.Component, t geom.Transform) {
 	}
 }
 
-func (pcb *PCB) MaskPad(padContours ...Path) {
-	pcb.MaskContour(0.1, padContours...)
-}
-
-func (pcb *PCB) MaskContour(w float64, contour ...Path) {
-	brush := shape.Circle(int(w * pcb.resolution))
-	brush.IterateContours(Paths(contour).Transform(pcb.bitmapTransform()), pcb.mask.Set1)
-}
-
-func (pcb *PCB) MaskHole(contour Path) {
-	pcb.MaskContour(0.2, contour)
-	pcb.maskHoles = append(pcb.maskHoles, contour)
-}
-
-func (pcb *PCB) SilkContour(w float64, contour Path) {
-	brush := shape.Circle(int(w * pcb.resolution))
-	brush.IterateContour(contour.Transform(pcb.bitmapTransform()), pcb.silk.Set1)
-}
-
 func (pcb *PCB) SaveFiles(path string) error {
-	pcb.technologicalParts()
-
 	if err := pcb.SaveEtch(path + "etch.lbrn"); err != nil {
 		return err
 	}
@@ -183,40 +137,4 @@ func (pcb *PCB) SaveFiles(path string) error {
 	}
 
 	return nil
-}
-
-func (pcb *PCB) technologicalParts() {
-	holders := []XY{
-		{-15, 20},
-		{15, 20},
-		{-15, -20},
-		{15, -20},
-	}
-
-	holder := path.Circle(2.1)
-	holderStencil := path.Circle(2.2)
-	maskHole := path.Circle(1.3)
-
-	for _, h := range holders {
-		t := geom.Move(h)
-
-		pcb.HoleNoStencil(holder.Transform(t))
-		pcb.StencilHole(holderStencil.Transform(t))
-		pcb.MaskPad(holder.Transform(t))
-
-		pcb.MaskHole(maskHole.Transform(t))
-	}
-
-	key := path.Points{
-		{0.5, -0.5},
-		{0.3, 0.5},
-		{-0.5, -0.3},
-		{0.5, -0.5},
-	}
-	t := geom.MoveXY(-16.4, 21.4)
-	pcb.Track(key.Transform(t))
-	pcb.SilkContour(0.2, path.Lines(key).Transform(t))
-
-	mark := path.Lines(key).Transform(t)
-	pcb.stencilMarks = append(pcb.stencilMarks, mark)
 }

@@ -35,6 +35,9 @@ type Component struct {
 	// Mask: solid mark strokes
 	Marks path.Strokes
 
+	// Stencil: cuts with tabs
+	StencilCuts path.Paths
+
 	// Mask: extra-wide solid cut strokes
 	// Mask: base cuts without tabs
 	MaskBaseHoles path.Paths

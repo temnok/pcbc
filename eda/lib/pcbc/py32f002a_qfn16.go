@@ -12,8 +12,7 @@ import (
 
 func PY32F002A_QFN16() *lib.Component {
 	chipTransform := geom.RotateD(45)
-	chip := qfn.QFN16G()
-	pins := chip.Pads.Transform(chipTransform).Centers()
+	pins := qfn.QFN16G.Pads.Transform(chipTransform).Centers()
 
 	headerTransform := geom.MoveXY(0, -4.25)
 	pads := mph100imp40f.G_V_SP_9.Pads.Transform(headerTransform).Centers()
@@ -51,12 +50,11 @@ func PY32F002A_QFN16() *lib.Component {
 				Description: "Chip",
 				Transform:   chipTransform,
 				Components: lib.Components{
-					chip,
+					qfn.QFN16G,
 				},
 			},
 			{
 				Description: "Bottom Header",
-				Transform:   geom.Identity(),
 				Components: lib.Components{
 					headerWithTracks,
 				},

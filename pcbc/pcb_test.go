@@ -6,18 +6,15 @@ import (
 	"temnok/lab/eda/lib"
 	"temnok/lab/eda/lib/pcbc"
 	"temnok/lab/geom"
-	"temnok/lab/path"
 	"testing"
 )
 
 func TestPCB(t *testing.T) {
 	pcb := eda.NewPCB(36, 46)
-	board := path.RoundRect(35, 45, 2.5)
-	pcb.Cut(board)
-	pcb.StencilCut(board)
 
 	pcb.Component(&lib.Component{
 		Components: lib.Components{
+			pcbc.Board35x45,
 			{
 				Description: "Copy 1",
 				Transform:   geom.MoveXY(0, -12.5),

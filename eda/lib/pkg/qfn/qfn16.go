@@ -6,7 +6,9 @@ import (
 	"temnok/lab/path"
 )
 
-func QFN16G() *lib.Component {
+var QFN16G *lib.Component
+
+func init() {
 	pad := path.RoundRect(0.6, 0.25, 0.12)
 
 	col := pad.Clone(4, 0, -0.5).Transform(geom.MoveXY(-1.5, 0))
@@ -27,7 +29,7 @@ func QFN16G() *lib.Component {
 		}
 	}
 
-	return &lib.Component{
+	QFN16G = &lib.Component{
 		Pads:     pads,
 		Tracks:   path.Strokes{0.2: tracks},
 		Openings: pads,

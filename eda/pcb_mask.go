@@ -15,8 +15,8 @@ func (pcb *PCB) SaveMask(filename string) error {
 		CutSettingImg: []lbrn.CutSetting{
 			{
 				Type:     "Image",
+				Name:     Param{"Silk"},
 				Index:    Param{"0"},
-				Name:     Param{"C00"},
 				Priority: Param{"0"},
 
 				MaxPower:    Param{"6"},
@@ -35,8 +35,8 @@ func (pcb *PCB) SaveMask(filename string) error {
 			},
 			{
 				Type:     "Image",
+				Name:     Param{"Mask 1"},
 				Index:    Param{"1"},
-				Name:     Param{"C01"},
 				Priority: Param{"1"},
 
 				MaxPower:    Param{"10"},
@@ -55,8 +55,8 @@ func (pcb *PCB) SaveMask(filename string) error {
 			},
 			{
 				Type:     "Image",
+				Name:     Param{"Mask 2"},
 				Index:    Param{"2"},
-				Name:     Param{"C02"},
 				Priority: Param{"2"},
 
 				MaxPower:    Param{"20"},
@@ -77,8 +77,8 @@ func (pcb *PCB) SaveMask(filename string) error {
 		CutSetting: []lbrn.CutSetting{
 			{
 				Type:     "Cut",
+				Name:     Param{"Mask Base Cut"},
 				Index:    Param{"3"},
-				Name:     Param{"C03"},
 				Priority: Param{"3"},
 
 				Speed:        Param{"200"},
