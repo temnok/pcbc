@@ -91,8 +91,8 @@ func PY32F002A_QFN16() *lib.Component {
 			font.CenterBold("bc").Transform(geom.MoveXY(-10, -0.3).RotateD(45).ScaleK(1.25)),
 			font.CenterBold("TMNK").Transform(geom.MoveXY(10.2, 0.3).ScaleXY(0.75, 0.5)),
 			font.CenterBold("TECH").Transform(geom.MoveXY(10.2, -0.3).ScaleXY(0.75, 0.5)),
-			font.CenterBold("PY32").Transform(geom.MoveXY(-4, 0).ScaleXY(1.3, 2.5)),
-			font.CenterBold("F002A").Transform(geom.MoveXY(4, 0).ScaleXY(1, 2.5)),
+			font.CenterBold("PY32").Transform(geom.MoveXY(-4.2, 0).ScaleXY(1.3, 2.5)),
+			font.CenterBold("F002A").Transform(geom.MoveXY(4.2, 0).ScaleXY(1, 2.5)),
 		),
 
 		Tracks: path.Strokes{},

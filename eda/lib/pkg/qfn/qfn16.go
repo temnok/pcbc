@@ -9,7 +9,7 @@ import (
 var QFN16G *lib.Component
 
 func init() {
-	pad := path.RoundRect(0.6, 0.25, 0.12)
+	pad := path.RoundRect(0.7, 0.25, 0.12)
 
 	col := pad.Clone(4, 0, -0.5).Transform(geom.MoveXY(-1.5, 0))
 
@@ -18,22 +18,16 @@ func init() {
 		pads = append(pads, col.Transform(geom.RotateD(a))...)
 	}
 
-	//const g = 0.6
-	//tracks := path.Paths{
-	//	path.Lines([]geom.XY{{-g, -g}, {g, -g}, {g, g}, {-g, g}, {-g, -g}}),
-	//}
-	//
-	//for x := -g; x <= g; x += g {
-	//	for y := -g; y <= g; y += g {
-	//		pads = append(pads, path.Rect(0.35, 0.35).Transform(geom.MoveXY(x, y)))
-	//	}
-	//}
-	//
-	pads = append(pads, path.Rect(1, 1))
+	pads = append(pads, path.Rect(1.2, 1.2))
 
 	QFN16G = &lib.Component{
-		Pads: pads,
-		//Tracks:   path.Strokes{0.2: tracks},
+		Pads:     pads,
 		Openings: pads,
+		Marks: path.Strokes{
+			0.1: path.Paths{
+				path.Rect(3.1, 3.1),
+				path.Circle(0.3).Transform(geom.MoveXY(-1.8, 1.4)),
+			},
+		},
 	}
 }
