@@ -19,22 +19,22 @@ func TestPCB(t *testing.T) {
 	pcb.Component(&lib.Component{
 		Components: lib.Components{
 			{
-				Description:    "Copy 1",
-				Transformation: geom.MoveXY(0, -12.5),
+				Description: "Copy 1",
+				Transform:   geom.MoveXY(0, -12.5),
 				Components: lib.Components{
 					pcbc.PY32F002A_QFN16(),
 				},
 			},
 			{
-				Description:    "Copy 2",
-				Transformation: geom.MoveXY(0, 0),
+				Description: "Copy 2",
+				Transform:   geom.MoveXY(0, 0),
 				Components: lib.Components{
 					pcbc.PY32F002A_QFN16(),
 				},
 			},
 			{
-				Description:    "Copy 3",
-				Transformation: geom.MoveXY(0, 12.5),
+				Description: "Copy 3",
+				Transform:   geom.MoveXY(0, 12.5),
 				Components: lib.Components{
 					pcbc.PY32F002A_QFN16(),
 				},

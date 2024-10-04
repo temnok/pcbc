@@ -9,9 +9,11 @@ type Components = []*Component
 
 // Component represents vector data for different PCB layers.
 type Component struct {
-	Description    string
-	Transformation geom.Transform
-	Components     []*Component
+	Description string
+
+	Transform geom.Transform
+
+	Components []*Component
 
 	// FR4: cuts with tabs
 	// Mask: dotted cut strokes

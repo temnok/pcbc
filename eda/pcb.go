@@ -85,8 +85,8 @@ func (pcb *PCB) Component(c *lib.Component) {
 }
 
 func (pcb *PCB) component(c *lib.Component, t geom.Transform) {
-	if !c.Transformation.IsZero() {
-		t = t.Multiply(c.Transformation)
+	if !c.Transform.IsZero() {
+		t = t.Multiply(c.Transform)
 	}
 	bt := pcb.bitmapTransform().Multiply(t)
 
