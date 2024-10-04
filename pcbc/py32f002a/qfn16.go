@@ -40,7 +40,7 @@ func init() {
 				eda.Track{pads[6]}.Y(-2.5).X(pins[6].X).Y(pins[6].Y),
 				eda.Track{pads[7]}.Y(-2).X(pins[7].X).Y(pins[7].Y),
 				eda.Track{pads[8]}.Y(-2).X(4.5).Y(0).X(pins[16].X),
-				eda.Track{{7.5, 0}}.Y(-2),
+				eda.Track{{7.5, 0}}.X(pins[16].X),
 			),
 		},
 	}
@@ -90,8 +90,7 @@ func init() {
 		},
 
 		Marks: path.Strokes{}.Merge(
-			font.CenterBold("pc").Transform(geom.MoveXY(-10.6, 0.3).RotateD(45).ScaleK(1.25)),
-			font.CenterBold("bc").Transform(geom.MoveXY(-10, -0.3).RotateD(45).ScaleK(1.25)),
+			pcbc.Logo.Transform(geom.MoveXY(-10.3, 0).ScaleK(1.25)),
 			font.CenterBold("TMNK").Transform(geom.MoveXY(10.2, 0.3).ScaleXY(0.75, 0.5)),
 			font.CenterBold("TECH").Transform(geom.MoveXY(10.2, -0.3).ScaleXY(0.75, 0.5)),
 			font.CenterBold("PY32").Transform(geom.MoveXY(-4.2, 0).ScaleXY(1.3, 2.5)),

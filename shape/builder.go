@@ -16,20 +16,22 @@ func (b *builder) build() *Shape {
 	for y := minY; y < maxY; y++ {
 		x0, x1 := b.rows.getBound(y)
 
-		for x := x0; x <= x1; x++ {
+		for x := x0; x <= x1+1; x++ {
 			y0, y1 := b.cols.getBound(x)
 
-			if y < y0 || y1 <= y {
-				if x0 < x {
-					s.rows = append(s.rows, row{
-						x0: int32(x0),
-						x1: int32(x),
-						y:  int32(y),
-					})
-				}
-
-				x0 = x + 1
+			if x <= x1 && y0 <= y && y < y1 {
+				continue
 			}
+
+			if x0 < x {
+				s.rows = append(s.rows, row{
+					x0: int32(x0),
+					x1: int32(x),
+					y:  int32(y),
+				})
+			}
+
+			x0 = x + 1
 		}
 	}
 
