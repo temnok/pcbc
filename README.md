@@ -8,10 +8,11 @@
 
 ### Example Overview
 
-* Red: copper
 * Dark green: FR4
+* Bright Green: FR4 cuts
+* Orange: copper
 * Blue: soldermask cuts
-* Light Green: soldermask marks (silkscreen)
+* Pale Green: soldermask marks (silkscreen)
 * White: stencil cuts
 
 ![PCB Design Overview](pcbc/out/overview.png)

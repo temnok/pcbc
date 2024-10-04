@@ -2,7 +2,6 @@ package eda
 
 import (
 	"temnok/lab/lbrn"
-	"temnok/lab/shape"
 )
 
 func (pcb *PCB) SaveStencil(filename string) error {
@@ -41,10 +40,8 @@ func (pcb *PCB) SaveStencil(filename string) error {
 		},
 	}
 
-	brush := shape.Circle(2)
-	for _, hole := range pcb.stencilHoles {
+	for _, hole := range pcb.apertures {
 		p.Shape = append(p.Shape, lbrn.NewPath(0, lbrnCenter, hole))
-		brush.IterateContour(hole.Transform(pcb.bitmapTransform()), pcb.stencil.Set1)
 	}
 
 	return p.SaveToFile(filename)

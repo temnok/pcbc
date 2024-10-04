@@ -96,7 +96,7 @@ func (pcb *PCB) SaveMask(filename string) error {
 		},
 	}
 
-	for _, cut := range pcb.maskHoles {
+	for _, cut := range pcb.openings {
 		p.Shape = append(p.Shape, lbrn.NewPath(3, lbrnCenter, cut))
 	}
 
