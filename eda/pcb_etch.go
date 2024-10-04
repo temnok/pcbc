@@ -51,7 +51,7 @@ func (pcb *PCB) SaveEtch(filename string) error {
 				Interval:         Param{"0.01"},
 				DPI:              Param{"2540"},
 				UseDotCorrection: Param{"1"},
-				DotWidth:         Param{"0.05"},
+				DotWidth:         Param{"0.15"},
 
 				Negative: Param{"1"},
 			},
@@ -69,7 +69,7 @@ func (pcb *PCB) SaveEtch(filename string) error {
 				Interval:         Param{"0.01"},
 				DPI:              Param{"2540"},
 				UseDotCorrection: Param{"1"},
-				DotWidth:         Param{"0.05"},
+				DotWidth:         Param{"0.15"},
 
 				Angle:    Param{"90"},
 				Negative: Param{"1"},
