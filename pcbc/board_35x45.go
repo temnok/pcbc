@@ -10,10 +10,9 @@ var (
 	boardHoleContour = path.Paths{path.Circle(2.1)}
 
 	boardHolderHole = &lib.Component{
-		Pads:          boardHoleContour,
-		Holes:         boardHoleContour,
-		Openings:      boardHoleContour,
-		MaskBaseHoles: path.Paths{path.Circle(1.3)},
+		Pads:     boardHoleContour,
+		Holes:    boardHoleContour,
+		Openings: boardHoleContour,
 	}
 
 	boardKey = path.Paths{path.Lines(path.Points{

@@ -92,10 +92,6 @@ func (pcb *PCB) component(c *lib.Component, t geom.Transform) {
 		brush.IterateContours(marks.Transform(bt), pcb.silk.Set1)
 	}
 
-	// MaskBaseHoles
-	brush2.IterateContours(c.MaskBaseHoles.Transform(bt), pcb.mask.Set1)
-	pcb.openings = append(pcb.openings, c.MaskBaseHoles.Transform(t)...)
-
 	// Holes
 	pcb.holes = append(pcb.holes, c.Holes.Transform(t)...)
 

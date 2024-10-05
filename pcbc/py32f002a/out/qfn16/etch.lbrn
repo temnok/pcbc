@@ -55,7 +55,7 @@
 		<dpi Value="2540"></dpi>
 		<ditherMode Value=""></ditherMode>
 		<useDotCorrection Value="1"></useDotCorrection>
-		<dotWidth Value="0.05"></dotWidth>
+		<dotWidth Value="0.15"></dotWidth>
 		<tabsEnabled Value=""></tabsEnabled>
 		<tabSize Value=""></tabSize>
 		<crossHatch Value=""></crossHatch>
@@ -76,7 +76,7 @@
 		<dpi Value="2540"></dpi>
 		<ditherMode Value=""></ditherMode>
 		<useDotCorrection Value="1"></useDotCorrection>
-		<dotWidth Value="0.05"></dotWidth>
+		<dotWidth Value="0.15"></dotWidth>
 		<tabsEnabled Value=""></tabsEnabled>
 		<tabSize Value=""></tabSize>
 		<crossHatch Value=""></crossHatch>
