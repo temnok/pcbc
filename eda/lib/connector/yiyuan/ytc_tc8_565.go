@@ -13,8 +13,9 @@ var (
 
 	YTC_TC8_565 = &lib.Component{
 		Pads:     pads,
-		Holes:    holes,
-		Openings: append(pads, holes...),
+		Openings: pads,
+		//Holes:    holes,
+		//Openings: append(pads, holes...),
 		Marks: path.Strokes{
 			0.1: path.Paths{
 				path.RoundRect(9, 3.16, 1),
