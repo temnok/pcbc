@@ -91,8 +91,7 @@ func init() {
 
 		Marks: path.Strokes{}.Merge(
 			pcbc.Logo.Transform(geom.MoveXY(-10.3, 0).ScaleK(1.25)),
-			font.CenterBold("TMNK").Transform(geom.MoveXY(10.2, 0.3).ScaleXY(0.75, 0.5)),
-			font.CenterBold("TECH").Transform(geom.MoveXY(10.2, -0.3).ScaleXY(0.75, 0.5)),
+			pcbc.TmnkTech.Transform(geom.MoveXY(10.2, 0)),
 			font.CenterBold("PY32").Transform(geom.MoveXY(-4.2, 0).ScaleXY(1.3, 2.5)),
 			font.CenterBold("F002A").Transform(geom.MoveXY(4.2, 0).ScaleXY(1, 2.5)),
 		),

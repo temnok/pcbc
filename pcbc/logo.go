@@ -12,3 +12,8 @@ var Logo = path.Strokes{
 		font.StringPaths("bc", font.AlignCenter).Transform(geom.MoveXY(0, -0.33))...,
 	).Transform(geom.RotateD(45)),
 }
+
+var TmnkTech = path.Strokes{}.Merge(
+	font.CenterBold("TMNK").Transform(geom.MoveXY(0, 0.3).ScaleXY(0.75, 0.5)),
+	font.CenterBold("TECH").Transform(geom.MoveXY(0, -0.3).ScaleXY(0.75, 0.5)),
+)
