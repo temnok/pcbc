@@ -34,7 +34,7 @@ func NewPCB(w, h float64) *PCB {
 		width:      w,
 		height:     h,
 		resolution: scale,
-		trackWidth: 0.2,
+		trackWidth: 0.25,
 
 		fr4:     bitmap.NewBitmap(wi, hi),
 		copper:  bitmap.NewBitmap(wi, hi),
