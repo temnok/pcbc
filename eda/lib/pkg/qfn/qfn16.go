@@ -21,8 +21,7 @@ func init() {
 	pads = append(pads, path.Rect(1.2, 1.2))
 
 	QFN16G = &lib.Component{
-		Pads:     pads,
-		Openings: pads,
+		Pads: pads,
 		Marks: path.Strokes{
 			0.1: path.Paths{
 				path.Rect(3.1, 3.1),

@@ -7,13 +7,10 @@ import (
 )
 
 var (
-	pads = path.Rect(0.5, 1.6).Clone(8, 0.8, 0).Transform(geom.MoveXY(0, -0.88-0.3))
-
-	holes = path.RoundRect(0.6, 1.6, 0.3).Clone(2, 8.64, 0).Transform(geom.MoveXY(0, -0.3))
+	//holes = path.RoundRect(0.6, 1.6, 0.3).Clone(2, 8.64, 0).Transform(geom.MoveXY(0, -0.3))
 
 	YTC_TC8_565 = &lib.Component{
-		Pads:     pads,
-		Openings: pads,
+		Pads: path.Rect(0.5, 1.6).Clone(8, 0.8, 0).Transform(geom.MoveXY(0, -0.88-0.3)),
 		//Holes:    holes,
 		//Openings: append(pads, holes...),
 		Marks: path.Strokes{

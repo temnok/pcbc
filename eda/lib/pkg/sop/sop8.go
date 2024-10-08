@@ -16,8 +16,7 @@ var (
 	pads = append(bottomPads, topPads...)
 
 	SOP8 = &lib.Component{
-		Pads:     pads,
-		Openings: pads,
+		Pads: pads,
 		Marks: path.Strokes{
 			0.1: path.Paths{
 				path.Rect(5, 4),

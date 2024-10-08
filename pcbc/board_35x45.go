@@ -10,25 +10,16 @@ var (
 	boardHoleContour = path.Paths{path.Circle(2.1)}
 
 	boardHolderHole = &lib.Component{
-		Pads:     boardHoleContour,
-		Holes:    boardHoleContour,
-		Openings: boardHoleContour,
+		Pads:  boardHoleContour,
+		Holes: boardHoleContour,
 	}
 
-	boardKey = path.Paths{path.Lines(path.Points{
-		{0.4, -0.4},
-		{0.3, 0.4},
-		{-0.4, -0.3},
-		{0.4, -0.4},
-	})}.Transform(geom.MoveXY(-16.4, 21.4))
+	boardKey = path.Circle(0.6).Transform(geom.MoveXY(-16.25, 21.25))
 
 	Board35x45 = &lib.Component{
 		Cuts: path.Paths{path.RoundRect(35, 45, 2.5)},
 
-		Pads: boardKey,
-		Marks: path.Strokes{
-			0.2: boardKey,
-		},
+		Pads: path.Paths{boardKey},
 
 		Components: lib.Components{
 			{

@@ -70,9 +70,12 @@ func (pcb *PCB) component(c *lib.Component, t geom.Transform) {
 	brush02.IterateContours(c.Cuts.Transform(bt), pcb.fr4.Set1)
 
 	// Pads
-	shape.IterateContoursRows(c.Pads.Transform(bt), pcb.copper.Set1)
 	pcb.apertures = append(pcb.apertures, c.Pads.Transform(t)...)
-	brush02.IterateContours(c.Pads.Transform(bt), pcb.stencil.Set1)
+
+	pads := c.Pads.Transform(bt)
+	brush1.IterateContours(pads, pcb.mask.Set1)
+	shape.IterateContoursRows(pads, pcb.copper.Set1)
+	brush02.IterateContours(pads, pcb.stencil.Set1)
 
 	// Tracks
 	for brushW, tracks := range c.Tracks {
@@ -82,9 +85,6 @@ func (pcb *PCB) component(c *lib.Component, t geom.Transform) {
 		brush := shape.Circle(int(brushW * pcb.resolution))
 		brush.IterateContours(tracks.Transform(bt), pcb.copper.Set1)
 	}
-
-	// Openings
-	brush1.IterateContours(c.Openings.Transform(bt), pcb.mask.Set1)
 
 	// Marks
 	for brushW, marks := range c.Marks {
@@ -96,9 +96,15 @@ func (pcb *PCB) component(c *lib.Component, t geom.Transform) {
 	pcb.holes = append(pcb.holes, c.Holes.Transform(t)...)
 
 	holes := c.Holes.Transform(bt)
+	brush1.IterateContours(holes, pcb.mask.Set1)
 	shape.IterateContoursRows(holes, pcb.copper.Set0)
 	brush2.IterateContours(holes, pcb.copper.Set0)
 	brush02.IterateContours(holes, pcb.fr4.Set1)
+
+	// Openings
+	openings := c.Openings.Transform(bt)
+	shape.IterateContoursRows(openings, pcb.mask.Set0)
+	brush1.IterateContours(openings, pcb.mask.Set1)
 
 	// Sub-components
 	for _, sub := range c.Components {
