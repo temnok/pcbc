@@ -13,7 +13,7 @@ var Logo = path.Strokes{
 	).Transform(geom.RotateD(45)),
 }
 
-var TmnkTech = path.Strokes{}.Merge(
+var TmnkTech = path.Strokes{}.Append(
 	font.CenterBold("TMNK").Transform(geom.MoveXY(0, 0.3).ScaleXY(0.75, 0.5)),
 	font.CenterBold("TECH").Transform(geom.MoveXY(0, -0.3).ScaleXY(0.75, 0.5)),
 )

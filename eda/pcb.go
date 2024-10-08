@@ -49,28 +49,16 @@ func (pcb *PCB) bitmapTransform() geom.Transform {
 }
 
 func (pcb *PCB) Component(c *lib.Component) {
-	pcb.component(c, geom.Identity())
-}
+	c = c.Squash()
 
-func (pcb *PCB) component(c *lib.Component, t geom.Transform) {
-	if !c.Transform.IsZero() {
-		t = t.Multiply(c.Transform)
-	}
-	bt := pcb.bitmapTransform().Multiply(t)
+	bt := pcb.bitmapTransform()
 
 	brush1 := shape.Circle(int(0.1 * pcb.resolution))
 	brush2 := shape.Circle(int(0.2 * pcb.resolution))
 	brush02 := shape.Circle(int(0.02 * pcb.resolution))
 
-	// Cuts
-	pcb.cuts = append(pcb.cuts, c.Cuts.Transform(t)...)
-	c.Cuts.Transform(bt).Jump(int(0.2*pcb.resolution), func(x, y int) {
-		brush1.IterateRowsXY(x, y, pcb.mask.Set1)
-	})
-	brush02.IterateContours(c.Cuts.Transform(bt), pcb.fr4.Set1)
-
 	// Pads
-	pcb.apertures = append(pcb.apertures, c.Pads.Transform(t)...)
+	pcb.apertures = append(pcb.apertures, c.Pads...)
 
 	pads := c.Pads.Transform(bt)
 	brush1.IterateContours(pads, pcb.mask.Set1)
@@ -93,7 +81,7 @@ func (pcb *PCB) component(c *lib.Component, t geom.Transform) {
 	}
 
 	// Holes
-	pcb.holes = append(pcb.holes, c.Holes.Transform(t)...)
+	pcb.holes = append(pcb.holes, c.Holes...)
 
 	holes := c.Holes.Transform(bt)
 	brush1.IterateContours(holes, pcb.mask.Set1)
@@ -101,15 +89,17 @@ func (pcb *PCB) component(c *lib.Component, t geom.Transform) {
 	brush2.IterateContours(holes, pcb.copper.Set0)
 	brush02.IterateContours(holes, pcb.fr4.Set1)
 
+	// Cuts
+	pcb.cuts = append(pcb.cuts, c.Cuts...)
+	c.Cuts.Transform(bt).Jump(int(0.2*pcb.resolution), func(x, y int) {
+		brush1.IterateRowsXY(x, y, pcb.mask.Set1)
+	})
+	brush02.IterateContours(c.Cuts.Transform(bt), pcb.fr4.Set1)
+
 	// Openings
 	openings := c.Openings.Transform(bt)
 	shape.IterateContoursRows(openings, pcb.mask.Set0)
 	brush1.IterateContours(openings, pcb.mask.Set1)
-
-	// Sub-components
-	for _, sub := range c.Components {
-		pcb.component(sub, t)
-	}
 }
 
 func (pcb *PCB) SaveFiles(path string) error {

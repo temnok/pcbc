@@ -22,7 +22,7 @@ var Board = &lib.Component{
 		path.RoundRect(16, 8, 1),
 	},
 
-	Marks: path.Strokes{}.Merge(
+	Marks: path.Strokes{}.Append(
 		font.CenterBold("YTC-TC8-565").Transform(geom.MoveXY(-5, 3.4).ScaleXY(0.7, 0.9)),
 		pcbc.Logo.Transform(geom.MoveXY(-7.2, 1.5).ScaleK(0.8)),
 		pcbc.TmnkTech.Transform(geom.MoveXY(7.25, 3.5).ScaleK(0.4)),
@@ -81,7 +81,7 @@ func init() {
 	const tenth = 2.54
 
 	for i, padName := range padNames {
-		Board.Marks = Board.Marks.Merge(
+		Board.Marks = Board.Marks.Append(
 			font.CenterBold(padName).Transform(geom.MoveXY(tenth*(float64(i)-2.5), -0.6).ScaleXY(0.9, 1.2)),
 		)
 	}

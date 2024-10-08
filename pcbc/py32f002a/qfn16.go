@@ -89,7 +89,7 @@ func init() {
 			path.RoundRect(23.5, 11.5, 1),
 		},
 
-		Marks: path.Strokes{}.Merge(
+		Marks: path.Strokes{}.Append(
 			pcbc.Logo.Transform(geom.MoveXY(-10.3, 0).ScaleK(1.25)),
 			pcbc.TmnkTech.Transform(geom.MoveXY(10.2, 0)),
 			font.CenterBold("PY32").Transform(geom.MoveXY(-4.2, 0).ScaleXY(1.3, 2.5)),
@@ -124,7 +124,7 @@ func init() {
 	const tenth = 2.54
 
 	for i := 0; i < 9; i++ {
-		board.Marks = board.Marks.Merge(
+		board.Marks = board.Marks.Append(
 			font.CenterBold(pinNames[i]).Transform(geom.MoveXY(tenth*float64(i-4), -2.4).ScaleXY(0.9, 1.2)),
 			font.CenterBold(pinNames[i+9]).Transform(geom.MoveXY(tenth*float64(i-4), 2.4).ScaleXY(0.9, 1.2)),
 		)
