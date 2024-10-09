@@ -27,12 +27,12 @@ func (track Track) X(x float64) Track {
 
 	switch {
 	case n == 0:
-		return append(track, XY{x, 0})
+		return append(track, geom.XY{x, 0})
 	case n == 1:
-		return append(track, XY{x, track[0].Y})
+		return append(track, geom.XY{x, track[0].Y})
 	}
 
-	track = append(track, XY{x, track[n-1].Y})
+	track = append(track, geom.XY{x, track[n-1].Y})
 
 	if track[n-2].X == track[n-1].X {
 		dx := track[n].X - track[n-1].X
@@ -53,12 +53,12 @@ func (track Track) Y(y float64) Track {
 
 	switch {
 	case n == 0:
-		return append(track, XY{0, y})
+		return append(track, geom.XY{0, y})
 	case n == 1:
-		return append(track, XY{track[0].X, y})
+		return append(track, geom.XY{track[0].X, y})
 	}
 
-	track = append(track, XY{track[n-1].X, y})
+	track = append(track, geom.XY{track[n-1].X, y})
 
 	if track[n-2].Y == track[n-1].Y {
 		dy := track[n].Y - track[n-1].Y

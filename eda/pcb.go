@@ -11,7 +11,6 @@ import (
 )
 
 type (
-	XY    = geom.XY
 	Path  = path.Path
 	Paths = path.Paths
 )
@@ -20,7 +19,7 @@ type PCB struct {
 	width, height, resolution float64
 	trackWidth                float64
 
-	cuts, holes, openings, apertures Paths
+	component *lib.Component
 
 	fr4, copper, mask, silk, stencil *bitmap.Bitmap
 }
@@ -50,6 +49,7 @@ func (pcb *PCB) bitmapTransform() geom.Transform {
 
 func (pcb *PCB) Component(c *lib.Component) {
 	c = c.Squash()
+	pcb.component = c
 
 	bt := pcb.bitmapTransform()
 
@@ -58,8 +58,6 @@ func (pcb *PCB) Component(c *lib.Component) {
 	brush02 := shape.Circle(int(0.02 * pcb.resolution))
 
 	// Pads
-	pcb.apertures = append(pcb.apertures, c.Pads...)
-
 	pads := c.Pads.Transform(bt)
 	brush1.IterateContours(pads, pcb.mask.Set1)
 	shape.IterateContoursRows(pads, pcb.copper.Set1)
@@ -81,8 +79,6 @@ func (pcb *PCB) Component(c *lib.Component) {
 	}
 
 	// Holes
-	pcb.holes = append(pcb.holes, c.Holes...)
-
 	holes := c.Holes.Transform(bt)
 	brush1.IterateContours(holes, pcb.mask.Set1)
 	shape.IterateContoursRows(holes, pcb.copper.Set0)
@@ -90,7 +86,6 @@ func (pcb *PCB) Component(c *lib.Component) {
 	brush02.IterateContours(holes, pcb.fr4.Set1)
 
 	// Cuts
-	pcb.cuts = append(pcb.cuts, c.Cuts...)
 	c.Cuts.Transform(bt).Jump(int(0.2*pcb.resolution), func(x, y int) {
 		brush1.IterateRowsXY(x, y, pcb.mask.Set1)
 	})
@@ -115,6 +110,14 @@ func (pcb *PCB) SaveFiles(path string) error {
 		return err
 	}
 
+	if err := pcb.SaveOverview(path + "overview.png"); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (pcb *PCB) SaveOverview(filename string) error {
 	image := bitmap.NewBitmapsImage(
 		[]*bitmap.Bitmap{pcb.fr4, pcb.copper, pcb.mask, pcb.silk, pcb.stencil},
 		[][2]color.Color{
@@ -126,7 +129,7 @@ func (pcb *PCB) SaveFiles(path string) error {
 		},
 		true,
 	)
-	if err := util.SavePng(path+"overview.png", image); err != nil {
+	if err := util.SavePng(filename, image); err != nil {
 		return err
 	}
 

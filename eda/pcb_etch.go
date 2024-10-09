@@ -100,11 +100,11 @@ func (pcb *PCB) SaveEtch(filename string) error {
 		},
 	}
 
-	for _, cut := range pcb.cuts {
+	for _, cut := range pcb.component.Cuts {
 		p.Shape = append(p.Shape, lbrn.NewPathWithTabs(2, lbrnCenter, cut))
 	}
 
-	for _, hole := range pcb.holes {
+	for _, hole := range pcb.component.Holes {
 		p.Shape = append(p.Shape, lbrn.NewPath(2, lbrnCenter, hole))
 	}
 

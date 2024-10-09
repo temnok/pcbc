@@ -74,30 +74,11 @@ func (pcb *PCB) SaveMask(filename string) error {
 				Angle:      Param{"90"},
 			},
 		},
-		CutSetting: []lbrn.CutSetting{
-			{
-				Type:     "Cut",
-				Name:     Param{"Mask Base Cut"},
-				Index:    Param{"3"},
-				Priority: Param{"3"},
-
-				Speed:        Param{"200"},
-				GlobalRepeat: Param{"15"},
-
-				MaxPower:    Param{"90"},
-				QPulseWidth: Param{"200"},
-				Frequency:   Param{"20000"},
-			},
-		},
 		Shape: []*lbrn.Shape{
 			lbrn.NewBitmap(0, bitmapTransform, silk),
 			lbrn.NewBitmap(1, bitmapTransform, mask),
 			lbrn.NewBitmap(2, bitmapTransform, mask),
 		},
-	}
-
-	for _, cut := range pcb.openings {
-		p.Shape = append(p.Shape, lbrn.NewPath(3, lbrnCenter, cut))
 	}
 
 	return p.SaveToFile(filename)

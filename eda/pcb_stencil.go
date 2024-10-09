@@ -23,7 +23,7 @@ func (pcb *PCB) SaveStencil(filename string) error {
 		},
 	}
 
-	for _, hole := range pcb.apertures {
+	for _, hole := range pcb.component.Pads {
 		p.Shape = append(p.Shape, lbrn.NewPath(0, lbrnCenter, hole))
 	}
 

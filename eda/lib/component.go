@@ -20,9 +20,11 @@ type Component struct {
 	Cuts path.Paths
 
 	// FR4: cuts without tabs
+	// Mask: solid cut strokes
 	Holes path.Paths
 
 	// FR4: copper fills
+	// Mask: solid cut strokes
 	// Stencil: cuts without tabs
 	Pads path.Paths
 
