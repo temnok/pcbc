@@ -57,7 +57,7 @@ func (pcb *PCB) Component(c *lib.Component) {
 	bt := pcb.bitmapTransform()
 
 	brush1 := shape.Circle(int(0.1 * pcb.resolution))
-	brush2 := shape.Circle(int(0.2 * pcb.resolution))
+	brush25 := shape.Circle(int(0.25 * pcb.resolution))
 	brush02 := shape.Circle(int(0.02 * pcb.resolution))
 
 	pads := c.Pads.Transform(bt)
@@ -107,12 +107,12 @@ func (pcb *PCB) Component(c *lib.Component) {
 	}
 	shape.IterateContoursRows(holes, set)
 
-	brush2.IterateContours(holes, pcb.copper.Set0)
+	brush25.IterateContours(holes, pcb.copper.Set0)
 	brush02.IterateContours(holes, pcb.fr4.Set1)
 
 	// Cuts
 	cuts := c.Cuts.Transform(bt)
-	brush2.IterateContours(cuts, pcb.copper.Set0)
+	brush25.IterateContours(cuts, pcb.copper.Set0)
 	cuts.Jump(int(0.2*pcb.resolution), func(x, y int) {
 		brush1.IterateRowsXY(x, y, pcb.mask.Set1)
 	})
