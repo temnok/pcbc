@@ -19,8 +19,6 @@ type PCB struct {
 	width, height, resolution float64
 	trackWidth                float64
 
-	Groundfill bool
-
 	component *lib.Component
 
 	fr4, copper, mask, silk, stencil *bitmap.Bitmap
@@ -31,7 +29,7 @@ func NewPCB(w, h float64) *PCB {
 
 	wi, hi := int(w*scale), int(h*scale)
 
-	return &PCB{
+	pcb := &PCB{
 		width:      w,
 		height:     h,
 		resolution: scale,
@@ -43,6 +41,10 @@ func NewPCB(w, h float64) *PCB {
 		silk:    bitmap.NewBitmap(wi, hi),
 		stencil: bitmap.NewBitmap(wi, hi),
 	}
+
+	pcb.copper.Invert()
+
+	return pcb
 }
 
 func (pcb *PCB) bitmapTransform() geom.Transform {
@@ -59,23 +61,28 @@ func (pcb *PCB) Component(c *lib.Component) {
 	brush1 := shape.Circle(int(0.1 * pcb.resolution))
 	brush25 := shape.Circle(int(0.25 * pcb.resolution))
 	brush02 := shape.Circle(int(0.02 * pcb.resolution))
+	brush5 := shape.Circle(int(0.5 * pcb.resolution))
 
+	// Clears: remove groundfill
+	shape.IterateContoursRows(c.Clears.Transform(bt), pcb.copper.Set0)
+
+	// Pads: remove groundfill
 	pads := c.Pads.Transform(bt)
-	if pcb.Groundfill {
-		pcb.copper.Invert()
+	brush5.IterateContours(pads, pcb.copper.Set0)
 
-		brush := shape.Circle(int(0.5 * pcb.resolution))
-		brush.IterateContours(pads, pcb.copper.Set0)
-
-		// Non-ground tracks
-		for brushW, tracks := range c.Tracks {
-			if brushW == 0 {
-				brushW = pcb.trackWidth
-			}
-			brush = shape.Circle(int((brushW + 0.5) * pcb.resolution))
-			brush.IterateContours(tracks.Transform(bt), pcb.copper.Set0)
+	// Non-ground tracks: remove groundfill
+	for brushW, tracks := range c.Tracks {
+		if brushW == 0 {
+			brushW = pcb.trackWidth
 		}
+		brush := shape.Circle(int((brushW + 0.5) * pcb.resolution))
+		brush.IterateContours(tracks.Transform(bt), pcb.copper.Set0)
 	}
+
+	// Pads
+	shape.IterateContoursRows(pads, pcb.copper.Set1)
+	brush1.IterateContours(pads, pcb.mask.Set1)
+	brush02.IterateContours(pads, pcb.stencil.Set1)
 
 	// Tracks
 	for brushW, tracks := range (path.Strokes{}).Append(c.Tracks, c.GroundTracks) {
@@ -86,11 +93,6 @@ func (pcb *PCB) Component(c *lib.Component) {
 		brush.IterateContours(tracks.Transform(bt), pcb.copper.Set1)
 	}
 
-	// Pads
-	shape.IterateContoursRows(pads, pcb.copper.Set1)
-	brush1.IterateContours(pads, pcb.mask.Set1)
-	brush02.IterateContours(pads, pcb.stencil.Set1)
-
 	// Marks
 	for brushW, marks := range c.Marks {
 		brush := shape.Circle(int(brushW * pcb.resolution))
@@ -100,13 +102,7 @@ func (pcb *PCB) Component(c *lib.Component) {
 	// Holes
 	holes := c.Holes.Transform(bt)
 	brush1.IterateContours(holes, pcb.mask.Set1)
-
-	set := pcb.copper.Set0
-	if pcb.Groundfill {
-		set = pcb.copper.Set1
-	}
-	shape.IterateContoursRows(holes, set)
-
+	shape.IterateContoursRows(holes, pcb.copper.Set1)
 	brush25.IterateContours(holes, pcb.copper.Set0)
 	brush02.IterateContours(holes, pcb.fr4.Set1)
 

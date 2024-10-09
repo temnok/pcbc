@@ -15,6 +15,9 @@ type Component struct {
 
 	Components []*Component
 
+	// FR4: remove groundfill
+	Clears path.Paths
+
 	// FR4: cuts with tabs
 	// Mask: dotted cut strokes
 	Cuts path.Paths
@@ -34,10 +37,10 @@ type Component struct {
 	// Mask: solid mark strokes
 	Marks path.Strokes
 
-	// FR4: copper strokes
+	// FR4: copper strokes with groundfill clean
 	Tracks path.Strokes
 
-	// FR4: copper strokes in non-groundfill mode
+	// FR4: copper strokes without groundfill clean
 	GroundTracks path.Strokes
 }
 
@@ -64,6 +67,7 @@ func (c *Component) dump(t geom.Transform, out *Component) {
 		sub.dump(t, out)
 	}
 
+	out.Clears = append(out.Clears, c.Clears.Transform(t)...)
 	out.Cuts = append(out.Cuts, c.Cuts.Transform(t)...)
 	out.Holes = append(out.Holes, c.Holes.Transform(t)...)
 	out.Pads = append(out.Pads, c.Pads.Transform(t)...)

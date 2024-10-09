@@ -64,8 +64,8 @@ var (
 
 		Tracks: path.Strokes{
 			0: eda.TrackPaths(
-				eda.Track{pins[8]}.DX(1.3).DY(3.7).DY(1.4).DX(-5.4).DY(1.5).YX(pads[0]),
-				eda.Track{pins[7]}.DX(0.7).DY(3.4).DX(-1).XY(pads[1]),
+				eda.Track{pins[8]}.DX(1.3).DY(3.5).DY(1.4).DX(-5.4).DY(1.5).YX(pads[0]),
+				eda.Track{pins[7]}.DX(0.7).DY(3.3).DX(-1).XY(pads[1]),
 				eda.Track{pins[6]}.DY(1.7).DX(-0.5).XY(pads[2]),
 				eda.Track{pins[1]}.XY(pads[3]),
 				eda.Track{pins[2]}.YX(pads[4]),
@@ -141,6 +141,10 @@ var (
 	}
 
 	Board = &lib.Component{
+		Clears: path.Paths{
+			path.Rect(21.5, 5.5).Transform(geom.MoveXY(0, 9.7)),
+		},
+
 		Cuts: path.Paths{
 			path.RoundRect(21, 24.6, 1),
 		},

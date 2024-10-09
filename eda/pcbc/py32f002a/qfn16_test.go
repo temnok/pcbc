@@ -6,6 +6,7 @@ import (
 	"temnok/pcbc/eda/lib"
 	"temnok/pcbc/eda/pcbc"
 	"temnok/pcbc/geom"
+	"temnok/pcbc/path"
 	"testing"
 )
 
@@ -13,6 +14,10 @@ func Test_QFN16(t *testing.T) {
 	pcb := eda.NewPCB(36, 46)
 
 	pcb.Component(&lib.Component{
+		Clears: path.Paths{
+			path.Rect(36, 46),
+		},
+
 		Components: lib.Components{
 			pcbc.Board35x45,
 			{
