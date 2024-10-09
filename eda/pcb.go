@@ -19,6 +19,8 @@ type PCB struct {
 	width, height, resolution float64
 	trackWidth                float64
 
+	Groundfill bool
+
 	component *lib.Component
 
 	fr4, copper, mask, silk, stencil *bitmap.Bitmap
@@ -48,6 +50,7 @@ func (pcb *PCB) bitmapTransform() geom.Transform {
 }
 
 func (pcb *PCB) Component(c *lib.Component) {
+
 	c = c.Squash()
 	pcb.component = c
 
@@ -57,20 +60,36 @@ func (pcb *PCB) Component(c *lib.Component) {
 	brush2 := shape.Circle(int(0.2 * pcb.resolution))
 	brush02 := shape.Circle(int(0.02 * pcb.resolution))
 
-	// Pads
 	pads := c.Pads.Transform(bt)
-	brush1.IterateContours(pads, pcb.mask.Set1)
-	shape.IterateContoursRows(pads, pcb.copper.Set1)
-	brush02.IterateContours(pads, pcb.stencil.Set1)
+	if pcb.Groundfill {
+		pcb.copper.Invert()
+
+		brush := shape.Circle(int(0.5 * pcb.resolution))
+		brush.IterateContours(pads, pcb.copper.Set0)
+
+		// Non-ground tracks
+		for brushW, tracks := range c.Tracks {
+			if brushW == 0 {
+				brushW = pcb.trackWidth
+			}
+			brush = shape.Circle(int((brushW + 0.5) * pcb.resolution))
+			brush.IterateContours(tracks.Transform(bt), pcb.copper.Set0)
+		}
+	}
 
 	// Tracks
-	for brushW, tracks := range c.Tracks {
+	for brushW, tracks := range (path.Strokes{}).Append(c.Tracks, c.GroundTracks) {
 		if brushW == 0 {
 			brushW = pcb.trackWidth
 		}
 		brush := shape.Circle(int(brushW * pcb.resolution))
 		brush.IterateContours(tracks.Transform(bt), pcb.copper.Set1)
 	}
+
+	// Pads
+	shape.IterateContoursRows(pads, pcb.copper.Set1)
+	brush1.IterateContours(pads, pcb.mask.Set1)
+	brush02.IterateContours(pads, pcb.stencil.Set1)
 
 	// Marks
 	for brushW, marks := range c.Marks {
@@ -81,15 +100,23 @@ func (pcb *PCB) Component(c *lib.Component) {
 	// Holes
 	holes := c.Holes.Transform(bt)
 	brush1.IterateContours(holes, pcb.mask.Set1)
-	shape.IterateContoursRows(holes, pcb.copper.Set0)
+
+	set := pcb.copper.Set0
+	if pcb.Groundfill {
+		set = pcb.copper.Set1
+	}
+	shape.IterateContoursRows(holes, set)
+
 	brush2.IterateContours(holes, pcb.copper.Set0)
 	brush02.IterateContours(holes, pcb.fr4.Set1)
 
 	// Cuts
-	c.Cuts.Transform(bt).Jump(int(0.2*pcb.resolution), func(x, y int) {
+	cuts := c.Cuts.Transform(bt)
+	brush2.IterateContours(cuts, pcb.copper.Set0)
+	cuts.Jump(int(0.2*pcb.resolution), func(x, y int) {
 		brush1.IterateRowsXY(x, y, pcb.mask.Set1)
 	})
-	brush02.IterateContours(c.Cuts.Transform(bt), pcb.fr4.Set1)
+	brush02.IterateContours(cuts, pcb.fr4.Set1)
 
 	// Openings
 	openings := c.Openings.Transform(bt)
@@ -119,10 +146,10 @@ func (pcb *PCB) SaveFiles(path string) error {
 
 func (pcb *PCB) SaveOverview(filename string) error {
 	image := bitmap.NewBitmapsImage(
-		[]*bitmap.Bitmap{pcb.fr4, pcb.copper, pcb.mask, pcb.silk, pcb.stencil},
+		[]*bitmap.Bitmap{pcb.copper, pcb.fr4, pcb.mask, pcb.silk, pcb.stencil},
 		[][2]color.Color{
-			{color.RGBA{0, 0x40, 0x10, 0xFF}, color.RGBA{0, 0xFF, 0, 0xFF}},
-			{color.RGBA{0, 0, 0, 0}, color.RGBA{0xFF, 0x50, 0, 0xFF}},
+			{color.RGBA{0, 0x40, 0x10, 0xFF}, color.RGBA{0xFF, 0x50, 0, 0xFF}},
+			{color.RGBA{0, 0, 0, 0}, color.RGBA{0, 0xFF, 0, 0xFF}},
 			{color.RGBA{0, 0, 0, 0}, color.RGBA{0x80, 0x80, 0xFF, 0xA0}},
 			{color.RGBA{0, 0, 0, 0}, color.RGBA{0xFF, 0xFF, 0xFF, 0x80}},
 			{color.RGBA{0, 0, 0, 0}, color.RGBA{0xFF, 0xFF, 0xFF, 0xFF}},

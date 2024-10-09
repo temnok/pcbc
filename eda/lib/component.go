@@ -31,19 +31,23 @@ type Component struct {
 	// Mask: solid cut strokes
 	Openings path.Paths
 
+	// Mask: solid mark strokes
+	Marks path.Strokes
+
 	// FR4: copper strokes
 	Tracks path.Strokes
 
-	// Mask: solid mark strokes
-	Marks path.Strokes
+	// FR4: copper strokes in non-groundfill mode
+	GroundTracks path.Strokes
 }
 
 // Squash merges component tree into the single component.
 func (c *Component) Squash() *Component {
 	out := &Component{
-		Transform: geom.Identity(),
-		Tracks:    path.Strokes{},
-		Marks:     path.Strokes{},
+		Transform:    geom.Identity(),
+		Marks:        path.Strokes{},
+		Tracks:       path.Strokes{},
+		GroundTracks: path.Strokes{},
 	}
 
 	c.dump(geom.Identity(), out)
@@ -65,6 +69,7 @@ func (c *Component) dump(t geom.Transform, out *Component) {
 	out.Pads = append(out.Pads, c.Pads.Transform(t)...)
 	out.Openings = append(out.Openings, c.Openings.Transform(t)...)
 
-	out.Tracks.Append(c.Tracks.Transform(t))
 	out.Marks.Append(c.Marks.Transform(t))
+	out.Tracks.Append(c.Tracks.Transform(t))
+	out.GroundTracks.Append(c.GroundTracks.Transform(t))
 }

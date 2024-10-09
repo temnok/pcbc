@@ -22,6 +22,12 @@ func NewBitmap(w, h int) *Bitmap {
 	return b
 }
 
+func (b *Bitmap) Invert() {
+	for i := range b.elems {
+		b.elems[i] = ^b.elems[i]
+	}
+}
+
 func (b *Bitmap) Set1(x0, x1, y int) {
 	b.Set(x0, x1, y, 1)
 }

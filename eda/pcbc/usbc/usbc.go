@@ -57,15 +57,20 @@ func init() {
 
 	Board.Tracks = path.Strokes{
 		0: eda.TrackPaths(
-			eda.Track{mountPads[5], {-4.1, -0.3}},
-			eda.Track{pins[0]}.Y(2).Y(2.75).X(pins[7].X).Y(2).Y(pins[7].Y),
-			eda.Track{pins[1]}.Y(2).Y(2.25).X(pins[6].X).Y(2).Y(pins[6].Y),
-			eda.Track{pins[0]}.Y(0).Y(-0.3).X(pads[0].X).Y(pads[0].Y),
+			eda.Track{pins[1]}.Y(1.75).Y(2).X(pins[6].X).Y(1.75).Y(pins[6].Y),
 			eda.Track{pins[2]}.Y(-0.3).Y(-0.8).X(pads[1].X).Y(pads[1].Y),
 			eda.Track{pins[3]}.Y(-0.8).Y(-1.3).X(pads[2].X).Y(pads[2].Y),
 			eda.Track{pads[3]}.X(pins[4].X).Y(pins[4].Y),
 			eda.Track{pads[4]}.X(pins[5].X).Y(pins[5].Y),
 			eda.Track{pads[5]}.X(pins[6].X).Y(pins[6].Y),
+		),
+	}
+
+	Board.GroundTracks = path.Strokes{
+		0: eda.TrackPaths(
+			eda.Track{mountPads[5], {-4.1, -0.3}},
+			eda.Track{pins[0]}.Y(1.75).Y(2.5).X(pins[7].X).Y(1.75).Y(pins[7].Y),
+			eda.Track{pins[0]}.Y(0).Y(-0.3).X(pads[0].X).Y(pads[0].Y),
 		),
 	}
 

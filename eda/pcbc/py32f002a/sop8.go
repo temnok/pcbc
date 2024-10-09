@@ -31,7 +31,6 @@ func init() {
 		},
 		Tracks: path.Strokes{
 			0: eda.TrackPaths(
-				eda.Track{pads[0]}.Y(-4).X(pins[0].X).Y(-3.5).Y(pins[0].Y),
 				eda.Track{pads[1]}.Y(-4.5).X(pins[1].X).Y(-4).Y(pins[1].Y),
 				eda.Track{pads[2]}.X(pins[2].X).Y(pins[2].Y),
 				eda.Track{pads[3]}.Y(-4).X(pins[3].X).Y(pins[3].Y),
@@ -80,12 +79,17 @@ func init() {
 			font.CenterBold("PY32").Transform(geom.MoveXY(-2.8, 2.4).ScaleXY(1.4, 2)),
 			font.CenterBold("F002A").Transform(geom.MoveXY(-2.8, -2.4).ScaleXY(1.2, 2)),
 			pcbc.Logo.Transform(geom.MoveXY(-4.5, 0).ScaleK(0.8)),
-			//font.CenterBold("TMNK").Transform(geom.MoveXY(4.7, 0.2).ScaleXY(0.5, 0.3)),
-			//font.CenterBold("TECH").Transform(geom.MoveXY(4.7, -0.2).ScaleXY(0.5, 0.3)),
 		),
 
 		Tracks: path.Strokes{
 			0: eda.TrackPaths(
+				eda.Track{pads[0]}.Y(-4).X(pins[0].X).Y(-3.5).Y(pins[0].Y),
+			),
+		},
+
+		GroundTracks: path.Strokes{
+			0: eda.TrackPaths(
+				eda.Track{{pads[0].X, -pads[0].Y}}.Y(4).X(pins[7].X).Y(3.5).Y(pins[7].Y),
 				eda.Track{pins[7]}.Y(0).X(-0.4).X(-2.2),
 			),
 		},

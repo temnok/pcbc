@@ -39,6 +39,10 @@ func init() {
 				eda.Track{pads[5]}.Y(pins[5].Y).X(pins[5].X),
 				eda.Track{pads[6]}.Y(-2.5).X(pins[6].X).Y(pins[6].Y),
 				eda.Track{pads[7]}.Y(-2).X(pins[7].X).Y(pins[7].Y),
+			),
+		},
+		GroundTracks: path.Strokes{
+			0: eda.TrackPaths(
 				eda.Track{pads[8]}.Y(-2).X(4.5).Y(0).X(pins[16].X),
 				eda.Track{{7.5, 0}}.X(pins[16].X),
 			),
