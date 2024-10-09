@@ -151,6 +151,25 @@ func CenterBold(str string) path.Strokes {
 	}
 }
 
+func CenterBolds(strs []string, shift geom.XY) path.Strokes {
+	return path.Strokes{
+		Bold: StringsPaths(strs, AlignCenter, shift),
+	}
+}
+
+func StringsPaths(strs []string, alignment float64, shift geom.XY) path.Paths {
+	var paths path.Paths
+
+	x0, y0 := -0.5*float64(len(strs)-1)*shift.X, -0.5*float64(len(strs)-1)*shift.Y
+	for i, str := range strs {
+		i := float64(i)
+		p := StringPaths(str, alignment).Transform(geom.MoveXY(x0+i*shift.X, y0+i*shift.Y))
+		paths = append(paths, p...)
+	}
+
+	return paths
+}
+
 func StringPaths(str string, alignment float64) path.Paths {
 	var paths path.Paths
 

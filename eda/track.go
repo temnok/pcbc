@@ -74,6 +74,22 @@ func (track Track) Y(y float64) Track {
 	return track
 }
 
+func (track Track) DX(dx float64) Track {
+	return track.X(track[len(track)-1].X + dx)
+}
+
+func (track Track) DY(dy float64) Track {
+	return track.Y(track[len(track)-1].Y + dy)
+}
+
+func (track Track) XY(p geom.XY) Track {
+	return track.X(p.X).Y(p.Y)
+}
+
+func (track Track) YX(p geom.XY) Track {
+	return track.Y(p.Y).X(p.X)
+}
+
 func sign(val float64) float64 {
 	switch {
 	case val < 0:
