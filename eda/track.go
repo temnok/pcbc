@@ -2,8 +2,8 @@ package eda
 
 import (
 	"math"
-	"temnok/lab/geom"
-	"temnok/lab/path"
+	"temnok/pcbc/geom"
+	"temnok/pcbc/path"
 )
 
 type Track path.Points

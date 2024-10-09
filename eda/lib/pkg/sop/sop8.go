@@ -1,9 +1,9 @@
 package sop
 
 import (
-	"temnok/lab/eda/lib"
-	"temnok/lab/geom"
-	"temnok/lab/path"
+	"temnok/pcbc/eda/lib"
+	"temnok/pcbc/geom"
+	"temnok/pcbc/path"
 )
 
 var (

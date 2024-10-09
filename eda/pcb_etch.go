@@ -2,8 +2,8 @@ package eda
 
 import (
 	"image/color"
-	"temnok/lab/geom"
-	"temnok/lab/lbrn"
+	"temnok/pcbc/geom"
+	"temnok/pcbc/lbrn"
 )
 
 type Param = lbrn.Param

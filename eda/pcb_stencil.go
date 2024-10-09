@@ -1,7 +1,7 @@
 package eda
 
 import (
-	"temnok/lab/lbrn"
+	"temnok/pcbc/lbrn"
 )
 
 func (pcb *PCB) SaveStencil(filename string) error {

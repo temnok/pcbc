@@ -1,7 +1,7 @@
 package path
 
 import (
-	"temnok/lab/geom"
+	"temnok/pcbc/geom"
 )
 
 func Rect(w, h float64) Path {

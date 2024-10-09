@@ -1,14 +1,14 @@
 package usbc
 
 import (
-	"temnok/lab/eda"
-	"temnok/lab/eda/lib"
-	"temnok/lab/eda/lib/connector/yiyuan"
-	"temnok/lab/eda/lib/header/mph100imp40f"
-	"temnok/lab/font"
-	"temnok/lab/geom"
-	"temnok/lab/path"
-	"temnok/lab/pcbc"
+	"temnok/pcbc/eda"
+	"temnok/pcbc/eda/lib"
+	"temnok/pcbc/eda/lib/connector/yiyuan"
+	"temnok/pcbc/eda/lib/header/mph100imp40f"
+	"temnok/pcbc/eda/pcbc"
+	"temnok/pcbc/font"
+	"temnok/pcbc/geom"
+	"temnok/pcbc/path"
 )
 
 var (

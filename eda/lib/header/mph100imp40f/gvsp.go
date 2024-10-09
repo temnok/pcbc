@@ -1,8 +1,8 @@
 package mph100imp40f
 
 import (
-	"temnok/lab/eda/lib"
-	"temnok/lab/path"
+	"temnok/pcbc/eda/lib"
+	"temnok/pcbc/path"
 )
 
 var (

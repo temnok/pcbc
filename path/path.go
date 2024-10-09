@@ -1,7 +1,7 @@
 package path
 
 import (
-	"temnok/lab/geom"
+	"temnok/pcbc/geom"
 )
 
 // Path consists of cubic-Bezier curves as a sequence of on-path points separated by pairs of control points,

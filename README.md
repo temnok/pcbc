@@ -1,4 +1,6 @@
-## PoC for fast prototyping PCBs using fiber laser
+<img src="eda/pcbc/img/logo.png" width="200"/>
+
+## PCBC: fast PCB prototyping with a fiber laser
 
 ### Generated LightBurn files
 
@@ -15,8 +17,8 @@
 * Pale Green: soldermask marks (silkscreen)
 * White: stencil cuts
 
-![PCB Design Overview](pcbc/py32f002a/out/qfn16/overview.png)
+![PCB Design Overview](eda/pcbc/py32f002a/out/qfn16/overview.png)
 
-![PCB Without components](pcbc/photos/py32f002a-pcb.jpg)
+![PCB Without components](eda/pcbc/img/py32f002a-pcb.jpg)
 
-![Complete PCB](pcbc/photos/py32f002a-complete-x3.jpg)
+![Complete PCB](eda/pcbc/img/py32f002a-complete-x3.jpg)

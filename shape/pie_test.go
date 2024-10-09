@@ -3,10 +3,10 @@ package shape
 import (
 	"github.com/stretchr/testify/assert"
 	"image/color"
-	"temnok/lab/bitmap"
-	"temnok/lab/geom"
-	"temnok/lab/path"
-	"temnok/lab/util"
+	"temnok/pcbc/bitmap"
+	"temnok/pcbc/geom"
+	"temnok/pcbc/path"
+	"temnok/pcbc/util"
 	"testing"
 )
 

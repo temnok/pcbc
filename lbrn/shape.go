@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"image"
 	"image/png"
-	"temnok/lab/geom"
-	"temnok/lab/path"
+	"temnok/pcbc/geom"
+	"temnok/pcbc/path"
 )
 
 type Shape struct {

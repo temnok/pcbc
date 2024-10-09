@@ -1,6 +1,6 @@
 package path
 
-import "temnok/lab/geom"
+import "temnok/pcbc/geom"
 
 // Points represent list of arbitrary 2D points, not necessary a path.
 type Points []geom.XY

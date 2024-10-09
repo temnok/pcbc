@@ -1,8 +1,8 @@
 package font
 
 import (
-	"temnok/lab/geom"
-	"temnok/lab/path"
+	"temnok/pcbc/geom"
+	"temnok/pcbc/path"
 )
 
 const (

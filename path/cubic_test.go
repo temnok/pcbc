@@ -3,7 +3,7 @@ package path
 import (
 	"math"
 	"math/rand"
-	"temnok/lab/geom"
+	"temnok/pcbc/geom"
 	"testing"
 
 	"github.com/stretchr/testify/assert"

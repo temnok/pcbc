@@ -3,7 +3,7 @@ package path
 import (
 	"math/rand/v2"
 	"reflect"
-	"temnok/lab/geom"
+	"temnok/pcbc/geom"
 	"testing"
 )
 

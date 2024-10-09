@@ -1,9 +1,9 @@
 package pcbc
 
 import (
-	"temnok/lab/font"
-	"temnok/lab/geom"
-	"temnok/lab/path"
+	"temnok/pcbc/font"
+	"temnok/pcbc/geom"
+	"temnok/pcbc/path"
 )
 
 var Logo = path.Strokes{

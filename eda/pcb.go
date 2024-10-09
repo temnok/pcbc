@@ -2,12 +2,12 @@ package eda
 
 import (
 	"image/color"
-	"temnok/lab/bitmap"
-	"temnok/lab/eda/lib"
-	"temnok/lab/geom"
-	"temnok/lab/path"
-	"temnok/lab/shape"
-	"temnok/lab/util"
+	"temnok/pcbc/bitmap"
+	"temnok/pcbc/eda/lib"
+	"temnok/pcbc/geom"
+	"temnok/pcbc/path"
+	"temnok/pcbc/shape"
+	"temnok/pcbc/util"
 )
 
 type (

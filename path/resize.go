@@ -1,6 +1,6 @@
 package path
 
-import "temnok/lab/geom"
+import "temnok/pcbc/geom"
 
 func (path Path) Resize(delta float64) Path {
 	mi, ma := path.minMax()

@@ -1,7 +1,7 @@
 package shape
 
 import (
-	"temnok/lab/path"
+	"temnok/pcbc/path"
 )
 
 type row = struct {

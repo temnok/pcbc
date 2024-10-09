@@ -2,10 +2,10 @@ package py32f002a
 
 import (
 	"github.com/stretchr/testify/assert"
-	"temnok/lab/eda"
-	"temnok/lab/eda/lib"
-	"temnok/lab/geom"
-	"temnok/lab/pcbc"
+	"temnok/pcbc/eda"
+	"temnok/pcbc/eda/lib"
+	"temnok/pcbc/eda/pcbc"
+	"temnok/pcbc/geom"
 	"testing"
 )
 

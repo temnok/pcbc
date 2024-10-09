@@ -1,6 +1,6 @@
 package path
 
-import "temnok/lab/geom"
+import "temnok/pcbc/geom"
 
 // Paths represent a sequence of paths.
 type Paths []Path

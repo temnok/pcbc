@@ -1,4 +1,4 @@
-module temnok/lab
+module temnok/pcbc
 
 go 1.22
 

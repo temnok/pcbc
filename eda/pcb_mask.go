@@ -2,7 +2,7 @@ package eda
 
 import (
 	"image/color"
-	"temnok/lab/lbrn"
+	"temnok/pcbc/lbrn"
 )
 
 func (pcb *PCB) SaveMask(filename string) error {

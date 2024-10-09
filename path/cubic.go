@@ -2,7 +2,7 @@ package path
 
 import (
 	"math"
-	"temnok/lab/geom"
+	"temnok/pcbc/geom"
 )
 
 // cubicVisit iterates over all pixels for a given cubic Bezier curve.

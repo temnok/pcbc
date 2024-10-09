@@ -3,10 +3,10 @@ package font
 import (
 	"github.com/stretchr/testify/assert"
 	"image/color"
-	"temnok/lab/bitmap"
-	"temnok/lab/geom"
-	"temnok/lab/shape"
-	"temnok/lab/util"
+	"temnok/pcbc/bitmap"
+	"temnok/pcbc/geom"
+	"temnok/pcbc/shape"
+	"temnok/pcbc/util"
 	"testing"
 )
 

@@ -1,15 +1,17 @@
-package py32f002a
+package demo
 
 import (
 	"github.com/stretchr/testify/assert"
-	"temnok/lab/eda"
-	"temnok/lab/eda/lib"
-	"temnok/lab/geom"
-	"temnok/lab/pcbc"
+	"temnok/pcbc/eda"
+	"temnok/pcbc/eda/lib"
+	"temnok/pcbc/eda/pcbc"
+	"temnok/pcbc/eda/pcbc/py32f002a"
+	"temnok/pcbc/eda/pcbc/usbc"
+	"temnok/pcbc/geom"
 	"testing"
 )
 
-func Test_SOP8(t *testing.T) {
+func Test_Demo(t *testing.T) {
 	pcb := eda.NewPCB(36, 46)
 
 	pcb.Component(&lib.Component{
@@ -18,23 +20,23 @@ func Test_SOP8(t *testing.T) {
 			{
 				Transform: geom.MoveXY(0, 9),
 				Components: lib.Components{
-					QFN16,
+					py32f002a.QFN16,
 				},
 			},
 			{
 				Transform: geom.MoveXY(-6.5, -7),
 				Components: lib.Components{
-					SOP8,
+					py32f002a.SOP8,
 				},
 			},
 			{
-				Transform: geom.MoveXY(6.5, -7),
+				Transform: geom.MoveXY(6.5, -7).RotateD(90),
 				Components: lib.Components{
-					SOP8,
+					usbc.Board,
 				},
 			},
 		},
 	})
 
-	assert.NoError(t, pcb.SaveFiles("out/sop8/"))
+	assert.NoError(t, pcb.SaveFiles("out/"))
 }

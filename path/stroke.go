@@ -2,7 +2,7 @@ package path
 
 import (
 	"math"
-	"temnok/lab/geom"
+	"temnok/pcbc/geom"
 )
 
 // Strokes are Paths with added thickness (brush diameter) that serves as a Paths group key.

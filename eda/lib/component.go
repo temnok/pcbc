@@ -1,8 +1,8 @@
 package lib
 
 import (
-	"temnok/lab/geom"
-	"temnok/lab/path"
+	"temnok/pcbc/geom"
+	"temnok/pcbc/path"
 )
 
 type Components = []*Component

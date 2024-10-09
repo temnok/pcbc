@@ -1,6 +1,6 @@
 package path
 
-import "temnok/lab/geom"
+import "temnok/pcbc/geom"
 
 // linearVisit iterates over all line pixels, except the first one.
 func linearVisit(a, b geom.XY, iterate func(x, y int)) {

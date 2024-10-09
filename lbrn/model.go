@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
-	"temnok/lab/geom"
+	"temnok/pcbc/geom"
 )
 
 type XY = geom.XY
