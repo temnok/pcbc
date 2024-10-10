@@ -144,10 +144,10 @@ func (pcb *PCB) SaveOverview(filename string) error {
 	image := bitmap.NewBitmapsImage(
 		[]*bitmap.Bitmap{pcb.copper, pcb.fr4, pcb.mask, pcb.silk, pcb.stencil},
 		[][2]color.Color{
-			{color.RGBA{0, 0x40, 0x10, 0xFF}, color.RGBA{0xFF, 0x50, 0, 0xFF}},
+			{color.RGBA{0, 0x40, 0x10, 0xFF}, color.RGBA{0xC0, 0x60, 0, 0xFF}},
 			{color.RGBA{0, 0, 0, 0}, color.RGBA{0, 0xFF, 0, 0xFF}},
 			{color.RGBA{0, 0, 0, 0}, color.RGBA{0x80, 0x80, 0xFF, 0xA0}},
-			{color.RGBA{0, 0, 0, 0}, color.RGBA{0xFF, 0xFF, 0xFF, 0x80}},
+			{color.RGBA{0, 0, 0, 0}, color.RGBA{0xFF, 0xFF, 0xFF, 0xA0}},
 			{color.RGBA{0, 0, 0, 0}, color.RGBA{0xFF, 0xFF, 0xFF, 0xFF}},
 		},
 		true,

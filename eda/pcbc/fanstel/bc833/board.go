@@ -17,6 +17,8 @@ var (
 )
 
 func board(short bool) *lib.Component {
+	revision := "v1.0"
+
 	header := &lib.Component{
 		Components: lib.Components{
 			{
@@ -114,6 +116,8 @@ func board(short bool) *lib.Component {
 		leftLabels[1] = ""
 		rightLabels[6] = ""
 		rightLabels[7] = ""
+
+		revision += "s"
 	}
 
 	leftMount := geom.XY{-5, -10.5}
@@ -156,6 +160,9 @@ func board(short bool) *lib.Component {
 		},
 
 		Marks: path.Strokes{}.Append(
+			font.CenterBold(revision).Transform(geom.MoveXY(-5, -8.1).ScaleXY(0.75, 1)),
+			pcbc.TmnkTech.Transform(geom.MoveXY(5, -8.1).ScaleK(0.75)),
+
 			pcbc.Logo.Transform(geom.MoveXY(0, -8.3).ScaleK(1.2)),
 			font.CenterBold("BC833").Transform(geom.MoveXY(0, -10.4).ScaleK(2)),
 			font.CenterBold("nRF52833").Transform(geom.MoveXY(0, -12.2).ScaleK(1.5)),
