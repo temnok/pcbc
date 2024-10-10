@@ -62,7 +62,11 @@ func (pcb *PCB) Component(c *lib.Component) {
 
 	const clearBrushW = 0.5
 	clearBrush := shape.Circle(int(clearBrushW * pcb.resolution))
-	halfClearBrush := shape.Circle(int(clearBrushW / 2 * pcb.resolution))
+
+	const extraCopper = 0.05 // compensate copper lost during etching
+	extraCopperBrush := shape.Circle(int(extraCopper * pcb.resolution))
+
+	cutClearBrush := shape.Circle(int((clearBrushW/2 - extraCopper) * pcb.resolution))
 
 	// Clears: remove groundfill
 	shape.IterateContoursRows(c.Clears.Transform(bt), pcb.copper.Set0)
@@ -82,6 +86,7 @@ func (pcb *PCB) Component(c *lib.Component) {
 
 	// Pads
 	shape.IterateContoursRows(pads, pcb.copper.Set1)
+	extraCopperBrush.IterateContours(pads, pcb.copper.Set1)
 	brush1.IterateContours(pads, pcb.mask.Set1)
 	brush02.IterateContours(pads, pcb.stencil.Set1)
 
@@ -90,7 +95,7 @@ func (pcb *PCB) Component(c *lib.Component) {
 		if brushW == 0 {
 			brushW = pcb.trackWidth
 		}
-		brush := shape.Circle(int(brushW * pcb.resolution))
+		brush := shape.Circle(int((brushW + extraCopper) * pcb.resolution))
 		brush.IterateContours(tracks.Transform(bt), pcb.copper.Set1)
 	}
 
@@ -104,12 +109,12 @@ func (pcb *PCB) Component(c *lib.Component) {
 	holes := c.Holes.Transform(bt)
 	brush1.IterateContours(holes, pcb.mask.Set1)
 	shape.IterateContoursRows(holes, pcb.copper.Set1)
-	halfClearBrush.IterateContours(holes, pcb.copper.Set0)
+	cutClearBrush.IterateContours(holes, pcb.copper.Set0)
 	brush02.IterateContours(holes, pcb.fr4.Set1)
 
 	// Cuts
 	cuts := c.Cuts.Transform(bt)
-	halfClearBrush.IterateContours(cuts, pcb.copper.Set0)
+	cutClearBrush.IterateContours(cuts, pcb.copper.Set0)
 	cuts.Jump(int(0.2*pcb.resolution), func(x, y int) {
 		brush1.IterateRowsXY(x, y, pcb.mask.Set1)
 	})
