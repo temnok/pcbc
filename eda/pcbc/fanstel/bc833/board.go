@@ -159,20 +159,22 @@ func board(short bool) *lib.Component {
 			),
 		},
 
-		Marks: path.Strokes{}.Append(
+		Marks: path.Strokes{
+			font.Bold: path.Paths{}.Append(
+				font.StringsPaths(leftLabels, font.AlignCenter, labelShift).
+					Transform(geom.MoveXY(-7, -2.9).RotateD(-90).Scale(labelScale)),
+				font.StringsPaths(centerLabels, font.AlignCenter, labelShift).
+					Transform(geom.MoveXY(0, -13.65).Scale(labelScale)),
+				font.StringsPaths(rightLabels, font.AlignCenter, labelShift).
+					Transform(geom.MoveXY(7, -2.9).RotateD(90).Scale(labelScale)),
+			),
+		}.Append(
 			font.CenterBold(revision).Transform(geom.MoveXY(-5, -8.1).ScaleXY(0.75, 1)),
 			pcbc.TmnkTech.Transform(geom.MoveXY(5, -8.1).ScaleK(0.75)),
 
 			pcbc.Logo.Transform(geom.MoveXY(0, -8.3).ScaleK(1.2)),
 			font.CenterBold("BC833").Transform(geom.MoveXY(0, -10.4).ScaleK(2)),
 			font.CenterBold("nRF52833").Transform(geom.MoveXY(0, -12.2).ScaleK(1.5)),
-
-			font.CenterBolds(leftLabels, labelShift).
-				Transform(geom.MoveXY(-7.1, -2.9).RotateD(-90).Scale(labelScale)),
-			font.CenterBolds(centerLabels, labelShift).
-				Transform(geom.MoveXY(0, -13.65).Scale(labelScale)),
-			font.CenterBolds(rightLabels, labelShift).
-				Transform(geom.MoveXY(7.1, -2.9).RotateD(90).Scale(labelScale)),
 		),
 	}
 

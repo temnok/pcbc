@@ -5,6 +5,13 @@ import "temnok/pcbc/geom"
 // Paths represent a sequence of paths.
 type Paths []Path
 
+func (paths Paths) Append(others ...Paths) Paths {
+	for _, other := range others {
+		paths = append(paths, other...)
+	}
+	return paths
+}
+
 // Transform returns list of transformed paths.
 func (paths Paths) Transform(transform geom.Transform) Paths {
 	res := make(Paths, len(paths))
