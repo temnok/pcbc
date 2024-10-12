@@ -101,7 +101,7 @@ func (pcb *PCB) SaveEtch(filename string) error {
 	}
 
 	for _, cut := range pcb.component.Cuts {
-		p.Shape = append(p.Shape, lbrn.NewPathWithTabs(2, lbrnCenter, cut))
+		p.Shape = append(p.Shape, lbrn.NewPath(2, lbrnCenter, cut)) // Experiment: no tabs
 	}
 
 	for _, hole := range pcb.component.Holes {
