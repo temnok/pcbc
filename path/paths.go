@@ -63,3 +63,13 @@ func (paths Paths) Bounds() (lt, rb geom.XY) {
 
 	return
 }
+
+func (paths Paths) Resize(delta float64) Paths {
+	res := make(Paths, len(paths))
+
+	for i, path := range paths {
+		res[i] = path.Resize(delta)
+	}
+
+	return res
+}

@@ -88,7 +88,9 @@ func (pcb *PCB) Component(c *lib.Component) {
 	shape.IterateContoursRows(pads, pcb.copper.Set1)
 	extraCopperBrush.IterateContours(pads, pcb.copper.Set1)
 	brush1.IterateContours(pads, pcb.mask.Set1)
-	brush02.IterateContours(pads, pcb.stencil.Set1)
+
+	resizedPads := c.Pads.Resize(-StencilShrink).Transform(bt)
+	brush02.IterateContours(resizedPads, pcb.stencil.Set1)
 
 	// Tracks
 	for brushW, tracks := range (path.Strokes{}).Append(c.Tracks, c.GroundTracks) {

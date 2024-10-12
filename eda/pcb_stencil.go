@@ -4,6 +4,8 @@ import (
 	"temnok/pcbc/lbrn"
 )
 
+const StencilShrink = 0.1
+
 func (pcb *PCB) SaveStencil(filename string) error {
 	p := lbrn.LightBurnProject{
 		CutSetting: []lbrn.CutSetting{
@@ -23,7 +25,8 @@ func (pcb *PCB) SaveStencil(filename string) error {
 		},
 	}
 
-	for _, hole := range pcb.component.Pads {
+	pads := pcb.component.Pads.Resize(-StencilShrink)
+	for _, hole := range pads {
 		p.Shape = append(p.Shape, lbrn.NewPath(0, lbrnCenter, hole))
 	}
 
