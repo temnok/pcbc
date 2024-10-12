@@ -55,13 +55,13 @@ func shortBoard(clear bool) *lib.Component {
 		Clears: clears,
 		Components: lib.Components{
 			pcbc.Board35x45,
-			&lib.Component{
+			{
 				Transform: geom.MoveXY(0, 10.5),
 				Components: lib.Components{
 					ShortBoard,
 				},
 			},
-			&lib.Component{
+			{
 				Transform: geom.MoveXY(0, -10.5).RotateD(180),
 				Components: lib.Components{
 					ShortBoard,

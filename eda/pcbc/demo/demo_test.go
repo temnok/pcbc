@@ -5,60 +5,41 @@ import (
 	"temnok/pcbc/eda"
 	"temnok/pcbc/eda/lib"
 	"temnok/pcbc/eda/pcbc"
-	"temnok/pcbc/eda/pcbc/py32f002a"
+	"temnok/pcbc/eda/pcbc/x2"
 	"temnok/pcbc/geom"
-	"temnok/pcbc/path"
 	"testing"
 )
 
 var demoBoard = &lib.Component{
+	//Clears: path.Paths{path.Rect(36, 46)},
 	Components: lib.Components{
 		pcbc.Board35x45,
 		{
-			Transform: geom.MoveXY(0, 9),
-			Components: lib.Components{
-				py32f002a.QFN16,
-			},
+			Transform: geom.RotateD(-90),
+			Components: lib.ComponentsGrid(3, 5, 10.5, 5.5,
+				x2.X0603WithGround("LED+", "RED 2V", "20mA"),
+				x2.X0603WithGround("LED+", "GRN 3V", "20mA"),
+				x2.X0603WithGround("LED+", "BLU 3V", "20mA"),
+				x2.X0603WithGround("LED+", "YEL 2V", "20mA"),
+				x2.X0603WithGround("LED+", "WHT 3V", "20mA"),
+				x2.X0603("75R", "75 Ohm", "Resistor"),
+				x2.X0603("75R", "75 Ohm", "Resistor"),
+				x2.X0603("K10", "100 Ohm", "Resistor"),
+				x2.X0603("K10", "100 Ohm", "Resistor"),
+				x2.X0603("K15", "150 Ohm", "Resistor"),
+				x2.X0603("K15", "150 Ohm", "Resistor"),
+				x2.X0603("K20", "200 Ohm", "Resistor"),
+				x2.X0603("K20", "200 Ohm", "Resistor"),
+				x2.X0603("K30", "300 Ohm", "Resistor"),
+				x2.X0603("K30", "300 Ohm", "Resistor"),
+			),
 		},
-		{
-			Transform: geom.MoveXY(-6.5, -7),
-			Components: lib.Components{
-				py32f002a.SOP8,
-			},
-		},
-		{
-			Transform: geom.MoveXY(6.5, -7),
-			Components: lib.Components{
-				py32f002a.SOP8,
-			},
-		},
-		//{
-		//	Transform: geom.MoveXY(6.5, -7).RotateD(90),
-		//	Components: lib.Components{
-		//		usbc.Board,
-		//	},
-		//},
 	},
 }
 
-func Test_DemoGroundfill(t *testing.T) {
+func TestDemo(t *testing.T) {
 	pcb := eda.NewPCB(36, 46)
 	pcb.Component(demoBoard)
 
-	assert.NoError(t, pcb.SaveFiles("out/ground/"))
-}
-
-func Test_DemoNormal(t *testing.T) {
-	pcb := eda.NewPCB(36, 46)
-	pcb.Component(&lib.Component{
-		Clears: path.Paths{
-			path.Rect(36, 46),
-		},
-
-		Components: lib.Components{
-			demoBoard,
-		},
-	})
-
-	assert.NoError(t, pcb.SaveFiles("out/normal/"))
+	assert.NoError(t, pcb.SaveFiles("out/"))
 }

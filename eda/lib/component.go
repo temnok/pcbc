@@ -77,3 +77,27 @@ func (c *Component) dump(t geom.Transform, out *Component) {
 	out.Tracks.Append(c.Tracks.Transform(t))
 	out.GroundTracks.Append(c.GroundTracks.Transform(t))
 }
+
+func ComponentsGrid(cols, rows int, dx, dy float64, comps ...*Component) Components {
+	x0, y0 := -0.5*float64(cols-1)*dx, 0.5*float64(rows-1)*dy
+
+	grid := Components{}
+
+	for i := 0; i < rows; i++ {
+		for j := 0; j < cols; j++ {
+			k := i*cols + j
+			if k >= len(comps) {
+				break
+			}
+
+			grid = append(grid, &Component{
+				Transform: geom.MoveXY(x0+float64(j)*dx, y0-float64(i)*dy),
+				Components: Components{
+					comps[k],
+				},
+			})
+		}
+	}
+
+	return grid
+}
