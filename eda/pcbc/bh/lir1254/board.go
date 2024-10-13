@@ -1,4 +1,4 @@
-package bh
+package lir1254
 
 import (
 	"temnok/pcbc/eda"
@@ -11,7 +11,7 @@ import (
 	"temnok/pcbc/path"
 )
 
-var LIR1254 = &lib.Component{
+var Board = &lib.Component{
 	Cuts: path.Paths{
 		path.RoundRect(21, 14, 1),
 	},
@@ -45,18 +45,20 @@ var LIR1254 = &lib.Component{
 			},
 		},
 	},
+
 	Marks: path.Strokes{}.Append(
-		font.CenterBold("LIR1254").Transform(geom.MoveXY(-7.8, 6).ScaleXY(1, 2)),
+		font.CenterBold("Board").Transform(geom.MoveXY(-7.8, 6).ScaleXY(1, 2)),
 		font.CenterBold("COIN BAT").Transform(geom.MoveXY(7.8, 6).ScaleXY(0.9, 2)),
-		pcbc.Logo.Transform(geom.MoveXY(-9.7, 3).ScaleK(0.7)),
-		pcbc.TmnkTech.Transform(geom.MoveXY(9.7, 3).ScaleK(0.6)),
+
+		pcbc.Logo.Transform(geom.MoveXY(-5, -2).ScaleK(1.2)),
+		pcbc.TmnkTech.Transform(geom.MoveXY(5, -2.3).ScaleK(1)),
 	),
 }
 
 func init() {
-	pad := LIR1254.Squash().Pads.Centers()
+	pad := Board.Squash().Pads.Centers()
 
-	LIR1254.Tracks = path.Strokes{
+	Board.Tracks = path.Strokes{
 		0: eda.TrackPaths(
 			eda.Track{pad[0]}.XY(pad[7]),
 			eda.Track{pad[0]}.DX(-0.8).YX(pad[8]),
@@ -64,7 +66,7 @@ func init() {
 		),
 	}
 
-	LIR1254.GroundTracks = path.Strokes{
+	Board.GroundTracks = path.Strokes{
 		0: eda.TrackPaths(
 			eda.Track{pad[10]}.DX(-2).DY(2),
 			eda.Track{pad[10]}.DX(2).DY(2),

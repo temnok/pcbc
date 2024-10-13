@@ -1,4 +1,4 @@
-package bh
+package lir1254
 
 import (
 	"github.com/stretchr/testify/assert"
@@ -15,13 +15,13 @@ var testBoard = &lib.Component{
 		{
 			//Transform: geom.RotateD(-90),
 			Components: lib.ComponentsGrid(1, 1, 10.5, 5.5,
-				LIR1254,
+				Board,
 			),
 		},
 	},
 }
 
-func TestBatteryHolder(t *testing.T) {
+func TestBoard(t *testing.T) {
 	pcb := eda.NewPCB(36, 46)
 	pcb.Component(testBoard)
 	assert.NoError(t, pcb.SaveFiles("out/"))

@@ -170,7 +170,7 @@ func board(short bool) *lib.Component {
 			),
 		}.Append(
 			font.CenterBold(revision).Transform(geom.MoveXY(-5, -8.1).ScaleXY(0.75, 1)),
-			pcbc.TmnkTech.Transform(geom.MoveXY(5, -8.1).ScaleK(0.75)),
+			pcbc.TmnkTech.Transform(geom.MoveXY(5, -8.1).ScaleK(1)),
 
 			pcbc.Logo.Transform(geom.MoveXY(0, -8.3).ScaleK(1.2)),
 			font.CenterBold("BC833").Transform(geom.MoveXY(0, -10.4).ScaleK(2)),
