@@ -16,10 +16,17 @@ func TestBoard(t *testing.T) {
 
 	pcb.Component(&lib.Component{
 		Pads: path.Paths{
-			path.Circle(0.5).Transform(geom.MoveXY(x, y)),
-			path.Circle(0.5).Transform(geom.MoveXY(x, -y)),
-			path.Circle(0.5).Transform(geom.MoveXY(-x, -y)),
-			path.Circle(0.5).Transform(geom.MoveXY(-x, y)),
+			path.Rect(0.5, 2).Transform(geom.MoveXY(x, y)),
+			path.Rect(2, 0.5).Transform(geom.MoveXY(x, y)),
+
+			path.Rect(0.5, 2).Transform(geom.MoveXY(x, -y)),
+			path.Rect(2, 0.5).Transform(geom.MoveXY(x, -y)),
+
+			path.Rect(0.5, 2).Transform(geom.MoveXY(-x, -y)),
+			path.Rect(2, 0.5).Transform(geom.MoveXY(-x, -y)),
+
+			path.Rect(0.5, 2).Transform(geom.MoveXY(-x, y)),
+			path.Rect(2, 0.5).Transform(geom.MoveXY(-x, y)),
 		},
 		Components: lib.Components{
 			BC833,
