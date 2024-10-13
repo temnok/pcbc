@@ -37,9 +37,7 @@ var Hyp1TS026A = &lib.Component{
 	},
 	Marks: path.Strokes{}.Append(
 		font.CenterBold("SW").Transform(geom.MoveXY(0, 2).ScaleK(1.5)),
-		font.CenterBold("1TS026A").Transform(geom.MoveXY(0, -2.2).ScaleXY(0.6, 1)),
-		pcbc.Logo.Transform(geom.MoveXY(3, 2.2).ScaleK(0.5)),
-		pcbc.TmnkTech.Transform(geom.MoveXY(3, -2.2).ScaleK(0.5)),
+		pcbc.Logo.Transform(geom.MoveXY(0, -1.9).ScaleK(0.7)),
 	),
 }
 
