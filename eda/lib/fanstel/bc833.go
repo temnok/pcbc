@@ -40,7 +40,7 @@ var (
 			26: pad.Transform(geom.MoveXY(0.5, 1.8)),
 			27: pad.Transform(geom.MoveXY(-0.5, 2.8)),
 			28: pad.Transform(geom.MoveXY(-0.5, 1.8)),
-		}.Transform(geom.MoveXY(0, 1.88-14.3/2)),
+		}.Transform(geom.MoveXY(0, 1.9-14.3/2)),
 
 		Marks: path.Strokes{
 			0.2: {
