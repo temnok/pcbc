@@ -69,6 +69,21 @@ func (path Path) Clone(n int, dx, dy float64) Paths {
 	return paths
 }
 
+func (path Path) CloneColsRows(cols, rows int, step geom.XY) Paths {
+	paths := make(Paths, 0, cols*rows)
+
+	x0, y0 := -0.5*float64(cols-1)*step.X, -0.5*float64(rows-1)*step.Y
+
+	for i := 0; i < rows; i++ {
+		for j := 0; j < cols; j++ {
+			x, y := x0+float64(j)*step.X, y0+float64(i)*step.Y
+			paths = append(paths, path.Transform(geom.MoveXY(x, y)))
+		}
+	}
+
+	return paths
+}
+
 func (path Path) Center() geom.XY {
 	mi, ma := path.Bounds()
 

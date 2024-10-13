@@ -11,7 +11,7 @@ import (
 	"temnok/pcbc/path"
 )
 
-var LIR1254 = (&lib.Component{
+var LIR1254 = &lib.Component{
 	Cuts: path.Paths{
 		path.RoundRect(21, 14, 1),
 	},
@@ -51,20 +51,20 @@ var LIR1254 = (&lib.Component{
 		pcbc.Logo.Transform(geom.MoveXY(-9.7, 3).ScaleK(0.7)),
 		pcbc.TmnkTech.Transform(geom.MoveXY(9.7, 3).ScaleK(0.6)),
 	),
-}).Squash()
+}
 
 func init() {
-	pad := LIR1254.Pads.Centers()
+	pad := LIR1254.Squash().Pads.Centers()
 
-	LIR1254.Tracks = LIR1254.Tracks.Append(path.Strokes{
+	LIR1254.Tracks = path.Strokes{
 		0: eda.TrackPaths(
 			eda.Track{pad[0]}.XY(pad[7]),
 			eda.Track{pad[0]}.DX(-0.8).YX(pad[8]),
 			eda.Track{pad[7]}.DX(0.8).YX(pad[9]),
 		),
-	})
+	}
 
-	LIR1254.GroundTracks = LIR1254.GroundTracks.Append(path.Strokes{
+	LIR1254.GroundTracks = path.Strokes{
 		0: eda.TrackPaths(
 			eda.Track{pad[10]}.DX(-2).DY(2),
 			eda.Track{pad[10]}.DX(2).DY(2),
@@ -73,5 +73,5 @@ func init() {
 			eda.Track{pad[10]}.YX(pad[19]),
 			eda.Track{pad[16]}.YX(pad[21]),
 		),
-	})
+	}
 }
