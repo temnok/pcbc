@@ -17,7 +17,7 @@
 * Pale Green: soldermask marks (silkscreen)
 * White: stencil cuts
 
-![PCB Design Overview](eda/pcbc/py32f002a/out/qfn16/overview.png)
+![PCB Design Overview](eda/pcbc/py32f002a/gen/qfn16/overview.png)
 
 ![PCB Without components](eda/pcbc/img/py32f002a-pcb.jpg)
 

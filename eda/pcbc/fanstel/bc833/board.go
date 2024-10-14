@@ -75,31 +75,32 @@ func board(short bool) *lib.Component {
 	labelScale := geom.XY{0.8, 1.3}
 
 	tracks := eda.TrackPaths(
-		eda.Track{pin[8]}.DX(1.3).DY(3.5).DY(1.4).DX(-5.4).DY(1.5).YX(pad[0]),
-		eda.Track{pin[7]}.DX(0.7).DY(3.3).DX(-1).XY(pad[1]),
-		eda.Track{pin[6]}.DY(1.7).DX(-0.5).XY(pad[2]),
-		eda.Track{pin[1]}.XY(pad[3]),
-		eda.Track{pin[2]}.YX(pad[4]),
-		eda.Track{pin[3]}.YX(pad[5]),
-		eda.Track{pin[4]}.DX(-3.1).YX(pad[6]),
+		eda.Track{pad[0]}.DX(1.5).DY(-4.7).DX(1.6).DX(3.7).DY(-1.2).YX(pin[8]),
+		eda.Track{pad[1]}.DY(-2.75).DX(5.3).DX(0.9).YX(pin[7]),
+		eda.Track{pad[2]}.DY(-0.8).DX(5).XY(pin[6]),
+		eda.Track{pad[3]}.YX(pin[1]),
+		eda.Track{pad[4]}.XY(pin[2]),
+		eda.Track{pad[5]}.XY(pin[3]),
+		eda.Track{pad[6]}.DX(1.5).YX(pin[4]),
 
-		eda.Track{pin[21]}.DY(-2.7).DX(-4.6).DX(-1).DY(-7.6).DY(-1.9).XY(pad[8]),
-		eda.Track{pin[20]}.DY(-2.3).DX(-4.3).DX(-0.7).DY(-7.4).DY(-2.1).XY(pad[9]),
-		eda.Track{pin[9]}.DX(-0.4).YX(pad[10]),
-		eda.Track{pin[10]}.DX(-0.8).YX(pad[11]),
-		eda.Track{pin[11]}.DX(-1.2).YX(pad[12]),
-		eda.Track{pin[12]}.DX(-1.6).YX(pad[13]),
-		eda.Track{pin[13]}.DX(-2.0).DY(-8.8).DX(2.1).XY(pad[14]),
-		eda.Track{pin[14]}.DX(-2.4).DY(-8.2).DX(1.9).XY(pad[15]),
+		eda.Track{pad[8]}.DY(2.1).X(-3.5).X(-2.1).DY(8).DY(1.1).XY(pin[21]),
+		eda.Track{pad[9]}.DY(1.5).X(-3.2).X(-1.5).DY(8.2).DY(0.9).XY(pin[20]),
+		eda.Track{pad[10]}.X(-0.9).YX(pin[9]),
+		eda.Track{pad[11]}.X(-0.3).YX(pin[10]),
 
-		eda.Track{pin[19]}.DX(3.5).YX(pad[16]),
-		eda.Track{pin[15]}.DX(3.1).YX(pad[17]),
-		eda.Track{pin[16]}.YX(pad[18]),
-		eda.Track{pin[17]}.YX(pad[19]),
-		eda.Track{pin[18]}.XY(pad[20]),
-		eda.Track{pin[22]}.DY(0.7).XY(pad[21]),
-		eda.Track{pin[23]}.DY(1.3).XY(pad[22]),
-		eda.Track{pin[24]}.DY(1.9).DX(6.1).DY(1.5).YX(pad[23]),
+		eda.Track{pad[12]}.X(0.3).YX(pin[11]),
+		eda.Track{pad[13]}.X(0.9).YX(pin[12]),
+		eda.Track{pad[14]}.DY(1.5).X(3.2).X(1.5).YX(pin[13]),
+		eda.Track{pad[15]}.DY(2.1).X(3.5).X(2.1).YX(pin[14]),
+
+		eda.Track{pad[16]}.DX(-2.1).YX(pin[19]),
+		eda.Track{pad[17]}.DX(-1.5).YX(pin[15]),
+		eda.Track{pad[18]}.XY(pin[16]),
+		eda.Track{pad[19]}.XY(pin[17]),
+		eda.Track{pad[20]}.YX(pin[18]),
+		eda.Track{pad[21]}.DY(-0.8).XY(pin[22]),
+		eda.Track{pad[22]}.DY(-2.75).XY(pin[23]),
+		eda.Track{pad[23]}.DX(-1.5).DY(-4.7).DX(-1.5).XY(pin[24]),
 	)
 
 	leftLabels := []string{"P031", "P030", "P029", "VDD", "P003", "P002", "P028", "GND"}
@@ -149,11 +150,12 @@ func board(short bool) *lib.Component {
 
 		GroundTracks: path.Strokes{
 			0: eda.TrackPaths(
-				eda.Track{pin[5]}.DX(-2.5).YX(pad[7]),
-				eda.Track{pin[5]}.DX(2).YX(pin[28]).XY(pin[26]).XY(pin[25]).YX(pin[27]).XY(pin[28]),
+				eda.Track{pad[7]}.DX(2.1).YX(pin[5]),
+				eda.Track{pad[7]}.XY(leftMount),
 
-				eda.Track{leftMount}.YX(pad[7]),
-				eda.Track{leftMount}.DX(1.5).DY(6.1).YX(pin[27]),
+				eda.Track{pin[5]}.DX(3).YX(pin[27]).XY(pin[25]).XY(pin[26]).YX(pin[28]).XY(pin[27]),
+
+				eda.Track{leftMount}.DX(1.5).DY(4.75).YX(pin[28]),
 				eda.Track{rightMount}.DX(-1.3).DY(1.3),
 				eda.Track{rightMount}.DX(1.3).DY(-1.3),
 			),

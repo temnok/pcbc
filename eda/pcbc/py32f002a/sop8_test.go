@@ -36,5 +36,5 @@ func Test_SOP8(t *testing.T) {
 		},
 	})
 
-	assert.NoError(t, pcb.SaveFiles("out/sop8/"))
+	assert.NoError(t, pcb.SaveFiles("gen/sop8/"))
 }

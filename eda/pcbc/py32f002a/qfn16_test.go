@@ -44,5 +44,5 @@ func Test_QFN16(t *testing.T) {
 		},
 	})
 
-	assert.NoError(t, pcb.SaveFiles("out/qfn16/"))
+	assert.NoError(t, pcb.SaveFiles("gen/qfn16/"))
 }

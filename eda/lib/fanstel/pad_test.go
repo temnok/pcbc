@@ -33,5 +33,5 @@ func TestBoard(t *testing.T) {
 		},
 	})
 
-	assert.NoError(t, pcb.SaveFiles("out/"))
+	assert.NoError(t, pcb.SaveFiles("gen/"))
 }

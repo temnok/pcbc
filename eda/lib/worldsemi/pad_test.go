@@ -11,5 +11,5 @@ func TestBoard(t *testing.T) {
 
 	pcb.Component(WS2812B_2020)
 
-	assert.NoError(t, pcb.SaveFiles("out/"))
+	assert.NoError(t, pcb.SaveFiles("gen/"))
 }

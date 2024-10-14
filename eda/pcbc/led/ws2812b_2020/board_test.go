@@ -35,5 +35,5 @@ func TestBoard(t *testing.T) {
 	pcb := eda.NewPCB(36, 46)
 	pcb.Component(testBoard)
 
-	assert.NoError(t, pcb.SaveFiles("out/"))
+	assert.NoError(t, pcb.SaveFiles("gen/"))
 }

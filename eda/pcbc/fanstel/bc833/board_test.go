@@ -19,13 +19,13 @@ func Test_BC833Normal(t *testing.T) {
 			Board,
 		},
 	})
-	assert.NoError(t, pcb.SaveFiles("out/normal/"))
+	assert.NoError(t, pcb.SaveFiles("gen/normal/"))
 }
 
 func Test_BC833NormalShort(t *testing.T) {
 	pcb := eda.NewPCB(36, 46)
 	pcb.Component(shortBoard(true))
-	assert.NoError(t, pcb.SaveFiles("out/normal-short/"))
+	assert.NoError(t, pcb.SaveFiles("gen/normal-short/"))
 }
 
 func Test_BC833(t *testing.T) {
@@ -36,13 +36,13 @@ func Test_BC833(t *testing.T) {
 			Board,
 		},
 	})
-	assert.NoError(t, pcb.SaveFiles("out/ground/"))
+	assert.NoError(t, pcb.SaveFiles("gen/ground/"))
 }
 
 func Test_BC833Short(t *testing.T) {
 	pcb := eda.NewPCB(36, 46)
 	pcb.Component(shortBoard(false))
-	assert.NoError(t, pcb.SaveFiles("out/ground-short/"))
+	assert.NoError(t, pcb.SaveFiles("gen/ground-short/"))
 }
 
 func shortBoard(clear bool) *lib.Component {
