@@ -9,9 +9,9 @@ import (
 var QFN16G *lib.Component
 
 func init() {
-	pad := path.RoundRect(0.7, 0.25, 0.12)
+	pad := path.RoundRect(0.65, 0.25, 0.12)
 
-	col := pad.Clone(4, 0, -0.5).Transform(geom.MoveXY(-1.5, 0))
+	col := pad.Clone(4, 0, -0.5).Transform(geom.MoveXY(-1.55, 0))
 
 	pads := path.Paths{}
 	for a := 0.0; a < 360; a += 90 {
@@ -22,7 +22,7 @@ func init() {
 
 	QFN16G = &lib.Component{
 		Clears: path.Paths{
-			path.Rect(2, 2),
+			path.Rect(2.2, 2.2),
 		},
 
 		Pads: pads,

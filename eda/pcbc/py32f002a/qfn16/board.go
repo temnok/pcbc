@@ -31,7 +31,7 @@ var (
 			0: eda.TrackPaths(
 				eda.Track{pads[0]}.Y(-2.5).X(-4.9).Y(-2).XY(pins[0]),
 				eda.Track{pads[1]}.Y(-2.5).XY(pins[1]),
-				eda.Track{pads[2]}.Y(-3).XY(pins[2]),
+				eda.Track{pads[2]}.YX(pins[2]),
 				eda.Track{pads[3]}.X(-1.25).YX(pins[3]),
 				eda.Track{pads[4]}.X(1.25).YX(pins[4]),
 				eda.Track{pads[5]}.YX(pins[5]),
@@ -40,7 +40,7 @@ var (
 			),
 		},
 		GroundTracks: path.Strokes{
-			0: eda.TrackPaths(
+			0.16: eda.TrackPaths(
 				eda.Track{{9.5, 0}}.X(pins[16].X),
 			),
 		},
