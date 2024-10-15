@@ -47,7 +47,7 @@ var Board = &lib.Component{
 	},
 
 	Marks: path.Strokes{}.Append(
-		font.CenterBold("Board").Transform(geom.MoveXY(-7.8, 6).ScaleXY(1, 2)),
+		font.CenterBold("LIR1254").Transform(geom.MoveXY(-7.8, 6).ScaleXY(1, 2)),
 		font.CenterBold("COIN BAT").Transform(geom.MoveXY(7.8, 6).ScaleXY(0.9, 2)),
 
 		pcbc.Logo.Transform(geom.MoveXY(-5, -2).ScaleK(1.2)),

@@ -1,4 +1,4 @@
-package py32f002a
+package sop8
 
 import (
 	"temnok/pcbc/eda"
@@ -11,7 +11,7 @@ import (
 	"temnok/pcbc/path"
 )
 
-var SOP8 *lib.Component
+var Board *lib.Component
 
 func init() {
 	chipTransform := geom.MoveXY(2.3, 0)
@@ -115,5 +115,5 @@ func init() {
 		)
 	}
 
-	SOP8 = board
+	Board = board
 }

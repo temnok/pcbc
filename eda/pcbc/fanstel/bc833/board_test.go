@@ -6,27 +6,8 @@ import (
 	"temnok/pcbc/eda/lib"
 	"temnok/pcbc/eda/pcbc"
 	"temnok/pcbc/geom"
-	"temnok/pcbc/path"
 	"testing"
 )
-
-func Test_BC833Normal(t *testing.T) {
-	pcb := eda.NewPCB(36, 46)
-	pcb.Component(&lib.Component{
-		Clears: path.Paths{path.Rect(36, 46)},
-		Components: lib.Components{
-			pcbc.Board35x45,
-			Board,
-		},
-	})
-	assert.NoError(t, pcb.SaveFiles("gen/normal/"))
-}
-
-func Test_BC833NormalShort(t *testing.T) {
-	pcb := eda.NewPCB(36, 46)
-	pcb.Component(shortBoard(true))
-	assert.NoError(t, pcb.SaveFiles("gen/normal-short/"))
-}
 
 func Test_BC833(t *testing.T) {
 	pcb := eda.NewPCB(36, 46)
@@ -36,23 +17,12 @@ func Test_BC833(t *testing.T) {
 			Board,
 		},
 	})
-	assert.NoError(t, pcb.SaveFiles("gen/ground/"))
+	assert.NoError(t, pcb.SaveFiles("gen/long/"))
 }
 
 func Test_BC833Short(t *testing.T) {
 	pcb := eda.NewPCB(36, 46)
-	pcb.Component(shortBoard(false))
-	assert.NoError(t, pcb.SaveFiles("gen/ground-short/"))
-}
-
-func shortBoard(clear bool) *lib.Component {
-	clears := path.Paths{path.Rect(36, 46)}
-	if !clear {
-		clears = nil
-	}
-
-	return &lib.Component{
-		Clears: clears,
+	pcb.Component(&lib.Component{
 		Components: lib.Components{
 			pcbc.Board35x45,
 			{
@@ -68,5 +38,6 @@ func shortBoard(clear bool) *lib.Component {
 				},
 			},
 		},
-	}
+	})
+	assert.NoError(t, pcb.SaveFiles("gen/short/"))
 }
