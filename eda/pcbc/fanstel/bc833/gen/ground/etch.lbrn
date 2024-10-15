@@ -15,7 +15,7 @@
 		<useDotCorrection Value=""></useDotCorrection>
 		<dotWidth Value=""></dotWidth>
 		<tabsEnabled Value="1"></tabsEnabled>
-		<tabSize Value="0.2"></tabSize>
+		<tabSize Value="0.1"></tabSize>
 		<crossHatch Value=""></crossHatch>
 		<angle Value=""></angle>
 		<negative Value=""></negative>
@@ -97,7 +97,7 @@
 	</Shape>
 	<Shape Type="Path" CutIndex="2">
 		<XForm>1 0 0 1 55 55</XForm>
-		<Tabs></Tabs>
+		<Tabs>0,22.5 -17.5,0 0,-22.5 17.5,0</Tabs>
 		<V vx="17.5" vy="20" c0x="17.5" c0y="21.380711874576985"></V>
 		<V vx="15" vy="22.5" c1x="16.380711874576985" c1y="22.5"></V>
 		<V vx="-15" vy="22.5" c0x="-16.380711874576985" c0y="22.5"></V>
@@ -118,7 +118,7 @@
 	</Shape>
 	<Shape Type="Path" CutIndex="2">
 		<XForm>1 0 0 1 55 55</XForm>
-		<Tabs></Tabs>
+		<Tabs>0,12.3 -10.5,0 0,-12.3 10.5,0</Tabs>
 		<V vx="10.5" vy="11.3" c0x="10.5" c0y="11.852284749830794"></V>
 		<V vx="9.5" vy="12.3" c1x="10.052284749830793" c1y="12.3"></V>
 		<V vx="-9.5" vy="12.3" c0x="-10.052284749830793" c0y="12.3"></V>

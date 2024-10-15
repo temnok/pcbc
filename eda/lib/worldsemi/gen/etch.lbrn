@@ -15,7 +15,7 @@
 		<useDotCorrection Value=""></useDotCorrection>
 		<dotWidth Value=""></dotWidth>
 		<tabsEnabled Value="1"></tabsEnabled>
-		<tabSize Value="0.2"></tabSize>
+		<tabSize Value="0.1"></tabSize>
 		<crossHatch Value=""></crossHatch>
 		<angle Value=""></angle>
 		<negative Value=""></negative>

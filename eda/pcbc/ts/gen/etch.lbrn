@@ -15,7 +15,7 @@
 		<useDotCorrection Value=""></useDotCorrection>
 		<dotWidth Value=""></dotWidth>
 		<tabsEnabled Value="1"></tabsEnabled>
-		<tabSize Value="0.2"></tabSize>
+		<tabSize Value="0.1"></tabSize>
 		<crossHatch Value=""></crossHatch>
 		<angle Value=""></angle>
 		<negative Value=""></negative>
@@ -97,7 +97,7 @@
 	</Shape>
 	<Shape Type="Path" CutIndex="2">
 		<XForm>1 0 0 1 55 55</XForm>
-		<Tabs></Tabs>
+		<Tabs>0,22.5 -17.5,0 0,-22.5 17.5,0</Tabs>
 		<V vx="17.5" vy="20" c0x="17.5" c0y="21.380711874576985"></V>
 		<V vx="15" vy="22.5" c1x="16.380711874576985" c1y="22.5"></V>
 		<V vx="-15" vy="22.5" c0x="-16.380711874576985" c0y="22.5"></V>
@@ -118,7 +118,7 @@
 	</Shape>
 	<Shape Type="Path" CutIndex="2">
 		<XForm>1 0 0 1 55 55</XForm>
-		<Tabs></Tabs>
+		<Tabs>0,15 -10.5,8 0,1 10.5,8</Tabs>
 		<V vx="10.5" vy="14" c0x="10.5" c0y="14.552284749830793"></V>
 		<V vx="9.5" vy="15" c1x="10.052284749830793" c1y="15"></V>
 		<V vx="-9.5" vy="15" c0x="-10.052284749830793" c0y="15"></V>
@@ -139,7 +139,7 @@
 	</Shape>
 	<Shape Type="Path" CutIndex="2">
 		<XForm>1 0 0 1 55 55</XForm>
-		<Tabs></Tabs>
+		<Tabs>-5.5,-0.75 -10.25,-4 -5.5,-7.25 -0.75,-4</Tabs>
 		<V vx="-0.75" vy="-1.75" c0x="-0.75" c0y="-1.1977152501692063"></V>
 		<V vx="-1.75" vy="-0.75" c1x="-1.1977152501692068" c1y="-0.75"></V>
 		<V vx="-9.25" vy="-0.75" c0x="-9.802284749830793" c0y="-0.75"></V>
@@ -160,7 +160,7 @@
 	</Shape>
 	<Shape Type="Path" CutIndex="2">
 		<XForm>1 0 0 1 55 55</XForm>
-		<Tabs></Tabs>
+		<Tabs>5.5,-0.75 0.75,-4 5.5,-7.25 10.25,-4</Tabs>
 		<V vx="10.25" vy="-1.75" c0x="10.25" c0y="-1.1977152501692063"></V>
 		<V vx="9.25" vy="-0.75" c1x="9.802284749830793" c1y="-0.75"></V>
 		<V vx="1.75" vy="-0.75" c0x="1.1977152501692068" c0y="-0.75"></V>
@@ -181,7 +181,7 @@
 	</Shape>
 	<Shape Type="Path" CutIndex="2">
 		<XForm>1 0 0 1 55 55</XForm>
-		<Tabs></Tabs>
+		<Tabs>-5.5,-8.75 -10.25,-12 -5.5,-15.25 -0.75,-12</Tabs>
 		<V vx="-0.75" vy="-9.75" c0x="-0.75" c0y="-9.197715250169207"></V>
 		<V vx="-1.75" vy="-8.75" c1x="-1.1977152501692068" c1y="-8.75"></V>
 		<V vx="-9.25" vy="-8.75" c0x="-9.802284749830793" c0y="-8.75"></V>
@@ -202,7 +202,7 @@
 	</Shape>
 	<Shape Type="Path" CutIndex="2">
 		<XForm>1 0 0 1 55 55</XForm>
-		<Tabs></Tabs>
+		<Tabs>5.5,-8.75 0.75,-12 5.5,-15.25 10.25,-12</Tabs>
 		<V vx="10.25" vy="-9.75" c0x="10.25" c0y="-9.197715250169207"></V>
 		<V vx="9.25" vy="-8.75" c1x="9.802284749830793" c1y="-8.75"></V>
 		<V vx="1.75" vy="-8.75" c0x="1.1977152501692068" c0y="-8.75"></V>

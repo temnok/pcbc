@@ -90,7 +90,7 @@ func (pcb *PCB) SaveEtch(filename string) error {
 				Frequency:   Param{"20000"},
 
 				TabsEnabled: Param{"1"},
-				TabSize:     Param{"0.2"},
+				TabSize:     Param{"0.1"},
 			},
 		},
 		Shape: []*lbrn.Shape{
@@ -101,7 +101,7 @@ func (pcb *PCB) SaveEtch(filename string) error {
 	}
 
 	for _, cut := range pcb.component.Cuts {
-		p.Shape = append(p.Shape, lbrn.NewPath(2, lbrnCenter, cut)) // Experiment: no tabs
+		p.Shape = append(p.Shape, lbrn.NewPathWithTabs(2, lbrnCenter, cut))
 	}
 
 	for _, hole := range pcb.component.Holes {
