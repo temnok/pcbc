@@ -64,7 +64,7 @@ func (pcb *PCB) Component(c *lib.Component) {
 	clearBrush := shape.Circle(int(clearBrushW * pcb.resolution))
 
 	const extraCopper = 0.05 // compensate copper lost during etching
-	extraCopperBrush := shape.Circle(int(extraCopper * pcb.resolution))
+	//extraCopperBrush := shape.Circle(int(extraCopper * pcb.resolution))
 
 	cutClearBrush := shape.Circle(int((clearBrushW/2 - extraCopper) * pcb.resolution))
 
@@ -86,11 +86,11 @@ func (pcb *PCB) Component(c *lib.Component) {
 
 	// Pads
 	shape.IterateContoursRows(pads, pcb.copper.Set1)
-	extraCopperBrush.IterateContours(pads, pcb.copper.Set1)
+	//extraCopperBrush.IterateContours(pads, pcb.copper.Set1)
 	brush1.IterateContours(pads, pcb.mask.Set1)
 
-	resizedPads := c.Pads.Resize(-StencilShrink).Transform(bt)
-	brush02.IterateContours(resizedPads, pcb.stencil.Set1)
+	//resizedPads := c.Pads.Resize(-StencilShrink).Transform(bt)
+	brush02.IterateContours(pads, pcb.stencil.Set1)
 
 	// Tracks
 	for brushW, tracks := range (path.Strokes{}).Append(c.Tracks, c.GroundTracks) {
