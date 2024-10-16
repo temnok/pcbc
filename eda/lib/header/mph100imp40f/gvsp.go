@@ -18,7 +18,7 @@ func G_V_SP(n int) *lib.Component {
 	const tenth = 2.54
 
 	return &lib.Component{
-		Pads: path.Circle(1.5).Clone(n, tenth, 0),
+		Pads: path.Circle(1.8).Clone(n, tenth, 0),
 		Marks: path.Strokes{
 			0.1: path.CutRect(tenth, tenth, 0.3).Clone(n, tenth, 0),
 		},
