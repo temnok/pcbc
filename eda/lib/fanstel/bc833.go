@@ -7,7 +7,7 @@ import (
 )
 
 var (
-	pad = path.Circle(0.5)
+	pad = path.Circle(0.6)
 
 	BC833 = &lib.Component{
 		Pads: path.Paths{
