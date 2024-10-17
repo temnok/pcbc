@@ -13,7 +13,7 @@ import (
 
 var (
 	labelShift = geom.XY{2.54 / 0.8, 0}
-	labelScale = geom.XY{0.8, 2}
+	labelScale = geom.XY{0.8, 1.8}
 
 	chip = &lib.Component{
 		Transform: geom.MoveXY(0, 3.9),
@@ -134,15 +134,15 @@ var (
 
 		GroundTracks: path.Strokes{
 			0: eda.TrackPaths(
-				eda.Track{pin[4]}.DX(-0.8),
+				eda.Track{pin[4]}.DX(-1),
 				eda.Track{pin[4]}.DX(1).DX(1.2).DY(-10.9).DX(-4).YX(pad[9]),
-				eda.Track{pin[15]}.DY(0.8),
-				eda.Track{pin[15]}.DY(-0.8),
+				eda.Track{pin[15]}.DY(1),
+				eda.Track{pin[15]}.DY(-1),
 				eda.Track{pad[9]}.DX(-0.8).DY(-0.8),
-				eda.Track{mountPad[0]}.DX(0.5),
-				eda.Track{mountPad[3]}.DX(-0.5),
-				eda.Track{mountPad[6]}.DX(0.5),
-				eda.Track{mountPad[9]}.DX(-0.5),
+				eda.Track{mountPad[0]}.DX(0.8),
+				eda.Track{mountPad[3]}.DX(-0.8),
+				eda.Track{mountPad[6]}.DX(0.8),
+				eda.Track{mountPad[9]}.DX(-0.8),
 			),
 		},
 

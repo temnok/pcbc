@@ -12,8 +12,8 @@ var E73 *lib.Component
 
 func init() {
 	const (
-		padInW       = 0.5
-		padOutW      = 0.5
+		padInW       = 0.7
+		padOutW      = 0.7
 		padW         = padInW + padOutW
 		padH         = 0.8
 		padStep      = 1.27
@@ -28,7 +28,7 @@ func init() {
 		padVShift = (componentH-(padRows*padStep-padGap))/2 - padBottomGap
 	)
 
-	pad := path.RoundRect(padW, padH, 0.1)
+	pad := path.RoundRect(padW, padH, 0.2)
 
 	E73 = &lib.Component{
 		Marks: path.Strokes{
