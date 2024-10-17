@@ -20,10 +20,10 @@ func TestFont_SavePng(t *testing.T) {
 		for j := 0; j < 16; j++ {
 			c := (i+2)*16 + j
 
-			transform := geom.ScaleK(scale).MoveXY(float64(j)*Width, float64(6-i))
+			transform := geom.ScaleXY(scale, -scale).MoveXY(float64(j)*Width, float64(-i))
 			brush.IterateContours(Paths[c].Transform(transform), bm.Set1)
 		}
 	}
 
-	assert.NoError(t, util.SaveTmpPng("font.png", bm.ToImage(color.White, color.Black)))
+	assert.NoError(t, util.SavePng("gen/font.png", bm.ToImage(color.Black, color.White)))
 }
