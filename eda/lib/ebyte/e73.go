@@ -28,7 +28,7 @@ func init() {
 		padVShift = (componentH-(padRows*padStep-padGap))/2 - padBottomGap
 	)
 
-	pad := path.Rect(padW, padH)
+	pad := path.RoundRect(padW, padH, 0.1)
 
 	E73 = &lib.Component{
 		Marks: path.Strokes{
@@ -37,6 +37,7 @@ func init() {
 
 		Pads: path.Paths.Append(
 			pad.Clone(padRows, 0, padStep).Transform(geom.MoveXY(-padHShift, -padVShift).RotateD(180)),
+			pad.Clone(8, 0, padStep).Transform(geom.MoveXY(0, -componentH/2).RotateD(-90)),
 			pad.Clone(padRows, 0, padStep).Transform(geom.MoveXY(padHShift, -padVShift)),
 		),
 	}
