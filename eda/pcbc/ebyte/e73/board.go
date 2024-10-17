@@ -50,13 +50,13 @@ var (
 		Marks: path.Strokes{
 			font.Bold: path.Paths{}.Append(
 				font.StringsPaths([]string{
-					"P111", "P110", "P003", "AI4", "AI0", "AI5", "AI7", "AI6", "P113",
+					"P111", "P110", "P003", "P028", "P002", "P029", "P031", "P030", "P113",
 				}, font.AlignCenter, labelShift).Transform(geom.MoveXY(-8.1, -1).RotateD(-90).Scale(labelScale)),
 				font.StringsPaths([]string{
-					"GND", "XL1", "XL2", "AI3", "P109", "VDD", "VDDH", "DCCH", "P024",
+					"GND", "P000", "P001", "P005", "P109", "VDD", "VDDH", "DCCH", "P024",
 				}, font.AlignCenter, labelShift).Transform(geom.MoveXY(0, -13.2).Scale(labelScale)),
 				font.StringsPaths([]string{
-					"P013", "P018", "VBUS", "D-", "D+", "SWD", "SWC", "NF1", "NF2",
+					"P013", "P018", "VBUS", "D-", "D+", "SWD", "SWC", "P009", "P010",
 				}, font.AlignCenter, labelShift).Transform(geom.MoveXY(8.1, -1).RotateD(90).Scale(labelScale)),
 			),
 		},
@@ -151,7 +151,7 @@ var (
 			pcbc.TmnkTech.Transform(geom.MoveXY(6.3, -6)),
 			font.CenterBold("E73").Transform(geom.MoveXY(-2.5, -6.8).ScaleXY(1.2, 2)),
 			font.CenterBold("-2G4M08S1C").Transform(geom.MoveXY(1.2, -6.8).ScaleXY(0.8, 2)),
-			font.CenterBold("nRF52840").Transform(geom.MoveXY(0, -8.4).ScaleXY(1.3, 2)),
+			font.CenterBold("nRF52840").Transform(geom.MoveXY(0, -8.4).ScaleXY(1.4, 2)),
 		),
 	}
 )
