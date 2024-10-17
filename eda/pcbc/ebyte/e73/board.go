@@ -6,13 +6,14 @@ import (
 	"temnok/pcbc/eda/lib/ebyte"
 	"temnok/pcbc/eda/lib/header/mph100imp40f"
 	"temnok/pcbc/eda/pcbc"
+	"temnok/pcbc/font"
 	"temnok/pcbc/geom"
 	"temnok/pcbc/path"
 )
 
 var (
 	labelShift = geom.XY{2.54 / 0.8, 0}
-	labelScale = geom.XY{0.8, 1.8}
+	labelScale = geom.XY{0.8, 2}
 
 	chip = &lib.Component{
 		Transform: geom.MoveXY(0, 3.9),
@@ -46,34 +47,33 @@ var (
 				},
 			},
 		},
-		//Marks: path.Strokes{
-		//	font.Bold: path.Paths{}.Append(
-		//		font.StringsPaths([]string{
-		//			"P113", "P115", "P002", "P029", "P031", "P109", "P012", "GND",
-		//		}, font.AlignCenter, labelShift).Transform(geom.MoveXY(-10.6, -1).RotateD(-90).Scale(labelScale)),
-		//		font.StringsPaths([]string{
-		//			"VDD", "P008", "P006", "P004", "P026", "P024", "P022", "P020", "P018", "P015", "VDDH",
-		//		}, font.AlignCenter, labelShift).Transform(geom.MoveXY(0, -11.95).Scale(labelScale)),
-		//		font.StringsPaths([]string{
-		//			"D-", "D+", "P013", "P100", "SWD", "SWC", "P009", "P010",
-		//		}, font.AlignCenter, labelShift).Transform(geom.MoveXY(10.6, -1).RotateD(90).Scale(labelScale)),
-		//	),
-		//},
+		Marks: path.Strokes{
+			font.Bold: path.Paths{}.Append(
+				font.StringsPaths([]string{
+					"P111", "P110", "P003", "AI4", "AI0", "AI5", "AI7", "AI6", "P113",
+				}, font.AlignCenter, labelShift).Transform(geom.MoveXY(-8.1, -1).RotateD(-90).Scale(labelScale)),
+				font.StringsPaths([]string{
+					"GND", "XL1", "XL2", "AI3", "P109", "VDD", "VDDH", "DCCH", "P024",
+				}, font.AlignCenter, labelShift).Transform(geom.MoveXY(0, -13.2).Scale(labelScale)),
+				font.StringsPaths([]string{
+					"P013", "P018", "VBUS", "D-", "D+", "SWD", "SWC", "NF1", "NF2",
+				}, font.AlignCenter, labelShift).Transform(geom.MoveXY(8.1, -1).RotateD(90).Scale(labelScale)),
+			),
+		},
 	}
 
 	pad = headers.Squash().Pads.Centers()
 
 	mountHoles = &lib.Component{
-		Transform: geom.MoveXY(0, 3),
 		Components: lib.Components{
 			{
-				Transform: geom.MoveXY(-5, -11.3),
+				Transform: geom.MoveXY(-5, -8),
 				Components: lib.Components{
 					pcbc.MountHole,
 				},
 			},
 			{
-				Transform: geom.MoveXY(5, -11.3),
+				Transform: geom.MoveXY(5, -8),
 				Components: lib.Components{
 					pcbc.MountHole,
 				},
@@ -105,9 +105,9 @@ var (
 				eda.Track{pin[2]}.XY(pad[2]),
 				eda.Track{pin[3]}.XY(pad[3]),
 
-				eda.Track{pin[5]}.XY(pad[4]),
-				eda.Track{pin[6]}.XY(pad[5]),
-				eda.Track{pin[7]}.DX(1).DX(0.5).YX(pad[8]),
+				eda.Track{pin[5]}.DX(1).DX(0.5).YX(pad[8]),
+				eda.Track{pin[6]}.XY(pad[4]),
+				eda.Track{pin[7]}.XY(pad[5]),
 				eda.Track{pin[8]}.XY(pad[6]),
 				eda.Track{pin[9]}.YX(pad[7]),
 
@@ -121,9 +121,9 @@ var (
 
 				eda.Track{pin[18]}.YX(pad[19]),
 				eda.Track{pin[19]}.XY(pad[20]),
-				eda.Track{pin[20]}.DX(-1).DX(-0.5).YX(pad[18]),
-				eda.Track{pin[21]}.XY(pad[21]),
-				eda.Track{pin[22]}.XY(pad[22]),
+				eda.Track{pin[20]}.XY(pad[21]),
+				eda.Track{pin[21]}.XY(pad[22]),
+				eda.Track{pin[22]}.DX(-1).DX(-0.5).YX(pad[18]),
 				eda.Track{pin[23]}.DX(-1).DX(-1.2).DY(-10.9).DX(4).YX(pad[17]),
 				eda.Track{pin[24]}.XY(pad[23]),
 				eda.Track{pin[25]}.XY(pad[24]),
@@ -145,12 +145,13 @@ var (
 				eda.Track{mountPad[9]}.DX(-0.5),
 			),
 		},
-		//
-		//	Marks: path.Strokes{}.Append(
-		//		pcbc.Logo.Transform(geom.MoveXY(-4.8, -6.5).ScaleK(1)),
-		//		//pcbc.TmnkTech.Transform(geom.MoveXY(4.8, -6.7).ScaleK(1)),
-		//		font.CenterBold("MS88SF21").Transform(geom.MoveXY(1.3, -5.9).ScaleXY(1.8, 1.8)),
-		//		font.CenterBold("nRF52840").Transform(geom.MoveXY(1.3, -7.4).ScaleXY(1.8, 1.8)),
-		//	),
+
+		Marks: path.Strokes{}.Append(
+			pcbc.Logo.Transform(geom.MoveXY(-6.3, -6)),
+			pcbc.TmnkTech.Transform(geom.MoveXY(6.3, -6)),
+			font.CenterBold("E73").Transform(geom.MoveXY(-2.5, -6.8).ScaleXY(1.2, 2)),
+			font.CenterBold("-2G4M08S1C").Transform(geom.MoveXY(1.2, -6.8).ScaleXY(0.8, 2)),
+			font.CenterBold("nRF52840").Transform(geom.MoveXY(0, -8.4).ScaleXY(1.3, 2)),
+		),
 	}
 )
