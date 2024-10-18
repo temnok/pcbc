@@ -1,6 +1,9 @@
 package path
 
-import "temnok/pcbc/geom"
+import (
+	"temnok/pcbc/geom"
+	"temnok/pcbc/transform"
+)
 
 // Paths represent a sequence of paths.
 type Paths []Path
@@ -12,12 +15,12 @@ func (paths Paths) Append(others ...Paths) Paths {
 	return paths
 }
 
-// Transform returns list of transformed paths.
-func (paths Paths) Transform(transform geom.Transform) Paths {
+// Apply returns list of transformed paths.
+func (paths Paths) Apply(t transform.Transform) Paths {
 	res := make(Paths, len(paths))
 
 	for i, path := range paths {
-		res[i] = path.Transform(transform)
+		res[i] = path.Apply(t)
 	}
 
 	return res

@@ -9,6 +9,7 @@ import (
 	"temnok/pcbc/font"
 	"temnok/pcbc/geom"
 	"temnok/pcbc/path"
+	"temnok/pcbc/transform"
 )
 
 var Board = &lib.Component{
@@ -17,26 +18,26 @@ var Board = &lib.Component{
 	},
 	Components: lib.Components{
 		{
-			Transform: geom.MoveXY(0, -5.5),
+			Transform: transform.Move(0, -5.5),
 			Components: lib.Components{
 				mph100imp40f.G_V_SP_x8,
 			},
 			Marks: font.CenterBolds(
 				[]string{"3V7", "3V7", "3V7", "3V7", "3V7", "3V7", "3V7", "3V7"},
 				geom.XY{2.54, 0},
-			).Transform(geom.MoveXY(0, 1.8)),
+			).Apply(transform.Move(0, 1.8)),
 		},
-		holder.LIR1254.Arrange(geom.MoveXY(0, 2.75)),
-		pcbc.MountHole.Arrange(geom.MoveXY(-7.5, -1.75)),
-		pcbc.MountHole.Arrange(geom.MoveXY(7.5, -1.75)),
+		holder.LIR1254.Arrange(transform.Move(0, 2.75)),
+		pcbc.MountHole.Arrange(transform.Move(-7.5, -1.75)),
+		pcbc.MountHole.Arrange(transform.Move(7.5, -1.75)),
 	},
 
 	Marks: path.Strokes{}.Append(
-		font.CenterBold("LIR1254").Transform(geom.MoveXY(-7.8, 6).ScaleXY(1, 2)),
-		font.CenterBold("COIN BAT").Transform(geom.MoveXY(7.8, 6).ScaleXY(0.9, 2)),
+		font.CenterBold("LIR1254").Apply(transform.Scale(1, 2).Move(-7.8, 6)),
+		font.CenterBold("COIN BAT").Apply(transform.Scale(0.9, 2).Move(7.8, 6)),
 
-		pcbc.Logo.Transform(geom.MoveXY(-5, -2).ScaleK(1.2)),
-		pcbc.TmnkTech.Transform(geom.MoveXY(5, -2.3).ScaleK(1)),
+		pcbc.Logo.Apply(transform.Scale(1.2, 1.2).Move(-5, -2)),
+		pcbc.TmnkTech.Apply(transform.Move(5, -2.3)),
 	),
 }
 

@@ -4,9 +4,9 @@ import (
 	"image/color"
 	"temnok/pcbc/bitmap"
 	"temnok/pcbc/eda/lib"
-	"temnok/pcbc/geom"
 	"temnok/pcbc/path"
 	"temnok/pcbc/shape"
+	"temnok/pcbc/transform"
 	"temnok/pcbc/util"
 )
 
@@ -47,15 +47,11 @@ func NewPCB(w, h float64) *PCB {
 	return pcb
 }
 
-func (pcb *PCB) bitmapTransform() geom.Transform {
-	return geom.ScaleK(pcb.resolution).MoveXY(pcb.width/2, pcb.height/2)
-}
-
 func (pcb *PCB) Component(c *lib.Component) {
 	c = c.Squash()
 	pcb.component = c
 
-	bt := pcb.bitmapTransform()
+	bt := transform.Move(pcb.width/2, pcb.height/2).Scale(pcb.resolution, pcb.resolution)
 
 	brush1 := shape.Circle(int(0.1 * pcb.resolution))
 	brush02 := shape.Circle(int(0.02 * pcb.resolution))
@@ -69,10 +65,10 @@ func (pcb *PCB) Component(c *lib.Component) {
 	cutClearBrush := shape.Circle(int((clearBrushW/2 - extraCopper) * pcb.resolution))
 
 	// Clears: remove groundfill
-	shape.IterateContoursRows(c.Clears.Transform(bt), pcb.copper.Set0)
+	shape.IterateContoursRows(c.Clears.Apply(bt), pcb.copper.Set0)
 
 	// Pads: remove groundfill
-	pads := c.Pads.Transform(bt)
+	pads := c.Pads.Apply(bt)
 	clearBrush.IterateContours(pads, pcb.copper.Set0)
 
 	// Non-ground tracks: remove groundfill
@@ -81,7 +77,7 @@ func (pcb *PCB) Component(c *lib.Component) {
 			brushW = pcb.trackWidth
 		}
 		brush := shape.Circle(int((brushW + clearBrushW) * pcb.resolution))
-		brush.IterateContours(tracks.Transform(bt), pcb.copper.Set0)
+		brush.IterateContours(tracks.Apply(bt), pcb.copper.Set0)
 	}
 
 	// Pads
@@ -89,7 +85,7 @@ func (pcb *PCB) Component(c *lib.Component) {
 	//extraCopperBrush.IterateContours(pads, pcb.copper.Set1)
 	brush1.IterateContours(pads, pcb.mask.Set1)
 
-	//resizedPads := c.Pads.Resize(-StencilShrink).Transform(bt)
+	//resizedPads := c.Pads.Resize(-StencilShrink).Apply(bt)
 	brush02.IterateContours(pads, pcb.stencil.Set1)
 
 	// Tracks
@@ -98,24 +94,24 @@ func (pcb *PCB) Component(c *lib.Component) {
 			brushW = pcb.trackWidth
 		}
 		brush := shape.Circle(int((brushW + extraCopper) * pcb.resolution))
-		brush.IterateContours(tracks.Transform(bt), pcb.copper.Set1)
+		brush.IterateContours(tracks.Apply(bt), pcb.copper.Set1)
 	}
 
 	// Marks
 	for brushW, marks := range c.Marks {
 		brush := shape.Circle(int(brushW * pcb.resolution))
-		brush.IterateContours(marks.Transform(bt), pcb.silk.Set1)
+		brush.IterateContours(marks.Apply(bt), pcb.silk.Set1)
 	}
 
 	// Holes
-	holes := c.Holes.Transform(bt)
+	holes := c.Holes.Apply(bt)
 	brush1.IterateContours(holes, pcb.mask.Set1)
 	shape.IterateContoursRows(holes, pcb.copper.Set1)
 	cutClearBrush.IterateContours(holes, pcb.copper.Set0)
 	brush02.IterateContours(holes, pcb.fr4.Set1)
 
 	// Cuts
-	cuts := c.Cuts.Transform(bt)
+	cuts := c.Cuts.Apply(bt)
 	cutClearBrush.IterateContours(cuts, pcb.copper.Set0)
 	cuts.Jump(int(0.2*pcb.resolution), func(x, y int) {
 		brush1.IterateRowsXY(x, y, pcb.mask.Set1)
@@ -123,21 +119,23 @@ func (pcb *PCB) Component(c *lib.Component) {
 	brush02.IterateContours(cuts, pcb.fr4.Set1)
 
 	// Openings
-	openings := c.Openings.Transform(bt)
+	openings := c.Openings.Apply(bt)
 	shape.IterateContoursRows(openings, pcb.mask.Set0)
 	brush1.IterateContours(openings, pcb.mask.Set1)
 }
 
 func (pcb *PCB) SaveFiles(path string) error {
-	if err := pcb.SaveEtch(path + "etch.lbrn"); err != nil {
+	center := transform.Move(55, 55)
+
+	if err := pcb.SaveEtch(center, path+"etch.lbrn"); err != nil {
 		return err
 	}
 
-	if err := pcb.SaveMask(path + "mask.lbrn"); err != nil {
+	if err := pcb.SaveMask(center, path+"mask.lbrn"); err != nil {
 		return err
 	}
 
-	if err := pcb.SaveStencil(path + "stencil.lbrn"); err != nil {
+	if err := pcb.SaveStencil(center, path+"stencil.lbrn"); err != nil {
 		return err
 	}
 

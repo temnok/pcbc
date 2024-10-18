@@ -4,6 +4,7 @@ import (
 	"math"
 	"temnok/pcbc/geom"
 	"temnok/pcbc/path"
+	"temnok/pcbc/transform"
 )
 
 type Track path.Points
@@ -18,8 +19,8 @@ func TrackPaths(lines ...Track) Paths {
 	return res
 }
 
-func (track Track) Transform(t geom.Transform) Track {
-	return Track(Path(track).Transform(t))
+func (track Track) Apply(t transform.Transform) Track {
+	return Track(Path(track).Apply(t))
 }
 
 func (track Track) X(x float64) Track {

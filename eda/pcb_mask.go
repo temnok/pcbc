@@ -3,13 +3,14 @@ package eda
 import (
 	"image/color"
 	"temnok/pcbc/lbrn"
+	"temnok/pcbc/transform"
 )
 
-func (pcb *PCB) SaveMask(filename string) error {
+func (pcb *PCB) SaveMask(center transform.Transform, filename string) error {
 	silk := pcb.silk.ToImage(color.White, color.Black)
 	mask := pcb.mask.ToImage(color.Transparent, color.Black)
 
-	bitmapTransform := lbrnCenter.ScaleK(1 / pcb.resolution)
+	bitmapTransform := transform.ScaleK(1 / pcb.resolution).Multiply(center)
 
 	p := lbrn.LightBurnProject{
 		CutSettingImg: []lbrn.CutSetting{

@@ -5,7 +5,7 @@ import (
 	"temnok/pcbc/eda"
 	"temnok/pcbc/eda/lib"
 	"temnok/pcbc/eda/pcbc"
-	"temnok/pcbc/geom"
+	"temnok/pcbc/transform"
 	"testing"
 )
 
@@ -13,7 +13,7 @@ var demoBoard = &lib.Component{
 	Components: lib.Components{
 		pcbc.Board35x45,
 		{
-			Transform: geom.RotateD(-90),
+			Transform: transform.Rotate(-90),
 
 			Components: lib.ComponentsGrid(3, 5, 10.5, 5.5,
 				X0603WithGround("LED+", "RED 2V", "20mA"),

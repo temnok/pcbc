@@ -2,8 +2,8 @@ package minewsemi
 
 import (
 	"temnok/pcbc/eda/lib"
-	"temnok/pcbc/geom"
 	"temnok/pcbc/path"
+	"temnok/pcbc/transform"
 )
 
 // https://store.minewsemi.com/wp-content/uploads/2024/03/MS88SF2-nRF52840_Datasheet_K_EN-1.pdf
@@ -37,8 +37,8 @@ func init() {
 
 		Pads: path.Paths.Append(
 			path.Paths{nil}, // skip pad #0
-			pad.Clone(padRows, 0, padStep).Transform(geom.MoveXY(-padHShift, -padVShift).RotateD(180)),
-			pad.Clone(padRows, 0, padStep).Transform(geom.MoveXY(padHShift, -padVShift)),
+			pad.Clone(padRows, 0, padStep).Apply(transform.Rotate(180).Move(-padHShift, -padVShift)),
+			pad.Clone(padRows, 0, padStep).Apply(transform.Move(padHShift, -padVShift)),
 		),
 	}
 }

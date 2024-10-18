@@ -3,28 +3,31 @@ package path
 import (
 	"math"
 	"temnok/pcbc/geom"
+	"temnok/pcbc/transform"
 )
 
 func Pie(n int, r1, r2, a1 float64) Paths {
 	var res Paths
 
-	angle := 2 * math.Pi / float64(n)
+	angle := 360 / float64(n)
 	for i := 0; i < n; i++ {
 		a := a1/2 + float64(i)*angle
-		c := PiePiece(r1, r2, angle-a1).Transform(geom.Rotate(a))
+		c := PiePiece(r1, r2, angle-a1).Apply(transform.Rotate(a))
 		res = append(res, c)
 	}
 
 	return res
 }
 
-func PiePiece(r1, r2, angle float64) Path {
+func PiePiece(r1, r2, ga float64) Path {
+	ra := math.Pi * ga / 180
+
 	a1 := geom.XY{r1, 0}
-	b1 := geom.XY{r1 * math.Cos(angle), r1 * math.Sin(angle)}
+	b1 := geom.XY{r1 * math.Cos(ra), r1 * math.Sin(ra)}
 	p11, p12 := arc(a1, b1)
 
 	a2 := geom.XY{r2, 0}
-	b2 := geom.XY{r2 * math.Cos(angle), r2 * math.Sin(angle)}
+	b2 := geom.XY{r2 * math.Cos(ra), r2 * math.Sin(ra)}
 	p21, p22 := arc(a2, b2)
 
 	return Path{

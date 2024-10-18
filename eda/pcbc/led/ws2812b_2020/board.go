@@ -7,8 +7,8 @@ import (
 	"temnok/pcbc/eda/lib/worldsemi"
 	"temnok/pcbc/eda/pcbc"
 	"temnok/pcbc/font"
-	"temnok/pcbc/geom"
 	"temnok/pcbc/path"
+	"temnok/pcbc/transform"
 )
 
 var Board = &lib.Component{
@@ -16,16 +16,16 @@ var Board = &lib.Component{
 		path.RoundRect(10, 5.5, 1),
 	},
 	Components: lib.Components{
-		worldsemi.WS2812B_2020.Arrange(geom.MoveXY(-3, 0)),
-		mph100imp40f.G_V_SP_x2.Arrange(geom.MoveXY(3.5, 0).RotateD(-90)),
-		pcbc.MountHole.Arrange(geom.MoveXY(0.55, 0).RotateD(30)),
+		worldsemi.WS2812B_2020.Arrange(transform.Move(-3, 0)),
+		mph100imp40f.G_V_SP_x2.Arrange(transform.Rotate(-90).Move(3.5, 0)),
+		pcbc.MountHole.Arrange(transform.Rotate(30).Move(0.55, 0)),
 	},
 	Marks: path.Strokes{}.Append(
-		font.CenterBold("WS2812B").Transform(geom.MoveXY(-2.1, 1.8).ScaleXY(1, 1.8)),
-		font.CenterBold("LED").Transform(geom.MoveXY(-3, -1.8).ScaleXY(1.5, 1.8)),
-		font.CenterBold("DI").Transform(geom.MoveXY(1.6, 2).ScaleXY(0.8, 1.4)),
-		font.CenterBold("VDD").Transform(geom.MoveXY(1.3, -2).ScaleXY(0.8, 1.4)),
-		pcbc.Logo.Transform(geom.MoveXY(-0.6, -2).ScaleK(0.7)),
+		font.CenterBold("WS2812B").Apply(transform.Scale(1, 1.8).Move(-2.1, 1.8)),
+		font.CenterBold("LED").Apply(transform.Scale(1.5, 1.8).Move(-3, -1.8)),
+		font.CenterBold("DI").Apply(transform.Scale(0.8, 1.4).Move(1.6, 2)),
+		font.CenterBold("VDD").Apply(transform.Scale(0.8, 1.4).Move(1.3, -2)),
+		pcbc.Logo.Apply(transform.ScaleK(0.7).Move(-0.6, -2)),
 	),
 }
 

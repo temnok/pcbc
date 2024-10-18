@@ -7,8 +7,8 @@ import (
 	"temnok/pcbc/eda/lib/ts/hyp"
 	"temnok/pcbc/eda/pcbc"
 	"temnok/pcbc/font"
-	"temnok/pcbc/geom"
 	"temnok/pcbc/path"
+	"temnok/pcbc/transform"
 )
 
 var Board = &lib.Component{
@@ -16,13 +16,13 @@ var Board = &lib.Component{
 		path.RoundRect(9, 5.5, 1),
 	},
 	Components: lib.Components{
-		hyp.Switch1TS026A.Arrange(geom.MoveXY(3, 0).RotateD(90)),
-		mph100imp40f.G_V_SP_x2.Arrange(geom.MoveXY(-3, 0).RotateD(-90)),
-		pcbc.MountHole.Arrange(geom.MoveXY(0, 0)),
+		hyp.Switch1TS026A.Arrange(transform.Rotate(90).Move(3, 0)),
+		mph100imp40f.G_V_SP_x2.Arrange(transform.Rotate(-90).Move(-3, 0)),
+		pcbc.MountHole.Arrange(transform.Move(0, 0)),
 	},
 	Marks: path.Strokes{}.Append(
-		font.CenterBold("SW").Transform(geom.MoveXY(0, 2).ScaleK(1.5)),
-		pcbc.Logo.Transform(geom.MoveXY(0, -1.9).ScaleK(0.7)),
+		font.CenterBold("SW").Apply(transform.ScaleK(1.5).Move(0, 2)),
+		pcbc.Logo.Apply(transform.ScaleK(0.7).Move(0, -1.9)),
 	),
 }
 

@@ -3,6 +3,7 @@ package font
 import (
 	"temnok/pcbc/geom"
 	"temnok/pcbc/path"
+	"temnok/pcbc/transform"
 )
 
 const (
@@ -163,7 +164,7 @@ func StringsPaths(strs []string, alignment float64, shift geom.XY) path.Paths {
 	x0, y0 := -0.5*float64(len(strs)-1)*shift.X, -0.5*float64(len(strs)-1)*shift.Y
 	for i, str := range strs {
 		i := float64(i)
-		p := StringPaths(str, alignment).Transform(geom.MoveXY(x0+i*shift.X, y0+i*shift.Y))
+		p := StringPaths(str, alignment).Apply(transform.Move(x0+i*shift.X, y0+i*shift.Y))
 		paths = append(paths, p...)
 	}
 
@@ -180,8 +181,8 @@ func StringPaths(str string, alignment float64) path.Paths {
 			c = '?'
 		}
 
-		t := geom.MoveXY(Width*(float64(i)-n*alignment), 0.4)
-		paths = append(paths, Paths[c].Transform(t)...)
+		t := transform.Move(Width*(float64(i)-n*alignment), 0.4)
+		paths = append(paths, Paths[c].Apply(t)...)
 	}
 
 	return paths

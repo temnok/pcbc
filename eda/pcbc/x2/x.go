@@ -7,8 +7,8 @@ import (
 	"temnok/pcbc/eda/lib/pkg/smd"
 	"temnok/pcbc/eda/pcbc"
 	"temnok/pcbc/font"
-	"temnok/pcbc/geom"
 	"temnok/pcbc/path"
+	"temnok/pcbc/transform"
 )
 
 func X0402(title, upperText, lowerText string) *lib.Component {
@@ -41,26 +41,26 @@ func x(x *lib.Component, title, upperText, lowerText string, ground bool) *lib.C
 		Marks: path.Strokes{
 			font.Bold: path.Paths{}.Append(
 				font.StringPaths(title, font.AlignCenter).
-					Transform(geom.MoveXY(-3.1, 1.3).ScaleXY(1, 2.2)),
+					Apply(transform.Scale(1, 2.2).Move(-3.1, 1.3)),
 			),
 
 			font.Normal: path.Paths{}.Append(
 				font.StringPaths(groundLabel, font.AlignCenter).
-					Transform(geom.MoveXY(0.8, -0.9).RotateD(-90).ScaleXY(1, 0.75)),
+					Apply(transform.Scale(1, 0.75).Rotate(-90).Move(0.8, -0.9)),
 				font.StringPaths(upperText, font.AlignCenter).
-					Transform(geom.MoveXY(2.5, 1.8).ScaleXY(0.75, 1)),
+					Apply(transform.Scale(0.75, 1).Move(2.5, 1.8)),
 				font.StringPaths(lowerText, font.AlignCenter).
-					Transform(geom.MoveXY(2.5, -1.8).ScaleXY(0.75, 1)),
+					Apply(transform.Scale(0.75, 1).Move(2.5, -1.8)),
 			),
 		}.Append(
-			pcbc.Logo.Transform(geom.MoveXY(4.3, 0).ScaleK(0.5)),
-			pcbc.TmnkTech.Transform(geom.MoveXY(4.3, -1).ScaleK(0.4)),
+			pcbc.Logo.Apply(transform.ScaleK(0.5).Move(4.3, 0)),
+			pcbc.TmnkTech.Apply(transform.ScaleK(0.4).Move(4.3, -1)),
 		),
 
 		Components: lib.Components{
-			x.Arrange(geom.MoveXY(-0.5, 1.3)),
-			mph100imp40f.G_V_SP_x2.Arrange(geom.MoveXY(-2.1, -0.85)),
-			pcbc.MountHole.Arrange(geom.MoveXY(2.5, 0)),
+			x.Arrange(transform.Move(-0.5, 1.3)),
+			mph100imp40f.G_V_SP_x2.Arrange(transform.Move(-2.1, -0.85)),
+			pcbc.MountHole.Arrange(transform.Move(2.5, 0)),
 		},
 	}).Squash()
 

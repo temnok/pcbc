@@ -1,8 +1,8 @@
 package lib
 
 import (
-	"temnok/pcbc/geom"
 	"temnok/pcbc/path"
+	"temnok/pcbc/transform"
 )
 
 type Components = []*Component
@@ -11,7 +11,7 @@ type Components = []*Component
 type Component struct {
 	Description string
 
-	Transform geom.Transform
+	Transform transform.Transform
 
 	Components []*Component
 
@@ -47,38 +47,38 @@ type Component struct {
 // Squash merges component tree into the single component.
 func (c *Component) Squash() *Component {
 	out := &Component{
-		Transform:    geom.Identity(),
+		Transform:    transform.Identity,
 		Marks:        path.Strokes{},
 		Tracks:       path.Strokes{},
 		GroundTracks: path.Strokes{},
 	}
 
-	c.dump(geom.Identity(), out)
+	c.dump(transform.Identity, out)
 
 	return out
 }
 
-func (c *Component) dump(t geom.Transform, out *Component) {
-	if !c.Transform.IsZero() {
-		t = t.Multiply(c.Transform)
+func (c *Component) dump(t transform.Transform, out *Component) {
+	if c.Transform != (transform.Transform{}) {
+		t = c.Transform.Multiply(t)
 	}
 
 	for _, sub := range c.Components {
 		sub.dump(t, out)
 	}
 
-	out.Clears = append(out.Clears, c.Clears.Transform(t)...)
-	out.Cuts = append(out.Cuts, c.Cuts.Transform(t)...)
-	out.Holes = append(out.Holes, c.Holes.Transform(t)...)
-	out.Pads = append(out.Pads, c.Pads.Transform(t)...)
-	out.Openings = append(out.Openings, c.Openings.Transform(t)...)
+	out.Clears = append(out.Clears, c.Clears.Apply(t)...)
+	out.Cuts = append(out.Cuts, c.Cuts.Apply(t)...)
+	out.Holes = append(out.Holes, c.Holes.Apply(t)...)
+	out.Pads = append(out.Pads, c.Pads.Apply(t)...)
+	out.Openings = append(out.Openings, c.Openings.Apply(t)...)
 
-	out.Marks.Append(c.Marks.Transform(t))
-	out.Tracks.Append(c.Tracks.Transform(t))
-	out.GroundTracks.Append(c.GroundTracks.Transform(t))
+	out.Marks.Append(c.Marks.Apply(t))
+	out.Tracks.Append(c.Tracks.Apply(t))
+	out.GroundTracks.Append(c.GroundTracks.Apply(t))
 }
 
-func (c *Component) Arrange(t geom.Transform) *Component {
+func (c *Component) Arrange(t transform.Transform) *Component {
 	return &Component{
 		Transform:  t,
 		Components: Components{c},
@@ -88,7 +88,7 @@ func (c *Component) Arrange(t geom.Transform) *Component {
 func (c *Component) Clone(n int, dx float64) *Component {
 	res := &Component{}
 	for i := range n {
-		clone := c.Arrange(geom.MoveXY((float64(i)-float64(n-1)/2)*dx, 0))
+		clone := c.Arrange(transform.Move((float64(i)-float64(n-1)/2)*dx, 0))
 		res.Components = append(res.Components, clone)
 	}
 
@@ -108,7 +108,7 @@ func ComponentsGrid(cols, rows int, dx, dy float64, comps ...*Component) Compone
 			}
 
 			grid = append(grid, &Component{
-				Transform: geom.MoveXY(x0+float64(j)*dx, y0-float64(i)*dy),
+				Transform: transform.Move(x0+float64(j)*dx, y0-float64(i)*dy),
 				Components: Components{
 					comps[k],
 				},

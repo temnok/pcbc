@@ -2,8 +2,8 @@ package pcbc
 
 import (
 	"temnok/pcbc/eda/lib"
-	"temnok/pcbc/geom"
 	"temnok/pcbc/path"
+	"temnok/pcbc/transform"
 )
 
 var (
@@ -14,7 +14,7 @@ var (
 		Holes: boardHoleContour,
 	}
 
-	boardKey = path.Circle(0.6).Transform(geom.MoveXY(-16.25, 21.25))
+	boardKey = path.Circle(0.6).Apply(transform.Move(-16.25, 21.25))
 
 	Board35x45 = &lib.Component{
 		Cuts: path.Paths{path.RoundRect(35, 45, 2.5)},
@@ -22,10 +22,10 @@ var (
 		Pads: path.Paths{boardKey},
 
 		Components: lib.Components{
-			boardHolderHole.Arrange(geom.MoveXY(-15, 20)),
-			boardHolderHole.Arrange(geom.MoveXY(15, 20)),
-			boardHolderHole.Arrange(geom.MoveXY(-15, -20)),
-			boardHolderHole.Arrange(geom.MoveXY(15, -20)),
+			boardHolderHole.Arrange(transform.Move(-15, 20)),
+			boardHolderHole.Arrange(transform.Move(15, 20)),
+			boardHolderHole.Arrange(transform.Move(-15, -20)),
+			boardHolderHole.Arrange(transform.Move(15, -20)),
 		},
 	}
 )

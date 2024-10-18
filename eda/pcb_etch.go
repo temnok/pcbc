@@ -2,20 +2,16 @@ package eda
 
 import (
 	"image/color"
-	"temnok/pcbc/geom"
 	"temnok/pcbc/lbrn"
+	"temnok/pcbc/transform"
 )
 
 type Param = lbrn.Param
 
-var (
-	lbrnCenter = geom.MoveXY(55, 55)
-)
-
-func (pcb *PCB) SaveEtch(filename string) error {
+func (pcb *PCB) SaveEtch(center transform.Transform, filename string) error {
 	im := pcb.copper.ToImage(color.White, color.Black)
 
-	bitmapTransform := lbrnCenter.ScaleK(1 / pcb.resolution)
+	bitmapTransform := transform.ScaleK(1 / pcb.resolution).Multiply(center)
 
 	p := lbrn.LightBurnProject{
 		CutSettingImg: []lbrn.CutSetting{
@@ -101,11 +97,11 @@ func (pcb *PCB) SaveEtch(filename string) error {
 	}
 
 	for _, cut := range pcb.component.Cuts {
-		p.Shape = append(p.Shape, lbrn.NewPathWithTabs(2, lbrnCenter, cut))
+		p.Shape = append(p.Shape, lbrn.NewPathWithTabs(2, center, cut))
 	}
 
 	for _, hole := range pcb.component.Holes {
-		p.Shape = append(p.Shape, lbrn.NewPath(2, lbrnCenter, hole))
+		p.Shape = append(p.Shape, lbrn.NewPath(2, center, hole))
 	}
 
 	return p.SaveToFile(filename)

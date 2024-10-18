@@ -7,14 +7,14 @@ import (
 	"temnok/pcbc/eda/lib/header/mph100imp40f"
 	"temnok/pcbc/eda/pcbc"
 	"temnok/pcbc/font"
-	"temnok/pcbc/geom"
 	"temnok/pcbc/path"
+	"temnok/pcbc/transform"
 )
 
 var (
-	mountPos     = geom.MoveXY(-5, 1.5)
-	connectorPos = geom.MoveXY(2.5, 2)
-	headerPos    = geom.MoveXY(0, -2.5)
+	mountPos     = transform.Move(-5, 1.5)
+	connectorPos = transform.Move(2.5, 2)
+	headerPos    = transform.Move(0, -2.5)
 )
 
 var Board = &lib.Component{
@@ -23,9 +23,9 @@ var Board = &lib.Component{
 	},
 
 	Marks: path.Strokes{}.Append(
-		font.CenterBold("YTC-TC8-565").Transform(geom.MoveXY(-5, 3.4).ScaleXY(0.7, 0.9)),
-		pcbc.Logo.Transform(geom.MoveXY(-7.2, 1.5).ScaleK(0.8)),
-		pcbc.TmnkTech.Transform(geom.MoveXY(7.25, 3.5).ScaleK(0.4)),
+		font.CenterBold("YTC-TC8-565").Apply(transform.Scale(0.7, 0.9).Move(-5, 3.4)),
+		pcbc.Logo.Apply(transform.ScaleK(0.8).Move(-7.2, 1.5)),
+		pcbc.TmnkTech.Apply(transform.ScaleK(0.4).Move(7.25, 3.5)),
 	),
 
 	Components: lib.Components{
@@ -36,9 +36,9 @@ var Board = &lib.Component{
 }
 
 func init() {
-	mountPads := pcbc.MountHole.Pads.Transform(mountPos).Centers()
-	pins := yiyuan.YTC_TC8_565.Pads.Transform(connectorPos).Centers()
-	pads := mph100imp40f.G_V_SP_x6.Pads.Transform(headerPos).Centers()
+	mountPads := pcbc.MountHole.Pads.Apply(mountPos).Centers()
+	pins := yiyuan.YTC_TC8_565.Pads.Apply(connectorPos).Centers()
+	pads := mph100imp40f.G_V_SP_x6.Pads.Apply(headerPos).Centers()
 
 	Board.Tracks = path.Strokes{
 		0: eda.TrackPaths(
@@ -72,7 +72,7 @@ func init() {
 
 	for i, padName := range padNames {
 		Board.Marks = Board.Marks.Append(
-			font.CenterBold(padName).Transform(geom.MoveXY(tenth*(float64(i)-2.5), -0.6).ScaleXY(0.9, 1.2)),
+			font.CenterBold(padName).Apply(transform.Scale(0.9, 1.2).Move(tenth*(float64(i)-2.5), -0.6)),
 		)
 	}
 }

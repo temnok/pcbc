@@ -1,4 +1,4 @@
-<img src="eda/pcbc/img/logo.png" width="200"/>
+<img src="doc/img/logo.png" width="200"/>
 
 ## PCBC: fast PCB prototyping with a fiber laser
 
@@ -8,7 +8,7 @@
 * Mask
 * Stencil
 
-### Example Overview
+### Sample Overview
 
 * Dark green: FR4
 * Bright Green: FR4 cuts
@@ -17,8 +17,6 @@
 * Pale Green: soldermask marks (silkscreen)
 * White: stencil cuts
 
-![PCB Design Overview](eda/pcbc/py32f002a/gen/qfn16/overview.png)
+![Overview 1](doc/gallery/e73.png)
+![Overview 2](doc/gallery/resistors.png)
 
-![PCB Without components](eda/pcbc/img/py32f002a-pcb.jpg)
-
-![Complete PCB](eda/pcbc/img/py32f002a-complete-x3.jpg)

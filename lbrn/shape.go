@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"image"
 	"image/png"
-	"temnok/pcbc/geom"
 	"temnok/pcbc/path"
+	"temnok/pcbc/transform"
 )
 
 type Shape struct {
@@ -88,7 +88,7 @@ func (s *Shape) SetCutOrder(order int) *Shape {
 	return s
 }
 
-func NewPath(i int, t geom.Transform, path path.Path) *Shape {
+func NewPath(i int, t transform.Transform, path path.Path) *Shape {
 	s := &Shape{
 		Type:     "Path",
 		CutIndex: fmt.Sprint(i),
@@ -100,7 +100,7 @@ func NewPath(i int, t geom.Transform, path path.Path) *Shape {
 	return s
 }
 
-func NewPathWithTabs(index int, t geom.Transform, path path.Path) *Shape {
+func NewPathWithTabs(index int, t transform.Transform, path path.Path) *Shape {
 	s := NewPath(index, t, path)
 
 	var tabs []XY
@@ -115,28 +115,7 @@ func NewPathWithTabs(index int, t geom.Transform, path path.Path) *Shape {
 	return s
 }
 
-func NewCircle(i int, t geom.Transform, r float64) *Shape {
-	return &Shape{
-		Type:     "Ellipse",
-		CutIndex: fmt.Sprint(i),
-		XForm:    XForm(t),
-		Rx:       fmt.Sprint(r),
-		Ry:       fmt.Sprint(r),
-	}
-}
-
-func NewRect(i int, t geom.Transform, w, h, r float64) *Shape {
-	return &Shape{
-		Type:     "Rect",
-		CutIndex: fmt.Sprint(i),
-		XForm:    XForm(t),
-		W:        fmt.Sprint(w),
-		H:        fmt.Sprint(h),
-		Cr:       fmt.Sprint(r),
-	}
-}
-
-func NewBitmap(i int, t geom.Transform, im image.Image) *Shape {
+func NewBitmap(i int, t transform.Transform, im image.Image) *Shape {
 	buf := new(bytes.Buffer)
 	if err := png.Encode(buf, im); err != nil {
 		panic(err)

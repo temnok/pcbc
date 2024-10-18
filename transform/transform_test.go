@@ -1,4 +1,4 @@
-package geom
+package transform
 
 import (
 	"fmt"
@@ -17,7 +17,7 @@ func TestAscii(t *testing.T) {
 				"12",
 				"3.",
 			},
-			transform: MoveXY(3, 2),
+			transform: Move(3, 2),
 			expected: []string{
 				".....",
 				".....",
@@ -30,7 +30,7 @@ func TestAscii(t *testing.T) {
 				"12",
 				"3.",
 			},
-			transform: ScaleXY(3, 2),
+			transform: Scale(3, 2),
 			expected: []string{
 				"111222",
 				"111222",
@@ -43,7 +43,7 @@ func TestAscii(t *testing.T) {
 				"12",
 				"3.",
 			},
-			transform: MoveXY(2, 0).RotateD(90),
+			transform: Rotate(90).Move(2, 0),
 			expected: []string{
 				"31",
 				".2",
@@ -54,7 +54,7 @@ func TestAscii(t *testing.T) {
 				"12",
 				"3.",
 			},
-			transform: MoveXY(3, 2).ScaleXY(2, 3).MoveXY(0, 2).RotateD(-90),
+			transform: Rotate(-90).Move(0, 2).Scale(2, 3).Move(3, 2),
 			expected: []string{
 				".......",
 				".......",
@@ -77,10 +77,10 @@ func TestAscii(t *testing.T) {
 					if val == ' ' {
 						continue
 					}
-					a := test.transform.Point(XY{float64(x), float64(y)})
-					b := test.transform.Point(XY{float64(x + 1), float64(y + 1)})
-					x0, y0 := int(min(a.X, b.X)), int(min(a.Y, b.Y))
-					x1, y1 := int(max(a.X, b.X)), int(max(a.Y, b.Y))
+					ax, ay := test.transform.Apply(float64(x), float64(y))
+					bx, by := test.transform.Apply(float64(x+1), float64(y+1))
+					x0, y0 := int(min(ax, bx)), int(min(ay, by))
+					x1, y1 := int(max(ax, bx)), int(max(ay, by))
 					for len(buf) < y1 {
 						newRow := make([]byte, len(buf[0]))
 						for i := range newRow {
@@ -106,8 +106,8 @@ func TestAscii(t *testing.T) {
 				actual = append(actual, '\n')
 			}
 
-			if got, want := string(actual), strings.Join(test.expected, "\n")+"\n"; got != want {
-				t.Errorf("Got:\n%v\nWant:\n%v\n", got, want)
+			if want, got := strings.Join(test.expected, "\n")+"\n", string(actual); want != got {
+				t.Errorf("want: %v\n got: %v\n", want, got)
 			}
 		})
 	}

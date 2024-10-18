@@ -9,14 +9,15 @@ import (
 	"temnok/pcbc/font"
 	"temnok/pcbc/geom"
 	"temnok/pcbc/path"
+	"temnok/pcbc/transform"
 )
 
 var (
-	chip = sop.SOP8.Arrange(geom.MoveXY(2.3, 0))
+	chip = sop.SOP8.Arrange(transform.Move(2.3, 0))
 
 	pin = chip.Squash().Pads.Centers()
 
-	header = mph100imp40f.G_V_SP_x4.Arrange(geom.MoveXY(0, -6))
+	header = mph100imp40f.G_V_SP_x4.Arrange(transform.Move(0, -6))
 
 	pad = header.Squash().Pads.Centers()
 
@@ -39,20 +40,20 @@ var (
 		Components: lib.Components{
 			chip,
 			headerWithTracks,
-			headerWithTracks.Arrange(geom.ScaleXY(1, -1)),
-			pcbc.MountHole.Arrange(geom.MoveXY(-2.2, 0)),
+			headerWithTracks.Arrange(transform.Scale(1, -1)),
+			pcbc.MountHole.Arrange(transform.Move(-2.2, 0)),
 		},
 
 		Marks: path.Strokes{}.Append(
 			font.CenterBolds([]string{"GND", "PA1", "PA2", "SWD"}, geom.XY{2.54 / 0.9, 0}).
-				Transform(geom.MoveXY(0, 4).ScaleXY(0.9, 1.2)),
+				Apply(transform.Scale(0.9, 1.2).Move(0, 4)),
 
-			font.CenterBold("PY32").Transform(geom.MoveXY(-2.8, 2.4).ScaleXY(1.4, 2)),
-			pcbc.Logo.Transform(geom.MoveXY(-4.5, 0).ScaleK(0.8)),
-			font.CenterBold("F002A").Transform(geom.MoveXY(-2.8, -2.4).ScaleXY(1.2, 2)),
+			font.CenterBold("PY32").Apply(transform.Scale(1.4, 2).Move(-2.8, 2.4)),
+			pcbc.Logo.Apply(transform.ScaleK(0.8).Move(-4.5, 0)),
+			font.CenterBold("F002A").Apply(transform.Scale(1.2, 2).Move(-2.8, -2.4)),
 
 			font.CenterBolds([]string{"VCC", "PA4", "PA3", "SWC"}, geom.XY{2.54 / 0.9, 0}).
-				Transform(geom.MoveXY(0, -4).ScaleXY(0.9, 1.2)),
+				Apply(transform.Scale(0.9, 1.2).Move(0, -4)),
 		),
 
 		Tracks: path.Strokes{

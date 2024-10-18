@@ -6,6 +6,7 @@ import (
 	"os"
 	"path/filepath"
 	"temnok/pcbc/geom"
+	"temnok/pcbc/transform"
 )
 
 type XY = geom.XY
@@ -66,8 +67,8 @@ type P struct {
 	P1 string `xml:"p1,attr"`
 }
 
-func XForm(t geom.Transform) string {
-	return fmt.Sprintf("%v %v %v %v %v %v", t.I.X, t.I.Y, t.J.X, t.J.Y, t.K.X, t.K.Y)
+func XForm(t transform.Transform) string {
+	return fmt.Sprintf("%v %v %v %v %v %v", t.Ix, t.Iy, t.Jx, t.Jy, t.Kx, t.Ky)
 }
 
 func (p *LightBurnProject) SaveToFile(filename string) error {

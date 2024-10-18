@@ -6,7 +6,7 @@ import (
 	"temnok/pcbc/eda/lib"
 	"temnok/pcbc/eda/pcbc"
 	"temnok/pcbc/eda/pcbc/fanstel/bc833"
-	"temnok/pcbc/geom"
+	"temnok/pcbc/transform"
 	"testing"
 )
 
@@ -16,8 +16,8 @@ func TestBoard(t *testing.T) {
 	pcb.Component(&lib.Component{
 		Components: lib.Components{
 			pcbc.Board35x45,
-			bc833.ShortBoard.Arrange(geom.MoveXY(0, 7)),
-			Board.Arrange(geom.MoveXY(0, -11)),
+			bc833.ShortBoard.Arrange(transform.Move(0, 7)),
+			Board.Arrange(transform.Move(0, -11)),
 		},
 	})
 

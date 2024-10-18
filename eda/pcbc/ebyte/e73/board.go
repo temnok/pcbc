@@ -9,36 +9,37 @@ import (
 	"temnok/pcbc/font"
 	"temnok/pcbc/geom"
 	"temnok/pcbc/path"
+	"temnok/pcbc/transform"
 )
 
 var (
 	labelShift = geom.XY{2.54 / 0.8, 0}
-	labelScale = geom.XY{0.8, 1.8}
+	labelScale = transform.Scale(0.8, 1.8)
 
-	chip = ebyte.E73.Arrange(geom.MoveXY(0, 3.9))
+	chip = ebyte.E73.Arrange(transform.Move(0, 3.9))
 
 	pin = chip.Squash().Pads.Centers()
 
 	headers = &lib.Component{
-		Transform: geom.MoveXY(0, 3.05),
+		Transform: transform.Move(0, 3.05),
 
 		Components: lib.Components{
-			mph100imp40f.G_V_SP_x9.Arrange(geom.MoveXY(-10.2, -1).RotateD(-90)),
-			mph100imp40f.G_V_SP_x9.Arrange(geom.MoveXY(0, -15.3)),
-			mph100imp40f.G_V_SP_x9.Arrange(geom.MoveXY(10.2, -1).RotateD(90)),
+			mph100imp40f.G_V_SP_x9.Arrange(transform.Rotate(-90).Move(-10.2, -1)),
+			mph100imp40f.G_V_SP_x9.Arrange(transform.Move(0, -15.3)),
+			mph100imp40f.G_V_SP_x9.Arrange(transform.Rotate(90).Move(10.2, -1)),
 		},
 
 		Marks: path.Strokes{
 			font.Bold: path.Paths{}.Append(
 				font.StringsPaths([]string{
 					"P111", "P110", "P003", "P028", "P002", "P029", "P031", "P030", "P113",
-				}, font.AlignCenter, labelShift).Transform(geom.MoveXY(-8.1, -1).RotateD(-90).Scale(labelScale)),
+				}, font.AlignCenter, labelShift).Apply(labelScale.Rotate(-90).Move(-8.1, -1)),
 				font.StringsPaths([]string{
 					"GND", "P000", "P001", "P005", "P109", "VDD", "VDDH", "DCCH", "P024",
-				}, font.AlignCenter, labelShift).Transform(geom.MoveXY(0, -13.2).Scale(labelScale)),
+				}, font.AlignCenter, labelShift).Apply(labelScale.Move(0, -13.2)),
 				font.StringsPaths([]string{
 					"P013", "P018", "VBUS", "D-", "D+", "SWD", "SWC", "P009", "P010",
-				}, font.AlignCenter, labelShift).Transform(geom.MoveXY(8.1, -1).RotateD(90).Scale(labelScale)),
+				}, font.AlignCenter, labelShift).Apply(labelScale.Rotate(90).Move(8.1, -1)),
 			),
 		},
 	}
@@ -47,8 +48,8 @@ var (
 
 	mountHoles = &lib.Component{
 		Components: lib.Components{
-			pcbc.MountHole.Arrange(geom.MoveXY(-5, -8)),
-			pcbc.MountHole.Arrange(geom.MoveXY(5, -8)),
+			pcbc.MountHole.Arrange(transform.Move(-5, -8)),
+			pcbc.MountHole.Arrange(transform.Move(5, -8)),
 		},
 	}
 
@@ -56,7 +57,7 @@ var (
 
 	Board_nRF52840 = &lib.Component{
 		Clears: path.Paths{
-			path.Rect(24, 4.6).Transform(geom.MoveXY(0, 11.6)),
+			path.Rect(24, 4.6).Apply(transform.Move(0, 11.6)),
 		},
 
 		Cuts: path.Paths{
@@ -118,11 +119,11 @@ var (
 		},
 
 		Marks: path.Strokes{}.Append(
-			pcbc.Logo.Transform(geom.MoveXY(-6.3, -6)),
-			pcbc.TmnkTech.Transform(geom.MoveXY(6.3, -6)),
-			font.CenterBold("E73").Transform(geom.MoveXY(-2.5, -6.8).ScaleXY(1.2, 2)),
-			font.CenterBold("-2G4M08S1C").Transform(geom.MoveXY(1.2, -6.8).ScaleXY(0.8, 2)),
-			font.CenterBold("nRF52840").Transform(geom.MoveXY(0, -8.4).ScaleXY(1.4, 2)),
+			pcbc.Logo.Apply(transform.Move(-6.3, -6)),
+			pcbc.TmnkTech.Apply(transform.Move(6.3, -6)),
+			font.CenterBold("E73").Apply(transform.Scale(1.2, 2).Move(-2.5, -6.8)),
+			font.CenterBold("-2G4M08S1C").Apply(transform.Scale(0.8, 2).Move(1.2, -6.8)),
+			font.CenterBold("nRF52840").Apply(transform.Scale(1.4, 2).Move(0, -8.4)),
 		),
 	}
 )

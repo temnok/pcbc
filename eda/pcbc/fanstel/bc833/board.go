@@ -9,6 +9,7 @@ import (
 	"temnok/pcbc/font"
 	"temnok/pcbc/geom"
 	"temnok/pcbc/path"
+	"temnok/pcbc/transform"
 )
 
 var (
@@ -21,9 +22,9 @@ func board(short bool) *lib.Component {
 
 	header := &lib.Component{
 		Components: lib.Components{
-			mph100imp40f.G_V_SP_x8.Arrange(geom.MoveXY(-8.9, -2.9).RotateD(-90)),
-			mph100imp40f.G_V_SP_x8.Arrange(geom.MoveXY(0, -15.5)),
-			mph100imp40f.G_V_SP_x8.Arrange(geom.MoveXY(8.9, -2.9).RotateD(90)),
+			mph100imp40f.G_V_SP_x8.Arrange(transform.Rotate(-90).Move(-8.9, -2.9)),
+			mph100imp40f.G_V_SP_x8.Arrange(transform.Move(0, -15.5)),
+			mph100imp40f.G_V_SP_x8.Arrange(transform.Rotate(90).Move(8.9, -2.9)),
 		},
 	}
 
@@ -32,9 +33,9 @@ func board(short bool) *lib.Component {
 	if short {
 		header = &lib.Component{
 			Components: lib.Components{
-				mph100imp40f.G_V_SP_x6.Arrange(geom.MoveXY(-8.9, -2.9-2.54).RotateD(-90)),
-				mph100imp40f.G_V_SP_x8.Arrange(geom.MoveXY(0, -15.5)),
-				mph100imp40f.G_V_SP_x6.Arrange(geom.MoveXY(8.9, -2.9-2.54).RotateD(90)),
+				mph100imp40f.G_V_SP_x6.Arrange(transform.Rotate(-90).Move(-8.9, -2.9-2.54)),
+				mph100imp40f.G_V_SP_x8.Arrange(transform.Move(0, -15.5)),
+				mph100imp40f.G_V_SP_x6.Arrange(transform.Rotate(90).Move(8.9, -2.9-2.54)),
 			},
 		}
 	}
@@ -42,7 +43,7 @@ func board(short bool) *lib.Component {
 	pin := fanstel.BC833.Pads.Centers()
 
 	labelShift := geom.XY{2.54 / 0.8, 0}
-	labelScale := geom.XY{0.8, 1.3}
+	labelScale := transform.Scale(0.8, 1.3)
 
 	tracks := eda.TrackPaths(
 		eda.Track{pad[0]}.DX(1.5).DY(-4.7).DX(1.6).DX(3.7).DY(-1.2).YX(pin[8]),
@@ -98,8 +99,8 @@ func board(short bool) *lib.Component {
 		Components: lib.Components{
 			fanstel.BC833,
 			header,
-			pcbc.MountHole.Arrange(geom.Move(leftMount)),
-			pcbc.MountHole.Arrange(geom.Move(rightMount)),
+			pcbc.MountHole.Arrange(transform.Move(leftMount.X, leftMount.Y)),
+			pcbc.MountHole.Arrange(transform.Move(rightMount.X, rightMount.Y)),
 		},
 
 		Tracks: path.Strokes{
@@ -122,26 +123,26 @@ func board(short bool) *lib.Component {
 		Marks: path.Strokes{
 			font.Bold: path.Paths{}.Append(
 				font.StringsPaths(leftLabels, font.AlignCenter, labelShift).
-					Transform(geom.MoveXY(-7, -2.9).RotateD(-90).Scale(labelScale)),
+					Apply(labelScale.Rotate(-90).Move(-7, -2.9)),
 				font.StringsPaths(centerLabels, font.AlignCenter, labelShift).
-					Transform(geom.MoveXY(0, -13.65).Scale(labelScale)),
+					Apply(labelScale.Move(0, -13.65)),
 				font.StringsPaths(rightLabels, font.AlignCenter, labelShift).
-					Transform(geom.MoveXY(7, -2.9).RotateD(90).Scale(labelScale)),
+					Apply(labelScale.Rotate(90).Move(7, -2.9)),
 			),
 		}.Append(
-			font.CenterBold(revision).Transform(geom.MoveXY(-5, -8.1).ScaleXY(0.75, 1)),
-			pcbc.TmnkTech.Transform(geom.MoveXY(5, -8.1).ScaleK(1)),
+			font.CenterBold(revision).Apply(transform.Scale(0.75, 1).Move(-5, -8.1)),
+			pcbc.TmnkTech.Apply(transform.Move(5, -8.1)),
 
-			pcbc.Logo.Transform(geom.MoveXY(0, -8.3).ScaleK(1.2)),
-			font.CenterBold("BC833").Transform(geom.MoveXY(0, -10.4).ScaleK(2)),
-			font.CenterBold("nRF52833").Transform(geom.MoveXY(0, -12.2).ScaleK(1.5)),
+			pcbc.Logo.Apply(transform.ScaleK(1.2).Move(0, -8.3)),
+			font.CenterBold("BC833").Apply(transform.ScaleK(2).Move(0, -10.4)),
+			font.CenterBold("nRF52833").Apply(transform.ScaleK(1.5).Move(0, -12.2)),
 		),
 	}
 
 	boardShift := 4.75
 	boardCut := path.RoundRect(21, 24.6, 1)
 	boardClears := path.Paths{
-		path.Rect(21.5, 5.5).Transform(geom.MoveXY(0, 9.7)),
+		path.Rect(21.5, 5.5).Apply(transform.Move(0, 9.7)),
 	}
 
 	if short {
@@ -158,7 +159,7 @@ func board(short bool) *lib.Component {
 		},
 
 		Components: lib.Components{
-			shiftedBoard.Arrange(geom.MoveXY(0, boardShift)),
+			shiftedBoard.Arrange(transform.Move(0, boardShift)),
 		},
 	}
 }

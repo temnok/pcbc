@@ -6,16 +6,16 @@ import (
 	"temnok/pcbc/eda/lib"
 	"temnok/pcbc/eda/pcbc"
 	"temnok/pcbc/eda/pcbc/fanstel/bc833"
-	"temnok/pcbc/geom"
+	"temnok/pcbc/transform"
 	"testing"
 )
 
 var testBoard = &lib.Component{
 	Components: lib.Components{
 		pcbc.Board35x45,
-		bc833.Board.Arrange(geom.MoveXY(0, 3.5)),
+		bc833.Board.Arrange(transform.Move(0, 3.5)),
 		{
-			Transform: geom.MoveXY(0, -13),
+			Transform: transform.Move(0, -13),
 			Components: lib.ComponentsGrid(2, 1, 11, 7,
 				Board,
 				Board,

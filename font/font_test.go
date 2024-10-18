@@ -4,8 +4,8 @@ import (
 	"github.com/stretchr/testify/assert"
 	"image/color"
 	"temnok/pcbc/bitmap"
-	"temnok/pcbc/geom"
 	"temnok/pcbc/shape"
+	"temnok/pcbc/transform"
 	"temnok/pcbc/util"
 	"testing"
 )
@@ -20,8 +20,8 @@ func TestFont_SavePng(t *testing.T) {
 		for j := 0; j < 16; j++ {
 			c := (i+2)*16 + j
 
-			transform := geom.ScaleXY(scale, -scale).MoveXY(float64(j)*Width, float64(-i))
-			brush.IterateContours(Paths[c].Transform(transform), bm.Set1)
+			t := transform.Move(float64(j)*Width, float64(-i)).Scale(scale, -scale)
+			brush.IterateContours(Paths[c].Apply(t), bm.Set1)
 		}
 	}
 

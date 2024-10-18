@@ -4,8 +4,8 @@ import (
 	"github.com/stretchr/testify/assert"
 	"image/color"
 	"temnok/pcbc/bitmap"
-	"temnok/pcbc/geom"
 	"temnok/pcbc/path"
+	"temnok/pcbc/transform"
 	"temnok/pcbc/util"
 	"testing"
 )
@@ -13,7 +13,7 @@ import (
 func TestPie(t *testing.T) {
 	bm := bitmap.NewBitmap(400, 400)
 
-	parts := path.Pie(6, 150, 180, 10*geom.Degree).Transform(geom.RotateD(90))
+	parts := path.Pie(6, 150, 180, 10).Apply(transform.Rotate(90))
 
 	for _, part := range parts {
 		shape := FromContour(part)
@@ -26,7 +26,7 @@ func TestPie(t *testing.T) {
 func TestPiePart(t *testing.T) {
 	bm := bitmap.NewBitmap(20, 20)
 
-	part := path.PiePiece(6, 9, 60*geom.Degree).Transform(geom.RotateD(150))
+	part := path.PiePiece(6, 9, 60).Apply(transform.Rotate(150))
 	shape := FromContour(part)
 	shape.IterateRowsXY(10, 10, bm.Set1)
 

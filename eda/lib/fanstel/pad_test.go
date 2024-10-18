@@ -4,8 +4,8 @@ import (
 	"github.com/stretchr/testify/assert"
 	"temnok/pcbc/eda"
 	"temnok/pcbc/eda/lib"
-	"temnok/pcbc/geom"
 	"temnok/pcbc/path"
+	"temnok/pcbc/transform"
 	"testing"
 )
 
@@ -16,17 +16,17 @@ func TestBoard(t *testing.T) {
 
 	pcb.Component(&lib.Component{
 		Pads: path.Paths{
-			path.Rect(0.5, 2).Transform(geom.MoveXY(x, y)),
-			path.Rect(2, 0.5).Transform(geom.MoveXY(x, y)),
+			path.Rect(0.5, 2).Apply(transform.Move(x, y)),
+			path.Rect(2, 0.5).Apply(transform.Move(x, y)),
 
-			path.Rect(0.5, 2).Transform(geom.MoveXY(x, -y)),
-			path.Rect(2, 0.5).Transform(geom.MoveXY(x, -y)),
+			path.Rect(0.5, 2).Apply(transform.Move(x, -y)),
+			path.Rect(2, 0.5).Apply(transform.Move(x, -y)),
 
-			path.Rect(0.5, 2).Transform(geom.MoveXY(-x, -y)),
-			path.Rect(2, 0.5).Transform(geom.MoveXY(-x, -y)),
+			path.Rect(0.5, 2).Apply(transform.Move(-x, -y)),
+			path.Rect(2, 0.5).Apply(transform.Move(-x, -y)),
 
-			path.Rect(0.5, 2).Transform(geom.MoveXY(-x, y)),
-			path.Rect(2, 0.5).Transform(geom.MoveXY(-x, y)),
+			path.Rect(0.5, 2).Apply(transform.Move(-x, y)),
+			path.Rect(2, 0.5).Apply(transform.Move(-x, y)),
 		},
 		Components: lib.Components{
 			BC833,

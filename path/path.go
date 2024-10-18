@@ -2,6 +2,7 @@ package path
 
 import (
 	"temnok/pcbc/geom"
+	"temnok/pcbc/transform"
 )
 
 // Path consists of cubic-Bezier curves as a sequence of on-path points separated by pairs of control points,
@@ -9,9 +10,9 @@ import (
 // If the last point is the same as the first one, the path represents a closed contour.
 type Path []geom.XY
 
-// Transform returns new path transformed by a given 2D transformation.
-func (path Path) Transform(transform geom.Transform) Path {
-	return Points(path).Transform(transform)
+// Apply returns new path transformed by a given 2D transformation.
+func (path Path) Apply(t transform.Transform) Path {
+	return Points(path).Apply(t)
 }
 
 // Visit calls provided callback for each interpolated point on the path with integer coordinates.
@@ -63,7 +64,7 @@ func (path Path) Clone(n int, dx, dy float64) Paths {
 
 	for i := 0; i < n; i++ {
 		k := float64(i) - float64(n-1)/2
-		paths[i] = path.Transform(geom.MoveXY(dx*k, dy*k))
+		paths[i] = path.Apply(transform.Move(dx*k, dy*k))
 	}
 
 	return paths
@@ -77,7 +78,7 @@ func (path Path) CloneRowsCols(rows, cols int, step geom.XY) Paths {
 	for i := 0; i < rows; i++ {
 		for j := 0; j < cols; j++ {
 			x, y := x0+float64(j)*step.X, y0-float64(i)*step.Y
-			paths = append(paths, path.Transform(geom.MoveXY(x, y)))
+			paths = append(paths, path.Apply(transform.Move(x, y)))
 		}
 	}
 

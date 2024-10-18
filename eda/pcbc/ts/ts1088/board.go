@@ -7,8 +7,8 @@ import (
 	"temnok/pcbc/eda/lib/ts/xunpu"
 	"temnok/pcbc/eda/pcbc"
 	"temnok/pcbc/font"
-	"temnok/pcbc/geom"
 	"temnok/pcbc/path"
+	"temnok/pcbc/transform"
 )
 
 var Board = &lib.Component{
@@ -17,15 +17,15 @@ var Board = &lib.Component{
 	},
 
 	Components: lib.Components{
-		xunpu.SwitchTS1088.Arrange(geom.MoveXY(3, 0).RotateD(-90)),
-		mph100imp40f.G_V_SP_x2.Arrange(geom.MoveXY(-3.25, 0).RotateD(-90)),
-		pcbc.MountHole.Arrange(geom.MoveXY(-0.25, 0)),
+		xunpu.SwitchTS1088.Arrange(transform.Rotate(-90).Move(3, 0)),
+		mph100imp40f.G_V_SP_x2.Arrange(transform.Rotate(-90).Move(-3.25, 0)),
+		pcbc.MountHole.Arrange(transform.Move(-0.25, 0)),
 	},
 
 	Marks: path.Strokes{}.Append(
-		font.CenterBold("SW").Transform(geom.MoveXY(-0.25, 2.4).ScaleXY(2, 1.5)),
-		pcbc.Logo.Transform(geom.MoveXY(-1, -2.1).ScaleK(1)),
-		pcbc.TmnkTech.Transform(geom.MoveXY(0.65, -2.2).ScaleK(0.8)),
+		font.CenterBold("SW").Apply(transform.Scale(2, 1.5).Move(-0.25, 2.4)),
+		pcbc.Logo.Apply(transform.Move(-1, -2.1)),
+		pcbc.TmnkTech.Apply(transform.ScaleK(0.8).Move(0.65, -2.2)),
 	),
 }
 

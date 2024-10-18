@@ -2,8 +2,8 @@ package ebyte
 
 import (
 	"temnok/pcbc/eda/lib"
-	"temnok/pcbc/geom"
 	"temnok/pcbc/path"
+	"temnok/pcbc/transform"
 )
 
 // https://www.cdebyte.com/pdf-down.aspx?id=2587
@@ -36,9 +36,9 @@ func init() {
 		},
 
 		Pads: path.Paths.Append(
-			pad.Clone(padRows, 0, padStep).Transform(geom.MoveXY(-padHShift, -padVShift).RotateD(180)),
-			pad.Clone(8, 0, padStep).Transform(geom.MoveXY(0, -componentH/2).RotateD(-90)),
-			pad.Clone(padRows, 0, padStep).Transform(geom.MoveXY(padHShift, -padVShift)),
+			pad.Clone(padRows, 0, padStep).Apply(transform.Rotate(180).Move(-padHShift, -padVShift)),
+			pad.Clone(8, 0, padStep).Apply(transform.Rotate(-90).Move(0, -componentH/2)),
+			pad.Clone(padRows, 0, padStep).Apply(transform.Move(padHShift, -padVShift)),
 		),
 	}
 }

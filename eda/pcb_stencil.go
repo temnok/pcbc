@@ -2,11 +2,12 @@ package eda
 
 import (
 	"temnok/pcbc/lbrn"
+	"temnok/pcbc/transform"
 )
 
 const StencilShrink = 0.1
 
-func (pcb *PCB) SaveStencil(filename string) error {
+func (pcb *PCB) SaveStencil(center transform.Transform, filename string) error {
 	p := lbrn.LightBurnProject{
 		CutSetting: []lbrn.CutSetting{
 			{
@@ -27,7 +28,7 @@ func (pcb *PCB) SaveStencil(filename string) error {
 
 	pads := pcb.component.Pads.Resize(-StencilShrink)
 	for _, hole := range pads {
-		p.Shape = append(p.Shape, lbrn.NewPath(0, lbrnCenter, hole))
+		p.Shape = append(p.Shape, lbrn.NewPath(0, center, hole))
 	}
 
 	return p.SaveToFile(filename)

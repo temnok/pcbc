@@ -5,8 +5,8 @@ import (
 	"temnok/pcbc/eda/lib"
 	"temnok/pcbc/eda/lib/header/mph100imp40f"
 	"temnok/pcbc/eda/pcbc"
-	"temnok/pcbc/geom"
 	"temnok/pcbc/path"
+	"temnok/pcbc/transform"
 )
 
 var X4 = &lib.Component{
@@ -14,17 +14,17 @@ var X4 = &lib.Component{
 		path.RoundRect(14.5, 4, 1),
 	},
 	Components: lib.Components{
-		mph100imp40f.G_V_SP_x4.Arrange(geom.MoveXY(-1.9, -0.5)),
-		pcbc.MountHole.Arrange(geom.MoveXY(5.2, 0)),
+		mph100imp40f.G_V_SP_x4.Arrange(transform.Move(-1.9, -0.5)),
+		pcbc.MountHole.Arrange(transform.Move(5.2, 0)),
 	},
 	Marks: path.Strokes{}.Append(
 		path.Strokes{
 			0.3: path.Paths{
 				path.Lines(path.Points{{-1.5 * 2.54, 0}, {1.5 * 2.54, 0}}),
 			}.Append(path.Circle(0.3).Clone(4, 2.54, 0)),
-		}.Transform(geom.MoveXY(-1.9, 1.35)),
-		pcbc.Logo.Transform(geom.MoveXY(6.5, 1.4).ScaleK(0.6)),
-		pcbc.TmnkTech.Transform(geom.MoveXY(6.6, -1.2).ScaleK(0.4)),
+		}.Apply(transform.Move(-1.9, 1.35)),
+		pcbc.Logo.Apply(transform.ScaleK(0.6).Move(6.5, 1.4)),
+		pcbc.TmnkTech.Apply(transform.ScaleK(0.4).Move(6.6, -1.2)),
 	),
 }
 
