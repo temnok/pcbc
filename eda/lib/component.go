@@ -78,6 +78,18 @@ func (c *Component) dump(t geom.Transform, out *Component) {
 	out.GroundTracks.Append(c.GroundTracks.Transform(t))
 }
 
+func (c *Component) Clone(n int, dx float64) *Component {
+	res := &Component{}
+	for i := range n {
+		res.Components = append(res.Components, &Component{
+			Transform:  geom.MoveXY((float64(i)-float64(n-1)/2)*dx, 0),
+			Components: Components{c},
+		})
+	}
+
+	return res
+}
+
 func ComponentsGrid(cols, rows int, dx, dy float64, comps ...*Component) Components {
 	x0, y0 := -0.5*float64(cols-1)*dx, 0.5*float64(rows-1)*dy
 
