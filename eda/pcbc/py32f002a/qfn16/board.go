@@ -12,29 +12,11 @@ import (
 )
 
 var (
-	chip = &lib.Component{
-		Components: lib.Components{
-			{
-				Transform: geom.RotateD(45),
-				Components: lib.Components{
-					qfn.QFN16G,
-				},
-			},
-		},
-	}
+	chip = qfn.QFN16G.Arrange(geom.RotateD(45))
 
 	pin = chip.Squash().Pads.Centers()
 
-	header = &lib.Component{
-		Components: lib.Components{
-			{
-				Transform: geom.MoveXY(0, -4.25),
-				Components: lib.Components{
-					mph100imp40f.G_V_SP_x8,
-				},
-			},
-		},
-	}
+	header = mph100imp40f.G_V_SP_x8.Arrange(geom.MoveXY(0, -4.25))
 
 	pad = header.Squash().Pads.Centers()
 
@@ -62,25 +44,10 @@ var (
 	Board = &lib.Component{
 		Components: lib.Components{
 			chip,
+			headerWithTracks.Arrange(geom.RotateD(180)),
 			headerWithTracks,
-			{
-				Transform: geom.RotateD(180),
-				Components: lib.Components{
-					headerWithTracks,
-				},
-			},
-			{
-				Transform: geom.MoveXY(-7.5, 0),
-				Components: lib.Components{
-					pcbc.MountHole,
-				},
-			},
-			{
-				Transform: geom.MoveXY(7.5, 0),
-				Components: lib.Components{
-					pcbc.MountHole,
-				},
-			},
+			pcbc.MountHole.Arrange(geom.MoveXY(-7.5, 0)),
+			pcbc.MountHole.Arrange(geom.MoveXY(7.5, 0)),
 		},
 
 		Cuts: path.Paths{

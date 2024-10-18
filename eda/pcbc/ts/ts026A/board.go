@@ -16,24 +16,9 @@ var Board = &lib.Component{
 		path.RoundRect(9, 5.5, 1),
 	},
 	Components: lib.Components{
-		{
-			Transform: geom.MoveXY(3, 0).RotateD(90),
-			Components: lib.Components{
-				hyp.Switch1TS026A,
-			},
-		},
-		{
-			Transform: geom.MoveXY(-3, 0).RotateD(-90),
-			Components: lib.Components{
-				mph100imp40f.G_V_SP_x2,
-			},
-		},
-		{
-			Transform: geom.MoveXY(0, 0),
-			Components: lib.Components{
-				pcbc.MountHole,
-			},
-		},
+		hyp.Switch1TS026A.Arrange(geom.MoveXY(3, 0).RotateD(90)),
+		mph100imp40f.G_V_SP_x2.Arrange(geom.MoveXY(-3, 0).RotateD(-90)),
+		pcbc.MountHole.Arrange(geom.MoveXY(0, 0)),
 	},
 	Marks: path.Strokes{}.Append(
 		font.CenterBold("SW").Transform(geom.MoveXY(0, 2).ScaleK(1.5)),

@@ -21,24 +21,9 @@ func board(short bool) *lib.Component {
 
 	header := &lib.Component{
 		Components: lib.Components{
-			{
-				Transform: geom.MoveXY(-8.9, -2.9).RotateD(-90),
-				Components: lib.Components{
-					mph100imp40f.G_V_SP_x8,
-				},
-			},
-			{
-				Transform: geom.MoveXY(0, -15.5),
-				Components: lib.Components{
-					mph100imp40f.G_V_SP_x8,
-				},
-			},
-			{
-				Transform: geom.MoveXY(8.9, -2.9).RotateD(90),
-				Components: lib.Components{
-					mph100imp40f.G_V_SP_x8,
-				},
-			},
+			mph100imp40f.G_V_SP_x8.Arrange(geom.MoveXY(-8.9, -2.9).RotateD(-90)),
+			mph100imp40f.G_V_SP_x8.Arrange(geom.MoveXY(0, -15.5)),
+			mph100imp40f.G_V_SP_x8.Arrange(geom.MoveXY(8.9, -2.9).RotateD(90)),
 		},
 	}
 
@@ -47,24 +32,9 @@ func board(short bool) *lib.Component {
 	if short {
 		header = &lib.Component{
 			Components: lib.Components{
-				{
-					Transform: geom.MoveXY(-8.9, -2.9-2.54).RotateD(-90),
-					Components: lib.Components{
-						mph100imp40f.G_V_SP_x6,
-					},
-				},
-				{
-					Transform: geom.MoveXY(0, -15.5),
-					Components: lib.Components{
-						mph100imp40f.G_V_SP_x8,
-					},
-				},
-				{
-					Transform: geom.MoveXY(8.9, -2.9-2.54).RotateD(90),
-					Components: lib.Components{
-						mph100imp40f.G_V_SP_x6,
-					},
-				},
+				mph100imp40f.G_V_SP_x6.Arrange(geom.MoveXY(-8.9, -2.9-2.54).RotateD(-90)),
+				mph100imp40f.G_V_SP_x8.Arrange(geom.MoveXY(0, -15.5)),
+				mph100imp40f.G_V_SP_x6.Arrange(geom.MoveXY(8.9, -2.9-2.54).RotateD(90)),
 			},
 		}
 	}
@@ -127,21 +97,9 @@ func board(short bool) *lib.Component {
 	shiftedBoard := &lib.Component{
 		Components: lib.Components{
 			fanstel.BC833,
-
 			header,
-
-			{
-				Transform: geom.Move(leftMount),
-				Components: lib.Components{
-					pcbc.MountHole,
-				},
-			},
-			{
-				Transform: geom.Move(rightMount),
-				Components: lib.Components{
-					pcbc.MountHole,
-				},
-			},
+			pcbc.MountHole.Arrange(geom.Move(leftMount)),
+			pcbc.MountHole.Arrange(geom.Move(rightMount)),
 		},
 
 		Tracks: path.Strokes{
@@ -200,12 +158,7 @@ func board(short bool) *lib.Component {
 		},
 
 		Components: lib.Components{
-			{
-				Transform: geom.MoveXY(0, boardShift),
-				Components: lib.Components{
-					shiftedBoard,
-				},
-			},
+			shiftedBoard.Arrange(geom.MoveXY(0, boardShift)),
 		},
 	}
 }

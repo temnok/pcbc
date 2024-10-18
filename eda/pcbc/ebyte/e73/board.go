@@ -15,12 +15,7 @@ var (
 	labelShift = geom.XY{2.54 / 0.8, 0}
 	labelScale = geom.XY{0.8, 1.8}
 
-	chip = &lib.Component{
-		Transform: geom.MoveXY(0, 3.9),
-		Components: lib.Components{
-			ebyte.E73,
-		},
-	}
+	chip = ebyte.E73.Arrange(geom.MoveXY(0, 3.9))
 
 	pin = chip.Squash().Pads.Centers()
 
@@ -28,25 +23,11 @@ var (
 		Transform: geom.MoveXY(0, 3.05),
 
 		Components: lib.Components{
-			{
-				Transform: geom.MoveXY(-10.2, -1).RotateD(-90),
-				Components: lib.Components{
-					mph100imp40f.G_V_SP_x9,
-				},
-			},
-			{
-				Transform: geom.MoveXY(0, -15.3),
-				Components: lib.Components{
-					mph100imp40f.G_V_SP_x9,
-				},
-			},
-			{
-				Transform: geom.MoveXY(10.2, -1).RotateD(90),
-				Components: lib.Components{
-					mph100imp40f.G_V_SP_x9,
-				},
-			},
+			mph100imp40f.G_V_SP_x9.Arrange(geom.MoveXY(-10.2, -1).RotateD(-90)),
+			mph100imp40f.G_V_SP_x9.Arrange(geom.MoveXY(0, -15.3)),
+			mph100imp40f.G_V_SP_x9.Arrange(geom.MoveXY(10.2, -1).RotateD(90)),
 		},
+
 		Marks: path.Strokes{
 			font.Bold: path.Paths{}.Append(
 				font.StringsPaths([]string{
@@ -66,18 +47,8 @@ var (
 
 	mountHoles = &lib.Component{
 		Components: lib.Components{
-			{
-				Transform: geom.MoveXY(-5, -8),
-				Components: lib.Components{
-					pcbc.MountHole,
-				},
-			},
-			{
-				Transform: geom.MoveXY(5, -8),
-				Components: lib.Components{
-					pcbc.MountHole,
-				},
-			},
+			pcbc.MountHole.Arrange(geom.MoveXY(-5, -8)),
+			pcbc.MountHole.Arrange(geom.MoveXY(5, -8)),
 		},
 	}
 

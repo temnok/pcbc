@@ -29,24 +29,9 @@ var Board = &lib.Component{
 	),
 
 	Components: lib.Components{
-		{
-			Transform: mountPos,
-			Components: lib.Components{
-				pcbc.MountHole,
-			},
-		},
-		{
-			Transform: connectorPos,
-			Components: lib.Components{
-				yiyuan.YTC_TC8_565,
-			},
-		},
-		{
-			Transform: headerPos,
-			Components: lib.Components{
-				mph100imp40f.G_V_SP_x6,
-			},
-		},
+		pcbc.MountHole.Arrange(mountPos),
+		yiyuan.YTC_TC8_565.Arrange(connectorPos),
+		mph100imp40f.G_V_SP_x6.Arrange(headerPos),
 	},
 }
 

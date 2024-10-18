@@ -15,26 +15,13 @@ var Board = &lib.Component{
 	Cuts: path.Paths{
 		path.RoundRect(9.5, 6.5, 1),
 	},
+
 	Components: lib.Components{
-		{
-			Transform: geom.MoveXY(3, 0).RotateD(-90),
-			Components: lib.Components{
-				xunpu.SwitchTS1088,
-			},
-		},
-		{
-			Transform: geom.MoveXY(-3.25, 0).RotateD(-90),
-			Components: lib.Components{
-				mph100imp40f.G_V_SP_x2,
-			},
-		},
-		{
-			Transform: geom.MoveXY(-0.25, 0),
-			Components: lib.Components{
-				pcbc.MountHole,
-			},
-		},
+		xunpu.SwitchTS1088.Arrange(geom.MoveXY(3, 0).RotateD(-90)),
+		mph100imp40f.G_V_SP_x2.Arrange(geom.MoveXY(-3.25, 0).RotateD(-90)),
+		pcbc.MountHole.Arrange(geom.MoveXY(-0.25, 0)),
 	},
+
 	Marks: path.Strokes{}.Append(
 		font.CenterBold("SW").Transform(geom.MoveXY(-0.25, 2.4).ScaleXY(2, 1.5)),
 		pcbc.Logo.Transform(geom.MoveXY(-1, -2.1).ScaleK(1)),

@@ -25,18 +25,8 @@ func Test_BC833Short(t *testing.T) {
 	pcb.Component(&lib.Component{
 		Components: lib.Components{
 			pcbc.Board35x45,
-			{
-				Transform: geom.MoveXY(0, 10.5),
-				Components: lib.Components{
-					ShortBoard,
-				},
-			},
-			{
-				Transform: geom.MoveXY(0, -10.5).RotateD(180),
-				Components: lib.Components{
-					ShortBoard,
-				},
-			},
+			ShortBoard.Arrange(geom.MoveXY(0, 10.5)),
+			ShortBoard.Arrange(geom.MoveXY(0, -10.5).RotateD(180)),
 		},
 	})
 	assert.NoError(t, pcb.SaveFiles("gen/short/"))

@@ -16,24 +16,9 @@ var Board = &lib.Component{
 		path.RoundRect(10, 5.5, 1),
 	},
 	Components: lib.Components{
-		{
-			Transform: geom.MoveXY(-3, 0),
-			Components: lib.Components{
-				worldsemi.WS2812B_2020,
-			},
-		},
-		{
-			Transform: geom.MoveXY(3.5, 0).RotateD(-90),
-			Components: lib.Components{
-				mph100imp40f.G_V_SP_x2,
-			},
-		},
-		{
-			Transform: geom.MoveXY(0.55, 0).RotateD(30),
-			Components: lib.Components{
-				pcbc.MountHole,
-			},
-		},
+		worldsemi.WS2812B_2020.Arrange(geom.MoveXY(-3, 0)),
+		mph100imp40f.G_V_SP_x2.Arrange(geom.MoveXY(3.5, 0).RotateD(-90)),
+		pcbc.MountHole.Arrange(geom.MoveXY(0.55, 0).RotateD(30)),
 	},
 	Marks: path.Strokes{}.Append(
 		font.CenterBold("WS2812B").Transform(geom.MoveXY(-2.1, 1.8).ScaleXY(1, 1.8)),

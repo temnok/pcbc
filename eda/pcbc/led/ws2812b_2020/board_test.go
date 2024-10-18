@@ -13,12 +13,7 @@ import (
 var testBoard = &lib.Component{
 	Components: lib.Components{
 		pcbc.Board35x45,
-		{
-			Transform: geom.MoveXY(0, 3.5),
-			Components: lib.Components{
-				bc833.Board,
-			},
-		},
+		bc833.Board.Arrange(geom.MoveXY(0, 3.5)),
 		{
 			Transform: geom.MoveXY(0, -13),
 			Components: lib.ComponentsGrid(2, 1, 11, 7,

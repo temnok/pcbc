@@ -14,18 +14,8 @@ var X4 = &lib.Component{
 		path.RoundRect(14.5, 4, 1),
 	},
 	Components: lib.Components{
-		{
-			Transform: geom.MoveXY(-1.9, -0.5),
-			Components: lib.Components{
-				mph100imp40f.G_V_SP_x4,
-			},
-		},
-		{
-			Transform: geom.MoveXY(5.2, 0),
-			Components: lib.Components{
-				pcbc.MountHole,
-			},
-		},
+		mph100imp40f.G_V_SP_x4.Arrange(geom.MoveXY(-1.9, -0.5)),
+		pcbc.MountHole.Arrange(geom.MoveXY(5.2, 0)),
 	},
 	Marks: path.Strokes{}.Append(
 		path.Strokes{

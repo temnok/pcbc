@@ -78,13 +78,18 @@ func (c *Component) dump(t geom.Transform, out *Component) {
 	out.GroundTracks.Append(c.GroundTracks.Transform(t))
 }
 
+func (c *Component) Arrange(t geom.Transform) *Component {
+	return &Component{
+		Transform:  t,
+		Components: Components{c},
+	}
+}
+
 func (c *Component) Clone(n int, dx float64) *Component {
 	res := &Component{}
 	for i := range n {
-		res.Components = append(res.Components, &Component{
-			Transform:  geom.MoveXY((float64(i)-float64(n-1)/2)*dx, 0),
-			Components: Components{c},
-		})
+		clone := c.Arrange(geom.MoveXY((float64(i)-float64(n-1)/2)*dx, 0))
+		res.Components = append(res.Components, clone)
 	}
 
 	return res

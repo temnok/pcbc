@@ -16,24 +16,9 @@ func TestBoard(t *testing.T) {
 	pcb.Component(&lib.Component{
 		Components: lib.Components{
 			pcbc.Board35x45,
-			{
-				Transform: geom.MoveXY(0, 9),
-				Components: lib.Components{
-					qfn16.Board,
-				},
-			},
-			{
-				Transform: geom.MoveXY(-6.5, -7),
-				Components: lib.Components{
-					Board,
-				},
-			},
-			{
-				Transform: geom.MoveXY(6.5, -7),
-				Components: lib.Components{
-					Board,
-				},
-			},
+			qfn16.Board.Arrange(geom.MoveXY(0, 9)),
+			Board.Arrange(geom.MoveXY(-6.5, -7)),
+			Board.Arrange(geom.MoveXY(6.5, -7)),
 		},
 	})
 

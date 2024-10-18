@@ -22,30 +22,10 @@ var (
 		Pads: path.Paths{boardKey},
 
 		Components: lib.Components{
-			{
-				Transform: geom.MoveXY(-15, 20),
-				Components: lib.Components{
-					boardHolderHole,
-				},
-			},
-			{
-				Transform: geom.MoveXY(15, 20),
-				Components: lib.Components{
-					boardHolderHole,
-				},
-			},
-			{
-				Transform: geom.MoveXY(-15, -20),
-				Components: lib.Components{
-					boardHolderHole,
-				},
-			},
-			{
-				Transform: geom.MoveXY(15, -20),
-				Components: lib.Components{
-					boardHolderHole,
-				},
-			},
+			boardHolderHole.Arrange(geom.MoveXY(-15, 20)),
+			boardHolderHole.Arrange(geom.MoveXY(15, 20)),
+			boardHolderHole.Arrange(geom.MoveXY(-15, -20)),
+			boardHolderHole.Arrange(geom.MoveXY(15, -20)),
 		},
 	}
 )

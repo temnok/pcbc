@@ -26,24 +26,9 @@ var Board = &lib.Component{
 				geom.XY{2.54, 0},
 			).Transform(geom.MoveXY(0, 1.8)),
 		},
-		{
-			Transform: geom.MoveXY(0, 2.75),
-			Components: lib.Components{
-				holder.LIR1254,
-			},
-		},
-		{
-			Transform: geom.MoveXY(-7.5, -1.75),
-			Components: lib.Components{
-				pcbc.MountHole,
-			},
-		},
-		{
-			Transform: geom.MoveXY(7.5, -1.75),
-			Components: lib.Components{
-				pcbc.MountHole,
-			},
-		},
+		holder.LIR1254.Arrange(geom.MoveXY(0, 2.75)),
+		pcbc.MountHole.Arrange(geom.MoveXY(-7.5, -1.75)),
+		pcbc.MountHole.Arrange(geom.MoveXY(7.5, -1.75)),
 	},
 
 	Marks: path.Strokes{}.Append(

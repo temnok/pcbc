@@ -10,11 +10,11 @@ import (
 )
 
 var demoBoard = &lib.Component{
-	//Clears: path.Paths{path.Rect(36, 46)},
 	Components: lib.Components{
 		pcbc.Board35x45,
 		{
 			Transform: geom.RotateD(-90),
+
 			Components: lib.ComponentsGrid(3, 5, 10.5, 5.5,
 				X0603WithGround("LED+", "RED 2V", "20mA"),
 				X0603WithGround("LED+", "GRN 3V", "20mA"),

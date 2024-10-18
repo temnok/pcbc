@@ -37,6 +37,7 @@ func x(x *lib.Component, title, upperText, lowerText string, ground bool) *lib.C
 		Cuts: path.Paths{
 			path.RoundRect(9.75, 4.75, 1),
 		},
+
 		Marks: path.Strokes{
 			font.Bold: path.Paths{}.Append(
 				font.StringPaths(title, font.AlignCenter).
@@ -55,25 +56,11 @@ func x(x *lib.Component, title, upperText, lowerText string, ground bool) *lib.C
 			pcbc.Logo.Transform(geom.MoveXY(4.3, 0).ScaleK(0.5)),
 			pcbc.TmnkTech.Transform(geom.MoveXY(4.3, -1).ScaleK(0.4)),
 		),
+
 		Components: lib.Components{
-			{
-				Transform: geom.MoveXY(-0.5, 1.3),
-				Components: lib.Components{
-					x,
-				},
-			},
-			{
-				Transform: geom.MoveXY(-2.1, -0.85),
-				Components: lib.Components{
-					mph100imp40f.G_V_SP_x2,
-				},
-			},
-			{
-				Transform: geom.MoveXY(2.5, 0),
-				Components: lib.Components{
-					pcbc.MountHole,
-				},
-			},
+			x.Arrange(geom.MoveXY(-0.5, 1.3)),
+			mph100imp40f.G_V_SP_x2.Arrange(geom.MoveXY(-2.1, -0.85)),
+			pcbc.MountHole.Arrange(geom.MoveXY(2.5, 0)),
 		},
 	}).Squash()
 

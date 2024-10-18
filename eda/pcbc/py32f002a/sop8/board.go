@@ -12,23 +12,11 @@ import (
 )
 
 var (
-	chip = &lib.Component{
-		Transform:  geom.MoveXY(2.3, 0),
-		Components: lib.Components{sop.SOP8},
-	}
+	chip = sop.SOP8.Arrange(geom.MoveXY(2.3, 0))
 
 	pin = chip.Squash().Pads.Centers()
 
-	header = &lib.Component{
-		Components: lib.Components{
-			{
-				Transform: geom.MoveXY(0, -6),
-				Components: lib.Components{
-					mph100imp40f.G_V_SP_x4,
-				},
-			},
-		},
-	}
+	header = mph100imp40f.G_V_SP_x4.Arrange(geom.MoveXY(0, -6))
 
 	pad = header.Squash().Pads.Centers()
 
@@ -51,18 +39,8 @@ var (
 		Components: lib.Components{
 			chip,
 			headerWithTracks,
-			{
-				Transform: geom.ScaleXY(1, -1),
-				Components: lib.Components{
-					headerWithTracks,
-				},
-			},
-			{
-				Transform: geom.MoveXY(-2.2, 0),
-				Components: lib.Components{
-					pcbc.MountHole,
-				},
-			},
+			headerWithTracks.Arrange(geom.ScaleXY(1, -1)),
+			pcbc.MountHole.Arrange(geom.MoveXY(-2.2, 0)),
 		},
 
 		Marks: path.Strokes{}.Append(
