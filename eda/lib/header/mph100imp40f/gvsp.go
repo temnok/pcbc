@@ -20,7 +20,7 @@ func G_V_SP(n int) *lib.Component {
 	const step = 2.54
 
 	return &lib.Component{
-		Pads: path.Circle(1.7).Clone(n, step, 0),
+		Pads: path.Circle(1.8).Clone(n, step, 0),
 		Marks: path.Strokes{
 			0.1: path.CutRect(step, step, 0.3).Clone(n, step, 0),
 		},

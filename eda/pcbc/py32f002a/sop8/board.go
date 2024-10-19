@@ -3,7 +3,7 @@ package sop8
 import (
 	"temnok/pcbc/eda"
 	"temnok/pcbc/eda/lib"
-	"temnok/pcbc/eda/lib/header/female"
+	"temnok/pcbc/eda/lib/header/mph100imp40f"
 	"temnok/pcbc/eda/lib/pkg/sop"
 	"temnok/pcbc/eda/pcbc"
 	"temnok/pcbc/font"
@@ -17,7 +17,7 @@ var (
 
 	pin = chip.Squash().Pads.Centers()
 
-	header = female.Header254(4).Arrange(transform.Move(0, -6))
+	header = mph100imp40f.G_V_SP(4).Arrange(transform.Move(0, -6))
 
 	pad = header.Squash().Pads.Centers()
 
