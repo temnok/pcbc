@@ -14,20 +14,20 @@ func CSCC118(n int, labels []string) *lib.Component {
 
 	shift := float64((n+1)%2) / 2
 
+	pads := pad.Clone(n, 0, -1)
 	labels0, labels1 := make([]string, (n+1)/2), make([]string, n/2)
 	for i := range labels {
 		if i%2 == 0 {
 			labels0[i/2] = labels[i]
+			pads[i] = pads[i].Apply(transform.Move(padW/2, 0))
 		} else {
 			labels1[i/2] = labels[i]
+			pads[i] = pads[i].Apply(transform.Move(-padW/2, 0))
 		}
 	}
 
 	return &lib.Component{
-		Pads: path.Paths{}.Append(
-			pad.Clone((n+1)/2, 0, 2).Apply(transform.Move(padW/2, shift)),
-			pad.Clone(n/2, 0, 2).Apply(transform.Move(-padW/2, -shift)),
-		),
+		Pads: pads,
 
 		Marks: path.Strokes{
 			0.1: path.Paths{path.Rect(1.5, float64(n)+0.5)},
