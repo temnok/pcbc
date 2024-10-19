@@ -8,11 +8,11 @@ import (
 )
 
 func TestBoard(t *testing.T) {
-	pcb := eda.NewPCB(2.54*40+5, 10)
+	pcb := eda.NewPCB(2.54*8+5, 10)
 
 	pcb.Component(&lib.Component{
 		Components: lib.Components{
-			Header254(40),
+			Header254(8),
 		},
 	})
 

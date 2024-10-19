@@ -79,7 +79,7 @@ func (pcb *PCB) SaveEtch(center transform.Transform, filename string) error {
 				Priority: Param{"2"},
 
 				Speed:        Param{"100"},
-				GlobalRepeat: Param{"75"},
+				GlobalRepeat: Param{"50"},
 
 				MaxPower:    Param{"90"},
 				QPulseWidth: Param{"200"},
