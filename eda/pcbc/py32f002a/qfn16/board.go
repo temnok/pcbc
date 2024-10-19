@@ -3,7 +3,7 @@ package qfn16
 import (
 	"temnok/pcbc/eda"
 	"temnok/pcbc/eda/lib"
-	"temnok/pcbc/eda/lib/header/mph100imp40f"
+	"temnok/pcbc/eda/lib/header/female"
 	"temnok/pcbc/eda/lib/pkg/qfn"
 	"temnok/pcbc/eda/pcbc"
 	"temnok/pcbc/font"
@@ -17,7 +17,7 @@ var (
 
 	pin = chip.Squash().Pads.Centers()
 
-	header = mph100imp40f.G_V_SP_x8.Arrange(transform.Move(0, -4.25))
+	header = female.Header254(8).Arrange(transform.Move(0, -4.25))
 
 	pad = header.Squash().Pads.Centers()
 
