@@ -28,7 +28,7 @@ var (
 		},
 
 		Components: lib.Components{
-			pcbc.MountHole.Arrange(transform.Move(-4.8, 0)),
+			mount,
 			chip,
 			header,
 		},
@@ -36,7 +36,6 @@ var (
 		Marks: path.Strokes{}.Append(
 			font.CenterBold("PY32").Apply(transform.Scale(1.5, 2.8).Move(-2.8, 2.7)),
 			pcbc.Logo.Apply(transform.Move(-4.5, 0)),
-			//pcbc.TmnkTech.Apply(transform.ScaleK(0.8).Move(-4.4, -0.9)),
 			font.CenterBold("F002A").Apply(transform.Scale(1.3, 2.8).Move(-2.8, -2.7)),
 		).Apply(transform.Move(-2.6, 0)),
 

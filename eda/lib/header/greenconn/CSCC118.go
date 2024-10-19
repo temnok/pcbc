@@ -16,12 +16,16 @@ func CSCC118(n int, labels []string) *lib.Component {
 
 	pads := pad.Clone(n, 0, -1)
 	labels0, labels1 := make([]string, (n+1)/2), make([]string, n/2)
-	for i := range labels {
+	for i := range n {
 		if i%2 == 0 {
-			labels0[i/2] = labels[i]
+			if i < len(labels) {
+				labels0[i/2] = labels[i]
+			}
 			pads[i] = pads[i].Apply(transform.Move(padW/2, 0))
 		} else {
-			labels1[i/2] = labels[i]
+			if i < len(labels) {
+				labels1[i/2] = labels[i]
+			}
 			pads[i] = pads[i].Apply(transform.Move(-padW/2, 0))
 		}
 	}
