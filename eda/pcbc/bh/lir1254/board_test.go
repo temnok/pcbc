@@ -22,7 +22,6 @@ var testBoard = &lib.Component{
 }
 
 func TestBoard(t *testing.T) {
-	pcb := eda.NewPCB(36, 46)
-	pcb.Component(testBoard)
+	pcb := eda.NewPCB(36, 46, testBoard)
 	assert.NoError(t, pcb.SaveFiles("gen/"))
 }

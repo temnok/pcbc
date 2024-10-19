@@ -10,8 +10,7 @@ import (
 )
 
 func Test_BC833(t *testing.T) {
-	pcb := eda.NewPCB(36, 46)
-	pcb.Component(&lib.Component{
+	pcb := eda.NewPCB(36, 46, &lib.Component{
 		Components: lib.Components{
 			pcbc.Board35x45,
 			Board,
@@ -21,8 +20,7 @@ func Test_BC833(t *testing.T) {
 }
 
 func Test_BC833Short(t *testing.T) {
-	pcb := eda.NewPCB(36, 46)
-	pcb.Component(&lib.Component{
+	pcb := eda.NewPCB(36, 46, &lib.Component{
 		Components: lib.Components{
 			pcbc.Board35x45,
 			ShortBoard.Arrange(transform.Move(0, 10.5)),

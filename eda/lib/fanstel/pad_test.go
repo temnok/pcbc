@@ -10,11 +10,9 @@ import (
 )
 
 func TestBoard(t *testing.T) {
-	pcb := eda.NewPCB(20, 20)
-
 	x, y := 5.0, 14.3/2
 
-	pcb.Component(&lib.Component{
+	pcb := eda.NewPCB(20, 20, &lib.Component{
 		Pads: path.Paths{
 			path.Rect(0.5, 2).Apply(transform.Move(x, y)),
 			path.Rect(2, 0.5).Apply(transform.Move(x, y)),

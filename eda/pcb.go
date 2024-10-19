@@ -24,14 +24,14 @@ type PCB struct {
 	fr4, copper, mask, silk, stencil *bitmap.Bitmap
 }
 
-func NewPCB(w, h float64) *PCB {
+func NewPCB(width, height float64, component *lib.Component) *PCB {
 	const scale = 100
 
-	wi, hi := int(w*scale), int(h*scale)
+	wi, hi := int(width*scale), int(height*scale)
 
 	pcb := &PCB{
-		width:      w,
-		height:     h,
+		width:      width,
+		height:     height,
 		resolution: scale,
 		trackWidth: 0.25,
 
@@ -44,10 +44,12 @@ func NewPCB(w, h float64) *PCB {
 
 	pcb.copper.Invert()
 
+	pcb.setComponent(component)
+
 	return pcb
 }
 
-func (pcb *PCB) Component(c *lib.Component) {
+func (pcb *PCB) setComponent(c *lib.Component) {
 	c = c.Squash()
 	pcb.component = c
 
