@@ -39,9 +39,9 @@ func CSCC118(n int, labels []string) *lib.Component {
 			path.Strokes{
 				0.15: path.Paths{}.Append(
 					font.StringsPaths(labels0, font.AlignRight, geom.XY{0, -2 / 1.6}).
-						Apply(transform.Scale(0.8, 1.6).Move(-0.9, shift)),
+						Apply(transform.Scale(0.7, 1.6).Move(-0.9, shift)),
 					font.StringsPaths(labels1, font.AlignLeft, geom.XY{0, -2 / 1.6}).
-						Apply(transform.Scale(0.8, 1.6).Move(0.9, -shift)),
+						Apply(transform.Scale(0.7, 1.6).Move(0.9, -shift)),
 				),
 			},
 		),

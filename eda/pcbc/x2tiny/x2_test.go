@@ -1,4 +1,4 @@
-package sop8tiny
+package x2tiny
 
 import (
 	"github.com/stretchr/testify/assert"
@@ -8,11 +8,11 @@ import (
 	"testing"
 )
 
-func TestBoard(t *testing.T) {
+func TestDemo(t *testing.T) {
 	pcb := eda.NewPCB(36, 46, &lib.Component{
 		Components: lib.Components{
 			pcbc.Board35x45,
-			Board,
+			X2Base,
 		},
 	})
 

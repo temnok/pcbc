@@ -18,7 +18,7 @@ var (
 	chip = qfn.QFN16G.Arrange(transform.Rotate(-45).Move(0, -1.5))
 	pin  = chip.Squash().Pads.Centers()
 
-	leftLabels  = []string{"PB1", "A12", "SWD", "SWC", "PF2", "PA0", "PA1", "PA2"}
+	leftLabels  = []string{"PB1", "PA12", "SWD", "SWC", "PF2", "PA0", "PA1", "PA2"}
 	rightLabels = []string{"PA8", "VCC", "PB0", "PA7", "PA6", "PA5", "PA4", "PA3"}
 
 	header = &lib.Component{
@@ -31,7 +31,7 @@ var (
 
 	Board = &lib.Component{
 		Cuts: path.Paths{
-			path.RoundRect(16.5, 9.3, 1),
+			path.RoundRect(16, 9.3, 1),
 		},
 
 		Components: lib.Components{
