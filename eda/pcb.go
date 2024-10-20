@@ -23,7 +23,7 @@ type PCB struct {
 
 	component *lib.Component
 
-	fr4, copper, mask, silk, stencil *bitmap.Bitmap
+	fr4, copper, mask, maskB, silk, stencil *bitmap.Bitmap
 }
 
 func NewPCB(width, height float64, component *lib.Component) *PCB {
@@ -40,6 +40,7 @@ func NewPCB(width, height float64, component *lib.Component) *PCB {
 		fr4:     bitmap.NewBitmap(wi, hi),
 		copper:  bitmap.NewBitmap(wi, hi),
 		mask:    bitmap.NewBitmap(wi, hi),
+		maskB:   bitmap.NewBitmap(wi, hi),
 		silk:    bitmap.NewBitmap(wi, hi),
 		stencil: bitmap.NewBitmap(wi, hi),
 	}
@@ -112,6 +113,7 @@ func (pcb *PCB) setComponent(c *lib.Component) {
 	// Holes
 	holes := c.Holes.Apply(bt)
 	brush1.IterateContours(holes, pcb.mask.Set1)
+	brush1.IterateContours(holes, pcb.maskB.Set1)
 	shape.IterateContoursRows(holes, pcb.copper.Set1)
 	cutClearBrush.IterateContours(holes, pcb.copper.Set0)
 	brush02.IterateContours(holes, pcb.fr4.Set1)
@@ -121,6 +123,7 @@ func (pcb *PCB) setComponent(c *lib.Component) {
 	cutClearBrush.IterateContours(cuts, pcb.copper.Set0)
 	cuts.Jump(int(0.2*pcb.resolution), func(x, y int) {
 		brush1.IterateRowsXY(x, y, pcb.mask.Set1)
+		brush1.IterateRowsXY(x, y, pcb.maskB.Set1)
 	})
 	brush02.IterateContours(cuts, pcb.fr4.Set1)
 
@@ -136,6 +139,10 @@ func (pcb *PCB) SaveFiles(path string) error {
 	}
 
 	if err := pcb.SaveMask(path + "mask.lbrn"); err != nil {
+		return err
+	}
+
+	if err := pcb.SaveMaskBottom(path + "mask-bottom.lbrn"); err != nil {
 		return err
 	}
 
