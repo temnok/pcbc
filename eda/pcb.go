@@ -4,6 +4,7 @@ import (
 	"image/color"
 	"temnok/pcbc/bitmap"
 	"temnok/pcbc/eda/lib"
+	"temnok/pcbc/geom"
 	"temnok/pcbc/path"
 	"temnok/pcbc/shape"
 	"temnok/pcbc/transform"
@@ -18,6 +19,7 @@ type (
 type PCB struct {
 	width, height, resolution float64
 	trackWidth                float64
+	lbrnCenter                geom.XY
 
 	component *lib.Component
 
@@ -45,6 +47,8 @@ func NewPCB(width, height float64, component *lib.Component) *PCB {
 	pcb.copper.Invert()
 
 	pcb.setComponent(component)
+
+	pcb.lbrnCenter = geom.XY{55, 55}
 
 	return pcb
 }
@@ -127,17 +131,15 @@ func (pcb *PCB) setComponent(c *lib.Component) {
 }
 
 func (pcb *PCB) SaveFiles(path string) error {
-	center := transform.Move(55, 55)
-
-	if err := pcb.SaveEtch(center, path+"etch.lbrn"); err != nil {
+	if err := pcb.SaveEtch(path + "etch.lbrn"); err != nil {
 		return err
 	}
 
-	if err := pcb.SaveMask(center, path+"mask.lbrn"); err != nil {
+	if err := pcb.SaveMask(path + "mask.lbrn"); err != nil {
 		return err
 	}
 
-	if err := pcb.SaveStencil(center, path+"stencil.lbrn"); err != nil {
+	if err := pcb.SaveStencil(path + "stencil.lbrn"); err != nil {
 		return err
 	}
 

@@ -6,10 +6,11 @@ import (
 	"temnok/pcbc/transform"
 )
 
-func (pcb *PCB) SaveMask(center transform.Transform, filename string) error {
+func (pcb *PCB) SaveMask(filename string) error {
 	silk := pcb.silk.ToImage(color.White, color.Black)
 	mask := pcb.mask.ToImage(color.Transparent, color.Black)
 
+	center := transform.Move(pcb.lbrnCenter.X, pcb.lbrnCenter.Y)
 	bitmapTransform := transform.ScaleK(1 / pcb.resolution).Multiply(center)
 
 	p := lbrn.LightBurnProject{

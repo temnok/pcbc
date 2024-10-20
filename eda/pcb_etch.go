@@ -8,9 +8,10 @@ import (
 
 type Param = lbrn.Param
 
-func (pcb *PCB) SaveEtch(center transform.Transform, filename string) error {
+func (pcb *PCB) SaveEtch(filename string) error {
 	im := pcb.copper.ToImage(color.White, color.Black)
 
+	center := transform.Move(pcb.lbrnCenter.X, pcb.lbrnCenter.Y)
 	bitmapTransform := transform.ScaleK(1 / pcb.resolution).Multiply(center)
 
 	p := lbrn.LightBurnProject{

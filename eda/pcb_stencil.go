@@ -7,7 +7,9 @@ import (
 
 const StencilShrink = 0.1
 
-func (pcb *PCB) SaveStencil(center transform.Transform, filename string) error {
+func (pcb *PCB) SaveStencil(filename string) error {
+	center := transform.Move(pcb.lbrnCenter.X, pcb.lbrnCenter.Y)
+
 	p := lbrn.LightBurnProject{
 		CutSetting: []lbrn.CutSetting{
 			{
