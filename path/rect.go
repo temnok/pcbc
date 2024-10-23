@@ -1,13 +1,9 @@
 package path
 
-import (
-	"temnok/pcbc/geom"
-)
-
 func Rect(w, h float64) Path {
 	x, y := w/2, h/2
 
-	return Lines([]geom.XY{
+	return Lines([]Point{
 		{x, y},
 		{x, -y},
 		{-x, -y},
@@ -23,7 +19,7 @@ func RoundRect(w, h, r float64) Path {
 
 	m := r * roundK
 
-	return []geom.XY{
+	return []Point{
 		{x1, y0},
 		{x1, y0 + m}, {x0 + m, y1},
 		{x0, y1},
@@ -46,7 +42,7 @@ func RoundRect(w, h, r float64) Path {
 
 func CutRect(w, h, r float64) Path {
 	x, y := w/2, h/2
-	return Lines([]geom.XY{
+	return Lines([]Point{
 		{x - r, y}, {-x + r, y},
 		{-x, y - r}, {-x, -y + r},
 		{-x + r, -y}, {x - r, -y},

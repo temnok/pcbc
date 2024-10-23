@@ -3,7 +3,6 @@ package greenconn
 import (
 	"temnok/pcbc/eda/lib"
 	"temnok/pcbc/font"
-	"temnok/pcbc/geom"
 	"temnok/pcbc/path"
 	"temnok/pcbc/transform"
 )
@@ -38,9 +37,9 @@ func CSCC118(n int, labels []string) *lib.Component {
 		}.Append(
 			path.Strokes{
 				0.15: path.Paths{}.Append(
-					font.StringsPaths(labels0, font.AlignRight, geom.XY{0, -2 / 1.6}).
+					font.StringsPaths(labels0, font.AlignRight, path.Point{0, -2 / 1.6}).
 						Apply(transform.Scale(0.7, 1.6).Move(-0.9, shift)),
-					font.StringsPaths(labels1, font.AlignLeft, geom.XY{0, -2 / 1.6}).
+					font.StringsPaths(labels1, font.AlignLeft, path.Point{0, -2 / 1.6}).
 						Apply(transform.Scale(0.7, 1.6).Move(0.9, -shift)),
 				),
 			},

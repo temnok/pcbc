@@ -29,7 +29,7 @@ type Shape struct {
 	Data string `xml:"Data,attr,omitempty"`
 }
 
-func (s *Shape) SetTabs(tabs []XY) {
+func (s *Shape) SetTabs(tabs []path.Point) {
 	var buf []byte
 
 	for _, xy := range tabs {
@@ -100,14 +100,14 @@ func NewPath(i int, t transform.Transform, path path.Path) *Shape {
 	return s
 }
 
-func NewPathWithTabs(index int, t transform.Transform, path path.Path) *Shape {
-	s := NewPath(index, t, path)
+func NewPathWithTabs(index int, t transform.Transform, p path.Path) *Shape {
+	s := NewPath(index, t, p)
 
-	var tabs []XY
-	for i := 0; i < len(path); i += 3 {
-		if isLine := i > 0 && path[i-3] == path[i-2] && path[i-1] == path[i]; isLine {
-			u, v := path[i-2], path[i-1]
-			tabs = append(tabs, XY{(u.X + v.X) / 2, (u.Y + v.Y) / 2})
+	var tabs path.Points
+	for i := 0; i < len(p); i += 3 {
+		if isLine := i > 0 && p[i-3] == p[i-2] && p[i-1] == p[i]; isLine {
+			u, v := p[i-2], p[i-1]
+			tabs = append(tabs, path.Point{(u.X + v.X) / 2, (u.Y + v.Y) / 2})
 		}
 	}
 	s.SetTabs(tabs)

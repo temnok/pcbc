@@ -7,7 +7,6 @@ import (
 	"temnok/pcbc/eda/lib/header/mph100imp40f"
 	"temnok/pcbc/eda/pcbc"
 	"temnok/pcbc/font"
-	"temnok/pcbc/geom"
 	"temnok/pcbc/path"
 	"temnok/pcbc/transform"
 )
@@ -24,7 +23,7 @@ var Board = &lib.Component{
 			},
 			Marks: font.CenterBolds(
 				[]string{"3V7", "3V7", "3V7", "3V7", "3V7", "3V7", "3V7", "3V7"},
-				geom.XY{2.54, 0},
+				path.Point{2.54, 0},
 			).Apply(transform.Move(0, 1.8)),
 		},
 		holder.LIR1254.Arrange(transform.Move(0, 2.75)),

@@ -7,7 +7,6 @@ import (
 	"temnok/pcbc/eda/lib/header/mph100imp40f"
 	"temnok/pcbc/eda/pcbc"
 	"temnok/pcbc/font"
-	"temnok/pcbc/geom"
 	"temnok/pcbc/path"
 	"temnok/pcbc/transform"
 )
@@ -42,7 +41,7 @@ func board(short bool) *lib.Component {
 
 	pin := fanstel.BC833.Pads.Centers()
 
-	labelShift := geom.XY{2.54 / 0.8, 0}
+	labelShift := path.Point{2.54 / 0.8, 0}
 	labelScale := transform.Scale(0.8, 1.3)
 
 	tracks := eda.TrackPaths(
@@ -92,8 +91,8 @@ func board(short bool) *lib.Component {
 		revision += "s"
 	}
 
-	leftMount := geom.XY{-5, -10.5}
-	rightMount := geom.XY{5, -10.5}
+	leftMount := path.Point{-5, -10.5}
+	rightMount := path.Point{5, -10.5}
 
 	shiftedBoard := &lib.Component{
 		Components: lib.Components{

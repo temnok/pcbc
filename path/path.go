@@ -1,14 +1,13 @@
 package path
 
 import (
-	"temnok/pcbc/geom"
 	"temnok/pcbc/transform"
 )
 
 // Path consists of cubic-Bezier curves as a sequence of on-path points separated by pairs of control points,
 // for example {p1,c1,c2,p2,c3,c4,p3}. Length of path should be 0 or n*3-2, where n > 0.
 // If the last point is the same as the first one, the path represents a closed contour.
-type Path []geom.XY
+type Path []Point
 
 // Apply returns new path transformed by a given 2D transformation.
 func (path Path) Apply(t transform.Transform) Path {
@@ -23,7 +22,7 @@ func (path Path) Visit(visit func(x, y int)) {
 	}
 
 	a := path[0]
-	visit(a.Ints())
+	visit(a.RoundXY())
 
 	for i := 0; i+3 < len(path); i += 3 {
 		c1, c2, b := path[i+1], path[i+2], path[i+3]
@@ -31,7 +30,7 @@ func (path Path) Visit(visit func(x, y int)) {
 		if a == c1 && c2 == b {
 			linearVisit(a, b, visit)
 		} else {
-			cubicVisit([]geom.XY{a, c1, c2, b}, visit)
+			cubicVisit([]Point{a, c1, c2, b}, visit)
 		}
 
 		a = b
@@ -70,7 +69,7 @@ func (path Path) Clone(n int, dx, dy float64) Paths {
 	return paths
 }
 
-func (path Path) CloneRowsCols(rows, cols int, step geom.XY) Paths {
+func (path Path) CloneRowsCols(rows, cols int, step Point) Paths {
 	paths := make(Paths, 0, rows*cols)
 
 	x0, y0 := -0.5*float64(cols-1)*step.X, 0.5*float64(rows-1)*step.Y
@@ -85,13 +84,13 @@ func (path Path) CloneRowsCols(rows, cols int, step geom.XY) Paths {
 	return paths
 }
 
-func (path Path) Center() geom.XY {
+func (path Path) Center() Point {
 	mi, ma := path.Bounds()
 
-	return geom.XY{(mi.X + ma.X) / 2, (mi.Y + ma.Y) / 2}
+	return Point{(mi.X + ma.X) / 2, (mi.Y + ma.Y) / 2}
 }
 
-func (path Path) Bounds() (lt, rb geom.XY) {
+func (path Path) Bounds() (lt, rb Point) {
 	if len(path) == 0 {
 		return
 	}

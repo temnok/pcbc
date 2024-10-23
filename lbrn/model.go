@@ -5,11 +5,11 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
-	"temnok/pcbc/geom"
+	"temnok/pcbc/path"
 	"temnok/pcbc/transform"
 )
 
-type XY = geom.XY
+type XY = path.Point
 
 type LightBurnProject struct {
 	XMLName       xml.Name     `xml:"LightBurnProject"`

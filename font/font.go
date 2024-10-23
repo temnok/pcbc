@@ -1,7 +1,6 @@
 package font
 
 import (
-	"temnok/pcbc/geom"
 	"temnok/pcbc/path"
 	"temnok/pcbc/transform"
 )
@@ -152,13 +151,13 @@ func CenterBold(str string) path.Strokes {
 	}
 }
 
-func CenterBolds(strs []string, shift geom.XY) path.Strokes {
+func CenterBolds(strs []string, shift path.Point) path.Strokes {
 	return path.Strokes{
 		Bold: StringsPaths(strs, AlignCenter, shift),
 	}
 }
 
-func StringsPaths(strs []string, alignment float64, shift geom.XY) path.Paths {
+func StringsPaths(strs []string, alignment float64, shift path.Point) path.Paths {
 	var paths path.Paths
 
 	x0, y0 := -0.5*float64(len(strs)-1)*shift.X, -0.5*float64(len(strs)-1)*shift.Y
@@ -192,11 +191,11 @@ func init() {
 	for i, paths := range data {
 		Paths[i] = make(path.Paths, len(paths))
 
-		for j, path := range paths {
-			a := pToXY(path[0])
-			Paths[i][j] = []geom.XY{a}
+		for j, p := range paths {
+			a := pToXY(p[0])
+			Paths[i][j] = []path.Point{a}
 
-			for _, p := range path[1:] {
+			for _, p := range p[1:] {
 				b := pToXY(p)
 				Paths[i][j] = append(Paths[i][j], a, b, b)
 
@@ -206,8 +205,8 @@ func init() {
 	}
 }
 
-func pToXY(p byte) geom.XY {
-	return geom.XY{
+func pToXY(p byte) path.Point {
+	return path.Point{
 		X: float64(p%10) / 10.0,
 		Y: -float64(p/10) / 10.0,
 	}

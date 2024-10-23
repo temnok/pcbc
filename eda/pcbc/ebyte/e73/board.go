@@ -7,13 +7,12 @@ import (
 	"temnok/pcbc/eda/lib/header/mph100imp40f"
 	"temnok/pcbc/eda/pcbc"
 	"temnok/pcbc/font"
-	"temnok/pcbc/geom"
 	"temnok/pcbc/path"
 	"temnok/pcbc/transform"
 )
 
 var (
-	labelShift = geom.XY{2.54 / 0.8, 0}
+	labelShift = path.Point{2.54 / 0.8, 0}
 	labelScale = transform.Scale(0.8, 1.8)
 
 	chip = ebyte.E73.Arrange(transform.Move(0, 3.9))

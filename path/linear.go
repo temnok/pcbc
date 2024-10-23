@@ -1,11 +1,9 @@
 package path
 
-import "temnok/pcbc/geom"
-
 // linearVisit iterates over all line pixels, except the first one.
-func linearVisit(a, b geom.XY, iterate func(x, y int)) {
-	x0, y0 := a.Ints()
-	x1, y1 := b.Ints()
+func linearVisit(a, b Point, iterate func(x, y int)) {
+	x0, y0 := a.RoundXY()
+	x1, y1 := b.RoundXY()
 
 	dx, ix := x1-x0, 1
 	if dx < 0 {

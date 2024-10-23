@@ -4,7 +4,6 @@ import (
 	"image/color"
 	"temnok/pcbc/bitmap"
 	"temnok/pcbc/eda/lib"
-	"temnok/pcbc/geom"
 	"temnok/pcbc/path"
 	"temnok/pcbc/shape"
 	"temnok/pcbc/transform"
@@ -19,7 +18,7 @@ type (
 type PCB struct {
 	width, height, resolution float64
 	trackWidth                float64
-	lbrnCenter                geom.XY
+	lbrnCenter                path.Point
 
 	component *lib.Component
 
@@ -49,7 +48,7 @@ func NewPCB(width, height float64, component *lib.Component) *PCB {
 
 	pcb.setComponent(component)
 
-	pcb.lbrnCenter = geom.XY{55, 55}
+	pcb.lbrnCenter = path.Point{55, 55}
 
 	return pcb
 }

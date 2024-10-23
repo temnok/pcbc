@@ -7,7 +7,6 @@ import (
 	"temnok/pcbc/eda/lib/pkg/qfn"
 	"temnok/pcbc/eda/pcbc"
 	"temnok/pcbc/font"
-	"temnok/pcbc/geom"
 	"temnok/pcbc/path"
 	"temnok/pcbc/transform"
 )
@@ -59,7 +58,7 @@ var (
 
 		Marks: path.Strokes{}.Append(
 			font.CenterBolds([]string{"PA8", "VCC", "PB0", "PA7", "PA6", "PA5", "PA4", "PA3"},
-				geom.XY{2.54 / 0.9, 0}).Apply(labelScale.Move(0, 2.4)),
+				path.Point{2.54 / 0.9, 0}).Apply(labelScale.Move(0, 2.4)),
 
 			pcbc.Logo.Apply(transform.ScaleK(0.8).Move(-9.7, 0)),
 			font.CenterBold("PY32").Apply(transform.Scale(1.3, 2.5).Move(-4.2, 0)),
@@ -67,7 +66,7 @@ var (
 			pcbc.TmnkTech.Apply(transform.Rotate(90).Move(9.7, 0)),
 
 			font.CenterBolds([]string{"PB1", "PA12", "SWD", "SWC", "PF2", "PA0", "PA1", "PA2"},
-				geom.XY{2.54 / 0.9, 0}).Apply(labelScale.Move(0, -2.4)),
+				path.Point{2.54 / 0.9, 0}).Apply(labelScale.Move(0, -2.4)),
 		),
 	}
 )

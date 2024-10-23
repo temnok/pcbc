@@ -2,11 +2,10 @@ package path
 
 import (
 	"math"
-	"temnok/pcbc/geom"
 )
 
 // cubicVisit iterates over all pixels for a given cubic Bezier curve.
-func cubicVisit(points []geom.XY, visit func(x, y int)) {
+func cubicVisit(points []Point, visit func(x, y int)) {
 	prev := points[0].Round()
 
 	steps := cubicSteps(points)
@@ -23,7 +22,7 @@ func cubicVisit(points []geom.XY, visit func(x, y int)) {
 	}
 }
 
-func cubicPoint(p []geom.XY, t float64) geom.XY {
+func cubicPoint(p []Point, t float64) Point {
 	ab := mix(p[0], p[1], t)
 	bc := mix(p[1], p[2], t)
 	cd := mix(p[2], p[3], t)
@@ -32,11 +31,11 @@ func cubicPoint(p []geom.XY, t float64) geom.XY {
 	return mix(abc, bcd, t)
 }
 
-func cubicSteps(points []geom.XY) int {
+func cubicSteps(points []Point) int {
 	return 3 * cubicDist(points)
 }
 
-func cubicDist(points []geom.XY) int {
+func cubicDist(points []Point) int {
 	totalD := 0
 	for i := 1; i < len(points); i++ {
 		a, b := points[i-1], points[i]
@@ -48,6 +47,6 @@ func cubicDist(points []geom.XY) int {
 }
 
 //go:inline
-func mix(a, b geom.XY, t float64) geom.XY {
-	return geom.XY{X: a.X*(1-t) + b.X*t, Y: a.Y*(1-t) + b.Y*t}
+func mix(a, b Point, t float64) Point {
+	return Point{X: a.X*(1-t) + b.X*t, Y: a.Y*(1-t) + b.Y*t}
 }

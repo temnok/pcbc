@@ -2,7 +2,6 @@ package eda
 
 import (
 	"math"
-	"temnok/pcbc/geom"
 	"temnok/pcbc/path"
 	"temnok/pcbc/transform"
 )
@@ -28,12 +27,12 @@ func (track Track) X(x float64) Track {
 
 	switch {
 	case n == 0:
-		return append(track, geom.XY{x, 0})
+		return append(track, path.Point{x, 0})
 	case n == 1:
-		return append(track, geom.XY{x, track[0].Y})
+		return append(track, path.Point{x, track[0].Y})
 	}
 
-	track = append(track, geom.XY{x, track[n-1].Y})
+	track = append(track, path.Point{x, track[n-1].Y})
 
 	if track[n-2].X == track[n-1].X {
 		dx := track[n].X - track[n-1].X
@@ -54,12 +53,12 @@ func (track Track) Y(y float64) Track {
 
 	switch {
 	case n == 0:
-		return append(track, geom.XY{0, y})
+		return append(track, path.Point{0, y})
 	case n == 1:
-		return append(track, geom.XY{track[0].X, y})
+		return append(track, path.Point{track[0].X, y})
 	}
 
-	track = append(track, geom.XY{track[n-1].X, y})
+	track = append(track, path.Point{track[n-1].X, y})
 
 	if track[n-2].Y == track[n-1].Y {
 		dy := track[n].Y - track[n-1].Y
@@ -83,11 +82,11 @@ func (track Track) DY(dy float64) Track {
 	return track.Y(track[len(track)-1].Y + dy)
 }
 
-func (track Track) XY(p geom.XY) Track {
+func (track Track) XY(p path.Point) Track {
 	return track.X(p.X).Y(p.Y)
 }
 
-func (track Track) YX(p geom.XY) Track {
+func (track Track) YX(p path.Point) Track {
 	return track.Y(p.Y).X(p.X)
 }
 

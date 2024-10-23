@@ -6,7 +6,6 @@ import (
 	"temnok/pcbc/eda/lib/header/mph100imp40f"
 	"temnok/pcbc/eda/pcbc"
 	"temnok/pcbc/font"
-	"temnok/pcbc/geom"
 	"temnok/pcbc/path"
 	"temnok/pcbc/transform"
 )
@@ -22,7 +21,7 @@ var GndX4 = &lib.Component{
 	Marks: path.Strokes{}.Append(
 		font.CenterBolds([]string{
 			"GND", "GND", "GND", "GND",
-		}, geom.XY{2.54, 0}).Apply(transform.Move(-1.9, 1.35)),
+		}, path.Point{2.54, 0}).Apply(transform.Move(-1.9, 1.35)),
 		pcbc.Logo.Apply(transform.ScaleK(0.6).Move(6.5, 1.4)),
 		pcbc.TmnkTech.Apply(transform.ScaleK(0.4).Move(6.6, -1.2)),
 	),

@@ -1,12 +1,11 @@
 package path
 
 import (
-	"temnok/pcbc/geom"
 	"temnok/pcbc/transform"
 )
 
 // Points represent list of arbitrary 2D points, not necessary a path.
-type Points []geom.XY
+type Points []Point
 
 // Apply returns points transformed by a given 2D transformation.
 func (points Points) Apply(t transform.Transform) Path {

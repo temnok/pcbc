@@ -1,7 +1,6 @@
 package path
 
 import (
-	"temnok/pcbc/geom"
 	"temnok/pcbc/transform"
 )
 
@@ -51,7 +50,7 @@ func (paths Paths) Centers() Points {
 	return centers
 }
 
-func (paths Paths) Bounds() (lt, rb geom.XY) {
+func (paths Paths) Bounds() (lt, rb Point) {
 	if len(paths) == 0 {
 		return
 	}
