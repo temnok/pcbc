@@ -16,7 +16,7 @@ var X2Base = &lib.Component{
 
 	Components: lib.Components{
 		smd.I0603.Arrange(transform.Rotate(90).Move(-1.5, -0.5)),
-		greenconn.CSCC118(2, []string{"", "K20"}).Arrange(transform.Move(0, -1.8)),
+		greenconn.CSCC118(2, false, []string{"", "K20"}).Arrange(transform.Move(0, -1.8)),
 		pcbc.MountHole.Arrange(transform.Move(0.5, 1.5)),
 	},
 }

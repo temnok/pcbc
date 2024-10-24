@@ -23,8 +23,8 @@ var (
 
 	header = &lib.Component{
 		Components: lib.Components{
-			greenconn.CSCC118(8, leftLabels).Arrange(transform.Move(-5.5, 0)),
-			greenconn.CSCC118(8, rightLabels).Arrange(transform.Move(5.5, 0)),
+			greenconn.CSCC118(8, false, leftLabels).Arrange(transform.Move(-5.5, 0)),
+			greenconn.CSCC118(8, false, rightLabels).Arrange(transform.Move(5.5, 0)),
 		},
 	}
 	pad = header.Squash().Pads.Centers()

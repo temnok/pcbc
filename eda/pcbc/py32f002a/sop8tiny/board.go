@@ -18,7 +18,7 @@ var (
 	chip = sop.SOP8.Arrange(transform.Move(-0.6, 0))
 	pin  = chip.Squash().Pads.Centers()
 
-	header = greenconn.CSCC118(7, []string{"SWD", "PA2", "PA1", "VCC", "PA4", "PA3", "SWC"}).
+	header = greenconn.CSCC118(7, false, []string{"SWD", "PA2", "PA1", "VCC", "PA4", "PA3", "SWC"}).
 		Arrange(transform.Move(4.4, 0))
 	pad = header.Squash().Pads.Centers()
 

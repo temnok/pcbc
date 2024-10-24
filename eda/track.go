@@ -82,6 +82,14 @@ func (track Track) DY(dy float64) Track {
 	return track.Y(track[len(track)-1].Y + dy)
 }
 
+func (track Track) DXY(dx, dy float64) Track {
+	return track.DX(dx).DY(dy)
+}
+
+func (track Track) DYX(dx, dy float64) Track {
+	return track.DY(dx).DX(dy)
+}
+
 func (track Track) XY(p path.Point) Track {
 	return track.X(p.X).Y(p.Y)
 }

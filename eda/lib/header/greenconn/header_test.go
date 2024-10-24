@@ -11,9 +11,9 @@ import (
 func TestHeader(t *testing.T) {
 	pcb := eda.NewPCB(20, 10, &lib.Component{
 		Components: lib.Components{
-			CSCC118(7, []string{"P001", "P002", "VDD", "D+", "D-", "GND", "P007"}).
+			CSCC118(7, false, []string{"P001", "P002", "VDD", "D+", "D-", "GND", "P007"}).
 				Arrange(transform.Move(-5, 0)),
-			CSCC118(8, []string{"P001", "GND", "VDD", "D+", "D-", "P006", "P008", "P009"}).
+			CSCC118(8, false, []string{"P001", "GND", "VDD", "D+", "D-", "P006", "P008", "P009"}).
 				Arrange(transform.Move(5, 0)),
 		},
 	})
