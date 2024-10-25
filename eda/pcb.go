@@ -133,27 +133,13 @@ func (pcb *PCB) setComponent(c *lib.Component) {
 }
 
 func (pcb *PCB) SaveFiles(path string) error {
-	if err := pcb.SaveEtch(path + "etch.lbrn"); err != nil {
-		return err
-	}
-
-	if err := pcb.SaveMask(path + "mask.lbrn"); err != nil {
-		return err
-	}
-
-	if err := pcb.SaveMaskBottom(path + "mask-bottom.lbrn"); err != nil {
-		return err
-	}
-
-	if err := pcb.SaveStencil(path + "stencil.lbrn"); err != nil {
-		return err
-	}
-
-	if err := pcb.SaveOverview(path + "overview.png"); err != nil {
-		return err
-	}
-
-	return nil
+	return util.GoAll([]func() error{
+		func() error { return pcb.SaveEtch(path + "etch.lbrn") },
+		func() error { return pcb.SaveMask(path + "mask.lbrn") },
+		func() error { return pcb.SaveMaskBottom(path + "mask-bottom.lbrn") },
+		func() error { return pcb.SaveStencil(path + "stencil.lbrn") },
+		func() error { return pcb.SaveOverview(path + "overview.png") },
+	})
 }
 
 func (pcb *PCB) SaveOverview(filename string) error {
