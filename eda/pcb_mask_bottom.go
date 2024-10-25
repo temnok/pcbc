@@ -6,7 +6,9 @@ import (
 	"temnok/pcbc/transform"
 )
 
-func (pcb *PCB) SaveMaskBottom(filename string) error {
+func (pcb *PCB) SaveMaskBottom() error {
+	filename := pcb.savePath + "mask-bottom.lbrn"
+
 	mask := pcb.maskB.ToImage(color.White, color.Black)
 
 	bitmapTransform := transform.Scale(-1, 1).ScaleK(1/pcb.resolution).

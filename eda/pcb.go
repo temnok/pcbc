@@ -16,25 +16,35 @@ type (
 )
 
 type PCB struct {
-	width, height, resolution float64
-	trackWidth                float64
-	lbrnCenter                path.Point
+	resolution float64
+	trackWidth float64
+	lbrnCenter path.Point
 
+	savePath  string
 	component *lib.Component
 
 	fr4, copper, mask, maskB, silk, stencil *bitmap.Bitmap
 }
 
-func NewPCB(width, height float64, component *lib.Component) *PCB {
+func GeneratePCB(component *lib.Component) error {
+	return newPCB("pcb/", component).saveFiles()
+}
+
+func newPCB(savePath string, component *lib.Component) *PCB {
 	const scale = 100
+
+	component = component.Squash()
+	width, height := component.Size()
+	width, height = width+1, height+1
 
 	wi, hi := int(width*scale), int(height*scale)
 
 	pcb := &PCB{
-		width:      width,
-		height:     height,
 		resolution: scale,
 		trackWidth: 0.25,
+
+		lbrnCenter: path.Point{55, 55},
+		savePath:   savePath,
 
 		fr4:     bitmap.NewBitmap(wi, hi),
 		copper:  bitmap.NewBitmap(wi, hi),
@@ -46,18 +56,15 @@ func NewPCB(width, height float64, component *lib.Component) *PCB {
 
 	pcb.copper.Invert()
 
-	pcb.setComponent(component)
-
-	pcb.lbrnCenter = path.Point{55, 55}
+	pcb.setComponent(component, width, height)
 
 	return pcb
 }
 
-func (pcb *PCB) setComponent(c *lib.Component) {
-	c = c.Squash()
+func (pcb *PCB) setComponent(c *lib.Component, width, height float64) {
 	pcb.component = c
 
-	bt := transform.Move(pcb.width/2, pcb.height/2).Scale(pcb.resolution, pcb.resolution)
+	bt := transform.Move(width/2, height/2).Scale(pcb.resolution, pcb.resolution)
 
 	brush1 := shape.Circle(int(0.1 * pcb.resolution))
 	brush02 := shape.Circle(int(0.02 * pcb.resolution))
@@ -132,17 +139,19 @@ func (pcb *PCB) setComponent(c *lib.Component) {
 	brush1.IterateContours(openings, pcb.mask.Set1)
 }
 
-func (pcb *PCB) SaveFiles(path string) error {
+func (pcb *PCB) saveFiles() error {
 	return util.GoAll([]func() error{
-		func() error { return pcb.SaveEtch(path + "etch.lbrn") },
-		func() error { return pcb.SaveMask(path + "mask.lbrn") },
-		func() error { return pcb.SaveMaskBottom(path + "mask-bottom.lbrn") },
-		func() error { return pcb.SaveStencil(path + "stencil.lbrn") },
-		func() error { return pcb.SaveOverview(path + "overview.png") },
+		pcb.SaveEtch,
+		pcb.SaveMask,
+		pcb.SaveMaskBottom,
+		pcb.SaveStencil,
+		pcb.SaveOverview,
 	})
 }
 
-func (pcb *PCB) SaveOverview(filename string) error {
+func (pcb *PCB) SaveOverview() error {
+	filename := pcb.savePath + "overview.png"
+
 	image := bitmap.NewBitmapsImage(
 		[]*bitmap.Bitmap{pcb.copper, pcb.fr4, pcb.mask, pcb.silk, pcb.stencil},
 		[][2]color.Color{

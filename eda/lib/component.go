@@ -96,6 +96,20 @@ func (c *Component) Clone(n int, dx, dy float64) *Component {
 	return res
 }
 
+func (c *Component) Size() (float64, float64) {
+	var b path.Bounds
+	b.AddPaths(c.Clears)
+	b.AddPaths(c.Cuts)
+	b.AddPaths(c.Holes)
+	b.AddPaths(c.Pads)
+	b.AddPaths(c.Openings)
+	b.AddStrokes(c.Marks)
+	b.AddStrokes(c.Tracks)
+	b.AddStrokes(c.GroundTracks)
+
+	return b.Width(), b.Height()
+}
+
 func ComponentsGrid(cols, rows int, dx, dy float64, comps ...*Component) Components {
 	x0, y0 := -0.5*float64(cols-1)*dx, 0.5*float64(rows-1)*dy
 

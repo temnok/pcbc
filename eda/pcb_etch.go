@@ -8,7 +8,8 @@ import (
 
 type Param = lbrn.Param
 
-func (pcb *PCB) SaveEtch(filename string) error {
+func (pcb *PCB) SaveEtch() error {
+	filename := pcb.savePath + "etch.lbrn"
 	im := pcb.copper.ToImage(color.White, color.Black)
 
 	center := transform.Move(pcb.lbrnCenter.X, pcb.lbrnCenter.Y)

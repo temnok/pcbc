@@ -9,13 +9,11 @@ import (
 )
 
 func TestBoard(t *testing.T) {
-	pcb := eda.NewPCB(36, 46, &lib.Component{
+	assert.NoError(t, eda.GeneratePCB(&lib.Component{
 		Components: lib.Components{
 			pcbc.Board35x45,
 
 			Board,
 		},
-	})
-
-	assert.NoError(t, pcb.SaveFiles("gen/"))
+	}))
 }

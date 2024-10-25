@@ -1,4 +1,4 @@
-package qfn16
+package long
 
 import (
 	"github.com/stretchr/testify/assert"
@@ -10,12 +10,12 @@ import (
 	"testing"
 )
 
-func TestBoard(t *testing.T) {
+func Test_BC833Short(t *testing.T) {
 	assert.NoError(t, eda.GeneratePCB(&lib.Component{
 		Components: lib.Components{
 			pcbc.Board35x45,
-			bc833.ShortBoard.Arrange(transform.Move(0, 7)),
-			Board.Arrange(transform.Move(0, -11)),
+			bc833.ShortBoard.Arrange(transform.Move(0, 10.5)),
+			bc833.ShortBoard.Arrange(transform.Rotate(180).Move(0, -10.5)),
 		},
 	}))
 }

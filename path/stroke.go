@@ -38,3 +38,7 @@ func (strokes Strokes) Apply(t transform.Transform) Strokes {
 
 	return res
 }
+
+func (strokes Strokes) WidthHeight() (float64, float64) {
+	return 0, 0
+}

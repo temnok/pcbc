@@ -69,7 +69,8 @@ var maskCutSettings = []lbrn.CutSetting{
 	},
 }
 
-func (pcb *PCB) SaveMask(filename string) error {
+func (pcb *PCB) SaveMask() error {
+	filename := pcb.savePath + "mask.lbrn"
 	silk := pcb.silk.ToImage(color.White, color.Black)
 	mask := pcb.mask.ToImage(color.Transparent, color.Black)
 

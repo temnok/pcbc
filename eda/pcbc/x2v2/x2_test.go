@@ -10,7 +10,7 @@ import (
 )
 
 func TestBoard(t *testing.T) {
-	pcb := eda.NewPCB(36, 46, &lib.Component{
+	assert.NoError(t, eda.GeneratePCB(&lib.Component{
 		Components: lib.Components{
 			pcbc.Board35x45,
 			lib.ComponentGrid(3, 11, 5,
@@ -31,7 +31,5 @@ func TestBoard(t *testing.T) {
 				X2("R ", "K25"),
 			).Arrange(transform.Rotate(90)),
 		},
-	})
-
-	assert.NoError(t, pcb.SaveFiles("gen/"))
+	}))
 }
