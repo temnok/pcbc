@@ -119,3 +119,18 @@ func ComponentsGrid(cols, rows int, dx, dy float64, comps ...*Component) Compone
 
 	return grid
 }
+
+func ComponentGrid(cols int, dx, dy float64, comps ...*Component) *Component {
+	rows := (len(comps) + cols - 1) / cols
+
+	grid := &Component{}
+
+	for i, comp := range comps {
+		c := float64(i%cols) - float64(cols-1)/2
+		r := float64(i/cols) - float64(rows-1)/2
+
+		grid.Components = append(grid.Components, comp.Arrange(transform.Move(c*dx, -r*dy)))
+	}
+
+	return grid
+}
