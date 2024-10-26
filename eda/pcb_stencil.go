@@ -5,8 +5,6 @@ import (
 	"temnok/pcbc/transform"
 )
 
-const StencilShrink = 0.1
-
 func (pcb *PCB) SaveStencil() error {
 	filename := pcb.savePath + "stencil.lbrn"
 
@@ -30,8 +28,7 @@ func (pcb *PCB) SaveStencil() error {
 		},
 	}
 
-	pads := pcb.component.Pads.Resize(-StencilShrink)
-	for _, hole := range pads {
+	for _, hole := range pcb.component.Pads {
 		p.Shape = append(p.Shape, lbrn.NewPath(0, center, hole))
 	}
 
