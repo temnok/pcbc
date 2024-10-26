@@ -18,7 +18,7 @@ var (
 	chip = sop.SOP8.Arrange(transform.Move(-0.6, 0))
 	pin  = chip.Flatten().Pads.Centers()
 
-	header = greenconn.CSCC118(7, false, []string{"SWD", "PA2", "PA1", "VCC", "PA4", "PA3", "SWC"}).
+	header = greenconn.CSCC118(7, true, []string{"SWD", "PA2", "PA1", "VCC", "PA4", "PA3", "SWC"}).
 		Arrange(transform.Move(4.4, 0))
 	pad = header.Flatten().Pads.Centers()
 
@@ -34,9 +34,9 @@ var (
 		},
 
 		Marks: path.Strokes{}.Append(
-			font.CenterBold("PY32").Apply(transform.Scale(1.3, 2.8).Move(-5, 2.7)),
+			font.CenterBold("PY32").Apply(transform.Scale(1.3, 2.8).Move(-5, 2.5)),
 			//pcbc.Logo.Apply(transform.Move(-4.2, 0)),
-			font.CenterBold("F002A").Apply(transform.Scale(1.1, 2.8).Move(-5, -2.7)),
+			font.CenterBold("F002A").Apply(transform.Scale(1.1, 2.8).Move(-5, -2.5)),
 		),
 
 		Tracks: path.Strokes{
