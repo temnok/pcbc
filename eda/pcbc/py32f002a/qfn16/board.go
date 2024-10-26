@@ -14,11 +14,11 @@ import (
 var (
 	chip = qfn.QFN16G.Arrange(transform.Rotate(45))
 
-	pin = chip.Squash().Pads.Centers()
+	pin = chip.Flatten().Pads.Centers()
 
 	header = mph100imp40f.G_V_SP(8).Arrange(transform.Move(0, -4.25))
 
-	pad = header.Squash().Pads.Centers()
+	pad = header.Flatten().Pads.Centers()
 
 	headerWithTracks = &lib.Component{
 		Components: lib.Components{header},

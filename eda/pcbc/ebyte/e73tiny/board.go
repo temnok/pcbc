@@ -13,7 +13,7 @@ import (
 var (
 	chip = ebyte.E73.Arrange(transform.Rotate(-90).Move(5.2, 0))
 
-	pin = chip.Squash().Pads.Centers()
+	pin = chip.Flatten().Pads.Centers()
 
 	headers = &lib.Component{
 		Components: lib.Components{
@@ -25,7 +25,7 @@ var (
 		},
 	}
 
-	pad = headers.Squash().Pads.Centers()
+	pad = headers.Flatten().Pads.Centers()
 
 	mountHoles = &lib.Component{
 		Components: lib.Components{
@@ -34,7 +34,7 @@ var (
 		},
 	}
 
-	mountPad = mountHoles.Squash().Pads.Centers()
+	mountPad = mountHoles.Flatten().Pads.Centers()
 
 	Board_nRF52840 = &lib.Component{
 		Cuts: path.Paths{

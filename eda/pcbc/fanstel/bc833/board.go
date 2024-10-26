@@ -27,7 +27,7 @@ func board(short bool) *lib.Component {
 		},
 	}
 
-	pad := header.Squash().Pads.Centers()
+	pad := header.Flatten().Pads.Centers()
 
 	if short {
 		header = &lib.Component{

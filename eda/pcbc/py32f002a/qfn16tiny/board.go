@@ -13,10 +13,10 @@ import (
 
 var (
 	mount    = pcbc.MountHole.Arrange(transform.Rotate(30).Move(0, 2.5))
-	mountPad = mount.Squash().Pads.Centers()
+	mountPad = mount.Flatten().Pads.Centers()
 
 	chip = qfn.QFN16G.Arrange(transform.Rotate(-45).Move(0, -1.5))
-	pin  = chip.Squash().Pads.Centers()
+	pin  = chip.Flatten().Pads.Centers()
 
 	leftLabels  = []string{"PB1", "PA12", "SWD", "SWC", "PF2", "PA0", "PA1", "PA2"}
 	rightLabels = []string{"PA8", "VCC", "PB0", "PA7", "PA6", "PA5", "PA4", "PA3"}
@@ -27,7 +27,7 @@ var (
 			greenconn.CSCC118(8, false, rightLabels).Arrange(transform.Move(5.5, 0)),
 		},
 	}
-	pad = header.Squash().Pads.Centers()
+	pad = header.Flatten().Pads.Centers()
 
 	Board = &lib.Component{
 		Cuts: path.Paths{

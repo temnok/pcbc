@@ -12,13 +12,13 @@ import (
 
 func X2(topLabel, bottomLabel string) *lib.Component {
 	header := greenconn.CSCC118(3, false, []string{topLabel, "GND", bottomLabel}).Arrange(transform.Move(-2, 0))
-	pad := header.Squash().Pads.Centers()
+	pad := header.Flatten().Pads.Centers()
 
 	chip := smd.I0603.Arrange(transform.Rotate(-90).Move(0.8, 0))
-	pin := chip.Squash().Pads.Centers()
+	pin := chip.Flatten().Pads.Centers()
 
 	mount := pcbc.MountHole.Arrange(transform.Move(3, 0))
-	sink := mount.Squash().Pads.Centers()
+	sink := mount.Flatten().Pads.Centers()
 
 	return &lib.Component{
 		Cuts: path.Paths{

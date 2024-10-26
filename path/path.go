@@ -85,21 +85,7 @@ func (path Path) CloneRowsCols(rows, cols int, step Point) Paths {
 }
 
 func (path Path) Center() Point {
-	mi, ma := path.Bounds()
-
-	return Point{(mi.X + ma.X) / 2, (mi.Y + ma.Y) / 2}
-}
-
-func (path Path) Bounds() (lt, rb Point) {
-	if len(path) == 0 {
-		return
-	}
-
-	lt, rb = path[0], path[0]
-	for _, p := range path[1:] {
-		lt.X, lt.Y = min(lt.X, p.X), min(lt.Y, p.Y)
-		rb.X, rb.Y = max(rb.X, p.X), max(rb.Y, p.Y)
-	}
-
-	return
+	var b Bounds
+	b.AddPath(path)
+	return b.Center()
 }

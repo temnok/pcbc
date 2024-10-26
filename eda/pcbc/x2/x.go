@@ -62,7 +62,7 @@ func x(x *lib.Component, title, upperText, lowerText string, ground bool) *lib.C
 			mph100imp40f.G_V_SP_x2.Arrange(transform.Move(-2.1, -0.85)),
 			pcbc.MountHole.Arrange(transform.Move(2.5, 0)),
 		},
-	}).Squash()
+	}).Flatten()
 
 	pad := comp.Pads.Centers()
 

@@ -50,22 +50,6 @@ func (paths Paths) Centers() Points {
 	return centers
 }
 
-func (paths Paths) Bounds() (lb, rt Point) {
-	if len(paths) == 0 {
-		return
-	}
-
-	lb, rt = paths[0].Bounds()
-	for _, p := range paths[1:] {
-		a, b := p.Bounds()
-
-		lb.X, lb.Y = min(lb.X, a.X), min(lb.Y, a.Y)
-		rt.X, rt.Y = max(rt.X, b.X), max(rt.Y, b.Y)
-	}
-
-	return
-}
-
 func (paths Paths) Resize(delta float64) Paths {
 	res := make(Paths, len(paths))
 

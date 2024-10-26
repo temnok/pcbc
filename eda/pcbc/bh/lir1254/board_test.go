@@ -12,12 +12,7 @@ var testBoard = &lib.Component{
 	//Clears: path.Paths{path.Rect(36, 46)},
 	Components: lib.Components{
 		pcbc.Board35x45,
-		{
-			//Transform: geom.RotateD(-90),
-			Components: lib.ComponentsGrid(1, 1, 10.5, 5.5,
-				Board,
-			),
-		},
+		Board,
 	},
 }
 

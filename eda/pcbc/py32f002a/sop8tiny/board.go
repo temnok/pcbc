@@ -13,14 +13,14 @@ import (
 
 var (
 	mount    = pcbc.MountHole.Arrange(transform.Move(-5, 0))
-	mountPad = mount.Squash().Pads.Centers()
+	mountPad = mount.Flatten().Pads.Centers()
 
 	chip = sop.SOP8.Arrange(transform.Move(-0.6, 0))
-	pin  = chip.Squash().Pads.Centers()
+	pin  = chip.Flatten().Pads.Centers()
 
 	header = greenconn.CSCC118(7, false, []string{"SWD", "PA2", "PA1", "VCC", "PA4", "PA3", "SWC"}).
 		Arrange(transform.Move(4.4, 0))
-	pad = header.Squash().Pads.Centers()
+	pad = header.Flatten().Pads.Centers()
 
 	Board = &lib.Component{
 		Cuts: path.Paths{

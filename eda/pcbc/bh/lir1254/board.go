@@ -41,7 +41,7 @@ var Board = &lib.Component{
 }
 
 func init() {
-	pad := Board.Squash().Pads.Centers()
+	pad := Board.Flatten().Pads.Centers()
 
 	Board.Tracks = path.Strokes{
 		0: eda.TrackPaths(

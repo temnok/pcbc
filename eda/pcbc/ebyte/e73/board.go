@@ -17,7 +17,7 @@ var (
 
 	chip = ebyte.E73.Arrange(transform.Move(0, 3.9))
 
-	pin = chip.Squash().Pads.Centers()
+	pin = chip.Flatten().Pads.Centers()
 
 	headers = &lib.Component{
 		Transform: transform.Move(0, 3.05),
@@ -43,7 +43,7 @@ var (
 		},
 	}
 
-	pad = headers.Squash().Pads.Centers()
+	pad = headers.Flatten().Pads.Centers()
 
 	mountHoles = &lib.Component{
 		Components: lib.Components{
@@ -52,7 +52,7 @@ var (
 		},
 	}
 
-	mountPad = mountHoles.Squash().Pads.Centers()
+	mountPad = mountHoles.Flatten().Pads.Centers()
 
 	Board_nRF52840 = &lib.Component{
 		Clears: path.Paths{

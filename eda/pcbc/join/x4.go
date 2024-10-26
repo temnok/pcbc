@@ -29,7 +29,7 @@ var X4 = &lib.Component{
 }
 
 func init() {
-	pad := X4.Squash().Pads.Centers()
+	pad := X4.Flatten().Pads.Centers()
 
 	X4.Tracks = path.Strokes{
 		0: eda.TrackPaths(

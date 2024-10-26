@@ -9,8 +9,6 @@ type Components = []*Component
 
 // Component represents vector data for different PCB layers.
 type Component struct {
-	Description string
-
 	Transform transform.Transform
 
 	Components []*Component
@@ -44,8 +42,8 @@ type Component struct {
 	GroundTracks path.Strokes
 }
 
-// Squash merges component tree into the single component.
-func (c *Component) Squash() *Component {
+// Flatten merges component tree into the single component.
+func (c *Component) Flatten() *Component {
 	out := &Component{
 		Transform:    transform.Identity,
 		Marks:        path.Strokes{},
@@ -108,30 +106,6 @@ func (c *Component) Size() (float64, float64) {
 	b.AddStrokes(c.GroundTracks)
 
 	return b.Width(), b.Height()
-}
-
-func ComponentsGrid(cols, rows int, dx, dy float64, comps ...*Component) Components {
-	x0, y0 := -0.5*float64(cols-1)*dx, 0.5*float64(rows-1)*dy
-
-	grid := Components{}
-
-	for i := 0; i < rows; i++ {
-		for j := 0; j < cols; j++ {
-			k := i*cols + j
-			if k >= len(comps) {
-				break
-			}
-
-			grid = append(grid, &Component{
-				Transform: transform.Move(x0+float64(j)*dx, y0-float64(i)*dy),
-				Components: Components{
-					comps[k],
-				},
-			})
-		}
-	}
-
-	return grid
 }
 
 func ComponentGrid(cols int, dx, dy float64, comps ...*Component) *Component {

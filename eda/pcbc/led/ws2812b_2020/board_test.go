@@ -14,15 +14,10 @@ var testBoard = &lib.Component{
 	Components: lib.Components{
 		pcbc.Board35x45,
 		bc833.Board.Arrange(transform.Move(0, 3.5)),
-		{
-			Transform: transform.Move(0, -13),
-			Components: lib.ComponentsGrid(2, 1, 11, 7,
-				Board,
-				Board,
-				Board,
-				Board,
-			),
-		},
+		lib.ComponentGrid(2, 11, 7,
+			Board,
+			Board,
+		).Arrange(transform.Move(0, -13)),
 	},
 }
 

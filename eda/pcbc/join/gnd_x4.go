@@ -28,7 +28,7 @@ var GndX4 = &lib.Component{
 }
 
 func init() {
-	pad := GndX4.Squash().Pads.Centers()
+	pad := GndX4.Flatten().Pads.Centers()
 
 	GndX4.GroundTracks = path.Strokes{
 		0: eda.TrackPaths(

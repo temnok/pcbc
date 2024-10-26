@@ -17,7 +17,7 @@ var (
 
 	chip = minewsemi.MS88SF2.Arrange(transform.Move(0, 6.6))
 
-	pin = chip.Squash().Pads.Centers()
+	pin = chip.Flatten().Pads.Centers()
 
 	headers = &lib.Component{
 		Transform: transform.Move(0, 3.05),
@@ -43,7 +43,7 @@ var (
 		},
 	}
 
-	pad = append(path.Paths{nil}, headers.Squash().Pads...).Centers()
+	pad = append(path.Paths{nil}, headers.Flatten().Pads...).Centers()
 
 	mountHoles = &lib.Component{
 		Transform: transform.Move(0, 3),
@@ -54,7 +54,7 @@ var (
 		},
 	}
 
-	mountPad = mountHoles.Squash().Pads.Centers()
+	mountPad = mountHoles.Flatten().Pads.Centers()
 
 	Board_nRF52840 = &lib.Component{
 		Cuts: path.Paths{

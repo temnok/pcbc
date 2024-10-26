@@ -14,11 +14,11 @@ import (
 var (
 	chip = sop.SOP8.Arrange(transform.Move(2.3, 0))
 
-	pin = chip.Squash().Pads.Centers()
+	pin = chip.Flatten().Pads.Centers()
 
 	header = mph100imp40f.G_V_SP(4).Arrange(transform.Move(0, -6))
 
-	pad = header.Squash().Pads.Centers()
+	pad = header.Flatten().Pads.Centers()
 
 	headerWithTracks = &lib.Component{
 		Components: lib.Components{header},

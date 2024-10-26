@@ -33,7 +33,7 @@ func GeneratePCB(component *lib.Component) error {
 func newPCB(savePath string, component *lib.Component) *PCB {
 	const scale = 100
 
-	component = component.Squash()
+	component = component.Flatten()
 	width, height := component.Size()
 	width, height = width+1, height+1
 
