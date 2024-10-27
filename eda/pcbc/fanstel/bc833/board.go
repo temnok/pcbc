@@ -91,15 +91,12 @@ func board(short bool) *lib.Component {
 		revision += "s"
 	}
 
-	leftMount := path.Point{-5, -10.5}
-	rightMount := path.Point{5, -10.5}
-
 	shiftedBoard := &lib.Component{
 		Components: lib.Components{
 			fanstel.BC833,
 			header,
-			pcbc.MountHole.Arrange(transform.Move(leftMount.X, leftMount.Y)),
-			pcbc.MountHole.Arrange(transform.Move(rightMount.X, rightMount.Y)),
+			pcbc.MountHole.Arrange(transform.Rotate(45).Move(-5, -10.5)),
+			pcbc.MountHole.Arrange(transform.Rotate(-45).Move(5, -10.5)),
 		},
 
 		Tracks: path.Strokes{
@@ -109,13 +106,7 @@ func board(short bool) *lib.Component {
 		GroundTracks: path.Strokes{
 			0: eda.TrackPaths(
 				eda.Track{pad[7]}.DX(2.1).YX(pin[5]),
-				eda.Track{pad[7]}.XY(leftMount),
-
 				eda.Track{pin[5]}.DX(3).YX(pin[27]).XY(pin[25]).XY(pin[26]).YX(pin[28]).XY(pin[27]),
-
-				eda.Track{leftMount}.DX(1.5).DY(4.75).YX(pin[28]),
-				eda.Track{rightMount}.DX(-1.3).DY(1.3),
-				eda.Track{rightMount}.DX(1.3).DY(-1.3),
 			),
 		},
 

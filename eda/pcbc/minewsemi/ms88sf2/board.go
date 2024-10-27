@@ -49,12 +49,10 @@ var (
 		Transform: transform.Move(0, 3),
 
 		Components: lib.Components{
-			pcbc.MountHole.Arrange(transform.Move(-7.5, -9.7)),
-			pcbc.MountHole.Arrange(transform.Move(7.5, -9.7)),
+			pcbc.MountHole.Arrange(transform.Rotate(45).Move(-7.5, -9.7)),
+			pcbc.MountHole.Arrange(transform.Rotate(-45).Move(7.5, -9.7)),
 		},
 	}
-
-	mountPad = mountHoles.Flatten().Pads.Centers()
 
 	Board_nRF52840 = &lib.Component{
 		Cuts: path.Paths{
@@ -107,10 +105,6 @@ var (
 				eda.Track{pin[1]}.DX(1.5),
 				eda.Track{pin[1]}.DX(-1.5),
 				eda.Track{pad[8]}.DX(1.7).Y(pin[13].Y-1.4).YX(pin[13]),
-				eda.Track{mountPad[1]}.DX(0.5).Y(pin[13].Y-0.5).YX(pin[13]),
-				eda.Track{mountPad[4]}.DX(-0.5).DY(-0.5),
-				eda.Track{mountPad[8]}.DX(-0.5).DY(0.5),
-				eda.Track{mountPad[11]}.DX(0.5).DY(-0.5),
 			),
 		},
 

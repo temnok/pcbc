@@ -34,11 +34,6 @@ var (
 				eda.Track{pad[7]}.Y(-2.5).X(4.9).Y(-2).XY(pin[7]),
 			),
 		},
-		GroundTracks: path.Strokes{
-			0.16: eda.TrackPaths(
-				eda.Track{{9.5, 0}}.X(pin[16].X),
-			),
-		},
 	}
 
 	labelScale = transform.Scale(0.9, 1.2)

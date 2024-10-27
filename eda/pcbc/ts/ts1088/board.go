@@ -38,11 +38,4 @@ func init() {
 			eda.Track{pad[1]}.XY(pad[3]),
 		),
 	}
-
-	Board.GroundTracks = path.Strokes{
-		0: eda.TrackPaths(
-			eda.Track{pad[4]}.DX(0.7),
-			eda.Track{pad[7]}.DX(-0.7),
-		),
-	}
 }

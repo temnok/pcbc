@@ -29,8 +29,8 @@ var (
 
 	mountHoles = &lib.Component{
 		Components: lib.Components{
-			pcbc.MountHole.Arrange(transform.Move(7.5, 10)),
-			pcbc.MountHole.Arrange(transform.Move(7.5, -10)),
+			pcbc.MountHole.Arrange(transform.Rotate(-45).Move(7.5, 10)),
+			pcbc.MountHole.Arrange(transform.Rotate(45).Move(7.5, -10)),
 		},
 	}
 

@@ -1,0 +1,77 @@
+<LightBurnProject>
+	<CutSetting_Img type="Image">
+		<index Value="0"></index>
+		<name Value="Silk"></name>
+		<priority Value="0"></priority>
+		<speed Value="1000"></speed>
+		<numPasses Value="5"></numPasses>
+		<globalRepeat Value=""></globalRepeat>
+		<maxPower Value="6"></maxPower>
+		<QPulseWidth Value="80"></QPulseWidth>
+		<frequency Value="2000000"></frequency>
+		<interval Value="0.02"></interval>
+		<dpi Value="1270"></dpi>
+		<ditherMode Value=""></ditherMode>
+		<useDotCorrection Value="1"></useDotCorrection>
+		<dotWidth Value="0.05"></dotWidth>
+		<tabsEnabled Value=""></tabsEnabled>
+		<tabSize Value=""></tabSize>
+		<crossHatch Value="1"></crossHatch>
+		<angle Value="90"></angle>
+		<negative Value=""></negative>
+	</CutSetting_Img>
+	<CutSetting_Img type="Image">
+		<index Value="1"></index>
+		<name Value="Mask 1"></name>
+		<priority Value="1"></priority>
+		<speed Value="500"></speed>
+		<numPasses Value="5"></numPasses>
+		<globalRepeat Value=""></globalRepeat>
+		<maxPower Value="10"></maxPower>
+		<QPulseWidth Value="80"></QPulseWidth>
+		<frequency Value="2000000"></frequency>
+		<interval Value="0.01"></interval>
+		<dpi Value="2540"></dpi>
+		<ditherMode Value=""></ditherMode>
+		<useDotCorrection Value="1"></useDotCorrection>
+		<dotWidth Value="0.05"></dotWidth>
+		<tabsEnabled Value=""></tabsEnabled>
+		<tabSize Value=""></tabSize>
+		<crossHatch Value="1"></crossHatch>
+		<angle Value="90"></angle>
+		<negative Value=""></negative>
+	</CutSetting_Img>
+	<CutSetting_Img type="Image">
+		<index Value="2"></index>
+		<name Value="Mask 2"></name>
+		<priority Value="2"></priority>
+		<speed Value="500"></speed>
+		<numPasses Value="5"></numPasses>
+		<globalRepeat Value=""></globalRepeat>
+		<maxPower Value="20"></maxPower>
+		<QPulseWidth Value="80"></QPulseWidth>
+		<frequency Value="2000000"></frequency>
+		<interval Value="0.01"></interval>
+		<dpi Value="2540"></dpi>
+		<ditherMode Value=""></ditherMode>
+		<useDotCorrection Value="1"></useDotCorrection>
+		<dotWidth Value="0.05"></dotWidth>
+		<tabsEnabled Value=""></tabsEnabled>
+		<tabSize Value=""></tabSize>
+		<crossHatch Value="1"></crossHatch>
+		<angle Value="90"></angle>
+		<negative Value=""></negative>
+	</CutSetting_Img>
+	<Shape Type="Bitmap" CutIndex="0" W="487" H="475" Data="iVBORw0KGgoAAAANSUhEUgAAAecAAAHbAQMAAADLe8DBAAAABlBMVEX///8AAABVwtN+AAABFElEQVR4nOzcsW2DUBCAYRAFJSN4FEbDG2Qlb5AV2CAuUyAuMu4iF+hOEcH6/tLSJ1nicY/qGkmSJEmSJOl9amNf15e636nnP9DDTn2n/4teXv78u5GmaZqmaZqmaZqmaZqmaZqmaZqmaZqmaZqmaZqmaZqmaZqmaZqmaZqmaZqmaZqmafq0eloLuou45vUQMef1JeI7r8eIJa+niDWvIyLSuq3rj6zuivp+ic+s7mPuK/rWxVdWD9G0Jd0U9Po4bgfp5Vg9nvOfH/nEametdM5r71jt/a7Nltpce87U7Jaj5zxP70iq6e0eS+vtDk3r7f5O6+3bIa0f3y2FTWLTWtlD1t2KG9QkSZIkSZKkg/oJAAD//xrlM/wGBNUoAAAAAElFTkSuQmCC">
+		<XForm>0.01 0 0 0.01 55 55</XForm>
+		<Tabs></Tabs>
+	</Shape>
+	<Shape Type="Bitmap" CutIndex="1" W="487" H="475" Data="iVBORw0KGgoAAAANSUhEUgAAAecAAAHbAQMAAADLe8DBAAAABlBMVEUAAAAAAAClZ7nPAAAAAXRSTlMAQObYZgAAAz1JREFUeJzs3E1yozAQBWBRLFjqCBxFR8O7uZaPwtyAJQvKPaUGpyqKWurUy0wmyXuLqbHjzyB+JLWhCAzDMAzDMAzzMzI/8r+T3EIIg6z5xbK7tahL6qJkN8rDi0dRJ+qSunh+oSeTyJZXWY68yiK5LSJ3p47qRlEn6pJ+oSuz6kn1cOrFr5PktkbJbc1rsOoaeDd60qVGXWrWm+rDqRfVs+pJ9fBOfVO9qt5Ve3e4PGa5hSS/ZA1RfsseRtkXt94nuYf0GGQLUW7LEUZZZ/Hqbcz6CKrzf0a5R6ceZB3kns+LZcsnzHzkE2Zy67vqTfVx6vAOHU6dVEfVo1vfVK+qd9UPampqampqampq6g/Q2DwVmyMj83OsNkDrEqgmwuoxrBbE6lCsBsbqb6z2x353wH7zwH5vAX/rYRiGYX5o8kh7DtXNTOfHyjEtnm/3xptUX8j1dm+sk/pCluv9Nr7a92YOc73dGeNHqS5k8Omprl++tL3R4/Njt7puz21ifRUnn547ur3D53oD4/l66Oh0Nnh6o8/tsLRno+k8moaigc+Zf+ro68+Fnq9DdG7r57xrKfTh01tTR59Ohd59ev3/NNZubJtD+xs71tDjHDnHsPMb61uwfq3sU19ev/600aeW/Xks9FY0sFgnnzbGknIcmwu9v17F8qgoxlBDW2NoMX5b2hi/i7mDpY25QxFL+/Kpem+9pKb+oro8vw3tqw0s7asNLG2csGWfWtfO2sDQztrA0M7awNDO2qCn27WBoZ21QU+3awNDO2sDS/tqA0v7agNDO2sDS/tqg47uzM8t7Zvd/1ONtRvb5tD+xo419DhHzjHs/Mb6Fqxfw/pUrD/HxhJwHMPGUGz8xuYORb7QnIma+ido1gYtzdqgrlkb1DRrg4/UrA2amrVBVbM2qGnWBtTU30HL6/xVjV0XxK5JYtdDsWuxz4/dm9pZG7zvGnQ5jhnaWRv0rp7znqLAe4p4T1Fb856iEL7VPUU93a4NjDhrAyPO2sCIszawYuxX7J5g7H5khmEYhinCZ2LxmVh8JlY7fCYWNTU1NTU1NTU1dan5TCw+E4vPxOqEz8RiGIZhGIZhmM/JnwAAAP//9enxQ0J2X3EAAAAASUVORK5CYII=">
+		<XForm>0.01 0 0 0.01 55 55</XForm>
+		<Tabs></Tabs>
+	</Shape>
+	<Shape Type="Bitmap" CutIndex="2" W="487" H="475" Data="iVBORw0KGgoAAAANSUhEUgAAAecAAAHbAQMAAADLe8DBAAAABlBMVEUAAAAAAAClZ7nPAAAAAXRSTlMAQObYZgAAAz1JREFUeJzs3E1yozAQBWBRLFjqCBxFR8O7uZaPwtyAJQvKPaUGpyqKWurUy0wmyXuLqbHjzyB+JLWhCAzDMAzDMAzzMzI/8r+T3EIIg6z5xbK7tahL6qJkN8rDi0dRJ+qSunh+oSeTyJZXWY68yiK5LSJ3p47qRlEn6pJ+oSuz6kn1cOrFr5PktkbJbc1rsOoaeDd60qVGXWrWm+rDqRfVs+pJ9fBOfVO9qt5Ve3e4PGa5hSS/ZA1RfsseRtkXt94nuYf0GGQLUW7LEUZZZ/Hqbcz6CKrzf0a5R6ceZB3kns+LZcsnzHzkE2Zy67vqTfVx6vAOHU6dVEfVo1vfVK+qd9UPampqampqampq6g/Q2DwVmyMj83OsNkDrEqgmwuoxrBbE6lCsBsbqb6z2x353wH7zwH5vAX/rYRiGYX5o8kh7DtXNTOfHyjEtnm/3xptUX8j1dm+sk/pCluv9Nr7a92YOc73dGeNHqS5k8Omprl++tL3R4/Njt7puz21ifRUnn547ur3D53oD4/l66Oh0Nnh6o8/tsLRno+k8moaigc+Zf+ro68+Fnq9DdG7r57xrKfTh01tTR59Ohd59ev3/NNZubJtD+xs71tDjHDnHsPMb61uwfq3sU19ev/600aeW/Xks9FY0sFgnnzbGknIcmwu9v17F8qgoxlBDW2NoMX5b2hi/i7mDpY25QxFL+/Kpem+9pKb+oro8vw3tqw0s7asNLG2csGWfWtfO2sDQztrA0M7awNDO2qCn27WBoZ21QU+3awNDO2sDS/tqA0v7agNDO2sDS/tqg47uzM8t7Zvd/1ONtRvb5tD+xo419DhHzjHs/Mb6Fqxfw/pUrD/HxhJwHMPGUGz8xuYORb7QnIma+ido1gYtzdqgrlkb1DRrg4/UrA2amrVBVbM2qGnWBtTU30HL6/xVjV0XxK5JYtdDsWuxz4/dm9pZG7zvGnQ5jhnaWRv0rp7znqLAe4p4T1Fb856iEL7VPUU93a4NjDhrAyPO2sCIszawYuxX7J5g7H5khmEYhinCZ2LxmVh8JlY7fCYWNTU1NTU1NTU1dan5TCw+E4vPxOqEz8RiGIZhGIZhmM/JnwAAAP//9enxQ0J2X3EAAAAASUVORK5CYII=">
+		<XForm>0.01 0 0 0.01 55 55</XForm>
+		<Tabs></Tabs>
+	</Shape>
+</LightBurnProject>

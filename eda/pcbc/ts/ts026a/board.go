@@ -1,4 +1,4 @@
-package ts026A
+package ts026a
 
 import (
 	"temnok/pcbc/eda"
@@ -15,11 +15,13 @@ var Board = &lib.Component{
 	Cuts: path.Paths{
 		path.RoundRect(9, 5.5, 1),
 	},
+
 	Components: lib.Components{
 		hyp.Switch1TS026A.Arrange(transform.Rotate(90).Move(3, 0)),
 		mph100imp40f.G_V_SP_x2.Arrange(transform.Rotate(-90).Move(-3, 0)),
-		pcbc.MountHole.Arrange(transform.Move(0, 0)),
+		pcbc.MountHole,
 	},
+
 	Marks: path.Strokes{}.Append(
 		font.CenterBold("SW").Apply(transform.ScaleK(1.5).Move(0, 2)),
 		pcbc.Logo.Apply(transform.ScaleK(0.7).Move(0, -1.9)),
@@ -36,13 +38,6 @@ func init() {
 
 			eda.Track{pad[2]}.XY(pad[3]),
 			eda.Track{pad[3]}.DY(-0.7).XY(pad[5]),
-		),
-	}
-
-	Board.GroundTracks = path.Strokes{
-		0: eda.TrackPaths(
-			eda.Track{pad[6]}.DX(0.7),
-			eda.Track{pad[9]}.DX(-0.7),
 		),
 	}
 }

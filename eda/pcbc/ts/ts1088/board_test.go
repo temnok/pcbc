@@ -1,4 +1,4 @@
-package ts
+package ts1088
 
 import (
 	"github.com/stretchr/testify/assert"
@@ -6,7 +6,6 @@ import (
 	"temnok/pcbc/eda/lib"
 	"temnok/pcbc/eda/pcbc"
 	"temnok/pcbc/eda/pcbc/bh/lir1254"
-	"temnok/pcbc/eda/pcbc/ts/ts1088"
 	"temnok/pcbc/transform"
 	"testing"
 )
@@ -16,10 +15,10 @@ var testBoard = &lib.Component{
 		pcbc.Board35x45,
 		lir1254.Board.Arrange(transform.Move(0, 8)),
 		lib.ComponentGrid(2, 11, 8,
-			ts1088.Board,
-			ts1088.Board,
-			ts1088.Board,
-			ts1088.Board,
+			Board,
+			Board,
+			Board,
+			Board,
 		).Arrange(transform.Move(0, -8)),
 	},
 }

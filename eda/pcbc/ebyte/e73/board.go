@@ -52,8 +52,6 @@ var (
 		},
 	}
 
-	mountPad = mountHoles.Flatten().Pads.Centers()
-
 	Board_nRF52840 = &lib.Component{
 		Clears: path.Paths{
 			path.Rect(24, 4.6).Apply(transform.Move(0, 11.6)),
@@ -110,10 +108,6 @@ var (
 				eda.Track{pin[15]}.DY(1),
 				eda.Track{pin[15]}.DY(-1),
 				eda.Track{pad[9]}.DX(-0.8).DY(-0.8),
-				eda.Track{mountPad[0]}.DX(0.8),
-				eda.Track{mountPad[3]}.DX(-0.8),
-				eda.Track{mountPad[6]}.DX(0.8),
-				eda.Track{mountPad[9]}.DX(-0.8),
 			),
 		},
 

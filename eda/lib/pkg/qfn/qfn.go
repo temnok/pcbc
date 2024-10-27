@@ -1,6 +1,7 @@
 package qfn
 
 import (
+	"temnok/pcbc/eda"
 	"temnok/pcbc/eda/lib"
 	"temnok/pcbc/path"
 	"temnok/pcbc/transform"
@@ -32,6 +33,12 @@ func init() {
 				path.Rect(3.1, 3.1),
 				path.Circle(0.3).Apply(transform.Move(-1.8, 1.4)),
 			},
+		},
+
+		GroundTracks: path.Strokes{
+			0.16: eda.TrackPaths(
+				eda.Track{{-1.5, 1.5}, {1.5, -1.5}},
+			),
 		},
 	}
 }

@@ -12,8 +12,7 @@ import (
 )
 
 var (
-	mount    = pcbc.MountHole.Arrange(transform.Move(-5, 0))
-	mountPad = mount.Flatten().Pads.Centers()
+	mount = pcbc.MountHole.Arrange(transform.Rotate(90).Move(-5, 0))
 
 	chip = sop.SOP8.Arrange(transform.Move(-0.6, 0))
 	pin  = chip.Flatten().Pads.Centers()
@@ -53,9 +52,7 @@ var (
 
 		GroundTracks: path.Strokes{
 			0: eda.TrackPaths(
-				eda.Track{pin[7]}.DY(0.7),
-				eda.Track{pin[7]}.DY(-2).YX(mountPad[0]),
-				eda.Track{mountPad[3]}.DX(-0.7),
+				eda.Track{pin[7]}.DY(-1).DY(2),
 			),
 		},
 	}

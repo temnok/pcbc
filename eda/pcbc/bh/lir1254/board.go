@@ -15,6 +15,7 @@ var Board = &lib.Component{
 	Cuts: path.Paths{
 		path.RoundRect(21, 14, 1),
 	},
+
 	Components: lib.Components{
 		{
 			Transform: transform.Move(0, -5.5),
@@ -27,8 +28,8 @@ var Board = &lib.Component{
 			).Apply(transform.Move(0, 1.8)),
 		},
 		holder.LIR1254.Arrange(transform.Move(0, 2.75)),
-		pcbc.MountHole.Arrange(transform.Move(-7.5, -1.75)),
-		pcbc.MountHole.Arrange(transform.Move(7.5, -1.75)),
+		pcbc.MountHole.Arrange(transform.Rotate(-45).Move(-7.5, -1.75)),
+		pcbc.MountHole.Arrange(transform.Rotate(45).Move(7.5, -1.75)),
 	},
 
 	Marks: path.Strokes{}.Append(
@@ -53,12 +54,12 @@ func init() {
 
 	Board.GroundTracks = path.Strokes{
 		0: eda.TrackPaths(
-			eda.Track{pad[10]}.DX(-2).DY(2),
-			eda.Track{pad[10]}.DX(2).DY(2),
-
-			eda.Track{pad[10]}.YX(pad[12]),
-			eda.Track{pad[10]}.YX(pad[19]),
-			eda.Track{pad[16]}.YX(pad[21]),
+		//eda.Track{pad[10]}.DX(-2).DY(2),
+		//eda.Track{pad[10]}.DX(2).DY(2),
+		//
+		//eda.Track{pad[10]}.YX(pad[12]),
+		//eda.Track{pad[10]}.YX(pad[19]),
+		//eda.Track{pad[16]}.YX(pad[21]),
 		),
 	}
 }

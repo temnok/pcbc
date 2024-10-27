@@ -40,7 +40,7 @@ var (
 			chip,
 			headerWithTracks,
 			headerWithTracks.Arrange(transform.Scale(1, -1)),
-			pcbc.MountHole.Arrange(transform.Move(-2.2, 0)),
+			pcbc.MountHole.Arrange(transform.Rotate(90).Move(-2.2, 0)),
 		},
 
 		Marks: path.Strokes{}.Append(
@@ -63,8 +63,7 @@ var (
 
 		GroundTracks: path.Strokes{
 			0: eda.TrackPaths(
-				eda.Track{{pad[0].X, -pad[0].Y}}.Y(4).X(pin[7].X).Y(3.5).Y(pin[7].Y),
-				eda.Track{pin[7]}.Y(0).X(-0.4).X(-2.2),
+				eda.Track{pin[7]}.DY(-1).DY(2),
 			),
 		},
 	}

@@ -36,7 +36,6 @@ var Board = &lib.Component{
 }
 
 func init() {
-	mountPads := pcbc.MountHole.Pads.Apply(mountPos).Centers()
 	pins := yiyuan.YTC_TC8_565.Pads.Apply(connectorPos).Centers()
 	pads := mph100imp40f.G_V_SP_x6.Pads.Apply(headerPos).Centers()
 
@@ -53,7 +52,6 @@ func init() {
 
 	Board.GroundTracks = path.Strokes{
 		0: eda.TrackPaths(
-			eda.Track{mountPads[5], {-4.1, -0.3}},
 			eda.Track{pins[0]}.Y(1.75).Y(2.5).X(pins[7].X).Y(1.75).Y(pins[7].Y),
 			eda.Track{pins[0]}.Y(0).Y(-0.3).X(pads[0].X).Y(pads[0].Y),
 		),

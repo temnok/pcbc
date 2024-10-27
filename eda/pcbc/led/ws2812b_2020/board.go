@@ -18,7 +18,7 @@ var Board = &lib.Component{
 	Components: lib.Components{
 		worldsemi.WS2812B_2020.Arrange(transform.Move(-3, 0)),
 		mph100imp40f.G_V_SP_x2.Arrange(transform.Rotate(-90).Move(3.5, 0)),
-		pcbc.MountHole.Arrange(transform.Rotate(30).Move(0.55, 0)),
+		pcbc.MountHole.Arrange(transform.Rotate(45).Move(0.55, 0)),
 	},
 	Marks: path.Strokes{}.Append(
 		font.CenterBold("WS2812B").Apply(transform.Scale(1, 1.8).Move(-2.1, 1.8)),
@@ -42,9 +42,6 @@ func init() {
 	Board.GroundTracks = path.Strokes{
 		0: eda.TrackPaths(
 			eda.Track{pad[2]}.DY(0.5).XY(pad[9]),
-			eda.Track{pad[7]}.DX(0.5).DY(0.5),
-			eda.Track{pad[12]}.DX(0.5).DY(-0.5),
-			eda.Track{pad[10]}.DX(-0.5).DY(-0.5),
 		),
 	}
 }

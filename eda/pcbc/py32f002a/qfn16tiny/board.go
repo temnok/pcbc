@@ -12,8 +12,7 @@ import (
 )
 
 var (
-	mount    = pcbc.MountHole.Arrange(transform.Rotate(30).Move(0, 2.5))
-	mountPad = mount.Flatten().Pads.Centers()
+	mount = pcbc.MountHole.Arrange(transform.Rotate(90).Move(0, 2.5))
 
 	chip = qfn.QFN16G.Arrange(transform.Rotate(-45).Move(0, -1.5))
 	pin  = chip.Flatten().Pads.Centers()
@@ -67,16 +66,6 @@ var (
 				eda.Track{pin[13]}.YX(pad[10]),
 				eda.Track{pin[14]}.YX(pad[9]),
 				eda.Track{pin[15]}.DX(2).DY(2.5).YX(pad[8]),
-			),
-		},
-
-		GroundTracks: path.Strokes{
-			0: eda.TrackPaths(
-				eda.Track{mountPad[1]}.DY(0.7),
-			),
-			0.16: eda.TrackPaths(
-				eda.Track{pin[16]}.XY(mountPad[4]),
-				eda.Track{pin[16]}.DY(-2),
 			),
 		},
 	}
