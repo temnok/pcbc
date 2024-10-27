@@ -2,7 +2,6 @@ package bc833
 
 import (
 	"temnok/pcbc/eda"
-	"temnok/pcbc/eda/lib"
 	"temnok/pcbc/eda/lib/fanstel"
 	"temnok/pcbc/eda/lib/header/mph100imp40f"
 	"temnok/pcbc/eda/pcbc"
@@ -16,11 +15,11 @@ var (
 	ShortBoard = board(true)
 )
 
-func board(short bool) *lib.Component {
+func board(short bool) *eda.Component {
 	revision := "v1.0"
 
-	header := &lib.Component{
-		Components: lib.Components{
+	header := &eda.Component{
+		Components: eda.Components{
 			mph100imp40f.G_V_SP_x8.Arrange(transform.Rotate(-90).Move(-8.9, -2.9)),
 			mph100imp40f.G_V_SP_x8.Arrange(transform.Move(0, -15.5)),
 			mph100imp40f.G_V_SP_x8.Arrange(transform.Rotate(90).Move(8.9, -2.9)),
@@ -30,8 +29,8 @@ func board(short bool) *lib.Component {
 	pad := header.Flatten().Pads.Centers()
 
 	if short {
-		header = &lib.Component{
-			Components: lib.Components{
+		header = &eda.Component{
+			Components: eda.Components{
 				mph100imp40f.G_V_SP_x6.Arrange(transform.Rotate(-90).Move(-8.9, -2.9-2.54)),
 				mph100imp40f.G_V_SP_x8.Arrange(transform.Move(0, -15.5)),
 				mph100imp40f.G_V_SP_x6.Arrange(transform.Rotate(90).Move(8.9, -2.9-2.54)),
@@ -91,8 +90,8 @@ func board(short bool) *lib.Component {
 		revision += "s"
 	}
 
-	shiftedBoard := &lib.Component{
-		Components: lib.Components{
+	shiftedBoard := &eda.Component{
+		Components: eda.Components{
 			fanstel.BC833,
 			header,
 			pcbc.MountHole.Arrange(transform.Rotate(45).Move(-5, -10.5)),
@@ -141,14 +140,14 @@ func board(short bool) *lib.Component {
 		boardClears = nil
 	}
 
-	return &lib.Component{
+	return &eda.Component{
 		Clears: boardClears,
 
 		Cuts: path.Paths{
 			boardCut,
 		},
 
-		Components: lib.Components{
+		Components: eda.Components{
 			shiftedBoard.Arrange(transform.Move(0, boardShift)),
 		},
 	}

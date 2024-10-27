@@ -2,7 +2,6 @@ package usbc
 
 import (
 	"temnok/pcbc/eda"
-	"temnok/pcbc/eda/lib"
 	"temnok/pcbc/eda/lib/connector/yiyuan"
 	"temnok/pcbc/eda/lib/header/mph100imp40f"
 	"temnok/pcbc/eda/pcbc"
@@ -17,7 +16,7 @@ var (
 	headerPos    = transform.Move(0, -2.5)
 )
 
-var Board = &lib.Component{
+var Board = &eda.Component{
 	Cuts: path.Paths{
 		path.RoundRect(16, 8, 1),
 	},
@@ -28,7 +27,7 @@ var Board = &lib.Component{
 		pcbc.TmnkTech.Apply(transform.ScaleK(0.4).Move(7.25, 3.5)),
 	),
 
-	Components: lib.Components{
+	Components: eda.Components{
 		pcbc.MountHole.Arrange(mountPos),
 		yiyuan.YTC_TC8_565.Arrange(connectorPos),
 		mph100imp40f.G_V_SP_x6.Arrange(headerPos),

@@ -2,7 +2,6 @@ package sop8
 
 import (
 	"temnok/pcbc/eda"
-	"temnok/pcbc/eda/lib"
 	"temnok/pcbc/eda/lib/header/mph100imp40f"
 	"temnok/pcbc/eda/lib/pkg/sop"
 	"temnok/pcbc/eda/pcbc"
@@ -20,8 +19,8 @@ var (
 
 	pad = header.Flatten().Pads.Centers()
 
-	headerWithTracks = &lib.Component{
-		Components: lib.Components{header},
+	headerWithTracks = &eda.Component{
+		Components: eda.Components{header},
 		Tracks: path.Strokes{
 			0: eda.TrackPaths(
 				eda.Track{pad[1]}.Y(-4.5).X(pin[1].X).Y(-4).Y(pin[1].Y),
@@ -31,12 +30,12 @@ var (
 		},
 	}
 
-	Board = &lib.Component{
+	Board = &eda.Component{
 		Cuts: path.Paths{
 			path.RoundRect(10.75, 15, 1),
 		},
 
-		Components: lib.Components{
+		Components: eda.Components{
 			chip,
 			headerWithTracks,
 			headerWithTracks.Arrange(transform.Scale(1, -1)),

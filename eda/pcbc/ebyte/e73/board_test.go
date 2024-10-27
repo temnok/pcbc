@@ -3,14 +3,13 @@ package e73
 import (
 	"github.com/stretchr/testify/assert"
 	"temnok/pcbc/eda"
-	"temnok/pcbc/eda/lib"
 	"temnok/pcbc/eda/pcbc"
 	"testing"
 )
 
 func TestBoard(t *testing.T) {
-	assert.NoError(t, eda.GeneratePCB(&lib.Component{
-		Components: lib.Components{
+	assert.NoError(t, eda.GeneratePCB(&eda.Component{
+		Components: eda.Components{
 			pcbc.Board35x45,
 			Board_nRF52840,
 		},

@@ -2,7 +2,6 @@ package sop8tiny
 
 import (
 	"temnok/pcbc/eda"
-	"temnok/pcbc/eda/lib"
 	"temnok/pcbc/eda/lib/header/greenconn"
 	"temnok/pcbc/eda/lib/pkg/sop"
 	"temnok/pcbc/eda/pcbc"
@@ -21,12 +20,12 @@ var (
 		Arrange(transform.Move(4.4, 0))
 	pad = header.Flatten().Pads.Centers()
 
-	Board = &lib.Component{
+	Board = &eda.Component{
 		Cuts: path.Paths{
 			path.RoundRect(14, 8, 1),
 		},
 
-		Components: lib.Components{
+		Components: eda.Components{
 			mount,
 			chip,
 			header,

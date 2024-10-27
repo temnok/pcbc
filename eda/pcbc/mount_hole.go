@@ -1,12 +1,12 @@
 package pcbc
 
 import (
-	"temnok/pcbc/eda/lib"
+	"temnok/pcbc/eda"
 	"temnok/pcbc/path"
 	"temnok/pcbc/transform"
 )
 
-var MountHole = &lib.Component{
+var MountHole = &eda.Component{
 	Tracks: path.Strokes{
 		0.2: {
 			path.Circle(2.7),

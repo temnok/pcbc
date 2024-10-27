@@ -2,7 +2,6 @@ package qfn16
 
 import (
 	"temnok/pcbc/eda"
-	"temnok/pcbc/eda/lib"
 	"temnok/pcbc/eda/lib/header/mph100imp40f"
 	"temnok/pcbc/eda/lib/pkg/qfn"
 	"temnok/pcbc/eda/pcbc"
@@ -20,8 +19,8 @@ var (
 
 	pad = header.Flatten().Pads.Centers()
 
-	headerWithTracks = &lib.Component{
-		Components: lib.Components{header},
+	headerWithTracks = &eda.Component{
+		Components: eda.Components{header},
 		Tracks: path.Strokes{
 			0: eda.TrackPaths(
 				eda.Track{pad[0]}.Y(-2.5).X(-4.9).Y(-2).XY(pin[0]),
@@ -38,8 +37,8 @@ var (
 
 	labelScale = transform.Scale(0.9, 1.2)
 
-	Board = &lib.Component{
-		Components: lib.Components{
+	Board = &eda.Component{
+		Components: eda.Components{
 			chip,
 			headerWithTracks.Arrange(transform.Rotate(180)),
 			headerWithTracks,

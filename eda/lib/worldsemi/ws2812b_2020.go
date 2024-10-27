@@ -1,7 +1,7 @@
 package worldsemi
 
 import (
-	"temnok/pcbc/eda/lib"
+	"temnok/pcbc/eda"
 	"temnok/pcbc/path"
 	"temnok/pcbc/transform"
 )
@@ -10,7 +10,7 @@ var (
 	pad2020              = path.Rect(0.8, 0.8)
 	pad2020_X, pad2020_Y = 0.915, 0.55
 
-	WS2812B_2020 = &lib.Component{
+	WS2812B_2020 = &eda.Component{
 		Pads: path.Paths{
 			1: pad2020.Apply(transform.Move(pad2020_X, -pad2020_Y)),
 			2: pad2020.Apply(transform.Move(pad2020_X, pad2020_Y)),

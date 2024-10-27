@@ -2,12 +2,11 @@ package qfn
 
 import (
 	"temnok/pcbc/eda"
-	"temnok/pcbc/eda/lib"
 	"temnok/pcbc/path"
 	"temnok/pcbc/transform"
 )
 
-var QFN16G *lib.Component
+var QFN16G *eda.Component
 
 func init() {
 	pad := path.RoundRect(0.65, 0.25, 0.12)
@@ -21,7 +20,7 @@ func init() {
 
 	pads = append(pads, path.Rect(1.2, 1.2))
 
-	QFN16G = &lib.Component{
+	QFN16G = &eda.Component{
 		Clears: path.Paths{
 			path.Rect(2.2, 2.2),
 		},

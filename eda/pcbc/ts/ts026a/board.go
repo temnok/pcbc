@@ -2,7 +2,6 @@ package ts026a
 
 import (
 	"temnok/pcbc/eda"
-	"temnok/pcbc/eda/lib"
 	"temnok/pcbc/eda/lib/header/mph100imp40f"
 	"temnok/pcbc/eda/lib/ts/hyp"
 	"temnok/pcbc/eda/pcbc"
@@ -11,12 +10,12 @@ import (
 	"temnok/pcbc/transform"
 )
 
-var Board = &lib.Component{
+var Board = &eda.Component{
 	Cuts: path.Paths{
 		path.RoundRect(9, 5.5, 1),
 	},
 
-	Components: lib.Components{
+	Components: eda.Components{
 		hyp.Switch1TS026A.Arrange(transform.Rotate(90).Move(3, 0)),
 		mph100imp40f.G_V_SP_x2.Arrange(transform.Rotate(-90).Move(-3, 0)),
 		pcbc.MountHole,

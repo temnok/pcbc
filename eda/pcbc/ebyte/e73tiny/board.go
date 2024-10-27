@@ -2,7 +2,6 @@ package e73tiny
 
 import (
 	"temnok/pcbc/eda"
-	"temnok/pcbc/eda/lib"
 	"temnok/pcbc/eda/lib/ebyte"
 	"temnok/pcbc/eda/lib/header/greenconn"
 	"temnok/pcbc/eda/pcbc"
@@ -15,8 +14,8 @@ var (
 
 	pin = chip.Flatten().Pads.Centers()
 
-	headers = &lib.Component{
-		Components: lib.Components{
+	headers = &eda.Component{
+		Components: eda.Components{
 			greenconn.CSCC118(27, true, []string{
 				"P111", "P110", "P003", "P028", "GND", "P113", "P002", "P029", "P031", "P030",
 				"P000", "P001", "P005", "P109", "VDD", "VDDH" /*"GND",*/, "DCCH",
@@ -27,8 +26,8 @@ var (
 
 	pad = headers.Flatten().Pads.Centers()
 
-	mountHoles = &lib.Component{
-		Components: lib.Components{
+	mountHoles = &eda.Component{
+		Components: eda.Components{
 			pcbc.MountHole.Arrange(transform.Rotate(-45).Move(7.5, 10)),
 			pcbc.MountHole.Arrange(transform.Rotate(45).Move(7.5, -10)),
 		},
@@ -36,12 +35,12 @@ var (
 
 	mountPad = mountHoles.Flatten().Pads.Centers()
 
-	Board_nRF52840 = &lib.Component{
+	Board_nRF52840 = &eda.Component{
 		Cuts: path.Paths{
 			path.RoundRect(22.4, 28, 1),
 		},
 
-		Components: lib.Components{
+		Components: eda.Components{
 			chip,
 			headers,
 			mountHoles,

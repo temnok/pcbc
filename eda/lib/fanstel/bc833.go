@@ -1,7 +1,7 @@
 package fanstel
 
 import (
-	"temnok/pcbc/eda/lib"
+	"temnok/pcbc/eda"
 	"temnok/pcbc/path"
 	"temnok/pcbc/transform"
 )
@@ -9,7 +9,7 @@ import (
 var (
 	pad = path.Circle(0.6)
 
-	BC833 = &lib.Component{
+	BC833 = &eda.Component{
 		Pads: path.Paths{
 			0:  nil,
 			1:  pad.Apply(transform.Move(-4.5, 4.8)),

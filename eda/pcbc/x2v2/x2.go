@@ -2,7 +2,6 @@ package x2v2
 
 import (
 	"temnok/pcbc/eda"
-	"temnok/pcbc/eda/lib"
 	"temnok/pcbc/eda/lib/header/greenconn"
 	"temnok/pcbc/eda/lib/pkg/smd"
 	"temnok/pcbc/eda/pcbc"
@@ -10,7 +9,7 @@ import (
 	"temnok/pcbc/transform"
 )
 
-func X2(topLabel, bottomLabel string) *lib.Component {
+func X2(topLabel, bottomLabel string) *eda.Component {
 	header := greenconn.CSCC118(3, false, []string{topLabel, "GND", bottomLabel}).Arrange(transform.Move(-2, 0))
 	pad := header.Flatten().Pads.Centers()
 
@@ -20,12 +19,12 @@ func X2(topLabel, bottomLabel string) *lib.Component {
 	mount := pcbc.MountHole.Arrange(transform.Move(3, 0))
 	sink := mount.Flatten().Pads.Centers()
 
-	return &lib.Component{
+	return &eda.Component{
 		Cuts: path.Paths{
 			path.RoundRect(10, 4, 1),
 		},
 
-		Components: lib.Components{
+		Components: eda.Components{
 			header,
 			chip,
 			mount,

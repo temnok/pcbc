@@ -3,7 +3,6 @@ package eda
 import (
 	"image/color"
 	"temnok/pcbc/bitmap"
-	"temnok/pcbc/eda/lib"
 	"temnok/pcbc/path"
 	"temnok/pcbc/shape"
 	"temnok/pcbc/transform"
@@ -21,16 +20,16 @@ type PCB struct {
 	lbrnCenter path.Point
 
 	savePath  string
-	component *lib.Component
+	component *Component
 
 	fr4, copper, mask, maskB, silk, stencil *bitmap.Bitmap
 }
 
-func GeneratePCB(component *lib.Component) error {
-	return newPCB("pcb/", component).saveFiles()
+func GeneratePCB(component *Component) error {
+	return NewPCB(component).SaveFiles()
 }
 
-func newPCB(savePath string, component *lib.Component) *PCB {
+func NewPCB(component *Component) *PCB {
 	const scale = 100
 
 	component = component.Flatten()
@@ -44,7 +43,7 @@ func newPCB(savePath string, component *lib.Component) *PCB {
 		trackWidth: 0.25,
 
 		lbrnCenter: path.Point{55, 55},
-		savePath:   savePath,
+		savePath:   "pcb/",
 
 		fr4:     bitmap.NewBitmap(wi, hi),
 		copper:  bitmap.NewBitmap(wi, hi),
@@ -61,7 +60,7 @@ func newPCB(savePath string, component *lib.Component) *PCB {
 	return pcb
 }
 
-func (pcb *PCB) setComponent(c *lib.Component, width, height float64) {
+func (pcb *PCB) setComponent(c *Component, width, height float64) {
 	pcb.component = c
 
 	bt := transform.Move(width/2, height/2).Scale(pcb.resolution, pcb.resolution)
@@ -139,7 +138,7 @@ func (pcb *PCB) setComponent(c *lib.Component, width, height float64) {
 	brush1.IterateContours(openings, pcb.mask.Set1)
 }
 
-func (pcb *PCB) saveFiles() error {
+func (pcb *PCB) SaveFiles() error {
 	return util.GoAll([]func() error{
 		pcb.SaveEtch,
 		pcb.SaveMask,

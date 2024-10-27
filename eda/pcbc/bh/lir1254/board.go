@@ -2,7 +2,6 @@ package lir1254
 
 import (
 	"temnok/pcbc/eda"
-	"temnok/pcbc/eda/lib"
 	"temnok/pcbc/eda/lib/battery/holder"
 	"temnok/pcbc/eda/lib/header/mph100imp40f"
 	"temnok/pcbc/eda/pcbc"
@@ -11,15 +10,15 @@ import (
 	"temnok/pcbc/transform"
 )
 
-var Board = &lib.Component{
+var Board = &eda.Component{
 	Cuts: path.Paths{
 		path.RoundRect(21, 14, 1),
 	},
 
-	Components: lib.Components{
+	Components: eda.Components{
 		{
 			Transform: transform.Move(0, -5.5),
-			Components: lib.Components{
+			Components: eda.Components{
 				mph100imp40f.G_V_SP_x8,
 			},
 			Marks: font.CenterBolds(

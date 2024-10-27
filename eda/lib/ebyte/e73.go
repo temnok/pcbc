@@ -1,14 +1,14 @@
 package ebyte
 
 import (
-	"temnok/pcbc/eda/lib"
+	"temnok/pcbc/eda"
 	"temnok/pcbc/path"
 	"temnok/pcbc/transform"
 )
 
 // https://www.cdebyte.com/pdf-down.aspx?id=2587
 
-var E73 *lib.Component
+var E73 *eda.Component
 
 func init() {
 	const (
@@ -30,7 +30,7 @@ func init() {
 
 	pad := path.RoundRect(padW, padH, 0.2)
 
-	E73 = &lib.Component{
+	E73 = &eda.Component{
 		Marks: path.Strokes{
 			0.1: path.Paths{path.Rect(componentW, componentH)},
 		},

@@ -2,7 +2,6 @@ package x2
 
 import (
 	"temnok/pcbc/eda"
-	"temnok/pcbc/eda/lib"
 	"temnok/pcbc/eda/lib/header/mph100imp40f"
 	"temnok/pcbc/eda/lib/pkg/smd"
 	"temnok/pcbc/eda/pcbc"
@@ -11,29 +10,29 @@ import (
 	"temnok/pcbc/transform"
 )
 
-func X0402(title, upperText, lowerText string) *lib.Component {
+func X0402(title, upperText, lowerText string) *eda.Component {
 	return x(smd.I0402, title, upperText, lowerText, false)
 }
 
-func X0402WithGround(title, upperText, lowerText string) *lib.Component {
+func X0402WithGround(title, upperText, lowerText string) *eda.Component {
 	return x(smd.I0402, title, upperText, lowerText, true)
 }
 
-func X0603(title, upperText, lowerText string) *lib.Component {
+func X0603(title, upperText, lowerText string) *eda.Component {
 	return x(smd.I0603, title, upperText, lowerText, false)
 }
 
-func X0603WithGround(title, upperText, lowerText string) *lib.Component {
+func X0603WithGround(title, upperText, lowerText string) *eda.Component {
 	return x(smd.I0603, title, upperText, lowerText, true)
 }
 
-func x(x *lib.Component, title, upperText, lowerText string, ground bool) *lib.Component {
+func x(x *eda.Component, title, upperText, lowerText string, ground bool) *eda.Component {
 	groundLabel := ""
 	if ground {
 		groundLabel = "GND"
 	}
 
-	comp := (&lib.Component{
+	comp := (&eda.Component{
 		Cuts: path.Paths{
 			path.RoundRect(9.75, 4.75, 1),
 		},
@@ -57,7 +56,7 @@ func x(x *lib.Component, title, upperText, lowerText string, ground bool) *lib.C
 			pcbc.TmnkTech.Apply(transform.ScaleK(0.4).Move(4.3, -1)),
 		),
 
-		Components: lib.Components{
+		Components: eda.Components{
 			x.Arrange(transform.Move(-0.5, 1.3)),
 			mph100imp40f.G_V_SP_x2.Arrange(transform.Move(-2.1, -0.85)),
 			pcbc.MountHole.Arrange(transform.Move(2.5, 0)),

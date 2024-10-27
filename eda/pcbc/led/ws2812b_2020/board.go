@@ -2,7 +2,6 @@ package ws2812b_2020
 
 import (
 	"temnok/pcbc/eda"
-	"temnok/pcbc/eda/lib"
 	"temnok/pcbc/eda/lib/header/mph100imp40f"
 	"temnok/pcbc/eda/lib/worldsemi"
 	"temnok/pcbc/eda/pcbc"
@@ -11,11 +10,11 @@ import (
 	"temnok/pcbc/transform"
 )
 
-var Board = &lib.Component{
+var Board = &eda.Component{
 	Cuts: path.Paths{
 		path.RoundRect(10, 5.5, 1),
 	},
-	Components: lib.Components{
+	Components: eda.Components{
 		worldsemi.WS2812B_2020.Arrange(transform.Move(-3, 0)),
 		mph100imp40f.G_V_SP_x2.Arrange(transform.Rotate(-90).Move(3.5, 0)),
 		pcbc.MountHole.Arrange(transform.Rotate(45).Move(0.55, 0)),

@@ -1,7 +1,7 @@
 package sop
 
 import (
-	"temnok/pcbc/eda/lib"
+	"temnok/pcbc/eda"
 	"temnok/pcbc/path"
 	"temnok/pcbc/transform"
 )
@@ -15,7 +15,7 @@ var (
 
 	pads = append(bottomPads, topPads...)
 
-	SOP8 = &lib.Component{
+	SOP8 = &eda.Component{
 		Pads: pads,
 		Marks: path.Strokes{
 			0.1: path.Paths{

@@ -1,4 +1,4 @@
-package lib
+package eda
 
 import (
 	"temnok/pcbc/path"

@@ -8,7 +8,6 @@ import (
 const (
 	Width = 0.65 // relative to height 1.0
 
-	Light  = 0.08
 	Normal = 0.12
 	Bold   = 0.16
 

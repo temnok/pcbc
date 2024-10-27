@@ -2,7 +2,6 @@ package qfn16tiny
 
 import (
 	"temnok/pcbc/eda"
-	"temnok/pcbc/eda/lib"
 	"temnok/pcbc/eda/lib/header/greenconn"
 	"temnok/pcbc/eda/lib/pkg/qfn"
 	"temnok/pcbc/eda/pcbc"
@@ -20,20 +19,20 @@ var (
 	leftLabels  = []string{"PB1", "PA12", "SWD", "SWC", "PF2", "PA0", "PA1", "PA2"}
 	rightLabels = []string{"PA8", "VCC", "PB0", "PA7", "PA6", "PA5", "PA4", "PA3"}
 
-	header = &lib.Component{
-		Components: lib.Components{
+	header = &eda.Component{
+		Components: eda.Components{
 			greenconn.CSCC118(8, false, leftLabels).Arrange(transform.Move(-5.5, 0)),
 			greenconn.CSCC118(8, false, rightLabels).Arrange(transform.Move(5.5, 0)),
 		},
 	}
 	pad = header.Flatten().Pads.Centers()
 
-	Board = &lib.Component{
+	Board = &eda.Component{
 		Cuts: path.Paths{
 			path.RoundRect(16, 9.3, 1),
 		},
 
-		Components: lib.Components{
+		Components: eda.Components{
 			mount,
 			chip,
 			header,

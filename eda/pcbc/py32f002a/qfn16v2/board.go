@@ -2,7 +2,6 @@ package qfn16v2
 
 import (
 	"temnok/pcbc/eda"
-	"temnok/pcbc/eda/lib"
 	"temnok/pcbc/eda/lib/header/greenconn"
 	"temnok/pcbc/eda/lib/pkg/qfn"
 	"temnok/pcbc/eda/pcbc"
@@ -17,19 +16,19 @@ var (
 	pinNames = []string{"PB1", "PA12", "SWD", "SWC", "PF2", "PA0", "PA1", "PA2", "GND",
 		"PA3", "PA4", "PA5", "PA6", "PA7", "PB0", "VCC", "PA8"}
 
-	header = &lib.Component{
-		Components: lib.Components{
+	header = &eda.Component{
+		Components: eda.Components{
 			greenconn.CSCC118(17, false, pinNames).Arrange(transform.Rotate(90).Move(0, -2.5)),
 		},
 	}
 	pad = header.Flatten().Pads.Centers()
 
-	Board = &lib.Component{
+	Board = &eda.Component{
 		Cuts: path.Paths{
 			path.RoundRect(19, 10, 1),
 		},
 
-		Components: lib.Components{
+		Components: eda.Components{
 			pcbc.MountHole.Arrange(transform.Rotate(45).Move(-7.5, 3)),
 			pcbc.MountHole.Arrange(transform.Rotate(-45).Move(7.5, 3)),
 			chip,

@@ -7,5 +7,5 @@ import (
 )
 
 func TestBoard(t *testing.T) {
-	assert.NoError(t, eda.GeneratePCB(WS2812B_2020))
+	assert.NoError(t, eda.NewPCB(WS2812B_2020).SaveOverview())
 }

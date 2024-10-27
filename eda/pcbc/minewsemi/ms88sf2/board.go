@@ -2,7 +2,6 @@ package ms88sf2
 
 import (
 	"temnok/pcbc/eda"
-	"temnok/pcbc/eda/lib"
 	"temnok/pcbc/eda/lib/header/mph100imp40f"
 	"temnok/pcbc/eda/lib/minewsemi"
 	"temnok/pcbc/eda/pcbc"
@@ -19,10 +18,10 @@ var (
 
 	pin = chip.Flatten().Pads.Centers()
 
-	headers = &lib.Component{
+	headers = &eda.Component{
 		Transform: transform.Move(0, 3.05),
 
-		Components: lib.Components{
+		Components: eda.Components{
 			mph100imp40f.G_V_SP_x8.Arrange(transform.Rotate(-90).Move(-12.7, -1)),
 			mph100imp40f.G_V_SP_x11.Arrange(transform.Move(0, -14)),
 			mph100imp40f.G_V_SP_x8.Arrange(transform.Rotate(90).Move(12.7, -1)),
@@ -45,21 +44,21 @@ var (
 
 	pad = append(path.Paths{nil}, headers.Flatten().Pads...).Centers()
 
-	mountHoles = &lib.Component{
+	mountHoles = &eda.Component{
 		Transform: transform.Move(0, 3),
 
-		Components: lib.Components{
+		Components: eda.Components{
 			pcbc.MountHole.Arrange(transform.Rotate(45).Move(-7.5, -9.7)),
 			pcbc.MountHole.Arrange(transform.Rotate(-45).Move(7.5, -9.7)),
 		},
 	}
 
-	Board_nRF52840 = &lib.Component{
+	Board_nRF52840 = &eda.Component{
 		Cuts: path.Paths{
 			path.RoundRect(28.4, 24.9, 1),
 		},
 
-		Components: lib.Components{
+		Components: eda.Components{
 			chip,
 			headers,
 			mountHoles,

@@ -1,13 +1,13 @@
 package greenconn
 
 import (
-	"temnok/pcbc/eda/lib"
+	"temnok/pcbc/eda"
 	"temnok/pcbc/font"
 	"temnok/pcbc/path"
 	"temnok/pcbc/transform"
 )
 
-func CSCC118(n int, flip bool, labels []string) *lib.Component {
+func CSCC118(n int, flip bool, labels []string) *eda.Component {
 	const padW = 1.95
 	pad := path.Rect(padW, 0.5)
 
@@ -34,7 +34,7 @@ func CSCC118(n int, flip bool, labels []string) *lib.Component {
 		}
 	}
 
-	return &lib.Component{
+	return &eda.Component{
 		Pads: pads,
 
 		Marks: path.Strokes{

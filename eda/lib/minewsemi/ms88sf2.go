@@ -1,14 +1,14 @@
 package minewsemi
 
 import (
-	"temnok/pcbc/eda/lib"
+	"temnok/pcbc/eda"
 	"temnok/pcbc/path"
 	"temnok/pcbc/transform"
 )
 
 // https://store.minewsemi.com/wp-content/uploads/2024/03/MS88SF2-nRF52840_Datasheet_K_EN-1.pdf
 
-var MS88SF2 *lib.Component
+var MS88SF2 *eda.Component
 
 func init() {
 	const (
@@ -30,7 +30,7 @@ func init() {
 
 	pad := path.RoundRect(padW, padH, 0.3)
 
-	MS88SF2 = &lib.Component{
+	MS88SF2 = &eda.Component{
 		Marks: path.Strokes{
 			0.1: path.Paths{path.Rect(componentW, componentH)},
 		},

@@ -1,14 +1,14 @@
 package xfcn
 
 import (
-	"temnok/pcbc/eda/lib"
+	"temnok/pcbc/eda"
 	"temnok/pcbc/path"
 )
 
-func MF200V(n int) *lib.Component {
+func MF200V(n int) *eda.Component {
 	const w, h = 2, 2.2
 
-	return &lib.Component{
+	return &eda.Component{
 		Cuts: path.Circle(0.6).Clone(n, w, 0),
 		Pads: path.Circle(1.2).Clone(n, w, 0),
 		Marks: path.Strokes{

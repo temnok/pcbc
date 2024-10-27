@@ -2,7 +2,6 @@ package e73
 
 import (
 	"temnok/pcbc/eda"
-	"temnok/pcbc/eda/lib"
 	"temnok/pcbc/eda/lib/ebyte"
 	"temnok/pcbc/eda/lib/header/mph100imp40f"
 	"temnok/pcbc/eda/pcbc"
@@ -19,10 +18,10 @@ var (
 
 	pin = chip.Flatten().Pads.Centers()
 
-	headers = &lib.Component{
+	headers = &eda.Component{
 		Transform: transform.Move(0, 3.05),
 
-		Components: lib.Components{
+		Components: eda.Components{
 			mph100imp40f.G_V_SP_x9.Arrange(transform.Rotate(-90).Move(-10.2, -1)),
 			mph100imp40f.G_V_SP_x9.Arrange(transform.Move(0, -15.3)),
 			mph100imp40f.G_V_SP_x9.Arrange(transform.Rotate(90).Move(10.2, -1)),
@@ -45,14 +44,14 @@ var (
 
 	pad = headers.Flatten().Pads.Centers()
 
-	mountHoles = &lib.Component{
-		Components: lib.Components{
+	mountHoles = &eda.Component{
+		Components: eda.Components{
 			pcbc.MountHole.Arrange(transform.Move(-5, -8)),
 			pcbc.MountHole.Arrange(transform.Move(5, -8)),
 		},
 	}
 
-	Board_nRF52840 = &lib.Component{
+	Board_nRF52840 = &eda.Component{
 		Clears: path.Paths{
 			path.Rect(24, 4.6).Apply(transform.Move(0, 11.6)),
 		},
@@ -61,7 +60,7 @@ var (
 			path.RoundRect(23.5, 27.5, 1),
 		},
 
-		Components: lib.Components{
+		Components: eda.Components{
 			chip,
 			headers,
 			mountHoles,
