@@ -26,7 +26,7 @@ func board(short bool) *eda.Component {
 		},
 	}
 
-	pad := header.Flatten().Pads.Centers()
+	pad := header.PadCenters()
 
 	if short {
 		header = &eda.Component{

@@ -12,7 +12,7 @@ import (
 
 var (
 	chip     = qfn.QFN16G.Arrange(transform.Rotate(-45).Move(0, 2))
-	pin      = chip.Flatten().Pads.Centers()
+	pin      = chip.PadCenters()
 	pinNames = []string{"PB1", "PA12", "SWD", "SWC", "PF2", "PA0", "PA1", "PA2", "GND",
 		"PA3", "PA4", "PA5", "PA6", "PA7", "PB0", "VCC", "PA8"}
 
@@ -21,7 +21,7 @@ var (
 			greenconn.CSCC118(17, false, pinNames).Arrange(transform.Rotate(90).Move(0, -2.5)),
 		},
 	}
-	pad = header.Flatten().Pads.Centers()
+	pad = header.PadCenters()
 
 	Board = &eda.Component{
 		Cuts: path.Paths{

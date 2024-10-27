@@ -16,7 +16,7 @@ var (
 
 	chip = ebyte.E73.Arrange(transform.Move(0, 3.9))
 
-	pin = chip.Flatten().Pads.Centers()
+	pin = chip.PadCenters()
 
 	headers = &eda.Component{
 		Transform: transform.Move(0, 3.05),
@@ -42,7 +42,7 @@ var (
 		},
 	}
 
-	pad = headers.Flatten().Pads.Centers()
+	pad = headers.PadCenters()
 
 	mountHoles = &eda.Component{
 		Components: eda.Components{

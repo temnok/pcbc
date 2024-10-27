@@ -42,6 +42,42 @@ type Component struct {
 	GroundTracks path.Strokes
 }
 
+// Visit calls provided callback for each subcomponent recursively,
+// as if every component is isolated (without subcomponents)
+func (c *Component) visit(t transform.Transform, callback func(*Component)) {
+	if c.Transform != (transform.Transform{}) {
+		t = c.Transform.Multiply(t)
+	}
+
+	callback(&Component{
+		Transform:    t,
+		Clears:       c.Clears,
+		Cuts:         c.Cuts,
+		Holes:        c.Holes,
+		Pads:         c.Pads,
+		Openings:     c.Openings,
+		Marks:        c.Marks,
+		Tracks:       c.Tracks,
+		GroundTracks: c.GroundTracks,
+	})
+
+	for _, sub := range c.Components {
+		sub.visit(t, callback)
+	}
+}
+
+func (c *Component) PadCenters() path.Points {
+	var centers path.Points
+
+	c.visit(transform.Identity, func(component *Component) {
+		for _, pad := range component.Pads {
+			centers = append(centers, pad.Center().Apply(component.Transform))
+		}
+	})
+
+	return centers
+}
+
 // Flatten merges component tree into the single component.
 func (c *Component) Flatten() *Component {
 	out := &Component{
@@ -61,10 +97,6 @@ func (c *Component) dump(t transform.Transform, out *Component) {
 		t = c.Transform.Multiply(t)
 	}
 
-	for _, sub := range c.Components {
-		sub.dump(t, out)
-	}
-
 	out.Clears = append(out.Clears, c.Clears.Apply(t)...)
 	out.Cuts = append(out.Cuts, c.Cuts.Apply(t)...)
 	out.Holes = append(out.Holes, c.Holes.Apply(t)...)
@@ -74,6 +106,10 @@ func (c *Component) dump(t transform.Transform, out *Component) {
 	out.Marks.Append(c.Marks.Apply(t))
 	out.Tracks.Append(c.Tracks.Apply(t))
 	out.GroundTracks.Append(c.GroundTracks.Apply(t))
+
+	for _, sub := range c.Components {
+		sub.dump(t, out)
+	}
 }
 
 func (c *Component) Arrange(t transform.Transform) *Component {

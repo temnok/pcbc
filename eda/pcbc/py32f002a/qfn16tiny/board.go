@@ -14,7 +14,7 @@ var (
 	mount = pcbc.MountHole.Arrange(transform.Rotate(90).Move(0, 2.5))
 
 	chip = qfn.QFN16G.Arrange(transform.Rotate(-45).Move(0, -1.5))
-	pin  = chip.Flatten().Pads.Centers()
+	pin  = chip.PadCenters()
 
 	leftLabels  = []string{"PB1", "PA12", "SWD", "SWC", "PF2", "PA0", "PA1", "PA2"}
 	rightLabels = []string{"PA8", "VCC", "PB0", "PA7", "PA6", "PA5", "PA4", "PA3"}
@@ -25,7 +25,7 @@ var (
 			greenconn.CSCC118(8, false, rightLabels).Arrange(transform.Move(5.5, 0)),
 		},
 	}
-	pad = header.Flatten().Pads.Centers()
+	pad = header.PadCenters()
 
 	Board = &eda.Component{
 		Cuts: path.Paths{

@@ -16,7 +16,7 @@ var (
 
 	chip = minewsemi.MS88SF2.Arrange(transform.Move(0, 6.6))
 
-	pin = chip.Flatten().Pads.Centers()
+	pin = chip.PadCenters()
 
 	headers = &eda.Component{
 		Transform: transform.Move(0, 3.05),
@@ -42,7 +42,7 @@ var (
 		},
 	}
 
-	pad = append(path.Paths{nil}, headers.Flatten().Pads...).Centers()
+	pad = append(path.Points{{}}, headers.PadCenters()...)
 
 	mountHoles = &eda.Component{
 		Transform: transform.Move(0, 3),

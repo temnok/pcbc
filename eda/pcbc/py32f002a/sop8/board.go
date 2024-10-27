@@ -13,11 +13,11 @@ import (
 var (
 	chip = sop.SOP8.Arrange(transform.Move(2.3, 0))
 
-	pin = chip.Flatten().Pads.Centers()
+	pin = chip.PadCenters()
 
 	header = mph100imp40f.G_V_SP(4).Arrange(transform.Move(0, -6))
 
-	pad = header.Flatten().Pads.Centers()
+	pad = header.PadCenters()
 
 	headerWithTracks = &eda.Component{
 		Components: eda.Components{header},

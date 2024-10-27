@@ -29,7 +29,7 @@ var Board = &eda.Component{
 }
 
 func init() {
-	pad := Board.Flatten().Pads.Centers()
+	pad := Board.PadCenters()
 
 	Board.Tracks = path.Strokes{
 		0: eda.TrackPaths(

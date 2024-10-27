@@ -23,6 +23,110 @@
 	<Shape Type="Path" CutIndex="0">
 		<XForm>1 0 0 1 55 55</XForm>
 		<Tabs></Tabs>
+		<V vx="5.25" vy="8.15"></V>
+		<V vx="5.25" vy="6.15"></V>
+		<V vx="4.75" vy="6.15"></V>
+		<V vx="4.75" vy="8.15"></V>
+		<V vx="5.25" vy="8.15"></V>
+		<P T="L" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="L" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="0">
+		<XForm>1 0 0 1 55 55</XForm>
+		<Tabs></Tabs>
+		<V vx="6" vy="7.4"></V>
+		<V vx="6" vy="6.9"></V>
+		<V vx="4" vy="6.9"></V>
+		<V vx="4" vy="7.4"></V>
+		<V vx="6" vy="7.4"></V>
+		<P T="L" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="L" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="0">
+		<XForm>1 0 0 1 55 55</XForm>
+		<Tabs></Tabs>
+		<V vx="5.25" vy="-6.15"></V>
+		<V vx="5.25" vy="-8.15"></V>
+		<V vx="4.75" vy="-8.15"></V>
+		<V vx="4.75" vy="-6.15"></V>
+		<V vx="5.25" vy="-6.15"></V>
+		<P T="L" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="L" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="0">
+		<XForm>1 0 0 1 55 55</XForm>
+		<Tabs></Tabs>
+		<V vx="6" vy="-6.9"></V>
+		<V vx="6" vy="-7.4"></V>
+		<V vx="4" vy="-7.4"></V>
+		<V vx="4" vy="-6.9"></V>
+		<V vx="6" vy="-6.9"></V>
+		<P T="L" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="L" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="0">
+		<XForm>1 0 0 1 55 55</XForm>
+		<Tabs></Tabs>
+		<V vx="-4.75" vy="-6.15"></V>
+		<V vx="-4.75" vy="-8.15"></V>
+		<V vx="-5.25" vy="-8.15"></V>
+		<V vx="-5.25" vy="-6.15"></V>
+		<V vx="-4.75" vy="-6.15"></V>
+		<P T="L" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="L" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="0">
+		<XForm>1 0 0 1 55 55</XForm>
+		<Tabs></Tabs>
+		<V vx="-4" vy="-6.9"></V>
+		<V vx="-4" vy="-7.4"></V>
+		<V vx="-6" vy="-7.4"></V>
+		<V vx="-6" vy="-6.9"></V>
+		<V vx="-4" vy="-6.9"></V>
+		<P T="L" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="L" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="0">
+		<XForm>1 0 0 1 55 55</XForm>
+		<Tabs></Tabs>
+		<V vx="-4.75" vy="8.15"></V>
+		<V vx="-4.75" vy="6.15"></V>
+		<V vx="-5.25" vy="6.15"></V>
+		<V vx="-5.25" vy="8.15"></V>
+		<V vx="-4.75" vy="8.15"></V>
+		<P T="L" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="L" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="0">
+		<XForm>1 0 0 1 55 55</XForm>
+		<Tabs></Tabs>
+		<V vx="-4" vy="7.4"></V>
+		<V vx="-4" vy="6.9"></V>
+		<V vx="-6" vy="6.9"></V>
+		<V vx="-6" vy="7.4"></V>
+		<V vx="-4" vy="7.4"></V>
+		<P T="L" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="L" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="0">
+		<XForm>1 0 0 1 55 55</XForm>
+		<Tabs></Tabs>
 	</Shape>
 	<Shape Type="Path" CutIndex="0">
 		<XForm>1 0 0 1 55 55</XForm>
@@ -387,109 +491,5 @@
 		<P T="B" p0="1" p1="2"></P>
 		<P T="B" p0="2" p1="3"></P>
 		<P T="B" p0="3" p1="4"></P>
-	</Shape>
-	<Shape Type="Path" CutIndex="0">
-		<XForm>1 0 0 1 55 55</XForm>
-		<Tabs></Tabs>
-		<V vx="5.25" vy="8.15"></V>
-		<V vx="5.25" vy="6.15"></V>
-		<V vx="4.75" vy="6.15"></V>
-		<V vx="4.75" vy="8.15"></V>
-		<V vx="5.25" vy="8.15"></V>
-		<P T="L" p0="0" p1="1"></P>
-		<P T="L" p0="1" p1="2"></P>
-		<P T="L" p0="2" p1="3"></P>
-		<P T="L" p0="3" p1="4"></P>
-	</Shape>
-	<Shape Type="Path" CutIndex="0">
-		<XForm>1 0 0 1 55 55</XForm>
-		<Tabs></Tabs>
-		<V vx="6" vy="7.4"></V>
-		<V vx="6" vy="6.9"></V>
-		<V vx="4" vy="6.9"></V>
-		<V vx="4" vy="7.4"></V>
-		<V vx="6" vy="7.4"></V>
-		<P T="L" p0="0" p1="1"></P>
-		<P T="L" p0="1" p1="2"></P>
-		<P T="L" p0="2" p1="3"></P>
-		<P T="L" p0="3" p1="4"></P>
-	</Shape>
-	<Shape Type="Path" CutIndex="0">
-		<XForm>1 0 0 1 55 55</XForm>
-		<Tabs></Tabs>
-		<V vx="5.25" vy="-6.15"></V>
-		<V vx="5.25" vy="-8.15"></V>
-		<V vx="4.75" vy="-8.15"></V>
-		<V vx="4.75" vy="-6.15"></V>
-		<V vx="5.25" vy="-6.15"></V>
-		<P T="L" p0="0" p1="1"></P>
-		<P T="L" p0="1" p1="2"></P>
-		<P T="L" p0="2" p1="3"></P>
-		<P T="L" p0="3" p1="4"></P>
-	</Shape>
-	<Shape Type="Path" CutIndex="0">
-		<XForm>1 0 0 1 55 55</XForm>
-		<Tabs></Tabs>
-		<V vx="6" vy="-6.9"></V>
-		<V vx="6" vy="-7.4"></V>
-		<V vx="4" vy="-7.4"></V>
-		<V vx="4" vy="-6.9"></V>
-		<V vx="6" vy="-6.9"></V>
-		<P T="L" p0="0" p1="1"></P>
-		<P T="L" p0="1" p1="2"></P>
-		<P T="L" p0="2" p1="3"></P>
-		<P T="L" p0="3" p1="4"></P>
-	</Shape>
-	<Shape Type="Path" CutIndex="0">
-		<XForm>1 0 0 1 55 55</XForm>
-		<Tabs></Tabs>
-		<V vx="-4.75" vy="-6.15"></V>
-		<V vx="-4.75" vy="-8.15"></V>
-		<V vx="-5.25" vy="-8.15"></V>
-		<V vx="-5.25" vy="-6.15"></V>
-		<V vx="-4.75" vy="-6.15"></V>
-		<P T="L" p0="0" p1="1"></P>
-		<P T="L" p0="1" p1="2"></P>
-		<P T="L" p0="2" p1="3"></P>
-		<P T="L" p0="3" p1="4"></P>
-	</Shape>
-	<Shape Type="Path" CutIndex="0">
-		<XForm>1 0 0 1 55 55</XForm>
-		<Tabs></Tabs>
-		<V vx="-4" vy="-6.9"></V>
-		<V vx="-4" vy="-7.4"></V>
-		<V vx="-6" vy="-7.4"></V>
-		<V vx="-6" vy="-6.9"></V>
-		<V vx="-4" vy="-6.9"></V>
-		<P T="L" p0="0" p1="1"></P>
-		<P T="L" p0="1" p1="2"></P>
-		<P T="L" p0="2" p1="3"></P>
-		<P T="L" p0="3" p1="4"></P>
-	</Shape>
-	<Shape Type="Path" CutIndex="0">
-		<XForm>1 0 0 1 55 55</XForm>
-		<Tabs></Tabs>
-		<V vx="-4.75" vy="8.15"></V>
-		<V vx="-4.75" vy="6.15"></V>
-		<V vx="-5.25" vy="6.15"></V>
-		<V vx="-5.25" vy="8.15"></V>
-		<V vx="-4.75" vy="8.15"></V>
-		<P T="L" p0="0" p1="1"></P>
-		<P T="L" p0="1" p1="2"></P>
-		<P T="L" p0="2" p1="3"></P>
-		<P T="L" p0="3" p1="4"></P>
-	</Shape>
-	<Shape Type="Path" CutIndex="0">
-		<XForm>1 0 0 1 55 55</XForm>
-		<Tabs></Tabs>
-		<V vx="-4" vy="7.4"></V>
-		<V vx="-4" vy="6.9"></V>
-		<V vx="-6" vy="6.9"></V>
-		<V vx="-6" vy="7.4"></V>
-		<V vx="-4" vy="7.4"></V>
-		<P T="L" p0="0" p1="1"></P>
-		<P T="L" p0="1" p1="2"></P>
-		<P T="L" p0="2" p1="3"></P>
-		<P T="L" p0="3" p1="4"></P>
 	</Shape>
 </LightBurnProject>

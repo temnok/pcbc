@@ -14,11 +14,11 @@ var (
 	mount = pcbc.MountHole.Arrange(transform.Rotate(90).Move(-5, 0))
 
 	chip = sop.SOP8.Arrange(transform.Move(-0.6, 0))
-	pin  = chip.Flatten().Pads.Centers()
+	pin  = chip.PadCenters()
 
 	header = greenconn.CSCC118(7, true, []string{"SWD", "PA2", "PA1", "VCC", "PA4", "PA3", "SWC"}).
 		Arrange(transform.Move(4.4, 0))
-	pad = header.Flatten().Pads.Centers()
+	pad = header.PadCenters()
 
 	Board = &eda.Component{
 		Cuts: path.Paths{

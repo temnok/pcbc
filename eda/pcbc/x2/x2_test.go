@@ -1,4 +1,4 @@
-package x2v2
+package x2
 
 import (
 	"github.com/stretchr/testify/assert"

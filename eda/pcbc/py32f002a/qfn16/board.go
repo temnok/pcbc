@@ -13,11 +13,11 @@ import (
 var (
 	chip = qfn.QFN16G.Arrange(transform.Rotate(45))
 
-	pin = chip.Flatten().Pads.Centers()
+	pin = chip.PadCenters()
 
 	header = mph100imp40f.G_V_SP(8).Arrange(transform.Move(0, -4.25))
 
-	pad = header.Flatten().Pads.Centers()
+	pad = header.PadCenters()
 
 	headerWithTracks = &eda.Component{
 		Components: eda.Components{header},
