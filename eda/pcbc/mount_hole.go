@@ -15,7 +15,7 @@ var (
 
 		Tracks: path.Strokes{
 			0.2: {
-				path.Circle(2.7),
+				path.Circle(2.8),
 			},
 		},
 
