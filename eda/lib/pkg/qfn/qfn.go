@@ -34,10 +34,10 @@ func init() {
 			},
 		},
 
-		GroundTracks: path.Strokes{
-			0.16: eda.TrackPaths(
-				eda.Track{{X: -1.5, Y: 1.5}, {X: 1.5, Y: -1.5}},
-			),
-		},
+		TrackWidth: 0.16,
+
+		GroundTracks: eda.TrackPaths(
+			eda.Track{{X: -1.5, Y: 1.5}, {X: 1.5, Y: -1.5}},
+		),
 	}
 }

@@ -43,22 +43,9 @@ var Board = &eda.Component{
 func init() {
 	pad := Board.PadCenters()
 
-	Board.Tracks = path.Strokes{
-		0: eda.TrackPaths(
-			eda.Track{pad[0]}.XY(pad[7]),
-			eda.Track{pad[0]}.DX(-0.8).YX(pad[8]),
-			eda.Track{pad[7]}.DX(0.8).YX(pad[9]),
-		),
-	}
-
-	Board.GroundTracks = path.Strokes{
-		0: eda.TrackPaths(
-		//eda.Track{pad[10]}.DX(-2).DY(2),
-		//eda.Track{pad[10]}.DX(2).DY(2),
-		//
-		//eda.Track{pad[10]}.YX(pad[12]),
-		//eda.Track{pad[10]}.YX(pad[19]),
-		//eda.Track{pad[16]}.YX(pad[21]),
-		),
-	}
+	Board.Tracks = eda.TrackPaths(
+		eda.Track{pad[0]}.XY(pad[7]),
+		eda.Track{pad[0]}.DX(-0.8).YX(pad[8]),
+		eda.Track{pad[7]}.DX(0.8).YX(pad[9]),
+	)
 }

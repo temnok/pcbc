@@ -37,22 +37,18 @@ var (
 			font.CenterBold("F002A").Apply(transform.Scale(1.1, 2.8).Move(-5, -2.5)),
 		),
 
-		Tracks: path.Strokes{
-			0: eda.TrackPaths(
-				eda.Track{pin[0]}.DY(0.8).YX(pad[3]),
-				eda.Track{pin[1]}.DY(0.8).YX(pad[4]),
-				eda.Track{pin[2]}.DY(0.8).DY(0.3).DX(2.2).YX(pad[5]),
-				eda.Track{pin[3]}.YX(pad[6]),
-				eda.Track{pin[4]}.YX(pad[0]),
-				eda.Track{pin[5]}.DY(-0.8).DY(-0.3).DX(2.2).YX(pad[1]),
-				eda.Track{pin[6]}.DY(-0.8).YX(pad[2]),
-			),
-		},
+		Tracks: eda.TrackPaths(
+			eda.Track{pin[0]}.DY(0.8).YX(pad[3]),
+			eda.Track{pin[1]}.DY(0.8).YX(pad[4]),
+			eda.Track{pin[2]}.DY(0.8).DY(0.3).DX(2.2).YX(pad[5]),
+			eda.Track{pin[3]}.YX(pad[6]),
+			eda.Track{pin[4]}.YX(pad[0]),
+			eda.Track{pin[5]}.DY(-0.8).DY(-0.3).DX(2.2).YX(pad[1]),
+			eda.Track{pin[6]}.DY(-0.8).YX(pad[2]),
+		),
 
-		GroundTracks: path.Strokes{
-			0: eda.TrackPaths(
-				eda.Track{pin[7]}.DY(-1).DY(2),
-			),
-		},
+		GroundTracks: eda.TrackPaths(
+			eda.Track{pin[7]}.DY(-1).DY(2),
+		),
 	}
 )

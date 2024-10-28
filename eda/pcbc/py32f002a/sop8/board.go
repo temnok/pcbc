@@ -21,13 +21,11 @@ var (
 
 	headerWithTracks = &eda.Component{
 		Components: eda.Components{header},
-		Tracks: path.Strokes{
-			0: eda.TrackPaths(
-				eda.Track{pad[1]}.Y(-4.5).X(pin[1].X).Y(-4).Y(pin[1].Y),
-				eda.Track{pad[2]}.X(pin[2].X).Y(pin[2].Y),
-				eda.Track{pad[3]}.Y(-4).X(pin[3].X).Y(pin[3].Y),
-			),
-		},
+		Tracks: eda.TrackPaths(
+			eda.Track{pad[1]}.Y(-4.5).X(pin[1].X).Y(-4).Y(pin[1].Y),
+			eda.Track{pad[2]}.X(pin[2].X).Y(pin[2].Y),
+			eda.Track{pad[3]}.Y(-4).X(pin[3].X).Y(pin[3].Y),
+		),
 	}
 
 	Board = &eda.Component{
@@ -54,16 +52,12 @@ var (
 				Apply(transform.Scale(0.9, 1.2).Move(0, -4)),
 		),
 
-		Tracks: path.Strokes{
-			0: eda.TrackPaths(
-				eda.Track{pad[0]}.Y(-4).X(pin[0].X).Y(-3.5).Y(pin[0].Y),
-			),
-		},
+		Tracks: eda.TrackPaths(
+			eda.Track{pad[0]}.Y(-4).X(pin[0].X).Y(-3.5).Y(pin[0].Y),
+		),
 
-		GroundTracks: path.Strokes{
-			0: eda.TrackPaths(
-				eda.Track{pin[7]}.DY(-1).DY(2),
-			),
-		},
+		GroundTracks: eda.TrackPaths(
+			eda.Track{pin[7]}.DY(-1).DY(2),
+		),
 	}
 )

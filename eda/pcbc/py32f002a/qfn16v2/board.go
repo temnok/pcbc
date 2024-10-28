@@ -35,33 +35,29 @@ var (
 			header,
 		},
 
-		Tracks: path.Strokes{
-			0: eda.TrackPaths(
-				eda.Track{pin[0]}.DY(0.7).DX(-2.4).XY(pad[0]),
-				eda.Track{pin[1]}.DY(0.5).DX(-1.7).XY(pad[1]),
-				eda.Track{pin[2]}.DY(0.3).DX(-1).XY(pad[2]),
-				eda.Track{pin[3]}.DY(0.1).DX(-0.3).XY(pad[3]),
-				eda.Track{pin[4]}.XY(pad[4]),
-				eda.Track{pin[5]}.XY(pad[5]),
-				eda.Track{pin[6]}.XY(pad[6]),
-				eda.Track{pin[7]}.XY(pad[7]),
+		Tracks: eda.TrackPaths(
+			eda.Track{pin[0]}.DY(0.7).DX(-2.4).XY(pad[0]),
+			eda.Track{pin[1]}.DY(0.5).DX(-1.7).XY(pad[1]),
+			eda.Track{pin[2]}.DY(0.3).DX(-1).XY(pad[2]),
+			eda.Track{pin[3]}.DY(0.1).DX(-0.3).XY(pad[3]),
+			eda.Track{pin[4]}.XY(pad[4]),
+			eda.Track{pin[5]}.XY(pad[5]),
+			eda.Track{pin[6]}.XY(pad[6]),
+			eda.Track{pin[7]}.XY(pad[7]),
 
-				eda.Track{pin[8]}.XY(pad[9]),
-				eda.Track{pin[9]}.XY(pad[10]),
-				eda.Track{pin[10]}.XY(pad[11]),
-				eda.Track{pin[11]}.XY(pad[12]),
-				eda.Track{pin[12]}.DY(0.1).DX(0.3).XY(pad[13]),
-				eda.Track{pin[13]}.DY(0.3).DX(1).XY(pad[14]),
-				eda.Track{pin[14]}.DY(0.5).DX(1.7).XY(pad[15]),
-				eda.Track{pin[15]}.DY(0.7).DX(2.4).XY(pad[16]),
-			),
-		},
+			eda.Track{pin[8]}.XY(pad[9]),
+			eda.Track{pin[9]}.XY(pad[10]),
+			eda.Track{pin[10]}.XY(pad[11]),
+			eda.Track{pin[11]}.XY(pad[12]),
+			eda.Track{pin[12]}.DY(0.1).DX(0.3).XY(pad[13]),
+			eda.Track{pin[13]}.DY(0.3).DX(1).XY(pad[14]),
+			eda.Track{pin[14]}.DY(0.5).DX(1.7).XY(pad[15]),
+			eda.Track{pin[15]}.DY(0.7).DX(2.4).XY(pad[16]),
+		),
 
-		GroundTracks: path.Strokes{
-			0: eda.TrackPaths(
-				eda.Track{pad[8]}.DY(1.5).DY(-3),
-			),
-		},
+		GroundTracks: eda.TrackPaths(
+			eda.Track{pad[8]}.DY(1.5).DY(-3),
+		),
 
 		Marks: path.Strokes{}.Append(
 			font.CenterBold("PY").Apply(transform.ScaleK(2.5).Move(-4, 3.4)),

@@ -38,23 +38,19 @@ func init() {
 	pins := yiyuan.YTC_TC8_565.Pads.Apply(connectorPos).Centers(transform.Identity)
 	pads := mph100imp40f.G_V_SP_x6.Pads.Apply(headerPos).Centers(transform.Identity)
 
-	Board.Tracks = path.Strokes{
-		0: eda.TrackPaths(
-			eda.Track{pins[1]}.Y(1.75).Y(2).X(pins[6].X).Y(1.75).Y(pins[6].Y),
-			eda.Track{pins[2]}.Y(-0.3).Y(-0.8).X(pads[1].X).Y(pads[1].Y),
-			eda.Track{pins[3]}.Y(-0.8).Y(-1.3).X(pads[2].X).Y(pads[2].Y),
-			eda.Track{pads[3]}.X(pins[4].X).Y(pins[4].Y),
-			eda.Track{pads[4]}.X(pins[5].X).Y(pins[5].Y),
-			eda.Track{pads[5]}.X(pins[6].X).Y(pins[6].Y),
-		),
-	}
+	Board.Tracks = eda.TrackPaths(
+		eda.Track{pins[1]}.Y(1.75).Y(2).X(pins[6].X).Y(1.75).Y(pins[6].Y),
+		eda.Track{pins[2]}.Y(-0.3).Y(-0.8).X(pads[1].X).Y(pads[1].Y),
+		eda.Track{pins[3]}.Y(-0.8).Y(-1.3).X(pads[2].X).Y(pads[2].Y),
+		eda.Track{pads[3]}.X(pins[4].X).Y(pins[4].Y),
+		eda.Track{pads[4]}.X(pins[5].X).Y(pins[5].Y),
+		eda.Track{pads[5]}.X(pins[6].X).Y(pins[6].Y),
+	)
 
-	Board.GroundTracks = path.Strokes{
-		0: eda.TrackPaths(
-			eda.Track{pins[0]}.Y(1.75).Y(2.5).X(pins[7].X).Y(1.75).Y(pins[7].Y),
-			eda.Track{pins[0]}.Y(0).Y(-0.3).X(pads[0].X).Y(pads[0].Y),
-		),
-	}
+	Board.GroundTracks = eda.TrackPaths(
+		eda.Track{pins[0]}.Y(1.75).Y(2.5).X(pins[7].X).Y(1.75).Y(pins[7].Y),
+		eda.Track{pins[0]}.Y(0).Y(-0.3).X(pads[0].X).Y(pads[0].Y),
+	)
 
 	padNames := []string{
 		"GND",

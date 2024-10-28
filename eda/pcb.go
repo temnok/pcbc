@@ -102,13 +102,12 @@ func (pcb *PCB) removeCopper(c *Component) {
 	clearBrush.IterateContours(pads, pcb.copper.Set0)
 
 	// Non-ground tracks
-	for brushW, tracks := range c.Tracks {
-		if brushW == 0 {
-			brushW = pcb.trackWidth
-		}
-		brush := shape.Circle(int((brushW + clearBrushDiameter) * resolution))
-		brush.IterateContours(tracks.Apply(t), pcb.copper.Set0)
+	brushW := c.TrackWidth
+	if brushW == 0 {
+		brushW = pcb.trackWidth
 	}
+	brush := shape.Circle(int((brushW + clearBrushDiameter) * resolution))
+	brush.IterateContours(c.Tracks.Apply(t), pcb.copper.Set0)
 
 	cutClearBrush := shape.Circle(int((clearBrushDiameter / 2) * resolution))
 
@@ -129,13 +128,13 @@ func (pcb *PCB) addCopper(c *Component) {
 	shape.IterateContoursRows(pads, pcb.copper.Set1)
 
 	// Tracks
-	for brushW, tracks := range (path.Strokes{}).Append(c.Tracks, c.GroundTracks) {
-		if brushW == 0 {
-			brushW = pcb.trackWidth
-		}
-		brush := shape.Circle(int(brushW * resolution))
-		brush.IterateContours(tracks.Apply(t), pcb.copper.Set1)
+	brushW := c.TrackWidth
+	if brushW == 0 {
+		brushW = pcb.trackWidth
 	}
+	brush := shape.Circle(int(brushW * resolution))
+	brush.IterateContours(c.Tracks.Apply(t), pcb.copper.Set1)
+	brush.IterateContours(c.GroundTracks.Apply(t), pcb.copper.Set1)
 }
 
 func (pcb *PCB) cutBoard(c *Component) {

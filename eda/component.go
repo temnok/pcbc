@@ -30,14 +30,14 @@ type Component struct {
 	// Mask: solid cut strokes
 	Openings path.Paths
 
-	// Mask: solid mark strokes
-	Marks path.Strokes
-
 	// FR4: copper strokes with groundfill clean
-	Tracks path.Strokes
+	Tracks path.Paths
 
 	// FR4: copper strokes without groundfill clean
-	GroundTracks path.Strokes
+	GroundTracks path.Paths
+
+	// Mask: solid mark strokes
+	Marks path.Strokes
 
 	TrackWidth float64
 
@@ -47,15 +47,15 @@ type Component struct {
 // Visit calls provided callback for each subcomponent recursively,
 // as if every component is isolated (without subcomponents)
 func (c *Component) Visit(callback func(*Component)) {
-	c.visit(transform.Identity, callback)
+	c.visit(transform.Identity, nil, callback)
 }
 
-func (c *Component) visit(t transform.Transform, callback func(*Component)) {
+func (c *Component) visit(t transform.Transform, parent *Component, callback func(*Component)) {
 	if c.Transform != (transform.Transform{}) {
 		t = c.Transform.Multiply(t)
 	}
 
-	callback(&Component{
+	comp := &Component{
 		Transform:    t,
 		Clears:       c.Clears,
 		Cuts:         c.Cuts,
@@ -65,17 +65,23 @@ func (c *Component) visit(t transform.Transform, callback func(*Component)) {
 		Marks:        c.Marks,
 		Tracks:       c.Tracks,
 		GroundTracks: c.GroundTracks,
-	})
+		TrackWidth:   c.TrackWidth,
+	}
+	if comp.TrackWidth == 0 && parent != nil {
+		comp.TrackWidth = parent.TrackWidth
+	}
+
+	callback(comp)
 
 	for _, sub := range c.Components {
-		sub.visit(t, callback)
+		sub.visit(t, comp, callback)
 	}
 }
 
 func (c *Component) PadCenters() path.Points {
 	var centers path.Points
 
-	c.visit(transform.Identity, func(component *Component) {
+	c.Visit(func(component *Component) {
 		for _, pad := range component.Pads {
 			centers = append(centers, pad.Center(component.Transform))
 		}
@@ -111,8 +117,8 @@ func (c *Component) Size() (float64, float64) {
 		b.AddPaths(c.Transform, c.Pads)
 		b.AddPaths(c.Transform, c.Openings)
 		b.AddStrokes(c.Transform, c.Marks)
-		b.AddStrokes(c.Transform, c.Tracks)
-		b.AddStrokes(c.Transform, c.GroundTracks)
+		b.AddPaths(c.Transform, c.Tracks)
+		b.AddPaths(c.Transform, c.GroundTracks)
 	})
 
 	return b.Width(), b.Height()

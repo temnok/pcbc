@@ -21,18 +21,16 @@ var (
 
 	headerWithTracks = &eda.Component{
 		Components: eda.Components{header},
-		Tracks: path.Strokes{
-			0: eda.TrackPaths(
-				eda.Track{pad[0]}.Y(-2.5).X(-4.9).Y(-2).XY(pin[0]),
-				eda.Track{pad[1]}.Y(-2.5).XY(pin[1]),
-				eda.Track{pad[2]}.YX(pin[2]),
-				eda.Track{pad[3]}.X(-1.25).YX(pin[3]),
-				eda.Track{pad[4]}.X(1.25).YX(pin[4]),
-				eda.Track{pad[5]}.YX(pin[5]),
-				eda.Track{pad[6]}.Y(-2.5).XY(pin[6]),
-				eda.Track{pad[7]}.Y(-2.5).X(4.9).Y(-2).XY(pin[7]),
-			),
-		},
+		Tracks: eda.TrackPaths(
+			eda.Track{pad[0]}.Y(-2.5).X(-4.9).Y(-2).XY(pin[0]),
+			eda.Track{pad[1]}.Y(-2.5).XY(pin[1]),
+			eda.Track{pad[2]}.YX(pin[2]),
+			eda.Track{pad[3]}.X(-1.25).YX(pin[3]),
+			eda.Track{pad[4]}.X(1.25).YX(pin[4]),
+			eda.Track{pad[5]}.YX(pin[5]),
+			eda.Track{pad[6]}.Y(-2.5).XY(pin[6]),
+			eda.Track{pad[7]}.Y(-2.5).X(4.9).Y(-2).XY(pin[7]),
+		),
 	}
 
 	labelScale = transform.Scale(0.9, 1.2)

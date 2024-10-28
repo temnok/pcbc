@@ -13,18 +13,10 @@ var (
 	MountHole = &eda.Component{
 		Pads: mountPads,
 
-		Tracks: path.Strokes{
-			0.2: {
-				path.Circle(2.8),
-			},
-		},
-
-		GroundTracks: path.Strokes{
-			0.25: eda.TrackPaths(
-				eda.Track{pad[0]}.DX(0.7),
-				eda.Track{pad[3]}.DX(-0.7),
-			),
-		},
+		GroundTracks: eda.TrackPaths(
+			eda.Track{pad[0]}.DX(0.7),
+			eda.Track{pad[3]}.DX(-0.7),
+		),
 
 		Openings: path.Paths{
 			path.Circle(2.6),
@@ -32,6 +24,13 @@ var (
 
 		Holes: path.Paths{
 			path.Circle(1.8),
+		},
+
+		Components: eda.Components{
+			{
+				TrackWidth: 0.2,
+				Tracks:     path.Paths{path.Circle(2.8)},
+			},
 		},
 	}
 )

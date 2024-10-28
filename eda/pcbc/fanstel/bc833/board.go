@@ -98,16 +98,12 @@ func board(short bool) *eda.Component {
 			pcbc.MountHole.Arrange(transform.Rotate(-45).Move(5, -10.5)),
 		},
 
-		Tracks: path.Strokes{
-			0: tracks,
-		},
+		Tracks: tracks,
 
-		GroundTracks: path.Strokes{
-			0: eda.TrackPaths(
-				eda.Track{pad[7]}.DX(2.1).YX(pin[5]),
-				eda.Track{pin[5]}.DX(3).YX(pin[27]).XY(pin[25]).XY(pin[26]).YX(pin[28]).XY(pin[27]),
-			),
-		},
+		GroundTracks: eda.TrackPaths(
+			eda.Track{pad[7]}.DX(2.1).YX(pin[5]),
+			eda.Track{pin[5]}.DX(3).YX(pin[27]).XY(pin[25]).XY(pin[26]).YX(pin[28]).XY(pin[27]),
+		),
 
 		Marks: path.Strokes{
 			font.Bold: path.Paths{}.Append(
