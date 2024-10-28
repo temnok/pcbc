@@ -24,7 +24,6 @@ var Board = &eda.Component{
 	Marks: path.Strokes{}.Append(
 		font.CenterBold("YTC-TC8-565").Apply(transform.Scale(0.7, 0.9).Move(-5, 3.4)),
 		pcbc.Logo.Apply(transform.ScaleK(0.8).Move(-7.2, 1.5)),
-		pcbc.TmnkTech.Apply(transform.ScaleK(0.4).Move(7.25, 3.5)),
 	),
 
 	Components: eda.Components{

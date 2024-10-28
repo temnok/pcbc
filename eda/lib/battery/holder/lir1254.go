@@ -10,7 +10,7 @@ var LIR1254 = &eda.Component{
 		path.Paths{path.Circle(5)},
 	),
 
-	TrackWidth: 0.25,
+	TrackThickness: 0.25,
 
 	GroundTracks: eda.TrackPaths(
 		eda.Track{{X: -2, Y: -2}, {X: 2, Y: 2}},

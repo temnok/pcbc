@@ -108,7 +108,6 @@ var (
 
 		Marks: path.Strokes{}.Append(
 			pcbc.Logo.Apply(transform.Move(-6.3, -6)),
-			pcbc.TmnkTech.Apply(transform.Move(6.3, -6)),
 			font.CenterBold("E73").Apply(transform.Scale(1.2, 2).Move(-2.5, -6.8)),
 			font.CenterBold("-2G4M08S1C").Apply(transform.Scale(0.8, 2).Move(1.2, -6.8)),
 			font.CenterBold("nRF52840").Apply(transform.Scale(1.4, 2).Move(0, -8.4)),

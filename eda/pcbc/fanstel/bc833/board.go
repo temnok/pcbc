@@ -116,7 +116,6 @@ func board(short bool) *eda.Component {
 			),
 		}.Append(
 			font.CenterBold(revision).Apply(transform.Scale(0.75, 1).Move(-5, -8.1)),
-			pcbc.TmnkTech.Apply(transform.Move(5, -8.1)),
 
 			pcbc.Logo.Apply(transform.ScaleK(1.2).Move(0, -8.3)),
 			font.CenterBold("BC833").Apply(transform.ScaleK(2).Move(0, -10.4)),

@@ -1,6 +1,7 @@
 package eda
 
 import (
+	"math"
 	"temnok/pcbc/path"
 	"temnok/pcbc/transform"
 )
@@ -39,7 +40,11 @@ type Component struct {
 	// Mask: solid mark strokes
 	Marks path.Strokes
 
-	TrackWidth float64
+	MarkPaths path.Paths
+
+	TrackThickness float64
+
+	MarkThickness float64
 
 	Components []*Component
 }
@@ -56,19 +61,23 @@ func (c *Component) visit(t transform.Transform, parent *Component, callback fun
 	}
 
 	comp := &Component{
-		Transform:    t,
-		Clears:       c.Clears,
-		Cuts:         c.Cuts,
-		Holes:        c.Holes,
-		Pads:         c.Pads,
-		Openings:     c.Openings,
-		Marks:        c.Marks,
-		Tracks:       c.Tracks,
-		GroundTracks: c.GroundTracks,
-		TrackWidth:   c.TrackWidth,
+		Transform:      t,
+		Clears:         c.Clears,
+		Cuts:           c.Cuts,
+		Holes:          c.Holes,
+		Pads:           c.Pads,
+		Openings:       c.Openings,
+		Marks:          c.Marks,
+		Tracks:         c.Tracks,
+		GroundTracks:   c.GroundTracks,
+		TrackThickness: c.TrackThickness,
+		MarkThickness:  c.MarkThickness,
 	}
-	if comp.TrackWidth == 0 && parent != nil {
-		comp.TrackWidth = parent.TrackWidth
+	if comp.TrackThickness == 0 && parent != nil {
+		comp.TrackThickness = parent.TrackThickness
+	}
+	if comp.MarkThickness == 0 && parent != nil {
+		comp.MarkThickness = parent.MarkThickness
 	}
 
 	callback(comp)
@@ -76,6 +85,11 @@ func (c *Component) visit(t transform.Transform, parent *Component, callback fun
 	for _, sub := range c.Components {
 		sub.visit(t, comp, callback)
 	}
+}
+
+func (c *Component) markScale() float64 {
+	t := c.Transform
+	return min(math.Sqrt(t.Ix*t.Ix+t.Iy*t.Iy), math.Sqrt(t.Jx*t.Jx+t.Jy*t.Jy))
 }
 
 func (c *Component) PadCenters() path.Points {

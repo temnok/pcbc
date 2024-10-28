@@ -55,7 +55,6 @@ var (
 			pcbc.Logo.Apply(transform.ScaleK(0.8).Move(-9.7, 0)),
 			font.CenterBold("PY32").Apply(transform.Scale(1.3, 2.5).Move(-4.2, 0)),
 			font.CenterBold("F002A").Apply(transform.Scale(1, 2.5).Move(4.2, 0)),
-			pcbc.TmnkTech.Apply(transform.Rotate(90).Move(9.7, 0)),
 
 			font.CenterBolds([]string{"PB1", "PA12", "SWD", "SWC", "PF2", "PA0", "PA1", "PA2"},
 				path.Point{X: 2.54 / 0.9}).Apply(labelScale.Move(0, -2.4)),

@@ -36,7 +36,6 @@ var Board = &eda.Component{
 		font.CenterBold("COIN BAT").Apply(transform.Scale(0.9, 2).Move(7.8, 6)),
 
 		pcbc.Logo.Apply(transform.Scale(1.2, 1.2).Move(-5, -2)),
-		pcbc.TmnkTech.Apply(transform.Move(5, -2.3)),
 	),
 }
 

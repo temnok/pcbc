@@ -156,6 +156,10 @@ func CenterBolds(strs []string, shift path.Point) path.Strokes {
 	}
 }
 
+func CenteredStringsPaths(strs []string, shift path.Point) path.Paths {
+	return StringsPaths(strs, AlignCenter, shift)
+}
+
 func StringsPaths(strs []string, alignment float64, shift path.Point) path.Paths {
 	var paths path.Paths
 
@@ -167,6 +171,10 @@ func StringsPaths(strs []string, alignment float64, shift path.Point) path.Paths
 	}
 
 	return paths
+}
+
+func CenteredStringPaths(str string) path.Paths {
+	return StringPaths(str, AlignCenter)
 }
 
 func StringPaths(str string, alignment float64) path.Paths {

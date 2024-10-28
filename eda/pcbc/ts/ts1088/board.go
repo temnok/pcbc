@@ -24,7 +24,6 @@ var Board = &eda.Component{
 	Marks: path.Strokes{}.Append(
 		font.CenterBold("SW").Apply(transform.Scale(2, 1.5).Move(-0.25, 2.4)),
 		pcbc.Logo.Apply(transform.Move(-1, -2.1)),
-		pcbc.TmnkTech.Apply(transform.ScaleK(0.8).Move(0.65, -2.2)),
 	),
 }
 

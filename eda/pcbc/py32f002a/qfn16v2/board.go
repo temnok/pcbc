@@ -65,7 +65,6 @@ var (
 			font.CenterBold("F00").Apply(transform.Scale(2, 2.5).Move(4, 3.4)),
 			font.CenterBold("2A").Apply(transform.ScaleK(2.5).Move(4, 1)),
 			pcbc.Logo.Apply(transform.Move(-8.3, 0.8)),
-			pcbc.TmnkTech.Apply(transform.Move(8.3, 0.7)),
 		),
 	}
 )
