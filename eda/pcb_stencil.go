@@ -28,9 +28,13 @@ func (pcb *PCB) SaveStencil() error {
 		},
 	}
 
-	for _, hole := range pcb.component.Pads {
-		p.Shape = append(p.Shape, lbrn.NewPath(0, center, hole))
-	}
+	pcb.nonflatComponent.Visit(func(component *Component) {
+		t := component.Transform.Multiply(center)
+
+		for _, pad := range component.Pads {
+			p.Shape = append(p.Shape, lbrn.NewPath(0, t, pad))
+		}
+	})
 
 	return p.SaveToFile(filename)
 }

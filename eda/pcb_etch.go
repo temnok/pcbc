@@ -98,13 +98,17 @@ func (pcb *PCB) SaveEtch() error {
 		},
 	}
 
-	for _, cut := range pcb.component.Cuts {
-		p.Shape = append(p.Shape, lbrn.NewPathWithTabs(2, center, cut))
-	}
+	pcb.nonflatComponent.Visit(func(component *Component) {
+		t := component.Transform.Multiply(center)
 
-	for _, hole := range pcb.component.Holes {
-		p.Shape = append(p.Shape, lbrn.NewPath(2, center, hole))
-	}
+		for _, cut := range component.Cuts {
+			p.Shape = append(p.Shape, lbrn.NewPathWithTabs(2, t, cut))
+		}
+
+		for _, hole := range component.Holes {
+			p.Shape = append(p.Shape, lbrn.NewPath(2, t, hole))
+		}
+	})
 
 	return p.SaveToFile(filename)
 }

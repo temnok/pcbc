@@ -20,8 +20,9 @@ type PCB struct {
 	trackWidth float64
 	lbrnCenter path.Point
 
-	savePath  string
-	component *Component
+	savePath         string
+	component        *Component
+	nonflatComponent *Component
 
 	fr4, copper, mask, maskB, silk, stencil *bitmap.Bitmap
 }
@@ -42,8 +43,8 @@ func GeneratePCB(component *Component) error {
 }
 
 func NewPCB(component *Component) *PCB {
-	component = component.Flatten()
-	width, height := component.Size()
+	flatComponent := component.Flatten()
+	width, height := flatComponent.Size()
 	width, height = width+1, height+1
 
 	wi, hi := int(width*resolution), int(height*resolution)
@@ -51,6 +52,8 @@ func NewPCB(component *Component) *PCB {
 	pcb := &PCB{
 		width:  width,
 		height: height,
+
+		nonflatComponent: component,
 
 		trackWidth: 0.25,
 
@@ -67,7 +70,7 @@ func NewPCB(component *Component) *PCB {
 
 	pcb.copper.Invert()
 
-	pcb.setComponent(component)
+	pcb.setComponent(flatComponent)
 
 	return pcb
 }
@@ -135,9 +138,12 @@ func (pcb *PCB) removeCopper() {
 func (pcb *PCB) addCopper() {
 	bt := pcb.bitmapTransform()
 
+	extraCopperBrush := shape.Circle(int(extraCopper * resolution))
+
 	// Pads
 	pads := pcb.component.Pads.Apply(bt)
 	shape.IterateContoursRows(pads, pcb.copper.Set1)
+	extraCopperBrush.IterateContours(pads, pcb.copper.Set1)
 
 	// Tracks
 	for brushW, tracks := range (path.Strokes{}).Append(pcb.component.Tracks, pcb.component.GroundTracks) {

@@ -21,8 +21,8 @@ var (
 
 		GroundTracks: path.Strokes{
 			0.25: eda.TrackPaths(
-				eda.Track{pad[0]}.DX(1.7),
-				eda.Track{pad[3]}.DX(-1.7),
+				eda.Track{pad[0]}.DX(0.7),
+				eda.Track{pad[3]}.DX(-0.7),
 			),
 		},
 

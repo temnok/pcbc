@@ -44,6 +44,10 @@ type Component struct {
 
 // Visit calls provided callback for each subcomponent recursively,
 // as if every component is isolated (without subcomponents)
+func (c *Component) Visit(callback func(*Component)) {
+	c.visit(transform.Identity, callback)
+}
+
 func (c *Component) visit(t transform.Transform, callback func(*Component)) {
 	if c.Transform != (transform.Transform{}) {
 		t = c.Transform.Multiply(t)
