@@ -78,29 +78,20 @@ func NewPCB(component *Component) *PCB {
 func (pcb *PCB) setComponent(c *Component) {
 	pcb.component = c
 
-	bt := pcb.bitmapTransform()
+	pcb.processBoard()
+	pcb.processMask()
+	pcb.processStencil()
+}
 
+func (pcb *PCB) processBoard() {
 	pcb.removeCopper()
 	pcb.addCopper()
-	pcb.removeMask()
+	pcb.cutBoard()
+}
 
-	// Pads
-	pads := pcb.component.Pads.Apply(bt)
-	brush02.IterateContours(pads, pcb.stencil.Set1)
-
-	// Marks
-	for brushW, marks := range c.Marks {
-		brush := shape.Circle(int(brushW * resolution))
-		brush.IterateContours(marks.Apply(bt), pcb.silk.Set1)
-	}
-
-	// Holes
-	holes := c.Holes.Apply(bt)
-	brush02.IterateContours(holes, pcb.fr4.Set1)
-
-	// Cuts
-	cuts := c.Cuts.Apply(bt)
-	brush02.IterateContours(cuts, pcb.fr4.Set1)
+func (pcb *PCB) processMask() {
+	pcb.addMarks()
+	pcb.addOpenings()
 }
 
 func (pcb *PCB) removeCopper() {
@@ -155,7 +146,29 @@ func (pcb *PCB) addCopper() {
 	}
 }
 
-func (pcb *PCB) removeMask() {
+func (pcb *PCB) cutBoard() {
+	bt := pcb.bitmapTransform()
+
+	// Holes
+	holes := pcb.component.Holes.Apply(bt)
+	brush02.IterateContours(holes, pcb.fr4.Set1)
+
+	// Cuts
+	cuts := pcb.component.Cuts.Apply(bt)
+	brush02.IterateContours(cuts, pcb.fr4.Set1)
+}
+
+func (pcb *PCB) addMarks() {
+	bt := pcb.bitmapTransform()
+
+	// Marks
+	for brushW, marks := range pcb.component.Marks {
+		brush := shape.Circle(int(brushW * resolution))
+		brush.IterateContours(marks.Apply(bt), pcb.silk.Set1)
+	}
+}
+
+func (pcb *PCB) addOpenings() {
 	bt := pcb.bitmapTransform()
 
 	// Pads
@@ -178,6 +191,14 @@ func (pcb *PCB) removeMask() {
 	openings := pcb.component.Openings.Apply(bt)
 	shape.IterateContoursRows(openings, pcb.mask.Set0)
 	brush1.IterateContours(openings, pcb.mask.Set1)
+}
+
+func (pcb *PCB) processStencil() {
+	bt := pcb.bitmapTransform()
+
+	// Pads
+	pads := pcb.component.Pads.Apply(bt)
+	brush02.IterateContours(pads, pcb.stencil.Set1)
 }
 
 func (pcb *PCB) bitmapTransform() transform.Transform {
