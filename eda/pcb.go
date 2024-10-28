@@ -29,7 +29,6 @@ type PCB struct {
 const (
 	resolution         = 100.0 // pixels per mm
 	clearBrushDiameter = 0.5
-	extraCopper        = 0.05 // compensate copper lost during etching
 )
 
 var (
@@ -111,7 +110,7 @@ func (pcb *PCB) removeCopper(c *Component) {
 		brush.IterateContours(tracks.Apply(t), pcb.copper.Set0)
 	}
 
-	cutClearBrush := shape.Circle(int((clearBrushDiameter/2 - extraCopper) * resolution))
+	cutClearBrush := shape.Circle(int((clearBrushDiameter / 2) * resolution))
 
 	// Holes
 	holes := c.Holes.Apply(t)
@@ -125,19 +124,16 @@ func (pcb *PCB) removeCopper(c *Component) {
 func (pcb *PCB) addCopper(c *Component) {
 	t := c.Transform.Multiply(pcb.bitmapTransform())
 
-	extraCopperBrush := shape.Circle(int(extraCopper * resolution))
-
 	// Pads
 	pads := c.Pads.Apply(t)
 	shape.IterateContoursRows(pads, pcb.copper.Set1)
-	extraCopperBrush.IterateContours(pads, pcb.copper.Set1)
 
 	// Tracks
 	for brushW, tracks := range (path.Strokes{}).Append(c.Tracks, c.GroundTracks) {
 		if brushW == 0 {
 			brushW = pcb.trackWidth
 		}
-		brush := shape.Circle(int((brushW + extraCopper) * resolution))
+		brush := shape.Circle(int(brushW * resolution))
 		brush.IterateContours(tracks.Apply(t), pcb.copper.Set1)
 	}
 }

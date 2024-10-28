@@ -39,6 +39,8 @@ type Component struct {
 	// FR4: copper strokes without groundfill clean
 	GroundTracks path.Strokes
 
+	TrackWidth float64
+
 	Components []*Component
 }
 
