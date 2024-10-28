@@ -11,14 +11,14 @@ func TestLinearVisit(t *testing.T) {
 		a, b     Point
 		expected [][2]int
 	}{
-		{a: Point{0, 0}, b: Point{0, 0}, expected: [][2]int{}},
+		{a: Point{0, 0}, b: Point{0, 0}, expected: nil},
 		{a: Point{2, 0}, b: Point{0, 0}, expected: [][2]int{{1, 0}, {0, 0}}},
 		{a: Point{-1, 1}, b: Point{1, -1}, expected: [][2]int{{0, 0}, {1, -1}}},
 		{a: Point{5, 3}, b: Point{0, 0}, expected: [][2]int{{4, 2}, {3, 2}, {2, 1}, {1, 1}, {0, 0}}},
 	}
 
 	for _, test := range tests {
-		actual := [][2]int{}
+		var actual [][2]int
 
 		linearVisit(test.a, test.b, func(x, y int) {
 			actual = append(actual, [2]int{x, y})

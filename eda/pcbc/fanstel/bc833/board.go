@@ -40,7 +40,7 @@ func board(short bool) *eda.Component {
 
 	pin := fanstel.BC833.Pads.Centers(transform.Identity)
 
-	labelShift := path.Point{2.54 / 0.8, 0}
+	labelShift := path.Point{X: 2.54 / 0.8}
 	labelScale := transform.Scale(0.8, 1.3)
 
 	tracks := eda.TrackPaths(

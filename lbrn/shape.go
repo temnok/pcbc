@@ -107,7 +107,7 @@ func NewPathWithTabs(index int, t transform.Transform, p path.Path) *Shape {
 	for i := 0; i < len(p); i += 3 {
 		if isLine := i > 0 && p[i-3] == p[i-2] && p[i-1] == p[i]; isLine {
 			u, v := p[i-2], p[i-1]
-			tabs = append(tabs, path.Point{(u.X + v.X) / 2, (u.Y + v.Y) / 2})
+			tabs = append(tabs, path.Point{X: (u.X + v.X) / 2, Y: (u.Y + v.Y) / 2})
 		}
 	}
 	s.SetTabs(tabs)

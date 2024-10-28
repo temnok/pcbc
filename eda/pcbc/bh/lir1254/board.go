@@ -23,7 +23,7 @@ var Board = &eda.Component{
 			},
 			Marks: font.CenterBolds(
 				[]string{"3V7", "3V7", "3V7", "3V7", "3V7", "3V7", "3V7", "3V7"},
-				path.Point{2.54, 0},
+				path.Point{X: 2.54},
 			).Apply(transform.Move(0, 1.8)),
 		},
 		holder.LIR1254.Arrange(transform.Move(0, 2.75)),

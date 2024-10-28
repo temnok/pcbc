@@ -33,8 +33,6 @@ var (
 		},
 	}
 
-	mountPad = mountHoles.PadCenters()
-
 	Board_nRF52840 = &eda.Component{
 		Cuts: path.Paths{
 			path.RoundRect(22.4, 28, 1),

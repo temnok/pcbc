@@ -36,7 +36,7 @@ func init() {
 
 		GroundTracks: path.Strokes{
 			0.16: eda.TrackPaths(
-				eda.Track{{-1.5, 1.5}, {1.5, -1.5}},
+				eda.Track{{X: -1.5, Y: 1.5}, {X: 1.5, Y: -1.5}},
 			),
 		},
 	}

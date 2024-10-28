@@ -22,12 +22,12 @@ var (
 				path.Rect(2.20, 2),
 			},
 			0.6: path.Paths{
-				path.Path{{0, 0.4}},
+				path.Path{{X: 0, Y: 0.4}},
 			},
 			0.2: path.Paths{
-				path.Path{{-0.3, -0.4}},
-				path.Path{{0, -0.4}},
-				path.Path{{0.3, -0.4}},
+				path.Path{{X: -0.3, Y: -0.4}},
+				path.Path{{X: 0, Y: -0.4}},
+				path.Path{{X: 0.3, Y: -0.4}},
 			},
 		},
 	}

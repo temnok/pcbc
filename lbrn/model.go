@@ -81,7 +81,7 @@ func (p *LightBurnProject) SaveToFile(filename string) error {
 		return err
 	}
 
-	defer file.Close()
+	defer func() { _ = file.Close() }()
 
 	enc := xml.NewEncoder(file)
 	enc.Indent("", "\t")

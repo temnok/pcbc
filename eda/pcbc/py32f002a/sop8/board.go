@@ -43,14 +43,14 @@ var (
 		},
 
 		Marks: path.Strokes{}.Append(
-			font.CenterBolds([]string{"GND", "PA1", "PA2", "SWD"}, path.Point{2.54 / 0.9, 0}).
+			font.CenterBolds([]string{"GND", "PA1", "PA2", "SWD"}, path.Point{X: 2.54 / 0.9}).
 				Apply(transform.Scale(0.9, 1.2).Move(0, 4)),
 
 			font.CenterBold("PY32").Apply(transform.Scale(1.4, 2).Move(-2.8, 2.4)),
 			pcbc.Logo.Apply(transform.ScaleK(0.8).Move(-4.5, 0)),
 			font.CenterBold("F002A").Apply(transform.Scale(1.2, 2).Move(-2.8, -2.4)),
 
-			font.CenterBolds([]string{"VCC", "PA4", "PA3", "SWC"}, path.Point{2.54 / 0.9, 0}).
+			font.CenterBolds([]string{"VCC", "PA4", "PA3", "SWC"}, path.Point{X: 2.54 / 0.9}).
 				Apply(transform.Scale(0.9, 1.2).Move(0, -4)),
 		),
 

@@ -12,8 +12,8 @@ var LIR1254 = &eda.Component{
 
 	GroundTracks: path.Strokes{
 		0.25: eda.TrackPaths(
-			eda.Track{{-2, -2}, {2, 2}},
-			eda.Track{{2, -2}, {-2, 2}},
+			eda.Track{{X: -2, Y: -2}, {X: 2, Y: 2}},
+			eda.Track{{X: 2, Y: -2}, {X: -2, Y: 2}},
 		),
 	},
 

@@ -18,12 +18,12 @@ func NewBitmapsImage(bitmaps []*Bitmap, bitmapColors [][2]color.Color, flipY boo
 		colors := make([]color.Color, len(bitmapColors))
 
 		for j, bc := range bitmapColors {
-			color := bc[0]
+			c := bc[0]
 			if i&(1<<j) != 0 {
-				color = bc[1]
+				c = bc[1]
 			}
 
-			colors[j] = color
+			colors[j] = c
 		}
 
 		palette[i] = combineColors(colors)
@@ -72,8 +72,8 @@ func combineColors(colors []color.Color) color.Color {
 
 	var tr, tg, tb float64
 
-	for _, color := range colors {
-		r, g, b, a := color.RGBA()
+	for _, c := range colors {
+		r, g, b, a := c.RGBA()
 		k := float64(a) / f
 		tr = tr*(1-k) + (float64(r)/f)*k
 		tg = tg*(1-k) + (float64(g)/f)*k

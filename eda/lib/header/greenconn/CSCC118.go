@@ -42,9 +42,9 @@ func CSCC118(n int, flip bool, labels []string) *eda.Component {
 		}.Append(
 			path.Strokes{
 				0.15: path.Paths{}.Append(
-					font.StringsPaths(labels0, align0, path.Point{0, -2 / 1.6}).
+					font.StringsPaths(labels0, align0, path.Point{Y: -2 / 1.6}).
 						Apply(transform.Scale(0.7, 1.6).Move(-sign*0.9, shift)),
-					font.StringsPaths(labels1, align1, path.Point{0, -2 / 1.6}).
+					font.StringsPaths(labels1, align1, path.Point{Y: -2 / 1.6}).
 						Apply(transform.Scale(0.7, 1.6).Move(sign*0.9, -shift)),
 				),
 			},

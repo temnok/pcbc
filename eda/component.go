@@ -91,7 +91,7 @@ func (c *Component) Arrange(t transform.Transform) *Component {
 func (c *Component) Clone(n int, dx, dy float64) *Component {
 	res := &Component{}
 	for i := range n {
-		k := (float64(i) - float64(n-1)/2)
+		k := float64(i) - float64(n-1)/2
 		clone := c.Arrange(transform.Move(k*dx, k*dy))
 		res.Components = append(res.Components, clone)
 	}

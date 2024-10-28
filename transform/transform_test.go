@@ -100,7 +100,7 @@ func TestAscii(t *testing.T) {
 					}
 				}
 			}
-			actual := []byte{}
+			var actual []byte
 			for _, row := range buf {
 				actual = append(actual, row...)
 				actual = append(actual, '\n')

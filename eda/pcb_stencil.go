@@ -14,16 +14,16 @@ func (pcb *PCB) SaveStencil() error {
 		CutSetting: []lbrn.CutSetting{
 			{
 				Type:     "Cut",
-				Name:     Param{"Apertures"},
-				Index:    Param{"0"},
-				Priority: Param{"0"},
+				Name:     Param{Value: "Apertures"},
+				Index:    Param{Value: "0"},
+				Priority: Param{Value: "0"},
 
-				Speed:        Param{"200"},
-				GlobalRepeat: Param{"20"},
+				Speed:        Param{Value: "200"},
+				GlobalRepeat: Param{Value: "20"},
 
-				MaxPower:    Param{"90"},
-				QPulseWidth: Param{"200"},
-				Frequency:   Param{"20000"},
+				MaxPower:    Param{Value: "90"},
+				QPulseWidth: Param{Value: "200"},
+				Frequency:   Param{Value: "20000"},
 			},
 		},
 	}

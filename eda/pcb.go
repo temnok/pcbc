@@ -55,7 +55,7 @@ func NewPCB(component *Component) *PCB {
 
 		trackWidth: 0.25,
 
-		lbrnCenter: path.Point{55, 55},
+		lbrnCenter: path.Point{X: 55, Y: 55},
 		savePath:   "pcb/",
 
 		fr4:     bitmap.NewBitmap(wi, hi),
@@ -217,11 +217,11 @@ func (pcb *PCB) SaveOverview() error {
 	image := bitmap.NewBitmapsImage(
 		[]*bitmap.Bitmap{pcb.copper, pcb.fr4, pcb.mask, pcb.silk, pcb.stencil},
 		[][2]color.Color{
-			{color.RGBA{0, 0x40, 0x10, 0xFF}, color.RGBA{0xC0, 0x60, 0, 0xFF}},
-			{color.RGBA{0, 0, 0, 0}, color.RGBA{0, 0xFF, 0, 0xFF}},
-			{color.RGBA{0, 0, 0, 0}, color.RGBA{0x80, 0x80, 0xFF, 0xA0}},
-			{color.RGBA{0, 0, 0, 0}, color.RGBA{0xFF, 0xFF, 0xFF, 0xA0}},
-			{color.RGBA{0, 0, 0, 0}, color.RGBA{0xFF, 0xFF, 0xFF, 0xFF}},
+			{color.RGBA{G: 0x40, B: 0x10, A: 0xFF}, color.RGBA{R: 0xC0, G: 0x60, A: 0xFF}},
+			{color.RGBA{}, color.RGBA{G: 0xFF, A: 0xFF}},
+			{color.RGBA{}, color.RGBA{R: 0x80, G: 0x80, B: 0xFF, A: 0xA0}},
+			{color.RGBA{}, color.RGBA{R: 0xFF, G: 0xFF, B: 0xFF, A: 0xA0}},
+			{color.RGBA{}, color.RGBA{R: 0xFF, G: 0xFF, B: 0xFF, A: 0xFF}},
 		},
 		true,
 	)
