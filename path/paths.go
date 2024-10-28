@@ -40,11 +40,11 @@ func (paths Paths) Jump(dist int, jump func(x, y int)) {
 }
 
 // Centers returns center points for paths.
-func (paths Paths) Centers() Points {
+func (paths Paths) Centers(t transform.Transform) Points {
 	centers := make(Points, len(paths))
 
 	for i, path := range paths {
-		centers[i] = path.Center()
+		centers[i] = path.Center(t)
 	}
 
 	return centers

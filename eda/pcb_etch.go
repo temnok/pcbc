@@ -98,7 +98,7 @@ func (pcb *PCB) SaveEtch() error {
 		},
 	}
 
-	pcb.nonflatComponent.Visit(func(component *Component) {
+	pcb.component.Visit(func(component *Component) {
 		t := component.Transform.Multiply(center)
 
 		for _, cut := range component.Cuts {

@@ -28,7 +28,7 @@ func (pcb *PCB) SaveStencil() error {
 		},
 	}
 
-	pcb.nonflatComponent.Visit(func(component *Component) {
+	pcb.component.Visit(func(component *Component) {
 		t := component.Transform.Multiply(center)
 
 		for _, pad := range component.Pads {

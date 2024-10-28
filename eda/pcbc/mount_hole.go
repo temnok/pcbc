@@ -8,7 +8,7 @@ import (
 
 var (
 	mountPads = path.Pie(6, 1.0, 1.3, 15).Apply(transform.Rotate(-30))
-	pad       = mountPads.Centers()
+	pad       = mountPads.Centers(transform.Identity)
 
 	MountHole = &eda.Component{
 		Pads: mountPads,

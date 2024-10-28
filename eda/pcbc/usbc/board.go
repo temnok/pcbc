@@ -35,8 +35,8 @@ var Board = &eda.Component{
 }
 
 func init() {
-	pins := yiyuan.YTC_TC8_565.Pads.Apply(connectorPos).Centers()
-	pads := mph100imp40f.G_V_SP_x6.Pads.Apply(headerPos).Centers()
+	pins := yiyuan.YTC_TC8_565.Pads.Apply(connectorPos).Centers(transform.Identity)
+	pads := mph100imp40f.G_V_SP_x6.Pads.Apply(headerPos).Centers(transform.Identity)
 
 	Board.Tracks = path.Strokes{
 		0: eda.TrackPaths(

@@ -84,8 +84,8 @@ func (path Path) CloneRowsCols(rows, cols int, step Point) Paths {
 	return paths
 }
 
-func (path Path) Center() Point {
+func (path Path) Center(t transform.Transform) Point {
 	var b Bounds
-	b.AddPath(path)
+	b.AddPath(t, path)
 	return b.Center()
 }

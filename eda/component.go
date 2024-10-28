@@ -75,47 +75,12 @@ func (c *Component) PadCenters() path.Points {
 
 	c.visit(transform.Identity, func(component *Component) {
 		for _, pad := range component.Pads {
-			centers = append(centers, pad.Center().Apply(component.Transform))
+			centers = append(centers, pad.Center(component.Transform))
 		}
 	})
 
 	return centers
 }
-
-// Flatten merges component tree into the single component.
-func (c *Component) Flatten() *Component {
-	out := &Component{
-		Transform:    transform.Identity,
-		Marks:        path.Strokes{},
-		Tracks:       path.Strokes{},
-		GroundTracks: path.Strokes{},
-	}
-
-	c.dump(transform.Identity, out)
-
-	return out
-}
-
-func (c *Component) dump(t transform.Transform, out *Component) {
-	if c.Transform != (transform.Transform{}) {
-		t = c.Transform.Multiply(t)
-	}
-
-	out.Clears = append(out.Clears, c.Clears.Apply(t)...)
-	out.Cuts = append(out.Cuts, c.Cuts.Apply(t)...)
-	out.Holes = append(out.Holes, c.Holes.Apply(t)...)
-	out.Pads = append(out.Pads, c.Pads.Apply(t)...)
-	out.Openings = append(out.Openings, c.Openings.Apply(t)...)
-
-	out.Marks.Append(c.Marks.Apply(t))
-	out.Tracks.Append(c.Tracks.Apply(t))
-	out.GroundTracks.Append(c.GroundTracks.Apply(t))
-
-	for _, sub := range c.Components {
-		sub.dump(t, out)
-	}
-}
-
 func (c *Component) Arrange(t transform.Transform) *Component {
 	return &Component{
 		Transform:  t,
@@ -136,14 +101,17 @@ func (c *Component) Clone(n int, dx, dy float64) *Component {
 
 func (c *Component) Size() (float64, float64) {
 	var b path.Bounds
-	b.AddPaths(c.Clears)
-	b.AddPaths(c.Cuts)
-	b.AddPaths(c.Holes)
-	b.AddPaths(c.Pads)
-	b.AddPaths(c.Openings)
-	b.AddStrokes(c.Marks)
-	b.AddStrokes(c.Tracks)
-	b.AddStrokes(c.GroundTracks)
+
+	c.Visit(func(c *Component) {
+		b.AddPaths(c.Transform, c.Clears)
+		b.AddPaths(c.Transform, c.Cuts)
+		b.AddPaths(c.Transform, c.Holes)
+		b.AddPaths(c.Transform, c.Pads)
+		b.AddPaths(c.Transform, c.Openings)
+		b.AddStrokes(c.Transform, c.Marks)
+		b.AddStrokes(c.Transform, c.Tracks)
+		b.AddStrokes(c.Transform, c.GroundTracks)
+	})
 
 	return b.Width(), b.Height()
 }
