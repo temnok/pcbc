@@ -15,7 +15,8 @@ type (
 )
 
 type PCB struct {
-	resolution float64
+	width, height float64
+
 	trackWidth float64
 	lbrnCenter path.Point
 
@@ -25,21 +26,32 @@ type PCB struct {
 	fr4, copper, mask, maskB, silk, stencil *bitmap.Bitmap
 }
 
+const (
+	resolution         = 100.0 // pixels per mm
+	clearBrushDiameter = 0.5
+	extraCopper        = 0.05 // compensate copper lost during etching
+)
+
+var (
+	brush1  = shape.Circle(int(0.1 * resolution))
+	brush02 = shape.Circle(int(0.02 * resolution))
+)
+
 func GeneratePCB(component *Component) error {
 	return NewPCB(component).SaveFiles()
 }
 
 func NewPCB(component *Component) *PCB {
-	const scale = 100
-
 	component = component.Flatten()
 	width, height := component.Size()
 	width, height = width+1, height+1
 
-	wi, hi := int(width*scale), int(height*scale)
+	wi, hi := int(width*resolution), int(height*resolution)
 
 	pcb := &PCB{
-		resolution: scale,
+		width:  width,
+		height: height,
+
 		trackWidth: 0.25,
 
 		lbrnCenter: path.Point{55, 55},
@@ -55,87 +67,115 @@ func NewPCB(component *Component) *PCB {
 
 	pcb.copper.Invert()
 
-	pcb.setComponent(component, width, height)
+	pcb.setComponent(component)
 
 	return pcb
 }
 
-func (pcb *PCB) setComponent(c *Component, width, height float64) {
+func (pcb *PCB) setComponent(c *Component) {
 	pcb.component = c
 
-	bt := transform.Move(width/2, height/2).Scale(pcb.resolution, pcb.resolution)
+	bt := pcb.bitmapTransform()
 
-	brush1 := shape.Circle(int(0.1 * pcb.resolution))
-	brush02 := shape.Circle(int(0.02 * pcb.resolution))
-
-	const clearBrushW = 0.5
-	clearBrush := shape.Circle(int(clearBrushW * pcb.resolution))
-
-	const extraCopper = 0.05 // compensate copper lost during etching
-	//extraCopperBrush := shape.Circle(int(extraCopper * pcb.resolution))
-
-	cutClearBrush := shape.Circle(int((clearBrushW/2 - extraCopper) * pcb.resolution))
-
-	// Clears: remove groundfill
-	shape.IterateContoursRows(c.Clears.Apply(bt), pcb.copper.Set0)
-
-	// Pads: remove groundfill
-	pads := c.Pads.Apply(bt)
-	clearBrush.IterateContours(pads, pcb.copper.Set0)
-
-	// Non-ground tracks: remove groundfill
-	for brushW, tracks := range c.Tracks {
-		if brushW == 0 {
-			brushW = pcb.trackWidth
-		}
-		brush := shape.Circle(int((brushW + clearBrushW) * pcb.resolution))
-		brush.IterateContours(tracks.Apply(bt), pcb.copper.Set0)
-	}
+	pcb.removeCopper()
+	pcb.addCopper()
+	pcb.removeMask()
 
 	// Pads
-	shape.IterateContoursRows(pads, pcb.copper.Set1)
-	//extraCopperBrush.IterateContours(pads, pcb.copper.Set1)
-	brush1.IterateContours(pads, pcb.mask.Set1)
-
-	//resizedPads := c.Pads.Resize(-StencilShrink).Apply(bt)
+	pads := pcb.component.Pads.Apply(bt)
 	brush02.IterateContours(pads, pcb.stencil.Set1)
-
-	// Tracks
-	for brushW, tracks := range (path.Strokes{}).Append(c.Tracks, c.GroundTracks) {
-		if brushW == 0 {
-			brushW = pcb.trackWidth
-		}
-		brush := shape.Circle(int((brushW + extraCopper) * pcb.resolution))
-		brush.IterateContours(tracks.Apply(bt), pcb.copper.Set1)
-	}
 
 	// Marks
 	for brushW, marks := range c.Marks {
-		brush := shape.Circle(int(brushW * pcb.resolution))
+		brush := shape.Circle(int(brushW * resolution))
 		brush.IterateContours(marks.Apply(bt), pcb.silk.Set1)
 	}
 
 	// Holes
 	holes := c.Holes.Apply(bt)
-	brush1.IterateContours(holes, pcb.mask.Set1)
-	brush1.IterateContours(holes, pcb.maskB.Set1)
-	shape.IterateContoursRows(holes, pcb.copper.Set1)
-	cutClearBrush.IterateContours(holes, pcb.copper.Set0)
 	brush02.IterateContours(holes, pcb.fr4.Set1)
 
 	// Cuts
 	cuts := c.Cuts.Apply(bt)
+	brush02.IterateContours(cuts, pcb.fr4.Set1)
+}
+
+func (pcb *PCB) removeCopper() {
+	bt := pcb.bitmapTransform()
+
+	// Clears
+	clears := pcb.component.Clears.Apply(bt)
+	shape.IterateContoursRows(clears, pcb.copper.Set0)
+
+	// Pads
+	pads := pcb.component.Pads.Apply(bt)
+	clearBrush := shape.Circle(int(clearBrushDiameter * resolution))
+	clearBrush.IterateContours(pads, pcb.copper.Set0)
+
+	// Non-ground tracks
+	for brushW, tracks := range pcb.component.Tracks {
+		if brushW == 0 {
+			brushW = pcb.trackWidth
+		}
+		brush := shape.Circle(int((brushW + clearBrushDiameter) * resolution))
+		brush.IterateContours(tracks.Apply(bt), pcb.copper.Set0)
+	}
+
+	cutClearBrush := shape.Circle(int((clearBrushDiameter/2 - extraCopper) * resolution))
+
+	// Holes
+	holes := pcb.component.Holes.Apply(bt)
+	cutClearBrush.IterateContours(holes, pcb.copper.Set0)
+
+	// Cuts
+	cuts := pcb.component.Cuts.Apply(bt)
 	cutClearBrush.IterateContours(cuts, pcb.copper.Set0)
-	cuts.Jump(int(0.2*pcb.resolution), func(x, y int) {
+}
+
+func (pcb *PCB) addCopper() {
+	bt := pcb.bitmapTransform()
+
+	// Pads
+	pads := pcb.component.Pads.Apply(bt)
+	shape.IterateContoursRows(pads, pcb.copper.Set1)
+
+	// Tracks
+	for brushW, tracks := range (path.Strokes{}).Append(pcb.component.Tracks, pcb.component.GroundTracks) {
+		if brushW == 0 {
+			brushW = pcb.trackWidth
+		}
+		brush := shape.Circle(int((brushW + extraCopper) * resolution))
+		brush.IterateContours(tracks.Apply(bt), pcb.copper.Set1)
+	}
+}
+
+func (pcb *PCB) removeMask() {
+	bt := pcb.bitmapTransform()
+
+	// Pads
+	pads := pcb.component.Pads.Apply(bt)
+	brush1.IterateContours(pads, pcb.mask.Set1)
+
+	// Holes
+	holes := pcb.component.Holes.Apply(bt)
+	brush1.IterateContours(holes, pcb.mask.Set1)
+	brush1.IterateContours(holes, pcb.maskB.Set1)
+
+	// Cuts
+	cuts := pcb.component.Cuts.Apply(bt)
+	cuts.Jump(int(0.2*resolution), func(x, y int) {
 		brush1.IterateRowsXY(x, y, pcb.mask.Set1)
 		brush1.IterateRowsXY(x, y, pcb.maskB.Set1)
 	})
-	brush02.IterateContours(cuts, pcb.fr4.Set1)
 
 	// Openings
-	openings := c.Openings.Apply(bt)
+	openings := pcb.component.Openings.Apply(bt)
 	shape.IterateContoursRows(openings, pcb.mask.Set0)
 	brush1.IterateContours(openings, pcb.mask.Set1)
+}
+
+func (pcb *PCB) bitmapTransform() transform.Transform {
+	return transform.Move(pcb.width/2, pcb.height/2).Scale(resolution, resolution)
 }
 
 func (pcb *PCB) SaveFiles() error {

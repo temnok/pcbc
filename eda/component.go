@@ -11,8 +11,6 @@ type Components = []*Component
 type Component struct {
 	Transform transform.Transform
 
-	Components []*Component
-
 	// FR4: remove groundfill
 	Clears path.Paths
 
@@ -40,6 +38,8 @@ type Component struct {
 
 	// FR4: copper strokes without groundfill clean
 	GroundTracks path.Strokes
+
+	Components []*Component
 }
 
 // Visit calls provided callback for each subcomponent recursively,

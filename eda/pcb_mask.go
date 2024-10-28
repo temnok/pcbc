@@ -74,7 +74,7 @@ func (pcb *PCB) SaveMask() error {
 	silk := pcb.silk.ToImage(color.White, color.Black)
 	mask := pcb.mask.ToImage(color.Transparent, color.Black)
 
-	bitmapTransform := transform.ScaleK(1/pcb.resolution).
+	bitmapTransform := transform.ScaleK(1/resolution).
 		Move(pcb.lbrnCenter.X, pcb.lbrnCenter.Y)
 
 	p := lbrn.LightBurnProject{

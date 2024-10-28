@@ -11,7 +11,7 @@ func (pcb *PCB) SaveMaskBottom() error {
 
 	mask := pcb.maskB.ToImage(color.White, color.Black)
 
-	bitmapTransform := transform.Scale(-1, 1).ScaleK(1/pcb.resolution).
+	bitmapTransform := transform.Scale(-1, 1).ScaleK(1/resolution).
 		Move(pcb.lbrnCenter.X, pcb.lbrnCenter.Y)
 
 	p := lbrn.LightBurnProject{
