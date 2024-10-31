@@ -30,7 +30,7 @@ func init() {
 		Marks: path.Strokes{
 			0.1: path.Paths{
 				path.Rect(3.1, 3.1),
-				path.Circle(0.3).Apply(transform.Move(-1.8, 1.4)),
+				path.Circle(0.2).Apply(transform.Move(-1.7, 1.4)),
 			},
 		},
 
