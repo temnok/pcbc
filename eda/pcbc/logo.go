@@ -15,4 +15,11 @@ var (
 	Logo = path.Strokes{
 		font.Bold: LogoPaths,
 	}
+
+	TmnkTech = path.Strokes{
+		font.Bold: append(
+			font.CenteredStringPaths("TMNK").Apply(transform.Move(0, 0.5)),
+			font.CenteredStringPaths("TECH").Apply(transform.Move(0, -0.5))...,
+		),
+	}
 )

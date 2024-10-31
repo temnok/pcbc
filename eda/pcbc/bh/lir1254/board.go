@@ -34,9 +34,9 @@ var Board = &eda.Component{
 	Marks: path.Strokes{}.Append(
 		font.CenterBold("LIR1254").Apply(transform.Scale(1, 2).Move(-7.8, 6)),
 		font.CenterBold("COIN BAT").Apply(transform.Scale(0.9, 2).Move(7.8, 6)),
-
-		pcbc.Logo.Apply(transform.Scale(1.2, 1.2).Move(-5, -2)),
 	),
+
+	MarkPaths: pcbc.LogoPaths.Apply(transform.Scale(1.2, 1.2).Move(-5, -2)),
 }
 
 func init() {

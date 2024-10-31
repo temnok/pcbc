@@ -44,8 +44,6 @@ type Component struct {
 
 	TrackThickness float64
 
-	MarkThickness float64
-
 	Components []*Component
 }
 
@@ -68,16 +66,13 @@ func (c *Component) visit(t transform.Transform, parent *Component, callback fun
 		Pads:           c.Pads,
 		Openings:       c.Openings,
 		Marks:          c.Marks,
+		MarkPaths:      c.MarkPaths,
 		Tracks:         c.Tracks,
 		GroundTracks:   c.GroundTracks,
 		TrackThickness: c.TrackThickness,
-		MarkThickness:  c.MarkThickness,
 	}
 	if comp.TrackThickness == 0 && parent != nil {
 		comp.TrackThickness = parent.TrackThickness
-	}
-	if comp.MarkThickness == 0 && parent != nil {
-		comp.MarkThickness = parent.MarkThickness
 	}
 
 	callback(comp)

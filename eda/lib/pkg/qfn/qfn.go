@@ -9,7 +9,7 @@ import (
 var QFN16G *eda.Component
 
 func init() {
-	pad := path.RoundRect(0.65, 0.25, 0.12)
+	pad := path.RoundRect(0.7, 0.25, 0.1)
 
 	col := pad.Clone(4, 0, -0.5).Apply(transform.Move(-1.55, 0))
 
@@ -34,7 +34,7 @@ func init() {
 			},
 		},
 
-		TrackThickness: 0.16,
+		TrackThickness: 0.18,
 
 		GroundTracks: eda.TrackPaths(
 			eda.Track{{X: -1.5, Y: 1.5}, {X: 1.5, Y: -1.5}},

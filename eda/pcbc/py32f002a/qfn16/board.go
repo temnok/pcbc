@@ -2,7 +2,7 @@ package qfn16
 
 import (
 	"temnok/pcbc/eda"
-	"temnok/pcbc/eda/lib/header/mph100imp40f"
+	"temnok/pcbc/eda/lib/header/greenconn"
 	"temnok/pcbc/eda/lib/pkg/qfn"
 	"temnok/pcbc/eda/pcbc"
 	"temnok/pcbc/font"
@@ -11,53 +11,64 @@ import (
 )
 
 var (
-	chip = qfn.QFN16G.Arrange(transform.Rotate(45))
+	mount    = pcbc.MountHole.Arrange(transform.Rotate(90).Move(0, -2.8))
+	mountPad = mount.PadCenters()
 
-	pin = chip.PadCenters()
+	chip = qfn.QFN16G.Arrange(transform.Rotate(-45).Move(0, 1.2))
+	pin  = chip.PadCenters()
 
-	header = mph100imp40f.G_V_SP(8).Arrange(transform.Move(0, -4.25))
+	leftLabels  = []string{"PB1", "A12", "SWD", "SWC", "PF2", "PA0", "PA1", "PA2", "GND"}
+	rightLabels = []string{"PA8", "VCC", "PB0", "PA7", "PA6", "PA5", "PA4", "PA3", "GND"}
 
+	header = &eda.Component{
+		Components: eda.Components{
+			greenconn.CSCC118(9, true, leftLabels).Arrange(transform.Move(-4.5, 0)),
+			greenconn.CSCC118(9, false, rightLabels).Arrange(transform.Move(4.5, 0)),
+		},
+	}
 	pad = header.PadCenters()
 
-	headerWithTracks = &eda.Component{
-		Components: eda.Components{header},
-		Tracks: eda.TrackPaths(
-			eda.Track{pad[0]}.Y(-2.5).X(-4.9).Y(-2).XY(pin[0]),
-			eda.Track{pad[1]}.Y(-2.5).XY(pin[1]),
-			eda.Track{pad[2]}.YX(pin[2]),
-			eda.Track{pad[3]}.X(-1.25).YX(pin[3]),
-			eda.Track{pad[4]}.X(1.25).YX(pin[4]),
-			eda.Track{pad[5]}.YX(pin[5]),
-			eda.Track{pad[6]}.Y(-2.5).XY(pin[6]),
-			eda.Track{pad[7]}.Y(-2.5).X(4.9).Y(-2).XY(pin[7]),
-		),
-	}
-
-	labelScale = transform.Scale(0.9, 1.2)
-
 	Board = &eda.Component{
-		Components: eda.Components{
-			chip,
-			headerWithTracks.Arrange(transform.Rotate(180)),
-			headerWithTracks,
-			pcbc.MountHole.Arrange(transform.Move(-7.5, 0)),
-			pcbc.MountHole.Arrange(transform.Move(7.5, 0)),
+		Cuts: path.Paths{
+			path.RoundRect(14.3, 9.8, 1),
 		},
 
-		Cuts: path.Paths{
-			path.RoundRect(21, 11.5, 1),
+		Components: eda.Components{
+			mount,
+			chip,
+			header,
 		},
 
 		Marks: path.Strokes{}.Append(
-			font.CenterBolds([]string{"PA8", "VCC", "PB0", "PA7", "PA6", "PA5", "PA4", "PA3"},
-				path.Point{X: 2.54 / 0.9}).Apply(labelScale.Move(0, 2.4)),
+			font.CenterBold("PY32").Apply(transform.Scale(1.6, 1.5).Move(0, 4.1)),
+			font.CenterBold("F002A").Apply(transform.Scale(1.2, 0.9).Move(0, -4.4)),
+			pcbc.Logo.Apply(transform.Move(-1.6, -1)),
+			pcbc.TmnkTech.Apply(transform.ScaleK(0.5).Move(1.6, -1)),
+		),
 
-			pcbc.Logo.Apply(transform.ScaleK(0.8).Move(-9.7, 0)),
-			font.CenterBold("PY32").Apply(transform.Scale(1.3, 2.5).Move(-4.2, 0)),
-			font.CenterBold("F002A").Apply(transform.Scale(1, 2.5).Move(4.2, 0)),
+		Tracks: eda.TrackPaths(
+			eda.Track{pin[0]}.YX(pad[0]),
+			eda.Track{pin[1]}.YX(pad[1]),
+			eda.Track{pin[2]}.DY(0.3).DX(-1.3).YX(pad[2]),
+			eda.Track{pin[3]}.YX(pad[3]),
+			eda.Track{pin[4]}.YX(pad[4]),
+			eda.Track{pin[5]}.YX(pad[5]),
+			eda.Track{pin[6]}.YX(pad[6]),
+			eda.Track{pin[7]}.YX(pad[7]),
 
-			font.CenterBolds([]string{"PB1", "PA12", "SWD", "SWC", "PF2", "PA0", "PA1", "PA2"},
-				path.Point{X: 2.54 / 0.9}).Apply(labelScale.Move(0, -2.4)),
+			eda.Track{pin[8]}.YX(pad[16]),
+			eda.Track{pin[9]}.YX(pad[15]),
+			eda.Track{pin[10]}.YX(pad[14]),
+			eda.Track{pin[11]}.YX(pad[13]),
+			eda.Track{pin[12]}.YX(pad[12]),
+			eda.Track{pin[13]}.DY(0.3).DX(1.3).YX(pad[11]),
+			eda.Track{pin[14]}.YX(pad[10]),
+			eda.Track{pin[15]}.YX(pad[9]),
+		),
+
+		GroundTracks: eda.TrackPaths(
+			eda.Track{pad[8]}.XY(mountPad[2]),
+			eda.Track{pad[17]}.XY(mountPad[4]),
 		),
 	}
 )
