@@ -11,7 +11,7 @@ import (
 )
 
 func TestFont_SavePng(t *testing.T) {
-	const scale = 200.0
+	const scale = 100.0
 
 	bm := bitmap.NewBitmap(16*scale*Width, 20*scale)
 	thinBrush := shape.Circle(Thin * scale)
@@ -33,5 +33,5 @@ func TestFont_SavePng(t *testing.T) {
 		}
 	}
 
-	assert.NoError(t, util.SavePng("ascii/font.png", bm.ToImage(color.Black, color.White)))
+	assert.NoError(t, util.SavePng("out/font.png", bm.ToImage(color.Black, color.White)))
 }

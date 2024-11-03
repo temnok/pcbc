@@ -24,7 +24,7 @@ var Board = &eda.Component{
 		font.CenterBold("LED").Apply(transform.Scale(1.5, 1.8).Move(-3, -1.8)),
 		font.CenterBold("DI").Apply(transform.Scale(0.8, 1.4).Move(1.6, 2)),
 		font.CenterBold("VDD").Apply(transform.Scale(0.8, 1.4).Move(1.3, -2)),
-		pcbc.Logo.Apply(transform.ScaleK(0.7).Move(-0.6, -2)),
+		pcbc.LogoStrokes.Apply(transform.ScaleK(0.7).Move(-0.6, -2)),
 	),
 }
 

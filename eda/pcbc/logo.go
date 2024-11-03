@@ -12,7 +12,7 @@ var (
 		font.CenteredStringPaths("bc").Apply(transform.Move(0, -0.33))...,
 	).Apply(transform.Rotate(45))
 
-	Logo = path.Strokes{
+	LogoStrokes = path.Strokes{
 		font.Bold: LogoPaths,
 	}
 

@@ -23,7 +23,7 @@ var Board = &eda.Component{
 
 	Marks: path.Strokes{}.Append(
 		font.CenterBold("SW").Apply(transform.ScaleK(1.5).Move(0, 2)),
-		pcbc.Logo.Apply(transform.ScaleK(0.7).Move(0, -1.9)),
+		pcbc.LogoStrokes.Apply(transform.ScaleK(0.7).Move(0, -1.9)),
 	),
 }
 

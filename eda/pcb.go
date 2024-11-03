@@ -55,7 +55,7 @@ func NewPCB(component *Component) *PCB {
 		trackWidth: 0.25,
 
 		lbrnCenter: path.Point{X: 55, Y: 55},
-		savePath:   "pcb/",
+		savePath:   "out/",
 
 		fr4:     bitmap.NewBitmap(wi, hi),
 		copper:  bitmap.NewBitmap(wi, hi),

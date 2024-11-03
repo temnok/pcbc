@@ -42,7 +42,7 @@ var (
 		Marks: path.Strokes{}.Append(
 			font.CenterBold("PY32").Apply(transform.Scale(1.6, 1.5).Move(0, 4.1)),
 			font.CenterBold("F002A").Apply(transform.Scale(1.2, 0.9).Move(0, -4.4)),
-			pcbc.Logo.Apply(transform.Move(-1.6, -1)),
+			pcbc.LogoStrokes.Apply(transform.Move(-1.6, -1)),
 			pcbc.TmnkTech.Apply(transform.ScaleK(0.5).Move(1.6, -1)),
 		),
 
