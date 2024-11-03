@@ -27,17 +27,17 @@ var (
 			mph100imp40f.G_V_SP_x9.Arrange(transform.Rotate(90).Move(10.2, -1)),
 		},
 
-		Marks: path.Strokes{
+		MarkStrokes: path.Strokes{
 			font.Bold: path.Paths{}.Append(
-				font.StringsPaths([]string{
+				font.ShiftedAlignedPaths(labelShift, font.AlignCenter,
 					"P111", "P110", "P003", "P028", "P002", "P029", "P031", "P030", "P113",
-				}, font.AlignCenter, labelShift).Apply(labelScale.Rotate(-90).Move(-8.1, -1)),
-				font.StringsPaths([]string{
+				).Apply(labelScale.Rotate(-90).Move(-8.1, -1)),
+				font.ShiftedAlignedPaths(labelShift, font.AlignCenter,
 					"GND", "P000", "P001", "P005", "P109", "VDD", "VDDH", "DCCH", "P024",
-				}, font.AlignCenter, labelShift).Apply(labelScale.Move(0, -13.2)),
-				font.StringsPaths([]string{
+				).Apply(labelScale.Move(0, -13.2)),
+				font.ShiftedAlignedPaths(labelShift, font.AlignCenter,
 					"P013", "P018", "VBUS", "D-", "D+", "SWD", "SWC", "P009", "P010",
-				}, font.AlignCenter, labelShift).Apply(labelScale.Rotate(90).Move(8.1, -1)),
+				).Apply(labelScale.Rotate(90).Move(8.1, -1)),
 			),
 		},
 	}
@@ -106,7 +106,7 @@ var (
 			eda.Track{pad[9]}.DX(-0.8).DY(-0.8),
 		),
 
-		Marks: path.Strokes{}.Append(
+		MarkStrokes: path.Strokes{}.Append(
 			pcbc.LogoStrokes.Apply(transform.Move(-6.3, -6)),
 			font.CenterBold("E73").Apply(transform.Scale(1.2, 2).Move(-2.5, -6.8)),
 			font.CenterBold("-2G4M08S1C").Apply(transform.Scale(0.8, 2).Move(1.2, -6.8)),

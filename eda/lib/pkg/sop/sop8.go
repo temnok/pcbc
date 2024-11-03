@@ -17,7 +17,7 @@ var (
 
 	SOP8 = &eda.Component{
 		Pads: pads,
-		Marks: path.Strokes{
+		MarkStrokes: path.Strokes{
 			0.1: path.Paths{
 				path.Rect(5, 4),
 				path.Circle(0.3).Apply(transform.Move(-2.4, -2.3)),

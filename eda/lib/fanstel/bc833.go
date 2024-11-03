@@ -42,7 +42,7 @@ var (
 			28: pad.Apply(transform.Move(-0.5, 1.8)),
 		}.Apply(transform.Move(0.15, 1.75-14.3/2)),
 
-		Marks: path.Strokes{
+		MarkStrokes: path.Strokes{
 			0.1: {
 				path.Rect(10, 14.3),
 			},

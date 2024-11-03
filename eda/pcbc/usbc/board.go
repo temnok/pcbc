@@ -21,7 +21,7 @@ var Board = &eda.Component{
 		path.RoundRect(16, 8, 1),
 	},
 
-	Marks: path.Strokes{}.Append(
+	MarkStrokes: path.Strokes{}.Append(
 		font.CenterBold("YTC-TC8-565").Apply(transform.Scale(0.7, 0.9).Move(-5, 3.4)),
 		pcbc.LogoStrokes.Apply(transform.ScaleK(0.8).Move(-7.2, 1.5)),
 	),
@@ -63,7 +63,7 @@ func init() {
 	const tenth = 2.54
 
 	for i, padName := range padNames {
-		Board.Marks = Board.Marks.Append(
+		Board.MarkStrokes = Board.MarkStrokes.Append(
 			font.CenterBold(padName).Apply(transform.Scale(0.9, 1.2).Move(tenth*(float64(i)-2.5), -0.6)),
 		)
 	}

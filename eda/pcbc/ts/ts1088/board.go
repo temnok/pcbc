@@ -21,7 +21,7 @@ var Board = &eda.Component{
 		pcbc.MountHole.Arrange(transform.Move(-0.25, 0)),
 	},
 
-	Marks: path.Strokes{}.Append(
+	MarkStrokes: path.Strokes{}.Append(
 		font.CenterBold("SW").Apply(transform.Scale(2, 1.5).Move(-0.25, 2.4)),
 		pcbc.LogoStrokes.Apply(transform.Move(-1, -2.1)),
 	),

@@ -31,7 +31,7 @@ var (
 			header,
 		},
 
-		Marks: path.Strokes{}.Append(
+		MarkStrokes: path.Strokes{}.Append(
 			font.CenterBold("PY32").Apply(transform.Scale(1.3, 2.8).Move(-5, 2.5)),
 			//pcbc.Logo.Apply(transform.Move(-4.2, 0)),
 			font.CenterBold("F002A").Apply(transform.Scale(1.1, 2.8).Move(-5, -2.5)),

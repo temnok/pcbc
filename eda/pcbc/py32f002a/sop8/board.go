@@ -40,7 +40,7 @@ var (
 			pcbc.MountHole.Arrange(transform.Rotate(90).Move(-2.2, 0)),
 		},
 
-		Marks: path.Strokes{}.Append(
+		MarkStrokes: path.Strokes{}.Append(
 			font.CenterBolds([]string{"GND", "PA1", "PA2", "SWD"}, path.Point{X: 2.54 / 0.9}).
 				Apply(transform.Scale(0.9, 1.2).Move(0, 4)),
 

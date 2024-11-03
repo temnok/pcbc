@@ -3,6 +3,7 @@ package eda
 import (
 	"image/color"
 	"temnok/pcbc/bitmap"
+	"temnok/pcbc/font"
 	"temnok/pcbc/path"
 	"temnok/pcbc/shape"
 	"temnok/pcbc/transform"
@@ -152,8 +153,13 @@ func (pcb *PCB) cutBoard(c *Component) {
 func (pcb *PCB) addMarks(c *Component) {
 	t := c.Transform.Multiply(pcb.bitmapTransform())
 
-	// Marks
-	for brushW, marks := range c.Marks {
+	// Marks:
+	brushW := font.Bold * font.WeightScale(t)
+	brush := shape.Circle(int(brushW))
+	brush.IterateContours(c.Marks.Apply(t), pcb.silk.Set1)
+
+	// MarkStrokes: obsolete
+	for brushW, marks := range c.MarkStrokes {
 		brush := shape.Circle(int(brushW * resolution))
 		brush.IterateContours(marks.Apply(t), pcb.silk.Set1)
 	}

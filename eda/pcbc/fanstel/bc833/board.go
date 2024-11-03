@@ -105,13 +105,13 @@ func board(short bool) *eda.Component {
 			eda.Track{pin[5]}.DX(3).YX(pin[27]).XY(pin[25]).XY(pin[26]).YX(pin[28]).XY(pin[27]),
 		),
 
-		Marks: path.Strokes{
+		MarkStrokes: path.Strokes{
 			font.Bold: path.Paths{}.Append(
-				font.StringsPaths(leftLabels, font.AlignCenter, labelShift).
+				font.ShiftedAlignedPaths(labelShift, font.AlignCenter, leftLabels...).
 					Apply(labelScale.Rotate(-90).Move(-7, -2.9)),
-				font.StringsPaths(centerLabels, font.AlignCenter, labelShift).
+				font.ShiftedAlignedPaths(labelShift, font.AlignCenter, centerLabels...).
 					Apply(labelScale.Move(0, -13.65)),
-				font.StringsPaths(rightLabels, font.AlignCenter, labelShift).
+				font.ShiftedAlignedPaths(labelShift, font.AlignCenter, rightLabels...).
 					Apply(labelScale.Rotate(90).Move(7, -2.9)),
 			),
 		}.Append(

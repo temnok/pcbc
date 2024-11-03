@@ -1,6 +1,7 @@
 package font
 
 import (
+	"math"
 	"temnok/pcbc/path"
 	"temnok/pcbc/transform"
 )
@@ -149,38 +150,34 @@ var Paths = [256]path.Paths{}
 
 func CenterBold(str string) path.Strokes {
 	return path.Strokes{
-		Bold: StringPaths(str, AlignCenter),
+		Bold: AlignedPaths(AlignCenter, str),
 	}
 }
 
 func CenterBolds(strs []string, shift path.Point) path.Strokes {
 	return path.Strokes{
-		Bold: StringsPaths(strs, AlignCenter, shift),
+		Bold: ShiftedAlignedPaths(shift, AlignCenter, strs...),
 	}
 }
 
-func CenteredStringsPaths(strs []string, shift path.Point) path.Paths {
-	return StringsPaths(strs, AlignCenter, shift)
+func CenteredPaths(strs ...string) path.Paths {
+	return ShiftedAlignedPaths(path.Point{Y: 1}, AlignCenter, strs...)
 }
 
-func StringsPaths(strs []string, alignment float64, shift path.Point) path.Paths {
+func ShiftedAlignedPaths(shift path.Point, alignment float64, strs ...string) path.Paths {
 	var paths path.Paths
 
 	x0, y0 := -0.5*float64(len(strs)-1)*shift.X, -0.5*float64(len(strs)-1)*shift.Y
 	for i, str := range strs {
 		i := float64(i)
-		p := StringPaths(str, alignment).Apply(transform.Move(x0+i*shift.X, y0+i*shift.Y))
+		p := AlignedPaths(alignment, str).Apply(transform.Move(x0+i*shift.X, y0+i*shift.Y))
 		paths = append(paths, p...)
 	}
 
 	return paths
 }
 
-func CenteredStringPaths(str string) path.Paths {
-	return StringPaths(str, AlignCenter)
-}
-
-func StringPaths(str string, alignment float64) path.Paths {
+func AlignedPaths(alignment float64, str string) path.Paths {
 	var paths path.Paths
 
 	n := float64(len(str))
@@ -213,6 +210,10 @@ func init() {
 			}
 		}
 	}
+}
+
+func WeightScale(t transform.Transform) float64 {
+	return min(math.Sqrt(t.Ix*t.Ix+t.Iy*t.Iy), math.Sqrt(t.Jx*t.Jx+t.Jy*t.Jy))
 }
 
 func pToXY(p byte) path.Point {

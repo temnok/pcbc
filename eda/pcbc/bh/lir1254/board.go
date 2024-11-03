@@ -21,7 +21,7 @@ var Board = &eda.Component{
 			Components: eda.Components{
 				mph100imp40f.G_V_SP_x8,
 			},
-			Marks: font.CenterBolds(
+			MarkStrokes: font.CenterBolds(
 				[]string{"3V7", "3V7", "3V7", "3V7", "3V7", "3V7", "3V7", "3V7"},
 				path.Point{X: 2.54},
 			).Apply(transform.Move(0, 1.8)),
@@ -29,14 +29,19 @@ var Board = &eda.Component{
 		holder.LIR1254.Arrange(transform.Move(0, 2.75)),
 		pcbc.MountHole.Arrange(transform.Rotate(-45).Move(-7.5, -1.75)),
 		pcbc.MountHole.Arrange(transform.Rotate(45).Move(7.5, -1.75)),
+
+		pcbc.Logo.Arrange(transform.Scale(1.2, 1.2).Move(-5, -2)),
+
+		{
+			Transform: transform.Scale(1, 2).Move(-7.8, 6),
+			Marks:     font.CenteredPaths("LIR1254"),
+		},
+
+		{
+			Transform: transform.Scale(0.9, 2).Move(7.8, 6),
+			Marks:     font.CenteredPaths("COIN BAT"),
+		},
 	},
-
-	Marks: path.Strokes{}.Append(
-		font.CenterBold("LIR1254").Apply(transform.Scale(1, 2).Move(-7.8, 6)),
-		font.CenterBold("COIN BAT").Apply(transform.Scale(0.9, 2).Move(7.8, 6)),
-	),
-
-	MarkPaths: pcbc.LogoPaths.Apply(transform.Scale(1.2, 1.2).Move(-5, -2)),
 }
 
 func init() {

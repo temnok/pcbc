@@ -27,7 +27,7 @@ func init() {
 
 		Pads: pads,
 
-		Marks: path.Strokes{
+		MarkStrokes: path.Strokes{
 			0.1: path.Paths{
 				path.Rect(3.1, 3.1),
 				path.Circle(0.2).Apply(transform.Move(-1.7, 1.4)),

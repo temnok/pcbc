@@ -19,7 +19,7 @@ var Board = &eda.Component{
 		mph100imp40f.G_V_SP_x2.Arrange(transform.Rotate(-90).Move(3.5, 0)),
 		pcbc.MountHole.Arrange(transform.Rotate(45).Move(0.55, 0)),
 	},
-	Marks: path.Strokes{}.Append(
+	MarkStrokes: path.Strokes{}.Append(
 		font.CenterBold("WS2812B").Apply(transform.Scale(1, 1.8).Move(-2.1, 1.8)),
 		font.CenterBold("LED").Apply(transform.Scale(1.5, 1.8).Move(-3, -1.8)),
 		font.CenterBold("DI").Apply(transform.Scale(0.8, 1.4).Move(1.6, 2)),

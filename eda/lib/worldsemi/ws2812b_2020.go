@@ -17,7 +17,7 @@ var (
 			3: pad2020.Apply(transform.Move(-pad2020_X, pad2020_Y)),
 			4: pad2020.Apply(transform.Move(-pad2020_X, -pad2020_Y)),
 		},
-		Marks: path.Strokes{
+		MarkStrokes: path.Strokes{
 			0.1: path.Paths{
 				path.Rect(2.20, 2),
 			},

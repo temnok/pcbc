@@ -20,7 +20,7 @@ func G_V_SP(n int) *eda.Component {
 
 	return &eda.Component{
 		Pads: path.Circle(1.8).Clone(n, step, 0),
-		Marks: path.Strokes{
+		MarkStrokes: path.Strokes{
 			0.1: path.CutRect(step, step, 0.3).Clone(n, step, 0),
 		},
 	}
