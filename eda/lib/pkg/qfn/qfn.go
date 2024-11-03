@@ -27,11 +27,9 @@ func init() {
 
 		Pads: pads,
 
-		MarkStrokes: path.Strokes{
-			0.1: path.Paths{
-				path.Rect(3.1, 3.1),
-				path.Circle(0.2).Apply(transform.Move(-1.7, 1.4)),
-			},
+		Marks: path.Paths{
+			path.Rect(3.1, 3.1),
+			path.Circle(0.2).Apply(transform.Move(-1.7, 1.4)),
 		},
 
 		TrackThickness: 0.18,

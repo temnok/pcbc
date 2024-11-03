@@ -31,8 +31,8 @@ func init() {
 	pad := path.RoundRect(padW, padH, 0.3)
 
 	MS88SF2 = &eda.Component{
-		MarkStrokes: path.Strokes{
-			0.1: path.Paths{path.Rect(componentW, componentH)},
+		Marks: path.Paths{
+			path.Rect(componentW, componentH),
 		},
 
 		Pads: path.Paths.Append(

@@ -150,7 +150,7 @@ var Paths = [256]path.Paths{}
 
 func CenterBold(str string) path.Strokes {
 	return path.Strokes{
-		Bold: AlignedPaths(AlignCenter, str),
+		Bold: alignedPaths(AlignCenter, str),
 	}
 }
 
@@ -164,20 +164,24 @@ func CenteredPaths(strs ...string) path.Paths {
 	return ShiftedAlignedPaths(path.Point{Y: 1}, AlignCenter, strs...)
 }
 
+func ShiftedCenteredPaths(shift path.Point, strs ...string) path.Paths {
+	return ShiftedAlignedPaths(shift, AlignCenter, strs...)
+}
+
 func ShiftedAlignedPaths(shift path.Point, alignment float64, strs ...string) path.Paths {
 	var paths path.Paths
 
 	x0, y0 := -0.5*float64(len(strs)-1)*shift.X, -0.5*float64(len(strs)-1)*shift.Y
 	for i, str := range strs {
 		i := float64(i)
-		p := AlignedPaths(alignment, str).Apply(transform.Move(x0+i*shift.X, y0+i*shift.Y))
+		p := alignedPaths(alignment, str).Apply(transform.Move(x0+i*shift.X, y0+i*shift.Y))
 		paths = append(paths, p...)
 	}
 
 	return paths
 }
 
-func AlignedPaths(alignment float64, str string) path.Paths {
+func alignedPaths(alignment float64, str string) path.Paths {
 	var paths path.Paths
 
 	n := float64(len(str))

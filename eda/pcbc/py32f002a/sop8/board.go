@@ -38,19 +38,31 @@ var (
 			headerWithTracks,
 			headerWithTracks.Arrange(transform.Scale(1, -1)),
 			pcbc.MountHole.Arrange(transform.Rotate(90).Move(-2.2, 0)),
+
+			{
+				Transform: transform.Scale(0.9, 1.2).Move(0, 4),
+				Marks: font.ShiftedCenteredPaths(path.Point{X: 2.54 / 0.9},
+					"GND", "PA1", "PA2", "SWD"),
+			},
+
+			{
+				Transform: transform.Scale(0.9, 1.2).Move(0, -4),
+				Marks: font.ShiftedCenteredPaths(path.Point{X: 2.54 / 0.9},
+					"VCC", "PA4", "PA3", "SWC"),
+			},
+
+			{
+				Transform: transform.Scale(1.4, 2).Move(-2.8, 2.4),
+				Marks:     font.CenteredPaths("PY32"),
+			},
+
+			{
+				Transform: transform.Scale(1.2, 2).Move(-2.8, -2.4),
+				Marks:     font.CenteredPaths("F002A"),
+			},
+
+			pcbc.Logo.Arrange(transform.ScaleK(0.8).Move(-4.5, 0)),
 		},
-
-		MarkStrokes: path.Strokes{}.Append(
-			font.CenterBolds([]string{"GND", "PA1", "PA2", "SWD"}, path.Point{X: 2.54 / 0.9}).
-				Apply(transform.Scale(0.9, 1.2).Move(0, 4)),
-
-			font.CenterBold("PY32").Apply(transform.Scale(1.4, 2).Move(-2.8, 2.4)),
-			pcbc.LogoStrokes.Apply(transform.ScaleK(0.8).Move(-4.5, 0)),
-			font.CenterBold("F002A").Apply(transform.Scale(1.2, 2).Move(-2.8, -2.4)),
-
-			font.CenterBolds([]string{"VCC", "PA4", "PA3", "SWC"}, path.Point{X: 2.54 / 0.9}).
-				Apply(transform.Scale(0.9, 1.2).Move(0, -4)),
-		),
 
 		Tracks: eda.TrackPaths(
 			eda.Track{pad[0]}.Y(-4).X(pin[0].X).Y(-3.5).Y(pin[0].Y),

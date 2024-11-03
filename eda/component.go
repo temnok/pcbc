@@ -1,7 +1,6 @@
 package eda
 
 import (
-	"math"
 	"temnok/pcbc/path"
 	"temnok/pcbc/transform"
 )
@@ -80,11 +79,6 @@ func (c *Component) visit(t transform.Transform, parent *Component, callback fun
 	for _, sub := range c.Components {
 		sub.visit(t, comp, callback)
 	}
-}
-
-func (c *Component) markScale() float64 {
-	t := c.Transform
-	return min(math.Sqrt(t.Ix*t.Ix+t.Iy*t.Iy), math.Sqrt(t.Jx*t.Jx+t.Jy*t.Jy))
 }
 
 func (c *Component) PadCenters() path.Points {

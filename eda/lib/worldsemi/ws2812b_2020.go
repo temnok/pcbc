@@ -17,18 +17,13 @@ var (
 			3: pad2020.Apply(transform.Move(-pad2020_X, pad2020_Y)),
 			4: pad2020.Apply(transform.Move(-pad2020_X, -pad2020_Y)),
 		},
-		MarkStrokes: path.Strokes{
-			0.1: path.Paths{
-				path.Rect(2.20, 2),
-			},
-			0.6: path.Paths{
-				path.Path{{X: 0, Y: 0.4}},
-			},
-			0.2: path.Paths{
-				path.Path{{X: -0.3, Y: -0.4}},
-				path.Path{{X: 0, Y: -0.4}},
-				path.Path{{X: 0.3, Y: -0.4}},
-			},
+
+		Marks: path.Paths{
+			path.Rect(2.20, 2),
+			path.Rect(0.3, 0.3).Apply(transform.Move(0, 0.4)),
+			path.Rect(0.05, 0.05).Apply(transform.Move(-0.3, -0.4)),
+			path.Rect(0.05, 0.05).Apply(transform.Move(0, -0.4)),
+			path.Rect(0.05, 0.05).Apply(transform.Move(0.3, -0.4)),
 		},
 	}
 )

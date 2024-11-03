@@ -18,16 +18,20 @@ var Board = &eda.Component{
 	Components: eda.Components{
 		{
 			Transform: transform.Move(0, -5.5),
+
 			Components: eda.Components{
 				mph100imp40f.G_V_SP_x8,
 			},
-			MarkStrokes: font.CenterBolds(
-				[]string{"3V7", "3V7", "3V7", "3V7", "3V7", "3V7", "3V7", "3V7"},
-				path.Point{X: 2.54},
+
+			Marks: font.ShiftedCenteredPaths(path.Point{X: 2.54},
+				"3V7", "3V7", "3V7", "3V7", "3V7", "3V7", "3V7", "3V7",
 			).Apply(transform.Move(0, 1.8)),
 		},
+
 		holder.LIR1254.Arrange(transform.Move(0, 2.75)),
+
 		pcbc.MountHole.Arrange(transform.Rotate(-45).Move(-7.5, -1.75)),
+
 		pcbc.MountHole.Arrange(transform.Rotate(45).Move(7.5, -1.75)),
 
 		pcbc.Logo.Arrange(transform.Scale(1.2, 1.2).Move(-5, -2)),
