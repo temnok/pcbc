@@ -7,11 +7,12 @@ import (
 // Paths represent a sequence of paths.
 type Paths []Path
 
-func (paths Paths) Append(others ...Paths) Paths {
-	for _, other := range others {
-		paths = append(paths, other...)
+func Join(paths ...Paths) Paths {
+	var res Paths
+	for _, p := range paths {
+		res = append(res, p...)
 	}
-	return paths
+	return res
 }
 
 // Apply returns list of transformed paths.

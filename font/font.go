@@ -6,6 +6,8 @@ import (
 	"temnok/pcbc/transform"
 )
 
+type Align float64
+
 const (
 	Width = 0.65 // relative to height 1.0
 
@@ -13,9 +15,9 @@ const (
 	Normal = 0.12
 	Bold   = 0.15
 
-	AlignLeft   = 0.0
-	AlignCenter = 0.5
-	AlignRight  = 1.0
+	AlignLeft   Align = 0.0
+	AlignCenter Align = 0.5
+	AlignRight  Align = 1.0
 )
 
 /*
@@ -148,28 +150,36 @@ var data = [][][]byte{
 
 var Paths = [256]path.Paths{}
 
-func CenteredPaths(strs ...string) path.Paths {
-	return ShiftedAlignedPaths(path.Point{Y: -1}, AlignCenter, strs...)
+func Centered(str string) path.Paths {
+	return alignedText(AlignCenter, path.Point{}, str)
 }
 
-func ShiftedCenteredPaths(shift path.Point, strs ...string) path.Paths {
-	return ShiftedAlignedPaths(shift, AlignCenter, strs...)
+func CenteredRow(dx float64, strs ...string) path.Paths {
+	return alignedText(AlignCenter, path.Point{X: dx}, strs...)
 }
 
-func ShiftedAlignedPaths(shift path.Point, alignment float64, strs ...string) path.Paths {
+func CenteredColumn(dy float64, strs ...string) path.Paths {
+	return alignedText(AlignCenter, path.Point{Y: dy}, strs...)
+}
+
+func AlignedColumn(align Align, dy float64, strs ...string) path.Paths {
+	return alignedText(align, path.Point{Y: dy}, strs...)
+}
+
+func alignedText(align Align, shift path.Point, strs ...string) path.Paths {
 	var paths path.Paths
 
 	x0, y0 := -0.5*float64(len(strs)-1)*shift.X, -0.5*float64(len(strs)-1)*shift.Y
 	for i, str := range strs {
 		i := float64(i)
-		p := alignedPaths(alignment, str).Apply(transform.Move(x0+i*shift.X, y0+i*shift.Y))
+		p := alignedPaths(align, str).Apply(transform.Move(x0+i*shift.X, y0+i*shift.Y))
 		paths = append(paths, p...)
 	}
 
 	return paths
 }
 
-func alignedPaths(alignment float64, str string) path.Paths {
+func alignedPaths(align Align, str string) path.Paths {
 	var paths path.Paths
 
 	n := float64(len(str))
@@ -179,7 +189,7 @@ func alignedPaths(alignment float64, str string) path.Paths {
 			c = '?'
 		}
 
-		t := transform.Move(Width*(float64(i)-n*alignment), 0.4)
+		t := transform.Move(Width*(float64(i)-n*float64(align)), 0.4)
 		paths = append(paths, Paths[c].Apply(t)...)
 	}
 

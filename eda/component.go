@@ -140,8 +140,24 @@ func ComponentGrid(cols int, dx, dy float64, comps ...*Component) *Component {
 	return grid
 }
 
-func CenteredText(lines ...string) *Component {
+func CenteredText(line string) *Component {
+	return CenteredTextColumn(0, line)
+}
+
+func CenteredTextRow(dx float64, strs ...string) *Component {
 	return &Component{
-		Marks: font.CenteredPaths(lines...),
+		Marks: font.CenteredRow(dx, strs...),
+	}
+}
+
+func CenteredTextColumn(dy float64, lines ...string) *Component {
+	return &Component{
+		Marks: font.CenteredColumn(dy, lines...),
+	}
+}
+
+func AlignedTextColumn(align font.Align, dy float64, lines ...string) *Component {
+	return &Component{
+		Marks: font.AlignedColumn(align, dy, lines...),
 	}
 }

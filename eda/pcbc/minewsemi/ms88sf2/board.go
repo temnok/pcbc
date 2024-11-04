@@ -11,7 +11,7 @@ import (
 )
 
 var (
-	labelShift = path.Point{X: 2.54 / 0.8}
+	labelShift = 2.54 / 0.8
 	labelScale = transform.Scale(0.8, 1.8)
 
 	chip = minewsemi.MS88SF2.Arrange(transform.Move(0, 6.6))
@@ -27,14 +27,14 @@ var (
 			mph100imp40f.G_V_SP(8).Arrange(transform.Rotate(90).Move(12.7, -1)),
 		},
 
-		Marks: path.Paths{}.Append(
-			font.ShiftedCenteredPaths(labelShift,
+		Marks: path.Join(
+			font.CenteredRow(labelShift,
 				"P113", "P115", "P002", "P029", "P031", "P109", "P012", "GND",
 			).Apply(labelScale.Rotate(-90).Move(-10.6, -1)),
-			font.ShiftedCenteredPaths(labelShift,
+			font.CenteredRow(labelShift,
 				"VDD", "P008", "P006", "P004", "P026", "P024", "P022", "P020", "P018", "P015", "VDDH",
 			).Apply(labelScale.Move(0, -11.95)),
-			font.ShiftedCenteredPaths(labelShift,
+			font.CenteredRow(labelShift,
 				"D-", "D+", "P013", "P100", "SWD", "SWC", "P009", "P010",
 			).Apply(labelScale.Rotate(90).Move(10.6, -1)),
 		),
@@ -58,15 +58,11 @@ var (
 
 		Components: eda.Components{
 			chip,
-
 			headers,
-
 			mountHoles,
 
 			pcbc.Logo.Arrange(transform.Move(-4.8, -6.5)),
-
 			eda.CenteredText("MS88SF21").Arrange(transform.Scale(1.8, 1.8).Move(1.3, -5.9)),
-
 			eda.CenteredText("nRF52840").Arrange(transform.ScaleK(1.8).Move(1.3, -7.4)),
 		},
 

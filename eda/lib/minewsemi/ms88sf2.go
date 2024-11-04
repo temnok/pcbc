@@ -35,7 +35,7 @@ func init() {
 			path.Rect(componentW, componentH),
 		},
 
-		Pads: path.Paths.Append(
+		Pads: path.Join(
 			path.Paths{nil}, // skip pad #0
 			pad.Clone(padRows, 0, padStep).Apply(transform.Rotate(180).Move(-padHShift, -padVShift)),
 			pad.Clone(padRows, 0, padStep).Apply(transform.Move(padHShift, -padVShift)),

@@ -37,11 +37,14 @@ func CSCC118(n int, flip bool, labels []string) *eda.Component {
 	return &eda.Component{
 		Pads: pads,
 
-		Marks: path.Paths{}.Append(
+		Components: eda.Components{},
+
+		Marks: path.Join(
 			path.Paths{path.Rect(1.5, float64(n)+0.5)},
-			font.ShiftedAlignedPaths(path.Point{Y: -2 / 1.6}, align0, labels0...).
+
+			font.AlignedColumn(align0, -2/1.6, labels0...).
 				Apply(transform.Scale(0.7, 1.6).Move(-sign*0.9, shift)),
-			font.ShiftedAlignedPaths(path.Point{Y: -2 / 1.6}, align1, labels1...).
+			font.AlignedColumn(align1, -2/1.6, labels1...).
 				Apply(transform.Scale(0.7, 1.6).Move(sign*0.9, -shift)),
 		),
 	}
