@@ -27,19 +27,17 @@ var (
 			mph100imp40f.G_V_SP_x9.Arrange(transform.Rotate(90).Move(10.2, -1)),
 		},
 
-		MarkStrokes: path.Strokes{
-			font.Bold: path.Paths{}.Append(
-				font.ShiftedAlignedPaths(labelShift, font.AlignCenter,
-					"P111", "P110", "P003", "P028", "P002", "P029", "P031", "P030", "P113",
-				).Apply(labelScale.Rotate(-90).Move(-8.1, -1)),
-				font.ShiftedAlignedPaths(labelShift, font.AlignCenter,
-					"GND", "P000", "P001", "P005", "P109", "VDD", "VDDH", "DCCH", "P024",
-				).Apply(labelScale.Move(0, -13.2)),
-				font.ShiftedAlignedPaths(labelShift, font.AlignCenter,
-					"P013", "P018", "VBUS", "D-", "D+", "SWD", "SWC", "P009", "P010",
-				).Apply(labelScale.Rotate(90).Move(8.1, -1)),
-			),
-		},
+		Marks: path.Paths{}.Append(
+			font.ShiftedAlignedPaths(labelShift, font.AlignCenter,
+				"P111", "P110", "P003", "P028", "P002", "P029", "P031", "P030", "P113",
+			).Apply(labelScale.Rotate(-90).Move(-8.1, -1)),
+			font.ShiftedAlignedPaths(labelShift, font.AlignCenter,
+				"GND", "P000", "P001", "P005", "P109", "VDD", "VDDH", "DCCH", "P024",
+			).Apply(labelScale.Move(0, -13.2)),
+			font.ShiftedAlignedPaths(labelShift, font.AlignCenter,
+				"P013", "P018", "VBUS", "D-", "D+", "SWD", "SWC", "P009", "P010",
+			).Apply(labelScale.Rotate(90).Move(8.1, -1)),
+		),
 	}
 
 	pad = headers.PadCenters()
@@ -64,6 +62,23 @@ var (
 			chip,
 			headers,
 			mountHoles,
+
+			pcbc.Logo.Arrange(transform.Move(-6.3, -6)),
+
+			{
+				Transform: transform.Scale(1.2, 2).Move(-2.5, -6.8),
+				Marks:     font.CenteredPaths("E73"),
+			},
+
+			{
+				Transform: transform.Scale(0.8, 2).Move(1.2, -6.8),
+				Marks:     font.CenteredPaths("-2G4M08S1C"),
+			},
+
+			{
+				Transform: transform.Scale(1.4, 2).Move(0, -8.4),
+				Marks:     font.CenteredPaths("nRF52840"),
+			},
 		},
 
 		Tracks: eda.TrackPaths(
@@ -104,13 +119,6 @@ var (
 			eda.Track{pin[15]}.DY(1),
 			eda.Track{pin[15]}.DY(-1),
 			eda.Track{pad[9]}.DX(-0.8).DY(-0.8),
-		),
-
-		MarkStrokes: path.Strokes{}.Append(
-			pcbc.LogoStrokes.Apply(transform.Move(-6.3, -6)),
-			font.CenterBold("E73").Apply(transform.Scale(1.2, 2).Move(-2.5, -6.8)),
-			font.CenterBold("-2G4M08S1C").Apply(transform.Scale(0.8, 2).Move(1.2, -6.8)),
-			font.CenterBold("nRF52840").Apply(transform.Scale(1.4, 2).Move(0, -8.4)),
 		),
 	}
 )

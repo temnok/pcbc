@@ -17,14 +17,18 @@ var Board = &eda.Component{
 
 	Components: eda.Components{
 		xunpu.SwitchTS1088.Arrange(transform.Rotate(-90).Move(3, 0)),
-		mph100imp40f.G_V_SP_x2.Arrange(transform.Rotate(-90).Move(-3.25, 0)),
-		pcbc.MountHole.Arrange(transform.Move(-0.25, 0)),
-	},
 
-	MarkStrokes: path.Strokes{}.Append(
-		font.CenterBold("SW").Apply(transform.Scale(2, 1.5).Move(-0.25, 2.4)),
-		pcbc.LogoStrokes.Apply(transform.Move(-1, -2.1)),
-	),
+		mph100imp40f.G_V_SP_x2.Arrange(transform.Rotate(-90).Move(-3.25, 0)),
+
+		pcbc.MountHole.Arrange(transform.Move(-0.25, 0)),
+
+		pcbc.Logo.Arrange(transform.Move(-1, -2.1)),
+
+		{
+			Transform: transform.Scale(2, 1.5).Move(-0.25, 2.4),
+			Marks:     font.CenteredPaths("SW"),
+		},
+	},
 }
 
 func init() {

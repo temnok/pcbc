@@ -17,14 +17,18 @@ var Board = &eda.Component{
 
 	Components: eda.Components{
 		hyp.Switch1TS026A.Arrange(transform.Rotate(90).Move(3, 0)),
-		mph100imp40f.G_V_SP_x2.Arrange(transform.Rotate(-90).Move(-3, 0)),
-		pcbc.MountHole,
-	},
 
-	MarkStrokes: path.Strokes{}.Append(
-		font.CenterBold("SW").Apply(transform.ScaleK(1.5).Move(0, 2)),
-		pcbc.LogoStrokes.Apply(transform.ScaleK(0.7).Move(0, -1.9)),
-	),
+		mph100imp40f.G_V_SP_x2.Arrange(transform.Rotate(-90).Move(-3, 0)),
+
+		pcbc.MountHole,
+
+		pcbc.Logo.Arrange(transform.ScaleK(0.7).Move(0, -1.9)),
+
+		{
+			Transform: transform.ScaleK(1.5).Move(0, 2),
+			Marks:     font.CenteredPaths("SW"),
+		},
+	},
 }
 
 func init() {

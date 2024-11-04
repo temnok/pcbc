@@ -157,12 +157,6 @@ func (pcb *PCB) addMarks(c *Component) {
 	brushW := font.Bold * font.WeightScale(t)
 	brush := shape.Circle(int(brushW))
 	brush.IterateContours(c.Marks.Apply(t), pcb.silk.Set1)
-
-	// MarkStrokes: obsolete
-	for brushW, marks := range c.MarkStrokes {
-		brush := shape.Circle(int(brushW * resolution))
-		brush.IterateContours(marks.Apply(t), pcb.silk.Set1)
-	}
 }
 
 func (pcb *PCB) cutOpenings(c *Component) {

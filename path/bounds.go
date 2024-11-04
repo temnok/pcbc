@@ -30,17 +30,6 @@ func (b *Bounds) AddPaths(t transform.Transform, paths Paths) {
 	}
 }
 
-func (b *Bounds) AddStrokes(t transform.Transform, strokes Strokes) {
-	for d, p := range strokes {
-		b1 := &Bounds{}
-		b1.AddPaths(t, p)
-		if b1.initialized {
-			b.addPoint(Point{X: b1.lb.X - d/2, Y: b1.lb.Y - d/2})
-			b.addPoint(Point{X: b1.rt.X + d/2, Y: b1.rt.Y + d/2})
-		}
-	}
-}
-
 func (b *Bounds) Center() Point {
 	return Point{(b.lb.X + b.rt.X) / 2, (b.lb.Y + b.rt.Y) / 2}
 }

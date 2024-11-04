@@ -14,18 +14,36 @@ var Board = &eda.Component{
 	Cuts: path.Paths{
 		path.RoundRect(10, 5.5, 1),
 	},
+
 	Components: eda.Components{
 		worldsemi.WS2812B_2020.Arrange(transform.Move(-3, 0)),
+
 		mph100imp40f.G_V_SP_x2.Arrange(transform.Rotate(-90).Move(3.5, 0)),
+
 		pcbc.MountHole.Arrange(transform.Rotate(45).Move(0.55, 0)),
+
+		pcbc.Logo.Arrange(transform.ScaleK(0.7).Move(-0.6, -2)),
+
+		{
+			Transform: transform.Scale(1, 1.8).Move(-2.1, 1.8),
+			Marks:     font.CenteredPaths("WS2812B"),
+		},
+
+		{
+			Transform: transform.Scale(1.5, 1.8).Move(-3, -1.8),
+			Marks:     font.CenteredPaths("LED"),
+		},
+
+		{
+			Transform: transform.Scale(0.8, 1.4).Move(1.6, 2),
+			Marks:     font.CenteredPaths("DI"),
+		},
+
+		{
+			Transform: transform.Scale(0.8, 1.4).Move(1.3, -2),
+			Marks:     font.CenteredPaths("VDD"),
+		},
 	},
-	MarkStrokes: path.Strokes{}.Append(
-		font.CenterBold("WS2812B").Apply(transform.Scale(1, 1.8).Move(-2.1, 1.8)),
-		font.CenterBold("LED").Apply(transform.Scale(1.5, 1.8).Move(-3, -1.8)),
-		font.CenterBold("DI").Apply(transform.Scale(0.8, 1.4).Move(1.6, 2)),
-		font.CenterBold("VDD").Apply(transform.Scale(0.8, 1.4).Move(1.3, -2)),
-		pcbc.LogoStrokes.Apply(transform.ScaleK(0.7).Move(-0.6, -2)),
-	),
 }
 
 func init() {

@@ -21,15 +21,19 @@ var Board = &eda.Component{
 		path.RoundRect(16, 8, 1),
 	},
 
-	MarkStrokes: path.Strokes{}.Append(
-		font.CenterBold("YTC-TC8-565").Apply(transform.Scale(0.7, 0.9).Move(-5, 3.4)),
-		pcbc.LogoStrokes.Apply(transform.ScaleK(0.8).Move(-7.2, 1.5)),
-	),
-
 	Components: eda.Components{
 		pcbc.MountHole.Arrange(mountPos),
+
 		yiyuan.YTC_TC8_565.Arrange(connectorPos),
+
 		mph100imp40f.G_V_SP_x6.Arrange(headerPos),
+
+		pcbc.Logo.Arrange(transform.ScaleK(0.8).Move(-7.2, 1.5)),
+
+		{
+			Transform: transform.Scale(0.7, 0.9).Move(-5, 3.4),
+			Marks:     font.CenteredPaths("YTC-TC8-565"),
+		},
 	},
 }
 
@@ -63,8 +67,11 @@ func init() {
 	const tenth = 2.54
 
 	for i, padName := range padNames {
-		Board.MarkStrokes = Board.MarkStrokes.Append(
-			font.CenterBold(padName).Apply(transform.Scale(0.9, 1.2).Move(tenth*(float64(i)-2.5), -0.6)),
+		Board.Components = append(Board.Components,
+			&eda.Component{
+				Transform: transform.Scale(0.9, 1.2).Move(tenth*(float64(i)-2.5), -0.6),
+				Marks:     font.CenteredPaths(padName),
+			},
 		)
 	}
 }

@@ -96,6 +96,23 @@ func board(short bool) *eda.Component {
 			header,
 			pcbc.MountHole.Arrange(transform.Rotate(45).Move(-5, -10.5)),
 			pcbc.MountHole.Arrange(transform.Rotate(-45).Move(5, -10.5)),
+
+			pcbc.Logo.Arrange(transform.ScaleK(1.2).Move(0, -8.3)),
+
+			{
+				Transform: transform.Scale(0.75, 1).Move(-5, -8.1),
+				Marks:     font.CenteredPaths(revision),
+			},
+
+			{
+				Transform: transform.ScaleK(2).Move(0, -10.4),
+				Marks:     font.CenteredPaths("BC833"),
+			},
+
+			{
+				Transform: transform.ScaleK(1.5).Move(0, -12.2),
+				Marks:     font.CenteredPaths("nRF52833"),
+			},
 		},
 
 		Tracks: tracks,
@@ -105,21 +122,13 @@ func board(short bool) *eda.Component {
 			eda.Track{pin[5]}.DX(3).YX(pin[27]).XY(pin[25]).XY(pin[26]).YX(pin[28]).XY(pin[27]),
 		),
 
-		MarkStrokes: path.Strokes{
-			font.Bold: path.Paths{}.Append(
-				font.ShiftedAlignedPaths(labelShift, font.AlignCenter, leftLabels...).
-					Apply(labelScale.Rotate(-90).Move(-7, -2.9)),
-				font.ShiftedAlignedPaths(labelShift, font.AlignCenter, centerLabels...).
-					Apply(labelScale.Move(0, -13.65)),
-				font.ShiftedAlignedPaths(labelShift, font.AlignCenter, rightLabels...).
-					Apply(labelScale.Rotate(90).Move(7, -2.9)),
-			),
-		}.Append(
-			font.CenterBold(revision).Apply(transform.Scale(0.75, 1).Move(-5, -8.1)),
-
-			pcbc.LogoStrokes.Apply(transform.ScaleK(1.2).Move(0, -8.3)),
-			font.CenterBold("BC833").Apply(transform.ScaleK(2).Move(0, -10.4)),
-			font.CenterBold("nRF52833").Apply(transform.ScaleK(1.5).Move(0, -12.2)),
+		Marks: path.Paths{}.Append(
+			font.ShiftedAlignedPaths(labelShift, font.AlignCenter, leftLabels...).
+				Apply(labelScale.Rotate(-90).Move(-7, -2.9)),
+			font.ShiftedAlignedPaths(labelShift, font.AlignCenter, centerLabels...).
+				Apply(labelScale.Move(0, -13.65)),
+			font.ShiftedAlignedPaths(labelShift, font.AlignCenter, rightLabels...).
+				Apply(labelScale.Rotate(90).Move(7, -2.9)),
 		),
 	}
 

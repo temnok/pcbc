@@ -37,8 +37,6 @@ type Component struct {
 	GroundTracks path.Paths
 
 	// Mask: solid mark strokes
-	MarkStrokes path.Strokes
-
 	Marks path.Paths
 
 	TrackThickness float64
@@ -64,7 +62,6 @@ func (c *Component) visit(t transform.Transform, parent *Component, callback fun
 		Holes:          c.Holes,
 		Pads:           c.Pads,
 		Openings:       c.Openings,
-		MarkStrokes:    c.MarkStrokes,
 		Marks:          c.Marks,
 		Tracks:         c.Tracks,
 		GroundTracks:   c.GroundTracks,
@@ -119,7 +116,6 @@ func (c *Component) Size() (float64, float64) {
 		b.AddPaths(c.Transform, c.Holes)
 		b.AddPaths(c.Transform, c.Pads)
 		b.AddPaths(c.Transform, c.Openings)
-		b.AddStrokes(c.Transform, c.MarkStrokes)
 		b.AddPaths(c.Transform, c.Marks)
 		b.AddPaths(c.Transform, c.Tracks)
 		b.AddPaths(c.Transform, c.GroundTracks)

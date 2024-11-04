@@ -148,18 +148,6 @@ var data = [][][]byte{
 
 var Paths = [256]path.Paths{}
 
-func CenterBold(str string) path.Strokes {
-	return path.Strokes{
-		Bold: alignedPaths(AlignCenter, str),
-	}
-}
-
-func CenterBolds(strs []string, shift path.Point) path.Strokes {
-	return path.Strokes{
-		Bold: ShiftedAlignedPaths(shift, AlignCenter, strs...),
-	}
-}
-
 func CenteredPaths(strs ...string) path.Paths {
 	return ShiftedAlignedPaths(path.Point{Y: 1}, AlignCenter, strs...)
 }

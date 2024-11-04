@@ -27,15 +27,21 @@ var (
 
 		Components: eda.Components{
 			mount,
-			chip,
-			header,
-		},
 
-		MarkStrokes: path.Strokes{}.Append(
-			font.CenterBold("PY32").Apply(transform.Scale(1.3, 2.8).Move(-5, 2.5)),
-			//pcbc.Logo.Apply(transform.Move(-4.2, 0)),
-			font.CenterBold("F002A").Apply(transform.Scale(1.1, 2.8).Move(-5, -2.5)),
-		),
+			chip,
+
+			header,
+
+			{
+				Transform: transform.Scale(1.3, 2.8).Move(-5, 2.5),
+				Marks:     font.CenteredPaths("PY32"),
+			},
+
+			{
+				Transform: transform.Scale(1.1, 2.8).Move(-5, -2.5),
+				Marks:     font.CenteredPaths("F002A"),
+			},
+		},
 
 		Tracks: eda.TrackPaths(
 			eda.Track{pin[0]}.DY(0.8).YX(pad[3]),
