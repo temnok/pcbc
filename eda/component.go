@@ -1,6 +1,7 @@
 package eda
 
 import (
+	"temnok/pcbc/font"
 	"temnok/pcbc/path"
 	"temnok/pcbc/transform"
 )
@@ -137,4 +138,10 @@ func ComponentGrid(cols int, dx, dy float64, comps ...*Component) *Component {
 	}
 
 	return grid
+}
+
+func CenteredText(lines ...string) *Component {
+	return &Component{
+		Marks: font.CenteredPaths(lines...),
+	}
 }

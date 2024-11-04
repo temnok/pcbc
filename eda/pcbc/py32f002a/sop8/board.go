@@ -51,15 +51,9 @@ var (
 					"VCC", "PA4", "PA3", "SWC"),
 			},
 
-			{
-				Transform: transform.Scale(1.4, 2).Move(-2.8, 2.4),
-				Marks:     font.CenteredPaths("PY32"),
-			},
+			eda.CenteredText("PY32").Arrange(transform.Scale(1.4, 2).Move(-2.8, 2.4)),
 
-			{
-				Transform: transform.Scale(1.2, 2).Move(-2.8, -2.4),
-				Marks:     font.CenteredPaths("F002A"),
-			},
+			eda.CenteredText("F002A").Arrange(transform.Scale(1.2, 2).Move(-2.8, -2.4)),
 
 			pcbc.Logo.Arrange(transform.ScaleK(0.8).Move(-4.5, 0)),
 		},

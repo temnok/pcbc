@@ -5,7 +5,6 @@ import (
 	"temnok/pcbc/eda/lib/header/greenconn"
 	"temnok/pcbc/eda/lib/pkg/qfn"
 	"temnok/pcbc/eda/pcbc"
-	"temnok/pcbc/font"
 	"temnok/pcbc/path"
 	"temnok/pcbc/transform"
 )
@@ -40,16 +39,8 @@ var (
 
 			pcbc.Logo.Arrange(transform.Move(-1.6, -1)),
 			pcbc.Firm.Arrange(transform.ScaleK(0.5).Move(1.6, -1)),
-
-			{
-				Transform: transform.Scale(1.6, 1.5).Move(0, 4.1),
-				Marks:     font.CenteredPaths("PY32"),
-			},
-
-			{
-				Transform: transform.Scale(1.2, 0.9).Move(0, -4.4),
-				Marks:     font.CenteredPaths("F002A"),
-			},
+			eda.CenteredText("PY32").Arrange(transform.Scale(1.6, 1.5).Move(0, 4.1)),
+			eda.CenteredText("F002A").Arrange(transform.Scale(1.2, 0.9).Move(0, -4.4)),
 		},
 
 		Tracks: eda.TrackPaths(

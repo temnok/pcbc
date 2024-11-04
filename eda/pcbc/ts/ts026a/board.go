@@ -5,7 +5,6 @@ import (
 	"temnok/pcbc/eda/lib/header/mph100imp40f"
 	"temnok/pcbc/eda/lib/ts/hyp"
 	"temnok/pcbc/eda/pcbc"
-	"temnok/pcbc/font"
 	"temnok/pcbc/path"
 	"temnok/pcbc/transform"
 )
@@ -17,17 +16,11 @@ var Board = &eda.Component{
 
 	Components: eda.Components{
 		hyp.Switch1TS026A.Arrange(transform.Rotate(90).Move(3, 0)),
-
 		mph100imp40f.G_V_SP_x2.Arrange(transform.Rotate(-90).Move(-3, 0)),
-
 		pcbc.MountHole,
 
 		pcbc.Logo.Arrange(transform.ScaleK(0.7).Move(0, -1.9)),
-
-		{
-			Transform: transform.ScaleK(1.5).Move(0, 2),
-			Marks:     font.CenteredPaths("SW"),
-		},
+		eda.CenteredText("SW").Arrange(transform.ScaleK(1.5).Move(0, 2)),
 	},
 }
 

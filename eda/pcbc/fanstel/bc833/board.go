@@ -93,26 +93,20 @@ func board(short bool) *eda.Component {
 	shiftedBoard := &eda.Component{
 		Components: eda.Components{
 			fanstel.BC833,
+
 			header,
+
 			pcbc.MountHole.Arrange(transform.Rotate(45).Move(-5, -10.5)),
+
 			pcbc.MountHole.Arrange(transform.Rotate(-45).Move(5, -10.5)),
 
 			pcbc.Logo.Arrange(transform.ScaleK(1.2).Move(0, -8.3)),
 
-			{
-				Transform: transform.Scale(0.75, 1).Move(-5, -8.1),
-				Marks:     font.CenteredPaths(revision),
-			},
+			eda.CenteredText(revision).Arrange(transform.Scale(0.75, 1).Move(-5, -8.1)),
 
-			{
-				Transform: transform.ScaleK(2).Move(0, -10.4),
-				Marks:     font.CenteredPaths("BC833"),
-			},
+			eda.CenteredText("BC833").Arrange(transform.ScaleK(2).Move(0, -10.4)),
 
-			{
-				Transform: transform.ScaleK(1.5).Move(0, -12.2),
-				Marks:     font.CenteredPaths("nRF52833"),
-			},
+			eda.CenteredText("nRF52833").Arrange(transform.ScaleK(1.5).Move(0, -12.2)),
 		},
 
 		Tracks: tracks,
@@ -123,11 +117,11 @@ func board(short bool) *eda.Component {
 		),
 
 		Marks: path.Paths{}.Append(
-			font.ShiftedAlignedPaths(labelShift, font.AlignCenter, leftLabels...).
+			font.ShiftedCenteredPaths(labelShift, leftLabels...).
 				Apply(labelScale.Rotate(-90).Move(-7, -2.9)),
-			font.ShiftedAlignedPaths(labelShift, font.AlignCenter, centerLabels...).
+			font.ShiftedCenteredPaths(labelShift, centerLabels...).
 				Apply(labelScale.Move(0, -13.65)),
-			font.ShiftedAlignedPaths(labelShift, font.AlignCenter, rightLabels...).
+			font.ShiftedCenteredPaths(labelShift, rightLabels...).
 				Apply(labelScale.Rotate(90).Move(7, -2.9)),
 		),
 	}

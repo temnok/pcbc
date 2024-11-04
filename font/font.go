@@ -149,7 +149,7 @@ var data = [][][]byte{
 var Paths = [256]path.Paths{}
 
 func CenteredPaths(strs ...string) path.Paths {
-	return ShiftedAlignedPaths(path.Point{Y: 1}, AlignCenter, strs...)
+	return ShiftedAlignedPaths(path.Point{Y: -1}, AlignCenter, strs...)
 }
 
 func ShiftedCenteredPaths(shift path.Point, strs ...string) path.Paths {

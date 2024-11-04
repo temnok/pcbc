@@ -5,7 +5,6 @@ import (
 	"temnok/pcbc/eda/lib/header/greenconn"
 	"temnok/pcbc/eda/lib/pkg/sop"
 	"temnok/pcbc/eda/pcbc"
-	"temnok/pcbc/font"
 	"temnok/pcbc/path"
 	"temnok/pcbc/transform"
 )
@@ -27,20 +26,11 @@ var (
 
 		Components: eda.Components{
 			mount,
-
 			chip,
-
 			header,
 
-			{
-				Transform: transform.Scale(1.3, 2.8).Move(-5, 2.5),
-				Marks:     font.CenteredPaths("PY32"),
-			},
-
-			{
-				Transform: transform.Scale(1.1, 2.8).Move(-5, -2.5),
-				Marks:     font.CenteredPaths("F002A"),
-			},
+			eda.CenteredText("PY32").Arrange(transform.Scale(1.3, 2.8).Move(-5, 2.5)),
+			eda.CenteredText("F002A").Arrange(transform.Scale(1.1, 2.8).Move(-5, -2.5)),
 		},
 
 		Tracks: eda.TrackPaths(

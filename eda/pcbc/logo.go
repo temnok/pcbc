@@ -14,10 +14,8 @@ var (
 		).Apply(transform.Rotate(45)),
 	}
 
-	Firm = &eda.Component{
-		Marks: append(
-			font.CenteredPaths("TMNK").Apply(transform.Move(0, 0.5)),
-			font.CenteredPaths("TECH").Apply(transform.Move(0, -0.5))...,
-		),
-	}
+	Firm = eda.CenteredText(
+		"TMNK",
+		"TECH",
+	)
 )

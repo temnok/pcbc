@@ -28,13 +28,13 @@ var (
 		},
 
 		Marks: path.Paths{}.Append(
-			font.ShiftedAlignedPaths(labelShift, font.AlignCenter,
+			font.ShiftedCenteredPaths(labelShift,
 				"P111", "P110", "P003", "P028", "P002", "P029", "P031", "P030", "P113",
 			).Apply(labelScale.Rotate(-90).Move(-8.1, -1)),
-			font.ShiftedAlignedPaths(labelShift, font.AlignCenter,
+			font.ShiftedCenteredPaths(labelShift,
 				"GND", "P000", "P001", "P005", "P109", "VDD", "VDDH", "DCCH", "P024",
 			).Apply(labelScale.Move(0, -13.2)),
-			font.ShiftedAlignedPaths(labelShift, font.AlignCenter,
+			font.ShiftedCenteredPaths(labelShift,
 				"P013", "P018", "VBUS", "D-", "D+", "SWD", "SWC", "P009", "P010",
 			).Apply(labelScale.Rotate(90).Move(8.1, -1)),
 		),
@@ -65,20 +65,11 @@ var (
 
 			pcbc.Logo.Arrange(transform.Move(-6.3, -6)),
 
-			{
-				Transform: transform.Scale(1.2, 2).Move(-2.5, -6.8),
-				Marks:     font.CenteredPaths("E73"),
-			},
+			eda.CenteredText("E73").Arrange(transform.Scale(1.2, 2).Move(-2.5, -6.8)),
 
-			{
-				Transform: transform.Scale(0.8, 2).Move(1.2, -6.8),
-				Marks:     font.CenteredPaths("-2G4M08S1C"),
-			},
+			eda.CenteredText("-2G4M08S1C").Arrange(transform.Scale(0.8, 2).Move(1.2, -6.8)),
 
-			{
-				Transform: transform.Scale(1.4, 2).Move(0, -8.4),
-				Marks:     font.CenteredPaths("nRF52840"),
-			},
+			eda.CenteredText("nRF52840").Arrange(transform.Scale(1.4, 2).Move(0, -8.4)),
 		},
 
 		Tracks: eda.TrackPaths(

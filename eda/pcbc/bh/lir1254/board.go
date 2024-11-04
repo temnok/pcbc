@@ -36,15 +36,9 @@ var Board = &eda.Component{
 
 		pcbc.Logo.Arrange(transform.Scale(1.2, 1.2).Move(-5, -2)),
 
-		{
-			Transform: transform.Scale(1, 2).Move(-7.8, 6),
-			Marks:     font.CenteredPaths("LIR1254"),
-		},
+		eda.CenteredText("LIR1254").Arrange(transform.Scale(1, 2).Move(-7.8, 6)),
 
-		{
-			Transform: transform.Scale(0.9, 2).Move(7.8, 6),
-			Marks:     font.CenteredPaths("COIN BAT"),
-		},
+		eda.CenteredText("COIN BAT").Arrange(transform.Scale(0.9, 2).Move(7.8, 6)),
 	},
 }
 

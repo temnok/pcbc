@@ -5,7 +5,6 @@ import (
 	"temnok/pcbc/eda/lib/header/mph100imp40f"
 	"temnok/pcbc/eda/lib/worldsemi"
 	"temnok/pcbc/eda/pcbc"
-	"temnok/pcbc/font"
 	"temnok/pcbc/path"
 	"temnok/pcbc/transform"
 )
@@ -24,25 +23,13 @@ var Board = &eda.Component{
 
 		pcbc.Logo.Arrange(transform.ScaleK(0.7).Move(-0.6, -2)),
 
-		{
-			Transform: transform.Scale(1, 1.8).Move(-2.1, 1.8),
-			Marks:     font.CenteredPaths("WS2812B"),
-		},
+		eda.CenteredText("WS2812B").Arrange(transform.Scale(1, 1.8).Move(-2.1, 1.8)),
 
-		{
-			Transform: transform.Scale(1.5, 1.8).Move(-3, -1.8),
-			Marks:     font.CenteredPaths("LED"),
-		},
+		eda.CenteredText("LED").Arrange(transform.Scale(1.5, 1.8).Move(-3, -1.8)),
 
-		{
-			Transform: transform.Scale(0.8, 1.4).Move(1.6, 2),
-			Marks:     font.CenteredPaths("DI"),
-		},
+		eda.CenteredText("DI").Arrange(transform.Scale(0.8, 1.4).Move(1.6, 2)),
 
-		{
-			Transform: transform.Scale(0.8, 1.4).Move(1.3, -2),
-			Marks:     font.CenteredPaths("VDD"),
-		},
+		eda.CenteredText("VDD").Arrange(transform.Scale(0.8, 1.4).Move(1.3, -2)),
 	},
 }
 

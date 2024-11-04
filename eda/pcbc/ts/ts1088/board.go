@@ -5,7 +5,6 @@ import (
 	"temnok/pcbc/eda/lib/header/mph100imp40f"
 	"temnok/pcbc/eda/lib/ts/xunpu"
 	"temnok/pcbc/eda/pcbc"
-	"temnok/pcbc/font"
 	"temnok/pcbc/path"
 	"temnok/pcbc/transform"
 )
@@ -17,17 +16,11 @@ var Board = &eda.Component{
 
 	Components: eda.Components{
 		xunpu.SwitchTS1088.Arrange(transform.Rotate(-90).Move(3, 0)),
-
 		mph100imp40f.G_V_SP_x2.Arrange(transform.Rotate(-90).Move(-3.25, 0)),
-
 		pcbc.MountHole.Arrange(transform.Move(-0.25, 0)),
 
 		pcbc.Logo.Arrange(transform.Move(-1, -2.1)),
-
-		{
-			Transform: transform.Scale(2, 1.5).Move(-0.25, 2.4),
-			Marks:     font.CenteredPaths("SW"),
-		},
+		eda.CenteredText("SW").Arrange(transform.Scale(2, 1.5).Move(-0.25, 2.4)),
 	},
 }
 
