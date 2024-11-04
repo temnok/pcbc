@@ -2,64 +2,45 @@ package sop8
 
 import (
 	"temnok/pcbc/eda"
-	"temnok/pcbc/eda/lib/header/mph100imp40f"
+	"temnok/pcbc/eda/lib/header/greenconn"
 	"temnok/pcbc/eda/lib/pkg/sop"
 	"temnok/pcbc/eda/pcbc"
-	"temnok/pcbc/font"
 	"temnok/pcbc/path"
 	"temnok/pcbc/transform"
 )
 
 var (
-	chip = sop.SOP8.Arrange(transform.Move(2.3, 0))
+	mount = pcbc.MountHole.Arrange(transform.Rotate(90).Move(-5, 0))
 
-	pin = chip.PadCenters()
+	chip = sop.SOP8.Arrange(transform.Move(-0.6, 0))
+	pin  = chip.PadCenters()
 
-	header = mph100imp40f.G_V_SP(4).Arrange(transform.Move(0, -6))
-
+	header = greenconn.CSCC118(7, true, []string{"SWD", "PA2", "PA1", "VCC", "PA4", "PA3", "SWC"}).
+		Arrange(transform.Move(4.4, 0))
 	pad = header.PadCenters()
-
-	headerWithTracks = &eda.Component{
-		Components: eda.Components{header},
-		Tracks: eda.TrackPaths(
-			eda.Track{pad[1]}.Y(-4.5).X(pin[1].X).Y(-4).Y(pin[1].Y),
-			eda.Track{pad[2]}.X(pin[2].X).Y(pin[2].Y),
-			eda.Track{pad[3]}.Y(-4).X(pin[3].X).Y(pin[3].Y),
-		),
-	}
 
 	Board = &eda.Component{
 		Cuts: path.Paths{
-			path.RoundRect(10.75, 15, 1),
+			path.RoundRect(14, 8, 1),
 		},
 
 		Components: eda.Components{
+			mount,
 			chip,
-			headerWithTracks,
-			headerWithTracks.Arrange(transform.Scale(1, -1)),
-			pcbc.MountHole.Arrange(transform.Rotate(90).Move(-2.2, 0)),
+			header,
 
-			{
-				Transform: transform.Scale(0.9, 1.2).Move(0, 4),
-				Marks: font.ShiftedCenteredPaths(path.Point{X: 2.54 / 0.9},
-					"GND", "PA1", "PA2", "SWD"),
-			},
-
-			{
-				Transform: transform.Scale(0.9, 1.2).Move(0, -4),
-				Marks: font.ShiftedCenteredPaths(path.Point{X: 2.54 / 0.9},
-					"VCC", "PA4", "PA3", "SWC"),
-			},
-
-			eda.CenteredText("PY32").Arrange(transform.Scale(1.4, 2).Move(-2.8, 2.4)),
-
-			eda.CenteredText("F002A").Arrange(transform.Scale(1.2, 2).Move(-2.8, -2.4)),
-
-			pcbc.Logo.Arrange(transform.ScaleK(0.8).Move(-4.5, 0)),
+			eda.CenteredText("PY32").Arrange(transform.Scale(1.3, 2.8).Move(-5, 2.5)),
+			eda.CenteredText("F002A").Arrange(transform.Scale(1.1, 2.8).Move(-5, -2.5)),
 		},
 
 		Tracks: eda.TrackPaths(
-			eda.Track{pad[0]}.Y(-4).X(pin[0].X).Y(-3.5).Y(pin[0].Y),
+			eda.Track{pin[0]}.DY(0.8).YX(pad[3]),
+			eda.Track{pin[1]}.DY(0.8).YX(pad[4]),
+			eda.Track{pin[2]}.DY(0.8).DY(0.3).DX(2.2).YX(pad[5]),
+			eda.Track{pin[3]}.YX(pad[6]),
+			eda.Track{pin[4]}.YX(pad[0]),
+			eda.Track{pin[5]}.DY(-0.8).DY(-0.3).DX(2.2).YX(pad[1]),
+			eda.Track{pin[6]}.DY(-0.8).YX(pad[2]),
 		),
 
 		GroundTracks: eda.TrackPaths(

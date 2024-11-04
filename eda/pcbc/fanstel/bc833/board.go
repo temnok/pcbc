@@ -20,9 +20,9 @@ func board(short bool) *eda.Component {
 
 	header := &eda.Component{
 		Components: eda.Components{
-			mph100imp40f.G_V_SP_x8.Arrange(transform.Rotate(-90).Move(-8.9, -2.9)),
-			mph100imp40f.G_V_SP_x8.Arrange(transform.Move(0, -15.5)),
-			mph100imp40f.G_V_SP_x8.Arrange(transform.Rotate(90).Move(8.9, -2.9)),
+			mph100imp40f.G_V_SP(8).Arrange(transform.Rotate(-90).Move(-8.9, -2.9)),
+			mph100imp40f.G_V_SP(8).Arrange(transform.Move(0, -15.5)),
+			mph100imp40f.G_V_SP(8).Arrange(transform.Rotate(90).Move(8.9, -2.9)),
 		},
 	}
 
@@ -31,9 +31,9 @@ func board(short bool) *eda.Component {
 	if short {
 		header = &eda.Component{
 			Components: eda.Components{
-				mph100imp40f.G_V_SP_x6.Arrange(transform.Rotate(-90).Move(-8.9, -2.9-2.54)),
-				mph100imp40f.G_V_SP_x8.Arrange(transform.Move(0, -15.5)),
-				mph100imp40f.G_V_SP_x6.Arrange(transform.Rotate(90).Move(8.9, -2.9-2.54)),
+				mph100imp40f.G_V_SP(6).Arrange(transform.Rotate(-90).Move(-8.9, -2.9-2.54)),
+				mph100imp40f.G_V_SP(8).Arrange(transform.Move(0, -15.5)),
+				mph100imp40f.G_V_SP(6).Arrange(transform.Rotate(90).Move(8.9, -2.9-2.54)),
 			},
 		}
 	}

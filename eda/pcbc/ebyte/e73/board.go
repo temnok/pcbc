@@ -22,9 +22,9 @@ var (
 		Transform: transform.Move(0, 3.05),
 
 		Components: eda.Components{
-			mph100imp40f.G_V_SP_x9.Arrange(transform.Rotate(-90).Move(-10.2, -1)),
-			mph100imp40f.G_V_SP_x9.Arrange(transform.Move(0, -15.3)),
-			mph100imp40f.G_V_SP_x9.Arrange(transform.Rotate(90).Move(10.2, -1)),
+			mph100imp40f.G_V_SP(9).Arrange(transform.Rotate(-90).Move(-10.2, -1)),
+			mph100imp40f.G_V_SP(9).Arrange(transform.Move(0, -15.3)),
+			mph100imp40f.G_V_SP(9).Arrange(transform.Rotate(90).Move(10.2, -1)),
 		},
 
 		Marks: path.Paths{}.Append(

@@ -20,7 +20,7 @@ var Board = &eda.Component{
 			Transform: transform.Move(0, -5.5),
 
 			Components: eda.Components{
-				mph100imp40f.G_V_SP_x8,
+				mph100imp40f.G_V_SP(8),
 			},
 
 			Marks: font.ShiftedCenteredPaths(path.Point{X: 2.54},

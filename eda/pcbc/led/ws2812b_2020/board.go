@@ -17,7 +17,7 @@ var Board = &eda.Component{
 	Components: eda.Components{
 		worldsemi.WS2812B_2020.Arrange(transform.Move(-3, 0)),
 
-		mph100imp40f.G_V_SP_x2.Arrange(transform.Rotate(-90).Move(3.5, 0)),
+		mph100imp40f.G_V_SP(2).Arrange(transform.Rotate(-90).Move(3.5, 0)),
 
 		pcbc.MountHole.Arrange(transform.Rotate(45).Move(0.55, 0)),
 
