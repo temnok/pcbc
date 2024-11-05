@@ -6,26 +6,29 @@ import (
 	"temnok/pcbc/transform"
 )
 
-var (
-	boardHoleContour = path.Paths{path.Circle(2.1)}
+var Board35x45 *eda.Component
 
-	boardHolderHole = &eda.Component{
-		Pads:  boardHoleContour,
-		Holes: boardHoleContour,
+func init() {
+	holeContour := path.Paths{path.Circle(2.1)}
+
+	hole := &eda.Component{
+		Pads:  holeContour,
+		Holes: holeContour,
 	}
 
-	boardKey = path.Circle(0.6).Apply(transform.Move(-16.25, 21.25))
+	key := path.Circle(0.6).Apply(transform.Move(-16.25, 21.25))
 
 	Board35x45 = &eda.Component{
-		Cuts: path.Paths{path.RoundRect(35, 45, 2.5)},
+		Cuts: path.Paths{
+			path.RoundRect(35, 45, 2.5),
+		},
 
-		Pads: path.Paths{boardKey},
+		Pads: path.Paths{
+			key,
+		},
 
 		Components: eda.Components{
-			boardHolderHole.Arrange(transform.Move(-15, 20)),
-			boardHolderHole.Arrange(transform.Move(15, 20)),
-			boardHolderHole.Arrange(transform.Move(-15, -20)),
-			boardHolderHole.Arrange(transform.Move(15, -20)),
+			hole.Clone(2, 30, 0).Clone(2, 0, 40),
 		},
 	}
-)
+}
