@@ -11,9 +11,9 @@ type Align float64
 const (
 	Width = 0.65 // relative to height 1.0
 
-	Thin   = 0.09
-	Normal = 0.12
-	Bold   = 0.15
+	Normal    = 0.1
+	Bold      = 0.125
+	ExtraBold = 0.15
 
 	AlignLeft   Align = 0.0
 	AlignCenter Align = 0.5
