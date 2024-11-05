@@ -17,10 +17,10 @@ func TestFont_SavePng(t *testing.T) {
 
 	normalBrush := shape.Circle(Normal * scale)
 
-	d := Bold * scale
+	d := SemiBold * scale
 	boldBrush := shape.Circle(int(d))
 
-	extraBoldBrush := shape.Circle(ExtraBold * scale)
+	extraBoldBrush := shape.Circle(Bold * scale)
 
 	for i := 0; i < 14; i++ {
 		for j := 0; j < 16; j++ {

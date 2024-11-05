@@ -154,7 +154,7 @@ func (pcb *PCB) addMarks(c *Component) {
 	t := c.Transform.Multiply(pcb.bitmapTransform())
 
 	// Marks:
-	brushW := font.ExtraBold * font.WeightScale(t)
+	brushW := font.Bold * font.WeightScale(t)
 	brush := shape.Circle(int(brushW))
 	brush.IterateContours(c.Marks.Apply(t), pcb.silk.Set1)
 }
