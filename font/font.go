@@ -25,18 +25,18 @@ const (
 
 Vector (linear) font matrix. Data below uses its point numbers.
 
-11  12--13--14  15
-   /           \
+11  12  13  14  15
+
 21  22  23  24  25
- |               |
+
 31  32  33  34  35
- |               |
-41--42--43--44--45
- |               |
+
+41  42  43  44  45
+
 51  52  53  54  55
- |               |
+
 61  62  63  64  65
- |               |
+
 71  72  73  74  75
 
 81  82  83  84  85
@@ -149,7 +149,7 @@ var data = [][][]byte{
 	'~': {{41, 32, 54, 45}},
 }
 
-var Paths = [256]path.Paths{}
+var symbolPaths = [256]path.Paths{}
 
 func Centered(str string) path.Paths {
 	return alignedText(AlignCenter, path.Point{}, str)
@@ -186,12 +186,12 @@ func alignedPaths(align Align, str string) path.Paths {
 	n := float64(len(str))
 	for i, c := range str {
 		c := int(c)
-		if c >= len(Paths) {
+		if c >= len(symbolPaths) {
 			c = '?'
 		}
 
 		t := transform.Move(Width*(float64(i)-n*float64(align)), 0.4)
-		paths = append(paths, Paths[c].Apply(t)...)
+		paths = append(paths, symbolPaths[c].Apply(t)...)
 	}
 
 	return paths
@@ -199,15 +199,15 @@ func alignedPaths(align Align, str string) path.Paths {
 
 func init() {
 	for i, paths := range data {
-		Paths[i] = make(path.Paths, len(paths))
+		symbolPaths[i] = make(path.Paths, len(paths))
 
 		for j, p := range paths {
 			a := pToXY(p[0])
-			Paths[i][j] = []path.Point{a}
+			symbolPaths[i][j] = []path.Point{a}
 
 			for _, p := range p[1:] {
 				b := pToXY(p)
-				Paths[i][j] = append(Paths[i][j], a, b, b)
+				symbolPaths[i][j] = append(symbolPaths[i][j], a, b, b)
 
 				a = b
 			}

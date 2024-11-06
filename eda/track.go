@@ -8,11 +8,11 @@ import (
 
 type Track path.Points
 
-func TrackPaths(lines ...Track) Paths {
-	res := make(Paths, len(lines))
+func Tracks(tracks ...Track) Paths {
+	res := make(Paths, len(tracks))
 
-	for i, l := range lines {
-		res[i] = path.Lines(path.Points(l))
+	for i, track := range tracks {
+		res[i] = path.Lines(path.Points(track))
 	}
 
 	return res
@@ -80,14 +80,6 @@ func (track Track) DX(dx float64) Track {
 
 func (track Track) DY(dy float64) Track {
 	return track.Y(track[len(track)-1].Y + dy)
-}
-
-func (track Track) DXY(dx, dy float64) Track {
-	return track.DX(dx).DY(dy)
-}
-
-func (track Track) DYX(dx, dy float64) Track {
-	return track.DY(dx).DX(dy)
 }
 
 func (track Track) XY(p path.Point) Track {

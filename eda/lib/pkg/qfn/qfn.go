@@ -32,7 +32,7 @@ func init() {
 
 		TrackThickness: 0.18,
 
-		GroundTracks: eda.TrackPaths(
+		GroundTracks: eda.Tracks(
 			eda.Track{{X: -1.5, Y: 1.5}, {X: 1.5, Y: -1.5}},
 		),
 	}

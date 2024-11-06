@@ -42,7 +42,7 @@ var (
 			mountHoles,
 		},
 
-		Tracks: eda.TrackPaths(
+		Tracks: eda.Tracks(
 			eda.Track{pin[0]}.DY(5).YX(pad[0]),
 			eda.Track{pin[1]}.DY(1.2).DX(0.6).DY(3.5).YX(pad[1]),
 			eda.Track{pin[2]}.DY(0.5).YX(pad[2]),

@@ -28,16 +28,16 @@ func X2(topLabel, bottomLabel string) *eda.Component {
 			mount,
 		},
 
-		Tracks: eda.TrackPaths(
+		Tracks: eda.Tracks(
 			eda.Track{pad[0]}.XY(pin[0]),
 			eda.Track{pad[2]}.XY(pin[1]),
 		),
 
-		GroundTracks: eda.TrackPaths(
+		GroundTracks: eda.Tracks(
 			eda.Track{pad[1]}.DX(-1.2),
 			eda.Track{pad[1]}.XY(sink[3]),
-			eda.Track{sink[2]}.DXY(-0.5, 0.5),
-			eda.Track{sink[4]}.DXY(-0.5, -0.5),
+			eda.Track{sink[2]}.DX(-0.5).DY(0.5),
+			eda.Track{sink[4]}.DX(-0.5).DY(-0.5),
 		),
 	}
 }

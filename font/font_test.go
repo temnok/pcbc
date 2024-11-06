@@ -27,13 +27,13 @@ func TestFont_SavePng(t *testing.T) {
 			c := (i+2)*16 + j
 
 			tx := transform.Move(float64(j)*Width, float64(-i)).Scale(scale, -scale)
-			normalBrush.IterateContours(Paths[c].Apply(tx), bm.Set1)
+			normalBrush.IterateContours(symbolPaths[c].Apply(tx), bm.Set1)
 
 			tx = transform.Move(float64(j)*Width, float64(-i-7)).Scale(scale, -scale)
-			boldBrush.IterateContours(Paths[c].Apply(tx), bm.Set1)
+			boldBrush.IterateContours(symbolPaths[c].Apply(tx), bm.Set1)
 
 			tx = transform.Move(float64(j)*Width, float64(-i-14)).Scale(scale, -scale)
-			extraBoldBrush.IterateContours(Paths[c].Apply(tx), bm.Set1)
+			extraBoldBrush.IterateContours(symbolPaths[c].Apply(tx), bm.Set1)
 		}
 	}
 

@@ -31,7 +31,7 @@ var (
 			eda.CenteredText("F002A").Arrange(transform.Scale(1.1, 2.8).Move(-5, -2.5)),
 		},
 
-		Tracks: eda.TrackPaths(
+		Tracks: eda.Tracks(
 			eda.Track{pin[0]}.DY(0.8).YX(pad[3]),
 			eda.Track{pin[1]}.DY(0.8).YX(pad[4]),
 			eda.Track{pin[2]}.DY(0.8).DY(0.3).DX(2.2).YX(pad[5]),
@@ -41,7 +41,7 @@ var (
 			eda.Track{pin[6]}.DY(-0.8).YX(pad[2]),
 		),
 
-		GroundTracks: eda.TrackPaths(
+		GroundTracks: eda.Tracks(
 			eda.Track{pin[7]}.DY(-1).DY(2),
 		),
 	}

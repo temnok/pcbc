@@ -68,7 +68,7 @@ var (
 			eda.CenteredText("nRF52840").Arrange(transform.Scale(1.4, 2).Move(0, -8.4)),
 		},
 
-		Tracks: eda.TrackPaths(
+		Tracks: eda.Tracks(
 			eda.Track{pin[0]}.DX(-2).DY(0.5).YX(pad[0]),
 			eda.Track{pin[1]}.XY(pad[1]),
 			eda.Track{pin[2]}.XY(pad[2]),
@@ -100,7 +100,7 @@ var (
 			eda.Track{pin[27]}.DX(2).DY(0.5).YX(pad[26]),
 		),
 
-		GroundTracks: eda.TrackPaths(
+		GroundTracks: eda.Tracks(
 			eda.Track{pin[4]}.DX(-1),
 			eda.Track{pin[4]}.DX(1).DX(1.2).DY(-10.9).DX(-4).YX(pad[9]),
 			eda.Track{pin[15]}.DY(1),

@@ -43,7 +43,7 @@ func board(short bool) *eda.Component {
 	labelShift := 2.54 / 0.8
 	labelScale := transform.Scale(0.8, 1.3)
 
-	tracks := eda.TrackPaths(
+	tracks := eda.Tracks(
 		eda.Track{pad[0]}.DX(1.5).DY(-4.7).DX(1.6).DX(3.7).DY(-1.2).YX(pin[8]),
 		eda.Track{pad[1]}.DY(-2.75).DX(5.3).DX(0.9).YX(pin[7]),
 		eda.Track{pad[2]}.DY(-0.8).DX(5).XY(pin[6]),
@@ -105,7 +105,7 @@ func board(short bool) *eda.Component {
 
 		Tracks: tracks,
 
-		GroundTracks: eda.TrackPaths(
+		GroundTracks: eda.Tracks(
 			eda.Track{pad[7]}.DX(2.1).YX(pin[5]),
 			eda.Track{pin[5]}.DX(3).YX(pin[27]).XY(pin[25]).XY(pin[26]).YX(pin[28]).XY(pin[27]),
 		),
