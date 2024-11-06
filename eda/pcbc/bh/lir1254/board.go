@@ -10,9 +10,7 @@ import (
 )
 
 var Board = &eda.Component{
-	Cuts: path.Paths{
-		path.RoundRect(21, 14, 1),
-	},
+	Cuts: path.RoundRect(21, 14, 1),
 
 	Components: eda.Components{
 		{

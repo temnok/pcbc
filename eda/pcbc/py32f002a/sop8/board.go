@@ -20,9 +20,7 @@ var (
 	pad = header.PadCenters()
 
 	Board = &eda.Component{
-		Cuts: path.Paths{
-			path.RoundRect(14, 8, 1),
-		},
+		Cuts: path.RoundRect(14, 8, 1),
 
 		Components: eda.Components{
 			mount,

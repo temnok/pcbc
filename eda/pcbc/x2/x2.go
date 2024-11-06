@@ -20,9 +20,7 @@ func X2(topLabel, bottomLabel string) *eda.Component {
 	sink := mount.PadCenters()
 
 	return &eda.Component{
-		Cuts: path.Paths{
-			path.RoundRect(10, 4, 1),
-		},
+		Cuts: path.RoundRect(10, 4, 1),
 
 		Components: eda.Components{
 			header,

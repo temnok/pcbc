@@ -52,9 +52,7 @@ var (
 	}
 
 	Board_nRF52840 = &eda.Component{
-		Cuts: path.Paths{
-			path.RoundRect(28.4, 24.9, 1),
-		},
+		Cuts: path.RoundRect(28.4, 24.9, 1),
 
 		Components: eda.Components{
 			chip,

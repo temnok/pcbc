@@ -10,9 +10,7 @@ import (
 )
 
 var Board = &eda.Component{
-	Cuts: path.Paths{
-		path.RoundRect(9.5, 6.5, 1),
-	},
+	Cuts: path.RoundRect(9.5, 6.5, 1),
 
 	Components: eda.Components{
 		xunpu.SwitchTS1088.Arrange(transform.Rotate(-90).Move(3, 0)),

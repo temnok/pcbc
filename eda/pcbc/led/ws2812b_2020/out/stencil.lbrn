@@ -924,10 +924,6 @@
 	<Shape Type="Path" CutIndex="0">
 		<XForm>1 0 0 1 46.5 42</XForm>
 		<Tabs></Tabs>
-	</Shape>
-	<Shape Type="Path" CutIndex="0">
-		<XForm>1 0 0 1 46.5 42</XForm>
-		<Tabs></Tabs>
 		<V vx="1.315" vy="-0.15000000000000002"></V>
 		<V vx="1.315" vy="-0.9500000000000001"></V>
 		<V vx="0.515" vy="-0.9500000000000001"></V>
@@ -1080,10 +1076,6 @@
 		<P T="B" p0="1" p1="2"></P>
 		<P T="L" p0="2" p1="3"></P>
 		<P T="B" p0="3" p1="4"></P>
-	</Shape>
-	<Shape Type="Path" CutIndex="0">
-		<XForm>1 0 0 1 57.5 42</XForm>
-		<Tabs></Tabs>
 	</Shape>
 	<Shape Type="Path" CutIndex="0">
 		<XForm>1 0 0 1 57.5 42</XForm>
