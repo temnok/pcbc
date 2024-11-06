@@ -58,32 +58,6 @@ func (path Path) Jump(dist int, jump func(x, y int)) {
 	})
 }
 
-func (path Path) Clone(n int, dx, dy float64) Paths {
-	paths := make(Paths, n)
-
-	for i := 0; i < n; i++ {
-		k := float64(i) - float64(n-1)/2
-		paths[i] = path.Apply(transform.Move(dx*k, dy*k))
-	}
-
-	return paths
-}
-
-func (path Path) CloneRowsCols(rows, cols int, step Point) Paths {
-	paths := make(Paths, 0, rows*cols)
-
-	x0, y0 := -0.5*float64(cols-1)*step.X, 0.5*float64(rows-1)*step.Y
-
-	for i := 0; i < rows; i++ {
-		for j := 0; j < cols; j++ {
-			x, y := x0+float64(j)*step.X, y0-float64(i)*step.Y
-			paths = append(paths, path.Apply(transform.Move(x, y)))
-		}
-	}
-
-	return paths
-}
-
 func (path Path) Center(t transform.Transform) Point {
 	var b Bounds
 	b.AddPath(t, path)

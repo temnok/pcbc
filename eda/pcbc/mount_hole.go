@@ -7,15 +7,12 @@ import (
 )
 
 var (
-	mountPads = path.Pie(6, 1.0, 1.3, 15).Apply(transform.Rotate(-30))
-	pad       = mountPads.Centers(transform.Identity)
-
 	MountHole = &eda.Component{
-		Pads: mountPads,
+		Pads: path.Pie(6, 1.0, 1.3, 15).Apply(transform.Rotate(-30)),
 
 		GroundTracks: eda.TrackPaths(
-			eda.Track{pad[0]}.DX(0.7),
-			eda.Track{pad[3]}.DX(-0.7),
+			eda.Track{{1.15, 0}}.DX(0.6),
+			eda.Track{{-1.15, 0}}.DX(-0.6),
 		),
 
 		Openings: path.Paths{

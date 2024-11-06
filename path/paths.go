@@ -40,6 +40,17 @@ func (paths Paths) Jump(dist int, jump func(x, y int)) {
 	}
 }
 
+func (paths Paths) Clone(n int, dx, dy float64) Paths {
+	res := make(Paths, 0, n*len(paths))
+
+	for i := 0; i < n; i++ {
+		k := float64(i) - float64(n-1)/2
+		res = append(res, paths.Apply(transform.Move(dx*k, dy*k))...)
+	}
+
+	return res
+}
+
 // Centers returns center points for paths.
 func (paths Paths) Centers(t transform.Transform) Points {
 	centers := make(Points, len(paths))

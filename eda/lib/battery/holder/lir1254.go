@@ -7,7 +7,7 @@ import (
 
 var LIR1254 = &eda.Component{
 	Pads: path.Join(
-		path.Rect(2.5, 4.5).Clone(2, 15, 0),
+		path.Paths{path.Rect(2.5, 4.5)}.Clone(2, 15, 0),
 		path.Paths{path.Circle(5)},
 	),
 

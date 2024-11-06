@@ -9,7 +9,7 @@ import (
 
 func CSCC118(n int, flip bool, labels []string) *eda.Component {
 	const padW = 1.95
-	pad := path.RoundRect(padW, 0.5, 0.1)
+	pad := path.Paths{path.RoundRect(padW, 0.5, 0.1)}
 
 	shift := float64((n+1)%2) / 2
 

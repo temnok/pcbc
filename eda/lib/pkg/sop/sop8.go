@@ -7,7 +7,7 @@ import (
 )
 
 var (
-	pad = path.RoundRect(0.5, 1.0, 0.25)
+	pad = path.Paths{path.RoundRect(0.5, 1.0, 0.25)}
 
 	bottomPads = pad.Clone(4, 1.27, 0).Apply(transform.Move(0, -2.75))
 

@@ -28,7 +28,7 @@ func init() {
 		padVShift = (componentH-(padRows*padStep-padGap))/2 - padBottomGap
 	)
 
-	pad := path.RoundRect(padW, padH, 0.3)
+	pad := path.Paths{path.RoundRect(padW, padH, 0.3)}
 
 	MS88SF2 = &eda.Component{
 		Marks: path.Paths{

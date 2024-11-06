@@ -83,13 +83,12 @@ func (c *Component) PadCenters() path.Points {
 	var centers path.Points
 
 	c.Visit(func(component *Component) {
-		for _, pad := range component.Pads {
-			centers = append(centers, pad.Center(component.Transform))
-		}
+		centers = append(centers, component.Pads.Centers(component.Transform)...)
 	})
 
 	return centers
 }
+
 func (c *Component) Arrange(t transform.Transform) *Component {
 	return &Component{
 		Transform:  t,
