@@ -8,7 +8,7 @@
 * Mask
 * Stencil
 
-### Sample Overview
+### Generated Overview
 
 * Dark green: FR4
 * Bright Green: FR4 cuts
@@ -17,6 +17,7 @@
 * Pale Green/White: soldermask marks (silkscreen)
 * Bright White: stencil cuts
 
+![PY32](doc/gallery/py32/overview.png)
 ![E73](doc/gallery/e73/overview.png)
 ![Micro boards](doc/gallery/resistors.png)
 

@@ -203,7 +203,7 @@ func (pcb *PCB) bitmapTransform() transform.Transform {
 }
 
 func (pcb *PCB) SaveFiles() error {
-	return util.GoAll([]func() error{
+	return util.RunConcurrently([]func() error{
 		pcb.SaveEtch,
 		pcb.SaveMask,
 		pcb.SaveMaskBottom,
