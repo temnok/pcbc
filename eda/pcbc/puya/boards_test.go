@@ -1,4 +1,4 @@
-package py32f002a
+package puya
 
 import (
 	"github.com/stretchr/testify/assert"

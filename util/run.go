@@ -4,7 +4,7 @@ import "errors"
 
 // RunConcurrently runs provided functions concurrently, blocking until all functions are completed.
 // It returns resulting errors joined into the single one or nil if functions returned no errors.
-func RunConcurrently(funs []func() error) error {
+func RunConcurrently(funs ...func() error) error {
 	wait := make(chan error)
 
 	for _, fun := range funs {

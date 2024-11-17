@@ -12,7 +12,7 @@ func SaveTmpPng(name string, im image.Image) error {
 }
 
 func SavePng(name string, im image.Image) error {
-	if err := os.MkdirAll(filepath.Dir(name), 0400); err != nil {
+	if err := os.MkdirAll(filepath.Dir(name), 0700); err != nil {
 		return err
 	}
 
@@ -25,9 +25,5 @@ func SavePng(name string, im image.Image) error {
 		return err
 	}
 
-	if err = f.Close(); err != nil {
-		return err
-	}
-
-	return nil
+	return f.Close()
 }
