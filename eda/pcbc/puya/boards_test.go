@@ -4,8 +4,8 @@ import (
 	"github.com/stretchr/testify/assert"
 	"temnok/pcbc/eda"
 	"temnok/pcbc/eda/pcbc"
-	"temnok/pcbc/eda/pcbc/py32f002a/qfn16"
-	"temnok/pcbc/eda/pcbc/py32f002a/sop8"
+	"temnok/pcbc/eda/pcbc/puya/qfn16"
+	"temnok/pcbc/eda/pcbc/puya/sop8"
 	"temnok/pcbc/transform"
 	"testing"
 )

@@ -37,5 +37,5 @@ func TestFont_SavePng(t *testing.T) {
 		}
 	}
 
-	assert.NoError(t, util.SavePng("out/font.png", bm.ToImage(color.Black, color.White)))
+	assert.NoError(t, util.SavePNG("out/font.png", bm.ToImage(color.Black, color.White)))
 }

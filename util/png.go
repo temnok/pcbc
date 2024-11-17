@@ -7,11 +7,9 @@ import (
 	"path/filepath"
 )
 
-func SaveTmpPng(name string, im image.Image) error {
-	return SavePng("tmp/"+name, im)
-}
-
-func SavePng(name string, im image.Image) error {
+// SavePNG creates a PNG file out of provided image,
+// making all file parent directories if necessary.
+func SavePNG(name string, im image.Image) error {
 	if err := os.MkdirAll(filepath.Dir(name), 0700); err != nil {
 		return err
 	}

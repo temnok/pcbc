@@ -20,7 +20,7 @@ func TestPie(t *testing.T) {
 		shape.IterateRowsXY(200, 200, bm.Set1)
 	}
 
-	assert.NoError(t, util.SaveTmpPng("pie.png", bm.ToImage(color.Black, color.White)))
+	assert.NoError(t, util.SavePNG("tmp/pie.png", bm.ToImage(color.Black, color.White)))
 }
 
 func TestPiePart(t *testing.T) {
@@ -30,5 +30,5 @@ func TestPiePart(t *testing.T) {
 	shape := FromContour(part)
 	shape.IterateRowsXY(10, 10, bm.Set1)
 
-	assert.NoError(t, util.SaveTmpPng("pie-part.png", bm.ToImage(color.Black, color.White)))
+	assert.NoError(t, util.SavePNG("tmp/pie-part.png", bm.ToImage(color.Black, color.White)))
 }

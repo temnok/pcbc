@@ -226,7 +226,7 @@ func (pcb *PCB) SaveOverview() error {
 		},
 		true,
 	)
-	if err := util.SavePng(filename, image); err != nil {
+	if err := util.SavePNG(filename, image); err != nil {
 		return err
 	}
 

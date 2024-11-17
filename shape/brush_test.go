@@ -23,5 +23,5 @@ func TestBrushes(t *testing.T) {
 		rect.IterateRowsXY(50*d, 200, bm.Set1)
 	}
 
-	assert.NoError(t, util.SaveTmpPng("brush.png", bm.ToImage(color.Black, color.White)))
+	assert.NoError(t, util.SavePNG("tmp/brush.png", bm.ToImage(color.Black, color.White)))
 }
