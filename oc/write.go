@@ -2,9 +2,10 @@ package oc
 
 import "io"
 
-// Write passes data to the provided writer, escaping '{' and '}' with '\'.
+// Write passes an OC-token (string data ended with a curly brace) to
+// the provided writer, escaping curly braces within the data with '\'.
 // If '\' is the last data symbol then ' ' (space) is added after it.
-// Any error from writer is returned immediately.
+// Any error from the writer is returned immediately.
 func Write(w io.Writer, data []byte, oc bool) error {
 	i0 := 0
 
