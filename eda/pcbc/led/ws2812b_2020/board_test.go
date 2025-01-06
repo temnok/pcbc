@@ -1,3 +1,5 @@
+// Copyright © 2025 Alex Temnok. All rights reserved.
+
 package ws2812b_2020
 
 import (

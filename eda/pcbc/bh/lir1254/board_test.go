@@ -1,3 +1,5 @@
+// Copyright © 2025 Alex Temnok. All rights reserved.
+
 package lir1254
 
 import (

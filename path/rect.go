@@ -1,3 +1,5 @@
+// Copyright © 2025 Alex Temnok. All rights reserved.
+
 package path
 
 func Rect(w, h float64) Paths {

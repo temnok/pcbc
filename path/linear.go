@@ -1,3 +1,5 @@
+// Copyright © 2025 Alex Temnok. All rights reserved.
+
 package path
 
 // linearVisit iterates over all line pixels, except the first one.

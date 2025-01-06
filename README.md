@@ -1,3 +1,4 @@
+##### Copyright © 2025 Alex Temnok. All rights reserved.
 <img src="doc/gallery/logo.png" width="200"/>
 
 ## PCBC: fast PCB prototyping with a fiber laser
@@ -6,7 +7,7 @@
 
 ```go
 func main() {
-	err := eda.GeneratePCB(&eda.Component{
+	err := eda.GeneratePCBAt(&eda.Component{
 		Components: eda.Components{
 			pcbc.Board35x45,
 			eda.ComponentGrid(3, 11, 5,
@@ -27,7 +28,7 @@ func main() {
 				x2.X2("R ", "K25"),
 			).Arrange(transform.Rotate(90)),
 		},
-	})
+	}, "out/")
 
 	if err != nil {
 		log.Fatal(err)
@@ -35,13 +36,19 @@ func main() {
 }
 ```
 
+### Tiny Breakout Board Implementation Examples
+
+* PY32 QFN16: [eda/pcbc/puya/qfn16/board.go](eda/pcbc/puya/qfn16/board.go)
+* EBYTE E73: [eda/pcbc/ebyte/e73/board.go](eda/pcbc/ebyte/e73/board.go)
+* Various 0603 components: [eda/pcbc/x2/x2.go](eda/pcbc/x2/x2.go)
+
 ### Generated LightBurn files
 
 * Etch
 * Mask
 * Stencil
 
-### Generated Overview
+### Generated Overview (Combined Layers)
 
 * Dark green: FR4
 * Bright Green: FR4 cuts
@@ -56,7 +63,8 @@ func main() {
 
 ### Gallery
 
-![Finished](doc/gallery/e73/finished.jpg)
+![Finished PY32](doc/gallery/py32/finished.jpg)
+![Finished E73](doc/gallery/e73/finished.jpg)
 ![Baked](doc/gallery/e73/baked.jpg)
 ![Stencil](doc/gallery/e73/stencil.jpg)
 ![Masked](doc/gallery/e73/masked.jpg)

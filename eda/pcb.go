@@ -1,3 +1,5 @@
+// Copyright © 2025 Alex Temnok. All rights reserved.
+
 package eda
 
 import (
@@ -42,6 +44,12 @@ var (
 
 func GeneratePCB(component *Component) error {
 	return NewPCB(component).SaveFiles()
+}
+
+func GeneratePCBAt(component *Component, dirPath string) error {
+	pcb := NewPCB(component)
+	pcb.savePath = dirPath
+	return pcb.SaveFiles()
 }
 
 func NewPCB(component *Component) *PCB {

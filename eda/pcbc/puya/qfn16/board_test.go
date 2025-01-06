@@ -1,3 +1,5 @@
+// Copyright © 2025 Alex Temnok. All rights reserved.
+
 package qfn16
 
 import (
@@ -7,5 +9,5 @@ import (
 )
 
 func TestBoard(t *testing.T) {
-	assert.NoError(t, eda.GeneratePCB(Board))
+	assert.NoError(t, eda.GeneratePCBAt(Board, "out/"))
 }
