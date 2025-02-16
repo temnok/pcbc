@@ -12,7 +12,7 @@ import (
 func TestBoard(t *testing.T) {
 	via := &eda.Component{
 		Holes: path.Circle(0.6),
-		Pads:  path.Circle(1.2),
+		Pads:  path.Circle(1.0),
 	}
 
 	board := &eda.Component{
