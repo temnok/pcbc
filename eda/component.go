@@ -25,6 +25,12 @@ type Component struct {
 	// Mask: solid cut strokes
 	Holes path.Paths
 
+	// FR4: cuts without tabs
+	// Mask: solid cut strokes
+	// Maskbase: cuts without tabs
+	// Stencil: cuts without tabs
+	Windows path.Paths
+
 	// FR4: copper fills
 	// Mask: solid cut strokes
 	// Stencil: cuts without tabs
