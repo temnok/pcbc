@@ -20,7 +20,7 @@ func init() {
 
 	Base72x42 = &eda.Component{
 		Components: eda.Components{
-			hole.Arrange(transform.Move(-36, 20)),
+			hole.Arrange(transform.Move(-36, 19)),
 			hole.Arrange(transform.Move(-36, -21)),
 			hole.Arrange(transform.Move(36, 21)),
 			hole.Arrange(transform.Move(36, -21)),
