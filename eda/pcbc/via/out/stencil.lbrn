@@ -1,0 +1,88 @@
+<LightBurnProject>
+	<CutSetting type="Cut">
+		<index Value="0"></index>
+		<name Value="Apertures"></name>
+		<priority Value="0"></priority>
+		<speed Value="200"></speed>
+		<numPasses Value=""></numPasses>
+		<globalRepeat Value="20"></globalRepeat>
+		<maxPower Value="90"></maxPower>
+		<QPulseWidth Value="200"></QPulseWidth>
+		<frequency Value="20000"></frequency>
+		<interval Value=""></interval>
+		<dpi Value=""></dpi>
+		<ditherMode Value=""></ditherMode>
+		<useDotCorrection Value=""></useDotCorrection>
+		<dotWidth Value=""></dotWidth>
+		<tabsEnabled Value=""></tabsEnabled>
+		<tabSize Value=""></tabSize>
+		<crossHatch Value=""></crossHatch>
+		<angle Value=""></angle>
+		<negative Value=""></negative>
+	</CutSetting>
+	<Shape Type="Path" CutIndex="0">
+		<XForm>1 0 0 1 55 55</XForm>
+		<Tabs></Tabs>
+		<V vx="-36.95" vy="22.25" c0x="-36.95" c0y="22.41568542494924"></V>
+		<V vx="-37.25" vy="22.55" c0x="-37.41568542494924" c0y="22.55" c1x="-37.08431457505076" c1y="22.55"></V>
+		<V vx="-37.55" vy="22.25" c0x="-37.55" c0y="22.08431457505076" c1x="-37.55" c1y="22.41568542494924"></V>
+		<V vx="-37.25" vy="21.95" c0x="-37.08431457505076" c0y="21.95" c1x="-37.41568542494924" c1y="21.95"></V>
+		<V vx="-36.95" vy="22.25" c1x="-36.95" c1y="22.08431457505076"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="0">
+		<XForm>1 0 0 1 19 34</XForm>
+		<Tabs></Tabs>
+		<V vx="1.05" vy="0" c0x="1.05" c0y="0.5798989873223332"></V>
+		<V vx="0" vy="1.05" c0x="-0.5798989873223332" c0y="1.05" c1x="0.5798989873223332" c1y="1.05"></V>
+		<V vx="-1.05" vy="0" c0x="-1.05" c0y="-0.5798989873223332" c1x="-1.05" c1y="0.5798989873223332"></V>
+		<V vx="0" vy="-1.05" c0x="0.5798989873223332" c0y="-1.05" c1x="-0.5798989873223332" c1y="-1.05"></V>
+		<V vx="1.05" vy="0" c1x="1.05" c1y="-0.5798989873223332"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="0">
+		<XForm>1 0 0 1 91 34</XForm>
+		<Tabs></Tabs>
+		<V vx="1.05" vy="0" c0x="1.05" c0y="0.5798989873223332"></V>
+		<V vx="0" vy="1.05" c0x="-0.5798989873223332" c0y="1.05" c1x="0.5798989873223332" c1y="1.05"></V>
+		<V vx="-1.05" vy="0" c0x="-1.05" c0y="-0.5798989873223332" c1x="-1.05" c1y="0.5798989873223332"></V>
+		<V vx="0" vy="-1.05" c0x="0.5798989873223332" c0y="-1.05" c1x="-0.5798989873223332" c1y="-1.05"></V>
+		<V vx="1.05" vy="0" c1x="1.05" c1y="-0.5798989873223332"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="0">
+		<XForm>1 0 0 1 19 76</XForm>
+		<Tabs></Tabs>
+		<V vx="1.05" vy="0" c0x="1.05" c0y="0.5798989873223332"></V>
+		<V vx="0" vy="1.05" c0x="-0.5798989873223332" c0y="1.05" c1x="0.5798989873223332" c1y="1.05"></V>
+		<V vx="-1.05" vy="0" c0x="-1.05" c0y="-0.5798989873223332" c1x="-1.05" c1y="0.5798989873223332"></V>
+		<V vx="0" vy="-1.05" c0x="0.5798989873223332" c0y="-1.05" c1x="-0.5798989873223332" c1y="-1.05"></V>
+		<V vx="1.05" vy="0" c1x="1.05" c1y="-0.5798989873223332"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="0">
+		<XForm>1 0 0 1 91 76</XForm>
+		<Tabs></Tabs>
+		<V vx="1.05" vy="0" c0x="1.05" c0y="0.5798989873223332"></V>
+		<V vx="0" vy="1.05" c0x="-0.5798989873223332" c0y="1.05" c1x="0.5798989873223332" c1y="1.05"></V>
+		<V vx="-1.05" vy="0" c0x="-1.05" c0y="-0.5798989873223332" c1x="-1.05" c1y="0.5798989873223332"></V>
+		<V vx="0" vy="-1.05" c0x="0.5798989873223332" c0y="-1.05" c1x="-0.5798989873223332" c1y="-1.05"></V>
+		<V vx="1.05" vy="0" c1x="1.05" c1y="-0.5798989873223332"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+</LightBurnProject>

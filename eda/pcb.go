@@ -214,7 +214,6 @@ func (pcb *PCB) SaveFiles() error {
 	return util.RunConcurrently(
 		pcb.SaveEtch,
 		pcb.SaveMask,
-		pcb.SaveMaskBottom,
 		pcb.SaveStencil,
 		pcb.SaveOverview,
 	)
