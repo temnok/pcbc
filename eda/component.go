@@ -14,8 +14,11 @@ type Components = []*Component
 type Component struct {
 	Transform transform.Transform
 
-	// FR4: remove groundfill
+	// FR4: remove groundfill: at the beginning
 	Clears path.Paths
+
+	// FR4: remove groundfill: at the end
+	Etchings path.Paths
 
 	// FR4: cuts with tabs
 	// Mask: dotted cut strokes
@@ -25,11 +28,9 @@ type Component struct {
 	// Mask: solid cut strokes
 	Holes path.Paths
 
-	// FR4: cuts without tabs
+	// FR4: remove groundfil; cuts without tabs
 	// Mask: solid cut strokes
-	// Maskbase: cuts without tabs
-	// Stencil: cuts without tabs
-	Windows path.Paths
+	ClearHoles path.Paths
 
 	// FR4: copper fills
 	// Mask: solid cut strokes
@@ -67,6 +68,7 @@ func (c *Component) visit(t transform.Transform, parent *Component, callback fun
 	comp := &Component{
 		Transform:      t,
 		Clears:         c.Clears,
+		Etchings:       c.Etchings,
 		Cuts:           c.Cuts,
 		Holes:          c.Holes,
 		Pads:           c.Pads,
@@ -120,6 +122,7 @@ func (c *Component) Size() (float64, float64) {
 
 	c.Visit(func(c *Component) {
 		b.AddPaths(c.Transform, c.Clears)
+		b.AddPaths(c.Transform, c.Etchings)
 		b.AddPaths(c.Transform, c.Cuts)
 		b.AddPaths(c.Transform, c.Holes)
 		b.AddPaths(c.Transform, c.Pads)
@@ -160,11 +163,5 @@ func CenteredTextRow(dx float64, strs ...string) *Component {
 func CenteredTextColumn(dy float64, lines ...string) *Component {
 	return &Component{
 		Marks: font.CenteredColumn(dy, lines...),
-	}
-}
-
-func AlignedTextColumn(align font.Align, dy float64, lines ...string) *Component {
-	return &Component{
-		Marks: font.AlignedColumn(align, dy, lines...),
 	}
 }

@@ -36,6 +36,9 @@ func (pcb *PCB) SaveEtch() error {
 				DotWidth:         Param{Value: "0.05"},
 
 				Negative: Param{Value: "1"},
+
+				CrossHatch: Param{Value: "1"},
+				Angle:      Param{Value: "-90"},
 			},
 			{
 				Type:     "Image",

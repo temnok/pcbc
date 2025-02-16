@@ -26,7 +26,7 @@ type PCB struct {
 	savePath  string
 	component *Component
 
-	fr4, copper, mask, maskB, silk, stencil *bitmap.Bitmap
+	fr4, copper, mask, silk, stencil *bitmap.Bitmap
 }
 
 const (
@@ -72,7 +72,6 @@ func NewPCB(component *Component) *PCB {
 		fr4:     bitmap.NewBitmap(wi, hi),
 		copper:  bitmap.NewBitmap(wi, hi),
 		mask:    bitmap.NewBitmap(wi, hi),
-		maskB:   bitmap.NewBitmap(wi, hi),
 		silk:    bitmap.NewBitmap(wi, hi),
 		stencil: bitmap.NewBitmap(wi, hi),
 	}
@@ -89,6 +88,7 @@ func NewPCB(component *Component) *PCB {
 func (pcb *PCB) processBoard() {
 	pcb.component.Visit(pcb.removeCopper)
 	pcb.component.Visit(pcb.addCopper)
+	pcb.component.Visit(pcb.removeCopper2)
 	pcb.component.Visit(pcb.cutBoard)
 }
 
@@ -152,6 +152,14 @@ func (pcb *PCB) addCopper(c *Component) {
 	brush.IterateContours(c.GroundTracks.Apply(t), pcb.copper.Set1)
 }
 
+func (pcb *PCB) removeCopper2(c *Component) {
+	t := c.Transform.Multiply(pcb.bitmapTransform())
+
+	// Etchings
+	etchings := c.Etchings.Apply(t)
+	shape.IterateContoursRows(etchings, pcb.copper.Set0)
+}
+
 func (pcb *PCB) cutBoard(c *Component) {
 	t := c.Transform.Multiply(pcb.bitmapTransform())
 
@@ -183,13 +191,11 @@ func (pcb *PCB) cutOpenings(c *Component) {
 	// Holes
 	holes := c.Holes.Apply(t)
 	brush1.IterateContours(holes, pcb.mask.Set1)
-	brush1.IterateContours(holes, pcb.maskB.Set1)
 
 	// Cuts
 	cuts := c.Cuts.Apply(t)
 	cuts.Jump(int(0.2*resolution), func(x, y int) {
 		brush1.IterateRowsXY(x, y, pcb.mask.Set1)
-		brush1.IterateRowsXY(x, y, pcb.maskB.Set1)
 	})
 
 	// Openings

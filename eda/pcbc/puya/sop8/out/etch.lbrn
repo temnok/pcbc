@@ -37,8 +37,8 @@
 		<dotWidth Value="0.05"></dotWidth>
 		<tabsEnabled Value=""></tabsEnabled>
 		<tabSize Value=""></tabSize>
-		<crossHatch Value=""></crossHatch>
-		<angle Value=""></angle>
+		<crossHatch Value="1"></crossHatch>
+		<angle Value="-90"></angle>
 		<negative Value="1"></negative>
 	</CutSetting_Img>
 	<CutSetting_Img type="Image">
