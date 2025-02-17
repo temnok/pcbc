@@ -14,8 +14,9 @@ func init() {
 	holeContour := path.Circle(2.1)
 
 	hole := &eda.Component{
-		Pads:  holeContour,
-		Holes: holeContour,
+		Pads:          holeContour,
+		Holes:         holeContour,
+		MaskbaseHoles: holeContour,
 	}
 
 	Base72x42 = &eda.Component{

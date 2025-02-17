@@ -88,5 +88,39 @@ func (pcb *PCB) SaveMask() error {
 		},
 	}
 
+	addMaskbaseHoles(pcb, &p)
+
 	return p.SaveToFile(filename)
+}
+
+func addMaskbaseHoles(pcb *PCB, p *lbrn.LightBurnProject) {
+	hasMaskbaseHoles := false
+
+	center := transform.Move(pcb.lbrnCenter.X, pcb.lbrnCenter.Y)
+	pcb.component.Visit(func(component *Component) {
+		t := component.Transform.Multiply(center)
+
+		for _, hole := range component.MaskbaseHoles {
+			hasMaskbaseHoles = true
+			p.Shape = append(p.Shape, lbrn.NewPath(3, t, hole))
+		}
+	})
+
+	if hasMaskbaseHoles {
+		p.CutSetting = []lbrn.CutSetting{
+			{
+				Type:     "Cut",
+				Name:     Param{Value: "Maskbase Cut"},
+				Index:    Param{Value: "3"},
+				Priority: Param{Value: "3"},
+
+				Speed:        Param{Value: "100"},
+				GlobalRepeat: Param{Value: "30"},
+
+				MaxPower:    Param{Value: "90"},
+				QPulseWidth: Param{Value: "200"},
+				Frequency:   Param{Value: "20000"},
+			},
+		}
+	}
 }

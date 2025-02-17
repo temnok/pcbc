@@ -28,9 +28,8 @@ type Component struct {
 	// Mask: solid cut strokes
 	Holes path.Paths
 
-	// FR4: remove groundfil; cuts without tabs
-	// Mask: solid cut strokes
-	ClearHoles path.Paths
+	// Mask: holes
+	MaskbaseHoles path.Paths
 
 	// FR4: copper fills
 	// Mask: solid cut strokes
@@ -71,6 +70,7 @@ func (c *Component) visit(t transform.Transform, parent *Component, callback fun
 		Etchings:       c.Etchings,
 		Cuts:           c.Cuts,
 		Holes:          c.Holes,
+		MaskbaseHoles:  c.MaskbaseHoles,
 		Pads:           c.Pads,
 		Openings:       c.Openings,
 		Marks:          c.Marks,
@@ -125,6 +125,7 @@ func (c *Component) Size() (float64, float64) {
 		b.AddPaths(c.Transform, c.Etchings)
 		b.AddPaths(c.Transform, c.Cuts)
 		b.AddPaths(c.Transform, c.Holes)
+		b.AddPaths(c.Transform, c.MaskbaseHoles)
 		b.AddPaths(c.Transform, c.Pads)
 		b.AddPaths(c.Transform, c.Openings)
 		b.AddPaths(c.Transform, c.Marks)
