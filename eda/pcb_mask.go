@@ -69,7 +69,7 @@ var maskCutSettings = []lbrn.CutSetting{
 }
 
 func (pcb *PCB) SaveMask() error {
-	filename := pcb.savePath + "mask.lbrn"
+	filename := pcb.SavePath + "mask.lbrn"
 	silk := pcb.silk.ToImage(color.White, color.Black)
 	mask := pcb.mask.ToImage(color.Transparent, color.Black)
 

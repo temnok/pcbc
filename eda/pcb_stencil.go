@@ -8,7 +8,7 @@ import (
 )
 
 func (pcb *PCB) SaveStencil() error {
-	filename := pcb.savePath + "stencil.lbrn"
+	filename := pcb.SavePath + "stencil.lbrn"
 
 	center := transform.Move(pcb.lbrnCenter.X, pcb.lbrnCenter.Y)
 

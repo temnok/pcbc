@@ -9,5 +9,5 @@ import (
 )
 
 func TestBoard(t *testing.T) {
-	assert.NoError(t, eda.NewPCB(WS2812B_2020).SaveOverview())
+	assert.NoError(t, eda.ProcessPCB(WS2812B_2020).SaveOverview())
 }

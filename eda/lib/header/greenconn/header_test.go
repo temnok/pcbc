@@ -10,7 +10,7 @@ import (
 )
 
 func TestHeader(t *testing.T) {
-	assert.NoError(t, eda.NewPCB(&eda.Component{
+	assert.NoError(t, eda.ProcessPCB(&eda.Component{
 		Components: eda.Components{
 			CSCC118(7, false, []string{"P001", "P002", "VDD", "D+", "D-", "GND", "P007"}).
 				Arrange(transform.Move(-5, 0)),

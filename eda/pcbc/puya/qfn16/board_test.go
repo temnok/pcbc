@@ -9,5 +9,9 @@ import (
 )
 
 func TestBoard(t *testing.T) {
-	assert.NoError(t, eda.GeneratePCBAt(Board, "out/"))
+	pcb := eda.NewPCB(Board)
+	//pcb.TrackWidth = 0.35
+	//pcb.ClearBrushDiameter = 0.2
+	pcb.Process()
+	assert.NoError(t, pcb.SaveFiles())
 }

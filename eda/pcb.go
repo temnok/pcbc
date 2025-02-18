@@ -20,10 +20,12 @@ type (
 type PCB struct {
 	width, height float64
 
-	trackWidth float64
+	TrackWidth         float64
+	ClearBrushDiameter float64
+
 	lbrnCenter path.Point
 
-	savePath  string
+	SavePath  string
 	component *Component
 
 	fr4, copper, mask, silk, stencil *bitmap.Bitmap
@@ -31,8 +33,6 @@ type PCB struct {
 
 const (
 	resolution = 100.0 // pixels per mm
-
-	clearBrushDiameter = 0.5
 
 	extraCopper = 0.05 // compensate copper lost during etching
 )
@@ -43,12 +43,12 @@ var (
 )
 
 func GeneratePCB(component *Component) error {
-	return NewPCB(component).SaveFiles()
+	return ProcessPCB(component).SaveFiles()
 }
 
 func GeneratePCBAt(component *Component, dirPath string) error {
-	pcb := NewPCB(component)
-	pcb.savePath = dirPath
+	pcb := ProcessPCB(component)
+	pcb.SavePath = dirPath
 	return pcb.SaveFiles()
 }
 
@@ -64,10 +64,11 @@ func NewPCB(component *Component) *PCB {
 
 		component: component,
 
-		trackWidth: 0.25,
+		TrackWidth:         0.25,
+		ClearBrushDiameter: 0.5,
 
 		lbrnCenter: path.Point{X: 55, Y: 55},
-		savePath:   "out/",
+		SavePath:   "out/",
 
 		fr4:     bitmap.NewBitmap(wi, hi),
 		copper:  bitmap.NewBitmap(wi, hi),
@@ -77,12 +78,19 @@ func NewPCB(component *Component) *PCB {
 	}
 
 	pcb.copper.Invert()
+	return pcb
+}
 
+func ProcessPCB(component *Component) *PCB {
+	pcb := NewPCB(component)
+	pcb.Process()
+	return pcb
+}
+
+func (pcb *PCB) Process() {
 	pcb.processBoard()
 	pcb.processMask()
 	pcb.processStencil()
-
-	return pcb
 }
 
 func (pcb *PCB) processBoard() {
@@ -110,18 +118,18 @@ func (pcb *PCB) removeCopper(c *Component) {
 
 	// Pads
 	pads := c.Pads.Apply(t)
-	clearBrush := shape.Circle(int(clearBrushDiameter * resolution))
+	clearBrush := shape.Circle(int(pcb.ClearBrushDiameter * resolution))
 	clearBrush.IterateContours(pads, pcb.copper.Set0)
 
 	// Non-ground tracks
 	brushW := c.TrackThickness
 	if brushW == 0 {
-		brushW = pcb.trackWidth
+		brushW = pcb.TrackWidth
 	}
-	brush := shape.Circle(int((brushW + clearBrushDiameter) * resolution))
+	brush := shape.Circle(int((brushW + pcb.ClearBrushDiameter) * resolution))
 	brush.IterateContours(c.Tracks.Apply(t), pcb.copper.Set0)
 
-	cutClearBrush := shape.Circle(int((clearBrushDiameter / 2) * resolution))
+	cutClearBrush := shape.Circle(int((pcb.ClearBrushDiameter / 2) * resolution))
 
 	// Holes
 	holes := c.Holes.Apply(t)
@@ -145,7 +153,7 @@ func (pcb *PCB) addCopper(c *Component) {
 	// Tracks
 	brushW := c.TrackThickness
 	if brushW == 0 {
-		brushW = pcb.trackWidth
+		brushW = pcb.TrackWidth
 	}
 	brush := shape.Circle(int((brushW + extraCopper) * resolution))
 	brush.IterateContours(c.Tracks.Apply(t), pcb.copper.Set1)
@@ -226,7 +234,7 @@ func (pcb *PCB) SaveFiles() error {
 }
 
 func (pcb *PCB) SaveOverview() error {
-	filename := pcb.savePath + "overview.png"
+	filename := pcb.SavePath + "overview.png"
 
 	image := bitmap.NewBitmapsImage(
 		[]*bitmap.Bitmap{pcb.copper, pcb.fr4, pcb.mask, pcb.silk, pcb.stencil},

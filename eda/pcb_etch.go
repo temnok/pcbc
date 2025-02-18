@@ -11,7 +11,7 @@ import (
 type Param = lbrn.Param
 
 func (pcb *PCB) SaveEtch() error {
-	filename := pcb.savePath + "etch.lbrn"
+	filename := pcb.SavePath + "etch.lbrn"
 	im := pcb.copper.ToImage(color.White, color.Black)
 
 	center := transform.Move(pcb.lbrnCenter.X, pcb.lbrnCenter.Y)

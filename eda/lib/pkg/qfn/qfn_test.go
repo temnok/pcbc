@@ -9,5 +9,5 @@ import (
 )
 
 func TestQFN16(t *testing.T) {
-	assert.NoError(t, eda.NewPCB(QFN16G).SaveOverview())
+	assert.NoError(t, eda.ProcessPCB(QFN16G).SaveOverview())
 }
