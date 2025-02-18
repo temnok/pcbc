@@ -15,19 +15,16 @@ var maskCutSettings = []lbrn.CutSetting{
 		Index:    Param{Value: "0"},
 		Priority: Param{Value: "0"},
 
-		MaxPower:    Param{Value: "6"},
-		QPulseWidth: Param{Value: "80"},
-		Frequency:   Param{Value: "2000000"},
+		MaxPower:    Param{Value: "3"},
+		QPulseWidth: Param{Value: "200"},
+		Frequency:   Param{Value: "20000"},
 
-		NumPasses:        Param{Value: "5"},
-		Speed:            Param{Value: "1000"},
-		Interval:         Param{Value: "0.02"},
-		DPI:              Param{Value: "1270"},
-		UseDotCorrection: Param{Value: "1"},
-		DotWidth:         Param{Value: "0.05"},
+		NumPasses: Param{Value: "1"},
+		Speed:     Param{Value: "400"},
+		Interval:  Param{Value: "0.01"},
+		DPI:       Param{Value: "2540"},
 
-		CrossHatch: Param{Value: "1"},
-		Angle:      Param{Value: "90"},
+		Negative: Param{Value: "1"},
 	},
 	{
 		Type:     "Image",
