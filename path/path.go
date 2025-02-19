@@ -12,7 +12,7 @@ import (
 type Path []Point
 
 // Apply returns new path transformed by a given 2D transformation.
-func (path Path) Apply(t transform.Transform) Path {
+func (path Path) Apply(t transform.T) Path {
 	return Points(path).Apply(t)
 }
 
@@ -60,7 +60,7 @@ func (path Path) Jump(dist int, jump func(x, y int)) {
 	})
 }
 
-func (path Path) Center(t transform.Transform) Point {
+func (path Path) Center(t transform.T) Point {
 	var b Bounds
 	b.AddPath(t, path)
 	return b.Center()

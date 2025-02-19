@@ -20,7 +20,7 @@ func Tracks(tracks ...Track) Paths {
 	return res
 }
 
-func (track Track) Apply(t transform.Transform) Track {
+func (track Track) Apply(t transform.T) Track {
 	return Track(Path(track).Apply(t))
 }
 

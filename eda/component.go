@@ -12,7 +12,7 @@ type Components = []*Component
 
 // Component represents vector data for different PCB layers.
 type Component struct {
-	Transform transform.Transform
+	Transform transform.T
 
 	// FR4: remove groundfill: at the beginning
 	Clears path.Paths
@@ -56,11 +56,11 @@ type Component struct {
 // Visit calls provided callback for each subcomponent recursively,
 // as if every component is isolated (without subcomponents)
 func (c *Component) Visit(callback func(*Component)) {
-	c.visit(transform.Identity, nil, callback)
+	c.visit(transform.I, nil, callback)
 }
 
-func (c *Component) visit(t transform.Transform, parent *Component, callback func(*Component)) {
-	if c.Transform != (transform.Transform{}) {
+func (c *Component) visit(t transform.T, parent *Component, callback func(*Component)) {
+	if c.Transform != transform.Zero {
 		t = c.Transform.Multiply(t)
 	}
 
@@ -99,7 +99,7 @@ func (c *Component) PadCenters() path.Points {
 	return centers
 }
 
-func (c *Component) Arrange(t transform.Transform) *Component {
+func (c *Component) Arrange(t transform.T) *Component {
 	return &Component{
 		Transform:  t,
 		Components: Components{c},

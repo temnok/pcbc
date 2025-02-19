@@ -63,7 +63,7 @@ var (
 
 			pcbc.Logo.Arrange(transform.Move(-4.8, -6.5)),
 			eda.CenteredText("MS88SF21").Arrange(transform.Scale(1.8, 1.8).Move(1.3, -5.9)),
-			eda.CenteredText("nRF52840").Arrange(transform.ScaleK(1.8).Move(1.3, -7.4)),
+			eda.CenteredText("nRF52840").Arrange(transform.UniformScale(1.8).Move(1.3, -7.4)),
 		},
 
 		Tracks: eda.Tracks(

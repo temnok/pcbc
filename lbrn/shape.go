@@ -90,7 +90,7 @@ func (s *Shape) SetCutOrder(order int) *Shape {
 	return s
 }
 
-func NewPath(i int, t transform.Transform, path path.Path) *Shape {
+func NewPath(i int, t transform.T, path path.Path) *Shape {
 	s := &Shape{
 		Type:     "Path",
 		CutIndex: fmt.Sprint(i),
@@ -102,7 +102,7 @@ func NewPath(i int, t transform.Transform, path path.Path) *Shape {
 	return s
 }
 
-func NewPathWithTabs(index int, t transform.Transform, p path.Path) *Shape {
+func NewPathWithTabs(index int, t transform.T, p path.Path) *Shape {
 	s := NewPath(index, t, p)
 
 	var tabs path.Points
@@ -117,7 +117,7 @@ func NewPathWithTabs(index int, t transform.Transform, p path.Path) *Shape {
 	return s
 }
 
-func NewBitmap(i int, t transform.Transform, im image.Image) *Shape {
+func NewBitmap(i int, t transform.T, im image.Image) *Shape {
 	buf := new(bytes.Buffer)
 	if err := png.Encode(buf, im); err != nil {
 		panic(err)

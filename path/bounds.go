@@ -20,13 +20,13 @@ func (b *Bounds) addPoint(p Point) {
 	b.rt.X, b.rt.Y = max(b.rt.X, p.X), max(b.rt.Y, p.Y)
 }
 
-func (b *Bounds) AddPath(t transform.Transform, path Path) {
+func (b *Bounds) AddPath(t transform.T, path Path) {
 	for _, p := range path {
 		b.addPoint(p.Apply(t))
 	}
 }
 
-func (b *Bounds) AddPaths(t transform.Transform, paths Paths) {
+func (b *Bounds) AddPaths(t transform.T, paths Paths) {
 	for _, p := range paths {
 		b.AddPath(t, p)
 	}

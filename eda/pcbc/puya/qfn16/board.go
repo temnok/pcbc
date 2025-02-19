@@ -38,7 +38,7 @@ var (
 			header,
 
 			pcbc.Logo.Arrange(transform.Move(-1.6, -1)),
-			pcbc.Firm.Arrange(transform.ScaleK(0.5).Move(1.6, -1)),
+			pcbc.Firm.Arrange(transform.UniformScale(0.5).Move(1.6, -1)),
 			eda.CenteredText("PY32").Arrange(transform.Scale(1.6, 1.5).Move(0, 4.1)),
 			eda.CenteredText("F002A").Arrange(transform.Scale(1.2, 0.9).Move(0, -4.4)),
 		},

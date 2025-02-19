@@ -21,7 +21,7 @@ var Board = &eda.Component{
 
 		pcbc.MountHole.Arrange(transform.Rotate(45).Move(0.55, 0)),
 
-		pcbc.Logo.Arrange(transform.ScaleK(0.7).Move(-0.6, -2)),
+		pcbc.Logo.Arrange(transform.UniformScale(0.7).Move(-0.6, -2)),
 
 		eda.CenteredText("WS2812B").Arrange(transform.Scale(1, 1.8).Move(-2.1, 1.8)),
 

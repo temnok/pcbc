@@ -4,9 +4,12 @@ package transform
 
 import "math"
 
-var Identity = Transform{Ix: 1, Jy: 1}
+var (
+	Zero = T{}
+	I    = T{Ix: 1, Jy: 1}
+)
 
-func Apply(x, y float64, t Transform) (float64, float64) {
+func Apply(x, y float64, t T) (float64, float64) {
 	//            Ix Iy 0
 	//  x y 1  *  Jx Jy 0
 	//            Kx Ky 1
@@ -14,41 +17,41 @@ func Apply(x, y float64, t Transform) (float64, float64) {
 		x*t.Iy + y*t.Jy + t.Ky
 }
 
-func Multiply(a, b Transform) Transform {
+func Multiply(a, b T) T {
 	// a.Ix  a.Iy  0     b.Ix  b.Iy  0
 	// a.Jx  a.Jy  0  *  b.Jx  b.Jy  0
 	// a.Kx  a.Ky  1     b.Kx  b.Ky  1
-	return Transform{
+	return T{
 		Ix: a.Ix*b.Ix + a.Iy*b.Jx, Iy: a.Ix*b.Iy + a.Iy*b.Jy,
 		Jx: a.Jx*b.Ix + a.Jy*b.Jx, Jy: a.Jx*b.Iy + a.Jy*b.Jy,
 		Kx: a.Kx*b.Ix + a.Ky*b.Jx + b.Kx, Ky: a.Kx*b.Iy + a.Ky*b.Jy + b.Ky,
 	}
 }
 
-func Move(x, y float64) Transform {
+func Move(x, y float64) T {
 	// 1 0 0
 	// 0 1 0
 	// x y 1
-	return Transform{Ix: 1, Jy: 1, Kx: x, Ky: y}
+	return T{Ix: 1, Jy: 1, Kx: x, Ky: y}
 }
 
-func Rotate(d float64) Transform {
+func Rotate(d float64) T {
 	//  cos(a) sin(a) 0
 	// -sin(a) cos(a) 0
 	//    0     0     1
 	r := d * math.Pi / 180
 	sin, cos := math.Sin(r), math.Cos(r)
 
-	return Transform{Ix: cos, Iy: sin, Jx: -sin, Jy: cos}
+	return T{Ix: cos, Iy: sin, Jx: -sin, Jy: cos}
 }
 
-func Scale(x, y float64) Transform {
+func Scale(x, y float64) T {
 	// x 0 0
 	// 0 y 0
 	// 0 0 1
-	return Transform{Ix: x, Jy: y}
+	return T{Ix: x, Jy: y}
 }
 
-func ScaleK(k float64) Transform {
+func UniformScale(k float64) T {
 	return Scale(k, k)
 }

@@ -223,7 +223,7 @@ func init() {
 	}
 }
 
-func WeightScale(t transform.Transform) float64 {
+func WeightScale(t transform.T) float64 {
 	return min(math.Sqrt(t.Ix*t.Ix+t.Iy*t.Iy), math.Sqrt(t.Jx*t.Jx+t.Jy*t.Jy))
 }
 

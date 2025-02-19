@@ -2,32 +2,32 @@
 
 package transform
 
-type Transform struct {
+type T struct {
 	Ix, Iy float64
 	Jx, Jy float64
 	Kx, Ky float64
 }
 
-func (t Transform) Multiply(m Transform) Transform {
+func (t T) Multiply(m T) T {
 	return Multiply(t, m)
 }
 
-func (t Transform) Move(x, y float64) Transform {
-	return t.Multiply(Move(x, y))
+func (t T) Move(x, y float64) T {
+	return Multiply(t, Move(x, y))
 }
 
-func (t Transform) Rotate(d float64) Transform {
-	return t.Multiply(Rotate(d))
+func (t T) Rotate(d float64) T {
+	return Multiply(t, Rotate(d))
 }
 
-func (t Transform) Scale(kx, ky float64) Transform {
-	return t.Multiply(Scale(kx, ky))
+func (t T) Scale(kx, ky float64) T {
+	return Multiply(t, Scale(kx, ky))
 }
 
-func (t Transform) ScaleK(k float64) Transform {
-	return t.Multiply(ScaleK(k))
+func (t T) UniformScale(k float64) T {
+	return Multiply(t, UniformScale(k))
 }
 
-func (t Transform) Apply(x, y float64) (float64, float64) {
+func (t T) Apply(x, y float64) (float64, float64) {
 	return Apply(x, y, t)
 }

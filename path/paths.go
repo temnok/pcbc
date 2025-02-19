@@ -18,7 +18,7 @@ func Join(paths ...Paths) Paths {
 }
 
 // Apply returns list of transformed paths.
-func (paths Paths) Apply(t transform.Transform) Paths {
+func (paths Paths) Apply(t transform.T) Paths {
 	res := make(Paths, len(paths))
 
 	for i, path := range paths {
@@ -54,7 +54,7 @@ func (paths Paths) Clone(n int, dx, dy float64) Paths {
 }
 
 // Centers returns center points for paths.
-func (paths Paths) Centers(t transform.Transform) Points {
+func (paths Paths) Centers(t transform.T) Points {
 	centers := make(Points, len(paths))
 
 	for i, path := range paths {

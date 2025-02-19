@@ -19,7 +19,7 @@ func (p Point) RoundXY() (x, y int) {
 	return int(math.Round(p.X)), int(math.Round(p.Y))
 }
 
-func (p Point) Apply(t transform.Transform) Point {
+func (p Point) Apply(t transform.T) Point {
 	x, y := t.Apply(p.X, p.Y)
 	return Point{X: x, Y: y}
 }

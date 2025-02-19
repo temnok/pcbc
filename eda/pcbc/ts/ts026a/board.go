@@ -19,8 +19,8 @@ var Board = &eda.Component{
 		mph100imp40f.G_V_SP(2).Arrange(transform.Rotate(-90).Move(-3, 0)),
 		pcbc.MountHole,
 
-		pcbc.Logo.Arrange(transform.ScaleK(0.7).Move(0, -1.9)),
-		eda.CenteredText("SW").Arrange(transform.ScaleK(1.5).Move(0, 2)),
+		pcbc.Logo.Arrange(transform.UniformScale(0.7).Move(0, -1.9)),
+		eda.CenteredText("SW").Arrange(transform.UniformScale(1.5).Move(0, 2)),
 	},
 }
 

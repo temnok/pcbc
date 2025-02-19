@@ -15,7 +15,7 @@ func (pcb *PCB) SaveEtch() error {
 	im := pcb.copper.ToImage(color.White, color.Black)
 
 	center := transform.Move(pcb.lbrnCenter.X, pcb.lbrnCenter.Y)
-	bitmapTransform := transform.ScaleK(1 / resolution).Multiply(center)
+	bitmapTransform := transform.UniformScale(1 / resolution).Multiply(center)
 
 	p := lbrn.LightBurnProject{
 		CutSettingImg: []lbrn.CutSetting{

@@ -99,10 +99,10 @@ func board(short bool) *eda.Component {
 			pcbc.MountHole.Arrange(transform.Rotate(45).Move(-5, -10.5)),
 			pcbc.MountHole.Arrange(transform.Rotate(-45).Move(5, -10.5)),
 
-			pcbc.Logo.Arrange(transform.ScaleK(1.2).Move(0, -8.3)),
+			pcbc.Logo.Arrange(transform.UniformScale(1.2).Move(0, -8.3)),
 			eda.CenteredText(revision).Arrange(transform.Scale(0.75, 1).Move(-5, -8.1)),
-			eda.CenteredText("BC833").Arrange(transform.ScaleK(2).Move(0, -10.4)),
-			eda.CenteredText("nRF52833").Arrange(transform.ScaleK(1.5).Move(0, -12.2)),
+			eda.CenteredText("BC833").Arrange(transform.UniformScale(2).Move(0, -10.4)),
+			eda.CenteredText("nRF52833").Arrange(transform.UniformScale(1.5).Move(0, -12.2)),
 		},
 
 		Tracks: tracks,

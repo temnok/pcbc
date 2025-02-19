@@ -220,7 +220,7 @@ func (pcb *PCB) cutStencil(c *Component) {
 	brush02.IterateContours(pads, pcb.stencil.Set1)
 }
 
-func (pcb *PCB) bitmapTransform() transform.Transform {
+func (pcb *PCB) bitmapTransform() transform.T {
 	return transform.Move(pcb.width/2, pcb.height/2).Scale(resolution, resolution)
 }
 

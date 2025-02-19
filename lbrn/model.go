@@ -69,7 +69,7 @@ type P struct {
 	P1 string `xml:"p1,attr"`
 }
 
-func XForm(t transform.Transform) string {
+func XForm(t transform.T) string {
 	return fmt.Sprintf("%v %v %v %v %v %v", t.Ix, t.Iy, t.Jx, t.Jy, t.Kx, t.Ky)
 }
 

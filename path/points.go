@@ -10,7 +10,7 @@ import (
 type Points []Point
 
 // Apply returns points transformed by a given 2D transformation.
-func (points Points) Apply(t transform.Transform) Path {
+func (points Points) Apply(t transform.T) Path {
 	res := make(Path, len(points))
 
 	for i, point := range points {
