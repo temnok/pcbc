@@ -97,7 +97,7 @@ func addMaskbaseHoles(pcb *PCB, p *lbrn.LightBurnProject) {
 	pcb.component.Visit(func(component *Component) {
 		t := component.Transform.Multiply(center)
 
-		for _, hole := range component.MaskbaseHoles {
+		for _, hole := range component.Perforations {
 			hasMaskbaseHoles = true
 			p.Shape = append(p.Shape, lbrn.NewPath(3, t, hole))
 		}

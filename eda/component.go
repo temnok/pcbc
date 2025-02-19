@@ -17,9 +17,6 @@ type Component struct {
 	// FR4: remove groundfill: at the beginning
 	Clears path.Paths
 
-	// FR4: remove groundfill: at the end
-	Etchings path.Paths
-
 	// FR4: cuts with tabs
 	// Mask: dotted cut strokes
 	Cuts path.Paths
@@ -28,8 +25,8 @@ type Component struct {
 	// Mask: solid cut strokes
 	Holes path.Paths
 
-	// Mask: holes
-	MaskbaseHoles path.Paths
+	// Removed: copper, copperbase, mask, maskbase, stencil
+	Perforations path.Paths
 
 	// FR4: copper fills
 	// Mask: solid cut strokes
@@ -67,10 +64,9 @@ func (c *Component) visit(t transform.T, parent *Component, callback func(*Compo
 	comp := &Component{
 		Transform:      t,
 		Clears:         c.Clears,
-		Etchings:       c.Etchings,
 		Cuts:           c.Cuts,
 		Holes:          c.Holes,
-		MaskbaseHoles:  c.MaskbaseHoles,
+		Perforations:   c.Perforations,
 		Pads:           c.Pads,
 		Openings:       c.Openings,
 		Marks:          c.Marks,
@@ -122,10 +118,9 @@ func (c *Component) Size() (float64, float64) {
 
 	c.Visit(func(c *Component) {
 		b.AddPaths(c.Transform, c.Clears)
-		b.AddPaths(c.Transform, c.Etchings)
 		b.AddPaths(c.Transform, c.Cuts)
 		b.AddPaths(c.Transform, c.Holes)
-		b.AddPaths(c.Transform, c.MaskbaseHoles)
+		b.AddPaths(c.Transform, c.Perforations)
 		b.AddPaths(c.Transform, c.Pads)
 		b.AddPaths(c.Transform, c.Openings)
 		b.AddPaths(c.Transform, c.Marks)

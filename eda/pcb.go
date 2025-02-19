@@ -96,7 +96,6 @@ func (pcb *PCB) Process() {
 func (pcb *PCB) processBoard() {
 	pcb.component.Visit(pcb.removeCopper)
 	pcb.component.Visit(pcb.addCopper)
-	pcb.component.Visit(pcb.removeCopper2)
 	pcb.component.Visit(pcb.cutBoard)
 }
 
@@ -158,14 +157,6 @@ func (pcb *PCB) addCopper(c *Component) {
 	brush := shape.Circle(int((brushW + extraCopper) * resolution))
 	brush.IterateContours(c.Tracks.Apply(t), pcb.copper.Set1)
 	brush.IterateContours(c.GroundTracks.Apply(t), pcb.copper.Set1)
-}
-
-func (pcb *PCB) removeCopper2(c *Component) {
-	t := c.Transform.Multiply(pcb.bitmapTransform())
-
-	// Etchings
-	etchings := c.Etchings.Apply(t)
-	shape.IterateContoursRows(etchings, pcb.copper.Set0)
 }
 
 func (pcb *PCB) cutBoard(c *Component) {
