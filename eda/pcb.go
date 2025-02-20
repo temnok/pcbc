@@ -233,12 +233,20 @@ func (pcb *PCB) SaveOverview() error {
 	filename := pcb.SavePath + "overview.png"
 
 	image := bitmap.NewBitmapsImage(
-		[]*bitmap.Bitmap{pcb.copper, pcb.overviewCopperbaseCuts, pcb.mask, pcb.silk, pcb.overviewStencilCuts},
+		[]*bitmap.Bitmap{
+			pcb.copper,
+			pcb.mask,
+			pcb.silk,
+
+			pcb.overviewCopperbaseCuts,
+			pcb.overviewStencilCuts,
+		},
 		[][2]color.Color{
 			{color.RGBA{G: 0x40, B: 0x10, A: 0xFF}, color.RGBA{R: 0xC0, G: 0x60, A: 0xFF}},
-			{color.RGBA{}, color.RGBA{G: 0xFF, A: 0xFF}},
 			{color.RGBA{}, color.RGBA{R: 0x80, G: 0x80, B: 0xFF, A: 0xA0}},
 			{color.RGBA{}, color.RGBA{R: 0xFF, G: 0xFF, B: 0xFF, A: 0xA0}},
+
+			{color.RGBA{}, color.RGBA{G: 0xFF, B: 0xFF, A: 0xFF}},
 			{color.RGBA{}, color.RGBA{R: 0xFF, G: 0xFF, B: 0xFF, A: 0xFF}},
 		},
 		true,

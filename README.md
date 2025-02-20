@@ -51,7 +51,7 @@ func main() {
 ### Generated Overview (Combined Layers)
 
 * Dark green: FR4
-* Bright Green: FR4 cuts
+* Cyan: FR4 cuts
 * Orange: copper
 * Blue: soldermask cuts
 * Pale Green/White: soldermask marks (silkscreen)
