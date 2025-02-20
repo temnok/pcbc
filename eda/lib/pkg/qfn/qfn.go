@@ -11,9 +11,9 @@ import (
 var QFN16G *eda.Component
 
 func init() {
-	pad := path.RoundRect(0.8, 0.25, 0.1)
+	pad := path.RoundRect(0.75, 0.25, 0.1)
 
-	col := pad.Clone(4, 0, -0.5).Apply(transform.Move(-1.55, 0))
+	col := pad.Clone(4, 0, -0.5).Apply(transform.Move(-1.6, 0))
 
 	var pads path.Paths
 	for a := 0.0; a < 360; a += 90 {
@@ -23,7 +23,7 @@ func init() {
 	pads = append(pads, path.Rect(1.2, 1.2)...)
 
 	QFN16G = &eda.Component{
-		Clears: path.Rect(2.2, 2.2),
+		Clears: path.Rect(2.3, 2.3),
 
 		Pads: pads,
 
