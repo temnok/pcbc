@@ -113,9 +113,11 @@ func (pcb *PCB) removeCopper(c *Component) {
 	clears := c.Clears.Apply(t)
 	shape.IterateContoursRows(clears, pcb.copper.Set0)
 
+	clearWidth := 2 * (pcb.CopperClearWidth - pcb.ExtraCopperWidth)
+
 	// Pads
 	pads := c.Pads.Apply(t)
-	clearBrush := shape.Circle(int(2 * pcb.CopperClearWidth * pcb.pixelsPerMM))
+	clearBrush := shape.Circle(int(clearWidth * pcb.pixelsPerMM))
 	clearBrush.IterateContours(pads, pcb.copper.Set0)
 
 	// Non-ground tracks
@@ -123,7 +125,7 @@ func (pcb *PCB) removeCopper(c *Component) {
 	if brushW == 0 {
 		brushW = pcb.DefaultTrackWidth
 	}
-	brush := shape.Circle(int((brushW + 2*pcb.CopperClearWidth) * pcb.pixelsPerMM))
+	brush := shape.Circle(int((brushW + clearWidth) * pcb.pixelsPerMM))
 	brush.IterateContours(c.Tracks.Apply(t), pcb.copper.Set0)
 
 	cutClearBrush := shape.Circle(int((pcb.CopperClearWidth) * pcb.pixelsPerMM))
