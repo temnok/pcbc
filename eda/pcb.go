@@ -82,24 +82,24 @@ func (pcb *PCB) Process() {
 
 	pcb.copper.Invert()
 
-	pcb.processCopper()
-	pcb.processMask()
-	pcb.processStencil()
+	pcb.firstPass()
+	pcb.secondPass()
 }
 
-func (pcb *PCB) processCopper() {
-	pcb.component.Visit(pcb.removeCopper)
-	pcb.component.Visit(pcb.addCopper)
-	pcb.component.Visit(pcb.cutCopperbaseOverview)
+func (pcb *PCB) firstPass() {
+	pcb.component.Visit(func(component *Component) {
+		pcb.removeCopper(component)
+		pcb.cutCopperbaseOverview(component)
+		pcb.addSilk(component)
+		pcb.cutMask(component)
+		pcb.cutStencil(component)
+	})
 }
 
-func (pcb *PCB) processMask() {
-	pcb.component.Visit(pcb.addMarks)
-	pcb.component.Visit(pcb.cutOpenings)
-}
-
-func (pcb *PCB) processStencil() {
-	pcb.component.Visit(pcb.cutStencil)
+func (pcb *PCB) secondPass() {
+	pcb.component.Visit(func(component *Component) {
+		pcb.addCopper(component)
+	})
 }
 
 func (pcb *PCB) removeCopper(c *Component) {
@@ -179,7 +179,7 @@ func (pcb *PCB) cutCopperbaseOverview(c *Component) {
 	brush.IterateContours(perforations, pcb.overviewCopperbaseCuts.Set1)
 }
 
-func (pcb *PCB) addMarks(c *Component) {
+func (pcb *PCB) addSilk(c *Component) {
 	t := c.Transform.Multiply(pcb.bitmapTransform())
 
 	// Marks:
@@ -188,7 +188,7 @@ func (pcb *PCB) addMarks(c *Component) {
 	brush.IterateContours(c.Marks.Apply(t), pcb.silk.Set1)
 }
 
-func (pcb *PCB) cutOpenings(c *Component) {
+func (pcb *PCB) cutMask(c *Component) {
 	t := c.Transform.Multiply(pcb.bitmapTransform())
 
 	brush := shape.Circle(int(pcb.MaskCutWidth * pcb.PixelsPerMM))
