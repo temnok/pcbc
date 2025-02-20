@@ -210,11 +210,6 @@ func (pcb *PCB) cutOpenings(c *Component) {
 	// Perforations
 	perforations := c.Perforations.Apply(t)
 	brush.IterateContours(perforations, pcb.mask.Set1)
-
-	// Openings
-	openings := c.Openings.Apply(t)
-	shape.IterateContoursRows(openings, pcb.mask.Set0)
-	brush.IterateContours(openings, pcb.mask.Set1)
 }
 
 func (pcb *PCB) cutStencil(c *Component) {

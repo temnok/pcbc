@@ -38,9 +38,6 @@ type Component struct {
 	// FR4: copper strokes without groundfill clean
 	GroundTracks path.Paths
 
-	// Mask: solid cut strokes
-	Openings path.Paths
-
 	// Mask: solid mark strokes
 	Marks path.Paths
 
@@ -67,7 +64,6 @@ func (c *Component) visit(t transform.T, parent *Component, callback func(*Compo
 		Holes:        c.Holes,
 		Perforations: c.Perforations,
 		Pads:         c.Pads,
-		Openings:     c.Openings,
 		Marks:        c.Marks,
 		Tracks:       c.Tracks,
 		GroundTracks: c.GroundTracks,
@@ -121,7 +117,6 @@ func (c *Component) Size() (float64, float64) {
 		b.AddPaths(c.Transform, c.Holes)
 		b.AddPaths(c.Transform, c.Perforations)
 		b.AddPaths(c.Transform, c.Pads)
-		b.AddPaths(c.Transform, c.Openings)
 		b.AddPaths(c.Transform, c.Marks)
 		b.AddPaths(c.Transform, c.Tracks)
 		b.AddPaths(c.Transform, c.GroundTracks)
