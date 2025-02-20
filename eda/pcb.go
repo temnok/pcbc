@@ -18,8 +18,10 @@ type (
 )
 
 type PCB struct {
-	width, height float64
-	pixelsPerMM   float64
+	component *Component
+
+	Width, Height float64
+	PixelsPerMM   float64
 
 	DefaultTrackWidth float64
 	ExtraCopperWidth  float64
@@ -27,56 +29,40 @@ type PCB struct {
 	MaskCutWidth      float64
 	OverviewCutWidth  float64
 
-	lbrnCenter path.Point
+	LbrnCenterX, LbrnCenterY float64
 
-	SavePath  string
-	component *Component
+	SavePath string
 
-	overviewCopperbaseCuts, copper, mask, silk, overviewStencilCuts *bitmap.Bitmap
+	copper, mask, silk                          *bitmap.Bitmap
+	overviewCopperbaseCuts, overviewStencilCuts *bitmap.Bitmap
 }
 
 func GeneratePCB(component *Component) error {
 	return ProcessPCB(component).SaveFiles()
 }
 
-func GeneratePCBAt(component *Component, dirPath string) error {
-	pcb := ProcessPCB(component)
-	pcb.SavePath = dirPath
-	return pcb.SaveFiles()
-}
-
 func NewPCB(component *Component) *PCB {
 	width, height := component.Size()
 	width, height = width+1, height+1
 
-	const resolution = 100.0 // pixels per mm
-	wi, hi := int(width*resolution), int(height*resolution)
-
-	pcb := &PCB{
-		width:  width,
-		height: height,
-
+	return &PCB{
 		component: component,
 
-		pixelsPerMM:       resolution,
+		Width:       width,
+		Height:      height,
+		PixelsPerMM: 100,
+
 		DefaultTrackWidth: 0.25,
 		ExtraCopperWidth:  0.05,
 		CopperClearWidth:  0.25,
 		MaskCutWidth:      0.1,
 		OverviewCutWidth:  0.02,
 
-		lbrnCenter: path.Point{X: 55, Y: 55},
-		SavePath:   "out/",
+		LbrnCenterX: 55,
+		LbrnCenterY: 55,
 
-		copper:                 bitmap.NewBitmap(wi, hi),
-		mask:                   bitmap.NewBitmap(wi, hi),
-		silk:                   bitmap.NewBitmap(wi, hi),
-		overviewCopperbaseCuts: bitmap.NewBitmap(wi, hi),
-		overviewStencilCuts:    bitmap.NewBitmap(wi, hi),
+		SavePath: "out/",
 	}
-
-	pcb.copper.Invert()
-	return pcb
 }
 
 func ProcessPCB(component *Component) *PCB {
@@ -86,6 +72,16 @@ func ProcessPCB(component *Component) *PCB {
 }
 
 func (pcb *PCB) Process() {
+	wi, hi := int(pcb.Width*pcb.PixelsPerMM), int(pcb.Height*pcb.PixelsPerMM)
+
+	pcb.copper = bitmap.NewBitmap(wi, hi)
+	pcb.mask = bitmap.NewBitmap(wi, hi)
+	pcb.silk = bitmap.NewBitmap(wi, hi)
+	pcb.overviewCopperbaseCuts = bitmap.NewBitmap(wi, hi)
+	pcb.overviewStencilCuts = bitmap.NewBitmap(wi, hi)
+
+	pcb.copper.Invert()
+
 	pcb.processBoard()
 	pcb.processMask()
 	pcb.processStencil()
@@ -117,7 +113,7 @@ func (pcb *PCB) removeCopper(c *Component) {
 
 	// Pads
 	pads := c.Pads.Apply(t)
-	clearBrush := shape.Circle(int(clearWidth * pcb.pixelsPerMM))
+	clearBrush := shape.Circle(int(clearWidth * pcb.PixelsPerMM))
 	clearBrush.IterateContours(pads, pcb.copper.Set0)
 
 	// Non-ground tracks
@@ -125,10 +121,10 @@ func (pcb *PCB) removeCopper(c *Component) {
 	if brushW == 0 {
 		brushW = pcb.DefaultTrackWidth
 	}
-	brush := shape.Circle(int((brushW + clearWidth) * pcb.pixelsPerMM))
+	brush := shape.Circle(int((brushW + clearWidth) * pcb.PixelsPerMM))
 	brush.IterateContours(c.Tracks.Apply(t), pcb.copper.Set0)
 
-	cutClearBrush := shape.Circle(int((pcb.CopperClearWidth) * pcb.pixelsPerMM))
+	cutClearBrush := shape.Circle(int((pcb.CopperClearWidth) * pcb.PixelsPerMM))
 
 	// Holes
 	holes := c.Holes.Apply(t)
@@ -146,7 +142,7 @@ func (pcb *PCB) addCopper(c *Component) {
 	pads := c.Pads.Apply(t)
 	shape.IterateContoursRows(pads, pcb.copper.Set1)
 
-	extraCopperBrush := shape.Circle(int(pcb.ExtraCopperWidth * pcb.pixelsPerMM))
+	extraCopperBrush := shape.Circle(int(pcb.ExtraCopperWidth * pcb.PixelsPerMM))
 	extraCopperBrush.IterateContours(pads, pcb.copper.Set1)
 
 	// Tracks
@@ -155,7 +151,7 @@ func (pcb *PCB) addCopper(c *Component) {
 		brushW = pcb.DefaultTrackWidth
 	}
 
-	brush := shape.Circle(int((brushW + pcb.ExtraCopperWidth) * pcb.pixelsPerMM))
+	brush := shape.Circle(int((brushW + pcb.ExtraCopperWidth) * pcb.PixelsPerMM))
 	brush.IterateContours(c.Tracks.Apply(t), pcb.copper.Set1)
 	brush.IterateContours(c.GroundTracks.Apply(t), pcb.copper.Set1)
 }
@@ -163,7 +159,7 @@ func (pcb *PCB) addCopper(c *Component) {
 func (pcb *PCB) cutCopperbaseOverview(c *Component) {
 	t := c.Transform.Multiply(pcb.bitmapTransform())
 
-	brush := shape.Circle(int(pcb.OverviewCutWidth * pcb.pixelsPerMM))
+	brush := shape.Circle(int(pcb.OverviewCutWidth * pcb.PixelsPerMM))
 
 	// Holes
 	holes := c.Holes.Apply(t)
@@ -186,7 +182,7 @@ func (pcb *PCB) addMarks(c *Component) {
 func (pcb *PCB) cutOpenings(c *Component) {
 	t := c.Transform.Multiply(pcb.bitmapTransform())
 
-	brush := shape.Circle(int(pcb.MaskCutWidth * pcb.pixelsPerMM))
+	brush := shape.Circle(int(pcb.MaskCutWidth * pcb.PixelsPerMM))
 
 	// Pads
 	pads := c.Pads.Apply(t)
@@ -198,7 +194,7 @@ func (pcb *PCB) cutOpenings(c *Component) {
 
 	// Cuts
 	cuts := c.Cuts.Apply(t)
-	cuts.Jump(int(2*pcb.MaskCutWidth*pcb.pixelsPerMM), func(x, y int) {
+	cuts.Jump(int(2*pcb.MaskCutWidth*pcb.PixelsPerMM), func(x, y int) {
 		brush.IterateRowsXY(x, y, pcb.mask.Set1)
 	})
 
@@ -211,7 +207,7 @@ func (pcb *PCB) cutOpenings(c *Component) {
 func (pcb *PCB) cutStencil(c *Component) {
 	t := c.Transform.Multiply(pcb.bitmapTransform())
 
-	brush := shape.Circle(int(pcb.OverviewCutWidth * pcb.pixelsPerMM))
+	brush := shape.Circle(int(pcb.OverviewCutWidth * pcb.PixelsPerMM))
 
 	// Pads
 	pads := c.Pads.Apply(t)
@@ -219,7 +215,7 @@ func (pcb *PCB) cutStencil(c *Component) {
 }
 
 func (pcb *PCB) bitmapTransform() transform.T {
-	return transform.Move(pcb.width/2, pcb.height/2).Scale(pcb.pixelsPerMM, pcb.pixelsPerMM)
+	return transform.Move(pcb.Width/2, pcb.Height/2).Scale(pcb.PixelsPerMM, pcb.PixelsPerMM)
 }
 
 func (pcb *PCB) SaveFiles() error {

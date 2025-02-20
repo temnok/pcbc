@@ -10,7 +10,7 @@ import (
 func (pcb *PCB) SaveStencil() error {
 	filename := pcb.SavePath + "stencil.lbrn"
 
-	center := transform.Move(pcb.lbrnCenter.X, pcb.lbrnCenter.Y)
+	center := transform.Move(pcb.LbrnCenterX, pcb.LbrnCenterY)
 
 	p := lbrn.LightBurnProject{
 		CutSetting: []lbrn.CutSetting{

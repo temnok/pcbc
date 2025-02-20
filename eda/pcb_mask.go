@@ -73,8 +73,8 @@ func (pcb *PCB) SaveMask() error {
 	silk := pcb.silk.ToImage(color.White, color.Black)
 	mask := pcb.mask.ToImage(color.Transparent, color.Black)
 
-	bitmapTransform := transform.UniformScale(1/pcb.pixelsPerMM).
-		Move(pcb.lbrnCenter.X, pcb.lbrnCenter.Y)
+	bitmapTransform := transform.UniformScale(1/pcb.PixelsPerMM).
+		Move(pcb.LbrnCenterX, pcb.LbrnCenterY)
 
 	p := lbrn.LightBurnProject{
 		CutSettingImg: maskCutSettings,
@@ -93,7 +93,7 @@ func (pcb *PCB) SaveMask() error {
 func addMaskbaseHoles(pcb *PCB, p *lbrn.LightBurnProject) {
 	hasMaskbaseHoles := false
 
-	center := transform.Move(pcb.lbrnCenter.X, pcb.lbrnCenter.Y)
+	center := transform.Move(pcb.LbrnCenterX, pcb.LbrnCenterY)
 	pcb.component.Visit(func(component *Component) {
 		t := component.Transform.Multiply(center)
 
