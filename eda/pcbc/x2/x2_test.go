@@ -13,13 +13,13 @@ import (
 func TestBoard(t *testing.T) {
 	assert.NoError(t, eda.GeneratePCB(&eda.Component{
 		Components: eda.Components{
-			pcbc.Board35x45,
-			eda.ComponentGrid(3, 11, 5,
-				X2("LDR", "+2V"),
-				X2("LDG", "+3V"),
-				X2("LDB", "+3V"),
-				X2("LDY", "+2V"),
-				X2("LDW", "+3V"),
+			pcbc.Perforations34x42,
+			eda.ComponentGrid(3, 11.5, 5.5,
+				X2("LD+", "R2V"),
+				X2("LD+", "G3V"),
+				X2("LD+", "B3V"),
+				X2("LD+", "Y2V"),
+				X2("LD+", "W3V"),
 				X2("R ", "50R"),
 				X2("R ", "50R"),
 				X2("R ", "K10"),
