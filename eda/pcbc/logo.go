@@ -3,6 +3,8 @@
 package pcbc
 
 import (
+	"strconv"
+	"strings"
 	"temnok/pcbc/eda"
 	"temnok/pcbc/font"
 	"temnok/pcbc/path"
@@ -22,3 +24,12 @@ var (
 		"TECH",
 	)
 )
+
+func Rev(y, m, d int) *eda.Component {
+	const base = 36
+	ymd := strconv.FormatInt(int64(y)%100, base) +
+		strconv.FormatInt(int64(m), base) +
+		strconv.FormatInt(int64(d), base)
+
+	return eda.CenteredText(strings.ToUpper(ymd))
+}

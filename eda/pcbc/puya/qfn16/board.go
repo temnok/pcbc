@@ -41,6 +41,8 @@ var (
 			pcbc.Firm.Arrange(transform.UniformScale(0.5).Move(1.35, -1.25)),
 			eda.CenteredText("PY32").Arrange(transform.Scale(1.5, 1.5).Move(0, 4.1)),
 			eda.CenteredText("F002A").Arrange(transform.Scale(1.1, 0.9).Move(0, -4.4)),
+
+			pcbc.Rev(2025, 2, 19).Arrange(transform.UniformScale(0.5).Move(1.9, -3)),
 		},
 
 		Tracks: eda.Tracks(
