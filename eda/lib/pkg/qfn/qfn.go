@@ -32,7 +32,7 @@ func init() {
 			path.Circle(0.2).Apply(transform.Move(-1.7, 1.4)),
 		),
 
-		TrackThickness: 0.18,
+		TrackWidth: 0.18,
 
 		GroundTracks: eda.Tracks(
 			eda.Track{{X: -1.5, Y: 1.5}, {X: 1.5, Y: -1.5}},

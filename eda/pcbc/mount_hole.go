@@ -23,8 +23,8 @@ var (
 
 		Components: eda.Components{
 			{
-				TrackThickness: 0.2,
-				Tracks:         path.Circle(2.8),
+				TrackWidth: 0.2,
+				Tracks:     path.Circle(2.8),
 			},
 		},
 	}

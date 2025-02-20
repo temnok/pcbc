@@ -25,7 +25,7 @@ type Component struct {
 	// Mask: solid cut strokes
 	Holes path.Paths
 
-	// Removed: copper, copperbase, mask, maskbase, stencil
+	// Removed: copper, copperbase, mask, maskbase, overviewStencilCuts
 	Perforations path.Paths
 
 	// FR4: copper fills
@@ -45,7 +45,7 @@ type Component struct {
 	// Mask: solid mark strokes
 	Marks path.Paths
 
-	TrackThickness float64
+	TrackWidth float64
 
 	Components []*Component
 }
@@ -62,20 +62,20 @@ func (c *Component) visit(t transform.T, parent *Component, callback func(*Compo
 	}
 
 	comp := &Component{
-		Transform:      t,
-		Clears:         c.Clears,
-		Cuts:           c.Cuts,
-		Holes:          c.Holes,
-		Perforations:   c.Perforations,
-		Pads:           c.Pads,
-		Openings:       c.Openings,
-		Marks:          c.Marks,
-		Tracks:         c.Tracks,
-		GroundTracks:   c.GroundTracks,
-		TrackThickness: c.TrackThickness,
+		Transform:    t,
+		Clears:       c.Clears,
+		Cuts:         c.Cuts,
+		Holes:        c.Holes,
+		Perforations: c.Perforations,
+		Pads:         c.Pads,
+		Openings:     c.Openings,
+		Marks:        c.Marks,
+		Tracks:       c.Tracks,
+		GroundTracks: c.GroundTracks,
+		TrackWidth:   c.TrackWidth,
 	}
-	if comp.TrackThickness == 0 && parent != nil {
-		comp.TrackThickness = parent.TrackThickness
+	if comp.TrackWidth == 0 && parent != nil {
+		comp.TrackWidth = parent.TrackWidth
 	}
 
 	callback(comp)

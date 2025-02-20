@@ -10,7 +10,7 @@ import (
 
 func TestBoard(t *testing.T) {
 	pcb := eda.NewPCB(Board)
-	//pcb.TrackWidth = 0.35
+	//pcb.DefaultTrackWidth = 0.35
 	//pcb.ClearBrushDiameter = 0.2
 	pcb.Process()
 	assert.NoError(t, pcb.SaveFiles())
