@@ -5,13 +5,14 @@ package resistors
 import (
 	"github.com/stretchr/testify/assert"
 	"temnok/pcbc/eda"
+	"temnok/pcbc/eda/pcb"
 	"temnok/pcbc/eda/pcbc"
 	"temnok/pcbc/eda/pcbc/x2"
 	"testing"
 )
 
 func TestBoard(t *testing.T) {
-	assert.NoError(t, eda.GeneratePCB(&eda.Component{
+	assert.NoError(t, pcb.Generate(&eda.Component{
 		Components: eda.Components{
 			pcbc.Perforations72x42,
 			eda.ComponentGrid(6, 11, 5,

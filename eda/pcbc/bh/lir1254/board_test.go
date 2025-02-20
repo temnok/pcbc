@@ -5,6 +5,7 @@ package lir1254
 import (
 	"github.com/stretchr/testify/assert"
 	"temnok/pcbc/eda"
+	"temnok/pcbc/eda/pcb"
 	"temnok/pcbc/eda/pcbc"
 	"testing"
 )
@@ -18,5 +19,5 @@ var testBoard = &eda.Component{
 }
 
 func TestBoard(t *testing.T) {
-	assert.NoError(t, eda.GeneratePCB(testBoard))
+	assert.NoError(t, pcb.Generate(testBoard))
 }

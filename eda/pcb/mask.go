@@ -1,9 +1,10 @@
 // Copyright © 2025 Alex Temnok. All rights reserved.
 
-package eda
+package pcb
 
 import (
 	"image/color"
+	"temnok/pcbc/eda"
 	"temnok/pcbc/lbrn"
 	"temnok/pcbc/transform"
 )
@@ -94,7 +95,7 @@ func addPerforations(pcb *PCB, p *lbrn.LightBurnProject) {
 	hasPerforations := false
 
 	center := transform.Move(pcb.LbrnCenterX, pcb.LbrnCenterY)
-	pcb.component.Visit(func(component *Component) {
+	pcb.component.Visit(func(component *eda.Component) {
 		t := component.Transform.Multiply(center)
 
 		for _, hole := range component.Perforations {

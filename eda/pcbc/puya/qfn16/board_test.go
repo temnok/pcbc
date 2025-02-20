@@ -4,14 +4,10 @@ package qfn16
 
 import (
 	"github.com/stretchr/testify/assert"
-	"temnok/pcbc/eda"
+	"temnok/pcbc/eda/pcb"
 	"testing"
 )
 
 func TestBoard(t *testing.T) {
-	pcb := eda.NewPCB(Board)
-	//pcb.DefaultTrackWidth = 0.35
-	//pcb.ClearBrushDiameter = 0.2
-	pcb.Process()
-	assert.NoError(t, pcb.SaveFiles())
+	assert.NoError(t, pcb.Generate(Board))
 }

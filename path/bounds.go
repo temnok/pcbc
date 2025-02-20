@@ -9,7 +9,7 @@ type Bounds struct {
 	lb, rt      Point
 }
 
-func (b *Bounds) addPoint(p Point) {
+func (b *Bounds) includePoint(p Point) {
 	if !b.initialized {
 		b.initialized = true
 		b.lb, b.rt = p, p
@@ -20,15 +20,15 @@ func (b *Bounds) addPoint(p Point) {
 	b.rt.X, b.rt.Y = max(b.rt.X, p.X), max(b.rt.Y, p.Y)
 }
 
-func (b *Bounds) AddPath(t transform.T, path Path) {
+func (b *Bounds) IncludePath(t transform.T, path Path) {
 	for _, p := range path {
-		b.addPoint(p.Apply(t))
+		b.includePoint(p.Apply(t))
 	}
 }
 
-func (b *Bounds) AddPaths(t transform.T, paths Paths) {
+func (b *Bounds) IncludePaths(t transform.T, paths Paths) {
 	for _, p := range paths {
-		b.AddPath(t, p)
+		b.IncludePath(t, p)
 	}
 }
 

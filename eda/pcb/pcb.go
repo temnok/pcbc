@@ -1,24 +1,19 @@
 // Copyright © 2025 Alex Temnok. All rights reserved.
 
-package eda
+package pcb
 
 import (
 	"image/color"
 	"temnok/pcbc/bitmap"
+	"temnok/pcbc/eda"
 	"temnok/pcbc/font"
-	"temnok/pcbc/path"
 	"temnok/pcbc/shape"
 	"temnok/pcbc/transform"
 	"temnok/pcbc/util"
 )
 
-type (
-	Path  = path.Path
-	Paths = path.Paths
-)
-
 type PCB struct {
-	component *Component
+	component *eda.Component
 
 	Width, Height float64
 	PixelsPerMM   float64
@@ -37,11 +32,7 @@ type PCB struct {
 	overviewCopperbaseCuts, overviewStencilCuts *bitmap.Bitmap
 }
 
-func GeneratePCB(component *Component) error {
-	return ProcessPCB(component).SaveFiles()
-}
-
-func NewPCB(component *Component) *PCB {
+func New(component *eda.Component) *PCB {
 	width, height := component.Size()
 	width, height = width+1, height+1
 
@@ -65,10 +56,14 @@ func NewPCB(component *Component) *PCB {
 	}
 }
 
-func ProcessPCB(component *Component) *PCB {
-	pcb := NewPCB(component)
-	pcb.Process()
-	return pcb
+func Generate(component *eda.Component) error {
+	return Process(component).SaveFiles()
+}
+
+func Process(component *eda.Component) *PCB {
+	board := New(component)
+	board.Process()
+	return board
 }
 
 func (pcb *PCB) Process() {
@@ -82,12 +77,12 @@ func (pcb *PCB) Process() {
 
 	pcb.copper.Invert()
 
-	pcb.firstPass()
-	pcb.secondPass()
+	pcb.processPass1()
+	pcb.processPass2()
 }
 
-func (pcb *PCB) firstPass() {
-	pcb.component.Visit(func(component *Component) {
+func (pcb *PCB) processPass1() {
+	pcb.component.Visit(func(component *eda.Component) {
 		pcb.removeCopper(component)
 		pcb.cutCopperbaseOverview(component)
 		pcb.addSilk(component)
@@ -96,13 +91,13 @@ func (pcb *PCB) firstPass() {
 	})
 }
 
-func (pcb *PCB) secondPass() {
-	pcb.component.Visit(func(component *Component) {
+func (pcb *PCB) processPass2() {
+	pcb.component.Visit(func(component *eda.Component) {
 		pcb.addCopper(component)
 	})
 }
 
-func (pcb *PCB) removeCopper(c *Component) {
+func (pcb *PCB) removeCopper(c *eda.Component) {
 	t := c.Transform.Multiply(pcb.bitmapTransform())
 
 	// Clears
@@ -140,7 +135,7 @@ func (pcb *PCB) removeCopper(c *Component) {
 	clearBrush.IterateContours(perforations, pcb.copper.Set0)
 }
 
-func (pcb *PCB) addCopper(c *Component) {
+func (pcb *PCB) addCopper(c *eda.Component) {
 	t := c.Transform.Multiply(pcb.bitmapTransform())
 
 	// Pads
@@ -161,7 +156,7 @@ func (pcb *PCB) addCopper(c *Component) {
 	brush.IterateContours(c.GroundTracks.Apply(t), pcb.copper.Set1)
 }
 
-func (pcb *PCB) cutCopperbaseOverview(c *Component) {
+func (pcb *PCB) cutCopperbaseOverview(c *eda.Component) {
 	t := c.Transform.Multiply(pcb.bitmapTransform())
 
 	brush := shape.Circle(int(pcb.OverviewCutWidth * pcb.PixelsPerMM))
@@ -179,7 +174,7 @@ func (pcb *PCB) cutCopperbaseOverview(c *Component) {
 	brush.IterateContours(perforations, pcb.overviewCopperbaseCuts.Set1)
 }
 
-func (pcb *PCB) addSilk(c *Component) {
+func (pcb *PCB) addSilk(c *eda.Component) {
 	t := c.Transform.Multiply(pcb.bitmapTransform())
 
 	// Marks:
@@ -188,7 +183,7 @@ func (pcb *PCB) addSilk(c *Component) {
 	brush.IterateContours(c.Marks.Apply(t), pcb.silk.Set1)
 }
 
-func (pcb *PCB) cutMask(c *Component) {
+func (pcb *PCB) cutMask(c *eda.Component) {
 	t := c.Transform.Multiply(pcb.bitmapTransform())
 
 	brush := shape.Circle(int(pcb.MaskCutWidth * pcb.PixelsPerMM))
@@ -212,7 +207,7 @@ func (pcb *PCB) cutMask(c *Component) {
 	brush.IterateContours(perforations, pcb.mask.Set1)
 }
 
-func (pcb *PCB) cutStencil(c *Component) {
+func (pcb *PCB) cutStencil(c *eda.Component) {
 	t := c.Transform.Multiply(pcb.bitmapTransform())
 
 	brush := shape.Circle(int(pcb.OverviewCutWidth * pcb.PixelsPerMM))

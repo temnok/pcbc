@@ -62,6 +62,6 @@ func (path Path) Jump(dist int, jump func(x, y int)) {
 
 func (path Path) Center(t transform.T) Point {
 	var b Bounds
-	b.AddPath(t, path)
+	b.IncludePath(t, path)
 	return b.Center()
 }

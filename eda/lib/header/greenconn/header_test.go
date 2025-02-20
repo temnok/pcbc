@@ -5,12 +5,13 @@ package greenconn
 import (
 	"github.com/stretchr/testify/assert"
 	"temnok/pcbc/eda"
+	"temnok/pcbc/eda/pcb"
 	"temnok/pcbc/transform"
 	"testing"
 )
 
 func TestHeader(t *testing.T) {
-	assert.NoError(t, eda.ProcessPCB(&eda.Component{
+	assert.NoError(t, pcb.Process(&eda.Component{
 		Components: eda.Components{
 			CSCC118(7, false, []string{"P001", "P002", "VDD", "D+", "D-", "GND", "P007"}).
 				Arrange(transform.Move(-5, 0)),

@@ -4,10 +4,10 @@ package qfn
 
 import (
 	"github.com/stretchr/testify/assert"
-	"temnok/pcbc/eda"
+	"temnok/pcbc/eda/pcb"
 	"testing"
 )
 
 func TestQFN16(t *testing.T) {
-	assert.NoError(t, eda.ProcessPCB(QFN16G).SaveOverview())
+	assert.NoError(t, pcb.Process(QFN16G).SaveOverview())
 }

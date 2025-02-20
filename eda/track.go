@@ -10,8 +10,8 @@ import (
 
 type Track path.Points
 
-func Tracks(tracks ...Track) Paths {
-	res := make(Paths, len(tracks))
+func Tracks(tracks ...Track) path.Paths {
+	res := make(path.Paths, len(tracks))
 
 	for i, track := range tracks {
 		res[i] = path.Lines(path.Points(track))
@@ -21,7 +21,7 @@ func Tracks(tracks ...Track) Paths {
 }
 
 func (track Track) Apply(t transform.T) Track {
-	return Track(Path(track).Apply(t))
+	return Track(path.Path(track).Apply(t))
 }
 
 func (track Track) X(x float64) Track {

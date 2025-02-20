@@ -51,7 +51,7 @@ type Component struct {
 // Visit calls provided callback for each subcomponent recursively,
 // as if every component is isolated (without subcomponents)
 func (c *Component) Visit(callback func(*Component)) {
-	c.visit(transform.I, nil, callback)
+	c.visit(transform.I, &Component{}, callback)
 }
 
 func (c *Component) visit(t transform.T, parent *Component, callback func(*Component)) {
@@ -71,7 +71,7 @@ func (c *Component) visit(t transform.T, parent *Component, callback func(*Compo
 		GroundTracks: c.GroundTracks,
 		TrackWidth:   c.TrackWidth,
 	}
-	if comp.TrackWidth == 0 && parent != nil {
+	if comp.TrackWidth == 0 {
 		comp.TrackWidth = parent.TrackWidth
 	}
 
@@ -114,14 +114,14 @@ func (c *Component) Size() (float64, float64) {
 	var b path.Bounds
 
 	c.Visit(func(c *Component) {
-		b.AddPaths(c.Transform, c.Clears)
-		b.AddPaths(c.Transform, c.Cuts)
-		b.AddPaths(c.Transform, c.Holes)
-		b.AddPaths(c.Transform, c.Perforations)
-		b.AddPaths(c.Transform, c.Pads)
-		b.AddPaths(c.Transform, c.Marks)
-		b.AddPaths(c.Transform, c.Tracks)
-		b.AddPaths(c.Transform, c.GroundTracks)
+		b.IncludePaths(c.Transform, c.Clears)
+		b.IncludePaths(c.Transform, c.Cuts)
+		b.IncludePaths(c.Transform, c.Holes)
+		b.IncludePaths(c.Transform, c.Perforations)
+		b.IncludePaths(c.Transform, c.Pads)
+		b.IncludePaths(c.Transform, c.Marks)
+		b.IncludePaths(c.Transform, c.Tracks)
+		b.IncludePaths(c.Transform, c.GroundTracks)
 	})
 
 	return b.Width(), b.Height()

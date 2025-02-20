@@ -1,9 +1,10 @@
 // Copyright © 2025 Alex Temnok. All rights reserved.
 
-package eda
+package pcb
 
 import (
 	"image/color"
+	"temnok/pcbc/eda"
 	"temnok/pcbc/lbrn"
 	"temnok/pcbc/transform"
 )
@@ -100,7 +101,7 @@ func (pcb *PCB) SaveEtch() error {
 		},
 	}
 
-	pcb.component.Visit(func(component *Component) {
+	pcb.component.Visit(func(component *eda.Component) {
 		t := component.Transform.Multiply(center)
 
 		for _, cut := range component.Cuts {

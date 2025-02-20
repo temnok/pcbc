@@ -4,10 +4,10 @@ package worldsemi
 
 import (
 	"github.com/stretchr/testify/assert"
-	"temnok/pcbc/eda"
+	"temnok/pcbc/eda/pcb"
 	"testing"
 )
 
 func TestBoard(t *testing.T) {
-	assert.NoError(t, eda.ProcessPCB(WS2812B_2020).SaveOverview())
+	assert.NoError(t, pcb.Process(WS2812B_2020).SaveOverview())
 }

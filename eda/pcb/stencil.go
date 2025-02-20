@@ -1,8 +1,9 @@
 // Copyright © 2025 Alex Temnok. All rights reserved.
 
-package eda
+package pcb
 
 import (
+	"temnok/pcbc/eda"
 	"temnok/pcbc/lbrn"
 	"temnok/pcbc/transform"
 )
@@ -30,7 +31,7 @@ func (pcb *PCB) SaveStencil() error {
 		},
 	}
 
-	pcb.component.Visit(func(component *Component) {
+	pcb.component.Visit(func(component *eda.Component) {
 		t := component.Transform.Multiply(center)
 
 		for _, pad := range component.Pads {
