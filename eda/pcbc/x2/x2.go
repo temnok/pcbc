@@ -12,10 +12,14 @@ import (
 )
 
 func X2(topLabel, bottomLabel string) *eda.Component {
+	logo := pcbc.Logo.Arrange(transform.UniformScale(0.7).Move(1.7, 1.35))
+	firm := pcbc.Firm.Arrange(transform.UniformScale(0.4).Move(1.7, -1.5))
+	rev := pcbc.Rev(2025, 2, 19).Arrange(transform.Rotate(90).UniformScale(0.5).Move(4.6, 0))
+
 	header := greenconn.CSCC118(3, false, []string{topLabel, "GND", bottomLabel}).Arrange(transform.Move(-2, 0))
 	pad := header.PadCenters()
 
-	chip := smd.I0603.Arrange(transform.Rotate(-90).Move(0.8, 0))
+	chip := smd.I0603.Arrange(transform.Rotate(-90).Move(0.85, 0))
 	pin := chip.PadCenters()
 
 	mount := pcbc.MountHole.Arrange(transform.Move(3, 0))
@@ -28,6 +32,10 @@ func X2(topLabel, bottomLabel string) *eda.Component {
 			header,
 			chip,
 			mount,
+
+			logo,
+			firm,
+			rev,
 		},
 
 		Tracks: eda.Tracks(
