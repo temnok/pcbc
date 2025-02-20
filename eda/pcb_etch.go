@@ -110,6 +110,10 @@ func (pcb *PCB) SaveEtch() error {
 		for _, hole := range component.Holes {
 			p.Shape = append(p.Shape, lbrn.NewPath(2, t, hole))
 		}
+
+		for _, perforation := range component.Perforations {
+			p.Shape = append(p.Shape, lbrn.NewPath(2, t, perforation))
+		}
 	})
 
 	return p.SaveToFile(filename)

@@ -78,7 +78,7 @@ func TestBoard(t *testing.T) {
 
 	assert.NoError(t, eda.GeneratePCB(&eda.Component{
 		Components: eda.Components{
-			pcbc.Base72x42,
+			pcbc.Perforations72x42,
 			top.Arrange(transform.Move(-16, 0)),
 			bottom.Arrange(transform.Move(16, 0)),
 		},

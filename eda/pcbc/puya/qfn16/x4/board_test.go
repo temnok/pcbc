@@ -14,8 +14,8 @@ import (
 func TestBoard(t *testing.T) {
 	assert.NoError(t, eda.GeneratePCB(&eda.Component{
 		Components: eda.Components{
-			pcbc.Board35x45,
-			qfn16.Board.Arrange(transform.Rotate(90)).Clone(2, 12, 0).Clone(2, 0, 16.5),
+			pcbc.Perforations34x42,
+			qfn16.Board.Arrange(transform.Rotate(90)).Clone(2, 12.5, 0).Clone(2, 0, 17),
 		},
 	}))
 }

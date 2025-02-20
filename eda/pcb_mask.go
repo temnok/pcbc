@@ -85,29 +85,29 @@ func (pcb *PCB) SaveMask() error {
 		},
 	}
 
-	addMaskbaseHoles(pcb, &p)
+	addPerforations(pcb, &p)
 
 	return p.SaveToFile(filename)
 }
 
-func addMaskbaseHoles(pcb *PCB, p *lbrn.LightBurnProject) {
-	hasMaskbaseHoles := false
+func addPerforations(pcb *PCB, p *lbrn.LightBurnProject) {
+	hasPerforations := false
 
 	center := transform.Move(pcb.LbrnCenterX, pcb.LbrnCenterY)
 	pcb.component.Visit(func(component *Component) {
 		t := component.Transform.Multiply(center)
 
 		for _, hole := range component.Perforations {
-			hasMaskbaseHoles = true
+			hasPerforations = true
 			p.Shape = append(p.Shape, lbrn.NewPath(3, t, hole))
 		}
 	})
 
-	if hasMaskbaseHoles {
+	if hasPerforations {
 		p.CutSetting = []lbrn.CutSetting{
 			{
 				Type:     "Cut",
-				Name:     Param{Value: "Maskbase Cut"},
+				Name:     Param{Value: "Perforation"},
 				Index:    Param{Value: "3"},
 				Priority: Param{Value: "3"},
 

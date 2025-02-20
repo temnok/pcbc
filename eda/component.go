@@ -3,7 +3,6 @@
 package eda
 
 import (
-	"temnok/pcbc/font"
 	"temnok/pcbc/path"
 	"temnok/pcbc/transform"
 )
@@ -25,7 +24,7 @@ type Component struct {
 	// Mask: solid cut strokes
 	Holes path.Paths
 
-	// Removed: copper, copperbase, mask, maskbase, overviewStencilCuts
+	// Removed: copper, copperbase, mask, maskbase, stencil
 	Perforations path.Paths
 
 	// FR4: copper fills
@@ -33,14 +32,14 @@ type Component struct {
 	// Stencil: cuts without tabs
 	Pads path.Paths
 
-	// Mask: solid cut strokes
-	Openings path.Paths
-
 	// FR4: copper strokes with groundfill clean
 	Tracks path.Paths
 
 	// FR4: copper strokes without groundfill clean
 	GroundTracks path.Paths
+
+	// Mask: solid cut strokes
+	Openings path.Paths
 
 	// Mask: solid mark strokes
 	Marks path.Paths
@@ -144,20 +143,4 @@ func ComponentGrid(cols int, dx, dy float64, comps ...*Component) *Component {
 	}
 
 	return grid
-}
-
-func CenteredText(line string) *Component {
-	return CenteredTextColumn(0, line)
-}
-
-func CenteredTextRow(dx float64, strs ...string) *Component {
-	return &Component{
-		Marks: font.CenteredRow(dx, strs...),
-	}
-}
-
-func CenteredTextColumn(dy float64, lines ...string) *Component {
-	return &Component{
-		Marks: font.CenteredColumn(dy, lines...),
-	}
 }
