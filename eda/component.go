@@ -43,6 +43,9 @@ type Component struct {
 	// Add: silk
 	Marks path.Paths
 
+	// Remove: mask
+	Openings path.Paths
+
 	TrackWidth float64
 
 	Components []*Component
@@ -66,9 +69,10 @@ func (c *Component) visit(t transform.T, parent *Component, callback func(*Compo
 		Holes:        c.Holes,
 		Perforations: c.Perforations,
 		Pads:         c.Pads,
-		Marks:        c.Marks,
 		Tracks:       c.Tracks,
 		GroundTracks: c.GroundTracks,
+		Marks:        c.Marks,
+		Openings:     c.Openings,
 		TrackWidth:   c.TrackWidth,
 	}
 	if comp.TrackWidth == 0 {
@@ -119,9 +123,10 @@ func (c *Component) Size() (float64, float64) {
 		b.IncludePaths(c.Transform, c.Holes)
 		b.IncludePaths(c.Transform, c.Perforations)
 		b.IncludePaths(c.Transform, c.Pads)
-		b.IncludePaths(c.Transform, c.Marks)
 		b.IncludePaths(c.Transform, c.Tracks)
 		b.IncludePaths(c.Transform, c.GroundTracks)
+		b.IncludePaths(c.Transform, c.Marks)
+		b.IncludePaths(c.Transform, c.Openings)
 	})
 
 	return b.Width(), b.Height()
