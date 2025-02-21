@@ -265,7 +265,7 @@ func (pcb *PCB) SaveOverview() error {
 		},
 		[][2]color.Color{
 			{color.RGBA{G: 0x40, B: 0x10, A: 0xFF}, color.RGBA{R: 0xC0, G: 0x60, A: 0xFF}},
-			{color.RGBA{}, color.RGBA{R: 0x80, G: 0x80, B: 0xFF, A: 0xA0}},
+			{color.RGBA{}, color.RGBA{R: 0x80, G: 0x80, B: 0xFF, A: 0xC0}},
 			{color.RGBA{}, color.RGBA{R: 0xFF, G: 0xFF, B: 0xFF, A: 0xA0}},
 
 			{color.RGBA{}, color.RGBA{G: 0xFF, B: 0xFF, A: 0xFF}},
