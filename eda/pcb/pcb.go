@@ -28,7 +28,7 @@ type PCB struct {
 
 	SavePath string
 
-	copper, mask, silk                          *bitmap.Bitmap
+	copper, mask, maskBottom, silk              *bitmap.Bitmap
 	overviewCopperbaseCuts, overviewStencilCuts *bitmap.Bitmap
 }
 
@@ -71,6 +71,7 @@ func (pcb *PCB) Process() {
 
 	pcb.copper = bitmap.NewBitmap(wi, hi)
 	pcb.mask = bitmap.NewBitmap(wi, hi)
+	pcb.maskBottom = bitmap.NewBitmap(wi, hi)
 	pcb.silk = bitmap.NewBitmap(wi, hi)
 	pcb.overviewCopperbaseCuts = bitmap.NewBitmap(wi, hi)
 	pcb.overviewStencilCuts = bitmap.NewBitmap(wi, hi)
@@ -197,15 +198,18 @@ func (pcb *PCB) cutMask1(c *eda.Component) {
 	cuts := c.Cuts.Apply(t)
 	cuts.Jump(int(2*pcb.MaskCutWidth*pcb.PixelsPerMM), func(x, y int) {
 		brush.IterateRowsXY(x, y, pcb.mask.Set1)
+		brush.IterateRowsXY(x, y, pcb.maskBottom.Set1)
 	})
 
 	// Holes
 	holes := c.Holes.Apply(t)
 	brush.IterateContours(holes, pcb.mask.Set1)
+	brush.IterateContours(holes, pcb.maskBottom.Set1)
 
 	// Perforations
 	perforations := c.Perforations.Apply(t)
 	brush.IterateContours(perforations, pcb.mask.Set1)
+	brush.IterateContours(perforations, pcb.maskBottom.Set1)
 }
 
 func (pcb *PCB) cutMask2(c *eda.Component) {
@@ -241,6 +245,7 @@ func (pcb *PCB) SaveFiles() error {
 	return util.RunConcurrently(
 		pcb.SaveEtch,
 		pcb.SaveMask,
+		pcb.SaveMaskBottom,
 		pcb.SaveStencil,
 		pcb.SaveOverview,
 	)

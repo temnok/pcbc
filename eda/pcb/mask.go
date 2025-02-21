@@ -86,15 +86,35 @@ func (pcb *PCB) SaveMask() error {
 		},
 	}
 
-	addPerforations(pcb, &p)
+	addPerforations(pcb, &p, 1)
 
 	return p.SaveToFile(filename)
 }
 
-func addPerforations(pcb *PCB, p *lbrn.LightBurnProject) {
+func (pcb *PCB) SaveMaskBottom() error {
+	filename := pcb.SavePath + "mask-bottom.lbrn"
+	mask := pcb.maskBottom.ToImage(color.Transparent, color.Black)
+
+	bitmapTransform := transform.Scale(-1/pcb.PixelsPerMM, 1/pcb.PixelsPerMM).
+		Move(pcb.LbrnCenterX, pcb.LbrnCenterY)
+
+	p := lbrn.LightBurnProject{
+		CutSettingImg: maskCutSettings,
+		Shape: []*lbrn.Shape{
+			lbrn.NewBitmap(1, bitmapTransform, mask),
+			lbrn.NewBitmap(2, bitmapTransform, mask),
+		},
+	}
+
+	addPerforations(pcb, &p, -1)
+
+	return p.SaveToFile(filename)
+}
+
+func addPerforations(pcb *PCB, p *lbrn.LightBurnProject, reflect float64) {
 	hasPerforations := false
 
-	center := transform.Move(pcb.LbrnCenterX, pcb.LbrnCenterY)
+	center := transform.Scale(reflect, 1).Move(pcb.LbrnCenterX, pcb.LbrnCenterY)
 	pcb.component.Visit(func(component *eda.Component) {
 		t := component.Transform.Multiply(center)
 

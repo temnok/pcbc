@@ -1,0 +1,73 @@
+<LightBurnProject>
+	<CutSetting_Img type="Image">
+		<index Value="0"></index>
+		<name Value="Silk"></name>
+		<priority Value="0"></priority>
+		<speed Value="400"></speed>
+		<numPasses Value="1"></numPasses>
+		<globalRepeat Value=""></globalRepeat>
+		<maxPower Value="3"></maxPower>
+		<QPulseWidth Value="200"></QPulseWidth>
+		<frequency Value="20000"></frequency>
+		<interval Value="0.01"></interval>
+		<dpi Value="2540"></dpi>
+		<ditherMode Value=""></ditherMode>
+		<useDotCorrection Value=""></useDotCorrection>
+		<dotWidth Value=""></dotWidth>
+		<tabsEnabled Value=""></tabsEnabled>
+		<tabSize Value=""></tabSize>
+		<crossHatch Value=""></crossHatch>
+		<angle Value=""></angle>
+		<negative Value="1"></negative>
+	</CutSetting_Img>
+	<CutSetting_Img type="Image">
+		<index Value="1"></index>
+		<name Value="Mask 1"></name>
+		<priority Value="1"></priority>
+		<speed Value="500"></speed>
+		<numPasses Value="5"></numPasses>
+		<globalRepeat Value=""></globalRepeat>
+		<maxPower Value="10"></maxPower>
+		<QPulseWidth Value="80"></QPulseWidth>
+		<frequency Value="2000000"></frequency>
+		<interval Value="0.01"></interval>
+		<dpi Value="2540"></dpi>
+		<ditherMode Value=""></ditherMode>
+		<useDotCorrection Value="1"></useDotCorrection>
+		<dotWidth Value="0.05"></dotWidth>
+		<tabsEnabled Value=""></tabsEnabled>
+		<tabSize Value=""></tabSize>
+		<crossHatch Value="1"></crossHatch>
+		<angle Value="90"></angle>
+		<negative Value=""></negative>
+	</CutSetting_Img>
+	<CutSetting_Img type="Image">
+		<index Value="2"></index>
+		<name Value="Mask 2"></name>
+		<priority Value="2"></priority>
+		<speed Value="500"></speed>
+		<numPasses Value="5"></numPasses>
+		<globalRepeat Value=""></globalRepeat>
+		<maxPower Value="20"></maxPower>
+		<QPulseWidth Value="80"></QPulseWidth>
+		<frequency Value="2000000"></frequency>
+		<interval Value="0.01"></interval>
+		<dpi Value="2540"></dpi>
+		<ditherMode Value=""></ditherMode>
+		<useDotCorrection Value="1"></useDotCorrection>
+		<dotWidth Value="0.05"></dotWidth>
+		<tabsEnabled Value=""></tabsEnabled>
+		<tabSize Value=""></tabSize>
+		<crossHatch Value="1"></crossHatch>
+		<angle Value="90"></angle>
+		<negative Value=""></negative>
+	</CutSetting_Img>
+	<Shape Type="Bitmap" CutIndex="1" W="1000" H="650" Data="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">
+		<XForm>-0.01 0 0 0.01 55 55</XForm>
+		<Tabs></Tabs>
+	</Shape>
+	<Shape Type="Bitmap" CutIndex="2" W="1000" H="650" Data="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">
+		<XForm>-0.01 0 0 0.01 55 55</XForm>
+		<Tabs></Tabs>
+	</Shape>
+</LightBurnProject>
