@@ -13,37 +13,37 @@ type Components = []*Component
 type Component struct {
 	Transform transform.T
 
-	// Remove: copper
+	// Remove: copper shapes
 	Clears path.Paths
 
-	// Remove: copper, mask (perforations)
+	// Remove: copper strokes, mask(-bottom) perforations
 	// Cut: copperbase (leave tabs)
 	Cuts path.Paths
 
-	// Remove: copper, mask
+	// Remove: copper strokes, mask(-bottom) strokes
 	// Cut: copperbase
 	Holes path.Paths
 
-	// Remove: copper, mask
+	// Remove: copper strokes, mask(-bottom) strokes
 	// Cut: copperbase, maskbase, stencil
 	Perforations path.Paths
 
-	// Add: copper
-	// Remove: mask
+	// Remove: copper strokes, mask strokes
+	// Add: copper shapes
 	// Cut: stencil
 	Pads path.Paths
 
-	// Remove: copper
-	// Add: copper
+	// Remove: copper strokes
+	// Add: copper strokes
 	Tracks path.Paths
 
-	// Add: copper
+	// Add: copper strokes
 	GroundTracks path.Paths
 
-	// Add: silk
+	// Add: mark strokes
 	Marks path.Paths
 
-	// Remove: mask
+	// Remove: mask shapes
 	Openings path.Paths
 
 	TrackWidth float64
