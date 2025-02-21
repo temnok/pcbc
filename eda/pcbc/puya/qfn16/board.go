@@ -42,7 +42,7 @@ var (
 			eda.CenteredText("PY32").Arrange(transform.Scale(1.5, 1.5).Move(0, 4.1)),
 			eda.CenteredText("F002A").Arrange(transform.Scale(1.1, 0.9).Move(0, -4.4)),
 
-			pcbc.Rev(2025, 2, 19).Arrange(transform.UniformScale(0.5).Move(1.9, -3)),
+			pcbc.Rev(2025, 2, 19).Arrange(transform.UniformScale(0.5).Move(6, -4.55)),
 		},
 
 		Tracks: eda.Tracks(
@@ -66,8 +66,8 @@ var (
 		),
 
 		GroundTracks: eda.Tracks(
-			eda.Track{pad[8]}.XY(mountPad[2]),
-			eda.Track{pad[17]}.XY(mountPad[4]),
+			eda.Track{mountPad[2]}.YX(pad[8]).DX(-1.3),
+			eda.Track{mountPad[4]}.YX(pad[17]).DX(1.3),
 		),
 	}
 )
