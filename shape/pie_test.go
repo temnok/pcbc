@@ -15,10 +15,10 @@ import (
 func TestPie(t *testing.T) {
 	bm := bitmap.NewBitmap(400, 400)
 
-	parts := path.Pie(6, 150, 180, 10).Apply(transform.Rotate(90))
+	parts := path.Pie(6, 150, 180, 10)
 
 	for _, part := range parts {
-		shape := FromContour(part)
+		shape := FromContour(transform.Rotate(90), part)
 		shape.IterateRowsXY(200, 200, bm.Set1)
 	}
 
@@ -28,8 +28,8 @@ func TestPie(t *testing.T) {
 func TestPiePart(t *testing.T) {
 	bm := bitmap.NewBitmap(20, 20)
 
-	part := path.PiePiece(6, 9, 60).Apply(transform.Rotate(150))
-	shape := FromContour(part)
+	part := path.PiePiece(6, 9, 60)
+	shape := FromContour(transform.Rotate(150), part)
 	shape.IterateRowsXY(10, 10, bm.Set1)
 
 	assert.NoError(t, util.SavePNG("tmp/pie-part.png", bm.ToImage(color.Black, color.White)))

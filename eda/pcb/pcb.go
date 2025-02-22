@@ -103,15 +103,13 @@ func (pcb *PCB) removeCopper(c *eda.Component) {
 	t := c.Transform.Multiply(pcb.bitmapTransform())
 
 	// Clears
-	clears := c.Clears.Apply(t)
-	shape.IterateContoursRows(clears, pcb.copper.Set0)
+	shape.IterateContoursRows(t, c.Clears, pcb.copper.Set0)
 
 	clearWidth := 2 * (pcb.CopperClearWidth - pcb.ExtraCopperWidth)
 
 	// Pads
-	pads := c.Pads.Apply(t)
 	clearBrush := shape.Circle(int(clearWidth * pcb.PixelsPerMM))
-	clearBrush.IterateContours(pads, pcb.copper.Set0)
+	clearBrush.IterateContours(t, c.Pads, pcb.copper.Set0)
 
 	// Non-ground tracks
 	brushW := c.TrackWidth
@@ -119,33 +117,29 @@ func (pcb *PCB) removeCopper(c *eda.Component) {
 		brushW = pcb.DefaultTrackWidth
 	}
 	brush := shape.Circle(int((brushW + clearWidth) * pcb.PixelsPerMM))
-	brush.IterateContours(c.Tracks.Apply(t), pcb.copper.Set0)
+	brush.IterateContours(t, c.Tracks, pcb.copper.Set0)
 
 	// TODO: remove the following line
 	clearBrush = shape.Circle(int(pcb.CopperClearWidth * pcb.PixelsPerMM))
 
 	// Cuts
-	cuts := c.Cuts.Apply(t)
-	clearBrush.IterateContours(cuts, pcb.copper.Set0)
+	clearBrush.IterateContours(t, c.Cuts, pcb.copper.Set0)
 
 	// Holes
-	holes := c.Holes.Apply(t)
-	clearBrush.IterateContours(holes, pcb.copper.Set0)
+	clearBrush.IterateContours(t, c.Holes, pcb.copper.Set0)
 
 	// Perforations
-	perforations := c.Perforations.Apply(t)
-	clearBrush.IterateContours(perforations, pcb.copper.Set0)
+	clearBrush.IterateContours(t, c.Perforations, pcb.copper.Set0)
 }
 
 func (pcb *PCB) addCopper(c *eda.Component) {
 	t := c.Transform.Multiply(pcb.bitmapTransform())
 
 	// Pads
-	pads := c.Pads.Apply(t)
-	shape.IterateContoursRows(pads, pcb.copper.Set1)
+	shape.IterateContoursRows(t, c.Pads, pcb.copper.Set1)
 
 	extraCopperBrush := shape.Circle(int(pcb.ExtraCopperWidth * pcb.PixelsPerMM))
-	extraCopperBrush.IterateContours(pads, pcb.copper.Set1)
+	extraCopperBrush.IterateContours(t, c.Pads, pcb.copper.Set1)
 
 	// Tracks
 	brushW := c.TrackWidth
@@ -154,8 +148,8 @@ func (pcb *PCB) addCopper(c *eda.Component) {
 	}
 
 	brush := shape.Circle(int((brushW + pcb.ExtraCopperWidth) * pcb.PixelsPerMM))
-	brush.IterateContours(c.Tracks.Apply(t), pcb.copper.Set1)
-	brush.IterateContours(c.GroundTracks.Apply(t), pcb.copper.Set1)
+	brush.IterateContours(t, c.Tracks, pcb.copper.Set1)
+	brush.IterateContours(t, c.GroundTracks, pcb.copper.Set1)
 }
 
 func (pcb *PCB) cutCopperbaseOverview(c *eda.Component) {
@@ -164,16 +158,13 @@ func (pcb *PCB) cutCopperbaseOverview(c *eda.Component) {
 	brush := shape.Circle(int(pcb.OverviewCutWidth * pcb.PixelsPerMM))
 
 	// Holes
-	holes := c.Holes.Apply(t)
-	brush.IterateContours(holes, pcb.overviewCopperbaseCuts.Set1)
+	brush.IterateContours(t, c.Holes, pcb.overviewCopperbaseCuts.Set1)
 
 	// Cuts
-	cuts := c.Cuts.Apply(t)
-	brush.IterateContours(cuts, pcb.overviewCopperbaseCuts.Set1)
+	brush.IterateContours(t, c.Cuts, pcb.overviewCopperbaseCuts.Set1)
 
 	// Perforations
-	perforations := c.Perforations.Apply(t)
-	brush.IterateContours(perforations, pcb.overviewCopperbaseCuts.Set1)
+	brush.IterateContours(t, c.Perforations, pcb.overviewCopperbaseCuts.Set1)
 }
 
 func (pcb *PCB) addSilk(c *eda.Component) {
@@ -182,7 +173,7 @@ func (pcb *PCB) addSilk(c *eda.Component) {
 	// Marks:
 	brushW := font.Bold * font.WeightScale(t)
 	brush := shape.Circle(int(brushW))
-	brush.IterateContours(c.Marks.Apply(t), pcb.silk.Set1)
+	brush.IterateContours(t, c.Marks, pcb.silk.Set1)
 }
 
 func (pcb *PCB) cutMask1(c *eda.Component) {
@@ -191,25 +182,21 @@ func (pcb *PCB) cutMask1(c *eda.Component) {
 	brush := shape.Circle(int(pcb.MaskCutWidth * pcb.PixelsPerMM))
 
 	// Pads
-	pads := c.Pads.Apply(t)
-	brush.IterateContours(pads, pcb.mask.Set1)
+	brush.IterateContours(t, c.Pads, pcb.mask.Set1)
 
 	// Cuts
-	cuts := c.Cuts.Apply(t)
-	cuts.Jump(int(2*pcb.MaskCutWidth*pcb.PixelsPerMM), func(x, y int) {
+	c.Cuts.Jump(t, int(2*pcb.MaskCutWidth*pcb.PixelsPerMM), func(x, y int) {
 		brush.IterateRowsXY(x, y, pcb.mask.Set1)
 		brush.IterateRowsXY(x, y, pcb.maskBottom.Set1)
 	})
 
 	// Holes
-	holes := c.Holes.Apply(t)
-	brush.IterateContours(holes, pcb.mask.Set1)
-	brush.IterateContours(holes, pcb.maskBottom.Set1)
+	brush.IterateContours(t, c.Holes, pcb.mask.Set1)
+	brush.IterateContours(t, c.Holes, pcb.maskBottom.Set1)
 
 	// Perforations
-	perforations := c.Perforations.Apply(t)
-	brush.IterateContours(perforations, pcb.mask.Set1)
-	brush.IterateContours(perforations, pcb.maskBottom.Set1)
+	brush.IterateContours(t, c.Perforations, pcb.mask.Set1)
+	brush.IterateContours(t, c.Perforations, pcb.maskBottom.Set1)
 }
 
 func (pcb *PCB) cutMask2(c *eda.Component) {
@@ -218,9 +205,8 @@ func (pcb *PCB) cutMask2(c *eda.Component) {
 	brush := shape.Circle(int(pcb.MaskCutWidth * pcb.PixelsPerMM))
 
 	// Openings
-	openings := c.Openings.Apply(t)
-	shape.IterateContoursRows(openings, pcb.mask.Set0)
-	brush.IterateContours(openings, pcb.mask.Set1)
+	shape.IterateContoursRows(t, c.Openings, pcb.mask.Set0)
+	brush.IterateContours(t, c.Openings, pcb.mask.Set1)
 }
 
 func (pcb *PCB) cutStencil(c *eda.Component) {
@@ -229,12 +215,10 @@ func (pcb *PCB) cutStencil(c *eda.Component) {
 	brush := shape.Circle(int(pcb.OverviewCutWidth * pcb.PixelsPerMM))
 
 	// Pads
-	pads := c.Pads.Apply(t)
-	brush.IterateContours(pads, pcb.overviewStencilCuts.Set1)
+	brush.IterateContours(t, c.Pads, pcb.overviewStencilCuts.Set1)
 
 	// Perforations
-	perforations := c.Perforations.Apply(t)
-	brush.IterateContours(perforations, pcb.overviewStencilCuts.Set1)
+	brush.IterateContours(t, c.Perforations, pcb.overviewStencilCuts.Set1)
 }
 
 func (pcb *PCB) bitmapTransform() transform.T {

@@ -28,17 +28,10 @@ func (paths Paths) Apply(t transform.T) Paths {
 	return res
 }
 
-// Visit calls provided callback for each path.
-func (paths Paths) Visit(visit func(x, y int)) {
-	for _, path := range paths {
-		path.Visit(visit)
-	}
-}
-
 // Jump calls provided callback for each path.
-func (paths Paths) Jump(dist int, jump func(x, y int)) {
+func (paths Paths) Jump(t transform.T, dist int, jump func(x, y int)) {
 	for _, path := range paths {
-		path.Jump(dist, jump)
+		path.Jump(t, dist, jump)
 	}
 }
 

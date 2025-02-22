@@ -6,8 +6,8 @@ import (
 	"temnok/pcbc/transform"
 )
 
-// Path consists of cubic-Bezier curves as a sequence of on-path points separated by pairs of control points,
-// for example {p1,c1,c2,p2,c3,c4,p3}. Length of path should be 0 or n*3-2, where n > 0.
+// Path consists of cubic Bézier curves as a sequence of on-path points separated by pairs of control points,
+// for example {p1,c1,c2,p2,c3,c4,p3}. Length of path should be 0 or 1+n*3, where n >= 0.
 // If the last point is the same as the first one, the path represents a closed contour.
 type Path []Point
 
@@ -18,16 +18,16 @@ func (path Path) Apply(t transform.T) Path {
 
 // Visit calls provided callback for each interpolated point on the path with integer coordinates.
 // The callback is called at least one time for a non-empty path.
-func (path Path) Visit(visit func(x, y int)) {
+func (path Path) Visit(t transform.T, visit func(x, y int)) {
 	if len(path) == 0 {
 		return
 	}
 
-	a := path[0]
+	a := path[0].Apply(t)
 	visit(a.RoundXY())
 
 	for i := 0; i+3 < len(path); i += 3 {
-		c1, c2, b := path[i+1], path[i+2], path[i+3]
+		c1, c2, b := path[i+1].Apply(t), path[i+2].Apply(t), path[i+3].Apply(t)
 
 		if a == c1 && c2 == b {
 			linearVisit(a, b, visit)
@@ -41,11 +41,11 @@ func (path Path) Visit(visit func(x, y int)) {
 
 // Jump calls provided callback for interpolated points on the path, separated by given distance.
 // For example, it could be used to draw a dotted line.
-func (path Path) Jump(dist int, jump func(x, y int)) {
+func (path Path) Jump(t transform.T, dist int, jump func(x, y int)) {
 	var prevX, prevY int
 	started := false
 
-	path.Visit(func(x, y int) {
+	path.Visit(t, func(x, y int) {
 		if !started {
 			started = true
 		} else {
