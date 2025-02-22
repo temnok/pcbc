@@ -14,13 +14,15 @@ import (
 
 func TestBoard(t *testing.T) {
 	via := &eda.Component{
-		Pads:     path.Circle(1.3),
-		Openings: path.Circle(1.3),
-		Holes:    path.Circle(0.6),
+		Pads:     path.Paths{path.Circle(1.3)},
+		Openings: path.Paths{path.Circle(1.3)},
+		Holes:    path.Paths{path.Circle(0.6)},
 	}
 
 	board := &eda.Component{
-		Cuts: path.RoundRect(30, 40, 1),
+		Cuts: path.Paths{
+			path.RoundRect(30, 40, 1),
+		},
 
 		Components: eda.Components{
 			via.Arrange(transform.Move(-12.5, 17.5)),

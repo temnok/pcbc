@@ -105,7 +105,7 @@ func NewPath(i int, t transform.T, path path.Path) *Shape {
 func NewPathWithTabs(index int, t transform.T, p path.Path) *Shape {
 	s := NewPath(index, t, p)
 
-	var tabs path.Points
+	var tabs []path.Point
 	for i := 0; i < len(p); i += 3 {
 		if isLine := i > 0 && p[i-3] == p[i-2] && p[i-1] == p[i]; isLine {
 			u, v := p[i-2], p[i-1]

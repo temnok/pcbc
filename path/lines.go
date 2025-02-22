@@ -2,7 +2,7 @@
 
 package path
 
-func Lines(points Points) Path {
+func Linear(points []Point) Path {
 	if len(points) == 0 {
 		return nil
 	}

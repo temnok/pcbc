@@ -124,7 +124,9 @@ func board(short bool) *eda.Component {
 
 	boardShift := 4.75
 	boardCut := path.RoundRect(21, 24.6, 1)
-	boardClears := path.Rect(21.5, 5.5).Apply(transform.Move(0, 9.7))
+	boardClears := path.Paths{
+		path.Rect(21.5, 5.5).Apply(transform.Move(0, 9.7)),
+	}
 
 	if short {
 		boardShift += 2.54
@@ -135,7 +137,9 @@ func board(short bool) *eda.Component {
 	return &eda.Component{
 		Clears: boardClears,
 
-		Cuts: boardCut,
+		Cuts: path.Paths{
+			boardCut,
+		},
 
 		Components: eda.Components{
 			shiftedBoard.Arrange(transform.Move(0, boardShift)),

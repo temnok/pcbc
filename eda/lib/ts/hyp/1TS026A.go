@@ -14,5 +14,7 @@ var Switch1TS026A = &eda.Component{
 		Clone(2, 0, -(3.2 - 0.55)).
 		Apply(transform.Scale(1, -1).Rotate(90)),
 
-	Marks: path.Rect(2.6, 1.6),
+	Marks: path.Paths{
+		path.Rect(2.6, 1.6),
+	},
 }

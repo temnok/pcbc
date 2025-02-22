@@ -42,7 +42,7 @@ func CSCC118(n int, flip bool, labels []string) *eda.Component {
 		Components: eda.Components{},
 
 		Marks: path.Join(
-			path.Rect(1.5, float64(n)+0.5),
+			path.Paths{path.Rect(1.5, float64(n)+0.5)},
 
 			font.AlignedColumn(align0, -2/1.6, labels0...).
 				Apply(transform.Scale(0.8, 1.6).Move(-sign*0.9, shift)),

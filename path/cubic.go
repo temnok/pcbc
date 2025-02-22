@@ -6,7 +6,7 @@ import (
 	"math"
 )
 
-// cubicVisit iterates over all pixels for a given cubic Bezier curve.
+// cubicVisit iterates over all pixels for a given cubic Bézier curve.
 func cubicVisit(points []Point, visit func(x, y int)) {
 	prev := points[0].Round()
 

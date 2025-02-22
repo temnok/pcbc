@@ -11,17 +11,19 @@ import (
 var Board35x45 *eda.Component
 
 func init() {
-	holeContour := path.Circle(2.1)
+	holeContour := path.Paths{path.Circle(2.1)}
 
 	hole := &eda.Component{
 		Pads:  holeContour,
 		Holes: holeContour,
 	}
 
-	key := path.Circle(0.6).Apply(transform.Move(-16.25, 21.25))
+	key := path.Paths{path.Circle(0.6).Apply(transform.Move(-16.25, 21.25))}
 
 	Board35x45 = &eda.Component{
-		Cuts: path.RoundRect(35, 45, 2.5),
+		Cuts: path.Paths{
+			path.RoundRect(35, 45, 2.5),
+		},
 
 		Pads: key,
 

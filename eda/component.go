@@ -86,8 +86,8 @@ func (c *Component) visit(t transform.T, parent *Component, callback func(*Compo
 	}
 }
 
-func (c *Component) PadCenters() path.Points {
-	var centers path.Points
+func (c *Component) PadCenters() []path.Point {
+	var centers []path.Point
 
 	c.Visit(func(component *Component) {
 		centers = append(centers, component.Pads.Centers(component.Transform)...)

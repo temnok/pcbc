@@ -20,17 +20,17 @@ func init() {
 		pads = append(pads, col.Apply(transform.Rotate(a))...)
 	}
 
-	pads = append(pads, path.Rect(1.2, 1.2)...)
+	pads = append(pads, path.Rect(1.2, 1.2))
 
 	QFN16G = &eda.Component{
-		Clears: path.Rect(2.3, 2.3),
+		Clears: path.Paths{path.Rect(2.3, 2.3)},
 
 		Pads: pads,
 
-		Marks: path.Join(
+		Marks: path.Paths{
 			path.Rect(3.1, 3.1),
 			path.Circle(0.2).Apply(transform.Move(-1.7, 1.4)),
-		),
+		},
 
 		TrackWidth: 0.18,
 

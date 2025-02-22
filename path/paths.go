@@ -47,8 +47,8 @@ func (paths Paths) Clone(n int, dx, dy float64) Paths {
 }
 
 // Centers returns center points for paths.
-func (paths Paths) Centers(t transform.T) Points {
-	centers := make(Points, len(paths))
+func (paths Paths) Centers(t transform.T) []Point {
+	centers := make([]Point, len(paths))
 
 	for i, path := range paths {
 		centers[i] = path.Center(t)

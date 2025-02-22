@@ -12,7 +12,9 @@ import (
 )
 
 var Board = &eda.Component{
-	Cuts: path.RoundRect(10, 5.5, 1),
+	Cuts: path.Paths{
+		path.RoundRect(10, 5.5, 1),
+	},
 
 	Components: eda.Components{
 		worldsemi.WS2812B_2020.Arrange(transform.Move(-3, 0)),

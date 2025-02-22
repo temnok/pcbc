@@ -19,10 +19,10 @@ func TestBrushes(t *testing.T) {
 		circle := Circle(d)
 		circle.IterateRowsXY(50*d, 50, bm.Set1)
 
-		circle = FromContour(transform.I, path.Circle(float64(d))[0])
+		circle = FromContour(transform.I, path.Circle(float64(d)))
 		circle.IterateRowsXY(50*d, 100, bm.Set1)
 
-		rect := FromContour(transform.I, path.RoundRect(float64(d), float64(d)*2, 1+float64(d)/4)[0])
+		rect := FromContour(transform.I, path.RoundRect(float64(d), float64(d)*2, 1+float64(d)/4))
 		rect.IterateRowsXY(50*d, 200, bm.Set1)
 	}
 

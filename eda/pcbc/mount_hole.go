@@ -17,14 +17,14 @@ var (
 			eda.Track{{X: -1.15, Y: 0}}.DX(-0.6),
 		),
 
-		Openings: path.Circle(2.6),
+		Openings: path.Paths{path.Circle(2.6)},
 
-		Holes: path.Circle(1.8),
+		Holes: path.Paths{path.Circle(1.8)},
 
 		Components: eda.Components{
 			{
 				TrackWidth: 0.15,
-				Tracks:     path.Circle(2.8),
+				Tracks:     path.Paths{path.Circle(2.8)},
 			},
 		},
 	}

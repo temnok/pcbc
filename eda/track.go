@@ -8,13 +8,13 @@ import (
 	"temnok/pcbc/transform"
 )
 
-type Track path.Points
+type Track []path.Point
 
 func Tracks(tracks ...Track) path.Paths {
 	res := make(path.Paths, len(tracks))
 
 	for i, track := range tracks {
-		res[i] = path.Lines(path.Points(track))
+		res[i] = path.Linear(track)
 	}
 
 	return res

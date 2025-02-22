@@ -33,7 +33,7 @@ func init() {
 	pad := path.RoundRect(padW, padH, 0.3)
 
 	MS88SF2 = &eda.Component{
-		Marks: path.Rect(componentW, componentH),
+		Marks: path.Paths{path.Rect(componentW, componentH)},
 
 		Pads: path.Join(
 			path.Paths{nil}, // skip pad #0

@@ -13,7 +13,13 @@ type Path []Point
 
 // Apply returns new path transformed by a given 2D transformation.
 func (path Path) Apply(t transform.T) Path {
-	return Points(path).Apply(t)
+	res := make(Path, len(path))
+
+	for i, point := range path {
+		res[i].X, res[i].Y = t.Apply(point.X, point.Y)
+	}
+
+	return res
 }
 
 // Visit calls provided callback for each interpolated point on the path with integer coordinates.
@@ -58,6 +64,17 @@ func (path Path) Jump(t transform.T, dist int, jump func(x, y int)) {
 		jump(x, y)
 		prevX, prevY = x, y
 	})
+}
+
+func (path Path) Clone(n int, dx, dy float64) Paths {
+	res := make(Paths, 0, n)
+
+	for i := 0; i < n; i++ {
+		k := float64(i) - float64(n-1)/2
+		res = append(res, path.Apply(transform.Move(dx*k, dy*k)))
+	}
+
+	return res
 }
 
 func (path Path) Center(t transform.T) Point {

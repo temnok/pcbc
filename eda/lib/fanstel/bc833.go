@@ -9,7 +9,9 @@ import (
 )
 
 var (
-	pad = path.Circle(0.6)
+	pad = path.Paths{
+		path.Circle(0.6),
+	}
 
 	BC833 = &eda.Component{
 		Pads: path.Join(
@@ -44,6 +46,6 @@ var (
 			pad.Apply(transform.Move(-0.5, 1.8)),
 		).Apply(transform.Move(0.15, 1.75-14.3/2)),
 
-		Marks: path.Rect(10, 14.3),
+		Marks: path.Paths{path.Rect(10, 14.3)},
 	}
 )

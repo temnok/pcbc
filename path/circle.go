@@ -6,7 +6,7 @@ import "math"
 
 var roundK = 4 * (math.Sqrt(2) - 1) / 3
 
-func CirclePath(d float64) Path {
+func Circle(d float64) Path {
 	r := d * 0.5
 	m := r * roundK
 
@@ -21,8 +21,4 @@ func CirclePath(d float64) Path {
 		{m, -r}, {r, -m},
 		{r, 0},
 	}
-}
-
-func Circle(d float64) Paths {
-	return Paths{CirclePath(d)}
 }

@@ -42,7 +42,7 @@ var (
 		),
 	}
 
-	pad = append(path.Points{{}}, headers.PadCenters()...)
+	pad = append([]path.Point{{}}, headers.PadCenters()...)
 
 	mountHoles = &eda.Component{
 		Transform: transform.Move(0, 3),
@@ -54,7 +54,9 @@ var (
 	}
 
 	Board_nRF52840 = &eda.Component{
-		Cuts: path.RoundRect(28.4, 24.9, 1),
+		Cuts: path.Paths{
+			path.RoundRect(28.4, 24.9, 1),
+		},
 
 		Components: eda.Components{
 			chip,

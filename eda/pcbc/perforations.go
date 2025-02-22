@@ -14,7 +14,7 @@ var (
 )
 
 func init() {
-	perforation := path.CirclePath(2.1)
+	perforation := path.Circle(2.1)
 
 	Perforations34x42 = &eda.Component{
 		Perforations: path.Paths{
