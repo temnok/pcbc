@@ -4,6 +4,7 @@ package pcb
 
 import (
 	"image/color"
+	"temnok/pcbc/bitmap/image"
 	"temnok/pcbc/eda"
 	"temnok/pcbc/lbrn"
 	"temnok/pcbc/transform"
@@ -71,8 +72,8 @@ var maskCutSettings = []lbrn.CutSetting{
 
 func (pcb *PCB) SaveMask() error {
 	filename := pcb.SavePath + "mask.lbrn"
-	silk := pcb.silk.ToImage(color.White, color.Black)
-	mask := pcb.mask.ToImage(color.Transparent, color.Black)
+	silk := image.NewSingle(pcb.silk, color.White, color.Black)
+	mask := image.NewSingle(pcb.mask, color.Transparent, color.Black)
 
 	bitmapTransform := transform.UniformScale(1/pcb.PixelsPerMM).
 		Move(pcb.LbrnCenterX, pcb.LbrnCenterY)
@@ -93,7 +94,7 @@ func (pcb *PCB) SaveMask() error {
 
 func (pcb *PCB) SaveMaskBottom() error {
 	filename := pcb.SavePath + "mask-bottom.lbrn"
-	mask := pcb.maskBottom.ToImage(color.Transparent, color.Black)
+	mask := image.NewSingle(pcb.maskBottom, color.Transparent, color.Black)
 
 	bitmapTransform := transform.Scale(-1/pcb.PixelsPerMM, 1/pcb.PixelsPerMM).
 		Move(pcb.LbrnCenterX, pcb.LbrnCenterY)

@@ -6,6 +6,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"image/color"
 	"temnok/pcbc/bitmap"
+	"temnok/pcbc/bitmap/image"
 	"temnok/pcbc/shape"
 	"temnok/pcbc/transform"
 	"temnok/pcbc/util"
@@ -15,7 +16,7 @@ import (
 func TestFont_SavePng(t *testing.T) {
 	const scale = 100.0
 
-	bm := bitmap.NewBitmap(16*scale*Width, 20*scale)
+	bm := bitmap.New(16*scale*Width, 20*scale)
 
 	normalBrush := shape.Circle(Normal * scale)
 
@@ -39,5 +40,5 @@ func TestFont_SavePng(t *testing.T) {
 		}
 	}
 
-	assert.NoError(t, util.SavePNG("out/font.png", bm.ToImage(color.Black, color.White)))
+	assert.NoError(t, util.SavePNG("out/font.png", image.NewSingle(bm, color.Black, color.White)))
 }

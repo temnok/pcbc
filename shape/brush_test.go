@@ -6,6 +6,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"image/color"
 	"temnok/pcbc/bitmap"
+	"temnok/pcbc/bitmap/image"
 	"temnok/pcbc/path"
 	"temnok/pcbc/transform"
 	"temnok/pcbc/util"
@@ -13,7 +14,7 @@ import (
 )
 
 func TestBrushes(t *testing.T) {
-	bm := bitmap.NewBitmap(1000, 300)
+	bm := bitmap.New(1000, 300)
 
 	for d := 1; d < 20; d++ {
 		circle := Circle(d)
@@ -26,5 +27,5 @@ func TestBrushes(t *testing.T) {
 		rect.IterateRowsXY(50*d, 200, bm.Set1)
 	}
 
-	assert.NoError(t, util.SavePNG("tmp/brush.png", bm.ToImage(color.Black, color.White)))
+	assert.NoError(t, util.SavePNG("tmp/brush.png", image.NewSingle(bm, color.Black, color.White)))
 }

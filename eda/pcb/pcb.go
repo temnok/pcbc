@@ -5,6 +5,7 @@ package pcb
 import (
 	"image/color"
 	"temnok/pcbc/bitmap"
+	"temnok/pcbc/bitmap/image"
 	"temnok/pcbc/eda"
 	"temnok/pcbc/font"
 	"temnok/pcbc/shape"
@@ -69,12 +70,12 @@ func Process(component *eda.Component) *PCB {
 func (pcb *PCB) Process() {
 	wi, hi := int(pcb.Width*pcb.PixelsPerMM), int(pcb.Height*pcb.PixelsPerMM)
 
-	pcb.copper = bitmap.NewBitmap(wi, hi)
-	pcb.mask = bitmap.NewBitmap(wi, hi)
-	pcb.maskBottom = bitmap.NewBitmap(wi, hi)
-	pcb.silk = bitmap.NewBitmap(wi, hi)
-	pcb.overviewCopperbaseCuts = bitmap.NewBitmap(wi, hi)
-	pcb.overviewStencilCuts = bitmap.NewBitmap(wi, hi)
+	pcb.copper = bitmap.New(wi, hi)
+	pcb.mask = bitmap.New(wi, hi)
+	pcb.maskBottom = bitmap.New(wi, hi)
+	pcb.silk = bitmap.New(wi, hi)
+	pcb.overviewCopperbaseCuts = bitmap.New(wi, hi)
+	pcb.overviewStencilCuts = bitmap.New(wi, hi)
 
 	pcb.copper.Invert()
 
@@ -238,7 +239,7 @@ func (pcb *PCB) SaveFiles() error {
 func (pcb *PCB) SaveOverview() error {
 	filename := pcb.SavePath + "overview.png"
 
-	image := bitmap.NewBitmapsImage(
+	image := image.New(
 		[]*bitmap.Bitmap{
 			pcb.copper,
 			pcb.mask,

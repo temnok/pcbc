@@ -1,19 +1,24 @@
 // Copyright © 2025 Alex Temnok. All rights reserved.
 
-package bitmap
+package image
 
 import (
 	"image"
 	"image/color"
+	"temnok/pcbc/bitmap"
 )
 
 type bitmapsImage struct {
-	bitmaps []*Bitmap
+	bitmaps []*bitmap.Bitmap
 	palette color.Palette
 	flipY   bool
 }
 
-func NewBitmapsImage(bitmaps []*Bitmap, bitmapColors [][2]color.Color, flipY bool) image.Image {
+func NewSingle(bm *bitmap.Bitmap, zero, one color.Color) image.Image {
+	return New([]*bitmap.Bitmap{bm}, [][2]color.Color{{zero, one}}, false)
+}
+
+func New(bitmaps []*bitmap.Bitmap, bitmapColors [][2]color.Color, flipY bool) image.Image {
 	palette := make(color.Palette, 1<<len(bitmaps))
 
 	for i := range palette {
@@ -44,7 +49,7 @@ func (bi *bitmapsImage) ColorModel() color.Model {
 
 func (bi *bitmapsImage) Bounds() image.Rectangle {
 	b := bi.bitmaps[0]
-	return image.Rect(0, 0, b.width, b.height)
+	return image.Rect(0, 0, b.Width(), b.Height())
 }
 
 func (bi *bitmapsImage) At(x, y int) color.Color {
@@ -53,7 +58,7 @@ func (bi *bitmapsImage) At(x, y int) color.Color {
 
 func (bi *bitmapsImage) ColorIndexAt(x, y int) uint8 {
 	if bi.flipY {
-		y = bi.bitmaps[0].height - 1 - y
+		y = bi.bitmaps[0].Height() - 1 - y
 	}
 
 	index := 0

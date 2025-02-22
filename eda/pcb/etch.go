@@ -4,6 +4,7 @@ package pcb
 
 import (
 	"image/color"
+	"temnok/pcbc/bitmap/image"
 	"temnok/pcbc/eda"
 	"temnok/pcbc/lbrn"
 	"temnok/pcbc/transform"
@@ -13,7 +14,7 @@ type Param = lbrn.Param
 
 func (pcb *PCB) SaveEtch() error {
 	filename := pcb.SavePath + "etch.lbrn"
-	im := pcb.copper.ToImage(color.White, color.Black)
+	im := image.NewSingle(pcb.copper, color.White, color.Black)
 
 	center := transform.Move(pcb.LbrnCenterX, pcb.LbrnCenterY)
 	bitmapTransform := transform.UniformScale(1 / pcb.PixelsPerMM).Multiply(center)
