@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strconv"
 	"temnok/pcbc/path"
 	"temnok/pcbc/transform"
 )
@@ -69,8 +70,21 @@ type P struct {
 	P1 string `xml:"p1,attr"`
 }
 
-func XForm(t transform.T) string {
-	return fmt.Sprintf("%v %v %v %v %v %v", t.Ix, t.Iy, t.Jx, t.Jy, t.Kx, t.Ky)
+// having this method is important because default Sprint(f)
+// will result in different outputs on AMD and ARM platforms
+func f2s(val float64) string {
+	res := strconv.FormatFloat(val, 'f', 9, 64)
+	for res[len(res)-1] == '0' {
+		res = res[:len(res)-1]
+	}
+	if res[len(res)-1] == '.' {
+		res = res[:len(res)-1]
+	}
+	return res
+}
+
+func xform(t transform.T) string {
+	return fmt.Sprintf("%v %v %v %v %v %v", f2s(t.Ix), f2s(t.Iy), f2s(t.Jx), f2s(t.Jy), f2s(t.Kx), f2s(t.Ky))
 }
 
 func (p *LightBurnProject) SaveToFile(filename string) error {

@@ -38,9 +38,9 @@ func (s *Shape) SetTabs(tabs []path.Point) {
 		if len(buf) > 0 {
 			buf = append(buf, ' ')
 		}
-		buf = append(buf, fmt.Sprint(xy.X)...)
+		buf = append(buf, f2s(xy.X)...)
 		buf = append(buf, ',')
-		buf = append(buf, fmt.Sprint(xy.Y)...)
+		buf = append(buf, f2s(xy.Y)...)
 	}
 
 	s.Tabs = string(buf)
@@ -54,16 +54,16 @@ func (s *Shape) SetPath(path path.Path) {
 		xy := path[i]
 
 		v := V{
-			Vx: fmt.Sprint(xy.X),
-			Vy: fmt.Sprint(xy.Y),
+			Vx: f2s(xy.X),
+			Vy: f2s(xy.Y),
 		}
 		if i > 0 && path[i-1] != xy {
-			v.C1x = fmt.Sprint(path[i-1].X)
-			v.C1y = fmt.Sprint(path[i-1].Y)
+			v.C1x = f2s(path[i-1].X)
+			v.C1y = f2s(path[i-1].Y)
 		}
 		if i+1 < len(path) && path[i+1] != xy {
-			v.C0x = fmt.Sprint(path[i+1].X)
-			v.C0y = fmt.Sprint(path[i+1].Y)
+			v.C0x = f2s(path[i+1].X)
+			v.C0y = f2s(path[i+1].Y)
 		}
 
 		s.V = append(s.V, v)
@@ -94,7 +94,7 @@ func NewPath(i int, t transform.T, path path.Path) *Shape {
 	s := &Shape{
 		Type:     "Path",
 		CutIndex: fmt.Sprint(i),
-		XForm:    XForm(t),
+		XForm:    xform(t),
 	}
 
 	s.SetPath(path)
@@ -126,7 +126,7 @@ func NewBitmap(i int, t transform.T, im image.Image) *Shape {
 	return &Shape{
 		Type:     "Bitmap",
 		CutIndex: fmt.Sprint(i),
-		XForm:    XForm(t),
+		XForm:    xform(t),
 		W:        fmt.Sprint(im.Bounds().Dx()),
 		H:        fmt.Sprint(im.Bounds().Dy()),
 		Data:     base64.StdEncoding.EncodeToString(buf.Bytes()),
