@@ -19,7 +19,7 @@ func TestRunConcurrently(t *testing.T) {
 	tests := []struct {
 		name     string
 		input    []func() error
-		expected error
+		expected []error
 	}{
 		{
 			name: "no errors",
@@ -38,7 +38,7 @@ func TestRunConcurrently(t *testing.T) {
 				func() error { time.Sleep(10 * time.Millisecond); return errs[1] },
 				func() error { time.Sleep(20 * time.Millisecond); return errs[2] },
 			},
-			expected: errors.Join(errs...),
+			expected: errs,
 		},
 
 		{
@@ -48,14 +48,18 @@ func TestRunConcurrently(t *testing.T) {
 				func() error { time.Sleep(2 * time.Millisecond); return nil },
 				func() error { time.Sleep(1 * time.Millisecond); return errs[2] },
 			},
-			expected: errors.Join(errs[2], errs[0]),
+			expected: []error{errs[2], errs[0]},
 		},
 	}
 
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
 			err := RunConcurrently(test.input...)
-			assert.Equal(t, test.expected, err)
+			if err == nil {
+				assert.Nil(t, test.expected)
+			} else {
+				assert.ElementsMatch(t, test.expected, err.(interface{ Unwrap() []error }).Unwrap())
+			}
 		})
 	}
 }
