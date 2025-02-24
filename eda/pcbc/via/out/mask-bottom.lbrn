@@ -24,7 +24,7 @@
 		<index Value="0"></index>
 		<name Value="Silk"></name>
 		<priority Value="0"></priority>
-		<speed Value="400"></speed>
+		<speed Value="450"></speed>
 		<numPasses Value="1"></numPasses>
 		<globalRepeat Value=""></globalRepeat>
 		<maxPower Value="3"></maxPower>
@@ -37,8 +37,8 @@
 		<dotWidth Value=""></dotWidth>
 		<tabsEnabled Value=""></tabsEnabled>
 		<tabSize Value=""></tabSize>
-		<crossHatch Value=""></crossHatch>
-		<angle Value=""></angle>
+		<crossHatch Value="1"></crossHatch>
+		<angle Value="-90"></angle>
 		<negative Value="1"></negative>
 	</CutSetting_Img>
 	<CutSetting_Img type="Image">

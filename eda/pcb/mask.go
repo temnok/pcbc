@@ -22,11 +22,14 @@ var maskCutSettings = []lbrn.CutSetting{
 		Frequency:   Param{Value: "20000"},
 
 		NumPasses: Param{Value: "1"},
-		Speed:     Param{Value: "400"},
+		Speed:     Param{Value: "450"},
 		Interval:  Param{Value: "0.01"},
 		DPI:       Param{Value: "2540"},
 
 		Negative: Param{Value: "1"},
+
+		CrossHatch: Param{Value: "1"},
+		Angle:      Param{Value: "-90"},
 	},
 	{
 		Type:     "Image",
