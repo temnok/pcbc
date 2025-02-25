@@ -18,7 +18,7 @@
 		<tabSize Value=""></tabSize>
 		<crossHatch Value="1"></crossHatch>
 		<angle Value="-90"></angle>
-		<negative Value="1"></negative>
+		<negative Value=""></negative>
 	</CutSetting_Img>
 	<CutSetting_Img type="Image">
 		<index Value="1"></index>

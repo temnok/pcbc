@@ -26,7 +26,8 @@ var maskCutSettings = []lbrn.CutSetting{
 		Interval:  Param{Value: "0.02"},
 		DPI:       Param{Value: "1270"},
 
-		Negative: Param{Value: "1"},
+		// Making positive default -- negative is much slower!
+		//Negative: Param{Value: "1"},
 
 		CrossHatch: Param{Value: "1"},
 		Angle:      Param{Value: "-90"},
