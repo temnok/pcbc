@@ -10,21 +10,23 @@ import (
 type Components = []*Component
 
 // Component represents vector data for different PCB layers.
+// Its data should not be modified after component creation.
+// It allows using same components at multiple locations.
 type Component struct {
 	Transform transform.T
 
 	// Remove: copper shapes
 	Clears path.Paths
 
-	// Remove: copper strokes, mask(-bottom) perforations
+	// Remove: copper strokes, mask perforations
 	// Cut: copperbase (leave tabs)
 	Cuts path.Paths
 
-	// Remove: copper strokes, mask(-bottom) strokes
+	// Remove: copper strokes, mask strokes
 	// Cut: copperbase
 	Holes path.Paths
 
-	// Remove: copper strokes, mask(-bottom) strokes
+	// Remove: copper strokes, mask strokes
 	// Cut: copperbase, maskbase, stencil
 	Perforations path.Paths
 

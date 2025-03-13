@@ -2,20 +2,22 @@
 
 package bitmap
 
+type word uint64
+
 type Bitmap struct {
 	width, height int
-	bits          []uint64
+	words         []word
 }
 
 const (
-	ones = uint64((1 << 64) - 1)
+	ones = ^word(0)
 )
 
 func New(w, h int) *Bitmap {
 	w, h = max(w, 1), max(h, 1)
 
 	b := &Bitmap{width: w, height: h}
-	b.bits = make([]uint64, b.addr(w, h))
+	b.words = make([]word, b.addr(w, h-1)+1)
 	return b
 }
 
@@ -28,8 +30,8 @@ func (b *Bitmap) Height() int {
 }
 
 func (b *Bitmap) Invert() {
-	for i := range b.bits {
-		b.bits[i] = ^b.bits[i]
+	for i, w := range b.words {
+		b.words[i] = ^w
 	}
 }
 
@@ -41,7 +43,7 @@ func (b *Bitmap) Set0(x0, x1, y int) {
 	b.Set(x0, x1, y, 0)
 }
 
-func (b *Bitmap) Set(x0, x1, y, val int) {
+func (b *Bitmap) Set(x0, x1, y, bit int) {
 	if x0 < 0 {
 		x0 = 0
 	}
@@ -57,43 +59,43 @@ func (b *Bitmap) Set(x0, x1, y, val int) {
 	i0, i1 := b.addr(x0, y), b.addr(x1-1, y)
 	j0, j1 := x0%64, (x1-1)%64+1
 
-	if (val & 1) != 0 {
+	if (bit & 1) != 0 {
 		if i0 == i1 {
-			b.bits[i0] |= mask(j0, j1)
+			b.words[i0] |= mask(j0, j1)
 
 			return
 		}
 
-		b.bits[i0] |= mask(j0, 64)
+		b.words[i0] |= mask(j0, 64)
 		for i := i0 + 1; i < i1; i++ {
-			b.bits[i] = ones
+			b.words[i] = ones
 		}
 
-		b.bits[i1] |= mask(0, j1)
+		b.words[i1] |= mask(0, j1)
 	} else {
 		if i0 == i1 {
-			b.bits[i0] &^= mask(j0, j1)
+			b.words[i0] &^= mask(j0, j1)
 
 			return
 		}
 
-		b.bits[i0] &^= mask(j0, 64)
+		b.words[i0] &^= mask(j0, 64)
 		for i := i0 + 1; i < i1; i++ {
-			b.bits[i] = 0
+			b.words[i] = 0
 		}
 
-		b.bits[i1] &^= mask(0, j1)
+		b.words[i1] &^= mask(0, j1)
 	}
 }
 
 func (b *Bitmap) Get(x, y int) int {
-	return int(b.bits[b.addr(x, y)]>>(x%64)) & 1
+	return int(b.words[b.addr(x, y)]>>(x%64)) & 1
 }
 
 func (b *Bitmap) addr(x, y int) int {
 	return ((b.width+63)/64)*y + x/64
 }
 
-func mask(i, j int) uint64 {
+func mask(i, j int) word {
 	return (ones << uint64(i)) ^ (ones << uint64(j))
 }

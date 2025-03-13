@@ -8,7 +8,7 @@ import (
 
 func TestBitmap_Mask(t *testing.T) {
 	tests := []struct {
-		want uint64
+		want word
 		i, j int
 	}{
 		{0, 1, 1},
