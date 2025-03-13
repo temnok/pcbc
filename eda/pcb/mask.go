@@ -99,26 +99,6 @@ func (pcb *PCB) SaveMask() error {
 	return p.SaveToFile(filename)
 }
 
-func (pcb *PCB) SaveMaskBottom() error {
-	filename := pcb.SavePath + "mask-bottom.lbrn"
-	mask := image.NewSingle(pcb.maskBottom, color.Transparent, color.Black)
-
-	bitmapTransform := transform.Scale(-1/pcb.PixelsPerMM, 1/pcb.PixelsPerMM).
-		Move(pcb.LbrnCenterX, pcb.LbrnCenterY)
-
-	p := lbrn.LightBurnProject{
-		CutSettingImg: maskCutSettings,
-		Shape: []*lbrn.Shape{
-			lbrn.NewBitmap(1, bitmapTransform, mask),
-			lbrn.NewBitmap(2, bitmapTransform, mask),
-		},
-	}
-
-	addPerforations(pcb, &p, -1)
-
-	return p.SaveToFile(filename)
-}
-
 func addPerforations(pcb *PCB, p *lbrn.LightBurnProject, reflect float64) {
 	hasPerforations := false
 
