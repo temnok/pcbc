@@ -28,10 +28,17 @@ func (paths Paths) Apply(t transform.T) Paths {
 	return res
 }
 
-// Jump calls provided callback for each path.
-func (paths Paths) Jump(t transform.T, dist int, jump func(x, y int)) {
+// ForEachPixel calls provided callback for each path.
+func (paths Paths) ForEachPixel(t transform.T, iterator func(x, y int)) {
 	for _, path := range paths {
-		path.Jump(t, dist, jump)
+		path.ForEachPixel(t, iterator)
+	}
+}
+
+// ForEachPixelDist calls provided callback for each path.
+func (paths Paths) ForEachPixelDist(t transform.T, dist int, jump func(x, y int)) {
+	for _, path := range paths {
+		path.ForEachPixelDist(t, dist, jump)
 	}
 }
 

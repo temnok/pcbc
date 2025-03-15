@@ -55,9 +55,9 @@ func (pcb *PCB) renderStencilExpose(bm *bitmap.Bitmap) {
 	pcb.component.Visit(func(c *eda.Component) {
 		t := c.Transform.Multiply(bitmapTransform)
 
-		shape.IterateContoursRows(t, c.Pads, bm.Set1)
-		brush.IterateContours(t, c.Pads, bm.Set1)
+		shape.ForEachRow(c.Pads, t, bm.Set1)
+		brush.ForEachPathsPixel(c.Pads, t, bm.Set1)
 
-		shape.IterateContoursRows(t, c.Perforations, bm.Set1)
+		shape.ForEachRow(c.Perforations, t, bm.Set1)
 	})
 }

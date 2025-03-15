@@ -15,40 +15,30 @@ type Shape struct {
 	rows []row
 }
 
-func FromContour(t transform.T, contour path.Path) *Shape {
+func New(contour path.Path, t transform.T) *Shape {
 	b := new(builder)
-	contour.Visit(t, b.addPoint)
+	contour.ForEachPixel(t, b.addPoint)
 	return b.build()
 }
 
-func (s *Shape) IterateRows(iterator func(x0, x1, y int)) {
-	s.IterateRowsXY(0, 0, iterator)
+func (s *Shape) ForEachRow(iterator func(x0, x1, y int)) {
+	s.ForEachRowWithOffset(0, 0, iterator)
 }
 
-func (s *Shape) IterateRowsXY(x0, y0 int, iterator func(x0, x1, y int)) {
+func (s *Shape) ForEachRowWithOffset(x, y int, iterator func(x0, x1, y int)) {
 	for _, row := range s.rows {
-		iterator(x0+int(row.x0), x0+int(row.x1), y0+int(row.y))
+		iterator(x+int(row.x0), x+int(row.x1), y+int(row.y))
 	}
 }
 
-func (s *Shape) IterateContour(t transform.T, contour path.Path, iterator func(x0, x1, y int)) {
-	contour.Visit(t, func(x, y int) {
-		s.IterateRowsXY(x, y, iterator)
+func (s *Shape) ForEachPathsPixel(paths path.Paths, t transform.T, iterator func(x0, x1, y int)) {
+	paths.ForEachPixel(t, func(x, y int) {
+		s.ForEachRowWithOffset(x, y, iterator)
 	})
 }
 
-func (s *Shape) IterateContours(t transform.T, contours path.Paths, iterator func(x0, x1, y int)) {
-	for _, contour := range contours {
-		s.IterateContour(t, contour, iterator)
-	}
-}
-
-func IterateContourRows(t transform.T, contour path.Path, iterator func(x0, x1, y int)) {
-	FromContour(t, contour).IterateRows(iterator)
-}
-
-func IterateContoursRows(t transform.T, contours path.Paths, iterator func(x0, x1, y int)) {
-	for _, contour := range contours {
-		IterateContourRows(t, contour, iterator)
+func ForEachRow(shapeContours path.Paths, t transform.T, iterator func(x0, x1, y int)) {
+	for _, contour := range shapeContours {
+		New(contour, t).ForEachRow(iterator)
 	}
 }

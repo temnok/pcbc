@@ -61,9 +61,7 @@ const (
 // Visit calls provided callback for each subcomponent recursively,
 // as if every component is isolated (without subcomponents)
 func (c *Component) Visit(callback func(*Component)) {
-	defaults := &Component{}
-
-	c.visit(transform.I, defaults, callback)
+	c.visit(transform.I, &Component{}, callback)
 }
 
 func (c *Component) visit(t transform.T, parent *Component, callback func(*Component)) {

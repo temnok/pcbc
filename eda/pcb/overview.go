@@ -49,16 +49,16 @@ func (pcb *PCB) renderCutsOverview(substrateCuts, stencilCuts *bitmap.Bitmap) {
 		t := c.Transform.Multiply(pcb.bitmapTransform())
 
 		// Holes
-		brush.IterateContours(t, c.Holes, substrateCuts.Set1)
+		brush.ForEachPathsPixel(c.Holes, t, substrateCuts.Set1)
 
 		// Cuts
-		brush.IterateContours(t, c.Cuts, substrateCuts.Set1)
+		brush.ForEachPathsPixel(c.Cuts, t, substrateCuts.Set1)
 
 		// Pads
-		brush.IterateContours(t, c.Pads, stencilCuts.Set1)
+		brush.ForEachPathsPixel(c.Pads, t, stencilCuts.Set1)
 
 		// Perforations
-		brush.IterateContours(t, c.Perforations, substrateCuts.Set1)
-		brush.IterateContours(t, c.Perforations, stencilCuts.Set1)
+		brush.ForEachPathsPixel(c.Perforations, t, substrateCuts.Set1)
+		brush.ForEachPathsPixel(c.Perforations, t, stencilCuts.Set1)
 	})
 }

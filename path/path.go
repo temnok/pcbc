@@ -22,9 +22,9 @@ func (path Path) Apply(t transform.T) Path {
 	return res
 }
 
-// Visit calls provided callback for each interpolated point on the path with integer coordinates.
+// ForEachPixel calls provided callback for each interpolated point on the path with integer coordinates (pixel).
 // The callback is called at least one time for a non-empty path.
-func (path Path) Visit(t transform.T, visit func(x, y int)) {
+func (path Path) ForEachPixel(t transform.T, visit func(x, y int)) {
 	if len(path) == 0 {
 		return
 	}
@@ -45,13 +45,13 @@ func (path Path) Visit(t transform.T, visit func(x, y int)) {
 	}
 }
 
-// Jump calls provided callback for interpolated points on the path, separated by given distance.
+// ForEachPixelDist calls provided callback for interpolated points on the path, separated by given distance.
 // For example, it could be used to draw a dotted line.
-func (path Path) Jump(t transform.T, dist int, jump func(x, y int)) {
+func (path Path) ForEachPixelDist(t transform.T, dist int, jump func(x, y int)) {
 	var prevX, prevY int
 	started := false
 
-	path.Visit(t, func(x, y int) {
+	path.ForEachPixel(t, func(x, y int) {
 		if !started {
 			started = true
 		} else {
