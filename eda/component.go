@@ -50,13 +50,24 @@ type Component struct {
 
 	TrackWidth float64
 
+	Layers int
+
 	Components []*Component
 }
+
+const (
+	Layer0 = 1 << 0
+	Layer1 = 1 << 1
+)
 
 // Visit calls provided callback for each subcomponent recursively,
 // as if every component is isolated (without subcomponents)
 func (c *Component) Visit(callback func(*Component)) {
-	c.visit(transform.I, &Component{}, callback)
+	defaults := &Component{
+		Layers: Layer0,
+	}
+
+	c.visit(transform.I, defaults, callback)
 }
 
 func (c *Component) visit(t transform.T, parent *Component, callback func(*Component)) {
@@ -77,8 +88,13 @@ func (c *Component) visit(t transform.T, parent *Component, callback func(*Compo
 		Openings:     c.Openings,
 		TrackWidth:   c.TrackWidth,
 	}
+
 	if comp.TrackWidth == 0 {
 		comp.TrackWidth = parent.TrackWidth
+	}
+
+	if comp.Layers == 0 {
+		comp.Layers = parent.Layers
 	}
 
 	callback(comp)
