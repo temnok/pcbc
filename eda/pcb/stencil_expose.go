@@ -11,28 +11,12 @@ import (
 	"temnok/pcbc/shape"
 )
 
-func (pcb *PCB) createStencilExposeBitmap() *bitmap.Bitmap {
-	bm := bitmap.New(pcb.bitmapSize())
-
-	brush := shape.Circle(int(pcb.StencilExposeWidth * pcb.PixelsPerMM))
-
-	bitmapTransform := pcb.bitmapTransform()
-
-	pcb.component.Visit(func(c *eda.Component) {
-		t := c.Transform.Multiply(bitmapTransform)
-
-		shape.IterateContoursRows(t, c.Pads, bm.Set1)
-		brush.IterateContours(t, c.Pads, bm.Set1)
-
-		shape.IterateContoursRows(t, c.Perforations, bm.Set1)
-	})
-
-	return bm
-}
-
 func (pcb *PCB) SaveStencilExpose() error {
+	bm := bitmap.New(pcb.bitmapSize())
+	pcb.renderStencilExpose(bm)
+
 	filename := pcb.SavePath + "stencil-expose.lbrn"
-	im := image.NewSingle(pcb.createStencilExposeBitmap(), color.White, color.Black)
+	im := image.NewSingle(bm, color.White, color.Black)
 
 	p := lbrn.LightBurnProject{
 		CutSettingImg: []*lbrn.CutSetting{
@@ -61,4 +45,19 @@ func (pcb *PCB) SaveStencilExpose() error {
 	}
 
 	return p.SaveToFile(filename)
+}
+
+func (pcb *PCB) renderStencilExpose(bm *bitmap.Bitmap) {
+	brush := shape.Circle(int(pcb.StencilExposeWidth * pcb.PixelsPerMM))
+
+	bitmapTransform := pcb.bitmapTransform()
+
+	pcb.component.Visit(func(c *eda.Component) {
+		t := c.Transform.Multiply(bitmapTransform)
+
+		shape.IterateContoursRows(t, c.Pads, bm.Set1)
+		brush.IterateContours(t, c.Pads, bm.Set1)
+
+		shape.IterateContoursRows(t, c.Perforations, bm.Set1)
+	})
 }

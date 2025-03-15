@@ -81,7 +81,7 @@ func (pcb *PCB) SaveMask() error {
 	silk := image.NewSingle(pcb.silk, color.White, color.Black)
 	mask := image.NewSingle(pcb.mask, color.Transparent, color.Black)
 
-	p := lbrn.LightBurnProject{
+	p := &lbrn.LightBurnProject{
 		CutSettingImg: maskCutSettings,
 		Shape: []*lbrn.Shape{
 			lbrn.NewBitmap(0, pcb.lbrnBitmapScale(), silk),
@@ -90,38 +90,33 @@ func (pcb *PCB) SaveMask() error {
 		},
 	}
 
-	addPerforations(pcb, &p)
+	pcb.addMaskPerforations(p)
 
 	return p.SaveToFile(filename)
 }
 
-func addPerforations(pcb *PCB, p *lbrn.LightBurnProject) {
-	hasPerforations := false
-
+func (pcb *PCB) addMaskPerforations(p *lbrn.LightBurnProject) {
 	pcb.component.Visit(func(component *eda.Component) {
 		t := component.Transform.Multiply(pcb.lbrnCenterMove())
 
 		for _, hole := range component.Perforations {
-			hasPerforations = true
 			p.Shape = append(p.Shape, lbrn.NewPath(3, t, hole))
 		}
 	})
 
-	if hasPerforations {
-		p.CutSetting = []*lbrn.CutSetting{
-			{
-				Type:     "Cut",
-				Name:     Param{Value: "Perforation"},
-				Index:    Param{Value: "3"},
-				Priority: Param{Value: "3"},
+	p.CutSetting = []*lbrn.CutSetting{
+		{
+			Type:     "Cut",
+			Name:     Param{Value: "Perforation"},
+			Index:    Param{Value: "3"},
+			Priority: Param{Value: "3"},
 
-				Speed:        Param{Value: "100"},
-				GlobalRepeat: Param{Value: "30"},
+			Speed:        Param{Value: "100"},
+			GlobalRepeat: Param{Value: "30"},
 
-				MaxPower:    Param{Value: "90"},
-				QPulseWidth: Param{Value: "200"},
-				Frequency:   Param{Value: "20000"},
-			},
-		}
+			MaxPower:    Param{Value: "90"},
+			QPulseWidth: Param{Value: "200"},
+			Frequency:   Param{Value: "20000"},
+		},
 	}
 }
