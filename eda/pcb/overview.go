@@ -4,11 +4,17 @@ import (
 	"image/color"
 	"temnok/pcbc/bitmap"
 	"temnok/pcbc/bitmap/image"
+	"temnok/pcbc/eda"
+	"temnok/pcbc/shape"
 	"temnok/pcbc/util"
 )
 
 func (pcb *PCB) SaveOverview() error {
 	filename := pcb.SavePath + "overview.png"
+
+	substrateCuts := bitmap.New(pcb.bitmapSize())
+	stencilCuts := bitmap.New(pcb.bitmapSize())
+	pcb.renderCutsOverview(substrateCuts, stencilCuts)
 
 	image := image.New(
 		[]*bitmap.Bitmap{
@@ -16,8 +22,8 @@ func (pcb *PCB) SaveOverview() error {
 			pcb.mask,
 			pcb.silk,
 
-			pcb.overviewCopperbaseCuts,
-			pcb.overviewStencilCuts,
+			substrateCuts,
+			stencilCuts,
 		},
 		[][2]color.Color{
 			{color.RGBA{G: 0x40, B: 0x10, A: 0xFF}, color.RGBA{R: 0xC0, G: 0x60, A: 0xFF}},
@@ -34,4 +40,25 @@ func (pcb *PCB) SaveOverview() error {
 	}
 
 	return nil
+}
+
+func (pcb *PCB) renderCutsOverview(substrateCuts, stencilCuts *bitmap.Bitmap) {
+	brush := shape.Circle(int(pcb.OverviewCutWidth * pcb.PixelsPerMM))
+
+	pcb.component.Visit(func(c *eda.Component) {
+		t := c.Transform.Multiply(pcb.bitmapTransform())
+
+		// Holes
+		brush.IterateContours(t, c.Holes, substrateCuts.Set1)
+
+		// Cuts
+		brush.IterateContours(t, c.Cuts, substrateCuts.Set1)
+
+		// Pads
+		brush.IterateContours(t, c.Pads, stencilCuts.Set1)
+
+		// Perforations
+		brush.IterateContours(t, c.Perforations, substrateCuts.Set1)
+		brush.IterateContours(t, c.Perforations, stencilCuts.Set1)
+	})
 }

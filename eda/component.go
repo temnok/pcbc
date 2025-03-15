@@ -19,15 +19,15 @@ type Component struct {
 	Clears path.Paths
 
 	// Remove: copper strokes, mask perforations
-	// Cut: copperbase (leave tabs)
+	// Cut: substrate (leave tabs)
 	Cuts path.Paths
 
 	// Remove: copper strokes, mask strokes
-	// Cut: copperbase
+	// Cut: substrate
 	Holes path.Paths
 
 	// Remove: copper strokes, mask strokes
-	// Cut: copperbase, maskbase, stencil
+	// Cut: substrate, maskbase, stencil
 	Perforations path.Paths
 
 	// Remove: copper strokes, mask strokes
@@ -50,8 +50,6 @@ type Component struct {
 
 	TrackWidth float64
 
-	Layers int
-
 	Components []*Component
 }
 
@@ -63,9 +61,7 @@ const (
 // Visit calls provided callback for each subcomponent recursively,
 // as if every component is isolated (without subcomponents)
 func (c *Component) Visit(callback func(*Component)) {
-	defaults := &Component{
-		Layers: Layer0,
-	}
+	defaults := &Component{}
 
 	c.visit(transform.I, defaults, callback)
 }
@@ -91,10 +87,6 @@ func (c *Component) visit(t transform.T, parent *Component, callback func(*Compo
 
 	if comp.TrackWidth == 0 {
 		comp.TrackWidth = parent.TrackWidth
-	}
-
-	if comp.Layers == 0 {
-		comp.Layers = parent.Layers
 	}
 
 	callback(comp)

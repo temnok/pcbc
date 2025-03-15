@@ -29,8 +29,7 @@ type PCB struct {
 
 	SavePath string
 
-	copper, mask, silk                          *bitmap.Bitmap
-	overviewCopperbaseCuts, overviewStencilCuts *bitmap.Bitmap
+	copper, mask, silk *bitmap.Bitmap
 }
 
 func New(component *eda.Component) *PCB {
@@ -73,8 +72,6 @@ func (pcb *PCB) Process() {
 	pcb.copper = bitmap.New(wi, hi)
 	pcb.mask = bitmap.New(wi, hi)
 	pcb.silk = bitmap.New(wi, hi)
-	pcb.overviewCopperbaseCuts = bitmap.New(wi, hi)
-	pcb.overviewStencilCuts = bitmap.New(wi, hi)
 
 	pcb.copper.Invert()
 
@@ -89,10 +86,8 @@ func (pcb *PCB) bitmapSize() (int, int) {
 func (pcb *PCB) processPass1() {
 	pcb.component.Visit(func(component *eda.Component) {
 		pcb.removeCopper(component)
-		pcb.cutCopperbaseOverview(component)
 		pcb.addSilk(component)
 		pcb.cutMask1(component)
-		pcb.cutStencil(component)
 	})
 }
 
@@ -156,21 +151,6 @@ func (pcb *PCB) addCopper(c *eda.Component) {
 	brush.IterateContours(t, c.GroundTracks, pcb.copper.Set1)
 }
 
-func (pcb *PCB) cutCopperbaseOverview(c *eda.Component) {
-	t := c.Transform.Multiply(pcb.bitmapTransform())
-
-	brush := shape.Circle(int(pcb.OverviewCutWidth * pcb.PixelsPerMM))
-
-	// Holes
-	brush.IterateContours(t, c.Holes, pcb.overviewCopperbaseCuts.Set1)
-
-	// Cuts
-	brush.IterateContours(t, c.Cuts, pcb.overviewCopperbaseCuts.Set1)
-
-	// Perforations
-	brush.IterateContours(t, c.Perforations, pcb.overviewCopperbaseCuts.Set1)
-}
-
 func (pcb *PCB) addSilk(c *eda.Component) {
 	t := c.Transform.Multiply(pcb.bitmapTransform())
 
@@ -208,18 +188,6 @@ func (pcb *PCB) cutMask2(c *eda.Component) {
 	// Openings
 	shape.IterateContoursRows(t, c.Openings, pcb.mask.Set0)
 	brush.IterateContours(t, c.Openings, pcb.mask.Set1)
-}
-
-func (pcb *PCB) cutStencil(c *eda.Component) {
-	t := c.Transform.Multiply(pcb.bitmapTransform())
-
-	brush := shape.Circle(int(pcb.OverviewCutWidth * pcb.PixelsPerMM))
-
-	// Pads
-	brush.IterateContours(t, c.Pads, pcb.overviewStencilCuts.Set1)
-
-	// Perforations
-	brush.IterateContours(t, c.Perforations, pcb.overviewStencilCuts.Set1)
 }
 
 func (pcb *PCB) bitmapTransform() transform.T {
