@@ -92,14 +92,14 @@ func (pcb *PCB) SaveEtch() error {
 			},
 		},
 		Shape: []*lbrn.Shape{
-			lbrn.NewBitmap(0, pcb.lbrnBitmapScale, im),
-			lbrn.NewBitmap(1, pcb.lbrnBitmapScale, im),
-			lbrn.NewBitmap(3, pcb.lbrnBitmapScale, im),
+			lbrn.NewBitmap(0, pcb.lbrnBitmapScale(), im),
+			lbrn.NewBitmap(1, pcb.lbrnBitmapScale(), im),
+			lbrn.NewBitmap(3, pcb.lbrnBitmapScale(), im),
 		},
 	}
 
 	pcb.component.Visit(func(component *eda.Component) {
-		t := component.Transform.Multiply(pcb.LbrnCenter)
+		t := component.Transform.Multiply(pcb.lbrnCenterMove())
 
 		for _, cut := range component.Cuts {
 			p.Shape = append(p.Shape, lbrn.NewPathWithTabs(2, t, cut))

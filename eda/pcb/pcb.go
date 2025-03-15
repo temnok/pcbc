@@ -17,15 +17,13 @@ type PCB struct {
 	Width, Height float64
 	PixelsPerMM   float64
 
-	DefaultTrackWidth  float64
 	ExtraCopperWidth   float64
 	CopperClearWidth   float64
 	MaskCutWidth       float64
 	OverviewCutWidth   float64
 	StencilExposeWidth float64
 
-	LbrnCenter      transform.T
-	lbrnBitmapScale transform.T
+	LbrnCenterX, LbrnCenterY float64
 
 	SavePath string
 
@@ -37,20 +35,23 @@ func New(component *eda.Component) *PCB {
 	width, height = width+1, height+1
 
 	return &PCB{
-		component: component,
+		component: &eda.Component{
+			TrackWidth: 0.25,
+			Components: eda.Components{component},
+		},
 
 		Width:       width,
 		Height:      height,
 		PixelsPerMM: 100,
 
-		DefaultTrackWidth:  0.25,
 		ExtraCopperWidth:   0.05,
 		CopperClearWidth:   0.25,
 		MaskCutWidth:       0.1,
 		OverviewCutWidth:   0.02,
 		StencilExposeWidth: 1,
 
-		LbrnCenter: transform.Move(55, 55),
+		LbrnCenterX: 55,
+		LbrnCenterY: 55,
 
 		SavePath: "out/",
 	}
@@ -111,11 +112,7 @@ func (pcb *PCB) removeCopper(c *eda.Component) {
 	clearBrush.IterateContours(t, c.Pads, pcb.copper.Set0)
 
 	// Non-ground tracks
-	brushW := c.TrackWidth
-	if brushW == 0 {
-		brushW = pcb.DefaultTrackWidth
-	}
-	brush := shape.Circle(int((brushW + clearWidth) * pcb.PixelsPerMM))
+	brush := shape.Circle(int((c.TrackWidth + clearWidth) * pcb.PixelsPerMM))
 	brush.IterateContours(t, c.Tracks, pcb.copper.Set0)
 
 	// TODO: remove the following line
@@ -141,12 +138,7 @@ func (pcb *PCB) addCopper(c *eda.Component) {
 	extraCopperBrush.IterateContours(t, c.Pads, pcb.copper.Set1)
 
 	// Tracks
-	brushW := c.TrackWidth
-	if brushW == 0 {
-		brushW = pcb.DefaultTrackWidth
-	}
-
-	brush := shape.Circle(int((brushW + pcb.ExtraCopperWidth) * pcb.PixelsPerMM))
+	brush := shape.Circle(int((c.TrackWidth + pcb.ExtraCopperWidth) * pcb.PixelsPerMM))
 	brush.IterateContours(t, c.Tracks, pcb.copper.Set1)
 	brush.IterateContours(t, c.GroundTracks, pcb.copper.Set1)
 }
@@ -194,9 +186,15 @@ func (pcb *PCB) bitmapTransform() transform.T {
 	return transform.Move(pcb.Width/2, pcb.Height/2).Scale(pcb.PixelsPerMM, pcb.PixelsPerMM)
 }
 
-func (pcb *PCB) SaveFiles() error {
-	pcb.lbrnBitmapScale = transform.UniformScale(1 / pcb.PixelsPerMM).Multiply(pcb.LbrnCenter)
+func (pcb *PCB) lbrnCenterMove() transform.T {
+	return transform.Move(pcb.LbrnCenterX, pcb.LbrnCenterY)
+}
 
+func (pcb *PCB) lbrnBitmapScale() transform.T {
+	return transform.UniformScale(1 / pcb.PixelsPerMM).Multiply(pcb.lbrnCenterMove())
+}
+
+func (pcb *PCB) SaveFiles() error {
 	return util.RunConcurrently(
 		pcb.SaveEtch,
 		pcb.SaveMask,

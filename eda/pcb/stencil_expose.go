@@ -56,7 +56,7 @@ func (pcb *PCB) SaveStencilExpose() error {
 			},
 		},
 		Shape: []*lbrn.Shape{
-			lbrn.NewBitmap(0, pcb.lbrnBitmapScale, im),
+			lbrn.NewBitmap(0, pcb.lbrnBitmapScale(), im),
 		},
 	}
 

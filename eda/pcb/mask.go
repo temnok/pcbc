@@ -84,9 +84,9 @@ func (pcb *PCB) SaveMask() error {
 	p := lbrn.LightBurnProject{
 		CutSettingImg: maskCutSettings,
 		Shape: []*lbrn.Shape{
-			lbrn.NewBitmap(0, pcb.lbrnBitmapScale, silk),
-			lbrn.NewBitmap(1, pcb.lbrnBitmapScale, mask),
-			lbrn.NewBitmap(2, pcb.lbrnBitmapScale, mask),
+			lbrn.NewBitmap(0, pcb.lbrnBitmapScale(), silk),
+			lbrn.NewBitmap(1, pcb.lbrnBitmapScale(), mask),
+			lbrn.NewBitmap(2, pcb.lbrnBitmapScale(), mask),
 		},
 	}
 
@@ -99,7 +99,7 @@ func addPerforations(pcb *PCB, p *lbrn.LightBurnProject) {
 	hasPerforations := false
 
 	pcb.component.Visit(func(component *eda.Component) {
-		t := component.Transform.Multiply(pcb.LbrnCenter)
+		t := component.Transform.Multiply(pcb.lbrnCenterMove())
 
 		for _, hole := range component.Perforations {
 			hasPerforations = true

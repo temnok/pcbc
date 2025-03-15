@@ -29,7 +29,7 @@ func (pcb *PCB) SaveStencil() error {
 	}
 
 	pcb.component.Visit(func(component *eda.Component) {
-		t := component.Transform.Multiply(pcb.LbrnCenter)
+		t := component.Transform.Multiply(pcb.lbrnCenterMove())
 
 		for _, pad := range component.Pads {
 			p.Shape = append(p.Shape, lbrn.NewPath(0, t, pad))
