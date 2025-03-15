@@ -7,7 +7,6 @@ import (
 	"temnok/pcbc/bitmap/image"
 	"temnok/pcbc/eda"
 	"temnok/pcbc/lbrn"
-	"temnok/pcbc/transform"
 )
 
 type Param = lbrn.Param
@@ -16,11 +15,8 @@ func (pcb *PCB) SaveEtch() error {
 	filename := pcb.SavePath + "etch.lbrn"
 	im := image.NewSingle(pcb.copper, color.White, color.Black)
 
-	center := transform.Move(pcb.LbrnCenterX, pcb.LbrnCenterY)
-	bitmapTransform := transform.UniformScale(1 / pcb.PixelsPerMM).Multiply(center)
-
-	p := lbrn.LightBurnProject{
-		CutSettingImg: []lbrn.CutSetting{
+	p := &lbrn.LightBurnProject{
+		CutSettingImg: []*lbrn.CutSetting{
 			{
 				Type:     "Image",
 				Name:     Param{Value: "Etch"},
@@ -77,7 +73,7 @@ func (pcb *PCB) SaveEtch() error {
 				Negative: Param{Value: "1"},
 			},
 		},
-		CutSetting: []lbrn.CutSetting{
+		CutSetting: []*lbrn.CutSetting{
 			{
 				Type:     "Cut",
 				Name:     Param{Value: "FR4 Cut"},
@@ -96,14 +92,14 @@ func (pcb *PCB) SaveEtch() error {
 			},
 		},
 		Shape: []*lbrn.Shape{
-			lbrn.NewBitmap(0, bitmapTransform, im),
-			lbrn.NewBitmap(1, bitmapTransform, im),
-			lbrn.NewBitmap(3, bitmapTransform, im),
+			lbrn.NewBitmap(0, pcb.lbrnBitmapScale, im),
+			lbrn.NewBitmap(1, pcb.lbrnBitmapScale, im),
+			lbrn.NewBitmap(3, pcb.lbrnBitmapScale, im),
 		},
 	}
 
 	pcb.component.Visit(func(component *eda.Component) {
-		t := component.Transform.Multiply(center)
+		t := component.Transform.Multiply(pcb.LbrnCenter)
 
 		for _, cut := range component.Cuts {
 			p.Shape = append(p.Shape, lbrn.NewPathWithTabs(2, t, cut))

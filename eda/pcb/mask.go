@@ -7,10 +7,9 @@ import (
 	"temnok/pcbc/bitmap/image"
 	"temnok/pcbc/eda"
 	"temnok/pcbc/lbrn"
-	"temnok/pcbc/transform"
 )
 
-var maskCutSettings = []lbrn.CutSetting{
+var maskCutSettings = []*lbrn.CutSetting{
 	{
 		Type:     "Image",
 		Name:     Param{Value: "Silk"},
@@ -82,29 +81,25 @@ func (pcb *PCB) SaveMask() error {
 	silk := image.NewSingle(pcb.silk, color.White, color.Black)
 	mask := image.NewSingle(pcb.mask, color.Transparent, color.Black)
 
-	bitmapTransform := transform.UniformScale(1/pcb.PixelsPerMM).
-		Move(pcb.LbrnCenterX, pcb.LbrnCenterY)
-
 	p := lbrn.LightBurnProject{
 		CutSettingImg: maskCutSettings,
 		Shape: []*lbrn.Shape{
-			lbrn.NewBitmap(0, bitmapTransform, silk),
-			lbrn.NewBitmap(1, bitmapTransform, mask),
-			lbrn.NewBitmap(2, bitmapTransform, mask),
+			lbrn.NewBitmap(0, pcb.lbrnBitmapScale, silk),
+			lbrn.NewBitmap(1, pcb.lbrnBitmapScale, mask),
+			lbrn.NewBitmap(2, pcb.lbrnBitmapScale, mask),
 		},
 	}
 
-	addPerforations(pcb, &p, 1)
+	addPerforations(pcb, &p)
 
 	return p.SaveToFile(filename)
 }
 
-func addPerforations(pcb *PCB, p *lbrn.LightBurnProject, reflect float64) {
+func addPerforations(pcb *PCB, p *lbrn.LightBurnProject) {
 	hasPerforations := false
 
-	center := transform.Scale(reflect, 1).Move(pcb.LbrnCenterX, pcb.LbrnCenterY)
 	pcb.component.Visit(func(component *eda.Component) {
-		t := component.Transform.Multiply(center)
+		t := component.Transform.Multiply(pcb.LbrnCenter)
 
 		for _, hole := range component.Perforations {
 			hasPerforations = true
@@ -113,7 +108,7 @@ func addPerforations(pcb *PCB, p *lbrn.LightBurnProject, reflect float64) {
 	})
 
 	if hasPerforations {
-		p.CutSetting = []lbrn.CutSetting{
+		p.CutSetting = []*lbrn.CutSetting{
 			{
 				Type:     "Cut",
 				Name:     Param{Value: "Perforation"},

@@ -15,12 +15,12 @@ import (
 type XY = path.Point
 
 type LightBurnProject struct {
-	XMLName       xml.Name     `xml:"LightBurnProject"`
-	AppVersion    string       `xml:"AppVersion,attr,omitempty"`
-	FormatVersion string       `xml:"FormatVersion,attr,omitempty"`
-	CutSetting    []CutSetting `xml:"CutSetting"`
-	CutSettingImg []CutSetting `xml:"CutSetting_Img"`
-	Shape         []*Shape     `xml:"Shape"`
+	XMLName       xml.Name      `xml:"LightBurnProject"`
+	AppVersion    string        `xml:"AppVersion,attr,omitempty"`
+	FormatVersion string        `xml:"FormatVersion,attr,omitempty"`
+	CutSetting    []*CutSetting `xml:"CutSetting"`
+	CutSettingImg []*CutSetting `xml:"CutSetting_Img"`
+	Shape         []*Shape      `xml:"Shape"`
 }
 
 type CutSetting struct {

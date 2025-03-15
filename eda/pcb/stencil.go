@@ -5,16 +5,13 @@ package pcb
 import (
 	"temnok/pcbc/eda"
 	"temnok/pcbc/lbrn"
-	"temnok/pcbc/transform"
 )
 
 func (pcb *PCB) SaveStencil() error {
 	filename := pcb.SavePath + "stencil.lbrn"
 
-	center := transform.Move(pcb.LbrnCenterX, pcb.LbrnCenterY)
-
 	p := lbrn.LightBurnProject{
-		CutSetting: []lbrn.CutSetting{
+		CutSetting: []*lbrn.CutSetting{
 			{
 				Type:     "Cut",
 				Name:     Param{Value: "Apertures"},
@@ -32,7 +29,7 @@ func (pcb *PCB) SaveStencil() error {
 	}
 
 	pcb.component.Visit(func(component *eda.Component) {
-		t := component.Transform.Multiply(center)
+		t := component.Transform.Multiply(pcb.LbrnCenter)
 
 		for _, pad := range component.Pads {
 			p.Shape = append(p.Shape, lbrn.NewPath(0, t, pad))
