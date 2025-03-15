@@ -28,6 +28,8 @@ type PCB struct {
 	SavePath string
 
 	copper, mask, silk *bitmap.Bitmap
+
+	SaveEtchOverride func() error
 }
 
 func New(component *eda.Component) *PCB {
@@ -62,12 +64,10 @@ func Generate(component *eda.Component) error {
 }
 
 func Process(component *eda.Component) *PCB {
-	board := New(component)
-	board.Process()
-	return board
+	return New(component).Process()
 }
 
-func (pcb *PCB) Process() {
+func (pcb *PCB) Process() *PCB {
 	wi, hi := pcb.bitmapSize()
 
 	pcb.copper = bitmap.New(wi, hi)
@@ -78,6 +78,8 @@ func (pcb *PCB) Process() {
 
 	pcb.processPass1()
 	pcb.processPass2()
+
+	return pcb
 }
 
 func (pcb *PCB) bitmapSize() (int, int) {
@@ -115,16 +117,9 @@ func (pcb *PCB) removeCopper(c *eda.Component) {
 	brush := shape.Circle(int((c.TrackWidth + clearWidth) * pcb.PixelsPerMM))
 	brush.ForEachPathsPixel(c.Tracks, t, pcb.copper.Set0)
 
-	// TODO: remove the following line
 	clearBrush = shape.Circle(int(pcb.CopperClearWidth * pcb.PixelsPerMM))
-
-	// Cuts
 	clearBrush.ForEachPathsPixel(c.Cuts, t, pcb.copper.Set0)
-
-	// Holes
 	clearBrush.ForEachPathsPixel(c.Holes, t, pcb.copper.Set0)
-
-	// Perforations
 	clearBrush.ForEachPathsPixel(c.Perforations, t, pcb.copper.Set0)
 }
 

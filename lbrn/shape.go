@@ -90,6 +90,16 @@ func (s *Shape) SetCutOrder(order int) *Shape {
 	return s
 }
 
+func NewRect(i int, t transform.T, w, h float64) *Shape {
+	return &Shape{
+		Type:     "Rect",
+		CutIndex: fmt.Sprint(i),
+		W:        f2s(w),
+		H:        f2s(h),
+		XForm:    xform(t),
+	}
+}
+
 func NewPath(i int, t transform.T, path path.Path) *Shape {
 	s := &Shape{
 		Type:     "Path",

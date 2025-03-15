@@ -46,7 +46,7 @@ func TestBoard(t *testing.T) {
 		).Clone(5, 0, 1),
 	}
 
-	top := pcb.Process(&eda.Component{
+	top := pcb.New(&eda.Component{
 		Holes: vias,
 
 		Components: eda.Components{
@@ -59,6 +59,9 @@ func TestBoard(t *testing.T) {
 			tracks.Clone(2, 8, 0),
 		},
 	})
+	top.Width += 4
+	top.Height += 4
+	top.SaveEtchOverride = top.SaveEtchPI
 	top.SavePath = "out/1-"
 
 	bottom := pcb.Process(&eda.Component{
@@ -70,8 +73,11 @@ func TestBoard(t *testing.T) {
 			tracks,
 		},
 	})
+	bottom.Width += 4
+	bottom.Height += 4
+	bottom.SaveEtchOverride = bottom.SaveEtchPI
 	bottom.SavePath = "out/2-"
 
-	assert.NoError(t, top.SaveFiles())
-	assert.NoError(t, bottom.SaveFiles())
+	assert.NoError(t, top.Process().SaveFiles())
+	assert.NoError(t, bottom.Process().SaveFiles())
 }
