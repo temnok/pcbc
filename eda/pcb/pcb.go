@@ -19,11 +19,12 @@ type PCB struct {
 	Width, Height float64
 	PixelsPerMM   float64
 
-	DefaultTrackWidth float64
-	ExtraCopperWidth  float64
-	CopperClearWidth  float64
-	MaskCutWidth      float64
-	OverviewCutWidth  float64
+	DefaultTrackWidth  float64
+	ExtraCopperWidth   float64
+	CopperClearWidth   float64
+	MaskCutWidth       float64
+	OverviewCutWidth   float64
+	StencilExposeWidth float64
 
 	LbrnCenterX, LbrnCenterY float64
 
@@ -44,11 +45,12 @@ func New(component *eda.Component) *PCB {
 		Height:      height,
 		PixelsPerMM: 100,
 
-		DefaultTrackWidth: 0.25,
-		ExtraCopperWidth:  0.05,
-		CopperClearWidth:  0.25,
-		MaskCutWidth:      0.1,
-		OverviewCutWidth:  0.02,
+		DefaultTrackWidth:  0.25,
+		ExtraCopperWidth:   0.05,
+		CopperClearWidth:   0.25,
+		MaskCutWidth:       0.1,
+		OverviewCutWidth:   0.02,
+		StencilExposeWidth: 1,
 
 		LbrnCenterX: 55,
 		LbrnCenterY: 55,
@@ -68,7 +70,7 @@ func Process(component *eda.Component) *PCB {
 }
 
 func (pcb *PCB) Process() {
-	wi, hi := int(pcb.Width*pcb.PixelsPerMM), int(pcb.Height*pcb.PixelsPerMM)
+	wi, hi := pcb.bitmapSize()
 
 	pcb.copper = bitmap.New(wi, hi)
 	pcb.mask = bitmap.New(wi, hi)
@@ -80,6 +82,10 @@ func (pcb *PCB) Process() {
 
 	pcb.processPass1()
 	pcb.processPass2()
+}
+
+func (pcb *PCB) bitmapSize() (int, int) {
+	return int(pcb.Width * pcb.PixelsPerMM), int(pcb.Height * pcb.PixelsPerMM)
 }
 
 func (pcb *PCB) processPass1() {
@@ -227,6 +233,7 @@ func (pcb *PCB) SaveFiles() error {
 		pcb.SaveEtch,
 		pcb.SaveMask,
 		pcb.SaveStencil,
+		pcb.SaveStencilExpose,
 		pcb.SaveOverview,
 	)
 }

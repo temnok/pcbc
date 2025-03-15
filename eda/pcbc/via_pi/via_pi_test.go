@@ -16,8 +16,10 @@ func TestBoard(t *testing.T) {
 		Components: eda.Components{
 			{
 				Perforations: path.Paths{
-					director.Apply(transform.Move(-10, 5)),
+					director.Apply(transform.Move(-10, 4)),
 					director.Apply(transform.Move(-10, -6)),
+					director.Apply(transform.Move(0, 6)),
+					director.Apply(transform.Move(0, -6)),
 					director.Apply(transform.Move(10, 6)),
 					director.Apply(transform.Move(10, -6)),
 				},
@@ -25,41 +27,33 @@ func TestBoard(t *testing.T) {
 		},
 	}
 
-	viaHole := &eda.Component{
-		Holes: path.Paths{path.Rect(0.4, 0.4)},
+	contacts := &eda.Component{
+		Pads: path.Paths{path.RoundRect(2, 0.3, 0.1)}.Clone(10, 0, 0.5).Clone(2, 12, 0),
 	}
 
-	viaHoles := &eda.Component{
-		Components: eda.Components{
-			viaHole.Clone(2, 1, 0.5).Clone(5, 0, 1),
-		},
-	}
-
-	pad := &eda.Component{
-		Pads: path.Paths{path.RoundRect(0.8, 0.4, 0.1)},
-	}
+	vias := path.Paths{path.Rect(0.4, 0.4)}.Clone(2, 1, 0.5).Clone(5, 0, 1).Clone(2, 3.6, 0)
 
 	pads := &eda.Component{
-		Components: eda.Components{
-			pad.Clone(2, 1, 0.5).Clone(5, 0, 1),
-		},
+		Pads: path.Paths{path.RoundRect(0.8, 0.4, 0.1)}.Clone(2, 1, 0.5).Clone(5, 0, 1),
 	}
 
 	tracks := &eda.Component{
 		TrackWidth: 0.15,
 		Tracks: eda.Tracks(
-			eda.Track{{-2.7, -0.25}}.DX(4),
-			eda.Track{{-1.3, 0.25}}.DX(4),
+			eda.Track{{-2.4, -0.25}}.DX(3.5),
+			eda.Track{{-1.2, 0.25}}.DX(3.5),
 		).Clone(5, 0, 1),
 	}
 
 	top := pcb.Process(&eda.Component{
+		Holes: vias,
+
 		Components: eda.Components{
 			directors,
 
-			pads.Clone(4, 4, 0),
+			contacts,
 
-			viaHoles.Clone(2, 3.6, 0),
+			pads.Clone(2, 4, 0),
 
 			tracks.Clone(2, 8, 0),
 		},
@@ -67,10 +61,10 @@ func TestBoard(t *testing.T) {
 	top.SavePath = "out/1-"
 
 	bottom := pcb.Process(&eda.Component{
+		Pads: vias,
+
 		Components: eda.Components{
 			directors,
-
-			pads.Clone(2, 4, 0),
 
 			tracks,
 		},
