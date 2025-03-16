@@ -48,7 +48,7 @@ func (pcb *PCB) SaveEtchPI() error {
 
 				MaxPower:    Param{Value: "15"},
 				QPulseWidth: Param{Value: "80"},
-				Frequency:   Param{Value: "200000"},
+				Frequency:   Param{Value: "2000000"},
 
 				Speed:    Param{Value: "500"},
 				Interval: Param{Value: "0.02"},
@@ -80,7 +80,7 @@ func (pcb *PCB) SaveEtchPI() error {
 
 				MaxPower:    Param{Value: "20"},
 				QPulseWidth: Param{Value: "80"},
-				Frequency:   Param{Value: "200000"},
+				Frequency:   Param{Value: "2000000"},
 
 				Speed:    Param{Value: "500"},
 				Interval: Param{Value: "0.02"},

@@ -8,7 +8,7 @@
 		<globalRepeat Value=""></globalRepeat>
 		<maxPower Value="15"></maxPower>
 		<QPulseWidth Value="80"></QPulseWidth>
-		<frequency Value="200000"></frequency>
+		<frequency Value="2000000"></frequency>
 		<interval Value="0.02"></interval>
 		<dpi Value="1270"></dpi>
 		<ditherMode Value=""></ditherMode>
@@ -50,7 +50,7 @@
 		<globalRepeat Value=""></globalRepeat>
 		<maxPower Value="20"></maxPower>
 		<QPulseWidth Value="80"></QPulseWidth>
-		<frequency Value="200000"></frequency>
+		<frequency Value="2000000"></frequency>
 		<interval Value="0.02"></interval>
 		<dpi Value="1270"></dpi>
 		<ditherMode Value=""></ditherMode>
