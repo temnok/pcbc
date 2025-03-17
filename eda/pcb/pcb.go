@@ -17,11 +17,10 @@ type PCB struct {
 	Width, Height float64
 	PixelsPerMM   float64
 
-	ExtraCopperWidth   float64
-	CopperClearWidth   float64
-	MaskCutWidth       float64
-	OverviewCutWidth   float64
-	StencilExposeWidth float64
+	ExtraCopperWidth float64
+	CopperClearWidth float64
+	MaskCutWidth     float64
+	OverviewCutWidth float64
 
 	LbrnCenterX, LbrnCenterY float64
 
@@ -46,11 +45,10 @@ func New(component *eda.Component) *PCB {
 		Height:      height,
 		PixelsPerMM: 100,
 
-		ExtraCopperWidth:   0.05,
-		CopperClearWidth:   0.25,
-		MaskCutWidth:       0.1,
-		OverviewCutWidth:   0.02,
-		StencilExposeWidth: 1,
+		ExtraCopperWidth: 0.05,
+		CopperClearWidth: 0.25,
+		MaskCutWidth:     0.1,
+		OverviewCutWidth: 0.02,
 
 		LbrnCenterX: 55,
 		LbrnCenterY: 55,
@@ -194,7 +192,6 @@ func (pcb *PCB) SaveFiles() error {
 		pcb.SaveEtch,
 		pcb.SaveMask,
 		pcb.SaveStencil,
-		pcb.SaveStencilExpose,
 		pcb.SaveOverview,
 	)
 }
