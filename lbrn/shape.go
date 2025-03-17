@@ -3,11 +3,8 @@
 package lbrn
 
 import (
-	"bytes"
-	"encoding/base64"
 	"fmt"
 	"image"
-	"image/png"
 	"temnok/pcbc/path"
 	"temnok/pcbc/transform"
 )
@@ -127,18 +124,17 @@ func NewPathWithTabs(index int, t transform.T, p path.Path) *Shape {
 	return s
 }
 
-func NewBitmap(i int, t transform.T, im image.Image) *Shape {
-	buf := new(bytes.Buffer)
-	if err := png.Encode(buf, im); err != nil {
-		panic(err)
-	}
+func NewBitmapShapeFromImage(i int, t transform.T, im image.Image) *Shape {
+	return NewBitmapShape(i, t, NewBase64Bitmap(im))
+}
 
+func NewBitmapShape(i int, t transform.T, bm *Base64Bitmap) *Shape {
 	return &Shape{
 		Type:     "Bitmap",
 		CutIndex: fmt.Sprint(i),
 		XForm:    xform(t),
-		W:        fmt.Sprint(im.Bounds().Dx()),
-		H:        fmt.Sprint(im.Bounds().Dy()),
-		Data:     base64.StdEncoding.EncodeToString(buf.Bytes()),
+		W:        fmt.Sprint(bm.W),
+		H:        fmt.Sprint(bm.H),
+		Data:     bm.Data,
 	}
 }

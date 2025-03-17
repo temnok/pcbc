@@ -22,6 +22,7 @@ func (pcb *PCB) SaveEtch() error {
 func (pcb *PCB) SaveEtchFR4() error {
 	filename := pcb.SavePath + "etch.lbrn"
 	im := image.NewSingle(pcb.copper, color.White, color.Black)
+	bm := lbrn.NewBase64Bitmap(im)
 
 	p := &lbrn.LightBurnProject{
 		CutSettingImg: []*lbrn.CutSetting{
@@ -100,9 +101,9 @@ func (pcb *PCB) SaveEtchFR4() error {
 			},
 		},
 		Shape: []*lbrn.Shape{
-			lbrn.NewBitmap(0, pcb.lbrnBitmapScale(), im),
-			lbrn.NewBitmap(1, pcb.lbrnBitmapScale(), im),
-			lbrn.NewBitmap(3, pcb.lbrnBitmapScale(), im),
+			lbrn.NewBitmapShape(0, pcb.lbrnBitmapScale(), bm),
+			lbrn.NewBitmapShape(1, pcb.lbrnBitmapScale(), bm),
+			lbrn.NewBitmapShape(3, pcb.lbrnBitmapScale(), bm),
 		},
 	}
 

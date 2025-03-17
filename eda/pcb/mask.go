@@ -80,13 +80,14 @@ func (pcb *PCB) SaveMask() error {
 	filename := pcb.SavePath + "mask.lbrn"
 	silk := image.NewSingle(pcb.silk, color.White, color.Black)
 	mask := image.NewSingle(pcb.mask, color.Transparent, color.Black)
+	maskBM := lbrn.NewBase64Bitmap(mask)
 
 	p := &lbrn.LightBurnProject{
 		CutSettingImg: maskCutSettings,
 		Shape: []*lbrn.Shape{
-			lbrn.NewBitmap(0, pcb.lbrnBitmapScale(), silk),
-			lbrn.NewBitmap(1, pcb.lbrnBitmapScale(), mask),
-			lbrn.NewBitmap(2, pcb.lbrnBitmapScale(), mask),
+			lbrn.NewBitmapShapeFromImage(0, pcb.lbrnBitmapScale(), silk),
+			lbrn.NewBitmapShape(1, pcb.lbrnBitmapScale(), maskBM),
+			lbrn.NewBitmapShape(2, pcb.lbrnBitmapScale(), maskBM),
 		},
 	}
 

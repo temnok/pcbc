@@ -3,6 +3,7 @@
 package pcb
 
 import (
+	"fmt"
 	"image/color"
 	"temnok/pcbc/bitmap/image"
 	"temnok/pcbc/eda"
@@ -12,45 +13,21 @@ import (
 func (pcb *PCB) SaveEtchPI() error {
 	filename := pcb.SavePath + "etch-pi.lbrn"
 	im := image.NewSingle(pcb.copper, color.White, color.Black)
+	bm := lbrn.NewBase64Bitmap(im)
 
 	p := &lbrn.LightBurnProject{
-		CutSettingImg: []*lbrn.CutSetting{
-			{
-				Type:     "Image",
-				Name:     Param{Value: "Remove Adhesive"},
-				Index:    Param{Value: "2"},
-				Priority: Param{Value: "2"},
-
-				MaxPower:    Param{Value: "25"},
-				QPulseWidth: Param{Value: "1"},
-				Frequency:   Param{Value: "650000"},
-
-				Speed:            Param{Value: "500"},
-				Interval:         Param{Value: "0.01"},
-				DPI:              Param{Value: "2540"},
-				UseDotCorrection: Param{Value: "1"},
-				DotWidth:         Param{Value: "0.05"},
-
-				NumPasses: Param{Value: "5"},
-
-				CrossHatch: Param{Value: "1"},
-				Angle:      Param{Value: "90"},
-
-				Negative: Param{Value: "1"},
-			},
-		},
 		CutSetting: []*lbrn.CutSetting{
 			{
 				Type:     "Scan",
-				Name:     Param{Value: "Remove Kapton"},
+				Name:     Param{Value: "Remove BPI"},
 				Index:    Param{Value: "0"},
 				Priority: Param{Value: "0"},
 
-				MaxPower:    Param{Value: "15"},
-				QPulseWidth: Param{Value: "80"},
-				Frequency:   Param{Value: "2000000"},
+				MaxPower:    Param{Value: "8"},
+				QPulseWidth: Param{Value: "200"},
+				Frequency:   Param{Value: "20000"},
 
-				Speed:    Param{Value: "500"},
+				Speed:    Param{Value: "400"},
 				Interval: Param{Value: "0.02"},
 				DPI:      Param{Value: "1270"},
 
@@ -72,32 +49,58 @@ func (pcb *PCB) SaveEtchPI() error {
 
 				NumPasses: Param{Value: "80"},
 			},
-			{
-				Type:     "Scan",
-				Name:     Param{Value: "Clean"},
-				Index:    Param{Value: "3"},
-				Priority: Param{Value: "3"},
-
-				MaxPower:    Param{Value: "20"},
-				QPulseWidth: Param{Value: "80"},
-				Frequency:   Param{Value: "2000000"},
-
-				Speed:    Param{Value: "500"},
-				Interval: Param{Value: "0.02"},
-				DPI:      Param{Value: "1270"},
-
-				NumPasses: Param{Value: "1"},
-
-				CrossHatch: Param{Value: "1"},
-			},
 		},
 		Shape: []*lbrn.Shape{
-			lbrn.NewBitmap(2, pcb.lbrnBitmapScale(), im),
+			lbrn.NewRect(0, pcb.lbrnCenterMove(), pcb.Width, pcb.Height),
 		},
 	}
 
-	p.Shape = append(p.Shape, lbrn.NewRect(0, pcb.lbrnCenterMove(), pcb.Width, pcb.Height))
-	p.Shape = append(p.Shape, lbrn.NewRect(3, pcb.lbrnCenterMove(), pcb.Width, pcb.Height))
+	for pass := 0; pass < 4; pass++ {
+		i := 2 + pass*2
+		a := Param{Value: fmt.Sprint((pass - 1) * 90)}
+
+		p.CutSettingImg = append(p.CutSettingImg, &lbrn.CutSetting{
+			Type:     "Image",
+			Name:     Param{Value: fmt.Sprintf("Pass %v - Remove Adhesive", pass+1)},
+			Index:    Param{Value: fmt.Sprint(i)},
+			Priority: Param{Value: fmt.Sprint(i)},
+
+			MaxPower:    Param{Value: "80"},
+			QPulseWidth: Param{Value: "2"},
+			Frequency:   Param{Value: "3000000"},
+
+			Speed:            Param{Value: "400"},
+			Interval:         Param{Value: "0.01"},
+			DPI:              Param{Value: "2540"},
+			UseDotCorrection: Param{Value: "1"},
+			DotWidth:         Param{Value: "0.05"},
+
+			Angle:     a,
+			NumPasses: Param{Value: "1"},
+			Negative:  Param{Value: "1"},
+		})
+
+		p.CutSetting = append(p.CutSetting, &lbrn.CutSetting{
+			Type:     "Scan",
+			Name:     Param{Value: fmt.Sprintf("Pass %v - Clean", pass+1)},
+			Index:    Param{Value: fmt.Sprint(i + 1)},
+			Priority: Param{Value: fmt.Sprint(i + 1)},
+
+			MaxPower:    Param{Value: "8"},
+			QPulseWidth: Param{Value: "200"},
+			Frequency:   Param{Value: "20000"},
+
+			Speed:    Param{Value: "400"},
+			Interval: Param{Value: "0.02"},
+			DPI:      Param{Value: "1270"},
+
+			Angle:     a,
+			NumPasses: Param{Value: "1"},
+		})
+
+		p.Shape = append(p.Shape, lbrn.NewBitmapShape(i, pcb.lbrnBitmapScale(), bm))
+		p.Shape = append(p.Shape, lbrn.NewRect(i+1, pcb.lbrnCenterMove(), pcb.Width, pcb.Height))
+	}
 
 	pcb.component.Visit(func(component *eda.Component) {
 		t := component.Transform.Multiply(pcb.lbrnCenterMove())
