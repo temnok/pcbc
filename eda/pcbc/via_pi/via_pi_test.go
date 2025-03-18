@@ -64,7 +64,7 @@ func TestBoard(t *testing.T) {
 	top.SaveEtchOverride = top.SaveEtchPI
 	top.SavePath = "out/1-"
 
-	bottom := pcb.Process(&eda.Component{
+	bottom := pcb.New(&eda.Component{
 		Pads: bottomPads,
 
 		Components: eda.Components{

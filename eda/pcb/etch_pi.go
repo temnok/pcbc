@@ -55,9 +55,9 @@ func (pcb *PCB) SaveEtchPI() error {
 		},
 	}
 
-	for pass := 0; pass < 4; pass++ {
+	for pass := 0; pass < 5; pass++ {
 		i := 2 + pass*2
-		a := Param{Value: fmt.Sprint((pass - 1) * 90)}
+		a := Param{Value: fmt.Sprint((pass - 2) * 90)}
 
 		p.CutSettingImg = append(p.CutSettingImg, &lbrn.CutSetting{
 			Type:     "Image",
@@ -86,7 +86,7 @@ func (pcb *PCB) SaveEtchPI() error {
 			Index:    Param{Value: fmt.Sprint(i + 1)},
 			Priority: Param{Value: fmt.Sprint(i + 1)},
 
-			MaxPower:    Param{Value: "8"},
+			MaxPower:    Param{Value: "5"},
 			QPulseWidth: Param{Value: "200"},
 			Frequency:   Param{Value: "20000"},
 

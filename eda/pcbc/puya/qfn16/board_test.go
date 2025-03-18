@@ -9,5 +9,7 @@ import (
 )
 
 func TestBoard(t *testing.T) {
-	assert.NoError(t, pcb.Generate(Board))
+	board := pcb.New(Board)
+	board.SaveEtchOverride = board.SaveEtchPI
+	assert.NoError(t, board.Process().SaveFiles())
 }
