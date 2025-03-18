@@ -4,7 +4,7 @@
 		<name Value="Remove BPI"></name>
 		<priority Value="0"></priority>
 		<speed Value="400"></speed>
-		<numPasses Value="3"></numPasses>
+		<numPasses Value="4"></numPasses>
 		<globalRepeat Value=""></globalRepeat>
 		<maxPower Value="8"></maxPower>
 		<QPulseWidth Value="200"></QPulseWidth>

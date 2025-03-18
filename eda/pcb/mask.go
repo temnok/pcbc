@@ -36,16 +36,16 @@ var maskCutSettings = []*lbrn.CutSetting{
 	},
 	{
 		Type:     "Image",
-		Name:     Param{Value: "Remove BPI"},
+		Name:     Param{Value: "Mask 1"},
 		Index:    Param{Value: "1"},
 		Priority: Param{Value: "1"},
 
-		MaxPower:    Param{Value: "5"},
-		QPulseWidth: Param{Value: "200"},
-		Frequency:   Param{Value: "20000"},
+		MaxPower:    Param{Value: "10"},
+		QPulseWidth: Param{Value: "80"},
+		Frequency:   Param{Value: "2000000"},
 
-		NumPasses:        Param{Value: "4"},
-		Speed:            Param{Value: "400"},
+		NumPasses:        Param{Value: "5"},
+		Speed:            Param{Value: "500"},
 		Interval:         Param{Value: "0.01"},
 		DPI:              Param{Value: "2540"},
 		UseDotCorrection: Param{Value: "1"},
@@ -56,7 +56,7 @@ var maskCutSettings = []*lbrn.CutSetting{
 	},
 	{
 		Type:     "Image",
-		Name:     Param{Value: "Remove SA"},
+		Name:     Param{Value: "Mask 2"},
 		Index:    Param{Value: "2"},
 		Priority: Param{Value: "2"},
 

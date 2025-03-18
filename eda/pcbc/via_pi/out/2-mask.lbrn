@@ -43,14 +43,14 @@
 	</CutSetting_Img>
 	<CutSetting_Img type="Image">
 		<index Value="1"></index>
-		<name Value="Remove BPI"></name>
+		<name Value="Mask 1"></name>
 		<priority Value="1"></priority>
-		<speed Value="400"></speed>
-		<numPasses Value="4"></numPasses>
+		<speed Value="500"></speed>
+		<numPasses Value="5"></numPasses>
 		<globalRepeat Value=""></globalRepeat>
-		<maxPower Value="5"></maxPower>
-		<QPulseWidth Value="200"></QPulseWidth>
-		<frequency Value="20000"></frequency>
+		<maxPower Value="10"></maxPower>
+		<QPulseWidth Value="80"></QPulseWidth>
+		<frequency Value="2000000"></frequency>
 		<interval Value="0.01"></interval>
 		<dpi Value="2540"></dpi>
 		<ditherMode Value=""></ditherMode>
@@ -64,7 +64,7 @@
 	</CutSetting_Img>
 	<CutSetting_Img type="Image">
 		<index Value="2"></index>
-		<name Value="Remove SA"></name>
+		<name Value="Mask 2"></name>
 		<priority Value="2"></priority>
 		<speed Value="500"></speed>
 		<numPasses Value="5"></numPasses>
