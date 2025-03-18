@@ -3,7 +3,6 @@
 package pcb
 
 import (
-	"fmt"
 	"image/color"
 	"temnok/pcbc/bitmap/image"
 	"temnok/pcbc/eda"
@@ -23,7 +22,7 @@ func (pcb *PCB) SaveEtchPI() error {
 				Index:    Param{Value: "0"},
 				Priority: Param{Value: "0"},
 
-				MaxPower:    Param{Value: "8"},
+				MaxPower:    Param{Value: "10"},
 				QPulseWidth: Param{Value: "200"},
 				Frequency:   Param{Value: "20000"},
 
@@ -31,7 +30,7 @@ func (pcb *PCB) SaveEtchPI() error {
 				Interval: Param{Value: "0.02"},
 				DPI:      Param{Value: "1270"},
 
-				NumPasses: Param{Value: "4"},
+				NumPasses: Param{Value: "3"},
 
 				CrossHatch: Param{Value: "1"},
 			},
@@ -50,56 +49,55 @@ func (pcb *PCB) SaveEtchPI() error {
 				NumPasses: Param{Value: "80"},
 			},
 		},
+		CutSettingImg: []*lbrn.CutSetting{
+			{
+				Type:     "Image",
+				Name:     Param{Value: "Remove Adhesive"},
+				Index:    Param{Value: "2"},
+				Priority: Param{Value: "2"},
+
+				MaxPower:    Param{Value: "60"},
+				QPulseWidth: Param{Value: "80"},
+				Frequency:   Param{Value: "2000000"},
+
+				Speed:            Param{Value: "500"},
+				Interval:         Param{Value: "0.01"},
+				DPI:              Param{Value: "2540"},
+				UseDotCorrection: Param{Value: "1"},
+				DotWidth:         Param{Value: "0.05"},
+
+				//CrossHatch: Param{Value: "1"},
+				Angle: Param{Value: "90"},
+
+				NumPasses: Param{Value: "10"},
+				Negative:  Param{Value: "1"},
+
+				DitherMode:  Param{Value: "3dslice"},
+				CleanupPass: &Param{Value: "1"},
+
+				SubLayer: &lbrn.SubLayer{
+					Type:      "Scan",
+					Index:     "1",
+					IsCleanup: Param{Value: "1"},
+					FloodFill: Param{Value: "1"},
+
+					Speed:       Param{Value: "400"},
+					MaxPower:    Param{Value: "10"},
+					Frequency:   Param{Value: "20000"},
+					QPulseWidth: Param{Value: "200"},
+
+					Interval: Param{Value: "0.02"},
+
+					CrossHatch:   Param{Value: "1"},
+					Angle:        Param{Value: "90"},
+					AnglePerPass: Param{Value: "90"},
+				},
+			},
+		},
 		Shape: []*lbrn.Shape{
 			lbrn.NewRect(0, pcb.lbrnCenterMove(), pcb.Width, pcb.Height),
+			lbrn.NewBitmapShape(2, pcb.lbrnBitmapScale(), bm),
 		},
-	}
-
-	for pass := 0; pass < 5; pass++ {
-		i := 2 + pass*2
-		a := Param{Value: fmt.Sprint((pass - 2) * 90)}
-
-		p.CutSettingImg = append(p.CutSettingImg, &lbrn.CutSetting{
-			Type:     "Image",
-			Name:     Param{Value: fmt.Sprintf("Pass %v - Remove Adhesive", pass+1)},
-			Index:    Param{Value: fmt.Sprint(i)},
-			Priority: Param{Value: fmt.Sprint(i)},
-
-			MaxPower:    Param{Value: "80"},
-			QPulseWidth: Param{Value: "2"},
-			Frequency:   Param{Value: "3000000"},
-
-			Speed:            Param{Value: "400"},
-			Interval:         Param{Value: "0.01"},
-			DPI:              Param{Value: "2540"},
-			UseDotCorrection: Param{Value: "1"},
-			DotWidth:         Param{Value: "0.05"},
-
-			Angle:     a,
-			NumPasses: Param{Value: "1"},
-			Negative:  Param{Value: "1"},
-		})
-
-		p.CutSetting = append(p.CutSetting, &lbrn.CutSetting{
-			Type:     "Scan",
-			Name:     Param{Value: fmt.Sprintf("Pass %v - Clean", pass+1)},
-			Index:    Param{Value: fmt.Sprint(i + 1)},
-			Priority: Param{Value: fmt.Sprint(i + 1)},
-
-			MaxPower:    Param{Value: "5"},
-			QPulseWidth: Param{Value: "200"},
-			Frequency:   Param{Value: "20000"},
-
-			Speed:    Param{Value: "400"},
-			Interval: Param{Value: "0.02"},
-			DPI:      Param{Value: "1270"},
-
-			Angle:     a,
-			NumPasses: Param{Value: "1"},
-		})
-
-		p.Shape = append(p.Shape, lbrn.NewBitmapShape(i, pcb.lbrnBitmapScale(), bm))
-		p.Shape = append(p.Shape, lbrn.NewRect(i+1, pcb.lbrnCenterMove(), pcb.Width, pcb.Height))
 	}
 
 	pcb.component.Visit(func(component *eda.Component) {

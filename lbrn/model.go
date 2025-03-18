@@ -49,6 +49,31 @@ type CutSetting struct {
 	Angle      Param `xml:"angle"`
 
 	Negative Param `xml:"negative"`
+
+	CleanupPass *Param    `xml:"cleanupPass"`
+	SubLayer    *SubLayer `xml:"SubLayer"`
+}
+
+type SubLayer struct {
+	Type      string `xml:"type,attr"`
+	Index     string `xml:"index,attr"`
+	Subname   Param  `xml:"subname"`
+	IsCleanup Param  `xml:"isCleanup"`
+
+	Speed        Param `xml:"speed"`
+	Angle        Param `xml:"angle"`
+	AnglePerPass Param `xml:"anglePerPass"`
+	FloodFill    Param `xml:"floodFill"`
+
+	NumPasses   Param `xml:"numPasses"`
+	MaxPower    Param `xml:"maxPower"`
+	QPulseWidth Param `xml:"QPulseWidth"`
+	Frequency   Param `xml:"frequency"`
+
+	CrossHatch Param `xml:"crossHatch"`
+
+	Interval Param `xml:"interval"`
+	DPI      Param `xml:"dpi"`
 }
 
 type Param struct {
