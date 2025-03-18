@@ -17,8 +17,8 @@ func TestBoards(t *testing.T) {
 	assert.NoError(t, pcb.Generate(&eda.Component{
 		Components: eda.Components{
 			pcbc.Board35x45,
-			sop8.Board.Arrange(transform.Rotate(-90)).Clone(3, 9.5, 0).Arrange(transform.Move(0, 8.5)),
-			qfn16.Board.Arrange(transform.Rotate(90)).Clone(2, 11, 0).Arrange(transform.Move(0, -8.5)),
+			sop8.Board.Arrange(transform.RotateDegrees(-90)).Clone(3, 9.5, 0).Arrange(transform.Move(0, 8.5)),
+			qfn16.Board.Arrange(transform.RotateDegrees(90)).Clone(2, 11, 0).Arrange(transform.Move(0, -8.5)),
 		},
 	}))
 }

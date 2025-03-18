@@ -22,9 +22,9 @@ func board(short bool) *eda.Component {
 
 	header := &eda.Component{
 		Components: eda.Components{
-			mph100imp40f.G_V_SP(8).Arrange(transform.Rotate(-90).Move(-8.9, -2.9)),
+			mph100imp40f.G_V_SP(8).Arrange(transform.RotateDegrees(-90).Move(-8.9, -2.9)),
 			mph100imp40f.G_V_SP(8).Arrange(transform.Move(0, -15.5)),
-			mph100imp40f.G_V_SP(8).Arrange(transform.Rotate(90).Move(8.9, -2.9)),
+			mph100imp40f.G_V_SP(8).Arrange(transform.RotateDegrees(90).Move(8.9, -2.9)),
 		},
 	}
 
@@ -33,9 +33,9 @@ func board(short bool) *eda.Component {
 	if short {
 		header = &eda.Component{
 			Components: eda.Components{
-				mph100imp40f.G_V_SP(6).Arrange(transform.Rotate(-90).Move(-8.9, -2.9-2.54)),
+				mph100imp40f.G_V_SP(6).Arrange(transform.RotateDegrees(-90).Move(-8.9, -2.9-2.54)),
 				mph100imp40f.G_V_SP(8).Arrange(transform.Move(0, -15.5)),
-				mph100imp40f.G_V_SP(6).Arrange(transform.Rotate(90).Move(8.9, -2.9-2.54)),
+				mph100imp40f.G_V_SP(6).Arrange(transform.RotateDegrees(90).Move(8.9, -2.9-2.54)),
 			},
 		}
 	}
@@ -96,13 +96,13 @@ func board(short bool) *eda.Component {
 		Components: eda.Components{
 			fanstel.BC833,
 			header,
-			pcbc.MountHole.Arrange(transform.Rotate(45).Move(-5, -10.5)),
-			pcbc.MountHole.Arrange(transform.Rotate(-45).Move(5, -10.5)),
+			pcbc.MountHole.Arrange(transform.RotateDegrees(45).Move(-5, -10.5)),
+			pcbc.MountHole.Arrange(transform.RotateDegrees(-45).Move(5, -10.5)),
 
-			pcbc.Logo.Arrange(transform.UniformScale(1.2).Move(0, -8.3)),
+			pcbc.Logo.Arrange(transform.ScaleUniformly(1.2).Move(0, -8.3)),
 			eda.CenteredText(revision).Arrange(transform.Scale(0.75, 1).Move(-5, -8.1)),
-			eda.CenteredText("BC833").Arrange(transform.UniformScale(2).Move(0, -10.4)),
-			eda.CenteredText("nRF52833").Arrange(transform.UniformScale(1.5).Move(0, -12.2)),
+			eda.CenteredText("BC833").Arrange(transform.ScaleUniformly(2).Move(0, -10.4)),
+			eda.CenteredText("nRF52833").Arrange(transform.ScaleUniformly(1.5).Move(0, -12.2)),
 		},
 
 		Tracks: tracks,
@@ -114,11 +114,11 @@ func board(short bool) *eda.Component {
 
 		Marks: path.Join(
 			font.CenteredRow(labelShift, leftLabels...).
-				Apply(labelScale.Rotate(-90).Move(-7, -2.9)),
+				Apply(labelScale.RotateDegrees(-90).Move(-7, -2.9)),
 			font.CenteredRow(labelShift, centerLabels...).
 				Apply(labelScale.Move(0, -13.65)),
 			font.CenteredRow(labelShift, rightLabels...).
-				Apply(labelScale.Rotate(90).Move(7, -2.9)),
+				Apply(labelScale.RotateDegrees(90).Move(7, -2.9)),
 		),
 	}
 

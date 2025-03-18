@@ -12,10 +12,10 @@ import (
 )
 
 var (
-	mount    = pcbc.MountHole.Arrange(transform.Rotate(90).Move(0, -2.8))
+	mount    = pcbc.MountHole.Arrange(transform.RotateDegrees(90).Move(0, -2.8))
 	mountPad = mount.PadCenters()
 
-	chip = qfn.QFN16G.Arrange(transform.Rotate(-45).Move(0, 1.2))
+	chip = qfn.QFN16G.Arrange(transform.RotateDegrees(-45).Move(0, 1.2))
 	pin  = chip.PadCenters()
 
 	leftLabels  = []string{"PB1", "A12", "SWD", "SWC", "PF2", "PA0", "PA1", "PA2", "GND"}
@@ -39,12 +39,12 @@ var (
 			chip,
 			header,
 
-			pcbc.Logo.Arrange(transform.UniformScale(1.2).Move(-1.5, -1.1)),
-			pcbc.Firm.Arrange(transform.UniformScale(0.5).Move(1.35, -1.25)),
+			pcbc.Logo.Arrange(transform.ScaleUniformly(1.2).Move(-1.5, -1.1)),
+			pcbc.Firm.Arrange(transform.ScaleUniformly(0.5).Move(1.35, -1.25)),
 			eda.CenteredText("PY32").Arrange(transform.Scale(1.3, 1.5).Move(0, 4.1)),
 			eda.CenteredText("F002A").Arrange(transform.Scale(1.0, 0.9).Move(0, -4.4)),
 
-			pcbc.Rev(2025, 2, 19).Arrange(transform.UniformScale(0.5).Move(6, -4.55)),
+			pcbc.Rev(2025, 2, 19).Arrange(transform.ScaleUniformly(0.5).Move(6, -4.55)),
 		},
 
 		Tracks: eda.Tracks(

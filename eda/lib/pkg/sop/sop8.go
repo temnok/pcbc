@@ -13,7 +13,7 @@ var (
 
 	bottomPads = pad.Clone(4, 1.27, 0).Apply(transform.Move(0, -2.75))
 
-	topPads = bottomPads.Apply(transform.Rotate(180))
+	topPads = bottomPads.Apply(transform.RotateDegrees(180))
 
 	pads = append(bottomPads, topPads...)
 

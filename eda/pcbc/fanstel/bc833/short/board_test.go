@@ -17,7 +17,7 @@ func Test_BC833Short(t *testing.T) {
 		Components: eda.Components{
 			pcbc.Board35x45,
 			bc833.ShortBoard.Arrange(transform.Move(0, 10.5)),
-			bc833.ShortBoard.Arrange(transform.Rotate(180).Move(0, -10.5)),
+			bc833.ShortBoard.Arrange(transform.RotateDegrees(180).Move(0, -10.5)),
 		},
 	}))
 }

@@ -12,7 +12,7 @@ import (
 )
 
 var (
-	mount = pcbc.MountHole.Arrange(transform.Rotate(90).Move(-5, 0))
+	mount = pcbc.MountHole.Arrange(transform.RotateDegrees(90).Move(-5, 0))
 
 	chip = sop.SOP8.Arrange(transform.Move(-0.6, 0))
 	pin  = chip.PadCenters()

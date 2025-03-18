@@ -30,9 +30,9 @@ var Board = &eda.Component{
 
 		holder.LIR1254.Arrange(transform.Move(0, 2.75)),
 
-		pcbc.MountHole.Arrange(transform.Rotate(-45).Move(-7.5, -1.75)),
+		pcbc.MountHole.Arrange(transform.RotateDegrees(-45).Move(-7.5, -1.75)),
 
-		pcbc.MountHole.Arrange(transform.Rotate(45).Move(7.5, -1.75)),
+		pcbc.MountHole.Arrange(transform.RotateDegrees(45).Move(7.5, -1.75)),
 
 		pcbc.Logo.Arrange(transform.Scale(1.2, 1.2).Move(-5, -2)),
 

@@ -10,7 +10,7 @@ import (
 
 var (
 	MountHole = &eda.Component{
-		Pads: path.Pie(6, 1.0, 1.3, 15).Apply(transform.Rotate(-30)),
+		Pads: path.Pie(6, 1.0, 1.3, 15).Apply(transform.RotateDegrees(-30)),
 
 		GroundTracks: eda.Tracks(
 			eda.Track{{X: 1.15, Y: 0}}.DX(0.6),

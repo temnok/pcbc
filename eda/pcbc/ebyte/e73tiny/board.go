@@ -12,7 +12,7 @@ import (
 )
 
 var (
-	chip = ebyte.E73.Arrange(transform.Rotate(-90).Move(5.2, 0))
+	chip = ebyte.E73.Arrange(transform.RotateDegrees(-90).Move(5.2, 0))
 
 	pin = chip.PadCenters()
 
@@ -30,8 +30,8 @@ var (
 
 	mountHoles = &eda.Component{
 		Components: eda.Components{
-			pcbc.MountHole.Arrange(transform.Rotate(-45).Move(7.5, 10)),
-			pcbc.MountHole.Arrange(transform.Rotate(45).Move(7.5, -10)),
+			pcbc.MountHole.Arrange(transform.RotateDegrees(-45).Move(7.5, 10)),
+			pcbc.MountHole.Arrange(transform.RotateDegrees(45).Move(7.5, -10)),
 		},
 	}
 

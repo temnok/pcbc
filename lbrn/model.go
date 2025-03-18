@@ -95,17 +95,21 @@ type P struct {
 	P1 string `xml:"p1,attr"`
 }
 
-// having this method is important because default Sprint(f)
+// f2s converts float number to a string performing rounding to 9 decimal places.
+// Having this method is important because default Sprint(f)
 // will result in different outputs on AMD and ARM platforms
 func f2s(val float64) string {
-	res := strconv.FormatFloat(val, 'f', 9, 64)
-	for res[len(res)-1] == '0' {
-		res = res[:len(res)-1]
+	str := strconv.FormatFloat(val, 'f', 9, 64)
+
+	for str[len(str)-1] == '0' {
+		str = str[:len(str)-1]
 	}
-	if res[len(res)-1] == '.' {
-		res = res[:len(res)-1]
+
+	if str[len(str)-1] == '.' {
+		str = str[:len(str)-1]
 	}
-	return res
+
+	return str
 }
 
 func xform(t transform.T) string {

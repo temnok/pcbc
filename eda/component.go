@@ -65,7 +65,7 @@ func (c *Component) Visit(callback func(*Component)) {
 }
 
 func (c *Component) visit(t transform.T, parent *Component, callback func(*Component)) {
-	if c.Transform != transform.Zero {
+	if c.Transform != (transform.T{}) {
 		t = c.Transform.Multiply(t)
 	}
 

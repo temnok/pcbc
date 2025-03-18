@@ -184,7 +184,7 @@ func (pcb *PCB) lbrnCenterMove() transform.T {
 }
 
 func (pcb *PCB) lbrnBitmapScale() transform.T {
-	return transform.UniformScale(1 / pcb.PixelsPerMM).Multiply(pcb.lbrnCenterMove())
+	return transform.ScaleUniformly(1 / pcb.PixelsPerMM).Multiply(pcb.lbrnCenterMove())
 }
 
 func (pcb *PCB) SaveFiles() error {

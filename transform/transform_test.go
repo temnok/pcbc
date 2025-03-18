@@ -4,6 +4,7 @@ package transform
 
 import (
 	"fmt"
+	"github.com/stretchr/testify/assert"
 	"strings"
 	"testing"
 )
@@ -45,7 +46,7 @@ func TestAscii(t *testing.T) {
 				"12",
 				"3.",
 			},
-			transform: Rotate(90).Move(2, 0),
+			transform: RotateDegrees(90).Move(2, 0),
 			expected: []string{
 				"31",
 				".2",
@@ -56,7 +57,7 @@ func TestAscii(t *testing.T) {
 				"12",
 				"3.",
 			},
-			transform: Rotate(-90).Move(0, 2).Scale(2, 3).Move(3, 2),
+			transform: RotateDegrees(-90).Move(0, 2).Scale(2, 3).Move(3, 2),
 			expected: []string{
 				".......",
 				".......",
@@ -113,4 +114,14 @@ func TestAscii(t *testing.T) {
 			}
 		})
 	}
+}
+
+func TestDet(t *testing.T) {
+	const delta = 0.000001
+
+	assert.Equal(t, 0.0, (T{}).Det())
+	assert.Equal(t, 1.0, I.Det())
+	assert.InDelta(t, 1.0, I.RotateDegrees(45).Det(), delta)
+	assert.InDelta(t, 6.0, I.Scale(2, 3).RotateDegrees(-77).Det(), delta)
+	assert.InDelta(t, 3.0, I.Move(1, 2).RotateDegrees(11).Scale(3, 1).Det(), delta)
 }

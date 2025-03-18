@@ -17,8 +17,8 @@ var Board = &eda.Component{
 	},
 
 	Components: eda.Components{
-		xunpu.SwitchTS1088.Arrange(transform.Rotate(-90).Move(3, 0)),
-		mph100imp40f.G_V_SP(2).Arrange(transform.Rotate(-90).Move(-3.25, 0)),
+		xunpu.SwitchTS1088.Arrange(transform.RotateDegrees(-90).Move(3, 0)),
+		mph100imp40f.G_V_SP(2).Arrange(transform.RotateDegrees(-90).Move(-3.25, 0)),
 		pcbc.MountHole.Arrange(transform.Move(-0.25, 0)),
 
 		pcbc.Logo.Arrange(transform.Move(-1, -2.1)),

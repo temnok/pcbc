@@ -17,7 +17,7 @@ func init() {
 
 	var pads path.Paths
 	for a := 0.0; a < 360; a += 90 {
-		pads = append(pads, col.Apply(transform.Rotate(a))...)
+		pads = append(pads, col.Apply(transform.RotateDegrees(a))...)
 	}
 
 	pads = append(pads, path.Rect(1.2, 1.2))

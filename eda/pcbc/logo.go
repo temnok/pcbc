@@ -16,7 +16,7 @@ var (
 		Marks: path.Join(
 			font.Centered("pc").Apply(transform.Move(0, 0.33)),
 			font.Centered("bc").Apply(transform.Move(0, -0.33)),
-		).Apply(transform.Rotate(45)),
+		).Apply(transform.RotateDegrees(45)),
 	}
 
 	Firm = eda.CenteredTextColumn(-1,

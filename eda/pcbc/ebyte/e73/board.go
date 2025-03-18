@@ -24,21 +24,21 @@ var (
 		Transform: transform.Move(0, 3.05),
 
 		Components: eda.Components{
-			mph100imp40f.G_V_SP(9).Arrange(transform.Rotate(-90).Move(-10.2, -1)),
+			mph100imp40f.G_V_SP(9).Arrange(transform.RotateDegrees(-90).Move(-10.2, -1)),
 			mph100imp40f.G_V_SP(9).Arrange(transform.Move(0, -15.3)),
-			mph100imp40f.G_V_SP(9).Arrange(transform.Rotate(90).Move(10.2, -1)),
+			mph100imp40f.G_V_SP(9).Arrange(transform.RotateDegrees(90).Move(10.2, -1)),
 		},
 
 		Marks: path.Join(
 			font.CenteredRow(labelShift,
 				"P111", "P110", "P003", "P028", "P002", "P029", "P031", "P030", "P113",
-			).Apply(labelScale.Rotate(-90).Move(-8.1, -1)),
+			).Apply(labelScale.RotateDegrees(-90).Move(-8.1, -1)),
 			font.CenteredRow(labelShift,
 				"GND", "P000", "P001", "P005", "P109", "VDD", "VDDH", "DCCH", "P024",
 			).Apply(labelScale.Move(0, -13.2)),
 			font.CenteredRow(labelShift,
 				"P013", "P018", "VBUS", "D-", "D+", "SWD", "SWC", "P009", "P010",
-			).Apply(labelScale.Rotate(90).Move(8.1, -1)),
+			).Apply(labelScale.RotateDegrees(90).Move(8.1, -1)),
 		),
 	}
 
