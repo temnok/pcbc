@@ -31,7 +31,7 @@ func (pcb *PCB) SaveEtchPI() error {
 				Interval: Param{Value: "0.02"},
 				DPI:      Param{Value: "1270"},
 
-				NumPasses: Param{Value: "4"},
+				NumPasses: Param{Value: "3"},
 
 				CrossHatch: Param{Value: "1"},
 			},
