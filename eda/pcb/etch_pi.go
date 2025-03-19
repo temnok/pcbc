@@ -55,8 +55,8 @@ func (pcb *PCB) SaveEtchPI() error {
 			{
 				Type:     "Cut",
 				Name:     Param{Value: "Cut"},
-				Index:    Param{Value: "1"},
-				Priority: Param{Value: "1"},
+				Index:    Param{Value: "2"},
+				Priority: Param{Value: "2"},
 
 				MaxPower:    Param{Value: "80"},
 				QPulseWidth: Param{Value: "80"},
@@ -71,8 +71,8 @@ func (pcb *PCB) SaveEtchPI() error {
 			{
 				Type:     "Image",
 				Name:     Param{Value: "Remove Adhesive"},
-				Index:    Param{Value: "2"},
-				Priority: Param{Value: "2"},
+				Index:    Param{Value: "1"},
+				Priority: Param{Value: "1"},
 
 				MaxPower:    Param{Value: "90"},
 				QPulseWidth: Param{Value: "30"},
@@ -125,7 +125,7 @@ func (pcb *PCB) SaveEtchPI() error {
 		},
 		Shape: []*lbrn.Shape{
 			lbrn.NewRect(0, pcb.lbrnCenterMove(), pcb.Width, pcb.Height),
-			lbrn.NewBitmapShape(2, pcb.lbrnBitmapScale(), bm),
+			lbrn.NewBitmapShape(1, pcb.lbrnBitmapScale(), bm),
 			lbrn.NewBitmapShape(3, pcb.lbrnBitmapScale(), bm),
 		},
 	}
@@ -134,15 +134,15 @@ func (pcb *PCB) SaveEtchPI() error {
 		t := component.Transform.Multiply(pcb.lbrnCenterMove())
 
 		for _, cut := range component.Cuts {
-			p.Shape = append(p.Shape, lbrn.NewPathWithTabs(1, t, cut))
+			p.Shape = append(p.Shape, lbrn.NewPathWithTabs(2, t, cut))
 		}
 
 		for _, hole := range component.Holes {
-			p.Shape = append(p.Shape, lbrn.NewPath(1, t, hole))
+			p.Shape = append(p.Shape, lbrn.NewPath(2, t, hole))
 		}
 
 		for _, perforation := range component.Perforations {
-			p.Shape = append(p.Shape, lbrn.NewPath(1, t, perforation))
+			p.Shape = append(p.Shape, lbrn.NewPath(2, t, perforation))
 		}
 	})
 

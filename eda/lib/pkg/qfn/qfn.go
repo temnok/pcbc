@@ -23,7 +23,7 @@ func init() {
 	pads = append(pads, path.Rect(1.2, 1.2))
 
 	QFN16G = &eda.Component{
-		Clears: path.Paths{path.Rect(2.4, 2.4)},
+		Clears: path.Paths{path.Rect(2.5, 2.5)},
 
 		Pads: pads,
 
