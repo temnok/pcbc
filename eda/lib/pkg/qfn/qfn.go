@@ -23,7 +23,7 @@ func init() {
 	pads = append(pads, path.Rect(1.2, 1.2))
 
 	QFN16G = &eda.Component{
-		Clears: path.Paths{path.Rect(2.3, 2.3)},
+		Clears: path.Paths{path.Rect(2.4, 2.4)},
 
 		Pads: pads,
 
@@ -32,7 +32,7 @@ func init() {
 			path.Circle(0.2).Apply(transform.Move(-1.7, 1.4)),
 		},
 
-		TrackWidth: 0.18,
+		TrackWidth: 0.25,
 
 		GroundTracks: eda.Tracks(
 			eda.Track{{X: -1.5, Y: 1.5}, {X: 1.5, Y: -1.5}},
