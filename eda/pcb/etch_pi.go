@@ -74,7 +74,7 @@ func (pcb *PCB) SaveEtchPI() error {
 				Index:    Param{Value: "1"},
 				Priority: Param{Value: "1"},
 
-				MaxPower:    Param{Value: "90"},
+				MaxPower:    Param{Value: "-90"},
 				QPulseWidth: Param{Value: "30"},
 				Frequency:   Param{Value: "3000000"},
 
