@@ -74,7 +74,7 @@ func (pcb *PCB) SaveEtchPI() error {
 				Index:    Param{Value: "1"},
 				Priority: Param{Value: "1"},
 
-				MaxPower:    Param{Value: "-90"},
+				MaxPower:    Param{Value: "90"},
 				QPulseWidth: Param{Value: "30"},
 				Frequency:   Param{Value: "3000000"},
 
@@ -85,7 +85,7 @@ func (pcb *PCB) SaveEtchPI() error {
 				DotWidth:         Param{Value: "0.05"},
 
 				//CrossHatch: Param{Value: "1"},
-				Angle: Param{Value: "90"},
+				Angle: Param{Value: "-90"},
 
 				NumPasses: Param{Value: "12"},
 				Negative:  Param{Value: "1"},

@@ -48,7 +48,7 @@
 		<speed Value="600"></speed>
 		<numPasses Value="12"></numPasses>
 		<globalRepeat Value=""></globalRepeat>
-		<maxPower Value="-90"></maxPower>
+		<maxPower Value="90"></maxPower>
 		<QPulseWidth Value="30"></QPulseWidth>
 		<frequency Value="3000000"></frequency>
 		<interval Value="0.01"></interval>
@@ -59,7 +59,7 @@
 		<tabsEnabled Value=""></tabsEnabled>
 		<tabSize Value=""></tabSize>
 		<crossHatch Value=""></crossHatch>
-		<angle Value="90"></angle>
+		<angle Value="-90"></angle>
 		<negative Value="1"></negative>
 		<cleanupPass Value="1"></cleanupPass>
 		<SubLayer type="Scan" index="1">
