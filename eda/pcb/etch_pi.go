@@ -14,6 +14,24 @@ func (pcb *PCB) SaveEtchPI() error {
 	im := image.NewSingle(pcb.copper, color.White, color.Black)
 	bm := lbrn.NewBase64Bitmap(im)
 
+	cleanupPass := &lbrn.SubLayer{
+		Type:      "Scan",
+		Index:     "1",
+		IsCleanup: Param{Value: "1"},
+		FloodFill: Param{Value: "1"},
+
+		Speed:       Param{Value: "800"},
+		MaxPower:    Param{Value: "10"},
+		Frequency:   Param{Value: "40000"},
+		QPulseWidth: Param{Value: "80"},
+
+		Interval: Param{Value: "0.04"},
+
+		CrossHatch:   Param{Value: "1"},
+		Angle:        Param{Value: "90"},
+		AnglePerPass: Param{Value: "90"},
+	}
+
 	p := &lbrn.LightBurnProject{
 		CutSetting: []*lbrn.CutSetting{
 			{
@@ -23,14 +41,14 @@ func (pcb *PCB) SaveEtchPI() error {
 				Priority: Param{Value: "0"},
 
 				MaxPower:    Param{Value: "10"},
-				QPulseWidth: Param{Value: "200"},
-				Frequency:   Param{Value: "20000"},
+				QPulseWidth: Param{Value: "80"},
+				Frequency:   Param{Value: "40000"},
 
-				Speed:    Param{Value: "400"},
-				Interval: Param{Value: "0.02"},
-				DPI:      Param{Value: "1270"},
+				Speed:    Param{Value: "800"},
+				Interval: Param{Value: "0.04"},
+				DPI:      Param{Value: "635"},
 
-				NumPasses: Param{Value: "3"},
+				NumPasses: Param{Value: "8"},
 
 				CrossHatch: Param{Value: "1"},
 			},
@@ -56,11 +74,11 @@ func (pcb *PCB) SaveEtchPI() error {
 				Index:    Param{Value: "2"},
 				Priority: Param{Value: "2"},
 
-				MaxPower:    Param{Value: "60"},
-				QPulseWidth: Param{Value: "80"},
-				Frequency:   Param{Value: "2000000"},
+				MaxPower:    Param{Value: "90"},
+				QPulseWidth: Param{Value: "30"},
+				Frequency:   Param{Value: "3000000"},
 
-				Speed:            Param{Value: "500"},
+				Speed:            Param{Value: "600"},
 				Interval:         Param{Value: "0.01"},
 				DPI:              Param{Value: "2540"},
 				UseDotCorrection: Param{Value: "1"},
@@ -69,34 +87,46 @@ func (pcb *PCB) SaveEtchPI() error {
 				//CrossHatch: Param{Value: "1"},
 				Angle: Param{Value: "90"},
 
-				NumPasses: Param{Value: "10"},
+				NumPasses: Param{Value: "12"},
 				Negative:  Param{Value: "1"},
 
 				DitherMode:  Param{Value: "3dslice"},
 				CleanupPass: &Param{Value: "1"},
 
-				SubLayer: &lbrn.SubLayer{
-					Type:      "Scan",
-					Index:     "1",
-					IsCleanup: Param{Value: "1"},
-					FloodFill: Param{Value: "1"},
+				SubLayer: cleanupPass,
+			},
+			{
+				Type:     "Image",
+				Name:     Param{Value: "Clean Copper"},
+				Index:    Param{Value: "3"},
+				Priority: Param{Value: "3"},
 
-					Speed:       Param{Value: "400"},
-					MaxPower:    Param{Value: "10"},
-					Frequency:   Param{Value: "20000"},
-					QPulseWidth: Param{Value: "200"},
+				MaxPower:    Param{Value: "40"},
+				QPulseWidth: Param{Value: "2"},
+				Frequency:   Param{Value: "280000"},
 
-					Interval: Param{Value: "0.02"},
+				Speed:            Param{Value: "600"},
+				Interval:         Param{Value: "0.01"},
+				DPI:              Param{Value: "2540"},
+				UseDotCorrection: Param{Value: "1"},
+				DotWidth:         Param{Value: "0.05"},
 
-					CrossHatch:   Param{Value: "1"},
-					Angle:        Param{Value: "90"},
-					AnglePerPass: Param{Value: "90"},
-				},
+				//CrossHatch: Param{Value: "1"},
+				Angle: Param{Value: "90"},
+
+				NumPasses: Param{Value: "4"},
+				Negative:  Param{Value: "1"},
+
+				DitherMode:  Param{Value: "3dslice"},
+				CleanupPass: &Param{Value: "1"},
+
+				SubLayer: cleanupPass,
 			},
 		},
 		Shape: []*lbrn.Shape{
 			lbrn.NewRect(0, pcb.lbrnCenterMove(), pcb.Width, pcb.Height),
 			lbrn.NewBitmapShape(2, pcb.lbrnBitmapScale(), bm),
+			lbrn.NewBitmapShape(3, pcb.lbrnBitmapScale(), bm),
 		},
 	}
 
