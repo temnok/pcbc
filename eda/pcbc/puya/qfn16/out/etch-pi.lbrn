@@ -83,9 +83,9 @@
 		<name Value="Clean Copper"></name>
 		<priority Value="3"></priority>
 		<speed Value="600"></speed>
-		<numPasses Value="4"></numPasses>
+		<numPasses Value="6"></numPasses>
 		<globalRepeat Value=""></globalRepeat>
-		<maxPower Value="40"></maxPower>
+		<maxPower Value="30"></maxPower>
 		<QPulseWidth Value="2"></QPulseWidth>
 		<frequency Value="280000"></frequency>
 		<interval Value="0.01"></interval>

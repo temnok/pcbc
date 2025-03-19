@@ -101,7 +101,7 @@ func (pcb *PCB) SaveEtchPI() error {
 				Index:    Param{Value: "3"},
 				Priority: Param{Value: "3"},
 
-				MaxPower:    Param{Value: "40"},
+				MaxPower:    Param{Value: "30"},
 				QPulseWidth: Param{Value: "2"},
 				Frequency:   Param{Value: "280000"},
 
@@ -114,7 +114,7 @@ func (pcb *PCB) SaveEtchPI() error {
 				//CrossHatch: Param{Value: "1"},
 				Angle: Param{Value: "90"},
 
-				NumPasses: Param{Value: "4"},
+				NumPasses: Param{Value: "6"},
 				Negative:  Param{Value: "1"},
 
 				DitherMode:  Param{Value: "3dslice"},
