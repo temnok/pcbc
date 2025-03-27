@@ -7,7 +7,7 @@
 
 ```go
 func main() {
-	err := eda.GeneratePCBAt(&eda.Component{
+	err := pcb.Generate(&eda.Component{
 		Components: eda.Components{
 			pcbc.Board35x45,
 			eda.ComponentGrid(3, 11, 5,
@@ -26,9 +26,9 @@ func main() {
 				x2.X2("R ", "K20"),
 				x2.X2("R ", "K25"),
 				x2.X2("R ", "K25"),
-			).Arrange(transform.Rotate(90)),
+			).Arrange(transform.RotateDegrees(90)),
 		},
-	}, "out/")
+	})
 
 	if err != nil {
 		log.Fatal(err)
