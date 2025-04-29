@@ -24,7 +24,6 @@ const (
 )
 
 /*
-
 Vector (linear) font matrix. Data below uses its point numbers.
 Negative number means jump (no line) before it.
 
@@ -42,7 +41,6 @@ Grid:
 	13 23 33 43 53
 	12 22 32 42 52
 	11 21 31 41 51
-
 */
 
 var data = [][][]byte{
@@ -56,7 +54,7 @@ var data = [][][]byte{
 	'\'': {{37, 39}},
 	'(':  {{33, 25, 27, 39}},
 	')':  {{33, 45, 47, 39}},
-	'*':  {{16, 58}, {18, 56}, {35, 39}},
+	'*':  {{15, 57}, {17, 55}, {34, 38}},
 	'+':  {{16, 56}, {34, 38}},
 	',':  {{21, 33}},
 	'-':  {{16, 56}},
