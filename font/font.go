@@ -11,12 +11,11 @@ import (
 type Align float64
 
 const (
-	Width = 0.65 // relative to height 1.0
+	Width = 0.6 // relative to height 1.0
 
-	weightScale = 1.0 / 5000.0
-	Normal      = 400 * weightScale
-	SemiBold    = 600 * weightScale
-	Bold        = 700 * weightScale
+	Light  = 0.08
+	Medium = 0.1
+	Bold   = 0.125
 
 	AlignLeft   Align = 0.0
 	AlignCenter Align = 0.5

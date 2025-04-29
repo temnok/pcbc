@@ -14,8 +14,8 @@ import (
 var (
 	Logo = &eda.Component{
 		Marks: path.Join(
-			font.Centered("pc").Apply(transform.Move(0, 0.33)),
-			font.Centered("bc").Apply(transform.Move(0, -0.33)),
+			font.Centered("pc").Apply(transform.Move(0, 0.3)),
+			font.Centered("bc").Apply(transform.Move(0, -0.3)),
 		).Apply(transform.RotateDegrees(45)),
 	}
 
