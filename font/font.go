@@ -182,7 +182,7 @@ func alignedPaths(align Align, str string) path.Paths {
 			c = '?'
 		}
 
-		t := transform.Move(Width*(float64(i)-n*float64(align)), 0.4)
+		t := transform.Move(Width/2+Width*(float64(i)-n*float64(align)), -0.1)
 		paths = append(paths, symbolPaths[c].Apply(t)...)
 	}
 
@@ -210,7 +210,7 @@ func WeightScale(t transform.T) float64 {
 
 func pToXY(p byte) path.Point {
 	return path.Point{
-		X: float64(p/10) / 10.0,
-		Y: float64(p%10)/10.0 - 1,
+		X: (float64(p/10) - 3) * 0.1,
+		Y: (float64(p%10) - 5) * 0.1,
 	}
 }

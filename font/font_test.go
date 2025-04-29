@@ -18,7 +18,8 @@ import (
 func TestFont_SavePng(t *testing.T) {
 	const scale = 100.0
 
-	bm := bitmap.New(16*scale*Width, 20*scale)
+	const height = 1.0
+	bm := bitmap.New(16*scale*Width, 20*scale*height)
 
 	normalBrush := shape.Circle(Normal * scale)
 
@@ -27,17 +28,17 @@ func TestFont_SavePng(t *testing.T) {
 
 	extraBoldBrush := shape.Circle(Bold * scale)
 
-	for i := 0; i < 14; i++ {
+	for i := 0; i < 6; i++ {
 		for j := 0; j < 16; j++ {
 			c := (i+2)*16 + j
 
-			tf := transform.Move(float64(j)*Width, float64(20-i)).Scale(scale, scale)
+			tf := transform.Move(Width/2+float64(j)*Width, height/2+float64(19-i)*height).ScaleUniformly(scale)
 			normalBrush.ForEachPathsPixel(symbolPaths[c], tf, bm.Set1)
 
-			tf = transform.Move(float64(j)*Width, float64(13-i)).Scale(scale, scale)
+			tf = transform.Move(Width/2+float64(j)*Width, height/2+float64(12-i)*height).ScaleUniformly(scale)
 			boldBrush.ForEachPathsPixel(symbolPaths[c], tf, bm.Set1)
 
-			tf = transform.Move(float64(j)*Width, float64(6-i)).Scale(scale, scale)
+			tf = transform.Move(Width/2+float64(j)*Width, height/2+float64(5-i)*height).ScaleUniformly(scale)
 			extraBoldBrush.ForEachPathsPixel(symbolPaths[c], tf, bm.Set1)
 		}
 	}
