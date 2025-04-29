@@ -7,12 +7,8 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
-	"strconv"
-	"temnok/pcbc/path"
 	"temnok/pcbc/transform"
 )
-
-type XY = path.Point
 
 type LightBurnProject struct {
 	XMLName       xml.Name      `xml:"LightBurnProject"`
@@ -95,25 +91,12 @@ type P struct {
 	P1 string `xml:"p1,attr"`
 }
 
-// f2s converts float number to a string performing rounding to 9 decimal places.
-// Having this method is important because default Sprint(f)
-// will result in different outputs on AMD and ARM platforms
-func f2s(val float64) string {
-	str := strconv.FormatFloat(val, 'f', 9, 64)
-
-	for str[len(str)-1] == '0' {
-		str = str[:len(str)-1]
-	}
-
-	if str[len(str)-1] == '.' {
-		str = str[:len(str)-1]
-	}
-
-	return str
-}
-
 func xform(t transform.T) string {
-	return fmt.Sprintf("%v %v %v %v %v %v", f2s(t.Ix), f2s(t.Iy), f2s(t.Jx), f2s(t.Jy), f2s(t.Kx), f2s(t.Ky))
+	return fmt.Sprintf("%v %v %v %v %v %v",
+		f2s(t.Ix), f2s(t.Iy),
+		f2s(t.Jx), f2s(t.Jy),
+		f2s(t.Kx), f2s(t.Ky),
+	)
 }
 
 func (p *LightBurnProject) SaveToFile(filename string) error {
