@@ -16,7 +16,7 @@ func (pcb *PCB) SaveOverview() error {
 	stencilCuts := bitmap.New(pcb.bitmapSize())
 	pcb.renderCutsOverview(substrateCuts, stencilCuts)
 
-	image := image.New(
+	im := image.New(
 		[]*bitmap.Bitmap{
 			pcb.copper,
 			pcb.mask,
@@ -33,9 +33,8 @@ func (pcb *PCB) SaveOverview() error {
 			{color.RGBA{}, color.RGBA{G: 0xFF, B: 0xFF, A: 0xFF}},
 			{color.RGBA{}, color.RGBA{R: 0xFF, G: 0xFF, B: 0xFF, A: 0xFF}},
 		},
-		true,
 	)
-	if err := util.SavePNG(filename, image); err != nil {
+	if err := util.SavePNG(filename, im); err != nil {
 		return err
 	}
 

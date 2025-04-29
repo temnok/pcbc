@@ -176,7 +176,7 @@ func (pcb *PCB) cutMask2(c *eda.Component) {
 }
 
 func (pcb *PCB) bitmapTransform() transform.T {
-	return transform.Move(pcb.Width/2, pcb.Height/2).Scale(pcb.PixelsPerMM, pcb.PixelsPerMM)
+	return transform.Move(pcb.Width/2, pcb.Height/2).ScaleUniformly(pcb.PixelsPerMM)
 }
 
 func (pcb *PCB) lbrnCenterMove() transform.T {
@@ -184,7 +184,8 @@ func (pcb *PCB) lbrnCenterMove() transform.T {
 }
 
 func (pcb *PCB) lbrnBitmapScale() transform.T {
-	return transform.ScaleUniformly(1 / pcb.PixelsPerMM).Multiply(pcb.lbrnCenterMove())
+	scale := 1.0 / pcb.PixelsPerMM
+	return transform.Scale(scale, -scale).Multiply(pcb.lbrnCenterMove())
 }
 
 func (pcb *PCB) SaveFiles() error {
