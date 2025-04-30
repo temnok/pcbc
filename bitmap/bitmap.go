@@ -29,12 +29,6 @@ func (b *Bitmap) Height() int {
 	return b.height
 }
 
-func (b *Bitmap) Invert() {
-	for i, w := range b.words {
-		b.words[i] = ^w
-	}
-}
-
 func (b *Bitmap) Set1(x0, x1, y int) {
 	b.Set(x0, x1, y, 1)
 }

@@ -21,7 +21,7 @@ func (pcb *PCB) SaveEtch() error {
 
 func (pcb *PCB) SaveEtchFR4() error {
 	filename := pcb.SavePath + "etch.lbrn"
-	im := image.NewSingle(pcb.copper, color.White, color.Black)
+	im := image.NewSingle(pcb.copper, color.Black, color.White)
 	bm := lbrn.NewBase64Bitmap(im)
 
 	p := &lbrn.LightBurnProject{

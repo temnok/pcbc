@@ -5,6 +5,7 @@ package image
 import (
 	"image"
 	"image/color"
+	"math"
 	"temnok/pcbc/bitmap"
 )
 
@@ -18,26 +19,9 @@ func NewSingle(bm *bitmap.Bitmap, zero, one color.Color) image.Image {
 }
 
 func New(bitmaps []*bitmap.Bitmap, bitmapColors [][2]color.Color) image.Image {
-	palette := make(color.Palette, 1<<len(bitmaps))
-
-	for i := range palette {
-		colors := make([]color.Color, len(bitmapColors))
-
-		for j, bc := range bitmapColors {
-			c := bc[0]
-			if i&(1<<j) != 0 {
-				c = bc[1]
-			}
-
-			colors[j] = c
-		}
-
-		palette[i] = combineColors(colors)
-	}
-
 	return &bitmapsImage{
 		bitmaps: bitmaps,
-		palette: palette,
+		palette: createPalette(bitmaps, bitmapColors),
 	}
 }
 
@@ -58,7 +42,6 @@ func (bi *bitmapsImage) ColorIndexAt(x, y int) byte {
 	y = bi.bitmaps[0].Height() - 1 - y
 
 	index := 0
-
 	for i, b := range bi.bitmaps {
 		index |= b.Get(x, y) << i
 	}
@@ -66,27 +49,44 @@ func (bi *bitmapsImage) ColorIndexAt(x, y int) byte {
 	return byte(index)
 }
 
-func combineColors(colors []color.Color) color.Color {
+func createPalette(bitmaps []*bitmap.Bitmap, bitmapColors [][2]color.Color) color.Palette {
+	palette := make(color.Palette, 1<<len(bitmaps))
+
+	for i := range palette {
+		colors := make([]color.Color, len(bitmapColors))
+		for j, bc := range bitmapColors {
+			colors[j] = bc[(i>>j)&1]
+		}
+
+		palette[i] = mixColors(colors)
+	}
+
+	return palette
+}
+
+func mixColors(colors []color.Color) color.Color {
 	if len(colors) == 1 {
 		return colors[0]
 	}
 
-	const f = 0xFFFF
-
-	var tr, tg, tb float64
-
+	var r, g, b float64
 	for _, c := range colors {
-		r, g, b, a := c.RGBA()
-		k := float64(a) / f
-		tr = tr*(1-k) + (float64(r)/f)*k
-		tg = tg*(1-k) + (float64(g)/f)*k
-		tb = tb*(1-k) + (float64(b)/f)*k
+		r, g, b = mixInColor(r, g, b, c)
 	}
 
 	return color.RGBA64{
-		R: uint16(tr * f),
-		G: uint16(tg * f),
-		B: uint16(tb * f),
-		A: f,
+		R: uint16(r * math.MaxUint16),
+		G: uint16(g * math.MaxUint16),
+		B: uint16(b * math.MaxUint16),
+		A: math.MaxUint16,
 	}
+}
+
+func mixInColor(tr, tg, tb float64, c color.Color) (float64, float64, float64) {
+	r, g, b, a := c.RGBA()
+	k := float64(a) / math.MaxUint16
+	tr = tr*(1-k) + (float64(r)/math.MaxUint16)*k
+	tg = tg*(1-k) + (float64(g)/math.MaxUint16)*k
+	tb = tb*(1-k) + (float64(b)/math.MaxUint16)*k
+	return tr, tg, tb
 }

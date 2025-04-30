@@ -11,7 +11,7 @@ import (
 
 func (pcb *PCB) SaveEtchPI() error {
 	filename := pcb.SavePath + "etch-pi.lbrn"
-	im := image.NewSingle(pcb.copper, color.White, color.Black)
+	im := image.NewSingle(pcb.copper, color.Black, color.White)
 	bm := lbrn.NewBase64Bitmap(im)
 
 	cleanupPass := &lbrn.SubLayer{

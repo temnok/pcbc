@@ -72,8 +72,6 @@ func (pcb *PCB) Process() *PCB {
 	pcb.mask = bitmap.New(wi, hi)
 	pcb.silk = bitmap.New(wi, hi)
 
-	pcb.copper.Invert()
-
 	pcb.processPass1()
 	pcb.processPass2()
 
@@ -103,37 +101,37 @@ func (pcb *PCB) removeCopper(c *eda.Component) {
 	t := c.Transform.Multiply(pcb.bitmapTransform())
 
 	// Clears
-	shape.ForEachRow(c.Clears, t, pcb.copper.Set0)
+	shape.ForEachRow(c.Clears, t, pcb.copper.Set1)
 
 	clearWidth := 2 * (pcb.CopperClearWidth - pcb.ExtraCopperWidth)
 
 	// Pads
 	clearBrush := shape.Circle(int(clearWidth * pcb.PixelsPerMM))
-	clearBrush.ForEachPathsPixel(c.Pads, t, pcb.copper.Set0)
+	clearBrush.ForEachPathsPixel(c.Pads, t, pcb.copper.Set1)
 
 	// Non-ground tracks
 	brush := shape.Circle(int((c.TrackWidth + clearWidth) * pcb.PixelsPerMM))
-	brush.ForEachPathsPixel(c.Tracks, t, pcb.copper.Set0)
+	brush.ForEachPathsPixel(c.Tracks, t, pcb.copper.Set1)
 
 	clearBrush = shape.Circle(int(pcb.CopperClearWidth * pcb.PixelsPerMM))
-	clearBrush.ForEachPathsPixel(c.Cuts, t, pcb.copper.Set0)
-	clearBrush.ForEachPathsPixel(c.Holes, t, pcb.copper.Set0)
-	clearBrush.ForEachPathsPixel(c.Perforations, t, pcb.copper.Set0)
+	clearBrush.ForEachPathsPixel(c.Cuts, t, pcb.copper.Set1)
+	clearBrush.ForEachPathsPixel(c.Holes, t, pcb.copper.Set1)
+	clearBrush.ForEachPathsPixel(c.Perforations, t, pcb.copper.Set1)
 }
 
 func (pcb *PCB) addCopper(c *eda.Component) {
 	t := c.Transform.Multiply(pcb.bitmapTransform())
 
 	// Pads
-	shape.ForEachRow(c.Pads, t, pcb.copper.Set1)
+	shape.ForEachRow(c.Pads, t, pcb.copper.Set0)
 
 	extraCopperBrush := shape.Circle(int(pcb.ExtraCopperWidth * pcb.PixelsPerMM))
-	extraCopperBrush.ForEachPathsPixel(c.Pads, t, pcb.copper.Set1)
+	extraCopperBrush.ForEachPathsPixel(c.Pads, t, pcb.copper.Set0)
 
 	// Tracks
 	brush := shape.Circle(int((c.TrackWidth + pcb.ExtraCopperWidth) * pcb.PixelsPerMM))
-	brush.ForEachPathsPixel(c.Tracks, t, pcb.copper.Set1)
-	brush.ForEachPathsPixel(c.GroundTracks, t, pcb.copper.Set1)
+	brush.ForEachPathsPixel(c.Tracks, t, pcb.copper.Set0)
+	brush.ForEachPathsPixel(c.GroundTracks, t, pcb.copper.Set0)
 }
 
 func (pcb *PCB) addSilk(c *eda.Component) {
