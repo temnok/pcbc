@@ -3,7 +3,7 @@
 package path
 
 import (
-	"temnok/pcbc/cbc"
+	"temnok/pcbc/bezier"
 	"temnok/pcbc/transform"
 )
 
@@ -36,7 +36,7 @@ func (path Path) ForEachPixel(t transform.T, visit func(x, y int)) {
 	for i := 0; i+3 < len(path); i += 3 {
 		c1, c2, b := path[i+1].Apply(t), path[i+2].Apply(t), path[i+3].Apply(t)
 
-		cbc.Rasterize([]float64{a.X, a.Y, c1.X, c1.Y, c2.X, c2.Y, b.X, b.Y}, visit)
+		bezier.Rasterize([]float64{a.X, a.Y, c1.X, c1.Y, c2.X, c2.Y, b.X, b.Y}, visit)
 
 		a = b
 	}

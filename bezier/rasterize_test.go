@@ -1,6 +1,6 @@
 // Copyright © 2025 Alex Temnok. All rights reserved.
 
-package cbc
+package bezier
 
 import (
 	"math"
