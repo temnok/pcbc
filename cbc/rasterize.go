@@ -6,7 +6,7 @@ import "math"
 
 // Rasterize calls provided callback for each consecutive pixel along the CBC (cubic Bézier curve).
 // Pixels are points with integer coordinates. Pixels A and B are consecutive if A != B && |Ax-Bx| <= 1 && |Ay-By| <= 1.
-// The callback is NOT called for the very first pixel, to prevent duplicate calls for adjacent curves.
+// The callback is NOT called for the very first pixel, to prevent duplicate points for adjacent curves.
 // Cubic Bézier curve is represented by four points in xy array in form [Ax, Ay, Bx, By, Cx, Cy, Dx, Dy]
 // where A and D are start and end points of the curve and B and C are control points.
 func Rasterize(xy []float64, callback func(x, y int)) {
