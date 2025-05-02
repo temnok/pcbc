@@ -12,10 +12,6 @@ import (
 type Param = lbrn.Param
 
 func (pcb *PCB) SaveEtch() error {
-	return pcb.SaveEtchFR4()
-}
-
-func (pcb *PCB) SaveEtchFR4() error {
 	filename := pcb.SavePath + "etch.lbrn"
 	im := image.NewSingle(pcb.copper, color.Black, color.White)
 	bm := lbrn.NewBase64Bitmap(im)
