@@ -6,7 +6,9 @@ import (
 	"image/color"
 	"temnok/pcbc/bitmap/image"
 	"temnok/pcbc/eda"
+	"temnok/pcbc/font"
 	"temnok/pcbc/lbrn"
+	"temnok/pcbc/shape"
 )
 
 var maskCutSettings = []*lbrn.CutSetting{
@@ -77,6 +79,15 @@ var maskCutSettings = []*lbrn.CutSetting{
 }
 
 func (pcb *PCB) SaveMask() error {
+	pcb.component.Visit(func(component *eda.Component) {
+		pcb.addSilk(component)
+		pcb.cutMask1(component)
+	})
+
+	pcb.component.Visit(func(component *eda.Component) {
+		pcb.cutMask2(component)
+	})
+
 	filename := pcb.SavePath + "mask.lbrn"
 	silk := image.NewSingle(pcb.silk, color.White, color.Black)
 	mask := image.NewSingle(pcb.mask, color.Transparent, color.Black)
@@ -120,4 +131,43 @@ func (pcb *PCB) addMaskPerforations(p *lbrn.LightBurnProject) {
 			Frequency:   Param{Value: "20000"},
 		},
 	}
+}
+
+func (pcb *PCB) addSilk(c *eda.Component) {
+	t := c.Transform.Multiply(pcb.bitmapTransform())
+
+	// Marks:
+	brushW := font.Bold * font.WeightScale(t)
+	brush := shape.Circle(int(brushW))
+	brush.ForEachPathsPixel(c.Marks, t, pcb.silk.Set1)
+}
+
+func (pcb *PCB) cutMask1(c *eda.Component) {
+	t := c.Transform.Multiply(pcb.bitmapTransform())
+
+	brush := shape.Circle(int(pcb.MaskCutWidth * pcb.PixelsPerMM))
+
+	// Pads
+	brush.ForEachPathsPixel(c.Pads, t, pcb.mask.Set1)
+
+	// Cuts
+	c.Cuts.ForEachPixelDist(t, int(2*pcb.MaskCutWidth*pcb.PixelsPerMM), func(x, y int) {
+		brush.ForEachRowWithOffset(x, y, pcb.mask.Set1)
+	})
+
+	// Holes
+	brush.ForEachPathsPixel(c.Holes, t, pcb.mask.Set1)
+
+	// Perforations
+	brush.ForEachPathsPixel(c.Perforations, t, pcb.mask.Set1)
+}
+
+func (pcb *PCB) cutMask2(c *eda.Component) {
+	t := c.Transform.Multiply(pcb.bitmapTransform())
+
+	brush := shape.Circle(int(pcb.MaskCutWidth * pcb.PixelsPerMM))
+
+	// Openings
+	shape.ForEachRow(c.Openings, t, pcb.mask.Set0)
+	brush.ForEachPathsPixel(c.Openings, t, pcb.mask.Set1)
 }

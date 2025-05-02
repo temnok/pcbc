@@ -5,8 +5,6 @@ package pcb
 import (
 	"temnok/pcbc/bitmap"
 	"temnok/pcbc/eda"
-	"temnok/pcbc/font"
-	"temnok/pcbc/shape"
 	"temnok/pcbc/transform"
 	"temnok/pcbc/util"
 )
@@ -70,105 +68,11 @@ func (pcb *PCB) Process() *PCB {
 	pcb.mask = bitmap.New(wi, hi)
 	pcb.silk = bitmap.New(wi, hi)
 
-	pcb.processPass1()
-	pcb.processPass2()
-
 	return pcb
 }
 
 func (pcb *PCB) bitmapSize() (int, int) {
 	return int(pcb.Width * pcb.PixelsPerMM), int(pcb.Height * pcb.PixelsPerMM)
-}
-
-func (pcb *PCB) processPass1() {
-	pcb.component.Visit(func(component *eda.Component) {
-		pcb.removeCopper(component)
-		pcb.addSilk(component)
-		pcb.cutMask1(component)
-	})
-}
-
-func (pcb *PCB) processPass2() {
-	pcb.component.Visit(func(component *eda.Component) {
-		pcb.addCopper(component)
-		pcb.cutMask2(component)
-	})
-}
-
-func (pcb *PCB) removeCopper(c *eda.Component) {
-	t := c.Transform.Multiply(pcb.bitmapTransform())
-
-	// Clears
-	shape.ForEachRow(c.Clears, t, pcb.copper.Set1)
-
-	clearWidth := 2 * (pcb.CopperClearWidth - pcb.ExtraCopperWidth)
-
-	// Pads
-	clearBrush := shape.Circle(int(clearWidth * pcb.PixelsPerMM))
-	clearBrush.ForEachPathsPixel(c.Pads, t, pcb.copper.Set1)
-
-	// Non-ground tracks
-	brush := shape.Circle(int((c.TrackWidth + clearWidth) * pcb.PixelsPerMM))
-	brush.ForEachPathsPixel(c.Tracks, t, pcb.copper.Set1)
-
-	clearBrush = shape.Circle(int(pcb.CopperClearWidth * pcb.PixelsPerMM))
-	clearBrush.ForEachPathsPixel(c.Cuts, t, pcb.copper.Set1)
-	clearBrush.ForEachPathsPixel(c.Holes, t, pcb.copper.Set1)
-	clearBrush.ForEachPathsPixel(c.Perforations, t, pcb.copper.Set1)
-}
-
-func (pcb *PCB) addCopper(c *eda.Component) {
-	t := c.Transform.Multiply(pcb.bitmapTransform())
-
-	// Pads
-	shape.ForEachRow(c.Pads, t, pcb.copper.Set0)
-
-	extraCopperBrush := shape.Circle(int(pcb.ExtraCopperWidth * pcb.PixelsPerMM))
-	extraCopperBrush.ForEachPathsPixel(c.Pads, t, pcb.copper.Set0)
-
-	// Tracks
-	brush := shape.Circle(int((c.TrackWidth + pcb.ExtraCopperWidth) * pcb.PixelsPerMM))
-	brush.ForEachPathsPixel(c.Tracks, t, pcb.copper.Set0)
-	brush.ForEachPathsPixel(c.GroundTracks, t, pcb.copper.Set0)
-}
-
-func (pcb *PCB) addSilk(c *eda.Component) {
-	t := c.Transform.Multiply(pcb.bitmapTransform())
-
-	// Marks:
-	brushW := font.Bold * font.WeightScale(t)
-	brush := shape.Circle(int(brushW))
-	brush.ForEachPathsPixel(c.Marks, t, pcb.silk.Set1)
-}
-
-func (pcb *PCB) cutMask1(c *eda.Component) {
-	t := c.Transform.Multiply(pcb.bitmapTransform())
-
-	brush := shape.Circle(int(pcb.MaskCutWidth * pcb.PixelsPerMM))
-
-	// Pads
-	brush.ForEachPathsPixel(c.Pads, t, pcb.mask.Set1)
-
-	// Cuts
-	c.Cuts.ForEachPixelDist(t, int(2*pcb.MaskCutWidth*pcb.PixelsPerMM), func(x, y int) {
-		brush.ForEachRowWithOffset(x, y, pcb.mask.Set1)
-	})
-
-	// Holes
-	brush.ForEachPathsPixel(c.Holes, t, pcb.mask.Set1)
-
-	// Perforations
-	brush.ForEachPathsPixel(c.Perforations, t, pcb.mask.Set1)
-}
-
-func (pcb *PCB) cutMask2(c *eda.Component) {
-	t := c.Transform.Multiply(pcb.bitmapTransform())
-
-	brush := shape.Circle(int(pcb.MaskCutWidth * pcb.PixelsPerMM))
-
-	// Openings
-	shape.ForEachRow(c.Openings, t, pcb.mask.Set0)
-	brush.ForEachPathsPixel(c.Openings, t, pcb.mask.Set1)
 }
 
 func (pcb *PCB) bitmapTransform() transform.T {
@@ -185,10 +89,14 @@ func (pcb *PCB) lbrnBitmapScale() transform.T {
 }
 
 func (pcb *PCB) SaveFiles() error {
-	return util.RunConcurrently(
+	err := util.RunConcurrently(
 		pcb.SaveEtch,
 		pcb.SaveMask,
 		pcb.SaveStencil,
-		pcb.SaveOverview,
 	)
+	if err != nil {
+		return err
+	}
+
+	return pcb.SaveOverview()
 }

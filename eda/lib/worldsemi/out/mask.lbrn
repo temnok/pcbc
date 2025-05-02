@@ -1,0 +1,98 @@
+<LightBurnProject>
+	<CutSetting type="Cut">
+		<index Value="3"></index>
+		<name Value="Perforation"></name>
+		<priority Value="3"></priority>
+		<speed Value="100"></speed>
+		<numPasses Value=""></numPasses>
+		<globalRepeat Value="30"></globalRepeat>
+		<maxPower Value="90"></maxPower>
+		<QPulseWidth Value="200"></QPulseWidth>
+		<frequency Value="20000"></frequency>
+		<interval Value=""></interval>
+		<dpi Value=""></dpi>
+		<ditherMode Value=""></ditherMode>
+		<useDotCorrection Value=""></useDotCorrection>
+		<dotWidth Value=""></dotWidth>
+		<tabsEnabled Value=""></tabsEnabled>
+		<tabSize Value=""></tabSize>
+		<crossHatch Value=""></crossHatch>
+		<angle Value=""></angle>
+		<negative Value=""></negative>
+	</CutSetting>
+	<CutSetting_Img type="Image">
+		<index Value="0"></index>
+		<name Value="Silk"></name>
+		<priority Value="0"></priority>
+		<speed Value="800"></speed>
+		<numPasses Value="1"></numPasses>
+		<globalRepeat Value=""></globalRepeat>
+		<maxPower Value="5"></maxPower>
+		<QPulseWidth Value="200"></QPulseWidth>
+		<frequency Value="20000"></frequency>
+		<interval Value="0.02"></interval>
+		<dpi Value="1270"></dpi>
+		<ditherMode Value=""></ditherMode>
+		<useDotCorrection Value="1"></useDotCorrection>
+		<dotWidth Value="0.05"></dotWidth>
+		<tabsEnabled Value=""></tabsEnabled>
+		<tabSize Value=""></tabSize>
+		<crossHatch Value="1"></crossHatch>
+		<angle Value="-90"></angle>
+		<negative Value=""></negative>
+	</CutSetting_Img>
+	<CutSetting_Img type="Image">
+		<index Value="1"></index>
+		<name Value="Mask 1"></name>
+		<priority Value="1"></priority>
+		<speed Value="500"></speed>
+		<numPasses Value="5"></numPasses>
+		<globalRepeat Value=""></globalRepeat>
+		<maxPower Value="10"></maxPower>
+		<QPulseWidth Value="80"></QPulseWidth>
+		<frequency Value="2000000"></frequency>
+		<interval Value="0.01"></interval>
+		<dpi Value="2540"></dpi>
+		<ditherMode Value=""></ditherMode>
+		<useDotCorrection Value="1"></useDotCorrection>
+		<dotWidth Value="0.05"></dotWidth>
+		<tabsEnabled Value=""></tabsEnabled>
+		<tabSize Value=""></tabSize>
+		<crossHatch Value="1"></crossHatch>
+		<angle Value="90"></angle>
+		<negative Value=""></negative>
+	</CutSetting_Img>
+	<CutSetting_Img type="Image">
+		<index Value="2"></index>
+		<name Value="Mask 2"></name>
+		<priority Value="2"></priority>
+		<speed Value="500"></speed>
+		<numPasses Value="5"></numPasses>
+		<globalRepeat Value=""></globalRepeat>
+		<maxPower Value="20"></maxPower>
+		<QPulseWidth Value="80"></QPulseWidth>
+		<frequency Value="2000000"></frequency>
+		<interval Value="0.01"></interval>
+		<dpi Value="2540"></dpi>
+		<ditherMode Value=""></ditherMode>
+		<useDotCorrection Value="1"></useDotCorrection>
+		<dotWidth Value="0.05"></dotWidth>
+		<tabsEnabled Value=""></tabsEnabled>
+		<tabSize Value=""></tabSize>
+		<crossHatch Value="1"></crossHatch>
+		<angle Value="90"></angle>
+		<negative Value=""></negative>
+	</CutSetting_Img>
+	<Shape Type="Bitmap" CutIndex="0" W="363" H="300" Data="iVBORw0KGgoAAAANSUhEUgAAAWsAAAEsAQMAAAA/1QDvAAAABlBMVEX///8AAABVwtN+AAAA00lEQVR4nOzaQQqDMBBA0QkuXPYIHsWj6dE8So/g0kVwSoWKbWjI0KQE8v9S3jIysxghIiIiutbr93zIhwjXkI8xPv/Kpxhf4MX4Fnx61cHhcDi8Sf5cJ/Z0fqwTczIf3+dRZn5MwTv873wTB4fDs/Cqfu12eNnZZByUxjH8ERwOh8PhcDj8wodVZFrEaRqfvDhdpT9RnOsunW5yOxfPnNypSq9eBl3h9fKyj8D6Io3vPQgOh8PhcDg8F6/qIKYdXvaiy3heZjxeIyIioqZ7BAAA//+CBCjWC1ANDwAAAABJRU5ErkJggg==">
+		<XForm>0.01 0 0 -0.01 55 55</XForm>
+		<Tabs></Tabs>
+	</Shape>
+	<Shape Type="Bitmap" CutIndex="1" W="363" H="300" Data="iVBORw0KGgoAAAANSUhEUgAAAWsAAAEsAQMAAAA/1QDvAAAABlBMVEUAAAAAAAClZ7nPAAAAAXRSTlMAQObYZgAAAI5JREFUeJzs2DEKAjEQhlHFwtL7384jWFqEKDZmIIrEZWEG3leFn4edLMlBkiRJv3u8u4X1OOZr1KextzCfx3zfwMPew3z5/Cv4d97n04u3+YTjOI7jOI7jOJ6Vp7pmFeb73uQXnxUkFWntr+3FsAZP9ZHHcRzHcRzHcRz/i6e6ZhXmXgwlSZIK9AwAAP//orOvoA55350AAAAASUVORK5CYII=">
+		<XForm>0.01 0 0 -0.01 55 55</XForm>
+		<Tabs></Tabs>
+	</Shape>
+	<Shape Type="Bitmap" CutIndex="2" W="363" H="300" Data="iVBORw0KGgoAAAANSUhEUgAAAWsAAAEsAQMAAAA/1QDvAAAABlBMVEUAAAAAAAClZ7nPAAAAAXRSTlMAQObYZgAAAI5JREFUeJzs2DEKAjEQhlHFwtL7384jWFqEKDZmIIrEZWEG3leFn4edLMlBkiRJv3u8u4X1OOZr1KextzCfx3zfwMPew3z5/Cv4d97n04u3+YTjOI7jOI7jOJ6Vp7pmFeb73uQXnxUkFWntr+3FsAZP9ZHHcRzHcRzHcRz/i6e6ZhXmXgwlSZIK9AwAAP//orOvoA55350AAAAASUVORK5CYII=">
+		<XForm>0.01 0 0 -0.01 55 55</XForm>
+		<Tabs></Tabs>
+	</Shape>
+</LightBurnProject>

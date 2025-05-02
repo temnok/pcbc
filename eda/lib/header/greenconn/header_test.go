@@ -18,5 +18,5 @@ func TestHeader(t *testing.T) {
 			CSCC118(8, false, []string{"P001", "GND", "VDD", "D+", "D-", "P006", "P008", "P009"}).
 				Arrange(transform.Move(5, 0)),
 		},
-	}).SaveOverview())
+	}).SaveFiles())
 }
