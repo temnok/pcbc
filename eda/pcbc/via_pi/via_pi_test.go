@@ -63,7 +63,6 @@ func TestBoard(t *testing.T) {
 	})
 	top.Width += 4
 	top.Height += 4
-	top.SaveEtchOverride = top.SaveEtchPI
 	top.SavePath = "out/1-"
 
 	bottom := pcb.New(&eda.Component{
@@ -77,7 +76,6 @@ func TestBoard(t *testing.T) {
 	})
 	bottom.Width += 4
 	bottom.Height += 4
-	bottom.SaveEtchOverride = bottom.SaveEtchPI
 	bottom.SavePath = "out/2-"
 
 	assert.NoError(t, top.Process().SaveFiles())

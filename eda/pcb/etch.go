@@ -12,10 +12,6 @@ import (
 type Param = lbrn.Param
 
 func (pcb *PCB) SaveEtch() error {
-	if pcb.SaveEtchOverride != nil {
-		return pcb.SaveEtchOverride()
-	}
-
 	return pcb.SaveEtchFR4()
 }
 

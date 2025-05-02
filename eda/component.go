@@ -53,11 +53,6 @@ type Component struct {
 	Components []*Component
 }
 
-const (
-	Layer0 = 1 << 0
-	Layer1 = 1 << 1
-)
-
 // Visit calls provided callback for each subcomponent recursively,
 // as if every component is isolated (without subcomponents)
 func (c *Component) Visit(callback func(*Component)) {

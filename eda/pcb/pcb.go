@@ -27,8 +27,6 @@ type PCB struct {
 	SavePath string
 
 	copper, mask, silk *bitmap.Bitmap
-
-	SaveEtchOverride func() error
 }
 
 func New(component *eda.Component) *PCB {
