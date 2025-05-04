@@ -93,7 +93,7 @@ func (pcb *PCB) SaveFiles() error {
 	err := util.RunConcurrently(
 		func() error {
 			var e error
-			copper, e = pcb.SaveEtch()
+			copper, e = SaveEtch(pcb)
 			return e
 		},
 		pcb.SaveMask,

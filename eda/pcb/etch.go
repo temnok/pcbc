@@ -11,107 +11,109 @@ import (
 	"temnok/pcbc/shape"
 )
 
-type param = lbrn.Param
+var etchBitmapSettings = []*lbrn.CutSetting{
+	{
+		Type:     "Image",
+		Name:     lbrn.Param{Value: "Etch"},
+		Index:    lbrn.Param{Value: "0"},
+		Priority: lbrn.Param{Value: "0"},
 
-func (pcb *PCB) SaveEtch() (*bitmap.Bitmap, error) {
-	copper := bitmap.New(pcb.bitmapSize())
+		MaxPower:    lbrn.Param{Value: "20"},
+		QPulseWidth: lbrn.Param{Value: "200"},
+		Frequency:   lbrn.Param{Value: "20000"},
 
-	pcb.component.Visit(func(component *eda.Component) {
-		removeEtchCopper(pcb, component, copper)
+		Speed:            lbrn.Param{Value: "600"},
+		Interval:         lbrn.Param{Value: "0.01"},
+		DPI:              lbrn.Param{Value: "2540"},
+		UseDotCorrection: lbrn.Param{Value: "1"},
+		DotWidth:         lbrn.Param{Value: "0.05"},
+
+		Negative: lbrn.Param{Value: "1"},
+	},
+	{
+		Type:     "Image",
+		Name:     lbrn.Param{Value: "Clean 1"},
+		Index:    lbrn.Param{Value: "1"},
+		Priority: lbrn.Param{Value: "1"},
+
+		MaxPower:    lbrn.Param{Value: "50"},
+		QPulseWidth: lbrn.Param{Value: "2"},
+		Frequency:   lbrn.Param{Value: "280000"},
+
+		Speed:            lbrn.Param{Value: "2000"},
+		Interval:         lbrn.Param{Value: "0.01"},
+		DPI:              lbrn.Param{Value: "2540"},
+		UseDotCorrection: lbrn.Param{Value: "1"},
+		DotWidth:         lbrn.Param{Value: "0.15"},
+
+		Negative: lbrn.Param{Value: "1"},
+	},
+	{
+		Type:     "Image",
+		Name:     lbrn.Param{Value: "Clean 2"},
+		Index:    lbrn.Param{Value: "3"},
+		Priority: lbrn.Param{Value: "3"},
+
+		MaxPower:    lbrn.Param{Value: "50"},
+		QPulseWidth: lbrn.Param{Value: "2"},
+		Frequency:   lbrn.Param{Value: "280000"},
+
+		Speed:            lbrn.Param{Value: "2000"},
+		Interval:         lbrn.Param{Value: "0.01"},
+		DPI:              lbrn.Param{Value: "2540"},
+		UseDotCorrection: lbrn.Param{Value: "1"},
+		DotWidth:         lbrn.Param{Value: "0.15"},
+
+		Angle:    lbrn.Param{Value: "90"},
+		Negative: lbrn.Param{Value: "1"},
+	},
+}
+
+var etchCutSettings = []*lbrn.CutSetting{
+	{
+		Type:     "Cut",
+		Name:     lbrn.Param{Value: "FR4 Cut"},
+		Index:    lbrn.Param{Value: "2"},
+		Priority: lbrn.Param{Value: "2"},
+
+		Speed:        lbrn.Param{Value: "100"},
+		GlobalRepeat: lbrn.Param{Value: "50"},
+
+		MaxPower:    lbrn.Param{Value: "90"},
+		QPulseWidth: lbrn.Param{Value: "200"},
+		Frequency:   lbrn.Param{Value: "20000"},
+
+		TabsEnabled: lbrn.Param{Value: "1"},
+		TabSize:     lbrn.Param{Value: "0.1"},
+	},
+}
+
+func SaveEtch(config *PCB) (*bitmap.Bitmap, error) {
+	copper := bitmap.New(config.bitmapSize())
+	var cuts []*lbrn.Shape
+
+	config.component.Visit(func(component *eda.Component) {
+		removeEtchCopper(config, component, copper)
 	})
 
-	pcb.component.Visit(func(component *eda.Component) {
-		addEtchCopper(pcb, component, copper)
+	config.component.Visit(func(component *eda.Component) {
+		addEtchCopper(config, component, copper)
+		addEtchCuts(config, component, &cuts)
 	})
 
-	filename := pcb.SavePath + "etch.lbrn"
+	filename := config.SavePath + "etch.lbrn"
 	im := image.NewSingle(copper, color.Black, color.White)
 	bm := lbrn.NewBase64Bitmap(im)
 
 	p := &lbrn.LightBurnProject{
-		CutSettingImg: []*lbrn.CutSetting{
-			{
-				Type:     "Image",
-				Name:     param{Value: "Etch"},
-				Index:    param{Value: "0"},
-				Priority: param{Value: "0"},
-
-				MaxPower:    param{Value: "20"},
-				QPulseWidth: param{Value: "200"},
-				Frequency:   param{Value: "20000"},
-
-				Speed:            param{Value: "600"},
-				Interval:         param{Value: "0.01"},
-				DPI:              param{Value: "2540"},
-				UseDotCorrection: param{Value: "1"},
-				DotWidth:         param{Value: "0.05"},
-
-				Negative: param{Value: "1"},
-			},
-			{
-				Type:     "Image",
-				Name:     param{Value: "Clean 1"},
-				Index:    param{Value: "1"},
-				Priority: param{Value: "1"},
-
-				MaxPower:    param{Value: "50"},
-				QPulseWidth: param{Value: "2"},
-				Frequency:   param{Value: "280000"},
-
-				Speed:            param{Value: "2000"},
-				Interval:         param{Value: "0.01"},
-				DPI:              param{Value: "2540"},
-				UseDotCorrection: param{Value: "1"},
-				DotWidth:         param{Value: "0.15"},
-
-				Negative: param{Value: "1"},
-			},
-			{
-				Type:     "Image",
-				Name:     param{Value: "Clean 2"},
-				Index:    param{Value: "3"},
-				Priority: param{Value: "3"},
-
-				MaxPower:    param{Value: "50"},
-				QPulseWidth: param{Value: "2"},
-				Frequency:   param{Value: "280000"},
-
-				Speed:            param{Value: "2000"},
-				Interval:         param{Value: "0.01"},
-				DPI:              param{Value: "2540"},
-				UseDotCorrection: param{Value: "1"},
-				DotWidth:         param{Value: "0.15"},
-
-				Angle:    param{Value: "90"},
-				Negative: param{Value: "1"},
-			},
-		},
-		CutSetting: []*lbrn.CutSetting{
-			{
-				Type:     "Cut",
-				Name:     param{Value: "FR4 Cut"},
-				Index:    param{Value: "2"},
-				Priority: param{Value: "2"},
-
-				Speed:        param{Value: "100"},
-				GlobalRepeat: param{Value: "50"},
-
-				MaxPower:    param{Value: "90"},
-				QPulseWidth: param{Value: "200"},
-				Frequency:   param{Value: "20000"},
-
-				TabsEnabled: param{Value: "1"},
-				TabSize:     param{Value: "0.1"},
-			},
-		},
-		Shape: []*lbrn.Shape{
-			lbrn.NewBitmapShape(0, pcb.lbrnBitmapScale(), bm),
-			lbrn.NewBitmapShape(1, pcb.lbrnBitmapScale(), bm),
-			lbrn.NewBitmapShape(3, pcb.lbrnBitmapScale(), bm),
-		},
+		CutSettingImg: etchBitmapSettings,
+		CutSetting:    etchCutSettings,
+		Shape: append([]*lbrn.Shape{
+			lbrn.NewBitmapShape(0, config.lbrnBitmapScale(), bm),
+			lbrn.NewBitmapShape(1, config.lbrnBitmapScale(), bm),
+			lbrn.NewBitmapShape(3, config.lbrnBitmapScale(), bm),
+		}, cuts...),
 	}
-
-	pcb.addEtchCuts(p)
 
 	return copper, p.SaveToFile(filename)
 }
@@ -153,20 +155,18 @@ func addEtchCopper(config *PCB, component *eda.Component, copper *bitmap.Bitmap)
 	brush.ForEachPathsPixel(component.GroundTracks, t, copper.Set0)
 }
 
-func (pcb *PCB) addEtchCuts(p *lbrn.LightBurnProject) {
-	pcb.component.Visit(func(component *eda.Component) {
-		t := component.Transform.Multiply(pcb.lbrnCenterMove())
+func addEtchCuts(config *PCB, component *eda.Component, cuts *[]*lbrn.Shape) {
+	t := component.Transform.Multiply(config.lbrnCenterMove())
 
-		for _, cut := range component.Cuts {
-			p.Shape = append(p.Shape, lbrn.NewPathWithTabs(2, t, cut))
-		}
+	for _, cut := range component.Cuts {
+		*cuts = append(*cuts, lbrn.NewPathWithTabs(2, t, cut))
+	}
 
-		for _, hole := range component.Holes {
-			p.Shape = append(p.Shape, lbrn.NewPath(2, t, hole))
-		}
+	for _, hole := range component.Holes {
+		*cuts = append(*cuts, lbrn.NewPath(2, t, hole))
+	}
 
-		for _, perforation := range component.Perforations {
-			p.Shape = append(p.Shape, lbrn.NewPath(2, t, perforation))
-		}
-	})
+	for _, perforation := range component.Perforations {
+		*cuts = append(*cuts, lbrn.NewPath(2, t, perforation))
+	}
 }
