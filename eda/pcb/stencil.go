@@ -4,10 +4,11 @@ package pcb
 
 import (
 	"temnok/pcbc/eda"
+	"temnok/pcbc/eda/pcb/config"
 	"temnok/pcbc/lbrn"
 )
 
-func SaveStencil(config *Config, component *eda.Component) error {
+func SaveStencil(config *config.Config, component *eda.Component) error {
 	filename := config.SavePath + "stencil.lbrn"
 
 	p := lbrn.LightBurnProject{
@@ -29,7 +30,7 @@ func SaveStencil(config *Config, component *eda.Component) error {
 	}
 
 	component.Visit(func(component *eda.Component) {
-		t := component.Transform.Multiply(config.lbrnCenterMove())
+		t := component.Transform.Multiply(config.LbrnCenterMove())
 
 		for _, pad := range component.Pads {
 			p.Shape = append(p.Shape, lbrn.NewPath(0, t, pad))

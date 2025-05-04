@@ -19,5 +19,5 @@ var testBoard = &eda.Component{
 }
 
 func TestBoard(t *testing.T) {
-	assert.NoError(t, pcb.Generate(testBoard))
+	assert.NoError(t, pcb.ProcessWithDefaultConfig(testBoard))
 }

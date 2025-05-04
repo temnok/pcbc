@@ -7,15 +7,16 @@ import (
 	"temnok/pcbc/bitmap"
 	"temnok/pcbc/bitmap/image"
 	"temnok/pcbc/eda"
+	"temnok/pcbc/eda/pcb/config"
 	"temnok/pcbc/shape"
 	"temnok/pcbc/util"
 )
 
-func SaveOverview(config *Config, component *eda.Component, copper, mask, silk *bitmap.Bitmap) error {
+func SaveOverview(config *config.Config, component *eda.Component, copper, mask, silk *bitmap.Bitmap) error {
 	filename := config.SavePath + "overview.png"
 
-	substrateCuts := bitmap.New(config.bitmapSize())
-	stencilCuts := bitmap.New(config.bitmapSize())
+	substrateCuts := bitmap.New(config.BitmapSizeInPixels())
+	stencilCuts := bitmap.New(config.BitmapSizeInPixels())
 	renderCutsOverview(config, component, substrateCuts, stencilCuts)
 
 	im := image.New(
@@ -43,11 +44,11 @@ func SaveOverview(config *Config, component *eda.Component, copper, mask, silk *
 	return nil
 }
 
-func renderCutsOverview(config *Config, component *eda.Component, substrateCuts, stencilCuts *bitmap.Bitmap) {
+func renderCutsOverview(config *config.Config, component *eda.Component, substrateCuts, stencilCuts *bitmap.Bitmap) {
 	brush := shape.Circle(int(config.OverviewCutWidth * config.PixelsPerMM))
 
 	component.Visit(func(c *eda.Component) {
-		t := c.Transform.Multiply(config.bitmapTransform())
+		t := c.Transform.Multiply(config.BitmapTransform())
 
 		// Holes
 		brush.ForEachPathsPixel(c.Holes, t, substrateCuts.Set1)

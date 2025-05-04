@@ -7,6 +7,7 @@ import (
 	"temnok/pcbc/bitmap"
 	"temnok/pcbc/bitmap/image"
 	"temnok/pcbc/eda"
+	"temnok/pcbc/eda/pcb/config"
 	"temnok/pcbc/font"
 	"temnok/pcbc/lbrn"
 	"temnok/pcbc/shape"
@@ -79,9 +80,9 @@ var maskCutSettings = []*lbrn.CutSetting{
 	},
 }
 
-func SaveMask(config *Config, component *eda.Component) (*bitmap.Bitmap, *bitmap.Bitmap, error) {
-	mask := bitmap.New(config.bitmapSize())
-	silk := bitmap.New(config.bitmapSize())
+func SaveMask(config *config.Config, component *eda.Component) (*bitmap.Bitmap, *bitmap.Bitmap, error) {
+	mask := bitmap.New(config.BitmapSizeInPixels())
+	silk := bitmap.New(config.BitmapSizeInPixels())
 
 	component.Visit(func(c *eda.Component) {
 		cutMask1(config, c, mask)
@@ -100,9 +101,9 @@ func SaveMask(config *Config, component *eda.Component) (*bitmap.Bitmap, *bitmap
 	p := &lbrn.LightBurnProject{
 		CutSettingImg: maskCutSettings,
 		Shape: []*lbrn.Shape{
-			lbrn.NewBitmapShapeFromImage(0, config.lbrnBitmapScale(), silkImage),
-			lbrn.NewBitmapShape(1, config.lbrnBitmapScale(), maskBM),
-			lbrn.NewBitmapShape(2, config.lbrnBitmapScale(), maskBM),
+			lbrn.NewBitmapShapeFromImage(0, config.LbrnBitmapScale(), silkImage),
+			lbrn.NewBitmapShape(1, config.LbrnBitmapScale(), maskBM),
+			lbrn.NewBitmapShape(2, config.LbrnBitmapScale(), maskBM),
 		},
 	}
 
@@ -111,9 +112,9 @@ func SaveMask(config *Config, component *eda.Component) (*bitmap.Bitmap, *bitmap
 	return mask, silk, p.SaveToFile(filename)
 }
 
-func addMaskPerforations(config *Config, component *eda.Component, p *lbrn.LightBurnProject) {
+func addMaskPerforations(config *config.Config, component *eda.Component, p *lbrn.LightBurnProject) {
 	component.Visit(func(component *eda.Component) {
-		t := component.Transform.Multiply(config.lbrnCenterMove())
+		t := component.Transform.Multiply(config.LbrnCenterMove())
 
 		for _, hole := range component.Perforations {
 			p.Shape = append(p.Shape, lbrn.NewPath(3, t, hole))
@@ -137,8 +138,8 @@ func addMaskPerforations(config *Config, component *eda.Component, p *lbrn.Light
 	}
 }
 
-func addSilk(config *Config, c *eda.Component, silk *bitmap.Bitmap) {
-	t := c.Transform.Multiply(config.bitmapTransform())
+func addSilk(config *config.Config, c *eda.Component, silk *bitmap.Bitmap) {
+	t := c.Transform.Multiply(config.BitmapTransform())
 
 	// Marks:
 	brushW := font.Bold * font.WeightScale(t)
@@ -146,8 +147,8 @@ func addSilk(config *Config, c *eda.Component, silk *bitmap.Bitmap) {
 	brush.ForEachPathsPixel(c.Marks, t, silk.Set1)
 }
 
-func cutMask1(config *Config, c *eda.Component, mask *bitmap.Bitmap) {
-	t := c.Transform.Multiply(config.bitmapTransform())
+func cutMask1(config *config.Config, c *eda.Component, mask *bitmap.Bitmap) {
+	t := c.Transform.Multiply(config.BitmapTransform())
 
 	brush := shape.Circle(int(config.MaskCutWidth * config.PixelsPerMM))
 
@@ -166,8 +167,8 @@ func cutMask1(config *Config, c *eda.Component, mask *bitmap.Bitmap) {
 	brush.ForEachPathsPixel(c.Perforations, t, mask.Set1)
 }
 
-func cutMask2(config *Config, c *eda.Component, mask *bitmap.Bitmap) {
-	t := c.Transform.Multiply(config.bitmapTransform())
+func cutMask2(config *config.Config, c *eda.Component, mask *bitmap.Bitmap) {
+	t := c.Transform.Multiply(config.BitmapTransform())
 
 	brush := shape.Circle(int(config.MaskCutWidth * config.PixelsPerMM))
 

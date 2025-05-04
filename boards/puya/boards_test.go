@@ -14,7 +14,7 @@ import (
 )
 
 func TestBoards(t *testing.T) {
-	assert.NoError(t, pcb.Generate(&eda.Component{
+	assert.NoError(t, pcb.ProcessWithDefaultConfig(&eda.Component{
 		Components: eda.Components{
 			boards.Board35x45,
 			sop8.Board.Arrange(transform.RotateDegrees(-90)).Clone(3, 9.5, 0).Arrange(transform.Move(0, 8.5)),

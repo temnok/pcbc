@@ -6,6 +6,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"temnok/pcbc/eda"
 	"temnok/pcbc/eda/pcb"
+	"temnok/pcbc/eda/pcb/config"
 	"temnok/pcbc/path"
 	"temnok/pcbc/transform"
 	"testing"
@@ -62,7 +63,7 @@ func TestBoard(t *testing.T) {
 		},
 	}
 
-	topConfig := pcb.Defaults()
+	topConfig := config.Default()
 	topConfig.SavePath = "out/1-"
 
 	bottom := &eda.Component{
@@ -75,9 +76,9 @@ func TestBoard(t *testing.T) {
 		},
 	}
 
-	bottomConfig := pcb.Defaults()
+	bottomConfig := config.Default()
 	bottomConfig.SavePath = "out/2-"
 
-	assert.NoError(t, pcb.SaveFiles(topConfig, top))
-	assert.NoError(t, pcb.SaveFiles(bottomConfig, bottom))
+	assert.NoError(t, pcb.Process(topConfig, top))
+	assert.NoError(t, pcb.Process(bottomConfig, bottom))
 }

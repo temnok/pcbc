@@ -9,5 +9,5 @@ import (
 )
 
 func TestBoard(t *testing.T) {
-	assert.NoError(t, pcb.Generate(Board))
+	assert.NoError(t, pcb.ProcessWithDefaultConfig(Board))
 }

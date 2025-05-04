@@ -11,7 +11,7 @@ import (
 )
 
 func TestBoard(t *testing.T) {
-	assert.NoError(t, pcb.Generate(&eda.Component{
+	assert.NoError(t, pcb.ProcessWithDefaultConfig(&eda.Component{
 		Components: eda.Components{
 			boards.Board35x45,
 			Board_nRF52840,

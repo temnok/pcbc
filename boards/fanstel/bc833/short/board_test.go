@@ -13,7 +13,7 @@ import (
 )
 
 func Test_BC833Short(t *testing.T) {
-	assert.NoError(t, pcb.Generate(&eda.Component{
+	assert.NoError(t, pcb.ProcessWithDefaultConfig(&eda.Component{
 		Components: eda.Components{
 			boards.Board35x45,
 			bc833.ShortBoard.Arrange(transform.Move(0, 10.5)),
