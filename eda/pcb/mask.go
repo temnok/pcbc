@@ -4,6 +4,7 @@ package pcb
 
 import (
 	"image/color"
+	"temnok/pcbc/bitmap"
 	"temnok/pcbc/bitmap/image"
 	"temnok/pcbc/eda"
 	"temnok/pcbc/font"
@@ -78,38 +79,40 @@ var maskCutSettings = []*lbrn.CutSetting{
 	},
 }
 
-func (pcb *PCB) SaveMask() error {
-	pcb.component.Visit(func(component *eda.Component) {
-		pcb.addSilk(component)
-		pcb.cutMask1(component)
+func SaveMask(config *PCB, component *eda.Component) (*bitmap.Bitmap, error) {
+	mask := bitmap.New(config.bitmapSize())
+
+	component.Visit(func(c *eda.Component) {
+		addSilk(config, c)
+		cutMask1(config, c, mask)
 	})
 
-	pcb.component.Visit(func(component *eda.Component) {
-		pcb.cutMask2(component)
+	component.Visit(func(c *eda.Component) {
+		cutMask2(config, c, mask)
 	})
 
-	filename := pcb.SavePath + "mask.lbrn"
-	silk := image.NewSingle(pcb.silk, color.White, color.Black)
-	mask := image.NewSingle(pcb.mask, color.Transparent, color.Black)
-	maskBM := lbrn.NewBase64Bitmap(mask)
+	filename := config.SavePath + "mask.lbrn"
+	silk := image.NewSingle(config.silk, color.White, color.Black)
+	maskImage := image.NewSingle(mask, color.Transparent, color.Black)
+	maskBM := lbrn.NewBase64Bitmap(maskImage)
 
 	p := &lbrn.LightBurnProject{
 		CutSettingImg: maskCutSettings,
 		Shape: []*lbrn.Shape{
-			lbrn.NewBitmapShapeFromImage(0, pcb.lbrnBitmapScale(), silk),
-			lbrn.NewBitmapShape(1, pcb.lbrnBitmapScale(), maskBM),
-			lbrn.NewBitmapShape(2, pcb.lbrnBitmapScale(), maskBM),
+			lbrn.NewBitmapShapeFromImage(0, config.lbrnBitmapScale(), silk),
+			lbrn.NewBitmapShape(1, config.lbrnBitmapScale(), maskBM),
+			lbrn.NewBitmapShape(2, config.lbrnBitmapScale(), maskBM),
 		},
 	}
 
-	pcb.addMaskPerforations(p)
+	addMaskPerforations(config, p)
 
-	return p.SaveToFile(filename)
+	return mask, p.SaveToFile(filename)
 }
 
-func (pcb *PCB) addMaskPerforations(p *lbrn.LightBurnProject) {
-	pcb.component.Visit(func(component *eda.Component) {
-		t := component.Transform.Multiply(pcb.lbrnCenterMove())
+func addMaskPerforations(config *PCB, p *lbrn.LightBurnProject) {
+	config.component.Visit(func(component *eda.Component) {
+		t := component.Transform.Multiply(config.lbrnCenterMove())
 
 		for _, hole := range component.Perforations {
 			p.Shape = append(p.Shape, lbrn.NewPath(3, t, hole))
@@ -133,41 +136,41 @@ func (pcb *PCB) addMaskPerforations(p *lbrn.LightBurnProject) {
 	}
 }
 
-func (pcb *PCB) addSilk(c *eda.Component) {
-	t := c.Transform.Multiply(pcb.bitmapTransform())
+func addSilk(config *PCB, c *eda.Component) {
+	t := c.Transform.Multiply(config.bitmapTransform())
 
 	// Marks:
 	brushW := font.Bold * font.WeightScale(t)
 	brush := shape.Circle(int(brushW))
-	brush.ForEachPathsPixel(c.Marks, t, pcb.silk.Set1)
+	brush.ForEachPathsPixel(c.Marks, t, config.silk.Set1)
 }
 
-func (pcb *PCB) cutMask1(c *eda.Component) {
-	t := c.Transform.Multiply(pcb.bitmapTransform())
+func cutMask1(config *PCB, c *eda.Component, mask *bitmap.Bitmap) {
+	t := c.Transform.Multiply(config.bitmapTransform())
 
-	brush := shape.Circle(int(pcb.MaskCutWidth * pcb.PixelsPerMM))
+	brush := shape.Circle(int(config.MaskCutWidth * config.PixelsPerMM))
 
 	// Pads
-	brush.ForEachPathsPixel(c.Pads, t, pcb.mask.Set1)
+	brush.ForEachPathsPixel(c.Pads, t, mask.Set1)
 
 	// Cuts
-	c.Cuts.ForEachPixelDist(t, int(2*pcb.MaskCutWidth*pcb.PixelsPerMM), func(x, y int) {
-		brush.ForEachRowWithOffset(x, y, pcb.mask.Set1)
+	c.Cuts.ForEachPixelDist(t, int(2*config.MaskCutWidth*config.PixelsPerMM), func(x, y int) {
+		brush.ForEachRowWithOffset(x, y, mask.Set1)
 	})
 
 	// Holes
-	brush.ForEachPathsPixel(c.Holes, t, pcb.mask.Set1)
+	brush.ForEachPathsPixel(c.Holes, t, mask.Set1)
 
 	// Perforations
-	brush.ForEachPathsPixel(c.Perforations, t, pcb.mask.Set1)
+	brush.ForEachPathsPixel(c.Perforations, t, mask.Set1)
 }
 
-func (pcb *PCB) cutMask2(c *eda.Component) {
-	t := c.Transform.Multiply(pcb.bitmapTransform())
+func cutMask2(config *PCB, c *eda.Component, mask *bitmap.Bitmap) {
+	t := c.Transform.Multiply(config.bitmapTransform())
 
-	brush := shape.Circle(int(pcb.MaskCutWidth * pcb.PixelsPerMM))
+	brush := shape.Circle(int(config.MaskCutWidth * config.PixelsPerMM))
 
 	// Openings
-	shape.ForEachRow(c.Openings, t, pcb.mask.Set0)
-	brush.ForEachPathsPixel(c.Openings, t, pcb.mask.Set1)
+	shape.ForEachRow(c.Openings, t, mask.Set0)
+	brush.ForEachPathsPixel(c.Openings, t, mask.Set1)
 }

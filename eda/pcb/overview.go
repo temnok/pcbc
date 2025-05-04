@@ -11,7 +11,7 @@ import (
 	"temnok/pcbc/util"
 )
 
-func (pcb *PCB) SaveOverview(copper *bitmap.Bitmap) error {
+func (pcb *PCB) SaveOverview(copper, mask *bitmap.Bitmap) error {
 	filename := pcb.SavePath + "overview.png"
 
 	substrateCuts := bitmap.New(pcb.bitmapSize())
@@ -21,7 +21,7 @@ func (pcb *PCB) SaveOverview(copper *bitmap.Bitmap) error {
 	im := image.New(
 		[]*bitmap.Bitmap{
 			copper,
-			pcb.mask,
+			mask,
 			pcb.silk,
 
 			substrateCuts,

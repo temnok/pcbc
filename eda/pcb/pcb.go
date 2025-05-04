@@ -24,7 +24,7 @@ type PCB struct {
 
 	SavePath string
 
-	mask, silk *bitmap.Bitmap
+	silk *bitmap.Bitmap
 }
 
 func New(component *eda.Component) *PCB {
@@ -64,7 +64,6 @@ func Process(component *eda.Component) *PCB {
 func (pcb *PCB) Process() *PCB {
 	wi, hi := pcb.bitmapSize()
 
-	pcb.mask = bitmap.New(wi, hi)
 	pcb.silk = bitmap.New(wi, hi)
 
 	return pcb
@@ -88,20 +87,24 @@ func (pcb *PCB) lbrnBitmapScale() transform.T {
 }
 
 func (pcb *PCB) SaveFiles() error {
-	var copper *bitmap.Bitmap
+	var copper, mask *bitmap.Bitmap
 
 	err := util.RunConcurrently(
 		func() error {
 			var e error
-			copper, e = SaveEtch(pcb)
+			copper, e = SaveEtch(pcb, pcb.component)
 			return e
 		},
-		pcb.SaveMask,
+		func() error {
+			var e error
+			mask, e = SaveMask(pcb, pcb.component)
+			return e
+		},
 		pcb.SaveStencil,
 	)
 	if err != nil {
 		return err
 	}
 
-	return pcb.SaveOverview(copper)
+	return pcb.SaveOverview(copper, mask)
 }

@@ -88,17 +88,17 @@ var etchCutSettings = []*lbrn.CutSetting{
 	},
 }
 
-func SaveEtch(config *PCB) (*bitmap.Bitmap, error) {
+func SaveEtch(config *PCB, component *eda.Component) (*bitmap.Bitmap, error) {
 	copper := bitmap.New(config.bitmapSize())
 	var cuts []*lbrn.Shape
 
-	config.component.Visit(func(component *eda.Component) {
-		removeEtchCopper(config, component, copper)
+	component.Visit(func(c *eda.Component) {
+		removeEtchCopper(config, c, copper)
 	})
 
-	config.component.Visit(func(component *eda.Component) {
-		addEtchCopper(config, component, copper)
-		addEtchCuts(config, component, &cuts)
+	component.Visit(func(c *eda.Component) {
+		addEtchCopper(config, c, copper)
+		addEtchCuts(config, c, &cuts)
 	})
 
 	filename := config.SavePath + "etch.lbrn"
