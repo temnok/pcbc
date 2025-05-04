@@ -79,7 +79,7 @@ var maskCutSettings = []*lbrn.CutSetting{
 	},
 }
 
-func SaveMask(config *PCB, component *eda.Component) (*bitmap.Bitmap, *bitmap.Bitmap, error) {
+func SaveMask(config *Config, component *eda.Component) (*bitmap.Bitmap, *bitmap.Bitmap, error) {
 	mask := bitmap.New(config.bitmapSize())
 	silk := bitmap.New(config.bitmapSize())
 
@@ -106,13 +106,13 @@ func SaveMask(config *PCB, component *eda.Component) (*bitmap.Bitmap, *bitmap.Bi
 		},
 	}
 
-	addMaskPerforations(config, p)
+	addMaskPerforations(config, component, p)
 
 	return mask, silk, p.SaveToFile(filename)
 }
 
-func addMaskPerforations(config *PCB, p *lbrn.LightBurnProject) {
-	config.component.Visit(func(component *eda.Component) {
+func addMaskPerforations(config *Config, component *eda.Component, p *lbrn.LightBurnProject) {
+	component.Visit(func(component *eda.Component) {
 		t := component.Transform.Multiply(config.lbrnCenterMove())
 
 		for _, hole := range component.Perforations {
@@ -137,7 +137,7 @@ func addMaskPerforations(config *PCB, p *lbrn.LightBurnProject) {
 	}
 }
 
-func addSilk(config *PCB, c *eda.Component, silk *bitmap.Bitmap) {
+func addSilk(config *Config, c *eda.Component, silk *bitmap.Bitmap) {
 	t := c.Transform.Multiply(config.bitmapTransform())
 
 	// Marks:
@@ -146,7 +146,7 @@ func addSilk(config *PCB, c *eda.Component, silk *bitmap.Bitmap) {
 	brush.ForEachPathsPixel(c.Marks, t, silk.Set1)
 }
 
-func cutMask1(config *PCB, c *eda.Component, mask *bitmap.Bitmap) {
+func cutMask1(config *Config, c *eda.Component, mask *bitmap.Bitmap) {
 	t := c.Transform.Multiply(config.bitmapTransform())
 
 	brush := shape.Circle(int(config.MaskCutWidth * config.PixelsPerMM))
@@ -166,7 +166,7 @@ func cutMask1(config *PCB, c *eda.Component, mask *bitmap.Bitmap) {
 	brush.ForEachPathsPixel(c.Perforations, t, mask.Set1)
 }
 
-func cutMask2(config *PCB, c *eda.Component, mask *bitmap.Bitmap) {
+func cutMask2(config *Config, c *eda.Component, mask *bitmap.Bitmap) {
 	t := c.Transform.Multiply(config.bitmapTransform())
 
 	brush := shape.Circle(int(config.MaskCutWidth * config.PixelsPerMM))

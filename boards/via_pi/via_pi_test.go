@@ -48,7 +48,7 @@ func TestBoard(t *testing.T) {
 		).Clone(5, 0, 1),
 	}
 
-	top := pcb.New(&eda.Component{
+	top := &eda.Component{
 		Holes: vias,
 
 		Components: eda.Components{
@@ -60,12 +60,12 @@ func TestBoard(t *testing.T) {
 
 			tracks.Clone(2, 8, 0),
 		},
-	})
-	top.Width += 4
-	top.Height += 4
-	top.SavePath = "out/1-"
+	}
 
-	bottom := pcb.New(&eda.Component{
+	topConfig := pcb.Defaults()
+	topConfig.SavePath = "out/1-"
+
+	bottom := &eda.Component{
 		Pads: bottomPads,
 
 		Components: eda.Components{
@@ -73,11 +73,11 @@ func TestBoard(t *testing.T) {
 
 			tracks,
 		},
-	})
-	bottom.Width += 4
-	bottom.Height += 4
-	bottom.SavePath = "out/2-"
+	}
 
-	assert.NoError(t, top.SaveFiles())
-	assert.NoError(t, bottom.SaveFiles())
+	bottomConfig := pcb.Defaults()
+	bottomConfig.SavePath = "out/2-"
+
+	assert.NoError(t, pcb.SaveFiles(topConfig, top))
+	assert.NoError(t, pcb.SaveFiles(bottomConfig, bottom))
 }

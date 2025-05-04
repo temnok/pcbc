@@ -7,8 +7,8 @@ import (
 	"temnok/pcbc/lbrn"
 )
 
-func (pcb *PCB) SaveStencil() error {
-	filename := pcb.SavePath + "stencil.lbrn"
+func SaveStencil(config *Config, component *eda.Component) error {
+	filename := config.SavePath + "stencil.lbrn"
 
 	p := lbrn.LightBurnProject{
 		CutSetting: []*lbrn.CutSetting{
@@ -28,8 +28,8 @@ func (pcb *PCB) SaveStencil() error {
 		},
 	}
 
-	pcb.component.Visit(func(component *eda.Component) {
-		t := component.Transform.Multiply(pcb.lbrnCenterMove())
+	component.Visit(func(component *eda.Component) {
+		t := component.Transform.Multiply(config.lbrnCenterMove())
 
 		for _, pad := range component.Pads {
 			p.Shape = append(p.Shape, lbrn.NewPath(0, t, pad))

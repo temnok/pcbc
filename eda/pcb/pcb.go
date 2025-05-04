@@ -9,12 +9,11 @@ import (
 	"temnok/pcbc/util"
 )
 
-type PCB struct {
-	component *eda.Component
-
+type Config struct {
 	Width, Height float64
 	PixelsPerMM   float64
 
+	TrackWidth       float64
 	ExtraCopperWidth float64
 	CopperClearWidth float64
 	MaskCutWidth     float64
@@ -25,20 +24,11 @@ type PCB struct {
 	SavePath string
 }
 
-func New(component *eda.Component) *PCB {
-	width, height := component.Size()
-	width, height = width+1, height+1
-
-	return &PCB{
-		component: &eda.Component{
-			TrackWidth: 0.25,
-			Components: eda.Components{component},
-		},
-
-		Width:       width,
-		Height:      height,
+func Defaults() *Config {
+	return &Config{
 		PixelsPerMM: 100,
 
+		TrackWidth:       0.25,
 		ExtraCopperWidth: 0.05,
 		CopperClearWidth: 0.25,
 		MaskCutWidth:     0.1,
@@ -52,45 +42,63 @@ func New(component *eda.Component) *PCB {
 }
 
 func Generate(component *eda.Component) error {
-	return New(component).SaveFiles()
+	return SaveFiles(Defaults(), component)
 }
 
-func (pcb *PCB) bitmapSize() (int, int) {
-	return int(pcb.Width * pcb.PixelsPerMM), int(pcb.Height * pcb.PixelsPerMM)
+func (config *Config) bitmapSize() (int, int) {
+	return int(config.Width * config.PixelsPerMM), int(config.Height * config.PixelsPerMM)
 }
 
-func (pcb *PCB) bitmapTransform() transform.T {
-	return transform.Move(pcb.Width/2, pcb.Height/2).ScaleUniformly(pcb.PixelsPerMM)
+func (config *Config) bitmapTransform() transform.T {
+	return transform.Move(config.Width/2, config.Height/2).ScaleUniformly(config.PixelsPerMM)
 }
 
-func (pcb *PCB) lbrnCenterMove() transform.T {
-	return transform.Move(pcb.LbrnCenterX, pcb.LbrnCenterY)
+func (config *Config) lbrnCenterMove() transform.T {
+	return transform.Move(config.LbrnCenterX, config.LbrnCenterY)
 }
 
-func (pcb *PCB) lbrnBitmapScale() transform.T {
-	scale := 1.0 / pcb.PixelsPerMM
-	return transform.Scale(scale, -scale).Multiply(pcb.lbrnCenterMove())
+func (config *Config) lbrnBitmapScale() transform.T {
+	scale := 1.0 / config.PixelsPerMM
+	return transform.Scale(scale, -scale).Multiply(config.lbrnCenterMove())
 }
 
-func (pcb *PCB) SaveFiles() error {
+func SaveFiles(initialConfig *Config, component *eda.Component) error {
+	config := *initialConfig
+	if config.Width == 0 || config.Height == 0 {
+		w, h := component.Size()
+		w, h = w+1, h+1
+		if config.Width == 0 {
+			config.Width = w
+		}
+		if config.Height == 0 {
+			config.Height = h
+		}
+	}
+
+	if component.TrackWidth == 0 {
+		component.TrackWidth = config.TrackWidth
+	}
+
 	var copper, mask, silk *bitmap.Bitmap
 
 	err := util.RunConcurrently(
 		func() error {
 			var e error
-			copper, e = SaveEtch(pcb, pcb.component)
+			copper, e = SaveEtch(&config, component)
 			return e
 		},
 		func() error {
 			var e error
-			mask, silk, e = SaveMask(pcb, pcb.component)
+			mask, silk, e = SaveMask(&config, component)
 			return e
 		},
-		pcb.SaveStencil,
+		func() error {
+			return SaveStencil(&config, component)
+		},
 	)
 	if err != nil {
 		return err
 	}
 
-	return pcb.SaveOverview(copper, mask, silk)
+	return SaveOverview(&config, component, copper, mask, silk)
 }

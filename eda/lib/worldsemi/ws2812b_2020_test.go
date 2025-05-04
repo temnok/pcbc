@@ -9,5 +9,5 @@ import (
 )
 
 func TestBoard(t *testing.T) {
-	assert.NoError(t, pcb.New(WS2812B_2020).SaveFiles())
+	assert.NoError(t, pcb.Generate(WS2812B_2020))
 }

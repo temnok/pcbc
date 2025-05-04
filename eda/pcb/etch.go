@@ -88,7 +88,7 @@ var etchCutSettings = []*lbrn.CutSetting{
 	},
 }
 
-func SaveEtch(config *PCB, component *eda.Component) (*bitmap.Bitmap, error) {
+func SaveEtch(config *Config, component *eda.Component) (*bitmap.Bitmap, error) {
 	copper := bitmap.New(config.bitmapSize())
 	var cuts []*lbrn.Shape
 
@@ -118,7 +118,7 @@ func SaveEtch(config *PCB, component *eda.Component) (*bitmap.Bitmap, error) {
 	return copper, p.SaveToFile(filename)
 }
 
-func removeEtchCopper(config *PCB, component *eda.Component, copper *bitmap.Bitmap) {
+func removeEtchCopper(config *Config, component *eda.Component, copper *bitmap.Bitmap) {
 	t := component.Transform.Multiply(config.bitmapTransform())
 
 	// Clears
@@ -140,7 +140,7 @@ func removeEtchCopper(config *PCB, component *eda.Component, copper *bitmap.Bitm
 	clearBrush.ForEachPathsPixel(component.Perforations, t, copper.Set1)
 }
 
-func addEtchCopper(config *PCB, component *eda.Component, copper *bitmap.Bitmap) {
+func addEtchCopper(config *Config, component *eda.Component, copper *bitmap.Bitmap) {
 	t := component.Transform.Multiply(config.bitmapTransform())
 
 	// Pads
@@ -155,7 +155,7 @@ func addEtchCopper(config *PCB, component *eda.Component, copper *bitmap.Bitmap)
 	brush.ForEachPathsPixel(component.GroundTracks, t, copper.Set0)
 }
 
-func addEtchCuts(config *PCB, component *eda.Component, cuts *[]*lbrn.Shape) {
+func addEtchCuts(config *Config, component *eda.Component, cuts *[]*lbrn.Shape) {
 	t := component.Transform.Multiply(config.lbrnCenterMove())
 
 	for _, cut := range component.Cuts {
