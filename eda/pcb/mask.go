@@ -79,12 +79,13 @@ var maskCutSettings = []*lbrn.CutSetting{
 	},
 }
 
-func SaveMask(config *PCB, component *eda.Component) (*bitmap.Bitmap, error) {
+func SaveMask(config *PCB, component *eda.Component) (*bitmap.Bitmap, *bitmap.Bitmap, error) {
 	mask := bitmap.New(config.bitmapSize())
+	silk := bitmap.New(config.bitmapSize())
 
 	component.Visit(func(c *eda.Component) {
-		addSilk(config, c)
 		cutMask1(config, c, mask)
+		addSilk(config, c, silk)
 	})
 
 	component.Visit(func(c *eda.Component) {
@@ -92,14 +93,14 @@ func SaveMask(config *PCB, component *eda.Component) (*bitmap.Bitmap, error) {
 	})
 
 	filename := config.SavePath + "mask.lbrn"
-	silk := image.NewSingle(config.silk, color.White, color.Black)
+	silkImage := image.NewSingle(silk, color.White, color.Black)
 	maskImage := image.NewSingle(mask, color.Transparent, color.Black)
 	maskBM := lbrn.NewBase64Bitmap(maskImage)
 
 	p := &lbrn.LightBurnProject{
 		CutSettingImg: maskCutSettings,
 		Shape: []*lbrn.Shape{
-			lbrn.NewBitmapShapeFromImage(0, config.lbrnBitmapScale(), silk),
+			lbrn.NewBitmapShapeFromImage(0, config.lbrnBitmapScale(), silkImage),
 			lbrn.NewBitmapShape(1, config.lbrnBitmapScale(), maskBM),
 			lbrn.NewBitmapShape(2, config.lbrnBitmapScale(), maskBM),
 		},
@@ -107,7 +108,7 @@ func SaveMask(config *PCB, component *eda.Component) (*bitmap.Bitmap, error) {
 
 	addMaskPerforations(config, p)
 
-	return mask, p.SaveToFile(filename)
+	return mask, silk, p.SaveToFile(filename)
 }
 
 func addMaskPerforations(config *PCB, p *lbrn.LightBurnProject) {
@@ -136,13 +137,13 @@ func addMaskPerforations(config *PCB, p *lbrn.LightBurnProject) {
 	}
 }
 
-func addSilk(config *PCB, c *eda.Component) {
+func addSilk(config *PCB, c *eda.Component, silk *bitmap.Bitmap) {
 	t := c.Transform.Multiply(config.bitmapTransform())
 
 	// Marks:
 	brushW := font.Bold * font.WeightScale(t)
 	brush := shape.Circle(int(brushW))
-	brush.ForEachPathsPixel(c.Marks, t, config.silk.Set1)
+	brush.ForEachPathsPixel(c.Marks, t, silk.Set1)
 }
 
 func cutMask1(config *PCB, c *eda.Component, mask *bitmap.Bitmap) {

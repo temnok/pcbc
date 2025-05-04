@@ -78,6 +78,6 @@ func TestBoard(t *testing.T) {
 	bottom.Height += 4
 	bottom.SavePath = "out/2-"
 
-	assert.NoError(t, top.Process().SaveFiles())
-	assert.NoError(t, bottom.Process().SaveFiles())
+	assert.NoError(t, top.SaveFiles())
+	assert.NoError(t, bottom.SaveFiles())
 }

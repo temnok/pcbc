@@ -23,8 +23,6 @@ type PCB struct {
 	LbrnCenterX, LbrnCenterY float64
 
 	SavePath string
-
-	silk *bitmap.Bitmap
 }
 
 func New(component *eda.Component) *PCB {
@@ -54,19 +52,7 @@ func New(component *eda.Component) *PCB {
 }
 
 func Generate(component *eda.Component) error {
-	return Process(component).SaveFiles()
-}
-
-func Process(component *eda.Component) *PCB {
-	return New(component).Process()
-}
-
-func (pcb *PCB) Process() *PCB {
-	wi, hi := pcb.bitmapSize()
-
-	pcb.silk = bitmap.New(wi, hi)
-
-	return pcb
+	return New(component).SaveFiles()
 }
 
 func (pcb *PCB) bitmapSize() (int, int) {
@@ -87,7 +73,7 @@ func (pcb *PCB) lbrnBitmapScale() transform.T {
 }
 
 func (pcb *PCB) SaveFiles() error {
-	var copper, mask *bitmap.Bitmap
+	var copper, mask, silk *bitmap.Bitmap
 
 	err := util.RunConcurrently(
 		func() error {
@@ -97,7 +83,7 @@ func (pcb *PCB) SaveFiles() error {
 		},
 		func() error {
 			var e error
-			mask, e = SaveMask(pcb, pcb.component)
+			mask, silk, e = SaveMask(pcb, pcb.component)
 			return e
 		},
 		pcb.SaveStencil,
@@ -106,5 +92,5 @@ func (pcb *PCB) SaveFiles() error {
 		return err
 	}
 
-	return pcb.SaveOverview(copper, mask)
+	return pcb.SaveOverview(copper, mask, silk)
 }

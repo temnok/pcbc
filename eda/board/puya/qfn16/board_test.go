@@ -13,5 +13,5 @@ func TestBoard(t *testing.T) {
 	board := pcb.New(Board)
 	board.ExtraCopperWidth = 0
 	board.CopperClearWidth = 0.2
-	assert.NoError(t, board.Process().SaveFiles())
+	assert.NoError(t, board.SaveFiles())
 }
