@@ -128,13 +128,14 @@ func removeEtchCopper(config *config.Config, component *eda.Component, copper *b
 	clearWidth := 2 * (config.CopperClearWidth - config.ExtraCopperWidth)
 
 	// Pads
-	clearBrush := shape.Circle(int(clearWidth * config.PixelsPerMM))
-	clearBrush.ForEachPathsPixel(component.Pads, t, copper.Set1)
+	padClearBrush := shape.Circle(int((clearWidth + config.ExtraPadCopperWidth) * config.PixelsPerMM))
+	padClearBrush.ForEachPathsPixel(component.Pads, t, copper.Set1)
 
 	// Non-ground tracks
 	brush := shape.Circle(int((component.TrackWidth + clearWidth) * config.PixelsPerMM))
 	brush.ForEachPathsPixel(component.Tracks, t, copper.Set1)
 
+	clearBrush := shape.Circle(int(clearWidth * config.PixelsPerMM))
 	clearBrush = shape.Circle(int(config.CopperClearWidth * config.PixelsPerMM))
 	clearBrush.ForEachPathsPixel(component.Cuts, t, copper.Set1)
 	clearBrush.ForEachPathsPixel(component.Holes, t, copper.Set1)
@@ -147,7 +148,7 @@ func addEtchCopper(config *config.Config, component *eda.Component, copper *bitm
 	// Pads
 	shape.ForEachRow(component.Pads, t, copper.Set0)
 
-	extraCopperBrush := shape.Circle(int(config.ExtraCopperWidth * config.PixelsPerMM))
+	extraCopperBrush := shape.Circle(int((config.ExtraCopperWidth + config.ExtraPadCopperWidth) * config.PixelsPerMM))
 	extraCopperBrush.ForEachPathsPixel(component.Pads, t, copper.Set0)
 
 	// Tracks

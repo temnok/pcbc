@@ -10,9 +10,10 @@ import (
 )
 
 func TestBoard(t *testing.T) {
-	Board.TrackWidth = 0.3
+	Board.TrackWidth = 0.2
 	config := config.Default()
 	config.ExtraCopperWidth = 0
-	config.CopperClearWidth = 0.2
+	config.ExtraPadCopperWidth = 0.15
+	config.CopperClearWidth = 0.1
 	assert.NoError(t, pcb.Process(config, Board))
 }

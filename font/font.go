@@ -27,8 +27,8 @@ Vector (linear) font matrix. Data below uses its point numbers.
 Negative number means jump (no line) before it.
 
 Examples:
-	'Q': {4, 8, 19, 39, 48, 44, 33, 13, 4, -24, 42},
-	'q': {41, 47, 17, 6, 4, 13, 43},
+	'Q': {{14, 18, 29, 49, 58, 54, 43, 23, 14}, {34, 52}},
+	'q': {{51, 57, 27, 16, 14, 23, 53}},
 
 Grid:
 	19 29 39 49 59
