@@ -10,7 +10,7 @@ import (
 )
 
 func TestBoard(t *testing.T) {
-	Board.TrackWidth = 0.2
+	Board.TrackWidth = 0.15
 	config := config.Default()
 	config.ExtraCopperWidth = 0
 	config.ExtraPadCopperWidth = 0.15
