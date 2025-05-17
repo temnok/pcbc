@@ -21,25 +21,32 @@ func recurse(xy []float64, i0, i1 float64, x0, y0, x1, y1 int, callback func(x, 
 		return
 	}
 
-	if max(x0-x1, x1-x0) <= 1 && max(y0-y1, y1-y0) <= 1 {
+	if abs(x0-x1) <= 1 && abs(y0-y1) <= 1 {
 		callback(x1, y1)
 		return
 	}
 
 	i := (i0 + i1) / 2
 
-	abx, aby := mix(xy[0], xy[1], xy[2], xy[3], i)
-	bcx, bcy := mix(xy[2], xy[3], xy[4], xy[5], i)
-	cdx, cdy := mix(xy[4], xy[5], xy[6], xy[7], i)
+	abX, abY := mix(xy[0], xy[1], xy[2], xy[3], i)
+	bcX, bcY := mix(xy[2], xy[3], xy[4], xy[5], i)
+	cdX, cdY := mix(xy[4], xy[5], xy[6], xy[7], i)
 
-	abcx, abcy := mix(abx, aby, bcx, bcy, i)
-	bcdx, bcdy := mix(bcx, bcy, cdx, cdy, i)
+	abcX, abcY := mix(abX, abY, bcX, bcY, i)
+	bcdX, bcdY := mix(bcX, bcY, cdX, cdY, i)
 
-	abcdx, abcdy := mix(abcx, abcy, bcdx, bcdy, i)
-	x, y := round(abcdx), round(abcdy)
+	abcdX, abcdY := mix(abcX, abcY, bcdX, bcdY, i)
+	x, y := round(abcdX), round(abcdY)
 
 	recurse(xy, i0, i, x0, y0, x, y, callback)
 	recurse(xy, i, i1, x, y, x1, y1, callback)
+}
+
+func abs(a int) int {
+	if a < 0 {
+		return -a
+	}
+	return a
 }
 
 func mix(x0, y0, x1, y1, i float64) (float64, float64) {
