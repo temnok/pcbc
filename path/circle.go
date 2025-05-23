@@ -4,11 +4,11 @@ package path
 
 import "math"
 
-var roundK = 4 * (math.Sqrt(2) - 1) / 3
+var circleK = 4 * (math.Sqrt(2) - 1) / 3
 
 func Circle(d float64) Path {
 	r := d * 0.5
-	m := r * roundK
+	m := r * circleK
 
 	return Path{
 		{r, 0},

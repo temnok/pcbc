@@ -19,7 +19,7 @@ func RoundRect(w, h, r float64) Path {
 	r = min(r, x1, y1)
 	x0, y0 := x1-r, y1-r
 
-	m := r * roundK
+	m := r * circleK
 
 	return Path{
 		{x1, y0},
