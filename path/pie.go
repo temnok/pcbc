@@ -13,7 +13,7 @@ func Pie(n int, r1, r2, a1 float64) Paths {
 	angle := 360 / float64(n)
 	for i := 0; i < n; i++ {
 		a := a1/2 + float64(i)*angle
-		c := PiePiece(r1, r2, angle-a1).Apply(transform.RotateDegrees(a))
+		c := PiePiece(r1, r2, angle-a1).Transform(transform.RotateDegrees(a))
 		res = append(res, c)
 	}
 

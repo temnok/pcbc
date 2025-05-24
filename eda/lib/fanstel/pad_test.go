@@ -16,17 +16,17 @@ func TestBoard(t *testing.T) {
 
 	assert.NoError(t, pcb.ProcessWithDefaultConfig(&eda.Component{
 		Pads: path.Paths{
-			path.Rect(0.5, 2).Apply(transform.Move(x, y)),
-			path.Rect(2, 0.5).Apply(transform.Move(x, y)),
+			path.Rect(0.5, 2).Transform(transform.Move(x, y)),
+			path.Rect(2, 0.5).Transform(transform.Move(x, y)),
 
-			path.Rect(0.5, 2).Apply(transform.Move(x, -y)),
-			path.Rect(2, 0.5).Apply(transform.Move(x, -y)),
+			path.Rect(0.5, 2).Transform(transform.Move(x, -y)),
+			path.Rect(2, 0.5).Transform(transform.Move(x, -y)),
 
-			path.Rect(0.5, 2).Apply(transform.Move(-x, -y)),
-			path.Rect(2, 0.5).Apply(transform.Move(-x, -y)),
+			path.Rect(0.5, 2).Transform(transform.Move(-x, -y)),
+			path.Rect(2, 0.5).Transform(transform.Move(-x, -y)),
 
-			path.Rect(0.5, 2).Apply(transform.Move(-x, y)),
-			path.Rect(2, 0.5).Apply(transform.Move(-x, y)),
+			path.Rect(0.5, 2).Transform(transform.Move(-x, y)),
+			path.Rect(2, 0.5).Transform(transform.Move(-x, y)),
 		},
 
 		Components: eda.Components{

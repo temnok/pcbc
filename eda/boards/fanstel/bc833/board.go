@@ -114,18 +114,18 @@ func board(short bool) *eda.Component {
 
 		Marks: path.Join(
 			font.CenteredRow(labelShift, leftLabels...).
-				Apply(labelScale.RotateDegrees(-90).Move(-7, -2.9)),
+				Transform(labelScale.RotateDegrees(-90).Move(-7, -2.9)),
 			font.CenteredRow(labelShift, centerLabels...).
-				Apply(labelScale.Move(0, -13.65)),
+				Transform(labelScale.Move(0, -13.65)),
 			font.CenteredRow(labelShift, rightLabels...).
-				Apply(labelScale.RotateDegrees(90).Move(7, -2.9)),
+				Transform(labelScale.RotateDegrees(90).Move(7, -2.9)),
 		),
 	}
 
 	boardShift := 4.75
 	boardCut := path.RoundRect(21, 24.6, 1)
 	boardClears := path.Paths{
-		path.Rect(21.5, 5.5).Apply(transform.Move(0, 9.7)),
+		path.Rect(21.5, 5.5).Transform(transform.Move(0, 9.7)),
 	}
 
 	if short {

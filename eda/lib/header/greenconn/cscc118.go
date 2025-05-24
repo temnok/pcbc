@@ -27,12 +27,12 @@ func CSCC118(n int, flip bool, labels []string) *eda.Component {
 			if i < len(labels) {
 				labels0[i/2] = labels[i]
 			}
-			pads[i] = pads[i].Apply(transform.Move(sign*padW/2, 0))
+			pads[i] = pads[i].Transform(transform.Move(sign*padW/2, 0))
 		} else {
 			if i < len(labels) {
 				labels1[i/2] = labels[i]
 			}
-			pads[i] = pads[i].Apply(transform.Move(-sign*padW/2, 0))
+			pads[i] = pads[i].Transform(transform.Move(-sign*padW/2, 0))
 		}
 	}
 
@@ -45,9 +45,9 @@ func CSCC118(n int, flip bool, labels []string) *eda.Component {
 			path.Paths{path.Rect(1.5, float64(n)+0.5)},
 
 			font.AlignedColumn(align0, -2/1.6, labels0...).
-				Apply(transform.Scale(0.8, 1.6).Move(-sign*0.9, shift)),
+				Transform(transform.Scale(0.8, 1.6).Move(-sign*0.9, shift)),
 			font.AlignedColumn(align1, -2/1.6, labels1...).
-				Apply(transform.Scale(0.8, 1.6).Move(sign*0.9, -shift)),
+				Transform(transform.Scale(0.8, 1.6).Move(sign*0.9, -shift)),
 		),
 	}
 }

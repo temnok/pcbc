@@ -19,12 +19,12 @@ func TestBoard(t *testing.T) {
 		Components: eda.Components{
 			{
 				Perforations: path.Paths{
-					perforation.Apply(transform.Move(-10, 4)),
-					perforation.Apply(transform.Move(-10, -6)),
-					perforation.Apply(transform.Move(0, 6)),
-					perforation.Apply(transform.Move(0, -6)),
-					perforation.Apply(transform.Move(10, 6)),
-					perforation.Apply(transform.Move(10, -6)),
+					perforation.Transform(transform.Move(-10, 4)),
+					perforation.Transform(transform.Move(-10, -6)),
+					perforation.Transform(transform.Move(0, 6)),
+					perforation.Transform(transform.Move(0, -6)),
+					perforation.Transform(transform.Move(10, 6)),
+					perforation.Transform(transform.Move(10, -6)),
 				},
 			},
 		},

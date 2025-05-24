@@ -32,13 +32,13 @@ var (
 		Marks: path.Join(
 			font.CenteredRow(labelShift,
 				"P113", "P115", "P002", "P029", "P031", "P109", "P012", "GND",
-			).Apply(labelScale.RotateDegrees(-90).Move(-10.6, -1)),
+			).Transform(labelScale.RotateDegrees(-90).Move(-10.6, -1)),
 			font.CenteredRow(labelShift,
 				"VDD", "P008", "P006", "P004", "P026", "P024", "P022", "P020", "P018", "P015", "VDDH",
-			).Apply(labelScale.Move(0, -11.95)),
+			).Transform(labelScale.Move(0, -11.95)),
 			font.CenteredRow(labelShift,
 				"D-", "D+", "P013", "P100", "SWD", "SWC", "P009", "P010",
-			).Apply(labelScale.RotateDegrees(90).Move(10.6, -1)),
+			).Transform(labelScale.RotateDegrees(90).Move(10.6, -1)),
 		),
 	}
 

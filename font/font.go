@@ -164,7 +164,7 @@ func alignedText(align Align, shift path.Point, strs ...string) path.Paths {
 	x0, y0 := -0.5*float64(len(strs)-1)*shift.X, -0.5*float64(len(strs)-1)*shift.Y
 	for i, str := range strs {
 		i := float64(i)
-		p := alignedPaths(align, str).Apply(transform.Move(x0+i*shift.X, y0+i*shift.Y))
+		p := alignedPaths(align, str).Transform(transform.Move(x0+i*shift.X, y0+i*shift.Y))
 		paths = append(paths, p...)
 	}
 
@@ -182,7 +182,7 @@ func alignedPaths(align Align, str string) path.Paths {
 		}
 
 		t := transform.Move(Width/2+Width*(float64(i)-n*float64(align)), -0.1)
-		paths = append(paths, symbolPaths[c].Apply(t)...)
+		paths = append(paths, symbolPaths[c].Transform(t)...)
 	}
 
 	return paths

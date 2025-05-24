@@ -32,13 +32,13 @@ var (
 		Marks: path.Join(
 			font.CenteredRow(labelShift,
 				"P111", "P110", "P003", "P028", "P002", "P029", "P031", "P030", "P113",
-			).Apply(labelScale.RotateDegrees(-90).Move(-8.1, -1)),
+			).Transform(labelScale.RotateDegrees(-90).Move(-8.1, -1)),
 			font.CenteredRow(labelShift,
 				"GND", "P000", "P001", "P005", "P109", "VDD", "VDDH", "DCCH", "P024",
-			).Apply(labelScale.Move(0, -13.2)),
+			).Transform(labelScale.Move(0, -13.2)),
 			font.CenteredRow(labelShift,
 				"P013", "P018", "VBUS", "D-", "D+", "SWD", "SWC", "P009", "P010",
-			).Apply(labelScale.RotateDegrees(90).Move(8.1, -1)),
+			).Transform(labelScale.RotateDegrees(90).Move(8.1, -1)),
 		),
 	}
 
@@ -53,7 +53,7 @@ var (
 
 	Board_nRF52840 = &eda.Component{
 		Clears: path.Paths{
-			path.Rect(24, 4.6).Apply(transform.Move(0, 11.6)),
+			path.Rect(24, 4.6).Transform(transform.Move(0, 11.6)),
 		},
 
 		Cuts: path.Paths{

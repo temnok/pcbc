@@ -12,8 +12,8 @@ import (
 // If the last point is the same as the first one, the path represents a closed contour.
 type Path []Point
 
-// Apply returns new path transformed by a given 2D transformation.
-func (path Path) Apply(t transform.T) Path {
+// Transform returns new path transformed by a given 2D transformation.
+func (path Path) Transform(t transform.T) Path {
 	res := make(Path, len(path))
 
 	for i, point := range path {
@@ -23,42 +23,42 @@ func (path Path) Apply(t transform.T) Path {
 	return res
 }
 
-// ForEachPixel calls provided callback for each interpolated point on the path with integer coordinates (pixel).
+// Rasterize calls provided callback for each interpolated point on the path with integer coordinates (pixel).
 // The callback is called at least one time for a non-empty path.
-func (path Path) ForEachPixel(t transform.T, visit func(x, y int)) {
+func (path Path) Rasterize(t transform.T, callback func(x, y int)) {
 	if len(path) == 0 {
 		return
 	}
 
 	a := path[0].Apply(t)
-	visit(a.RoundXY())
+	callback(a.RoundXY())
 
 	for i := 0; i+3 < len(path); i += 3 {
 		c1, c2, b := path[i+1].Apply(t), path[i+2].Apply(t), path[i+3].Apply(t)
 
-		bezier.Rasterize([]float64{a.X, a.Y, c1.X, c1.Y, c2.X, c2.Y, b.X, b.Y}, visit)
+		bezier.Rasterize([]float64{a.X, a.Y, c1.X, c1.Y, c2.X, c2.Y, b.X, b.Y}, callback)
 
 		a = b
 	}
 }
 
-// ForEachPixelDist calls provided callback for interpolated points on the path, separated by given distance.
+// RasterizeIntermittently calls provided callback for interpolated points on the path, separated by given distance.
 // For example, it could be used to draw a dotted line.
-func (path Path) ForEachPixelDist(t transform.T, dist int, jump func(x, y int)) {
+func (path Path) RasterizeIntermittently(t transform.T, dist float64, callback func(x, y int)) {
 	var prevX, prevY int
 	started := false
 
-	path.ForEachPixel(t, func(x, y int) {
+	path.Rasterize(t, func(x, y int) {
 		if !started {
 			started = true
 		} else {
 			dx, dy := x-prevX, y-prevY
-			if dx*dx+dy*dy < dist*dist {
+			if float64(dx*dx+dy*dy) < dist*dist {
 				return
 			}
 		}
 
-		jump(x, y)
+		callback(x, y)
 		prevX, prevY = x, y
 	})
 }
@@ -68,7 +68,7 @@ func (path Path) Clone(n int, dx, dy float64) Paths {
 
 	for i := 0; i < n; i++ {
 		k := float64(i) - float64(n-1)/2
-		res = append(res, path.Apply(transform.Move(dx*k, dy*k)))
+		res = append(res, path.Transform(transform.Move(dx*k, dy*k)))
 	}
 
 	return res

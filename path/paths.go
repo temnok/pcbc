@@ -17,28 +17,28 @@ func Join(paths ...Paths) Paths {
 	return res
 }
 
-// Apply returns list of transformed paths.
-func (paths Paths) Apply(t transform.T) Paths {
+// Transform returns list of transformed paths.
+func (paths Paths) Transform(t transform.T) Paths {
 	res := make(Paths, len(paths))
 
 	for i, path := range paths {
-		res[i] = path.Apply(t)
+		res[i] = path.Transform(t)
 	}
 
 	return res
 }
 
-// ForEachPixel calls provided callback for each path.
-func (paths Paths) ForEachPixel(t transform.T, iterator func(x, y int)) {
+// Rasterize calls provided callback for each path.
+func (paths Paths) Rasterize(t transform.T, callback func(x, y int)) {
 	for _, path := range paths {
-		path.ForEachPixel(t, iterator)
+		path.Rasterize(t, callback)
 	}
 }
 
-// ForEachPixelDist calls provided callback for each path.
-func (paths Paths) ForEachPixelDist(t transform.T, dist int, jump func(x, y int)) {
+// RasterizeIntermittently calls provided callback for each path.
+func (paths Paths) RasterizeIntermittently(t transform.T, dist float64, callback func(x, y int)) {
 	for _, path := range paths {
-		path.ForEachPixelDist(t, dist, jump)
+		path.RasterizeIntermittently(t, dist, callback)
 	}
 }
 
@@ -47,7 +47,7 @@ func (paths Paths) Clone(n int, dx, dy float64) Paths {
 
 	for i := 0; i < n; i++ {
 		k := float64(i) - float64(n-1)/2
-		res = append(res, paths.Apply(transform.Move(dx*k, dy*k))...)
+		res = append(res, paths.Transform(transform.Move(dx*k, dy*k))...)
 	}
 
 	return res

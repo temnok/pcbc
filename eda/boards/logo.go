@@ -14,9 +14,9 @@ import (
 var (
 	Logo = &eda.Component{
 		Marks: path.Join(
-			font.Centered("pc").Apply(transform.Move(0, 0.3)),
-			font.Centered("bc").Apply(transform.Move(0, -0.3)),
-		).Apply(transform.RotateDegrees(45)),
+			font.Centered("pc").Transform(transform.Move(0, 0.3)),
+			font.Centered("bc").Transform(transform.Move(0, -0.3)),
+		).Transform(transform.RotateDegrees(45)),
 	}
 
 	Firm = eda.CenteredTextColumn(-1,

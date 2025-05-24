@@ -17,7 +17,7 @@ type Shape struct {
 
 func New(contour path.Path, t transform.T) *Shape {
 	b := new(builder)
-	contour.ForEachPixel(t, b.addPoint)
+	contour.Rasterize(t, b.addPoint)
 	return b.build()
 }
 
@@ -32,7 +32,7 @@ func (s *Shape) ForEachRowWithOffset(x, y int, iterator func(x0, x1, y int)) {
 }
 
 func (s *Shape) ForEachPathsPixel(paths path.Paths, t transform.T, iterator func(x0, x1, y int)) {
-	paths.ForEachPixel(t, func(x, y int) {
+	paths.Rasterize(t, func(x, y int) {
 		s.ForEachRowWithOffset(x, y, iterator)
 	})
 }

@@ -21,7 +21,7 @@ func Tracks(tracks ...Track) path.Paths {
 }
 
 func (track Track) Apply(t transform.T) Track {
-	return Track(path.Path(track).Apply(t))
+	return Track(path.Path(track).Transform(t))
 }
 
 func (track Track) X(x float64) Track {

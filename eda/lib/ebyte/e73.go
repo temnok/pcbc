@@ -36,9 +36,9 @@ func init() {
 		Marks: path.Paths{path.Rect(componentW, componentH)},
 
 		Pads: path.Join(
-			pad.Clone(padRows, 0, padStep).Apply(transform.RotateDegrees(180).Move(-padHShift, -padVShift)),
-			pad.Clone(8, 0, padStep).Apply(transform.RotateDegrees(-90).Move(0, -componentH/2)),
-			pad.Clone(padRows, 0, padStep).Apply(transform.Move(padHShift, -padVShift)),
+			pad.Clone(padRows, 0, padStep).Transform(transform.RotateDegrees(180).Move(-padHShift, -padVShift)),
+			pad.Clone(8, 0, padStep).Transform(transform.RotateDegrees(-90).Move(0, -componentH/2)),
+			pad.Clone(padRows, 0, padStep).Transform(transform.Move(padHShift, -padVShift)),
 		),
 	}
 }
