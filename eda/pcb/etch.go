@@ -181,9 +181,6 @@ func addSpacers(config *config.Config, copper *bitmap.Bitmap) {
 		return
 	}
 
-	//periodPixels := int(config.SpacerPeriod * config.PixelsPerMM)
-	//periodShape := shape.Circle(periodPixels)
-
 	spacerPixels := int(config.SpacerWidth * config.PixelsPerMM)
 	spacerShape := shape.Circle(spacerPixels)
 
@@ -198,16 +195,7 @@ func addSpacers(config *config.Config, copper *bitmap.Bitmap) {
 			xf, yf := t.Apply(x0+xShift+j*config.SpacerPeriod, y0+i*config.SpacerPeriod*k)
 			x, y := int(math.Round(xf)), int(math.Round(yf))
 
-			//pixelCount := 0
-			//periodShape.ForEachRowWithOffset(x, y, func(x0, x1, y int) {
-			//	pixelCount += copper.Count(x0, x1, y)
-			//})
-
-			//if pixelCount == 0 {
-			spacerShape.ForEachRowWithOffset(x, y, func(x0, x1, y int) {
-				copper.Set1(x0, x1, y)
-			})
-			//}
+			spacerShape.ForEachRowWithOffset(x, y, copper.Set1)
 		}
 
 		xShift = config.SpacerPeriod/2 - xShift
