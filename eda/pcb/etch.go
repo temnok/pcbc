@@ -177,7 +177,7 @@ func addEtchCuts(config *config.Config, component *eda.Component, cuts *[]*lbrn.
 }
 
 func addSpacers(config *config.Config, copper *bitmap.Bitmap) {
-	if config.SpacerPeriod == 0 || config.SpacerWidth >= config.SpacerPeriod {
+	if config.SpacerPeriod == 0 || config.SpacerWidth == 0 {
 		return
 	}
 
