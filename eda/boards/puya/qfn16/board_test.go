@@ -15,5 +15,9 @@ func TestBoard(t *testing.T) {
 	config.ExtraCopperWidth = 0.025
 	config.ExtraPadCopperWidth = 0.15
 	config.CopperClearWidth = 0.1
+
+	config.SpacerPeriod = 0.4
+	config.SpacerWidth = 0.2
+
 	assert.NoError(t, pcb.Process(config, Board))
 }
