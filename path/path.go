@@ -76,6 +76,6 @@ func (path Path) Clone(n int, dx, dy float64) Paths {
 
 func (path Path) Center(t transform.T) Point {
 	var b Bounds
-	b.IncludePath(t, path)
+	b.AddPath(t, path)
 	return b.Center()
 }

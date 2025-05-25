@@ -121,15 +121,15 @@ func (c *Component) Size() (float64, float64) {
 	var b path.Bounds
 
 	c.Visit(func(c *Component) {
-		b.IncludePaths(c.Transform, c.Clears)
-		b.IncludePaths(c.Transform, c.Cuts)
-		b.IncludePaths(c.Transform, c.Holes)
-		b.IncludePaths(c.Transform, c.Perforations)
-		b.IncludePaths(c.Transform, c.Pads)
-		b.IncludePaths(c.Transform, c.Tracks)
-		b.IncludePaths(c.Transform, c.GroundTracks)
-		b.IncludePaths(c.Transform, c.Marks)
-		b.IncludePaths(c.Transform, c.Openings)
+		b.AddPaths(c.Transform, c.Clears)
+		b.AddPaths(c.Transform, c.Cuts)
+		b.AddPaths(c.Transform, c.Holes)
+		b.AddPaths(c.Transform, c.Perforations)
+		b.AddPaths(c.Transform, c.Pads)
+		b.AddPaths(c.Transform, c.Tracks)
+		b.AddPaths(c.Transform, c.GroundTracks)
+		b.AddPaths(c.Transform, c.Marks)
+		b.AddPaths(c.Transform, c.Openings)
 	})
 
 	return b.Width(), b.Height()
