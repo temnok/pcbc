@@ -25,9 +25,10 @@ func Default() *Config {
 	return &Config{
 		PixelsPerMM: 100,
 
-		TrackWidth:       0.25,
-		ExtraCopperWidth: 0.05,
-		CopperClearWidth: 0.25,
+		TrackWidth:       0.2,
+		CopperClearWidth: 0.2,
+		ExtraCopperWidth: 0.03,
+
 		MaskCutWidth:     0.1,
 		OverviewCutWidth: 0.02,
 
