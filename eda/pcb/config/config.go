@@ -17,9 +17,6 @@ type Config struct {
 	MaskCutWidth        float64
 	OverviewCutWidth    float64
 
-	SpacerPeriod float64
-	SpacerWidth  float64
-
 	LbrnCenterX, LbrnCenterY float64
 
 	SavePath string

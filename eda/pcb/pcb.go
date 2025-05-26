@@ -11,16 +11,7 @@ import (
 
 func Process(initialConfig *config.Config, component *eda.Component) error {
 	config := *initialConfig
-	if config.Width == 0 || config.Height == 0 {
-		w, h := component.Size()
-		w, h = w+1, h+1
-		if config.Width == 0 {
-			config.Width = w
-		}
-		if config.Height == 0 {
-			config.Height = h
-		}
-	}
+	setMissingConfigSize(&config, component)
 
 	if component.TrackWidth == 0 {
 		component = &eda.Component{
@@ -53,6 +44,23 @@ func Process(initialConfig *config.Config, component *eda.Component) error {
 	}
 
 	return SaveOverview(&config, component, copper, mask, silk)
+}
+
+func setMissingConfigSize(config *config.Config, component *eda.Component) {
+	if config.Width > 0 && config.Height > 0 {
+		return
+	}
+
+	w, h := component.Size()
+	w, h = w+1, h+1
+
+	if config.Width <= 0 {
+		config.Width = w
+	}
+
+	if config.Height <= 0 {
+		config.Height = h
+	}
 }
 
 func ProcessWithDefaultConfig(component *eda.Component) error {

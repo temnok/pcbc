@@ -4,7 +4,6 @@ package pcb
 
 import (
 	"image/color"
-	"math"
 	"temnok/pcbc/bitmap"
 	"temnok/pcbc/bitmap/image"
 	"temnok/pcbc/eda"
@@ -98,8 +97,6 @@ func SaveEtch(config *config.Config, component *eda.Component) (*bitmap.Bitmap, 
 		removeEtchCopper(config, c, copper)
 	})
 
-	addSpacers(config, copper)
-
 	component.Visit(func(c *eda.Component) {
 		addEtchCopper(config, c, copper)
 		addEtchCuts(config, c, &cuts)
@@ -173,31 +170,5 @@ func addEtchCuts(config *config.Config, component *eda.Component, cuts *[]*lbrn.
 
 	for _, perforation := range component.Perforations {
 		*cuts = append(*cuts, lbrn.NewPath(2, t, perforation))
-	}
-}
-
-func addSpacers(config *config.Config, copper *bitmap.Bitmap) {
-	if config.SpacerPeriod == 0 || config.SpacerWidth == 0 {
-		return
-	}
-
-	spacerPixels := int(config.SpacerWidth * config.PixelsPerMM)
-	spacerShape := shape.Circle(spacerPixels)
-
-	t := config.BitmapTransform()
-	x0, y0 := -config.Width/2, -config.Height/2
-	x1, y1 := (config.Width+config.SpacerWidth)/2, (config.Height+config.SpacerWidth)/2
-	xShift := 0.0
-	k := math.Sqrt(3) / 2
-
-	for i := 0.0; y0+i*config.SpacerPeriod*k < y1; i++ {
-		for j := 0.0; x0+j*config.SpacerPeriod < x1; j++ {
-			xf, yf := t.Apply(x0+xShift+j*config.SpacerPeriod, y0+i*config.SpacerPeriod*k)
-			x, y := int(math.Round(xf)), int(math.Round(yf))
-
-			spacerShape.ForEachRowWithOffset(x, y, copper.Set1)
-		}
-
-		xShift = config.SpacerPeriod/2 - xShift
 	}
 }
