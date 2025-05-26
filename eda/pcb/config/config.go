@@ -10,12 +10,11 @@ type Config struct {
 	Width, Height float64
 	PixelsPerMM   float64
 
-	TrackWidth          float64
-	ExtraCopperWidth    float64
-	ExtraPadCopperWidth float64
-	CopperClearWidth    float64
-	MaskCutWidth        float64
-	OverviewCutWidth    float64
+	TrackWidth       float64
+	ExtraCopperWidth float64
+	CopperClearWidth float64
+	MaskCutWidth     float64
+	OverviewCutWidth float64
 
 	LbrnCenterX, LbrnCenterY float64
 
