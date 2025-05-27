@@ -13,18 +13,18 @@ import (
 )
 
 func TestBoard(t *testing.T) {
-	perforation := path.Circle(1)
+	hole := path.Circle(1)
 
-	perforations := &eda.Component{
+	holes := &eda.Component{
 		Components: eda.Components{
 			{
-				Perforations: path.Paths{
-					perforation.Transform(transform.Move(-10, 4)),
-					perforation.Transform(transform.Move(-10, -6)),
-					perforation.Transform(transform.Move(0, 6)),
-					perforation.Transform(transform.Move(0, -6)),
-					perforation.Transform(transform.Move(10, 6)),
-					perforation.Transform(transform.Move(10, -6)),
+				Cuts: path.Paths{
+					hole.Transform(transform.Move(-10, 4)),
+					hole.Transform(transform.Move(-10, -6)),
+					hole.Transform(transform.Move(0, 6)),
+					hole.Transform(transform.Move(0, -6)),
+					hole.Transform(transform.Move(10, 6)),
+					hole.Transform(transform.Move(10, -6)),
 				},
 			},
 		},
@@ -50,10 +50,10 @@ func TestBoard(t *testing.T) {
 	}
 
 	top := &eda.Component{
-		Perforations: vias,
+		Pads: vias,
 
 		Components: eda.Components{
-			perforations,
+			holes,
 
 			contacts,
 
@@ -70,7 +70,7 @@ func TestBoard(t *testing.T) {
 		Pads: bottomPads,
 
 		Components: eda.Components{
-			perforations,
+			holes,
 
 			tracks,
 		},

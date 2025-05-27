@@ -1,25 +1,4 @@
 <LightBurnProject>
-	<CutSetting type="Cut">
-		<index Value="3"></index>
-		<name Value="Perforation"></name>
-		<priority Value="3"></priority>
-		<speed Value="100"></speed>
-		<numPasses Value=""></numPasses>
-		<globalRepeat Value="30"></globalRepeat>
-		<maxPower Value="90"></maxPower>
-		<QPulseWidth Value="200"></QPulseWidth>
-		<frequency Value="20000"></frequency>
-		<interval Value=""></interval>
-		<dpi Value=""></dpi>
-		<ditherMode Value=""></ditherMode>
-		<useDotCorrection Value=""></useDotCorrection>
-		<dotWidth Value=""></dotWidth>
-		<tabsEnabled Value=""></tabsEnabled>
-		<tabSize Value=""></tabSize>
-		<crossHatch Value=""></crossHatch>
-		<angle Value=""></angle>
-		<negative Value=""></negative>
-	</CutSetting>
 	<CutSetting_Img type="Image">
 		<index Value="0"></index>
 		<name Value="Silk"></name>

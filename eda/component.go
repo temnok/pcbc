@@ -15,13 +15,9 @@ type Components = []*Component
 type Component struct {
 	Transform transform.T
 
-	// Remove: copper strokes, mask perforations
+	// Remove: copper strokes
 	// Cut: substrate (leave tabs)
 	Cuts path.Paths
-
-	// Remove: copper strokes, mask strokes
-	// Cut: substrate, maskbase, stencil
-	Perforations path.Paths
 
 	// Remove: copper strokes, mask strokes
 	// Add: copper shapes
@@ -57,7 +53,6 @@ func (c *Component) visit(t transform.T, parent *Component, callback func(*Compo
 	comp := &Component{
 		Transform:    t,
 		Cuts:         c.Cuts,
-		Perforations: c.Perforations,
 		Pads:         c.Pads,
 		Tracks:       c.Tracks,
 		GroundTracks: c.GroundTracks,
@@ -109,7 +104,6 @@ func (c *Component) Size() (float64, float64) {
 
 	c.Visit(func(c *Component) {
 		b.AddPaths(c.Transform, c.Cuts)
-		b.AddPaths(c.Transform, c.Perforations)
 		b.AddPaths(c.Transform, c.Pads)
 		b.AddPaths(c.Transform, c.Tracks)
 		b.AddPaths(c.Transform, c.GroundTracks)

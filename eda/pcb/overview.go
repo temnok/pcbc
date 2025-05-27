@@ -55,9 +55,5 @@ func renderCutsOverview(config *config.Config, component *eda.Component, substra
 
 		// Pads
 		brush.ForEachPathsPixel(c.Pads, t, stencilCuts.Set1)
-
-		// Perforations
-		brush.ForEachPathsPixel(c.Perforations, t, substrateCuts.Set1)
-		brush.ForEachPathsPixel(c.Perforations, t, stencilCuts.Set1)
 	})
 }

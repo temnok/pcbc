@@ -14,7 +14,7 @@ import (
 func TestBoard(t *testing.T) {
 	assert.NoError(t, pcb.ProcessWithDefaultConfig(&eda.Component{
 		Components: eda.Components{
-			boards.Perforations72x42,
+			boards.Holes72x42,
 			eda.ComponentGrid(6, 11, 5,
 				x2.X2("R ", "1R0"),
 				x2.X2("R ", "1R5"),

@@ -35,10 +35,6 @@ func SaveStencil(config *config.Config, component *eda.Component) error {
 		for _, pad := range component.Pads {
 			p.Shape = append(p.Shape, lbrn.NewPath(0, t, pad))
 		}
-
-		for _, perforation := range component.Perforations {
-			p.Shape = append(p.Shape, lbrn.NewPath(0, t, perforation))
-		}
 	})
 
 	return p.SaveToFile(filename)

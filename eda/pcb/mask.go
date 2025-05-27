@@ -103,35 +103,7 @@ func SaveMask(config *config.Config, component *eda.Component) (*bitmap.Bitmap, 
 		},
 	}
 
-	addMaskPerforations(config, component, p)
-
 	return mask, silk, p.SaveToFile(filename)
-}
-
-func addMaskPerforations(config *config.Config, component *eda.Component, p *lbrn.LightBurnProject) {
-	component.Visit(func(component *eda.Component) {
-		t := component.Transform.Multiply(config.LbrnCenterMove())
-
-		for _, hole := range component.Perforations {
-			p.Shape = append(p.Shape, lbrn.NewPath(3, t, hole))
-		}
-	})
-
-	p.CutSetting = []*lbrn.CutSetting{
-		{
-			Type:     "Cut",
-			Name:     lbrn.Param{Value: "Perforation"},
-			Index:    lbrn.Param{Value: "3"},
-			Priority: lbrn.Param{Value: "3"},
-
-			Speed:        lbrn.Param{Value: "100"},
-			GlobalRepeat: lbrn.Param{Value: "30"},
-
-			MaxPower:    lbrn.Param{Value: "90"},
-			QPulseWidth: lbrn.Param{Value: "200"},
-			Frequency:   lbrn.Param{Value: "20000"},
-		},
-	}
 }
 
 func addSilk(config *config.Config, c *eda.Component, silk *bitmap.Bitmap) {
@@ -155,7 +127,4 @@ func cutMask1(config *config.Config, c *eda.Component, mask *bitmap.Bitmap) {
 	c.Cuts.RasterizeIntermittently(t, 2*config.MaskCutWidth*config.PixelsPerMM, func(x, y int) {
 		brush.ForEachRowWithOffset(x, y, mask.Set1)
 	})
-
-	// Perforations
-	brush.ForEachPathsPixel(c.Perforations, t, mask.Set1)
 }

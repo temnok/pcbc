@@ -14,8 +14,7 @@ func init() {
 	holeContour := path.Paths{path.Circle(2.1)}
 
 	hole := &eda.Component{
-		Pads:         holeContour,
-		Perforations: holeContour,
+		Cuts: holeContour,
 	}
 
 	key := path.Paths{path.Circle(0.6).Transform(transform.Move(-16.25, 21.25))}
