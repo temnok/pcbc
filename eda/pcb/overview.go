@@ -50,9 +50,6 @@ func renderCutsOverview(config *config.Config, component *eda.Component, substra
 	component.Visit(func(c *eda.Component) {
 		t := c.Transform.Multiply(config.BitmapTransform())
 
-		// Holes
-		brush.ForEachPathsPixel(c.Holes, t, substrateCuts.Set1)
-
 		// Cuts
 		brush.ForEachPathsPixel(c.Cuts, t, substrateCuts.Set1)
 

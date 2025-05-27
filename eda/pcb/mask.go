@@ -156,9 +156,6 @@ func cutMask1(config *config.Config, c *eda.Component, mask *bitmap.Bitmap) {
 		brush.ForEachRowWithOffset(x, y, mask.Set1)
 	})
 
-	// Holes
-	brush.ForEachPathsPixel(c.Holes, t, mask.Set1)
-
 	// Perforations
 	brush.ForEachPathsPixel(c.Perforations, t, mask.Set1)
 }

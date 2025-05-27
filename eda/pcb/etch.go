@@ -135,7 +135,6 @@ func removeEtchCopper(config *config.Config, component *eda.Component, copper *b
 	clearBrush := shape.Circle(int(clearWidth * config.PixelsPerMM))
 	clearBrush = shape.Circle(int(config.CopperClearWidth * config.PixelsPerMM))
 	clearBrush.ForEachPathsPixel(component.Cuts, t, copper.Set1)
-	clearBrush.ForEachPathsPixel(component.Holes, t, copper.Set1)
 	clearBrush.ForEachPathsPixel(component.Perforations, t, copper.Set1)
 }
 
@@ -158,11 +157,8 @@ func addEtchCuts(config *config.Config, component *eda.Component, cuts *[]*lbrn.
 	t := component.Transform.Multiply(config.LbrnCenterMove())
 
 	for _, cut := range component.Cuts {
-		*cuts = append(*cuts, lbrn.NewPathWithTabs(2, t, cut))
-	}
-
-	for _, hole := range component.Holes {
-		*cuts = append(*cuts, lbrn.NewPath(2, t, hole))
+		//*cuts = append(*cuts, lbrn.NewPathWithTabs(2, t, cut))
+		*cuts = append(*cuts, lbrn.NewPath(2, t, cut))
 	}
 
 	for _, perforation := range component.Perforations {

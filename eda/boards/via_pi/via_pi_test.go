@@ -50,7 +50,7 @@ func TestBoard(t *testing.T) {
 	}
 
 	top := &eda.Component{
-		Holes: vias,
+		Perforations: vias,
 
 		Components: eda.Components{
 			perforations,
