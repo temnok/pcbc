@@ -45,9 +45,6 @@ type Component struct {
 	// Add: mark strokes
 	Marks path.Paths
 
-	// Remove: mask shapes
-	Openings path.Paths
-
 	TrackWidth float64
 
 	Components []*Component
@@ -74,7 +71,6 @@ func (c *Component) visit(t transform.T, parent *Component, callback func(*Compo
 		Tracks:       c.Tracks,
 		GroundTracks: c.GroundTracks,
 		Marks:        c.Marks,
-		Openings:     c.Openings,
 		TrackWidth:   c.TrackWidth,
 	}
 
@@ -129,7 +125,6 @@ func (c *Component) Size() (float64, float64) {
 		b.AddPaths(c.Transform, c.Tracks)
 		b.AddPaths(c.Transform, c.GroundTracks)
 		b.AddPaths(c.Transform, c.Marks)
-		b.AddPaths(c.Transform, c.Openings)
 	})
 
 	return b.Width(), b.Height()

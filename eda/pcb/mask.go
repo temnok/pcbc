@@ -89,10 +89,6 @@ func SaveMask(config *config.Config, component *eda.Component) (*bitmap.Bitmap, 
 		addSilk(config, c, silk)
 	})
 
-	component.Visit(func(c *eda.Component) {
-		cutMask2(config, c, mask)
-	})
-
 	filename := config.SavePath + "mask.lbrn"
 	silkImage := image.NewSingle(silk, color.White, color.Black)
 	maskImage := image.NewSingle(mask, color.Transparent, color.Black)
@@ -165,14 +161,4 @@ func cutMask1(config *config.Config, c *eda.Component, mask *bitmap.Bitmap) {
 
 	// Perforations
 	brush.ForEachPathsPixel(c.Perforations, t, mask.Set1)
-}
-
-func cutMask2(config *config.Config, c *eda.Component, mask *bitmap.Bitmap) {
-	t := c.Transform.Multiply(config.BitmapTransform())
-
-	brush := shape.Circle(int(config.MaskCutWidth * config.PixelsPerMM))
-
-	// Openings
-	shape.ForEachRow(c.Openings, t, mask.Set0)
-	brush.ForEachPathsPixel(c.Openings, t, mask.Set1)
 }

@@ -10,21 +10,19 @@ import (
 
 var (
 	MountHole = &eda.Component{
-		Pads: path.Pie(6, 1.0, 1.3, 15).Transform(transform.RotateDegrees(-30)),
+		Pads: path.Pie(6, 1.1, 1.35, 15).Transform(transform.RotateDegrees(-30)),
 
 		GroundTracks: eda.Tracks(
-			eda.Track{{X: 1.15, Y: 0}}.DX(0.6),
-			eda.Track{{X: -1.15, Y: 0}}.DX(-0.6),
+			eda.Track{{X: 1.2, Y: 0}}.DX(0.6),
+			eda.Track{{X: -1.2, Y: 0}}.DX(-0.6),
 		),
 
-		Openings: path.Paths{path.Circle(2.6)},
-
-		Holes: path.Paths{path.Circle(1.8)},
+		Cuts: path.Paths{path.Circle(1.8)},
 
 		Components: eda.Components{
 			{
 				TrackWidth: 0.15,
-				Tracks:     path.Paths{path.Circle(2.8)},
+				Tracks:     path.Paths{path.Circle(2.6)},
 			},
 		},
 	}
