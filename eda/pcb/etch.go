@@ -122,9 +122,6 @@ func SaveEtch(config *config.Config, component *eda.Component) (*bitmap.Bitmap, 
 func removeEtchCopper(config *config.Config, component *eda.Component, copper *bitmap.Bitmap) {
 	t := component.Transform.Multiply(config.BitmapTransform())
 
-	// Clears
-	shape.ForEachRow(component.Clears, t, copper.Set1)
-
 	clearWidth := 2 * (config.CopperClearWidth - config.ExtraCopperWidth)
 
 	// Pads

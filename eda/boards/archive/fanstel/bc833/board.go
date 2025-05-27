@@ -13,11 +13,10 @@ import (
 )
 
 var (
-	Board      = board(false)
-	ShortBoard = board(true)
+	Board = board()
 )
 
-func board(short bool) *eda.Component {
+func board() *eda.Component {
 	revision := "v1.0"
 
 	header := &eda.Component{
@@ -30,14 +29,12 @@ func board(short bool) *eda.Component {
 
 	pad := header.PadCenters()
 
-	if short {
-		header = &eda.Component{
-			Components: eda.Components{
-				mph100imp40f.G_V_SP(6).Arrange(transform.RotateDegrees(-90).Move(-8.9, -2.9-2.54)),
-				mph100imp40f.G_V_SP(8).Arrange(transform.Move(0, -15.5)),
-				mph100imp40f.G_V_SP(6).Arrange(transform.RotateDegrees(90).Move(8.9, -2.9-2.54)),
-			},
-		}
+	header = &eda.Component{
+		Components: eda.Components{
+			mph100imp40f.G_V_SP(6).Arrange(transform.RotateDegrees(-90).Move(-8.9, -2.9-2.54)),
+			mph100imp40f.G_V_SP(8).Arrange(transform.Move(0, -15.5)),
+			mph100imp40f.G_V_SP(6).Arrange(transform.RotateDegrees(90).Move(8.9, -2.9-2.54)),
+		},
 	}
 
 	pin := fanstel.BC833.PadCenters()
@@ -78,19 +75,17 @@ func board(short bool) *eda.Component {
 	centerLabels := []string{"P020", "P017", "P004", "P005", "P109", "P011", "VDDH", "VBUS"}
 	rightLabels := []string{"D+", "D-", "P015", "P018", "SWD", "SWC", "P009", "P010"}
 
-	if short {
-		tracks[0] = nil
-		tracks[1] = nil
-		tracks[21] = nil
-		tracks[22] = nil
+	tracks[0] = nil
+	tracks[1] = nil
+	tracks[21] = nil
+	tracks[22] = nil
 
-		leftLabels[0] = ""
-		leftLabels[1] = ""
-		rightLabels[6] = ""
-		rightLabels[7] = ""
+	leftLabels[0] = ""
+	leftLabels[1] = ""
+	rightLabels[6] = ""
+	rightLabels[7] = ""
 
-		revision += "s"
-	}
+	revision += "s"
 
 	shiftedBoard := &eda.Component{
 		Components: eda.Components{
@@ -124,19 +119,11 @@ func board(short bool) *eda.Component {
 
 	boardShift := 4.75
 	boardCut := path.RoundRect(21, 24.6, 1)
-	boardClears := path.Paths{
-		path.Rect(21.5, 5.5).Transform(transform.Move(0, 9.7)),
-	}
 
-	if short {
-		boardShift += 2.54
-		boardCut = path.RoundRect(21, 19.5, 1)
-		boardClears = nil
-	}
+	boardShift += 2.54
+	boardCut = path.RoundRect(21, 19.5, 1)
 
 	return &eda.Component{
-		Clears: boardClears,
-
 		Cuts: path.Paths{
 			boardCut,
 		},

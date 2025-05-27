@@ -11,7 +11,6 @@ import (
 )
 
 var testBoard = &eda.Component{
-	//Clears: path.Paths{path.Rect(36, 46)},
 	Components: eda.Components{
 		boards.Board35x45,
 		Board,
