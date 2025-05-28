@@ -1,372 +1,52 @@
 <LightBurnProject>
-	<CutSetting type="Cut">
+	<CutSetting_Img type="Image">
 		<index Value="0"></index>
-		<name Value="Apertures"></name>
+		<name Value="Stencil 1"></name>
 		<priority Value="0"></priority>
-		<speed Value="200"></speed>
-		<numPasses Value=""></numPasses>
-		<globalRepeat Value="20"></globalRepeat>
-		<maxPower Value="90"></maxPower>
-		<QPulseWidth Value="200"></QPulseWidth>
-		<frequency Value="20000"></frequency>
-		<interval Value=""></interval>
-		<dpi Value=""></dpi>
+		<speed Value="500"></speed>
+		<numPasses Value="5"></numPasses>
+		<globalRepeat Value=""></globalRepeat>
+		<maxPower Value="10"></maxPower>
+		<QPulseWidth Value="80"></QPulseWidth>
+		<frequency Value="2000000"></frequency>
+		<interval Value="0.01"></interval>
+		<dpi Value="2540"></dpi>
 		<ditherMode Value=""></ditherMode>
-		<useDotCorrection Value=""></useDotCorrection>
-		<dotWidth Value=""></dotWidth>
+		<useDotCorrection Value="1"></useDotCorrection>
+		<dotWidth Value="0.05"></dotWidth>
 		<tabsEnabled Value=""></tabsEnabled>
 		<tabSize Value=""></tabSize>
-		<crossHatch Value=""></crossHatch>
-		<angle Value=""></angle>
+		<crossHatch Value="1"></crossHatch>
+		<angle Value="90"></angle>
 		<negative Value=""></negative>
-	</CutSetting>
-	<Shape Type="Path" CutIndex="0">
-		<XForm>1 0 0 1 55 55</XForm>
+	</CutSetting_Img>
+	<CutSetting_Img type="Image">
+		<index Value="1"></index>
+		<name Value="Stencil 2"></name>
+		<priority Value="1"></priority>
+		<speed Value="500"></speed>
+		<numPasses Value="5"></numPasses>
+		<globalRepeat Value=""></globalRepeat>
+		<maxPower Value="20"></maxPower>
+		<QPulseWidth Value="80"></QPulseWidth>
+		<frequency Value="2000000"></frequency>
+		<interval Value="0.01"></interval>
+		<dpi Value="2540"></dpi>
+		<ditherMode Value=""></ditherMode>
+		<useDotCorrection Value="1"></useDotCorrection>
+		<dotWidth Value="0.05"></dotWidth>
+		<tabsEnabled Value=""></tabsEnabled>
+		<tabSize Value=""></tabSize>
+		<crossHatch Value="1"></crossHatch>
+		<angle Value="90"></angle>
+		<negative Value=""></negative>
+	</CutSetting_Img>
+	<Shape Type="Bitmap" CutIndex="0" W="490" H="490" Data="iVBORw0KGgoAAAANSUhEUgAAAeoAAAHqAQMAAADxo595AAAABlBMVEX///8AAABVwtN+AAACnUlEQVR4nOycT47qMAyHXXWRJUfIUXq0cjSOwhFYdoHqpwRaKaVuw1hMZ958P7FAkT+SotR/IiuCEEIIIYQQelHUs4gEvYpIo0Ma6sd6vM9gzGDQMf9I/sUqNZrBPoMxg0HzL1apVb2LiKqKSKd6ETmp3mrxoGneRvO8fZ43PhZUpVOet9U8r+Z5u8eCqhTzvEHTvGkNQ15D9V/vxLu87FNednqEe34E/Sa8v7d6laiigwS9dKM0ejtV75t+aBI+Sp/wc0z4NdTjN0n4XbqEyynhl7Yev6ZPHNInjOnT6LkBBwcHBwcHBwcHBwcH38CdhZizDPQVocdW0MeeHjiPPpwHL85jH+ehk/PIy3vghhBCCP0/SrmA6n4UNuzCc3gvhTDs4nN4Lwwbdt1zeC95M+z6aXgnhzDsptGUBm1p3a6Zh7f/esPOibfz8Hb2Ztg58TD9FTv7xrCbK41+D1+1C9M26B7D+qrLmt2ET5swDuUjavmwC7vP4GEFH8A/gpfbwcaNbVNuxvDq8qZlGZu2eBU28NVXpjU21xKve9/fxRdOyMTrfN27+MIBm7jl0Ev3b+NGmCiDj40bQaoMfTZuhMgy8Nq4EaDLsG/jVWmEjVcJHBz8R+NOd+F0Vk5X6XTUzjDhC1LHRthjswtnauROzJ5fuj28sJvxRVJq4nU5LfhvwZ3bhmqCaoJqYh2vEjg4+I/GqSaoJqgmDLywm/FfnRKDU01QTaziVBNUE+Dg4F/GqSaoJv54NaGveqeaMPG6nBb8q/h395g5G+S87Xmu5sBjOxuP7ep0tqR6G2Kd7bjOZmBnK7KzERohhBD6G+L+Ou6v4/467q8DBwcHBwcHBwcHBwf/KM79ddxfx/113F+HEEIIIYTQqv4FAAD//xGuMruoSYc5AAAAAElFTkSuQmCC">
+		<XForm>0.01 0 0 -0.01 55 55</XForm>
 		<Tabs></Tabs>
-		<V vx="-1.25" vy="0.77" c0x="-1.25" c0y="0.825228475"></V>
-		<V vx="-1.35" vy="0.87" c1x="-1.294771525" c1y="0.87"></V>
-		<V vx="-1.85" vy="0.87" c0x="-1.905228475" c0y="0.87"></V>
-		<V vx="-1.95" vy="0.77" c1x="-1.95" c1y="0.825228475"></V>
-		<V vx="-1.95" vy="0.73" c0x="-1.95" c0y="0.674771525"></V>
-		<V vx="-1.85" vy="0.63" c1x="-1.905228475" c1y="0.63"></V>
-		<V vx="-1.35" vy="0.63" c0x="-1.294771525" c0y="0.63"></V>
-		<V vx="-1.25" vy="0.73" c1x="-1.25" c1y="0.674771525"></V>
-		<V vx="-1.25" vy="0.77"></V>
-		<P T="B" p0="0" p1="1"></P>
-		<P T="L" p0="1" p1="2"></P>
-		<P T="B" p0="2" p1="3"></P>
-		<P T="L" p0="3" p1="4"></P>
-		<P T="B" p0="4" p1="5"></P>
-		<P T="L" p0="5" p1="6"></P>
-		<P T="B" p0="6" p1="7"></P>
-		<P T="L" p0="7" p1="8"></P>
 	</Shape>
-	<Shape Type="Path" CutIndex="0">
-		<XForm>1 0 0 1 55 55</XForm>
+	<Shape Type="Bitmap" CutIndex="1" W="490" H="490" Data="iVBORw0KGgoAAAANSUhEUgAAAeoAAAHqAQMAAADxo595AAAABlBMVEX///8AAABVwtN+AAACnUlEQVR4nOycT47qMAyHXXWRJUfIUXq0cjSOwhFYdoHqpwRaKaVuw1hMZ958P7FAkT+SotR/IiuCEEIIIYQQelHUs4gEvYpIo0Ma6sd6vM9gzGDQMf9I/sUqNZrBPoMxg0HzL1apVb2LiKqKSKd6ETmp3mrxoGneRvO8fZ43PhZUpVOet9U8r+Z5u8eCqhTzvEHTvGkNQ15D9V/vxLu87FNednqEe34E/Sa8v7d6laiigwS9dKM0ejtV75t+aBI+Sp/wc0z4NdTjN0n4XbqEyynhl7Yev6ZPHNInjOnT6LkBBwcHBwcHBwcHBwcH38CdhZizDPQVocdW0MeeHjiPPpwHL85jH+ehk/PIy3vghhBCCP0/SrmA6n4UNuzCc3gvhTDs4nN4Lwwbdt1zeC95M+z6aXgnhzDsptGUBm1p3a6Zh7f/esPOibfz8Hb2Ztg58TD9FTv7xrCbK41+D1+1C9M26B7D+qrLmt2ET5swDuUjavmwC7vP4GEFH8A/gpfbwcaNbVNuxvDq8qZlGZu2eBU28NVXpjU21xKve9/fxRdOyMTrfN27+MIBm7jl0Ev3b+NGmCiDj40bQaoMfTZuhMgy8Nq4EaDLsG/jVWmEjVcJHBz8R+NOd+F0Vk5X6XTUzjDhC1LHRthjswtnauROzJ5fuj28sJvxRVJq4nU5LfhvwZ3bhmqCaoJqYh2vEjg4+I/GqSaoJqgmDLywm/FfnRKDU01QTaziVBNUE+Dg4F/GqSaoJv54NaGveqeaMPG6nBb8q/h395g5G+S87Xmu5sBjOxuP7ep0tqR6G2Kd7bjOZmBnK7KzERohhBD6G+L+Ou6v4/467q8DBwcHBwcHBwcHBwf/KM79ddxfx/113F+HEEIIIYTQqv4FAAD//xGuMruoSYc5AAAAAElFTkSuQmCC">
+		<XForm>0.01 0 0 -0.01 55 55</XForm>
 		<Tabs></Tabs>
-		<V vx="-1.25" vy="0.27" c0x="-1.25" c0y="0.325228475"></V>
-		<V vx="-1.35" vy="0.37" c1x="-1.294771525" c1y="0.37"></V>
-		<V vx="-1.85" vy="0.37" c0x="-1.905228475" c0y="0.37"></V>
-		<V vx="-1.95" vy="0.27" c1x="-1.95" c1y="0.325228475"></V>
-		<V vx="-1.95" vy="0.23" c0x="-1.95" c0y="0.174771525"></V>
-		<V vx="-1.85" vy="0.13" c1x="-1.905228475" c1y="0.13"></V>
-		<V vx="-1.35" vy="0.13" c0x="-1.294771525" c0y="0.13"></V>
-		<V vx="-1.25" vy="0.23" c1x="-1.25" c1y="0.174771525"></V>
-		<V vx="-1.25" vy="0.27"></V>
-		<P T="B" p0="0" p1="1"></P>
-		<P T="L" p0="1" p1="2"></P>
-		<P T="B" p0="2" p1="3"></P>
-		<P T="L" p0="3" p1="4"></P>
-		<P T="B" p0="4" p1="5"></P>
-		<P T="L" p0="5" p1="6"></P>
-		<P T="B" p0="6" p1="7"></P>
-		<P T="L" p0="7" p1="8"></P>
-	</Shape>
-	<Shape Type="Path" CutIndex="0">
-		<XForm>1 0 0 1 55 55</XForm>
-		<Tabs></Tabs>
-		<V vx="-1.25" vy="-0.23" c0x="-1.25" c0y="-0.174771525"></V>
-		<V vx="-1.35" vy="-0.13" c1x="-1.294771525" c1y="-0.13"></V>
-		<V vx="-1.85" vy="-0.13" c0x="-1.905228475" c0y="-0.13"></V>
-		<V vx="-1.95" vy="-0.23" c1x="-1.95" c1y="-0.174771525"></V>
-		<V vx="-1.95" vy="-0.27" c0x="-1.95" c0y="-0.325228475"></V>
-		<V vx="-1.85" vy="-0.37" c1x="-1.905228475" c1y="-0.37"></V>
-		<V vx="-1.35" vy="-0.37" c0x="-1.294771525" c0y="-0.37"></V>
-		<V vx="-1.25" vy="-0.27" c1x="-1.25" c1y="-0.325228475"></V>
-		<V vx="-1.25" vy="-0.23"></V>
-		<P T="B" p0="0" p1="1"></P>
-		<P T="L" p0="1" p1="2"></P>
-		<P T="B" p0="2" p1="3"></P>
-		<P T="L" p0="3" p1="4"></P>
-		<P T="B" p0="4" p1="5"></P>
-		<P T="L" p0="5" p1="6"></P>
-		<P T="B" p0="6" p1="7"></P>
-		<P T="L" p0="7" p1="8"></P>
-	</Shape>
-	<Shape Type="Path" CutIndex="0">
-		<XForm>1 0 0 1 55 55</XForm>
-		<Tabs></Tabs>
-		<V vx="-1.25" vy="-0.73" c0x="-1.25" c0y="-0.674771525"></V>
-		<V vx="-1.35" vy="-0.63" c1x="-1.294771525" c1y="-0.63"></V>
-		<V vx="-1.85" vy="-0.63" c0x="-1.905228475" c0y="-0.63"></V>
-		<V vx="-1.95" vy="-0.73" c1x="-1.95" c1y="-0.674771525"></V>
-		<V vx="-1.95" vy="-0.77" c0x="-1.95" c0y="-0.825228475"></V>
-		<V vx="-1.85" vy="-0.87" c1x="-1.905228475" c1y="-0.87"></V>
-		<V vx="-1.35" vy="-0.87" c0x="-1.294771525" c0y="-0.87"></V>
-		<V vx="-1.25" vy="-0.77" c1x="-1.25" c1y="-0.825228475"></V>
-		<V vx="-1.25" vy="-0.73"></V>
-		<P T="B" p0="0" p1="1"></P>
-		<P T="L" p0="1" p1="2"></P>
-		<P T="B" p0="2" p1="3"></P>
-		<P T="L" p0="3" p1="4"></P>
-		<P T="B" p0="4" p1="5"></P>
-		<P T="L" p0="5" p1="6"></P>
-		<P T="B" p0="6" p1="7"></P>
-		<P T="L" p0="7" p1="8"></P>
-	</Shape>
-	<Shape Type="Path" CutIndex="0">
-		<XForm>1 0 0 1 55 55</XForm>
-		<Tabs></Tabs>
-		<V vx="-0.77" vy="-1.25" c0x="-0.825228475" c0y="-1.25"></V>
-		<V vx="-0.87" vy="-1.35" c1x="-0.87" c1y="-1.294771525"></V>
-		<V vx="-0.87" vy="-1.85" c0x="-0.87" c0y="-1.905228475"></V>
-		<V vx="-0.77" vy="-1.95" c1x="-0.825228475" c1y="-1.95"></V>
-		<V vx="-0.73" vy="-1.95" c0x="-0.674771525" c0y="-1.95"></V>
-		<V vx="-0.63" vy="-1.85" c1x="-0.63" c1y="-1.905228475"></V>
-		<V vx="-0.63" vy="-1.35" c0x="-0.63" c0y="-1.294771525"></V>
-		<V vx="-0.73" vy="-1.25" c1x="-0.674771525" c1y="-1.25"></V>
-		<V vx="-0.77" vy="-1.25"></V>
-		<P T="B" p0="0" p1="1"></P>
-		<P T="L" p0="1" p1="2"></P>
-		<P T="B" p0="2" p1="3"></P>
-		<P T="L" p0="3" p1="4"></P>
-		<P T="B" p0="4" p1="5"></P>
-		<P T="L" p0="5" p1="6"></P>
-		<P T="B" p0="6" p1="7"></P>
-		<P T="L" p0="7" p1="8"></P>
-	</Shape>
-	<Shape Type="Path" CutIndex="0">
-		<XForm>1 0 0 1 55 55</XForm>
-		<Tabs></Tabs>
-		<V vx="-0.27" vy="-1.25" c0x="-0.325228475" c0y="-1.25"></V>
-		<V vx="-0.37" vy="-1.35" c1x="-0.37" c1y="-1.294771525"></V>
-		<V vx="-0.37" vy="-1.85" c0x="-0.37" c0y="-1.905228475"></V>
-		<V vx="-0.27" vy="-1.95" c1x="-0.325228475" c1y="-1.95"></V>
-		<V vx="-0.23" vy="-1.95" c0x="-0.174771525" c0y="-1.95"></V>
-		<V vx="-0.13" vy="-1.85" c1x="-0.13" c1y="-1.905228475"></V>
-		<V vx="-0.13" vy="-1.35" c0x="-0.13" c0y="-1.294771525"></V>
-		<V vx="-0.23" vy="-1.25" c1x="-0.174771525" c1y="-1.25"></V>
-		<V vx="-0.27" vy="-1.25"></V>
-		<P T="B" p0="0" p1="1"></P>
-		<P T="L" p0="1" p1="2"></P>
-		<P T="B" p0="2" p1="3"></P>
-		<P T="L" p0="3" p1="4"></P>
-		<P T="B" p0="4" p1="5"></P>
-		<P T="L" p0="5" p1="6"></P>
-		<P T="B" p0="6" p1="7"></P>
-		<P T="L" p0="7" p1="8"></P>
-	</Shape>
-	<Shape Type="Path" CutIndex="0">
-		<XForm>1 0 0 1 55 55</XForm>
-		<Tabs></Tabs>
-		<V vx="0.23" vy="-1.25" c0x="0.174771525" c0y="-1.25"></V>
-		<V vx="0.13" vy="-1.35" c1x="0.13" c1y="-1.294771525"></V>
-		<V vx="0.13" vy="-1.85" c0x="0.13" c0y="-1.905228475"></V>
-		<V vx="0.23" vy="-1.95" c1x="0.174771525" c1y="-1.95"></V>
-		<V vx="0.27" vy="-1.95" c0x="0.325228475" c0y="-1.95"></V>
-		<V vx="0.37" vy="-1.85" c1x="0.37" c1y="-1.905228475"></V>
-		<V vx="0.37" vy="-1.35" c0x="0.37" c0y="-1.294771525"></V>
-		<V vx="0.27" vy="-1.25" c1x="0.325228475" c1y="-1.25"></V>
-		<V vx="0.23" vy="-1.25"></V>
-		<P T="B" p0="0" p1="1"></P>
-		<P T="L" p0="1" p1="2"></P>
-		<P T="B" p0="2" p1="3"></P>
-		<P T="L" p0="3" p1="4"></P>
-		<P T="B" p0="4" p1="5"></P>
-		<P T="L" p0="5" p1="6"></P>
-		<P T="B" p0="6" p1="7"></P>
-		<P T="L" p0="7" p1="8"></P>
-	</Shape>
-	<Shape Type="Path" CutIndex="0">
-		<XForm>1 0 0 1 55 55</XForm>
-		<Tabs></Tabs>
-		<V vx="0.73" vy="-1.25" c0x="0.674771525" c0y="-1.25"></V>
-		<V vx="0.63" vy="-1.35" c1x="0.63" c1y="-1.294771525"></V>
-		<V vx="0.63" vy="-1.85" c0x="0.63" c0y="-1.905228475"></V>
-		<V vx="0.73" vy="-1.95" c1x="0.674771525" c1y="-1.95"></V>
-		<V vx="0.77" vy="-1.95" c0x="0.825228475" c0y="-1.95"></V>
-		<V vx="0.87" vy="-1.85" c1x="0.87" c1y="-1.905228475"></V>
-		<V vx="0.87" vy="-1.35" c0x="0.87" c0y="-1.294771525"></V>
-		<V vx="0.77" vy="-1.25" c1x="0.825228475" c1y="-1.25"></V>
-		<V vx="0.73" vy="-1.25"></V>
-		<P T="B" p0="0" p1="1"></P>
-		<P T="L" p0="1" p1="2"></P>
-		<P T="B" p0="2" p1="3"></P>
-		<P T="L" p0="3" p1="4"></P>
-		<P T="B" p0="4" p1="5"></P>
-		<P T="L" p0="5" p1="6"></P>
-		<P T="B" p0="6" p1="7"></P>
-		<P T="L" p0="7" p1="8"></P>
-	</Shape>
-	<Shape Type="Path" CutIndex="0">
-		<XForm>1 0 0 1 55 55</XForm>
-		<Tabs></Tabs>
-		<V vx="1.25" vy="-0.77" c0x="1.25" c0y="-0.825228475"></V>
-		<V vx="1.35" vy="-0.87" c1x="1.294771525" c1y="-0.87"></V>
-		<V vx="1.85" vy="-0.87" c0x="1.905228475" c0y="-0.87"></V>
-		<V vx="1.95" vy="-0.77" c1x="1.95" c1y="-0.825228475"></V>
-		<V vx="1.95" vy="-0.73" c0x="1.95" c0y="-0.674771525"></V>
-		<V vx="1.85" vy="-0.63" c1x="1.905228475" c1y="-0.63"></V>
-		<V vx="1.35" vy="-0.63" c0x="1.294771525" c0y="-0.63"></V>
-		<V vx="1.25" vy="-0.73" c1x="1.25" c1y="-0.674771525"></V>
-		<V vx="1.25" vy="-0.77"></V>
-		<P T="B" p0="0" p1="1"></P>
-		<P T="L" p0="1" p1="2"></P>
-		<P T="B" p0="2" p1="3"></P>
-		<P T="L" p0="3" p1="4"></P>
-		<P T="B" p0="4" p1="5"></P>
-		<P T="L" p0="5" p1="6"></P>
-		<P T="B" p0="6" p1="7"></P>
-		<P T="L" p0="7" p1="8"></P>
-	</Shape>
-	<Shape Type="Path" CutIndex="0">
-		<XForm>1 0 0 1 55 55</XForm>
-		<Tabs></Tabs>
-		<V vx="1.25" vy="-0.27" c0x="1.25" c0y="-0.325228475"></V>
-		<V vx="1.35" vy="-0.37" c1x="1.294771525" c1y="-0.37"></V>
-		<V vx="1.85" vy="-0.37" c0x="1.905228475" c0y="-0.37"></V>
-		<V vx="1.95" vy="-0.27" c1x="1.95" c1y="-0.325228475"></V>
-		<V vx="1.95" vy="-0.23" c0x="1.95" c0y="-0.174771525"></V>
-		<V vx="1.85" vy="-0.13" c1x="1.905228475" c1y="-0.13"></V>
-		<V vx="1.35" vy="-0.13" c0x="1.294771525" c0y="-0.13"></V>
-		<V vx="1.25" vy="-0.23" c1x="1.25" c1y="-0.174771525"></V>
-		<V vx="1.25" vy="-0.27"></V>
-		<P T="B" p0="0" p1="1"></P>
-		<P T="L" p0="1" p1="2"></P>
-		<P T="B" p0="2" p1="3"></P>
-		<P T="L" p0="3" p1="4"></P>
-		<P T="B" p0="4" p1="5"></P>
-		<P T="L" p0="5" p1="6"></P>
-		<P T="B" p0="6" p1="7"></P>
-		<P T="L" p0="7" p1="8"></P>
-	</Shape>
-	<Shape Type="Path" CutIndex="0">
-		<XForm>1 0 0 1 55 55</XForm>
-		<Tabs></Tabs>
-		<V vx="1.25" vy="0.23" c0x="1.25" c0y="0.174771525"></V>
-		<V vx="1.35" vy="0.13" c1x="1.294771525" c1y="0.13"></V>
-		<V vx="1.85" vy="0.13" c0x="1.905228475" c0y="0.13"></V>
-		<V vx="1.95" vy="0.23" c1x="1.95" c1y="0.174771525"></V>
-		<V vx="1.95" vy="0.27" c0x="1.95" c0y="0.325228475"></V>
-		<V vx="1.85" vy="0.37" c1x="1.905228475" c1y="0.37"></V>
-		<V vx="1.35" vy="0.37" c0x="1.294771525" c0y="0.37"></V>
-		<V vx="1.25" vy="0.27" c1x="1.25" c1y="0.325228475"></V>
-		<V vx="1.25" vy="0.23"></V>
-		<P T="B" p0="0" p1="1"></P>
-		<P T="L" p0="1" p1="2"></P>
-		<P T="B" p0="2" p1="3"></P>
-		<P T="L" p0="3" p1="4"></P>
-		<P T="B" p0="4" p1="5"></P>
-		<P T="L" p0="5" p1="6"></P>
-		<P T="B" p0="6" p1="7"></P>
-		<P T="L" p0="7" p1="8"></P>
-	</Shape>
-	<Shape Type="Path" CutIndex="0">
-		<XForm>1 0 0 1 55 55</XForm>
-		<Tabs></Tabs>
-		<V vx="1.25" vy="0.73" c0x="1.25" c0y="0.674771525"></V>
-		<V vx="1.35" vy="0.63" c1x="1.294771525" c1y="0.63"></V>
-		<V vx="1.85" vy="0.63" c0x="1.905228475" c0y="0.63"></V>
-		<V vx="1.95" vy="0.73" c1x="1.95" c1y="0.674771525"></V>
-		<V vx="1.95" vy="0.77" c0x="1.95" c0y="0.825228475"></V>
-		<V vx="1.85" vy="0.87" c1x="1.905228475" c1y="0.87"></V>
-		<V vx="1.35" vy="0.87" c0x="1.294771525" c0y="0.87"></V>
-		<V vx="1.25" vy="0.77" c1x="1.25" c1y="0.825228475"></V>
-		<V vx="1.25" vy="0.73"></V>
-		<P T="B" p0="0" p1="1"></P>
-		<P T="L" p0="1" p1="2"></P>
-		<P T="B" p0="2" p1="3"></P>
-		<P T="L" p0="3" p1="4"></P>
-		<P T="B" p0="4" p1="5"></P>
-		<P T="L" p0="5" p1="6"></P>
-		<P T="B" p0="6" p1="7"></P>
-		<P T="L" p0="7" p1="8"></P>
-	</Shape>
-	<Shape Type="Path" CutIndex="0">
-		<XForm>1 0 0 1 55 55</XForm>
-		<Tabs></Tabs>
-		<V vx="0.77" vy="1.25" c0x="0.825228475" c0y="1.25"></V>
-		<V vx="0.87" vy="1.35" c1x="0.87" c1y="1.294771525"></V>
-		<V vx="0.87" vy="1.85" c0x="0.87" c0y="1.905228475"></V>
-		<V vx="0.77" vy="1.95" c1x="0.825228475" c1y="1.95"></V>
-		<V vx="0.73" vy="1.95" c0x="0.674771525" c0y="1.95"></V>
-		<V vx="0.63" vy="1.85" c1x="0.63" c1y="1.905228475"></V>
-		<V vx="0.63" vy="1.35" c0x="0.63" c0y="1.294771525"></V>
-		<V vx="0.73" vy="1.25" c1x="0.674771525" c1y="1.25"></V>
-		<V vx="0.77" vy="1.25"></V>
-		<P T="B" p0="0" p1="1"></P>
-		<P T="L" p0="1" p1="2"></P>
-		<P T="B" p0="2" p1="3"></P>
-		<P T="L" p0="3" p1="4"></P>
-		<P T="B" p0="4" p1="5"></P>
-		<P T="L" p0="5" p1="6"></P>
-		<P T="B" p0="6" p1="7"></P>
-		<P T="L" p0="7" p1="8"></P>
-	</Shape>
-	<Shape Type="Path" CutIndex="0">
-		<XForm>1 0 0 1 55 55</XForm>
-		<Tabs></Tabs>
-		<V vx="0.27" vy="1.25" c0x="0.325228475" c0y="1.25"></V>
-		<V vx="0.37" vy="1.35" c1x="0.37" c1y="1.294771525"></V>
-		<V vx="0.37" vy="1.85" c0x="0.37" c0y="1.905228475"></V>
-		<V vx="0.27" vy="1.95" c1x="0.325228475" c1y="1.95"></V>
-		<V vx="0.23" vy="1.95" c0x="0.174771525" c0y="1.95"></V>
-		<V vx="0.13" vy="1.85" c1x="0.13" c1y="1.905228475"></V>
-		<V vx="0.13" vy="1.35" c0x="0.13" c0y="1.294771525"></V>
-		<V vx="0.23" vy="1.25" c1x="0.174771525" c1y="1.25"></V>
-		<V vx="0.27" vy="1.25"></V>
-		<P T="B" p0="0" p1="1"></P>
-		<P T="L" p0="1" p1="2"></P>
-		<P T="B" p0="2" p1="3"></P>
-		<P T="L" p0="3" p1="4"></P>
-		<P T="B" p0="4" p1="5"></P>
-		<P T="L" p0="5" p1="6"></P>
-		<P T="B" p0="6" p1="7"></P>
-		<P T="L" p0="7" p1="8"></P>
-	</Shape>
-	<Shape Type="Path" CutIndex="0">
-		<XForm>1 0 0 1 55 55</XForm>
-		<Tabs></Tabs>
-		<V vx="-0.23" vy="1.25" c0x="-0.174771525" c0y="1.25"></V>
-		<V vx="-0.13" vy="1.35" c1x="-0.13" c1y="1.294771525"></V>
-		<V vx="-0.13" vy="1.85" c0x="-0.13" c0y="1.905228475"></V>
-		<V vx="-0.23" vy="1.95" c1x="-0.174771525" c1y="1.95"></V>
-		<V vx="-0.27" vy="1.95" c0x="-0.325228475" c0y="1.95"></V>
-		<V vx="-0.37" vy="1.85" c1x="-0.37" c1y="1.905228475"></V>
-		<V vx="-0.37" vy="1.35" c0x="-0.37" c0y="1.294771525"></V>
-		<V vx="-0.27" vy="1.25" c1x="-0.325228475" c1y="1.25"></V>
-		<V vx="-0.23" vy="1.25"></V>
-		<P T="B" p0="0" p1="1"></P>
-		<P T="L" p0="1" p1="2"></P>
-		<P T="B" p0="2" p1="3"></P>
-		<P T="L" p0="3" p1="4"></P>
-		<P T="B" p0="4" p1="5"></P>
-		<P T="L" p0="5" p1="6"></P>
-		<P T="B" p0="6" p1="7"></P>
-		<P T="L" p0="7" p1="8"></P>
-	</Shape>
-	<Shape Type="Path" CutIndex="0">
-		<XForm>1 0 0 1 55 55</XForm>
-		<Tabs></Tabs>
-		<V vx="-0.73" vy="1.25" c0x="-0.674771525" c0y="1.25"></V>
-		<V vx="-0.63" vy="1.35" c1x="-0.63" c1y="1.294771525"></V>
-		<V vx="-0.63" vy="1.85" c0x="-0.63" c0y="1.905228475"></V>
-		<V vx="-0.73" vy="1.95" c1x="-0.674771525" c1y="1.95"></V>
-		<V vx="-0.77" vy="1.95" c0x="-0.825228475" c0y="1.95"></V>
-		<V vx="-0.87" vy="1.85" c1x="-0.87" c1y="1.905228475"></V>
-		<V vx="-0.87" vy="1.35" c0x="-0.87" c0y="1.294771525"></V>
-		<V vx="-0.77" vy="1.25" c1x="-0.825228475" c1y="1.25"></V>
-		<V vx="-0.73" vy="1.25"></V>
-		<P T="B" p0="0" p1="1"></P>
-		<P T="L" p0="1" p1="2"></P>
-		<P T="B" p0="2" p1="3"></P>
-		<P T="L" p0="3" p1="4"></P>
-		<P T="B" p0="4" p1="5"></P>
-		<P T="L" p0="5" p1="6"></P>
-		<P T="B" p0="6" p1="7"></P>
-		<P T="L" p0="7" p1="8"></P>
-	</Shape>
-	<Shape Type="Path" CutIndex="0">
-		<XForm>1 0 0 1 55 55</XForm>
-		<Tabs></Tabs>
-		<V vx="0.75" vy="0.75"></V>
-		<V vx="0.75" vy="-0.75"></V>
-		<V vx="-0.75" vy="-0.75"></V>
-		<V vx="-0.75" vy="0.75"></V>
-		<V vx="0.75" vy="0.75"></V>
-		<P T="L" p0="0" p1="1"></P>
-		<P T="L" p0="1" p1="2"></P>
-		<P T="L" p0="2" p1="3"></P>
-		<P T="L" p0="3" p1="4"></P>
 	</Shape>
 </LightBurnProject>

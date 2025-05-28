@@ -21,7 +21,7 @@ func Process(initialConfig *config.Config, defaultComponent *eda.Component) erro
 		},
 	}
 
-	var copper, mask, silk *bitmap.Bitmap
+	var copper, mask, silk, stencil *bitmap.Bitmap
 
 	err := util.RunConcurrently(
 		func() error {
@@ -35,14 +35,16 @@ func Process(initialConfig *config.Config, defaultComponent *eda.Component) erro
 			return e
 		},
 		func() error {
-			return SaveStencil(&config, component)
+			var e error
+			stencil, e = SaveStencil(&config, component)
+			return e
 		},
 	)
 	if err != nil {
 		return err
 	}
 
-	return SaveOverview(&config, component, copper, mask, silk)
+	return SaveOverview(&config, copper, mask, silk, stencil)
 }
 
 func setMissingConfigSize(config *config.Config, component *eda.Component) {
