@@ -9,14 +9,16 @@ import (
 )
 
 var (
-	Holes34x42 *eda.Component
-	Holes72x42 *eda.Component
+	Guides34x42 *eda.Component
+	Guides72x42 *eda.Component
 )
 
 func init() {
 	hole := path.Circle(2.1)
 
-	Holes34x42 = &eda.Component{
+	Guides34x42 = &eda.Component{
+		OuterCut: true,
+
 		Cuts: path.Paths{
 			hole.Transform(transform.Move(-17, 19)),
 			hole.Transform(transform.Move(-17, -21)),
@@ -25,7 +27,9 @@ func init() {
 		},
 	}
 
-	Holes72x42 = &eda.Component{
+	Guides72x42 = &eda.Component{
+		OuterCut: true,
+
 		Cuts: path.Paths{
 			hole.Transform(transform.Move(-36, 19)),
 			hole.Transform(transform.Move(-36, -21)),

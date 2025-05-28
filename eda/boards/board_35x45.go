@@ -20,6 +20,8 @@ func init() {
 	key := path.Paths{path.Circle(0.6).Transform(transform.Move(-16.25, 21.25))}
 
 	Board35x45 = &eda.Component{
+		OuterCut: true,
+
 		Cuts: path.Paths{
 			path.RoundRect(35, 45, 2.5),
 		},

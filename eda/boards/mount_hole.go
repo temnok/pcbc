@@ -16,16 +16,16 @@ var (
 
 		Components: eda.Components{
 			{
-				TrackWidth: 0.15,
-				Tracks:     path.Paths{path.Circle(2.6)},
+				TrackWidth: 0.28,
+				Tracks:     path.Paths{path.Circle(2.45)},
 			},
 
 			{
 				NoClear: true,
 
 				Tracks: eda.Tracks(
-					eda.Track{{X: 1.2, Y: 0}}.DX(0.6),
-					eda.Track{{X: -1.2, Y: 0}}.DX(-0.6),
+					eda.Track{{X: 1.2, Y: 0}}.DX(0.5),
+					eda.Track{{X: -1.2, Y: 0}}.DX(-0.5),
 				),
 			},
 		},

@@ -17,6 +17,8 @@ type Component struct {
 
 	Cuts path.Paths
 
+	OuterCut bool
+
 	Marks path.Paths
 
 	Pads path.Paths
@@ -48,12 +50,13 @@ func (c *Component) visit(t transform.T, parent *Component, callback func(*Compo
 	comp := &Component{
 		Transform:  t,
 		Cuts:       c.Cuts,
+		OuterCut:   c.OuterCut || parent.OuterCut,
 		Pads:       c.Pads,
 		Tracks:     c.Tracks,
 		Marks:      c.Marks,
 		TrackWidth: c.TrackWidth,
 		ClearWidth: c.ClearWidth,
-		NoClear:    c.NoClear,
+		NoClear:    c.NoClear || parent.NoClear,
 	}
 
 	if comp.TrackWidth == 0 {
