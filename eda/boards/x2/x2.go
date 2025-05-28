@@ -16,22 +16,21 @@ func X2_I0603(topLabel, bottomLabel string) *eda.Component {
 }
 
 func X2(topLabel, bottomLabel string, chip *eda.Component) *eda.Component {
-	logo := boards.Logo.Arrange(transform.ScaleUniformly(0.7).Move(1.7, 1.35))
-	firm := boards.Firm.Arrange(transform.ScaleUniformly(0.4).Move(1.7, -1.5))
-	rev := boards.Rev(2025, 5, 27).Arrange(transform.RotateDegrees(90).ScaleUniformly(0.5).Move(4.6, 0))
+	logo := boards.Logo.Arrange(transform.ScaleUniformly(0.7).Move(0.8, 1.35))
+	//firm := boards.Firm.Arrange(transform.ScaleUniformly(0.5).Move(1.2, -1.4))
+	rev := boards.Rev(2025, 5, 28).Arrange(transform.RotateDegrees(90).ScaleUniformly(0.5).Move(4.6, 0))
 
 	header := greenconn.CSCC118(3, false, []string{topLabel, "GND", bottomLabel}).Arrange(transform.Move(-2, 0))
 	pad := header.PadCenters()
 
-	chip = chip.Arrange(transform.RotateDegrees(-90).Move(0.85, 0))
+	chip = chip.Arrange(transform.RotateDegrees(-90).Move(0.85, -0.45))
 	pin := chip.PadCenters()
 
-	mount := boards.MountHole.Arrange(transform.Move(3, 0))
-	sink := mount.PadCenters()
+	mount := boards.MountHole.Arrange(transform.RotateDegrees(90).Move(3, 0))
 
 	return &eda.Component{
 		Cuts: path.Paths{
-			path.RoundRect(10, 4, 1),
+			path.RoundRect(10, 4, 0.5),
 		},
 
 		Components: eda.Components{
@@ -40,7 +39,7 @@ func X2(topLabel, bottomLabel string, chip *eda.Component) *eda.Component {
 			mount,
 
 			logo,
-			firm,
+			//firm,
 			rev,
 
 			{
@@ -49,8 +48,6 @@ func X2(topLabel, bottomLabel string, chip *eda.Component) *eda.Component {
 				Tracks: eda.Tracks(
 					eda.Track{pad[1]}.DX(-1.2),
 					eda.Track{pad[1]}.DX(1.2),
-					eda.Track{sink[2]}.DX(-0.5).DY(0.5),
-					eda.Track{sink[4]}.DX(-0.5).DY(-0.5),
 				),
 			},
 		},
