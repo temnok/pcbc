@@ -16,7 +16,7 @@ func X2_I0603(topLabel, bottomLabel string) *eda.Component {
 }
 
 func X2(topLabel, bottomLabel string, chip *eda.Component) *eda.Component {
-	logo := boards.Logo.Arrange(transform.ScaleUniformly(0.7).Move(0.8, 1.35))
+	logo := boards.Logo.Arrange(transform.ScaleUniformly(0.8).Move(0.8, 1.3))
 	//firm := boards.Firm.Arrange(transform.ScaleUniformly(0.5).Move(1.2, -1.4))
 	rev := boards.Rev(2025, 5, 28).Arrange(transform.RotateDegrees(90).ScaleUniformly(0.5).Move(4.6, 0))
 
@@ -26,7 +26,7 @@ func X2(topLabel, bottomLabel string, chip *eda.Component) *eda.Component {
 	chip = chip.Arrange(transform.RotateDegrees(-90).Move(0.85, -0.45))
 	pin := chip.PadCenters()
 
-	mount := boards.MountHole.Arrange(transform.RotateDegrees(90).Move(3, 0))
+	mount := boards.MountHole.Arrange(transform.RotateDegrees(45).Move(3, 0))
 
 	return &eda.Component{
 		Cuts: path.Paths{

@@ -26,6 +26,8 @@ var (
 				Tracks: eda.Tracks(
 					eda.Track{{X: 1.2, Y: 0}}.DX(0.5),
 					eda.Track{{X: -1.2, Y: 0}}.DX(-0.5),
+					eda.Track{{X: 0, Y: 1.2}}.DY(0.5),
+					eda.Track{{X: 0, Y: -1.2}}.DY(-0.5),
 				),
 			},
 		},

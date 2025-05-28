@@ -1,10 +1,31 @@
 <LightBurnProject>
+	<CutSetting type="Scan">
+		<index Value="1"></index>
+		<name Value="Clean"></name>
+		<priority Value="1"></priority>
+		<speed Value="800"></speed>
+		<numPasses Value="1"></numPasses>
+		<globalRepeat Value=""></globalRepeat>
+		<maxPower Value="5"></maxPower>
+		<QPulseWidth Value="200"></QPulseWidth>
+		<frequency Value="20000"></frequency>
+		<interval Value="0.02"></interval>
+		<dpi Value="1270"></dpi>
+		<ditherMode Value=""></ditherMode>
+		<useDotCorrection Value=""></useDotCorrection>
+		<dotWidth Value=""></dotWidth>
+		<tabsEnabled Value=""></tabsEnabled>
+		<tabSize Value=""></tabSize>
+		<crossHatch Value="1"></crossHatch>
+		<angle Value=""></angle>
+		<negative Value=""></negative>
+	</CutSetting>
 	<CutSetting type="Cut">
-		<index Value="2"></index>
+		<index Value="3"></index>
 		<name Value="FR4 Cut"></name>
-		<priority Value="2"></priority>
+		<priority Value="3"></priority>
 		<speed Value="100"></speed>
-		<numPasses Value=""></numPasses>
+		<numPasses Value="1"></numPasses>
 		<globalRepeat Value="50"></globalRepeat>
 		<maxPower Value="90"></maxPower>
 		<QPulseWidth Value="200"></QPulseWidth>
@@ -14,22 +35,22 @@
 		<ditherMode Value=""></ditherMode>
 		<useDotCorrection Value=""></useDotCorrection>
 		<dotWidth Value=""></dotWidth>
-		<tabsEnabled Value="1"></tabsEnabled>
-		<tabSize Value="0.1"></tabSize>
+		<tabsEnabled Value=""></tabsEnabled>
+		<tabSize Value=""></tabSize>
 		<crossHatch Value=""></crossHatch>
 		<angle Value=""></angle>
 		<negative Value=""></negative>
 	</CutSetting>
 	<CutSetting_Img type="Image">
 		<index Value="0"></index>
-		<name Value="Etch"></name>
+		<name Value="Remove Pi13/Si13"></name>
 		<priority Value="0"></priority>
-		<speed Value="600"></speed>
-		<numPasses Value=""></numPasses>
+		<speed Value="400"></speed>
+		<numPasses Value="3"></numPasses>
 		<globalRepeat Value=""></globalRepeat>
-		<maxPower Value="20"></maxPower>
-		<QPulseWidth Value="200"></QPulseWidth>
-		<frequency Value="20000"></frequency>
+		<maxPower Value="30"></maxPower>
+		<QPulseWidth Value="30"></QPulseWidth>
+		<frequency Value="3000000"></frequency>
 		<interval Value="0.01"></interval>
 		<dpi Value="2540"></dpi>
 		<ditherMode Value=""></ditherMode>
@@ -37,61 +58,36 @@
 		<dotWidth Value="0.05"></dotWidth>
 		<tabsEnabled Value=""></tabsEnabled>
 		<tabSize Value=""></tabSize>
-		<crossHatch Value=""></crossHatch>
-		<angle Value=""></angle>
+		<crossHatch Value="1"></crossHatch>
+		<angle Value="-90"></angle>
 		<negative Value="1"></negative>
 	</CutSetting_Img>
 	<CutSetting_Img type="Image">
-		<index Value="1"></index>
-		<name Value="Clean 1"></name>
-		<priority Value="1"></priority>
-		<speed Value="2000"></speed>
-		<numPasses Value=""></numPasses>
+		<index Value="2"></index>
+		<name Value="Clean Cu"></name>
+		<priority Value="2"></priority>
+		<speed Value="400"></speed>
+		<numPasses Value="2"></numPasses>
 		<globalRepeat Value=""></globalRepeat>
-		<maxPower Value="50"></maxPower>
+		<maxPower Value="25"></maxPower>
 		<QPulseWidth Value="2"></QPulseWidth>
 		<frequency Value="280000"></frequency>
 		<interval Value="0.01"></interval>
 		<dpi Value="2540"></dpi>
 		<ditherMode Value=""></ditherMode>
 		<useDotCorrection Value="1"></useDotCorrection>
-		<dotWidth Value="0.15"></dotWidth>
+		<dotWidth Value="0.05"></dotWidth>
 		<tabsEnabled Value=""></tabsEnabled>
 		<tabSize Value=""></tabSize>
-		<crossHatch Value=""></crossHatch>
-		<angle Value=""></angle>
-		<negative Value="1"></negative>
-	</CutSetting_Img>
-	<CutSetting_Img type="Image">
-		<index Value="3"></index>
-		<name Value="Clean 2"></name>
-		<priority Value="3"></priority>
-		<speed Value="2000"></speed>
-		<numPasses Value=""></numPasses>
-		<globalRepeat Value=""></globalRepeat>
-		<maxPower Value="50"></maxPower>
-		<QPulseWidth Value="2"></QPulseWidth>
-		<frequency Value="280000"></frequency>
-		<interval Value="0.01"></interval>
-		<dpi Value="2540"></dpi>
-		<ditherMode Value=""></ditherMode>
-		<useDotCorrection Value="1"></useDotCorrection>
-		<dotWidth Value="0.15"></dotWidth>
-		<tabsEnabled Value=""></tabsEnabled>
-		<tabSize Value=""></tabSize>
-		<crossHatch Value=""></crossHatch>
-		<angle Value="90"></angle>
+		<crossHatch Value="1"></crossHatch>
+		<angle Value="-90"></angle>
 		<negative Value="1"></negative>
 	</CutSetting_Img>
 	<Shape Type="Bitmap" CutIndex="0" W="363" H="300" Data="iVBORw0KGgoAAAANSUhEUgAAAWsAAAEsAQMAAAA/1QDvAAAABlBMVEUAAAD///+l2Z/dAAAA70lEQVR4nOyaMQrDMBAEFVKkzBP8FD/Nfpqfkie4dBGidNIeXLMhIQLPVmYYDqGrvKgQQgghJ8ylthyCrx3vqk+d17XjWbDqi/BHx0LrVnK+Z0cMUwI/sqOHwwf+bPiWT4n81fA9nxJ5Te9LpkTeb3LOp7h65Fu2DV3fUHrkbd01n1IW+Z5U1wOovsrKRNe7RkdHR0dHR0dHR0dHR0cfXTf/hs1/bUsfqlYw9d/2M2ZZZFZRZtFl1mhmSedWgDSG+RQaQxpDdHR0dHR0dHR0dHR0dPTPdRrDr+g0hn9qDM0nieaDR0IIIeQseQcAAP//rEAV5ufR1q8AAAAASUVORK5CYII=">
 		<XForm>0.01 0 0 -0.01 55 55</XForm>
 		<Tabs></Tabs>
 	</Shape>
-	<Shape Type="Bitmap" CutIndex="1" W="363" H="300" Data="iVBORw0KGgoAAAANSUhEUgAAAWsAAAEsAQMAAAA/1QDvAAAABlBMVEUAAAD///+l2Z/dAAAA70lEQVR4nOyaMQrDMBAEFVKkzBP8FD/Nfpqfkie4dBGidNIeXLMhIQLPVmYYDqGrvKgQQgghJ8ylthyCrx3vqk+d17XjWbDqi/BHx0LrVnK+Z0cMUwI/sqOHwwf+bPiWT4n81fA9nxJ5Te9LpkTeb3LOp7h65Fu2DV3fUHrkbd01n1IW+Z5U1wOovsrKRNe7RkdHR0dHR0dHR0dHR0cfXTf/hs1/bUsfqlYw9d/2M2ZZZFZRZtFl1mhmSedWgDSG+RQaQxpDdHR0dHR0dHR0dHR0dPTPdRrDr+g0hn9qDM0nieaDR0IIIeQseQcAAP//rEAV5ufR1q8AAAAASUVORK5CYII=">
-		<XForm>0.01 0 0 -0.01 55 55</XForm>
-		<Tabs></Tabs>
-	</Shape>
-	<Shape Type="Bitmap" CutIndex="3" W="363" H="300" Data="iVBORw0KGgoAAAANSUhEUgAAAWsAAAEsAQMAAAA/1QDvAAAABlBMVEUAAAD///+l2Z/dAAAA70lEQVR4nOyaMQrDMBAEFVKkzBP8FD/Nfpqfkie4dBGidNIeXLMhIQLPVmYYDqGrvKgQQgghJ8ylthyCrx3vqk+d17XjWbDqi/BHx0LrVnK+Z0cMUwI/sqOHwwf+bPiWT4n81fA9nxJ5Te9LpkTeb3LOp7h65Fu2DV3fUHrkbd01n1IW+Z5U1wOovsrKRNe7RkdHR0dHR0dHR0dHR0cfXTf/hs1/bUsfqlYw9d/2M2ZZZFZRZtFl1mhmSedWgDSG+RQaQxpDdHR0dHR0dHR0dHR0dPTPdRrDr+g0hn9qDM0nieaDR0IIIeQseQcAAP//rEAV5ufR1q8AAAAASUVORK5CYII=">
+	<Shape Type="Bitmap" CutIndex="2" W="363" H="300" Data="iVBORw0KGgoAAAANSUhEUgAAAWsAAAEsAQMAAAA/1QDvAAAABlBMVEUAAAD///+l2Z/dAAAA70lEQVR4nOyaMQrDMBAEFVKkzBP8FD/Nfpqfkie4dBGidNIeXLMhIQLPVmYYDqGrvKgQQgghJ8ylthyCrx3vqk+d17XjWbDqi/BHx0LrVnK+Z0cMUwI/sqOHwwf+bPiWT4n81fA9nxJ5Te9LpkTeb3LOp7h65Fu2DV3fUHrkbd01n1IW+Z5U1wOovsrKRNe7RkdHR0dHR0dHR0dHR0cfXTf/hs1/bUsfqlYw9d/2M2ZZZFZRZtFl1mhmSedWgDSG+RQaQxpDdHR0dHR0dHR0dHR0dPTPdRrDr+g0hn9qDM0nieaDR0IIIeQseQcAAP//rEAV5ufR1q8AAAAASUVORK5CYII=">
 		<XForm>0.01 0 0 -0.01 55 55</XForm>
 		<Tabs></Tabs>
 	</Shape>
