@@ -28,9 +28,6 @@ type Component struct {
 	// Add: copper strokes
 	Tracks path.Paths
 
-	// Add: copper strokes
-	GroundTracks path.Paths
-
 	// Add: mark strokes
 	Marks path.Paths
 
@@ -53,14 +50,13 @@ func (c *Component) visit(t transform.T, parent *Component, callback func(*Compo
 	}
 
 	comp := &Component{
-		Transform:    t,
-		Cuts:         c.Cuts,
-		Pads:         c.Pads,
-		Tracks:       c.Tracks,
-		GroundTracks: c.GroundTracks,
-		Marks:        c.Marks,
-		TrackWidth:   c.TrackWidth,
-		NoClear:      c.NoClear || parent.NoClear,
+		Transform:  t,
+		Cuts:       c.Cuts,
+		Pads:       c.Pads,
+		Tracks:     c.Tracks,
+		Marks:      c.Marks,
+		TrackWidth: c.TrackWidth,
+		NoClear:    c.NoClear,
 	}
 
 	if comp.TrackWidth == 0 {
@@ -109,7 +105,6 @@ func (c *Component) Size() (float64, float64) {
 		b.AddPaths(c.Transform, c.Cuts)
 		b.AddPaths(c.Transform, c.Pads)
 		b.AddPaths(c.Transform, c.Tracks)
-		b.AddPaths(c.Transform, c.GroundTracks)
 		b.AddPaths(c.Transform, c.Marks)
 	})
 

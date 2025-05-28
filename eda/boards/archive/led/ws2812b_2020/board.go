@@ -43,7 +43,11 @@ func init() {
 		eda.Track{pad[4]}.DY(-1.5).XY(pad[6]),
 	)
 
-	Board.GroundTracks = eda.Tracks(
-		eda.Track{pad[2]}.DY(0.5).XY(pad[9]),
-	)
+	Board.Components = append(Board.Components, &eda.Component{
+		NoClear: true,
+
+		Tracks: eda.Tracks(
+			eda.Track{pad[2]}.DY(0.5).XY(pad[9]),
+		),
+	})
 }

@@ -33,6 +33,14 @@ var (
 
 			eda.CenteredText("PY32").Arrange(transform.Scale(1.3, 2.8).Move(-5, 2.5)),
 			eda.CenteredText("F002A").Arrange(transform.Scale(1.1, 2.8).Move(-5, -2.5)),
+
+			{
+				NoClear: true,
+
+				Tracks: eda.Tracks(
+					eda.Track{pin[7]}.DY(-1).DY(2),
+				),
+			},
 		},
 
 		Tracks: eda.Tracks(
@@ -43,10 +51,6 @@ var (
 			eda.Track{pin[4]}.YX(pad[0]),
 			eda.Track{pin[5]}.DY(-0.8).DY(-0.3).DX(2.2).YX(pad[1]),
 			eda.Track{pin[6]}.DY(-0.8).YX(pad[2]),
-		),
-
-		GroundTracks: eda.Tracks(
-			eda.Track{pin[7]}.DY(-1).DY(2),
 		),
 	}
 )

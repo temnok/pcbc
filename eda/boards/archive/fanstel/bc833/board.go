@@ -98,14 +98,18 @@ func board() *eda.Component {
 			eda.CenteredText(revision).Arrange(transform.Scale(0.75, 1).Move(-5, -8.1)),
 			eda.CenteredText("BC833").Arrange(transform.ScaleUniformly(2).Move(0, -10.4)),
 			eda.CenteredText("nRF52833").Arrange(transform.ScaleUniformly(1.5).Move(0, -12.2)),
+
+			{
+				NoClear: true,
+
+				Tracks: eda.Tracks(
+					eda.Track{pad[7]}.DX(2.1).YX(pin[5]),
+					eda.Track{pin[5]}.DX(3).YX(pin[27]).XY(pin[25]).XY(pin[26]).YX(pin[28]).XY(pin[27]),
+				),
+			},
 		},
 
 		Tracks: tracks,
-
-		GroundTracks: eda.Tracks(
-			eda.Track{pad[7]}.DX(2.1).YX(pin[5]),
-			eda.Track{pin[5]}.DX(3).YX(pin[27]).XY(pin[25]).XY(pin[26]).YX(pin[28]).XY(pin[27]),
-		),
 
 		Marks: path.Join(
 			font.CenteredRow(labelShift, leftLabels...).

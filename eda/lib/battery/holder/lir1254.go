@@ -15,12 +15,18 @@ var LIR1254 = &eda.Component{
 
 	TrackWidth: 0.25,
 
-	GroundTracks: eda.Tracks(
-		eda.Track{{X: -2, Y: -2}, {X: 2, Y: 2}},
-		eda.Track{{X: 2, Y: -2}, {X: -2, Y: 2}},
-	),
-
 	Marks: path.Paths{
 		path.Circle(12),
+	},
+
+	Components: eda.Components{
+		{
+			NoClear: true,
+			
+			Tracks: eda.Tracks(
+				eda.Track{{X: -2, Y: -2}, {X: 2, Y: 2}},
+				eda.Track{{X: 2, Y: -2}, {X: -2, Y: 2}},
+			),
+		},
 	},
 }

@@ -66,6 +66,16 @@ var (
 			boards.Logo.Arrange(transform.Move(-4.8, -6.5)),
 			eda.CenteredText("MS88SF21").Arrange(transform.Scale(1.8, 1.8).Move(1.3, -5.9)),
 			eda.CenteredText("nRF52840").Arrange(transform.ScaleUniformly(1.8).Move(1.3, -7.4)),
+
+			{
+				NoClear: true,
+
+				Tracks: eda.Tracks(
+					eda.Track{pin[1]}.DX(1.5),
+					eda.Track{pin[1]}.DX(-1.5),
+					eda.Track{pad[8]}.DX(1.7).Y(pin[13].Y-1.4).YX(pin[13]),
+				),
+			},
 		},
 
 		Tracks: eda.Tracks(
@@ -99,12 +109,6 @@ var (
 			eda.Track{pad[25]}.YX(pin[26]),
 			eda.Track{pad[26]}.YX(pin[27]),
 			eda.Track{pad[27]}.YX(pin[28]),
-		),
-
-		GroundTracks: eda.Tracks(
-			eda.Track{pin[1]}.DX(1.5),
-			eda.Track{pin[1]}.DX(-1.5),
-			eda.Track{pad[8]}.DX(1.7).Y(pin[13].Y-1.4).YX(pin[13]),
 		),
 	}
 )
