@@ -36,6 +36,8 @@ type Component struct {
 
 	TrackWidth float64
 
+	NoClear bool
+
 	Components []*Component
 }
 
@@ -58,6 +60,7 @@ func (c *Component) visit(t transform.T, parent *Component, callback func(*Compo
 		GroundTracks: c.GroundTracks,
 		Marks:        c.Marks,
 		TrackWidth:   c.TrackWidth,
+		NoClear:      c.NoClear || parent.NoClear,
 	}
 
 	if comp.TrackWidth == 0 {

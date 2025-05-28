@@ -120,6 +120,10 @@ func SaveEtch(config *config.Config, component *eda.Component) (*bitmap.Bitmap, 
 }
 
 func removeEtchCopper(config *config.Config, component *eda.Component, copper *bitmap.Bitmap) {
+	if component.NoClear {
+		return
+	}
+
 	t := component.Transform.Multiply(config.BitmapTransform())
 
 	clearWidth := 2 * (config.CopperClearWidth - config.ExtraCopperWidth)
