@@ -10,9 +10,10 @@ type Config struct {
 	Width, Height float64
 	PixelsPerMM   float64
 
-	TrackWidth       float64
+	TrackWidth float64
+	ClearWidth float64
+
 	ExtraCopperWidth float64
-	CopperClearWidth float64
 	MaskCutWidth     float64
 	OverviewCutWidth float64
 
@@ -26,7 +27,7 @@ func Default() *Config {
 		PixelsPerMM: 100,
 
 		TrackWidth:       0.2,
-		CopperClearWidth: 0.2,
+		ClearWidth:       0.2,
 		ExtraCopperWidth: 0.03,
 
 		MaskCutWidth:     0.1,

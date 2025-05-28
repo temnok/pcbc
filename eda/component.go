@@ -15,23 +15,19 @@ type Components = []*Component
 type Component struct {
 	Transform transform.T
 
-	// Remove: copper strokes
-	// Cut: substrate (leave tabs)
 	Cuts path.Paths
 
-	// Remove: copper strokes, mask strokes
-	// Add: copper shapes
-	// Cut: stencil
-	Pads path.Paths
-
-	// Remove: copper strokes
-	// Add: copper strokes
-	Tracks path.Paths
-
-	// Add: mark strokes
 	Marks path.Paths
 
+	Pads path.Paths
+
+	Tracks path.Paths
+
+	// zero value is replaced with parent component's value
 	TrackWidth float64
+
+	// zero value is replaced with parent component's value
+	ClearWidth float64
 
 	NoClear bool
 
@@ -56,11 +52,16 @@ func (c *Component) visit(t transform.T, parent *Component, callback func(*Compo
 		Tracks:     c.Tracks,
 		Marks:      c.Marks,
 		TrackWidth: c.TrackWidth,
+		ClearWidth: c.ClearWidth,
 		NoClear:    c.NoClear,
 	}
 
 	if comp.TrackWidth == 0 {
 		comp.TrackWidth = parent.TrackWidth
+	}
+
+	if comp.ClearWidth == 0 {
+		comp.ClearWidth = parent.ClearWidth
 	}
 
 	callback(comp)

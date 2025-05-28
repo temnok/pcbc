@@ -126,19 +126,18 @@ func removeEtchCopper(config *config.Config, component *eda.Component, copper *b
 
 	t := component.Transform.Multiply(config.BitmapTransform())
 
-	clearWidth := 2 * (config.CopperClearWidth - config.ExtraCopperWidth)
+	clearWidth := 2 * (component.ClearWidth - config.ExtraCopperWidth)
+	clearBrush := shape.Circle(int(clearWidth * config.PixelsPerMM))
+
+	// Cuts
+	clearBrush.ForEachPathsPixel(component.Cuts, t, copper.Set1)
 
 	// Pads
-	padClearBrush := shape.Circle(int(clearWidth * config.PixelsPerMM))
-	padClearBrush.ForEachPathsPixel(component.Pads, t, copper.Set1)
+	clearBrush.ForEachPathsPixel(component.Pads, t, copper.Set1)
 
 	// Tracks
 	brush := shape.Circle(int((component.TrackWidth + clearWidth) * config.PixelsPerMM))
 	brush.ForEachPathsPixel(component.Tracks, t, copper.Set1)
-
-	clearBrush := shape.Circle(int(clearWidth * config.PixelsPerMM))
-	clearBrush = shape.Circle(int(config.CopperClearWidth * config.PixelsPerMM))
-	clearBrush.ForEachPathsPixel(component.Cuts, t, copper.Set1)
 }
 
 func addEtchCopper(config *config.Config, component *eda.Component, copper *bitmap.Bitmap) {

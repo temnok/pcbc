@@ -9,17 +9,16 @@ import (
 	"temnok/pcbc/util"
 )
 
-func Process(initialConfig *config.Config, component *eda.Component) error {
+func Process(initialConfig *config.Config, defaultComponent *eda.Component) error {
 	config := *initialConfig
-	setMissingConfigSize(&config, component)
+	setMissingConfigSize(&config, defaultComponent)
 
-	if component.TrackWidth == 0 {
-		component = &eda.Component{
-			TrackWidth: config.TrackWidth,
-			Components: eda.Components{
-				component,
-			},
-		}
+	component := &eda.Component{
+		TrackWidth: config.TrackWidth,
+		ClearWidth: config.ClearWidth,
+		Components: eda.Components{
+			defaultComponent,
+		},
 	}
 
 	var copper, mask, silk *bitmap.Bitmap
