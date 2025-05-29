@@ -4,13 +4,16 @@ import (
 	"temnok/pcbc/eda"
 	"temnok/pcbc/eda/lib/pkg/smd"
 	"temnok/pcbc/eda/pcb"
+	"temnok/pcbc/eda/pcb/config"
 	"temnok/pcbc/path"
 	"temnok/pcbc/transform"
 	"testing"
 )
 
 func TestBoard(t *testing.T) {
-	pcb.ProcessWithDefaultConfig(&eda.Component{
+	conf := config.Default()
+
+	pcb.Process(conf, &eda.Component{
 		Components: eda.Components{
 			X2("R ", "1R0", smd.I0201),
 

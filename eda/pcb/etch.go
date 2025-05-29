@@ -9,6 +9,7 @@ import (
 	"temnok/pcbc/eda"
 	"temnok/pcbc/eda/pcb/config"
 	"temnok/pcbc/lbrn"
+	"temnok/pcbc/path"
 	"temnok/pcbc/shape"
 )
 
@@ -24,7 +25,7 @@ var etchBitmapSettings = []*lbrn.CutSetting{
 		QPulseWidth: lbrn.Param{Value: "30"},
 		Frequency:   lbrn.Param{Value: "3000000"},
 
-		NumPasses: lbrn.Param{Value: "3"},
+		NumPasses: lbrn.Param{Value: "4"},
 		Speed:     lbrn.Param{Value: "400"},
 		Interval:  lbrn.Param{Value: "0.01"},
 		DPI:       lbrn.Param{Value: "2540"},
@@ -41,7 +42,7 @@ var etchBitmapSettings = []*lbrn.CutSetting{
 		Priority: lbrn.Param{Value: "2"},
 		Negative: lbrn.Param{Value: "1"},
 
-		MaxPower:    lbrn.Param{Value: "25"},
+		MaxPower:    lbrn.Param{Value: "30"},
 		QPulseWidth: lbrn.Param{Value: "2"},
 		Frequency:   lbrn.Param{Value: "280000"},
 
@@ -60,7 +61,7 @@ var etchBitmapSettings = []*lbrn.CutSetting{
 var etchCutSettings = []*lbrn.CutSetting{
 	{
 		Type:     "Scan",
-		Name:     lbrn.Param{Value: "Clean"},
+		Name:     lbrn.Param{Value: "Clean 1"},
 		Index:    lbrn.Param{Value: "1"},
 		Priority: lbrn.Param{Value: "1"},
 
@@ -87,9 +88,22 @@ var etchCutSettings = []*lbrn.CutSetting{
 		NumPasses:    lbrn.Param{Value: "1"},
 		GlobalRepeat: lbrn.Param{Value: "50"},
 		Speed:        lbrn.Param{Value: "100"},
+	},
+	{
+		Type:     "Scan",
+		Name:     lbrn.Param{Value: "Clean 2"},
+		Index:    lbrn.Param{Value: "4"},
+		Priority: lbrn.Param{Value: "4"},
 
-		//TabsEnabled: lbrn.Param{Value: "1"},
-		//TabSize:     lbrn.Param{Value: "0.1"},
+		MaxPower:    lbrn.Param{Value: "5"},
+		QPulseWidth: lbrn.Param{Value: "200"},
+		Frequency:   lbrn.Param{Value: "20000"},
+
+		CrossHatch: lbrn.Param{Value: "1"},
+		NumPasses:  lbrn.Param{Value: "1"},
+		Speed:      lbrn.Param{Value: "800"},
+		Interval:   lbrn.Param{Value: "0.02"},
+		DPI:        lbrn.Param{Value: "1270"},
 	},
 }
 
@@ -119,6 +133,8 @@ func SaveEtch(config *config.Config, component *eda.Component) (*bitmap.Bitmap, 
 		}, cuts...),
 	}
 
+	addCleanPasses(config, p)
+
 	return copper, p.SaveToFile(filename)
 }
 
@@ -130,17 +146,18 @@ func removeEtchCopper(config *config.Config, component *eda.Component, copper *b
 	t := component.Transform.Multiply(config.BitmapTransform())
 
 	clearWidth := 2 * (component.ClearWidth - config.ExtraCopperWidth)
-	clearBrush := shape.Circle(int(clearWidth * config.PixelsPerMM))
 
 	// Cuts
-	clearBrush.ForEachPathsPixel(component.Cuts, t, copper.Set1)
+	cutBrush := shape.Circle(int((clearWidth / 2) * config.PixelsPerMM))
+	cutBrush.ForEachPathsPixel(component.Cuts, t, copper.Set1)
 
 	// Pads
-	clearBrush.ForEachPathsPixel(component.Pads, t, copper.Set1)
+	padBrush := shape.Circle(int(clearWidth * config.PixelsPerMM))
+	padBrush.ForEachPathsPixel(component.Pads, t, copper.Set1)
 
 	// Tracks
-	brush := shape.Circle(int((component.TrackWidth + clearWidth) * config.PixelsPerMM))
-	brush.ForEachPathsPixel(component.Tracks, t, copper.Set1)
+	trackBrush := shape.Circle(int((component.TrackWidth + clearWidth) * config.PixelsPerMM))
+	trackBrush.ForEachPathsPixel(component.Tracks, t, copper.Set1)
 }
 
 func addEtchCopper(config *config.Config, component *eda.Component, copper *bitmap.Bitmap) {
@@ -163,9 +180,14 @@ func addEtchCuts(config *config.Config, component *eda.Component, cuts *[]*lbrn.
 	for _, cut := range component.Cuts {
 		//*cuts = append(*cuts, lbrn.NewPathWithTabs(2, t, cut))
 		*cuts = append(*cuts, lbrn.NewPath(3, t, cut))
-
-		if component.OuterCut {
-			*cuts = append(*cuts, lbrn.NewPath(1, t, cut))
-		}
 	}
+}
+
+func addCleanPasses(config *config.Config, p *lbrn.LightBurnProject) {
+	t := config.LbrnCenterMove()
+	boardBounds := path.Rect(config.Width, config.Height)
+	p.Shape = append(p.Shape,
+		lbrn.NewPath(1, t, boardBounds),
+		lbrn.NewPath(4, t, boardBounds),
+	)
 }

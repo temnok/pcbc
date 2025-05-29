@@ -28,7 +28,7 @@ func Default() *Config {
 
 		TrackWidth:       0.2,
 		ClearWidth:       0.2,
-		ExtraCopperWidth: 0.03,
+		ExtraCopperWidth: 0.05,
 
 		MaskCutWidth:     0.1,
 		OverviewCutWidth: 0.02,
