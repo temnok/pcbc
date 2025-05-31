@@ -14,7 +14,7 @@ var (
 	M0603 = &eda.Component{
 		Pads: path.Rect(0.25, 0.35).Clone(2, 0.55, 0),
 		Marks: path.Paths{
-			path.Rect(0.6, 0.3),
+			path.Rect(0.8, 0.5),
 		},
 	}
 
@@ -22,7 +22,7 @@ var (
 	M1005 = &eda.Component{
 		Pads: path.Rect(0.5, 0.6).Clone(2, 1, 0),
 		Marks: path.Paths{
-			path.Rect(1.0, 0.5),
+			path.Rect(1.2, 0.7),
 		},
 	}
 
@@ -30,7 +30,7 @@ var (
 	M1608 = &eda.Component{
 		Pads: path.Rect(0.6, 0.9).Clone(2, 1.5, 0),
 		Marks: path.Paths{
-			path.Rect(1.6, 0.8),
+			path.Rect(1.8, 1.0),
 		},
 	}
 )

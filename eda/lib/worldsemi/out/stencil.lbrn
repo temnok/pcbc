@@ -41,11 +41,11 @@
 		<angle Value="90"></angle>
 		<negative Value=""></negative>
 	</CutSetting_Img>
-	<Shape Type="Bitmap" CutIndex="0" W="363" H="300" Data="iVBORw0KGgoAAAANSUhEUgAAAWsAAAEsAQMAAAA/1QDvAAAABlBMVEX///8AAABVwtN+AAAAjklEQVR4nOzYMQoCMRCGUcXC0vvfziNYWoQoNmYgisRlYQbeV4Wfh50syUGSJEm/e7y7hfU45mvUp7G3MJ/HfN/Aw97DfPn8K/h33ufTi7f5hOM4juM4juM4npWnumYV5vve5BefFSQVae2v7cWwBk/1kcdxHMdxHMdxHP+Lp7pmFeZeDCVJkgr0DAAA//+is6+gDnnfnQAAAABJRU5ErkJggg==">
+	<Shape Type="Bitmap" CutIndex="0" W="363" H="300" Data="iVBORw0KGgoAAAANSUhEUgAAAWsAAAEsAQMAAAA/1QDvAAAABlBMVEX///8AAABVwtN+AAAAZ0lEQVR4nOzYIQ6AMAyGURIEkvvflQCGiaIL+SHvuXWfX7MJAABesxxDGa9jusu/mF/n+ZZv9Voul8vlcrlc/vs8akuV9+QA8Liol0/ux1Aul8vlcrlc3ppHbanynhwAAIKcAQAA//9mDZKXJZu7WgAAAABJRU5ErkJggg==">
 		<XForm>0.01 0 0 -0.01 55 55</XForm>
 		<Tabs></Tabs>
 	</Shape>
-	<Shape Type="Bitmap" CutIndex="1" W="363" H="300" Data="iVBORw0KGgoAAAANSUhEUgAAAWsAAAEsAQMAAAA/1QDvAAAABlBMVEX///8AAABVwtN+AAAAjklEQVR4nOzYMQoCMRCGUcXC0vvfziNYWoQoNmYgisRlYQbeV4Wfh50syUGSJEm/e7y7hfU45mvUp7G3MJ/HfN/Aw97DfPn8K/h33ufTi7f5hOM4juM4juM4npWnumYV5vve5BefFSQVae2v7cWwBk/1kcdxHMdxHMdxHP+Lp7pmFeZeDCVJkgr0DAAA//+is6+gDnnfnQAAAABJRU5ErkJggg==">
+	<Shape Type="Bitmap" CutIndex="1" W="363" H="300" Data="iVBORw0KGgoAAAANSUhEUgAAAWsAAAEsAQMAAAA/1QDvAAAABlBMVEX///8AAABVwtN+AAAAZ0lEQVR4nOzYIQ6AMAyGURIEkvvflQCGiaIL+SHvuXWfX7MJAABesxxDGa9jusu/mF/n+ZZv9Voul8vlcrlc/vs8akuV9+QA8Liol0/ux1Aul8vlcrlc3ppHbanynhwAAIKcAQAA//9mDZKXJZu7WgAAAABJRU5ErkJggg==">
 		<XForm>0.01 0 0 -0.01 55 55</XForm>
 		<Tabs></Tabs>
 	</Shape>

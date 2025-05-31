@@ -12,6 +12,8 @@ import (
 
 func TestBoard(t *testing.T) {
 	conf := config.Default()
+	//conf.ExtraCopperWidth = 0
+	//conf.StencilPadDist = 0.05
 
 	pcb.Process(conf, &eda.Component{
 		Components: eda.Components{

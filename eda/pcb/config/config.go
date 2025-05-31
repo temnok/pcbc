@@ -15,7 +15,7 @@ type Config struct {
 
 	ExtraCopperWidth float64
 	MaskCutWidth     float64
-	OverviewCutWidth float64
+	StencilPadDist   float64
 
 	LbrnCenterX, LbrnCenterY float64
 
@@ -30,8 +30,8 @@ func Default() *Config {
 		ClearWidth:       0.2,
 		ExtraCopperWidth: 0.05,
 
-		MaskCutWidth:     0.1,
-		OverviewCutWidth: 0.02,
+		MaskCutWidth:   0.1,
+		StencilPadDist: 0.025,
 
 		LbrnCenterX: 55,
 		LbrnCenterY: 55,

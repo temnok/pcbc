@@ -58,15 +58,60 @@ var stencilCutSettings = []*lbrn.CutSetting{
 func SaveStencil(config *config.Config, component *eda.Component) (*bitmap.Bitmap, error) {
 	stencil := bitmap.New(config.BitmapSizeInPixels())
 
-	brush := shape.Circle(int(config.MaskCutWidth * config.PixelsPerMM))
+	bmT := config.BitmapTransform()
+
+	// Pass 1: draw pads
 	component.Visit(func(c *eda.Component) {
-		t := c.Transform.Multiply(config.BitmapTransform())
-
-		brush.ForEachPathsPixel(c.Pads, t, stencil.Set1)
-
 		if c.OuterCut {
-			brush.ForEachPathsPixel(c.Cuts, t, stencil.Set1)
+			return
 		}
+
+		t := c.Transform.Multiply(bmT)
+		shape.ForEachRow(c.Pads, t, stencil.Set1)
+	})
+
+	// Pass 2
+	if config.StencilPadDist > 0 {
+		component.Visit(func(c *eda.Component) {
+			if c.OuterCut {
+				return
+			}
+
+			brushD := 2 * config.StencilPadDist
+			brush := shape.Circle(int(brushD * config.PixelsPerMM))
+
+			t := c.Transform.Multiply(bmT)
+			brush.ForEachPathsPixel(c.Pads, t, stencil.Set0)
+		})
+	}
+
+	savedBitmap := stencil.Clone()
+
+	// Pass 3
+	component.Visit(func(c *eda.Component) {
+		if c.OuterCut {
+			return
+		}
+
+		clearWidth := 2 * (config.StencilPadDist + config.MaskCutWidth)
+		brush := shape.Circle(int(clearWidth * config.PixelsPerMM))
+
+		t := c.Transform.Multiply(bmT)
+		brush.ForEachPathsPixel(c.Pads, t, stencil.Set0)
+	})
+
+	// Pass 4
+	stencil.Xor(savedBitmap)
+
+	// Pass 5
+	outerCutBrush := shape.Circle(int(config.MaskCutWidth * config.PixelsPerMM))
+	component.Visit(func(c *eda.Component) {
+		if !c.OuterCut {
+			return
+		}
+
+		t := c.Transform.Multiply(bmT)
+		outerCutBrush.ForEachPathsPixel(c.Cuts, t, stencil.Set1)
 	})
 
 	stencilImage := image.NewSingle(stencil, color.White, color.Black)

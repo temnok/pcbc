@@ -21,6 +21,14 @@ func New(w, h int) *Bitmap {
 	return b
 }
 
+func (b *Bitmap) Clone() *Bitmap {
+	return &Bitmap{
+		width:  b.width,
+		height: b.height,
+		words:  append([]word{}, b.words...),
+	}
+}
+
 func (b *Bitmap) Width() int {
 	return b.width
 }
@@ -84,6 +92,13 @@ func (b *Bitmap) Set(x0, x1, y, bit int) {
 
 func (b *Bitmap) Get(x, y int) int {
 	return int(b.words[b.addr(x, y)]>>(x%64)) & 1
+}
+
+func (b *Bitmap) Xor(a *Bitmap) {
+	n := min(len(a.words), len(b.words))
+	for i, w := range a.words[:n] {
+		b.words[i] ^= w
+	}
 }
 
 func (b *Bitmap) addr(x, y int) int {
