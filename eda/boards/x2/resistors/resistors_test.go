@@ -13,7 +13,7 @@ import (
 
 func TestBoard(t *testing.T) {
 	r := func(label string) *eda.Component {
-		return x2.X2_I0603("R ", label)
+		return x2.X2_I0402("R ", label)
 	}
 
 	assert.NoError(t, pcb.ProcessWithDefaultConfig(&eda.Component{

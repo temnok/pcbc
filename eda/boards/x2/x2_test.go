@@ -17,16 +17,22 @@ func TestBoard(t *testing.T) {
 	//conf.ExtraCopperWidth = 0
 	//conf.StencilPadDist = 0.05
 
+	hole := path.Circle(1)
+
 	pcb.Process(conf, &eda.Component{
 		Components: eda.Components{
-			X2("R ", "1R0", smd.I0201),
+			X2("R ", "10K", smd.I0201).Arrange(transform.Move(0, 2.25)),
+			X2("R ", "1K0", smd.I0402).Arrange(transform.Move(0, -2.25)),
 
 			{
 				OuterCut: true,
 				Cuts: path.Paths{
-					path.RoundRect(12, 7, 1),
-					path.Circle(1).Transform(transform.Move(-5, 2.5)),
-					path.Circle(1).Transform(transform.Move(5, -2.5)),
+					path.RoundRect(12, 12, 1),
+
+					hole.Transform(transform.Move(-5, -5)),
+					hole.Transform(transform.Move(-5, 5)),
+					hole.Transform(transform.Move(5, -5)),
+					hole.Transform(transform.Move(5, 5)),
 				},
 			},
 		},
