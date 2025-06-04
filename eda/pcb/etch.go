@@ -87,7 +87,15 @@ var etchCutSettings = []*lbrn.CutSetting{
 
 		NumPasses:    &lbrn.Param{Value: "1"},
 		GlobalRepeat: &lbrn.Param{Value: "50"},
-		Speed:        &lbrn.Param{Value: "100"},
+		Speed:        &lbrn.Param{Value: "120"},
+
+		SubLayer: &lbrn.SubLayer{
+			Type:  "Cut",
+			Index: "1",
+
+			MaxPower: &lbrn.Param{Value: "1"},
+			Speed:    &lbrn.Param{Value: "12"},
+		},
 	},
 	{
 		Type:     "Scan",
