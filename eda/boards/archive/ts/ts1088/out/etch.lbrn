@@ -39,8 +39,10 @@
 		<QPulseWidth Value="200"></QPulseWidth>
 		<frequency Value="20000"></frequency>
 		<SubLayer type="Cut" index="1">
-			<speed Value="12"></speed>
+			<speed Value="24"></speed>
 			<maxPower Value="1"></maxPower>
+			<QPulseWidth Value="30"></QPulseWidth>
+			<frequency Value="3000000"></frequency>
 		</SubLayer>
 	</CutSetting>
 	<CutSetting type="Scan">

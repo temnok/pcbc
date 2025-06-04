@@ -94,7 +94,10 @@ var etchCutSettings = []*lbrn.CutSetting{
 			Index: "1",
 
 			MaxPower: &lbrn.Param{Value: "1"},
-			Speed:    &lbrn.Param{Value: "12"},
+			Speed:    &lbrn.Param{Value: "24"},
+
+			QPulseWidth: &lbrn.Param{Value: "30"},
+			Frequency:   &lbrn.Param{Value: "3000000"},
 		},
 	},
 	{
