@@ -1,24 +1,32 @@
 <LightBurnProject>
+	<UIPrefs>
+		<Optimize_ByLayer Value="0"></Optimize_ByLayer>
+		<Optimize_ByGroup Value="-1"></Optimize_ByGroup>
+		<Optimize_ByPriority Value="1"></Optimize_ByPriority>
+		<Optimize_WhichDirection Value="0"></Optimize_WhichDirection>
+		<Optimize_InnerToOuter Value="1"></Optimize_InnerToOuter>
+		<Optimize_ByDirection Value="0"></Optimize_ByDirection>
+		<Optimize_ReduceTravel Value="1"></Optimize_ReduceTravel>
+		<Optimize_HideBacklash Value="0"></Optimize_HideBacklash>
+		<Optimize_ReduceDirChanges Value="0"></Optimize_ReduceDirChanges>
+		<Optimize_ChooseCorners Value="0"></Optimize_ChooseCorners>
+		<Optimize_AllowReverse Value="1"></Optimize_AllowReverse>
+		<Optimize_RemoveOverlaps Value="0"></Optimize_RemoveOverlaps>
+		<Optimize_OptimalEntryPoint Value="1"></Optimize_OptimalEntryPoint>
+		<Optimize_OverlapDist Value="0.025"></Optimize_OverlapDist>
+	</UIPrefs>
 	<CutSetting type="Scan">
 		<index Value="1"></index>
 		<name Value="Clean 1"></name>
 		<priority Value="1"></priority>
 		<speed Value="800"></speed>
 		<numPasses Value="1"></numPasses>
-		<globalRepeat Value=""></globalRepeat>
 		<maxPower Value="5"></maxPower>
 		<QPulseWidth Value="200"></QPulseWidth>
 		<frequency Value="20000"></frequency>
 		<interval Value="0.02"></interval>
 		<dpi Value="1270"></dpi>
-		<ditherMode Value=""></ditherMode>
-		<useDotCorrection Value=""></useDotCorrection>
-		<dotWidth Value=""></dotWidth>
-		<tabsEnabled Value=""></tabsEnabled>
-		<tabSize Value=""></tabSize>
 		<crossHatch Value="1"></crossHatch>
-		<angle Value=""></angle>
-		<negative Value=""></negative>
 	</CutSetting>
 	<CutSetting type="Cut">
 		<index Value="3"></index>
@@ -30,16 +38,6 @@
 		<maxPower Value="90"></maxPower>
 		<QPulseWidth Value="200"></QPulseWidth>
 		<frequency Value="20000"></frequency>
-		<interval Value=""></interval>
-		<dpi Value=""></dpi>
-		<ditherMode Value=""></ditherMode>
-		<useDotCorrection Value=""></useDotCorrection>
-		<dotWidth Value=""></dotWidth>
-		<tabsEnabled Value=""></tabsEnabled>
-		<tabSize Value=""></tabSize>
-		<crossHatch Value=""></crossHatch>
-		<angle Value=""></angle>
-		<negative Value=""></negative>
 	</CutSetting>
 	<CutSetting type="Scan">
 		<index Value="4"></index>
@@ -47,20 +45,12 @@
 		<priority Value="4"></priority>
 		<speed Value="800"></speed>
 		<numPasses Value="1"></numPasses>
-		<globalRepeat Value=""></globalRepeat>
 		<maxPower Value="5"></maxPower>
 		<QPulseWidth Value="200"></QPulseWidth>
 		<frequency Value="20000"></frequency>
 		<interval Value="0.02"></interval>
 		<dpi Value="1270"></dpi>
-		<ditherMode Value=""></ditherMode>
-		<useDotCorrection Value=""></useDotCorrection>
-		<dotWidth Value=""></dotWidth>
-		<tabsEnabled Value=""></tabsEnabled>
-		<tabSize Value=""></tabSize>
 		<crossHatch Value="1"></crossHatch>
-		<angle Value=""></angle>
-		<negative Value=""></negative>
 	</CutSetting>
 	<CutSetting_Img type="Image">
 		<index Value="0"></index>
@@ -68,17 +58,13 @@
 		<priority Value="0"></priority>
 		<speed Value="400"></speed>
 		<numPasses Value="4"></numPasses>
-		<globalRepeat Value=""></globalRepeat>
 		<maxPower Value="30"></maxPower>
 		<QPulseWidth Value="30"></QPulseWidth>
 		<frequency Value="3000000"></frequency>
 		<interval Value="0.01"></interval>
 		<dpi Value="2540"></dpi>
-		<ditherMode Value=""></ditherMode>
 		<useDotCorrection Value="1"></useDotCorrection>
 		<dotWidth Value="0.05"></dotWidth>
-		<tabsEnabled Value=""></tabsEnabled>
-		<tabSize Value=""></tabSize>
 		<crossHatch Value="1"></crossHatch>
 		<angle Value="-90"></angle>
 		<negative Value="1"></negative>
@@ -89,32 +75,25 @@
 		<priority Value="2"></priority>
 		<speed Value="400"></speed>
 		<numPasses Value="2"></numPasses>
-		<globalRepeat Value=""></globalRepeat>
 		<maxPower Value="30"></maxPower>
 		<QPulseWidth Value="2"></QPulseWidth>
 		<frequency Value="280000"></frequency>
 		<interval Value="0.01"></interval>
 		<dpi Value="2540"></dpi>
-		<ditherMode Value=""></ditherMode>
 		<useDotCorrection Value="1"></useDotCorrection>
 		<dotWidth Value="0.05"></dotWidth>
-		<tabsEnabled Value=""></tabsEnabled>
-		<tabSize Value=""></tabSize>
 		<crossHatch Value="1"></crossHatch>
 		<angle Value="-90"></angle>
 		<negative Value="1"></negative>
 	</CutSetting_Img>
 	<Shape Type="Bitmap" CutIndex="0" W="490" H="490" Data="iVBORw0KGgoAAAANSUhEUgAAAeoAAAHqAQMAAADxo595AAAABlBMVEUAAAD///+l2Z/dAAAEqUlEQVR4nOycTY7jNhCFSzEQ7eIsswiGN4lvFnmXa+kGfYXODQz0RgtBFbBEy6JUJZdRM5nB9HsLoZuoj6L5Jz6aFkEQBEEQBP3wunBPRGe+EdGJx5zE7KYb5oGIOp6IKDFfiVrmdy/ecgYbFrATMM05upQEbDmDOZNBMpm8eCdgEjBnMkkmuSgu5dgbXZh5pHP+h0752vtoudUgZZikDHzNZfDWndxqlDKwlIH781wgl+RWk5SBr53cN80FckluxVIG7uV6u8wFckluxf/I9V+5DlIGZ8sF8QvfqOM3HinxBzO1PDL3jbfX5wGT+I1v1PIHj9RkPHcmH97xVarvXZpwkG405Vx93S7fppVe1syt3UmtJyeeb3Wa+/jc1y5ShrOz1+Zb5fvOg6eXprjlAjnxQYbNJLWYy3CWMpx8eGPirjHTyNjopI8m+QitfIQGOHDgwIEDBw4cOHDgwIED//p40MOG8LB/D+4eWHsXPjy8c9LLztFNyjDOG3Bzrh6Fd42y3uT6IdeR5807l77vjllwuy+42Rjc6gxutAa3eaObzMEt7uAGe3B7P/jlAvRpNM8tz8e0EZdK8rNxYcR1JfnZqNTjmnvqk4FhxLVL8vGwNOLOS/LxbGzEpSX5uO6MuMuSfDysjbjukXxY9UbcI/V4OtbjmlXyUcsZcUH8tNREKr159SFX4fu4gt+bsS3Jlx0+qnHln2HJaCi576TGbfJqSvJ5j/daXAleKqIUr93j71pcwZdW7MZ7ZW510+IKvvShy7hrojW+jSsV9UguY2GPD2rcjD/+LMn7hh/UOANXG96P7xv+JXzf8C/hO+W6CuAJ+E+IqyNJwY0RVyX//iK+mUX+sHBztqnmsD9t3JjrHjPoSPTFxqu4uzbzd7Jwc54f1xkl7SE94+PuhvtnV9Ie0mk6eMZV83HSnrIFX8fRUhHVwyRpa8s0eZ/vSVudHeCbRUfSVmfSyeu4RfWSRx02kmgsjeoFV9JWZ2myF2b1cs/GjWVhvdi0cWNRWi91bdxYEtcLbRu3Fu7VMt/GLdsQw4OFD1ZdsOGC3SbYaTdDxsRdbsLG67i7ttOFhTtnmxfx7Uxr4T43cYB73ISJ+9zEAe5xEybucxMHuMdNHOAeN2HiPjdxgFf/Agf+efHgiAvh4dkmONdVLuEAd7mJl+f52k3YuMtNvPyMe+gJvo6jpSK+5/M9uDiJLo3gJhhuAm5CxeEm4CbWONwEcOCfB4ebgJuAm1BxuAmGm3gIbuJepd/CTZxjbqKNzTanmJtoYm6CYm6C/g65Cfor5CboS8hN0G8hN0G/htwE/RJyE0oc8J8NN452evGthldw9XhaBJ9iOD/Bq5GknIq8anF+vD/CN7OIcqjyXYt74NUcpp/JVE9/luTKJShnMgct7q7t/L3HRzVuwWuXsD9UOalxS171s8tqeJ+b0D78VYtbKmLbRLq+zUnm4DHs6CHw4BH04AH44PH74OH/4E8Pgj98iP7sIvijDwjC++vw/jq8vw7vr8P764ADBw4cOHDgwIEDBw4cOPCvieP9dXh/3fw9xv67FFt4fx3eX4f310EQBEEQBP1f+i8AAP//CO5a+qv3J48AAAAASUVORK5CYII=">
 		<XForm>0.01 0 0 -0.01 55 55</XForm>
-		<Tabs></Tabs>
 	</Shape>
 	<Shape Type="Bitmap" CutIndex="2" W="490" H="490" Data="iVBORw0KGgoAAAANSUhEUgAAAeoAAAHqAQMAAADxo595AAAABlBMVEUAAAD///+l2Z/dAAAEqUlEQVR4nOycTY7jNhCFSzEQ7eIsswiGN4lvFnmXa+kGfYXODQz0RgtBFbBEy6JUJZdRM5nB9HsLoZuoj6L5Jz6aFkEQBEEQBP3wunBPRGe+EdGJx5zE7KYb5oGIOp6IKDFfiVrmdy/ecgYbFrATMM05upQEbDmDOZNBMpm8eCdgEjBnMkkmuSgu5dgbXZh5pHP+h0752vtoudUgZZikDHzNZfDWndxqlDKwlIH781wgl+RWk5SBr53cN80FckluxVIG7uV6u8wFckluxf/I9V+5DlIGZ8sF8QvfqOM3HinxBzO1PDL3jbfX5wGT+I1v1PIHj9RkPHcmH97xVarvXZpwkG405Vx93S7fppVe1syt3UmtJyeeb3Wa+/jc1y5ShrOz1+Zb5fvOg6eXprjlAjnxQYbNJLWYy3CWMpx8eGPirjHTyNjopI8m+QitfIQGOHDgwIEDBw4cOHDgwIED//p40MOG8LB/D+4eWHsXPjy8c9LLztFNyjDOG3Bzrh6Fd42y3uT6IdeR5807l77vjllwuy+42Rjc6gxutAa3eaObzMEt7uAGe3B7P/jlAvRpNM8tz8e0EZdK8rNxYcR1JfnZqNTjmnvqk4FhxLVL8vGwNOLOS/LxbGzEpSX5uO6MuMuSfDysjbjukXxY9UbcI/V4OtbjmlXyUcsZcUH8tNREKr159SFX4fu4gt+bsS3Jlx0+qnHln2HJaCi576TGbfJqSvJ5j/daXAleKqIUr93j71pcwZdW7MZ7ZW510+IKvvShy7hrojW+jSsV9UguY2GPD2rcjD/+LMn7hh/UOANXG96P7xv+JXzf8C/hO+W6CuAJ+E+IqyNJwY0RVyX//iK+mUX+sHBztqnmsD9t3JjrHjPoSPTFxqu4uzbzd7Jwc54f1xkl7SE94+PuhvtnV9Ie0mk6eMZV83HSnrIFX8fRUhHVwyRpa8s0eZ/vSVudHeCbRUfSVmfSyeu4RfWSRx02kmgsjeoFV9JWZ2myF2b1cs/GjWVhvdi0cWNRWi91bdxYEtcLbRu3Fu7VMt/GLdsQw4OFD1ZdsOGC3SbYaTdDxsRdbsLG67i7ttOFhTtnmxfx7Uxr4T43cYB73ISJ+9zEAe5xEybucxMHuMdNHOAeN2HiPjdxgFf/Agf+efHgiAvh4dkmONdVLuEAd7mJl+f52k3YuMtNvPyMe+gJvo6jpSK+5/M9uDiJLo3gJhhuAm5CxeEm4CbWONwEcOCfB4ebgJuAm1BxuAmGm3gIbuJepd/CTZxjbqKNzTanmJtoYm6CYm6C/g65Cfor5CboS8hN0G8hN0G/htwE/RJyE0oc8J8NN452evGthldw9XhaBJ9iOD/Bq5GknIq8anF+vD/CN7OIcqjyXYt74NUcpp/JVE9/luTKJShnMgct7q7t/L3HRzVuwWuXsD9UOalxS171s8tqeJ+b0D78VYtbKmLbRLq+zUnm4DHs6CHw4BH04AH44PH74OH/4E8Pgj98iP7sIvijDwjC++vw/jq8vw7vr8P764ADBw4cOHDgwIEDBw4cOPCvieP9dXh/3fw9xv67FFt4fx3eX4f310EQBEEQBP1f+i8AAP//CO5a+qv3J48AAAAASUVORK5CYII=">
 		<XForm>0.01 0 0 -0.01 55 55</XForm>
-		<Tabs></Tabs>
 	</Shape>
 	<Shape Type="Path" CutIndex="1">
 		<XForm>1 0 0 1 55 55</XForm>
-		<Tabs></Tabs>
 		<V vx="2.45" vy="2.45"></V>
 		<V vx="2.45" vy="-2.45"></V>
 		<V vx="-2.45" vy="-2.45"></V>
@@ -127,7 +106,6 @@
 	</Shape>
 	<Shape Type="Path" CutIndex="4">
 		<XForm>1 0 0 1 55 55</XForm>
-		<Tabs></Tabs>
 		<V vx="2.45" vy="2.45"></V>
 		<V vx="2.45" vy="-2.45"></V>
 		<V vx="-2.45" vy="-2.45"></V>

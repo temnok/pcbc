@@ -3,73 +3,61 @@
 package lbrn
 
 import (
-	"encoding/xml"
 	"fmt"
-	"os"
-	"path/filepath"
 	"temnok/pcbc/transform"
 )
 
-type LightBurnProject struct {
-	XMLName       xml.Name      `xml:"LightBurnProject"`
-	AppVersion    string        `xml:"AppVersion,attr,omitempty"`
-	FormatVersion string        `xml:"FormatVersion,attr,omitempty"`
-	CutSetting    []*CutSetting `xml:"CutSetting"`
-	CutSettingImg []*CutSetting `xml:"CutSetting_Img"`
-	Shape         []*Shape      `xml:"Shape"`
-}
-
 type CutSetting struct {
 	Type     string `xml:"type,attr"`
-	Index    Param  `xml:"index"`
-	Name     Param  `xml:"name"`
-	Priority Param  `xml:"priority"`
+	Index    *Param `xml:"index"`
+	Name     *Param `xml:"name"`
+	Priority *Param `xml:"priority"`
 
-	Speed        Param `xml:"speed"`
-	NumPasses    Param `xml:"numPasses"`
-	GlobalRepeat Param `xml:"globalRepeat"`
-	MaxPower     Param `xml:"maxPower"`
-	QPulseWidth  Param `xml:"QPulseWidth"`
-	Frequency    Param `xml:"frequency"`
+	Speed        *Param `xml:"speed"`
+	NumPasses    *Param `xml:"numPasses"`
+	GlobalRepeat *Param `xml:"globalRepeat"`
+	MaxPower     *Param `xml:"maxPower"`
+	QPulseWidth  *Param `xml:"QPulseWidth"`
+	Frequency    *Param `xml:"frequency"`
 
-	Interval         Param `xml:"interval"`
-	DPI              Param `xml:"dpi"`
-	DitherMode       Param `xml:"ditherMode"`
-	UseDotCorrection Param `xml:"useDotCorrection"`
-	DotWidth         Param `xml:"dotWidth"`
+	Interval         *Param `xml:"interval"`
+	DPI              *Param `xml:"dpi"`
+	DitherMode       *Param `xml:"ditherMode"`
+	UseDotCorrection *Param `xml:"useDotCorrection"`
+	DotWidth         *Param `xml:"dotWidth"`
 
-	TabsEnabled Param `xml:"tabsEnabled"`
-	TabSize     Param `xml:"tabSize"`
+	TabsEnabled *Param `xml:"tabsEnabled"`
+	TabSize     *Param `xml:"tabSize"`
 
-	CrossHatch Param `xml:"crossHatch"`
-	Angle      Param `xml:"angle"`
+	CrossHatch *Param `xml:"crossHatch"`
+	Angle      *Param `xml:"angle"`
 
-	Negative Param `xml:"negative"`
+	Negative *Param `xml:"negative"`
 
-	CleanupPass *Param    `xml:"cleanupPass"`
+	CleanupPass **Param   `xml:"cleanupPass"`
 	SubLayer    *SubLayer `xml:"SubLayer"`
 }
 
 type SubLayer struct {
 	Type      string `xml:"type,attr"`
 	Index     string `xml:"index,attr"`
-	Subname   Param  `xml:"subname"`
-	IsCleanup Param  `xml:"isCleanup"`
+	Subname   *Param `xml:"subname"`
+	IsCleanup *Param `xml:"isCleanup"`
 
-	Speed        Param `xml:"speed"`
-	Angle        Param `xml:"angle"`
-	AnglePerPass Param `xml:"anglePerPass"`
-	FloodFill    Param `xml:"floodFill"`
+	Speed        *Param `xml:"speed"`
+	Angle        *Param `xml:"angle"`
+	AnglePerPass *Param `xml:"anglePerPass"`
+	FloodFill    *Param `xml:"floodFill"`
 
-	NumPasses   Param `xml:"numPasses"`
-	MaxPower    Param `xml:"maxPower"`
-	QPulseWidth Param `xml:"QPulseWidth"`
-	Frequency   Param `xml:"frequency"`
+	NumPasses   *Param `xml:"numPasses"`
+	MaxPower    *Param `xml:"maxPower"`
+	QPulseWidth *Param `xml:"QPulseWidth"`
+	Frequency   *Param `xml:"frequency"`
 
-	CrossHatch Param `xml:"crossHatch"`
+	CrossHatch *Param `xml:"crossHatch"`
 
-	Interval Param `xml:"interval"`
-	DPI      Param `xml:"dpi"`
+	Interval *Param `xml:"interval"`
+	DPI      *Param `xml:"dpi"`
 }
 
 type Param struct {
@@ -97,21 +85,4 @@ func xform(t transform.T) string {
 		f2s(t.Jx), f2s(t.Jy),
 		f2s(t.Kx), f2s(t.Ky),
 	)
-}
-
-func (p *LightBurnProject) SaveToFile(filename string) error {
-	if err := os.MkdirAll(filepath.Dir(filename), 0770); err != nil {
-		return err
-	}
-
-	file, err := os.Create(filename)
-	if err != nil {
-		return err
-	}
-
-	defer func() { _ = file.Close() }()
-
-	enc := xml.NewEncoder(file)
-	enc.Indent("", "\t")
-	return enc.Encode(p)
 }

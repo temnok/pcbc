@@ -19,7 +19,7 @@ type Shape struct {
 	Rx       string `xml:"Rx,attr,omitempty"`
 	Ry       string `xml:"Ry,attr,omitempty"`
 	XForm    string `xml:"XForm"`
-	Tabs     string `xml:"Tabs"`
+	Tabs     string `xml:"Tabs,omitempty"`
 
 	V []V `xml:"V"`
 	P []P `xml:"P"`
