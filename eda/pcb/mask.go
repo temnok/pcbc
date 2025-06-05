@@ -106,7 +106,7 @@ func cutMask1(config *config.Config, c *eda.Component, mask *bitmap.Bitmap) {
 	if c.OuterCut {
 		brush.ForEachPathsPixel(c.Cuts, t, mask.Set1)
 	} else {
-		c.Cuts.RasterizeIntermittently(t, 2*config.MaskCutWidth*config.PixelsPerMM, func(x, y int) {
+		c.Cuts.RasterizeIntermittently(t, config.MaskPerforationStep*config.PixelsPerMM, func(x, y int) {
 			brush.ForEachRowWithOffset(x, y, mask.Set1)
 		})
 	}

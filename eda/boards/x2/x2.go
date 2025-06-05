@@ -16,9 +16,9 @@ func X2_I0402(topLabel, bottomLabel string) *eda.Component {
 }
 
 func X2(topLabel, bottomLabel string, chip *eda.Component) *eda.Component {
-	logo := boards.Logo.Arrange(transform.ScaleUniformly(0.8).Move(0.8, 1.1))
+	logo := boards.Logo.Arrange(transform.ScaleUniformly(0.9).Move(0.8, 1.1))
 	//firm := boards.Firm.Arrange(transform.ScaleUniformly(0.5).Move(1.2, -1.4))
-	rev := boards.Rev(2025, 6, 4).Arrange(transform.ScaleUniformly(0.4).Move(4.15, -1.5))
+	rev := boards.Rev(2025, 6, 5).Arrange(transform.ScaleUniformly(0.5).Move(4.15, -1.5))
 
 	header := greenconn.CSCC118(3, false, []string{topLabel, "GND", bottomLabel}).Arrange(transform.Move(-2, 0))
 	pad := header.PadCenters()
