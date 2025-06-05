@@ -40,7 +40,7 @@ var maskCutSettings = []*lbrn.CutSetting{
 	},
 	{
 		Type:     "Image",
-		Name:     &lbrn.Param{Value: "Mask 1"},
+		Name:     &lbrn.Param{Value: "Mask"},
 		Index:    &lbrn.Param{Value: "1"},
 		Priority: &lbrn.Param{Value: "1"},
 
@@ -48,27 +48,7 @@ var maskCutSettings = []*lbrn.CutSetting{
 		QPulseWidth: &lbrn.Param{Value: "80"},
 		Frequency:   &lbrn.Param{Value: "2000000"},
 
-		NumPasses:        &lbrn.Param{Value: "5"},
-		Speed:            &lbrn.Param{Value: "500"},
-		Interval:         &lbrn.Param{Value: "0.01"},
-		DPI:              &lbrn.Param{Value: "2540"},
-		UseDotCorrection: &lbrn.Param{Value: "1"},
-		DotWidth:         &lbrn.Param{Value: "0.05"},
-
-		CrossHatch: &lbrn.Param{Value: "1"},
-		Angle:      &lbrn.Param{Value: "90"},
-	},
-	{
-		Type:     "Image",
-		Name:     &lbrn.Param{Value: "Mask 2"},
-		Index:    &lbrn.Param{Value: "2"},
-		Priority: &lbrn.Param{Value: "2"},
-
-		MaxPower:    &lbrn.Param{Value: "20"},
-		QPulseWidth: &lbrn.Param{Value: "80"},
-		Frequency:   &lbrn.Param{Value: "2000000"},
-
-		NumPasses:        &lbrn.Param{Value: "5"},
+		NumPasses:        &lbrn.Param{Value: "8"},
 		Speed:            &lbrn.Param{Value: "500"},
 		Interval:         &lbrn.Param{Value: "0.01"},
 		DPI:              &lbrn.Param{Value: "2540"},
@@ -92,15 +72,13 @@ func SaveMask(config *config.Config, component *eda.Component) (*bitmap.Bitmap, 
 	filename := config.SavePath + "mask.lbrn"
 	silkImage := image.NewSingle(silk, color.White, color.Black)
 	maskImage := image.NewSingle(mask, color.Transparent, color.Black)
-	maskBM := lbrn.NewBase64Bitmap(maskImage)
 
 	p := &lbrn.LightBurnProject{
 		UIPrefs:       lbrn.UIPrefsDefaults,
 		CutSettingImg: maskCutSettings,
 		Shape: []*lbrn.Shape{
 			lbrn.NewBitmapShapeFromImage(0, config.LbrnBitmapScale(), silkImage),
-			lbrn.NewBitmapShape(1, config.LbrnBitmapScale(), maskBM),
-			lbrn.NewBitmapShape(2, config.LbrnBitmapScale(), maskBM),
+			lbrn.NewBitmapShapeFromImage(1, config.LbrnBitmapScale(), maskImage),
 		},
 	}
 

@@ -17,10 +17,10 @@
 	</UIPrefs>
 	<CutSetting_Img type="Image">
 		<index Value="0"></index>
-		<name Value="Stencil 1"></name>
+		<name Value="Stencil"></name>
 		<priority Value="0"></priority>
 		<speed Value="500"></speed>
-		<numPasses Value="5"></numPasses>
+		<numPasses Value="10"></numPasses>
 		<maxPower Value="10"></maxPower>
 		<QPulseWidth Value="80"></QPulseWidth>
 		<frequency Value="2000000"></frequency>
@@ -31,26 +31,7 @@
 		<crossHatch Value="1"></crossHatch>
 		<angle Value="90"></angle>
 	</CutSetting_Img>
-	<CutSetting_Img type="Image">
-		<index Value="1"></index>
-		<name Value="Stencil 2"></name>
-		<priority Value="1"></priority>
-		<speed Value="500"></speed>
-		<numPasses Value="5"></numPasses>
-		<maxPower Value="20"></maxPower>
-		<QPulseWidth Value="80"></QPulseWidth>
-		<frequency Value="2000000"></frequency>
-		<interval Value="0.01"></interval>
-		<dpi Value="2540"></dpi>
-		<useDotCorrection Value="1"></useDotCorrection>
-		<dotWidth Value="0.05"></dotWidth>
-		<crossHatch Value="1"></crossHatch>
-		<angle Value="90"></angle>
-	</CutSetting_Img>
 	<Shape Type="Bitmap" CutIndex="0" W="1648" H="950" Data="iVBORw0KGgoAAAANSUhEUgAABnAAAAO2AQMAAADiwkt/AAAABlBMVEX///8AAABVwtN+AAAFDUlEQVR4nOzdu5E0RRBGUf5AQFwTMAXTwDRMwQREBILFgS5lhJlbX5wjrjRX6Ud1Ru5PAAAAAAAAAAAAAAAAAAAAAAAAAADwSV/fjz79s17123POn5/+XS/6/Tnnr0//rhc913z//enf9aKtnB+HnH8+/cNeI6dMTtmP7z+e/vyrnAI5ZXLK5JTJKZNTJqdMTpmcMjllcsrklM3ljJ2CyumSk3bIufTb6FrO2FzB2NTH2EwOUDF2cRm79I/dmJ9rrn1s2soZe+WQUyanbO4gUk6XnDI5ZXLK5JTJKZNTJqdMTpmcMjllcsrmTkHldMlJO+Rc+m10LWdsrmBs6mNsJgfgXZ5vbrc+SB0eDP/79O960c+HJ6lP/64X/XLIeXyv7xvLOTxI3fpgKKdMTtnXv49/lpMgp0xOmZwyOWVyyuSUySmTUyanTE6ZnLK1nLFTUDlhcsrGvo2O5YzNFYxNfYzN5AAZWxeXsUv/2I157LFpLGfslUNOmZyytYNIOWFyyuSUySmTUyanTE6ZnDI5ZXLK5JTJKVs7BZUTJqds7NvoWM7YXMHY1MfYTA5A1tjK2LGFvmPrlg9PXrcuw97KGVskL6dMTtncv5eR0yWnTE6ZnDI5ZXLK5JTJKZNTJqdMTpmcsrlTUDldctIOOZd+G13LGZsrGJv6GJvJASrGLi5jl/6xG/NzzbWPTVs5Y68ccsrklM0dRMrpklMmp0xOmZwyOWVyyuSUySmTUyanTE7Z3CmonC45aYecS7+NruWMzRWMTX2MzeQAvMvWytixhb5j65bHlmGP5YwtkpdTJqds7d/LyAmTUyanTE6ZnDI5ZXLK5JTJKZNTJqdMTtnaKaicMDllY99Gx3LG5grGpj7GZnKAjK2Ly9ilf+zGPPbYNJYz9sohp0xO2dpBpJwwOWVyyuSUySmTUyanTE6ZnDI5ZXLK5JStnYLKCZNTNvZtdCxnbK5gbOpjbCYHIGtsZezYQt+xdcuHJ69bl2Fv5YwtkpdTJqds7t/LyOmSUyanTE6ZnDI5ZXLK5JTJKZNTJqdMTtncKaicLjlph5xLv42u5YzNFYxNfYzN5AAVYxeXsUv/2I35uebax6atnLFXDjllcsrmDiLldMkpk1Mmp0xOmZwyOWVyyuSUySmTUyanbO4UVE6XnLRDzqXfRtdyxuYKxqY+xmZyAN5la2Xs2ELfsXXLY8uwx3LGFsnLKZNTtvbvZeSEySmTUyanTE6ZnDI5ZXLK5JTJKZNTJqds7RRUTpicsrFvo2M5Y3MFY1MfYzM5QMbWxWXs0j92Yx57bBrLGXvlkFMmp2ztIFJOmJwyOWVyyuSUySmTUyanTE6ZnDI5ZXLK1k5B5YTJKRv7NjqWMzZXMDb1MTaTA5A1tjJ2bKHv2Lrlw5PXrcuwt3LGFsnLKZNTNvfvZeR0ySmTUyanTE6ZnDI5ZXLK5JTJKZNTJqds7hRUTpectEPOpd9G13LG5grGpj7GZnKAirGLy9ilf+zG/Fxz7WPTVs7YK4ecMjllcweRcrrklMkpk1Mmp0xOmZwyOWVyyuSUySmTUzZ3CiqnS07aIefSb6NrOWNzBWNTH2MzOQDvsrUydmyh79i65bFl2GM5Y4vk5ZTJKVv79zJywuSUySmTUyanTE6ZnDI5ZXLK5JTJKZNTtnYKKidMTtnYt9GxnLG5grGpj7GZHAAAAAAAAAAAAAAAAAAAAAAAAAAAOPg/AAD///taa+K9bd6ZAAAAAElFTkSuQmCC">
-		<XForm>0.01 0 0 -0.01 55 55</XForm>
-	</Shape>
-	<Shape Type="Bitmap" CutIndex="1" W="1648" H="950" Data="iVBORw0KGgoAAAANSUhEUgAABnAAAAO2AQMAAADiwkt/AAAABlBMVEX///8AAABVwtN+AAAFDUlEQVR4nOzdu5E0RRBGUf5AQFwTMAXTwDRMwQREBILFgS5lhJlbX5wjrjRX6Ud1Ru5PAAAAAAAAAAAAAAAAAAAAAAAAAADwSV/fjz79s17123POn5/+XS/6/Tnnr0//rhc913z//enf9aKtnB+HnH8+/cNeI6dMTtmP7z+e/vyrnAI5ZXLK5JTJKZNTJqdMTpmcMjllcsrklM3ljJ2CyumSk3bIufTb6FrO2FzB2NTH2EwOUDF2cRm79I/dmJ9rrn1s2soZe+WQUyanbO4gUk6XnDI5ZXLK5JTJKZNTJqdMTpmcMjllcsrmTkHldMlJO+Rc+m10LWdsrmBs6mNsJgfgXZ5vbrc+SB0eDP/79O960c+HJ6lP/64X/XLIeXyv7xvLOTxI3fpgKKdMTtnXv49/lpMgp0xOmZwyOWVyyuSUySmTUyanTE6ZnLK1nLFTUDlhcsrGvo2O5YzNFYxNfYzN5AAZWxeXsUv/2I157LFpLGfslUNOmZyytYNIOWFyyuSUySmTUyanTE6ZnDI5ZXLK5JTJKVs7BZUTJqds7NvoWM7YXMHY1MfYTA5A1tjK2LGFvmPrlg9PXrcuw97KGVskL6dMTtncv5eR0yWnTE6ZnDI5ZXLK5JTJKZNTJqdMTpmcsrlTUDldctIOOZd+G13LGZsrGJv6GJvJASrGLi5jl/6xG/NzzbWPTVs5Y68ccsrklM0dRMrpklMmp0xOmZwyOWVyyuSUySmTUyanTE7Z3CmonC45aYecS7+NruWMzRWMTX2MzeQAvMvWytixhb5j65bHlmGP5YwtkpdTJqds7d/LyAmTUyanTE6ZnDI5ZXLK5JTJKZNTJqdMTtnaKaicMDllY99Gx3LG5grGpj7GZnKAjK2Ly9ilf+zGPPbYNJYz9sohp0xO2dpBpJwwOWVyyuSUySmTUyanTE6ZnDI5ZXLK5JStnYLKCZNTNvZtdCxnbK5gbOpjbCYHIGtsZezYQt+xdcuHJ69bl2Fv5YwtkpdTJqds7t/LyOmSUyanTE6ZnDI5ZXLK5JTJKZNTJqdMTtncKaicLjlph5xLv42u5YzNFYxNfYzN5AAVYxeXsUv/2I35uebax6atnLFXDjllcsrmDiLldMkpk1Mmp0xOmZwyOWVyyuSUySmTUyanbO4UVE6XnLRDzqXfRtdyxuYKxqY+xmZyAN5la2Xs2ELfsXXLY8uwx3LGFsnLKZNTtvbvZeSEySmTUyanTE6ZnDI5ZXLK5JTJKZNTJqds7RRUTpicsrFvo2M5Y3MFY1MfYzM5QMbWxWXs0j92Yx57bBrLGXvlkFMmp2ztIFJOmJwyOWVyyuSUySmTUyanTE6ZnDI5ZXLK1k5B5YTJKRv7NjqWMzZXMDb1MTaTA5A1tjJ2bKHv2Lrlw5PXrcuwt3LGFsnLKZNTNvfvZeR0ySmTUyanTE6ZnDI5ZXLK5JTJKZNTJqds7hRUTpectEPOpd9G13LG5grGpj7GZnKAirGLy9ilf+zG/Fxz7WPTVs7YK4ecMjllcweRcrrklMkpk1Mmp0xOmZwyOWVyyuSUySmTUzZ3CiqnS07aIefSb6NrOWNzBWNTH2MzOQDvsrUydmyh79i65bFl2GM5Y4vk5ZTJKVv79zJywuSUySmTUyanTE6ZnDI5ZXLK5JTJKZNTtnYKKidMTtnYt9GxnLG5grGpj7GZHAAAAAAAAAAAAAAAAAAAAAAAAAAAOPg/AAD///taa+K9bd6ZAAAAAElFTkSuQmCC">
 		<XForm>0.01 0 0 -0.01 55 55</XForm>
 	</Shape>
 </LightBurnProject>
