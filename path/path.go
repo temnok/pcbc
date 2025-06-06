@@ -79,3 +79,11 @@ func (path Path) Center(t transform.T) Point {
 	b.AddPath(t, path)
 	return b.Center()
 }
+
+func (path Path) ToXY() (xy []float64) {
+	for _, p := range path {
+		xy = append(xy, p.X, p.Y)
+	}
+
+	return xy
+}

@@ -13,10 +13,11 @@ type Config struct {
 	TrackWidth float64
 	ClearWidth float64
 
-	ExtraCopperWidth    float64
-	MaskCutWidth        float64
-	MaskPerforationStep float64
-	StencilPadDist      float64
+	ExtraCopperWidth      float64
+	MaskCutWidth          float64
+	MaskPerforationStep   float64
+	StencilPadDist        float64
+	StencilLinearizeDelta float64
 
 	LbrnCenterX, LbrnCenterY float64
 
@@ -31,9 +32,10 @@ func Default() *Config {
 		ClearWidth:       0.2,
 		ExtraCopperWidth: 0.05,
 
-		MaskCutWidth:        0.1,
-		MaskPerforationStep: 0.175,
-		StencilPadDist:      0.025,
+		MaskCutWidth:          0.1,
+		MaskPerforationStep:   0.175,
+		StencilPadDist:        0.025,
+		StencilLinearizeDelta: 0.01,
 
 		LbrnCenterX: 55,
 		LbrnCenterY: 55,

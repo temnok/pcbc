@@ -24,7 +24,7 @@ func linearizeSegment(xy []float64, delta, t0, t1, x0, y0, x1, y1 float64, callb
 	t := (t0 + t1) / 2
 	x, y := cubicBezier(xy, t)
 
-	if d := dist(x0, y0, x1, y1, x, y); math.IsInf(d, 0) || d <= delta {
+	if d := dist(x0, y0, x1, y1, x, y); math.IsInf(d, 0) || math.IsNaN(d) || d <= delta {
 		return
 	}
 
