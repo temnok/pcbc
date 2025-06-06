@@ -30,13 +30,25 @@ func SaveStencilGerber(config *config.Config, component *eda.Component) error {
 				continue
 			}
 
-			x0, y0 := xy[0], xy[1]
+			x0, y0 := toGerberCoord(xy[0]), toGerberCoord(xy[1])
 
 			fmt.Fprintf(buf, "\nG36*\n")
-			fmt.Fprintf(buf, "X%vY%vD2*\n", toGerberDecimal(x0), toGerberDecimal(y0))
+			fmt.Fprintf(buf, "X%vY%vD2*\n", x0, y0)
 
-			bezier.Linearize(xy, config.StencilLinearizeDelta, func(x, y float64) {
-				fmt.Fprintf(buf, "X%vY%vD1*\n", toGerberDecimal(x), toGerberDecimal(y))
+			bezier.Linearize(xy, config.StencilLinearizeDelta, func(x1, y1 float64) {
+				x, y := toGerberCoord(x1), toGerberCoord(y1)
+				if x != x0 {
+					fmt.Fprintf(buf, "X%v", x)
+				}
+				if y != y0 {
+					fmt.Fprintf(buf, "Y%v", y)
+				}
+				if x == x0 && y == y0 {
+					return
+				}
+
+				x0, y0 = x, y
+				fmt.Fprintf(buf, "D1*\n")
 			})
 
 			fmt.Fprintf(buf, "G37*\n")
@@ -48,6 +60,6 @@ func SaveStencilGerber(config *config.Config, component *eda.Component) error {
 	return os.WriteFile(config.SavePath+"stencil.gtp", buf.Bytes(), 0770)
 }
 
-func toGerberDecimal(val float64) int {
+func toGerberCoord(val float64) int {
 	return int(math.Round(val * 10_000))
 }
