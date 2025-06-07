@@ -39,9 +39,6 @@ func Process(initialConfig *config.Config, defaultComponent *eda.Component) erro
 			stencil, e = SaveStencil(&config, component)
 			return e
 		},
-		func() error {
-			return SaveStencilGerber(&config, component)
-		},
 	)
 	if err != nil {
 		return err
