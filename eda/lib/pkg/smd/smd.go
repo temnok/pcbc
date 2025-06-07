@@ -14,7 +14,7 @@ var (
 	M0603 = &eda.Component{
 		Pads: path.Rect(0.25, 0.35).Clone(2, 0.55, 0),
 		Marks: path.Paths{
-			path.Rect(1.1, 0.6),
+			path.Rect(1.0, 0.55),
 		},
 	}
 

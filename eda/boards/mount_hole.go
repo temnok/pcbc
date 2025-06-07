@@ -10,14 +10,14 @@ import (
 
 var (
 	MountHole = &eda.Component{
-		Pads: path.Pie(6, 1.05, 1.3, 20).Transform(transform.RotateDegrees(-30)),
+		Pads: path.Pie(6, 1.05, 1.4, 20).Transform(transform.RotateDegrees(-30)),
 
 		Cuts: path.Paths{path.Circle(1.75)},
 
 		Components: eda.Components{
 			{
-				TrackWidth: 0.3,
-				Tracks:     path.Paths{path.Circle(2.35)},
+				TrackWidth: 0.35,
+				Tracks:     path.Paths{path.Circle(2.45)},
 			},
 
 			{

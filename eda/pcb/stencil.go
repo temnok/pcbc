@@ -38,6 +38,22 @@ var stencilCutSettings = []*lbrn.CutSetting{
 func SaveStencil(config *config.Config, component *eda.Component) (*bitmap.Bitmap, error) {
 	stencil := bitmap.New(config.BitmapSizeInPixels())
 
+	renderStencil(config, component, stencil)
+
+	stencilImage := image.NewSingle(stencil, color.White, color.Black)
+
+	p := lbrn.LightBurnProject{
+		UIPrefs:       lbrn.UIPrefsDefaults,
+		CutSettingImg: stencilCutSettings,
+		Shape: []*lbrn.Shape{
+			lbrn.NewBitmapShapeFromImage(0, config.LbrnBitmapScale(), stencilImage),
+		},
+	}
+
+	return stencil, p.SaveToFile(config.SavePath + "stencil.lbrn")
+}
+
+func renderStencil(config *config.Config, component *eda.Component, stencil *bitmap.Bitmap) {
 	bmT := config.BitmapTransform()
 
 	// Pass 1: draw pads
@@ -51,13 +67,13 @@ func SaveStencil(config *config.Config, component *eda.Component) (*bitmap.Bitma
 	})
 
 	// Pass 2
-	if config.StencilPadDist > 0 {
+	if config.StencilPadOffset > 0 {
 		component.Visit(func(c *eda.Component) {
 			if c.OuterCut {
 				return
 			}
 
-			brushD := 2 * config.StencilPadDist
+			brushD := 2 * config.StencilPadOffset
 			brush := shape.Circle(int(brushD * config.PixelsPerMM))
 
 			t := c.Transform.Multiply(bmT)
@@ -73,7 +89,7 @@ func SaveStencil(config *config.Config, component *eda.Component) (*bitmap.Bitma
 			return
 		}
 
-		clearWidth := 2 * (config.StencilPadDist + config.MaskCutWidth)
+		clearWidth := 2 * (config.StencilPadOffset + config.MaskCutWidth)
 		brush := shape.Circle(int(clearWidth * config.PixelsPerMM))
 
 		t := c.Transform.Multiply(bmT)
@@ -93,16 +109,4 @@ func SaveStencil(config *config.Config, component *eda.Component) (*bitmap.Bitma
 		t := c.Transform.Multiply(bmT)
 		outerCutBrush.ForEachPathsPixel(c.Cuts, t, stencil.Set1)
 	})
-
-	stencilImage := image.NewSingle(stencil, color.White, color.Black)
-
-	p := lbrn.LightBurnProject{
-		UIPrefs:       lbrn.UIPrefsDefaults,
-		CutSettingImg: stencilCutSettings,
-		Shape: []*lbrn.Shape{
-			lbrn.NewBitmapShapeFromImage(0, config.LbrnBitmapScale(), stencilImage),
-		},
-	}
-
-	return stencil, p.SaveToFile(config.SavePath + "stencil.lbrn")
 }

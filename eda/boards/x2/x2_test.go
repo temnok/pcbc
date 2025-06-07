@@ -15,7 +15,7 @@ import (
 func TestBoard(t *testing.T) {
 	conf := config.Default()
 	//conf.ExtraCopperWidth = 0
-	//conf.StencilPadDist = 0.05
+	//conf.StencilPadOffset = 0.05
 
 	hole := path.Circle(1)
 
