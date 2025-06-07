@@ -26,7 +26,7 @@ func TestFont_SavePng(t *testing.T) {
 	d := Medium * scale
 	mediumBrush := shape.Circle(int(d))
 
-	boldBrush := shape.Circle(Bold*scale + 0.5)
+	boldBrush := shape.Circle(Bold * scale)
 
 	for i := 0; i < 6; i++ {
 		for j := 0; j < 16; j++ {
