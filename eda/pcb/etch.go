@@ -123,12 +123,23 @@ func SaveEtch(config *config.Config, component *eda.Component) (*bitmap.Bitmap, 
 	var cuts []*lbrn.Shape
 
 	component.Visit(func(c *eda.Component) {
-		removeEtchCopper(config, c, copper)
+		if !c.OuterCut {
+			removeEtchCopper(config, c, copper)
+		}
 	})
 
 	component.Visit(func(c *eda.Component) {
-		addEtchCopper(config, c, copper)
-		addEtchCuts(config, c, &cuts)
+		if !c.OuterCut {
+			addEtchCopper(config, c, copper)
+			addEtchCuts(config, c, &cuts)
+		}
+	})
+
+	component.Visit(func(c *eda.Component) {
+		if c.OuterCut {
+			removeEtchCopper(config, c, copper)
+			addEtchCuts(config, c, &cuts)
+		}
 	})
 
 	filename := config.SavePath + "etch.lbrn"
@@ -190,7 +201,6 @@ func addEtchCuts(config *config.Config, component *eda.Component, cuts *[]*lbrn.
 	t := component.Transform.Multiply(config.LbrnCenterMove())
 
 	for _, cut := range component.Cuts {
-		//*cuts = append(*cuts, lbrn.NewPathWithTabs(2, t, cut))
 		*cuts = append(*cuts, lbrn.NewPath(3, t, cut))
 	}
 }

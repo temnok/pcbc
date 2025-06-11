@@ -31,7 +31,8 @@ type Component struct {
 	// zero value is replaced with parent component's value
 	ClearWidth float64
 
-	NoClear bool
+	NoClear   bool
+	NoOpening bool
 
 	Components []*Component
 }
@@ -47,7 +48,7 @@ func (c *Component) visit(t transform.T, parent *Component, callback func(*Compo
 		t = c.Transform.Multiply(t)
 	}
 
-	comp := &Component{
+	target := &Component{
 		Transform:  t,
 		Cuts:       c.Cuts,
 		OuterCut:   c.OuterCut || parent.OuterCut,
@@ -56,21 +57,23 @@ func (c *Component) visit(t transform.T, parent *Component, callback func(*Compo
 		Marks:      c.Marks,
 		TrackWidth: c.TrackWidth,
 		ClearWidth: c.ClearWidth,
-		NoClear:    c.NoClear || parent.NoClear,
+
+		NoClear:   c.NoClear || parent.NoClear,
+		NoOpening: c.NoOpening || parent.NoOpening,
 	}
 
-	if comp.TrackWidth == 0 {
-		comp.TrackWidth = parent.TrackWidth
+	if target.TrackWidth == 0 {
+		target.TrackWidth = parent.TrackWidth
 	}
 
-	if comp.ClearWidth == 0 {
-		comp.ClearWidth = parent.ClearWidth
+	if target.ClearWidth == 0 {
+		target.ClearWidth = parent.ClearWidth
 	}
 
-	callback(comp)
+	callback(target)
 
 	for _, sub := range c.Components {
-		sub.visit(t, comp, callback)
+		sub.visit(t, target, callback)
 	}
 }
 

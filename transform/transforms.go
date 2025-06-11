@@ -50,3 +50,7 @@ func Scale(x, y float64) T {
 func ScaleUniformly(k float64) T {
 	return Scale(k, k)
 }
+
+func MirrorX() T {
+	return Scale(-1, 1)
+}
