@@ -42,7 +42,7 @@ type Component struct {
 // Visit calls provided callback for each subcomponent recursively,
 // as if every component is isolated (without subcomponents)
 func (c *Component) Visit(callback func(*Component)) {
-	c.visit(transform.I, &Component{}, callback)
+	c.visit(transform.I, &Component{Layer: c.Layer}, callback)
 }
 
 func (c *Component) visit(t transform.T, parent *Component, callback func(*Component)) {
@@ -67,6 +67,10 @@ func (c *Component) visit(t transform.T, parent *Component, callback func(*Compo
 
 		NoClear:   c.NoClear || parent.NoClear,
 		NoOpening: c.NoOpening || parent.NoOpening,
+	}
+
+	if target.Layer == 0 {
+		target.Layer = parent.Layer
 	}
 
 	if target.TrackWidth == 0 {
@@ -97,6 +101,7 @@ func (c *Component) PadCenters() []path.Point {
 func (c *Component) Arrange(t transform.T) *Component {
 	return &Component{
 		Transform:  t,
+		Layer:      c.Layer,
 		Components: Components{c},
 	}
 }
@@ -110,6 +115,13 @@ func (c *Component) Clone(n int, dx, dy float64) *Component {
 	}
 
 	return res
+}
+
+func (c *Component) WithLayer(layer int) *Component {
+	return &Component{
+		Layer:      layer,
+		Components: Components{c},
+	}
 }
 
 func (c *Component) Size() (float64, float64) {

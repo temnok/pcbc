@@ -9,7 +9,6 @@ import (
 	"temnok/pcbc/eda/pcb/config"
 	"temnok/pcbc/path"
 	"temnok/pcbc/transform"
-	"temnok/pcbc/util"
 	"testing"
 )
 
@@ -30,82 +29,49 @@ func TestBoard(t *testing.T) {
 		},
 	}
 
-	rivets := &eda.Component{
+	rivetPair := &eda.Component{
 		Components: eda.Components{
-			Rivet06mm.Arrange(transform.Move(-1, 0)),
-			Rivet06mm.Arrange(transform.Move(1, 0)),
-		},
-	}
-
-	rivetPairTop := &eda.Component{
-		Components: eda.Components{
-			rivets,
+			Rivet06mm_Layers12.Arrange(transform.Move(-1, 0)),
+			Rivet06mm_Layers12.Arrange(transform.Move(1, 0)),
 
 			{
+				Layer: 1,
+
 				Pads: path.Paths{
 					path.Circle(1).Transform(transform.Move(-3, 0)),
 					path.Circle(1).Transform(transform.Move(3, 0)),
 				},
+
+				Tracks: eda.Tracks(
+					eda.Track{{-3, 0}, {-1, 0}},
+					eda.Track{{1, 0}, {3, 0}},
+				),
+			},
+
+			{
+				Layer: 2,
+
+				Tracks: eda.Tracks(
+					eda.Track{{-1, 0}, {1, 0}},
+				),
 			},
 		},
-
-		Tracks: eda.Tracks(
-			eda.Track{{-3, 0}, {-1, 0}},
-			eda.Track{{1, 0}, {3, 0}},
-		),
 	}
 
-	rivetPairBottom := &eda.Component{
-		Components: eda.Components{
-			rivets,
-		},
-
-		Tracks: eda.Tracks(
-			eda.Track{{-1, 0}, {1, 0}},
-		),
-	}
-
-	top := &eda.Component{
+	board := &eda.Component{
 		Components: eda.Components{
 			blank,
 
-			rivetPairTop.Arrange(transform.Move(0.5, 3)),
-			rivetPairTop.Arrange(transform.Move(-0.5, 2)),
-			rivetPairTop.Arrange(transform.Move(0.5, 1)),
-			rivetPairTop.Arrange(transform.Move(-0.5, 0)),
-			rivetPairTop.Arrange(transform.Move(0.5, -1)),
-			rivetPairTop.Arrange(transform.Move(-0.5, -2)),
-			rivetPairTop.Arrange(transform.Move(0.5, -3)),
+			rivetPair.Clone(4, 0, 2).Arrange(transform.Move(0.5, 0)),
+			rivetPair.Clone(3, 0, 2).Arrange(transform.Move(-0.5, 0)),
 		},
 	}
 
-	bottom := &eda.Component{
-		Transform: transform.MirrorX(),
+	conf := config.Default()
+	conf.SavePath = "out/{}-"
 
-		Components: eda.Components{
-			blank,
-
-			rivetPairBottom.Arrange(transform.Move(0.5, 3)),
-			rivetPairBottom.Arrange(transform.Move(-0.5, 2)),
-			rivetPairBottom.Arrange(transform.Move(0.5, 1)),
-			rivetPairBottom.Arrange(transform.Move(-0.5, 0)),
-			rivetPairBottom.Arrange(transform.Move(0.5, -1)),
-			rivetPairBottom.Arrange(transform.Move(-0.5, -2)),
-			rivetPairBottom.Arrange(transform.Move(0.5, -3)),
-		},
-	}
-
-	assert.NoError(t, util.RunConcurrently(
-		func() error {
-			conf := config.Default()
-			conf.SavePath = "out/1-"
-			return pcb.Process(conf, top)
-		},
-
-		func() error {
-			conf := config.Default()
-			conf.SavePath = "out/2-"
-			return pcb.Process(conf, bottom)
-		},
+	assert.NoError(t, pcb.Process(conf,
+		board.WithLayer(1),
+		board.WithLayer(2).Arrange(transform.MirrorX()),
 	))
 }

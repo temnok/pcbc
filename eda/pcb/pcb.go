@@ -11,21 +11,32 @@ import (
 	"temnok/pcbc/util"
 )
 
-func Process(initialConfig *config.Config, defaultComponent *eda.Component) error {
+func Process(config *config.Config, components ...*eda.Component) error {
+	var jobs []func() error
+
+	for _, comp := range components {
+		jobs = append(jobs, func() error { return processComponent(config, comp) })
+	}
+
+	return util.RunConcurrently(jobs...)
+}
+
+func processComponent(initialConfig *config.Config, initialComponent *eda.Component) error {
 	if initialConfig == nil {
 		initialConfig = config.Default()
 	}
 
 	config := *initialConfig
-	setMissingConfigSize(&config, defaultComponent)
+	setMissingConfigSize(&config, initialComponent)
 
-	config.SavePath = strings.ReplaceAll(initialConfig.SavePath, "{}", fmt.Sprint(defaultComponent.Layer))
+	config.SavePath = strings.ReplaceAll(initialConfig.SavePath, "{}", fmt.Sprint(initialComponent.Layer))
 
 	component := &eda.Component{
+		Layer:      initialComponent.Layer,
 		TrackWidth: config.TrackWidth,
 		ClearWidth: config.ClearWidth,
 		Components: eda.Components{
-			defaultComponent,
+			initialComponent,
 		},
 	}
 

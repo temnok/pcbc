@@ -7,18 +7,29 @@ import (
 	"temnok/pcbc/path"
 )
 
-var Rivet06mm = &eda.Component{
-	NoOpening: true,
+var Rivet06mm_Layers12 = Rivet(0.6, 1.2, 1, 2)
 
-	Pads: path.Paths{path.Circle(1.2)},
+func Rivet(outerDiameter, headDiameter float64, layer1, layer2 int) *eda.Component {
+	side := &eda.Component{
+		NoOpening: true,
 
-	Components: eda.Components{
-		{
-			ClearWidth: 0.15,
+		Pads: path.Paths{path.Circle(headDiameter)},
 
-			OuterCut: true,
+		Components: eda.Components{
+			{
+				ClearWidth: 0.15,
 
-			Cuts: path.Paths{path.Circle(0.6)},
+				OuterCut: true,
+
+				Cuts: path.Paths{path.Circle(outerDiameter)},
+			},
 		},
-	},
+	}
+
+	return &eda.Component{
+		Components: eda.Components{
+			side.WithLayer(layer1),
+			side.WithLayer(layer2),
+		},
+	}
 }
