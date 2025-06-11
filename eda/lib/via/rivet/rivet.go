@@ -10,12 +10,14 @@ import (
 var Rivet06mm = &eda.Component{
 	NoOpening: true,
 
-	TrackWidth: 0.2,
+	ClearWidth: 0.25,
 
-	Pads: path.Paths{path.Circle(1)},
+	Pads: path.Paths{path.Circle(1.2)},
 
 	Components: eda.Components{
 		{
+			ClearWidth: 0.15,
+
 			OuterCut: true,
 
 			Cuts: path.Paths{path.Circle(0.6)},

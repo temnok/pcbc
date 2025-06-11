@@ -30,17 +30,25 @@ func TestBoard(t *testing.T) {
 		},
 	}
 
-	rivets := eda.Components{
-		Rivet06mm.Arrange(transform.Move(-1, 0)),
-		Rivet06mm.Arrange(transform.Move(1, 0)),
+	rivets := &eda.Component{
+		Components: eda.Components{
+			Rivet06mm.Arrange(transform.Move(-1, 0)),
+			Rivet06mm.Arrange(transform.Move(1, 0)),
+		},
 	}
 
 	rivetPairTop := &eda.Component{
-		Components: rivets,
+		Components: eda.Components{
+			rivets,
 
-		Pads: path.Paths{
-			path.Circle(1).Transform(transform.Move(-3, 0)),
-			path.Circle(1).Transform(transform.Move(3, 0)),
+			{
+				ClearWidth: 0.35,
+
+				Pads: path.Paths{
+					path.Circle(1).Transform(transform.Move(-3, 0)),
+					path.Circle(1).Transform(transform.Move(3, 0)),
+				},
+			},
 		},
 
 		Tracks: eda.Tracks(
@@ -50,7 +58,9 @@ func TestBoard(t *testing.T) {
 	}
 
 	rivetPairBottom := &eda.Component{
-		Components: rivets,
+		Components: eda.Components{
+			rivets,
+		},
 
 		Tracks: eda.Tracks(
 			eda.Track{{-1, 0}, {1, 0}},
