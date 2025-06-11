@@ -25,7 +25,7 @@ func X2(topLabel, bottomLabel string, chip *eda.Component) *eda.Component {
 	chip = chip.Arrange(transform.RotateDegrees(-90).Move(0.85, -0.65))
 	pin := chip.PadCenters()
 
-	mount := boards.MountHole.Arrange(transform.Move(3, 0))
+	mount := boards.MountHole.Arrange(transform.RotateDegrees(45).Move(3, 0))
 
 	return &eda.Component{
 		Cuts: path.Paths{

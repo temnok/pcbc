@@ -29,7 +29,7 @@ func Default() *Config {
 		PixelsPerMM: 100,
 
 		TrackWidth:       0.2,
-		ClearWidth:       0.2,
+		ClearWidth:       0.3,
 		ExtraCopperWidth: 0.07,
 
 		MaskCutWidth:          0.1,
