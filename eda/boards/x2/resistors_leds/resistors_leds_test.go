@@ -13,7 +13,7 @@ import (
 
 func TestBoard(t *testing.T) {
 	assert.NoError(t, pcb.Process(nil, &eda.Component{
-		Components: eda.Components{
+		Inner: eda.Components{
 			boards.Guides72x42,
 			eda.ComponentGrid(6, 11, 5,
 				x2.X2_I0402("R ", "1R0"),

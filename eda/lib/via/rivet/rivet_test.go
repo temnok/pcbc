@@ -30,7 +30,7 @@ func TestBoard(t *testing.T) {
 	}
 
 	rivetPair := &eda.Component{
-		Components: eda.Components{
+		Inner: eda.Components{
 			Rivet06mm_Layers12.Arrange(transform.Move(-1, 0)),
 			Rivet06mm_Layers12.Arrange(transform.Move(1, 0)),
 
@@ -59,7 +59,7 @@ func TestBoard(t *testing.T) {
 	}
 
 	board := &eda.Component{
-		Components: eda.Components{
+		Inner: eda.Components{
 			blank,
 
 			rivetPair.Clone(4, 0, 2).Arrange(transform.Move(0.5, 0)),

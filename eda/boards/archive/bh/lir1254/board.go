@@ -18,11 +18,11 @@ var Board = &eda.Component{
 		path.RoundRect(21, 14, 1),
 	},
 
-	Components: eda.Components{
+	Inner: eda.Components{
 		{
 			Transform: transform.Move(0, -5.5),
 
-			Components: eda.Components{
+			Inner: eda.Components{
 				mph100imp40f.G_V_SP(8),
 
 				eda.CenteredTextRow(2.54, "3V7", "3V7", "3V7", "3V7", "3V7", "3V7", "3V7", "3V7").

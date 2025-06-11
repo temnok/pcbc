@@ -14,7 +14,7 @@ var (
 
 		Cuts: path.Paths{path.Circle(1.75)},
 
-		Components: eda.Components{
+		Inner: eda.Components{
 			{
 				TrackWidth: 0.35,
 				Tracks:     path.Paths{path.Circle(2.45)},

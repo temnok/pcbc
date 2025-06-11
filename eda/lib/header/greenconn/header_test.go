@@ -12,7 +12,7 @@ import (
 
 func TestHeader(t *testing.T) {
 	assert.NoError(t, pcb.Process(nil, &eda.Component{
-		Components: eda.Components{
+		Inner: eda.Components{
 			CSCC118(7, false, []string{"P001", "P002", "VDD", "D+", "D-", "GND", "P007"}).
 				Arrange(transform.Move(-5, 0)),
 			CSCC118(8, false, []string{"P001", "GND", "VDD", "D+", "D-", "P006", "P008", "P009"}).

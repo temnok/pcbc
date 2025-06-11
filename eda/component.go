@@ -36,7 +36,7 @@ type Component struct {
 	NoClear   bool
 	NoOpening bool
 
-	Components []*Component
+	Inner []*Component
 }
 
 // Visit calls provided callback for each subcomponent recursively,
@@ -83,7 +83,7 @@ func (c *Component) visit(t transform.T, parent *Component, callback func(*Compo
 
 	callback(target)
 
-	for _, sub := range c.Components {
+	for _, sub := range c.Inner {
 		sub.visit(t, target, callback)
 	}
 }
@@ -100,9 +100,9 @@ func (c *Component) PadCenters() []path.Point {
 
 func (c *Component) Arrange(t transform.T) *Component {
 	return &Component{
-		Transform:  t,
-		Layer:      c.Layer,
-		Components: Components{c},
+		Transform: t,
+		Layer:     c.Layer,
+		Inner:     Components{c},
 	}
 }
 
@@ -111,7 +111,7 @@ func (c *Component) Clone(n int, dx, dy float64) *Component {
 	for i := range n {
 		k := float64(i) - float64(n-1)/2
 		clone := c.Arrange(transform.Move(k*dx, k*dy))
-		res.Components = append(res.Components, clone)
+		res.Inner = append(res.Inner, clone)
 	}
 
 	return res
@@ -119,8 +119,8 @@ func (c *Component) Clone(n int, dx, dy float64) *Component {
 
 func (c *Component) WithLayer(layer int) *Component {
 	return &Component{
-		Layer:      layer,
-		Components: Components{c},
+		Layer: layer,
+		Inner: Components{c},
 	}
 }
 
@@ -146,7 +146,7 @@ func ComponentGrid(cols int, dx, dy float64, comps ...*Component) *Component {
 		c := float64(i%cols) - float64(cols-1)/2
 		r := float64(i/cols) - float64(rows-1)/2
 
-		grid.Components = append(grid.Components, comp.Arrange(transform.Move(c*dx, -r*dy)))
+		grid.Inner = append(grid.Inner, comp.Arrange(transform.Move(c*dx, -r*dy)))
 	}
 
 	return grid

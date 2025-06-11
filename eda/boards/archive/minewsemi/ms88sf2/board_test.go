@@ -12,7 +12,7 @@ import (
 
 func TestBoard(t *testing.T) {
 	assert.NoError(t, pcb.Process(nil, &eda.Component{
-		Components: eda.Components{
+		Inner: eda.Components{
 			boards.Board35x45,
 			Board_nRF52840,
 		},

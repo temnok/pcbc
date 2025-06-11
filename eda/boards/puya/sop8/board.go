@@ -26,7 +26,7 @@ var (
 			path.RoundRect(14, 8, 1),
 		},
 
-		Components: eda.Components{
+		Inner: eda.Components{
 			mount,
 			chip,
 			header,

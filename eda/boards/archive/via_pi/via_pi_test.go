@@ -16,7 +16,7 @@ func TestBoard(t *testing.T) {
 	hole := path.Circle(1)
 
 	holes := &eda.Component{
-		Components: eda.Components{
+		Inner: eda.Components{
 			{
 				Cuts: path.Paths{
 					hole.Transform(transform.Move(-10, 4)),
@@ -52,7 +52,7 @@ func TestBoard(t *testing.T) {
 	top := &eda.Component{
 		Pads: vias,
 
-		Components: eda.Components{
+		Inner: eda.Components{
 			holes,
 
 			contacts,
@@ -69,7 +69,7 @@ func TestBoard(t *testing.T) {
 	bottom := &eda.Component{
 		Pads: bottomPads,
 
-		Components: eda.Components{
+		Inner: eda.Components{
 			holes,
 
 			tracks,

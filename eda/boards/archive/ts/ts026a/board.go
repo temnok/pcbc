@@ -16,7 +16,7 @@ var Board = &eda.Component{
 		path.RoundRect(9, 5.5, 1),
 	},
 
-	Components: eda.Components{
+	Inner: eda.Components{
 		hyp.Switch1TS026A.Arrange(transform.RotateDegrees(90).Move(3, 0)),
 		mph100imp40f.G_V_SP(2).Arrange(transform.RotateDegrees(-90).Move(-3, 0)),
 		boards.MountHole,

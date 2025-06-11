@@ -17,7 +17,7 @@ var (
 	pin = chip.PadCenters()
 
 	headers = &eda.Component{
-		Components: eda.Components{
+		Inner: eda.Components{
 			greenconn.CSCC118(27, true, []string{
 				"P111", "P110", "P003", "P028", "GND", "P113", "P002", "P029", "P031", "P030",
 				"P000", "P001", "P005", "P109", "VDD", "VDDH" /*"GND",*/, "DCCH",
@@ -29,7 +29,7 @@ var (
 	pad = headers.PadCenters()
 
 	mountHoles = &eda.Component{
-		Components: eda.Components{
+		Inner: eda.Components{
 			boards.MountHole.Arrange(transform.RotateDegrees(-45).Move(7.5, 10)),
 			boards.MountHole.Arrange(transform.RotateDegrees(45).Move(7.5, -10)),
 		},
@@ -40,7 +40,7 @@ var (
 			path.RoundRect(22.4, 28, 1),
 		},
 
-		Components: eda.Components{
+		Inner: eda.Components{
 			chip,
 			headers,
 			mountHoles,

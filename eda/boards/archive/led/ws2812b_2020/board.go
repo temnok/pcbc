@@ -16,7 +16,7 @@ var Board = &eda.Component{
 		path.RoundRect(10, 5.5, 1),
 	},
 
-	Components: eda.Components{
+	Inner: eda.Components{
 		worldsemi.WS2812B_2020.Arrange(transform.Move(-3, 0)),
 
 		mph100imp40f.G_V_SP(2).Arrange(transform.RotateDegrees(-90).Move(3.5, 0)),
@@ -43,7 +43,7 @@ func init() {
 		eda.Track{pad[4]}.DY(-1.5).XY(pad[6]),
 	)
 
-	Board.Components = append(Board.Components, &eda.Component{
+	Board.Inner = append(Board.Inner, &eda.Component{
 		NoClear: true,
 
 		Tracks: eda.Tracks(

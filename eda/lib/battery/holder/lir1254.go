@@ -19,10 +19,10 @@ var LIR1254 = &eda.Component{
 		path.Circle(12),
 	},
 
-	Components: eda.Components{
+	Inner: eda.Components{
 		{
 			NoClear: true,
-			
+
 			Tracks: eda.Tracks(
 				eda.Track{{X: -2, Y: -2}, {X: 2, Y: 2}},
 				eda.Track{{X: 2, Y: -2}, {X: -2, Y: 2}},

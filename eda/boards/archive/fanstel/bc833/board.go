@@ -20,7 +20,7 @@ func board() *eda.Component {
 	revision := "v1.0"
 
 	header := &eda.Component{
-		Components: eda.Components{
+		Inner: eda.Components{
 			mph100imp40f.G_V_SP(8).Arrange(transform.RotateDegrees(-90).Move(-8.9, -2.9)),
 			mph100imp40f.G_V_SP(8).Arrange(transform.Move(0, -15.5)),
 			mph100imp40f.G_V_SP(8).Arrange(transform.RotateDegrees(90).Move(8.9, -2.9)),
@@ -30,7 +30,7 @@ func board() *eda.Component {
 	pad := header.PadCenters()
 
 	header = &eda.Component{
-		Components: eda.Components{
+		Inner: eda.Components{
 			mph100imp40f.G_V_SP(6).Arrange(transform.RotateDegrees(-90).Move(-8.9, -2.9-2.54)),
 			mph100imp40f.G_V_SP(8).Arrange(transform.Move(0, -15.5)),
 			mph100imp40f.G_V_SP(6).Arrange(transform.RotateDegrees(90).Move(8.9, -2.9-2.54)),
@@ -88,7 +88,7 @@ func board() *eda.Component {
 	revision += "s"
 
 	shiftedBoard := &eda.Component{
-		Components: eda.Components{
+		Inner: eda.Components{
 			fanstel.BC833,
 			header,
 			boards.MountHole.Arrange(transform.RotateDegrees(45).Move(-5, -10.5)),
@@ -132,7 +132,7 @@ func board() *eda.Component {
 			boardCut,
 		},
 
-		Components: eda.Components{
+		Inner: eda.Components{
 			shiftedBoard.Arrange(transform.Move(0, boardShift)),
 		},
 	}

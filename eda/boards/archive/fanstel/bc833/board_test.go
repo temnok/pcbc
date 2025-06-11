@@ -12,7 +12,7 @@ import (
 
 func Test_BC833(t *testing.T) {
 	assert.NoError(t, pcb.Process(nil, &eda.Component{
-		Components: eda.Components{
+		Inner: eda.Components{
 			Board.Arrange(transform.Move(0, 10.5)),
 			Board.Arrange(transform.RotateDegrees(180).Move(0, -10.5)),
 		},

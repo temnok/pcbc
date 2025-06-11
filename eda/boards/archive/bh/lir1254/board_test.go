@@ -11,7 +11,7 @@ import (
 )
 
 var testBoard = &eda.Component{
-	Components: eda.Components{
+	Inner: eda.Components{
 		boards.Board35x45,
 		Board,
 	},

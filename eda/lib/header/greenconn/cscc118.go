@@ -39,7 +39,7 @@ func CSCC118(n int, flip bool, labels []string) *eda.Component {
 	return &eda.Component{
 		Pads: pads,
 
-		Components: eda.Components{},
+		Inner: eda.Components{},
 
 		Marks: path.Join(
 			path.Paths{path.Rect(1.5, float64(n)+0.5)},

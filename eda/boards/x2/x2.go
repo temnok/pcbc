@@ -32,7 +32,7 @@ func X2(topLabel, bottomLabel string, chip *eda.Component) *eda.Component {
 			path.RoundRect(9.75, 3.75, 0.5),
 		},
 
-		Components: eda.Components{
+		Inner: eda.Components{
 			header,
 			chip,
 			mount,

@@ -15,7 +15,7 @@ func Rivet(outerDiameter, headDiameter float64, layer1, layer2 int) *eda.Compone
 
 		Pads: path.Paths{path.Circle(headDiameter)},
 
-		Components: eda.Components{
+		Inner: eda.Components{
 			{
 				ClearWidth: 0.15,
 
@@ -27,7 +27,7 @@ func Rivet(outerDiameter, headDiameter float64, layer1, layer2 int) *eda.Compone
 	}
 
 	return &eda.Component{
-		Components: eda.Components{
+		Inner: eda.Components{
 			side.WithLayer(layer1),
 			side.WithLayer(layer2),
 		},
