@@ -5,9 +5,13 @@ package qfn
 import (
 	"github.com/stretchr/testify/assert"
 	"temnok/pcbc/eda/pcb"
+	"temnok/pcbc/eda/pcb/config"
 	"testing"
 )
 
 func TestQFN16(t *testing.T) {
-	assert.NoError(t, pcb.Process(nil, QFN16G))
+	conf := config.Default()
+	conf.Width, conf.Height = 5, 5
+
+	assert.NoError(t, pcb.Process(conf, QFN16G))
 }

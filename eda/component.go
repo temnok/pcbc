@@ -124,19 +124,6 @@ func (c *Component) WithLayer(layer int) *Component {
 	}
 }
 
-func (c *Component) Size() (float64, float64) {
-	var b path.Bounds
-
-	c.Visit(func(c *Component) {
-		b.AddPaths(c.Transform, c.Cuts)
-		b.AddPaths(c.Transform, c.Pads)
-		b.AddPaths(c.Transform, c.Tracks)
-		b.AddPaths(c.Transform, c.Marks)
-	})
-
-	return b.Width(), b.Height()
-}
-
 func ComponentGrid(cols int, dx, dy float64, comps ...*Component) *Component {
 	rows := (len(comps) + cols - 1) / cols
 

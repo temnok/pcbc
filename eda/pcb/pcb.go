@@ -27,8 +27,6 @@ func processComponent(initialConfig *config.Config, initialComponent *eda.Compon
 	}
 
 	config := *initialConfig
-	setMissingConfigSize(&config, initialComponent)
-
 	config.SavePath = strings.ReplaceAll(initialConfig.SavePath, "{}", fmt.Sprint(initialComponent.Layer))
 
 	component := &eda.Component{
@@ -64,21 +62,4 @@ func processComponent(initialConfig *config.Config, initialComponent *eda.Compon
 	}
 
 	return saveOverview(&config, copper, mask, silk, stencil)
-}
-
-func setMissingConfigSize(config *config.Config, component *eda.Component) {
-	if config.Width > 0 && config.Height > 0 {
-		return
-	}
-
-	w, h := component.Size()
-	w, h = w+1, h+1
-
-	if config.Width <= 0 {
-		config.Width = w
-	}
-
-	if config.Height <= 0 {
-		config.Height = h
-	}
 }

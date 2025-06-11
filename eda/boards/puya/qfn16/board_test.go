@@ -10,6 +10,8 @@ import (
 )
 
 func TestBoard(t *testing.T) {
-	config := config.Default()
-	assert.NoError(t, pcb.Process(config, Board))
+	conf := config.Default()
+	conf.Width, conf.Height = 16, 11
+
+	assert.NoError(t, pcb.Process(conf, Board))
 }

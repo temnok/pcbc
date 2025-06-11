@@ -35,11 +35,3 @@ func (b *Bounds) AddPaths(t transform.T, paths Paths) {
 func (b *Bounds) Center() Point {
 	return Point{(b.lb.X + b.rt.X) / 2, (b.lb.Y + b.rt.Y) / 2}
 }
-
-func (b *Bounds) Width() float64 {
-	return b.rt.X - b.lb.X
-}
-
-func (b *Bounds) Height() float64 {
-	return b.rt.Y - b.lb.Y
-}

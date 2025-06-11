@@ -92,19 +92,19 @@
 		<angle Value="-90"></angle>
 		<negative Value="1"></negative>
 	</CutSetting_Img>
-	<Shape Type="Bitmap" CutIndex="0" W="363" H="300" Data="iVBORw0KGgoAAAANSUhEUgAAAWsAAAEsAQMAAAA/1QDvAAAABlBMVEUAAAD///+l2Z/dAAABGUlEQVR4nOyasQ2DMBBFiSgoGcGjMFoyGqMwAiUFwul839Y1J4GCyPtdnp6Qc7jh6zpCCCEPTp9LdsGD4U31yXieDb8Ff0QXnNdCX4oX9yx6mkGxnGZUngtOSo/O53bKyX9Kw2fvn+p/rfniDUAnVvPVG4w8peGbNy8ZcFBv+O6NXQYf1Bt+uC/P3nZQb3h237XdglvpSe/PWH5MeguT/UjKB9Hljo+qC+9F36unoKOjo6Ojo6Ojo6Ojo6P/sx781o5+yVcx3asP7lVaBPVr259rm6trW7dgBUhjSGNIY4iOjo6Ojo6Ojo6Ojo6O/mudxvAUncbwrMYwuJIYXHgMrlMGlzWDq6DBRdPoGmtwSZYQQsjT8g0AAP//2TUJ/ED46AkAAAAASUVORK5CYII=">
+	<Shape Type="Bitmap" CutIndex="0" W="400" H="300" Data="iVBORw0KGgoAAAANSUhEUgAAAZAAAAEsAQMAAADXeXeBAAAABlBMVEUAAAD///+l2Z/dAAABK0lEQVR4nOyaMW7DQAwEI1zhMk/IU/I0+2l+Sp7g0oXhS2PrlgyDIAtJEIzZzlwMreNdteAbQgghtKaOfdZJyqPaM3EQ7zrK71K+JORDvPsof0r59vt36ZdpNX3ZFLyvZ7mF8jkg0btUJ5ROhXetTp/PH71bNZQwyR/evRpYHln0ejlHHb6HRG++mF53cpHkPS5t6nUnE8ne455b3WnfSNM3N80/Dvp6W3zK8aciZ+2UEPnToyAn7QQCAgICAgICAgICAgICAgKyCGJkF0ZCEjSQKp55Nt5nQGQg26RwGyWK26SjRmxL0qsi6f0LIekFAQEBAQEBAQEBAQEBAQF5PYSkd22EpPffiBHbGmvAxrKxsdJsLE4b69nOErixam4stCOEEEJL6jsAAP//G7RMQwrfYcYAAAAASUVORK5CYII=">
 		<XForm>0.01 0 0 -0.01 55 55</XForm>
 	</Shape>
-	<Shape Type="Bitmap" CutIndex="2" W="363" H="300" Data="iVBORw0KGgoAAAANSUhEUgAAAWsAAAEsAQMAAAA/1QDvAAAABlBMVEUAAAD///+l2Z/dAAABGUlEQVR4nOyasQ2DMBBFiSgoGcGjMFoyGqMwAiUFwul839Y1J4GCyPtdnp6Qc7jh6zpCCCEPTp9LdsGD4U31yXieDb8Ff0QXnNdCX4oX9yx6mkGxnGZUngtOSo/O53bKyX9Kw2fvn+p/rfniDUAnVvPVG4w8peGbNy8ZcFBv+O6NXQYf1Bt+uC/P3nZQb3h237XdglvpSe/PWH5MeguT/UjKB9Hljo+qC+9F36unoKOjo6Ojo6Ojo6Ojo6P/sx781o5+yVcx3asP7lVaBPVr259rm6trW7dgBUhjSGNIY4iOjo6Ojo6Ojo6Ojo6O/mudxvAUncbwrMYwuJIYXHgMrlMGlzWDq6DBRdPoGmtwSZYQQsjT8g0AAP//2TUJ/ED46AkAAAAASUVORK5CYII=">
+	<Shape Type="Bitmap" CutIndex="2" W="400" H="300" Data="iVBORw0KGgoAAAANSUhEUgAAAZAAAAEsAQMAAADXeXeBAAAABlBMVEUAAAD///+l2Z/dAAABK0lEQVR4nOyaMW7DQAwEI1zhMk/IU/I0+2l+Sp7g0oXhS2PrlgyDIAtJEIzZzlwMreNdteAbQgghtKaOfdZJyqPaM3EQ7zrK71K+JORDvPsof0r59vt36ZdpNX3ZFLyvZ7mF8jkg0btUJ5ROhXetTp/PH71bNZQwyR/evRpYHln0ejlHHb6HRG++mF53cpHkPS5t6nUnE8ne455b3WnfSNM3N80/Dvp6W3zK8aciZ+2UEPnToyAn7QQCAgICAgICAgICAgICAgKyCGJkF0ZCEjSQKp55Nt5nQGQg26RwGyWK26SjRmxL0qsi6f0LIekFAQEBAQEBAQEBAQEBAQF5PYSkd22EpPffiBHbGmvAxrKxsdJsLE4b69nOErixam4stCOEEEJL6jsAAP//G7RMQwrfYcYAAAAASUVORK5CYII=">
 		<XForm>0.01 0 0 -0.01 55 55</XForm>
 	</Shape>
 	<Shape Type="Path" CutIndex="1">
 		<XForm>1 0 0 1 55 55</XForm>
-		<V vx="1.815" vy="1.5"></V>
-		<V vx="1.815" vy="-1.5"></V>
-		<V vx="-1.815" vy="-1.5"></V>
-		<V vx="-1.815" vy="1.5"></V>
-		<V vx="1.815" vy="1.5"></V>
+		<V vx="2" vy="1.5"></V>
+		<V vx="2" vy="-1.5"></V>
+		<V vx="-2" vy="-1.5"></V>
+		<V vx="-2" vy="1.5"></V>
+		<V vx="2" vy="1.5"></V>
 		<P T="L" p0="0" p1="1"></P>
 		<P T="L" p0="1" p1="2"></P>
 		<P T="L" p0="2" p1="3"></P>
@@ -112,11 +112,11 @@
 	</Shape>
 	<Shape Type="Path" CutIndex="4">
 		<XForm>1 0 0 1 55 55</XForm>
-		<V vx="1.815" vy="1.5"></V>
-		<V vx="1.815" vy="-1.5"></V>
-		<V vx="-1.815" vy="-1.5"></V>
-		<V vx="-1.815" vy="1.5"></V>
-		<V vx="1.815" vy="1.5"></V>
+		<V vx="2" vy="1.5"></V>
+		<V vx="2" vy="-1.5"></V>
+		<V vx="-2" vy="-1.5"></V>
+		<V vx="-2" vy="1.5"></V>
+		<V vx="2" vy="1.5"></V>
 		<P T="L" p0="0" p1="1"></P>
 		<P T="L" p0="1" p1="2"></P>
 		<P T="L" p0="2" p1="3"></P>

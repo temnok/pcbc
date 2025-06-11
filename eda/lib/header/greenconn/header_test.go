@@ -6,12 +6,16 @@ import (
 	"github.com/stretchr/testify/assert"
 	"temnok/pcbc/eda"
 	"temnok/pcbc/eda/pcb"
+	"temnok/pcbc/eda/pcb/config"
 	"temnok/pcbc/transform"
 	"testing"
 )
 
 func TestHeader(t *testing.T) {
-	assert.NoError(t, pcb.Process(nil, &eda.Component{
+	conf := config.Default()
+	conf.Width, conf.Height = 17, 10
+
+	assert.NoError(t, pcb.Process(conf, &eda.Component{
 		Inner: eda.Components{
 			CSCC118(7, false, []string{"P001", "P002", "VDD", "D+", "D-", "GND", "P007"}).
 				Arrange(transform.Move(-5, 0)),

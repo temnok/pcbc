@@ -5,9 +5,13 @@ package worldsemi
 import (
 	"github.com/stretchr/testify/assert"
 	"temnok/pcbc/eda/pcb"
+	"temnok/pcbc/eda/pcb/config"
 	"testing"
 )
 
 func TestBoard(t *testing.T) {
-	assert.NoError(t, pcb.Process(nil, WS2812B_2020))
+	conf := config.Default()
+	conf.Width, conf.Height = 4, 3
+
+	assert.NoError(t, pcb.Process(conf, WS2812B_2020))
 }

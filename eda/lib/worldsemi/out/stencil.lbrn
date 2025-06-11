@@ -31,7 +31,7 @@
 		<crossHatch Value="1"></crossHatch>
 		<angle Value="90"></angle>
 	</CutSetting_Img>
-	<Shape Type="Bitmap" CutIndex="0" W="363" H="300" Data="iVBORw0KGgoAAAANSUhEUgAAAWsAAAEsAQMAAAA/1QDvAAAABlBMVEX///8AAABVwtN+AAAAbElEQVR4nOzYwQmAMAxAUZ3M0VzNURzBDfQSRTwHCen7pza8cwmdJEmS1LvlvNvf4/UZb3h/fsThw+M24ziO4ziO43g7Xmohx3O4JCmtUu877scQx3Ecx3Ecx3/hpRZyPIdLkiRp9K4AAAD//6eXOesazOWmAAAAAElFTkSuQmCC">
+	<Shape Type="Bitmap" CutIndex="0" W="400" H="300" Data="iVBORw0KGgoAAAANSUhEUgAAAZAAAAEsAQMAAADXeXeBAAAABlBMVEX///8AAABVwtN+AAAAc0lEQVR4nOzXsQ2EMBBFwcsupARKof+OCBCQYGRyLP1F8yJ7pYnt/UmSJEk1+x+trR9P93hFkJ7s12F+knZbEARBEARBEASpTWKXEWQ8kSSVLvZ9QUJJ7HcUQRAEQRAEQZBXSOwygownkiRJ0lc7AwAA//8RyVTs0qvSUgAAAABJRU5ErkJggg==">
 		<XForm>0.01 0 0 -0.01 55 55</XForm>
 	</Shape>
 </LightBurnProject>

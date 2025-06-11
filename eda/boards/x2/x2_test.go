@@ -14,6 +14,8 @@ import (
 
 func TestBoard(t *testing.T) {
 	conf := config.Default()
+	conf.Width, conf.Height = 13, 13
+
 	//conf.ExtraCopperWidth = 0
 	//conf.StencilPadOffset = 0.05
 

@@ -8,6 +8,7 @@ import (
 	"temnok/pcbc/eda/boards"
 	"temnok/pcbc/eda/boards/archive/bh/lir1254"
 	"temnok/pcbc/eda/pcb"
+	"temnok/pcbc/eda/pcb/config"
 	"temnok/pcbc/transform"
 	"testing"
 )
@@ -26,5 +27,8 @@ var testBoard = &eda.Component{
 }
 
 func TestBoard(t *testing.T) {
-	assert.NoError(t, pcb.Process(nil, testBoard))
+	conf := config.Default()
+	conf.Width, conf.Height = 36, 46
+
+	assert.NoError(t, pcb.Process(conf, testBoard))
 }

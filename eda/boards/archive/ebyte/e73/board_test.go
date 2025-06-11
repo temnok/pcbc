@@ -7,11 +7,15 @@ import (
 	"temnok/pcbc/eda"
 	"temnok/pcbc/eda/boards"
 	"temnok/pcbc/eda/pcb"
+	"temnok/pcbc/eda/pcb/config"
 	"testing"
 )
 
 func TestBoard(t *testing.T) {
-	assert.NoError(t, pcb.Process(nil, &eda.Component{
+	conf := config.Default()
+	conf.Width = 36
+	conf.Height = 46
+	assert.NoError(t, pcb.Process(conf, &eda.Component{
 		Inner: eda.Components{
 			boards.Board35x45,
 			Board_nRF52840,

@@ -64,6 +64,7 @@ func TestBoard(t *testing.T) {
 	}
 
 	topConfig := config.Default()
+	topConfig.Width, topConfig.Height = 22, 14
 	topConfig.SavePath = "out/1-"
 
 	bottom := &eda.Component{
@@ -77,6 +78,7 @@ func TestBoard(t *testing.T) {
 	}
 
 	bottomConfig := config.Default()
+	bottomConfig.Width, bottomConfig.Height = 22, 14
 	bottomConfig.SavePath = "out/2-"
 
 	assert.NoError(t, pcb.Process(topConfig, top))

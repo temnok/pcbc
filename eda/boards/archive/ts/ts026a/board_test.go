@@ -5,9 +5,13 @@ package ts026a
 import (
 	"github.com/stretchr/testify/assert"
 	"temnok/pcbc/eda/pcb"
+	"temnok/pcbc/eda/pcb/config"
 	"testing"
 )
 
 func TestBoard(t *testing.T) {
-	assert.NoError(t, pcb.Process(nil, Board))
+	conf := config.Default()
+	conf.Width, conf.Height = 10, 6.5
+
+	assert.NoError(t, pcb.Process(conf, Board))
 }

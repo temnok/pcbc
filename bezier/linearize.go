@@ -7,6 +7,7 @@ import (
 )
 
 // Linearize calls provided callback for selected points along the cubic Bézier path (one or more consecutive curves).
+// It is not called for the first point (xy[0], xy[1]).
 func Linearize(xy []float64, delta float64, callback func(x, y float64)) {
 	for ; len(xy) >= 8; xy = xy[6:] {
 		linearizeCurve(xy, delta, callback)
