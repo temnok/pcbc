@@ -42,8 +42,6 @@ func TestBoard(t *testing.T) {
 			rivets,
 
 			{
-				ClearWidth: 0.35,
-
 				Pads: path.Paths{
 					path.Circle(1).Transform(transform.Move(-3, 0)),
 					path.Circle(1).Transform(transform.Move(3, 0)),
