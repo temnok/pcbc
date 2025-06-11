@@ -98,6 +98,7 @@ func TestBoard(t *testing.T) {
 	assert.NoError(t, util.RunConcurrently(
 		func() error {
 			conf := config.Default()
+			conf.ClearWidth = 0.4
 			conf.SavePath = "out/1-"
 			return pcb.Process(conf, top)
 		},
