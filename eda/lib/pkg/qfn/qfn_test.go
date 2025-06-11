@@ -9,5 +9,5 @@ import (
 )
 
 func TestQFN16(t *testing.T) {
-	assert.NoError(t, pcb.ProcessWithDefaultConfig(QFN16G))
+	assert.NoError(t, pcb.Process(nil, QFN16G))
 }

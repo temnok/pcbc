@@ -15,6 +15,8 @@ type Components = []*Component
 type Component struct {
 	Transform transform.T
 
+	Layer int
+
 	Cuts path.Paths
 
 	OuterCut bool
@@ -44,12 +46,17 @@ func (c *Component) Visit(callback func(*Component)) {
 }
 
 func (c *Component) visit(t transform.T, parent *Component, callback func(*Component)) {
+	if c.Layer != 0 && c.Layer != parent.Layer {
+		return
+	}
+
 	if c.Transform != (transform.T{}) {
 		t = c.Transform.Multiply(t)
 	}
 
 	target := &Component{
 		Transform:  t,
+		Layer:      c.Layer,
 		Cuts:       c.Cuts,
 		OuterCut:   c.OuterCut || parent.OuterCut,
 		Pads:       c.Pads,

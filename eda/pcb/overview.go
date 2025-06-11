@@ -10,7 +10,7 @@ import (
 	"temnok/pcbc/util"
 )
 
-func SaveOverview(config *config.Config, copper, mask, silk, stencil *bitmap.Bitmap) error {
+func saveOverview(config *config.Config, copper, mask, silk, stencil *bitmap.Bitmap) error {
 	filename := config.SavePath + "overview.png"
 
 	im := image.New(

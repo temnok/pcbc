@@ -9,5 +9,5 @@ import (
 )
 
 func TestBoard(t *testing.T) {
-	assert.NoError(t, pcb.ProcessWithDefaultConfig(WS2812B_2020))
+	assert.NoError(t, pcb.Process(nil, WS2812B_2020))
 }

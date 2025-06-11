@@ -14,7 +14,7 @@ import (
 func TestBoard(t *testing.T) {
 	x, y := 5.0, 14.3/2
 
-	assert.NoError(t, pcb.ProcessWithDefaultConfig(&eda.Component{
+	assert.NoError(t, pcb.Process(nil, &eda.Component{
 		Pads: path.Paths{
 			path.Rect(0.5, 2).Transform(transform.Move(x, y)),
 			path.Rect(2, 0.5).Transform(transform.Move(x, y)),

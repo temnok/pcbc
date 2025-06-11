@@ -16,7 +16,7 @@ func TestBoard(t *testing.T) {
 		return x2.X2_I0402("R ", label)
 	}
 
-	assert.NoError(t, pcb.ProcessWithDefaultConfig(&eda.Component{
+	assert.NoError(t, pcb.Process(nil, &eda.Component{
 		Components: eda.Components{
 			boards.Guides72x42,
 			eda.ComponentGrid(6, 11, 5,

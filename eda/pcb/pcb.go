@@ -3,6 +3,8 @@
 package pcb
 
 import (
+	"fmt"
+	"strings"
 	"temnok/pcbc/bitmap"
 	"temnok/pcbc/eda"
 	"temnok/pcbc/eda/pcb/config"
@@ -10,8 +12,14 @@ import (
 )
 
 func Process(initialConfig *config.Config, defaultComponent *eda.Component) error {
+	if initialConfig == nil {
+		initialConfig = config.Default()
+	}
+
 	config := *initialConfig
 	setMissingConfigSize(&config, defaultComponent)
+
+	config.SavePath = strings.ReplaceAll(initialConfig.SavePath, "{}", fmt.Sprint(defaultComponent.Layer))
 
 	component := &eda.Component{
 		TrackWidth: config.TrackWidth,
@@ -44,7 +52,7 @@ func Process(initialConfig *config.Config, defaultComponent *eda.Component) erro
 		return err
 	}
 
-	return SaveOverview(&config, copper, mask, silk, stencil)
+	return saveOverview(&config, copper, mask, silk, stencil)
 }
 
 func setMissingConfigSize(config *config.Config, component *eda.Component) {
@@ -62,8 +70,4 @@ func setMissingConfigSize(config *config.Config, component *eda.Component) {
 	if config.Height <= 0 {
 		config.Height = h
 	}
-}
-
-func ProcessWithDefaultConfig(component *eda.Component) error {
-	return Process(config.Default(), component)
 }
