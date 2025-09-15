@@ -7,27 +7,30 @@ import (
 	"temnok/pcbc/path"
 )
 
-var Default = Via(0.6, 1.2, 1, 2)
+var BetweenLayers1and2 = Via(1, 2)
 
-func Via(outerDiameter, headDiameter float64, layer1, layer2 int) *eda.Component {
-	side := &eda.Component{
-		Pads: path.Paths{path.Circle(headDiameter)},
-
-		Inner: eda.Components{
-			{
-				ClearWidth: 0.15,
-
-				CutsOuter: true,
-
-				Cuts: path.Paths{path.Circle(outerDiameter)},
-			},
-		},
-	}
+func Via(layer1, layer2 int) *eda.Component {
+	const (
+		viaDiameter    = 0.6
+		topDiameter    = 1.0
+		bottomDiameter = 1.2
+	)
 
 	return &eda.Component{
 		Inner: eda.Components{
-			side.WithLayer(layer1),
-			side.WithLayer(layer2),
+			&eda.Component{
+				Layer: layer1,
+
+				Pads: path.Paths{path.Circle(topDiameter)},
+			},
+
+			&eda.Component{
+				Layer: layer2,
+
+				Tracks: path.Paths{path.Path{path.Point{}}},
+
+				TracksWidth: bottomDiameter,
+			},
 		},
 	}
 }

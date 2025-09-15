@@ -29,10 +29,10 @@ func TestBoard(t *testing.T) {
 		},
 	}
 
-	rivetPair := &eda.Component{
+	viaPair := &eda.Component{
 		Inner: eda.Components{
-			Default.Arrange(transform.Move(-1, 0)),
-			Default.Arrange(transform.Move(1, 0)),
+			BetweenLayers1and2.Arrange(transform.Move(-1, 0)),
+			BetweenLayers1and2.Arrange(transform.Move(1, 0)),
 
 			{
 				Layer: 1,
@@ -62,8 +62,8 @@ func TestBoard(t *testing.T) {
 		Inner: eda.Components{
 			blank,
 
-			rivetPair.Clone(4, 0, 2).Arrange(transform.Move(0.5, 0)),
-			rivetPair.Clone(3, 0, 2).Arrange(transform.Move(-0.5, 0)),
+			viaPair.Clone(4, 0, 2).Arrange(transform.Move(0.5, 0)),
+			viaPair.Clone(3, 0, 2).Arrange(transform.Move(-0.5, 0)),
 		},
 	}
 
@@ -72,7 +72,7 @@ func TestBoard(t *testing.T) {
 	conf.SavePath = "out/{}-"
 
 	assert.NoError(t, pcb.Process(conf,
-		board.WithLayer(1),
-		board.WithLayer(2).Arrange(transform.MirrorX()),
+		board.InLayer(1),
+		board.InLayer(2).Arrange(transform.MirrorX()),
 	))
 }

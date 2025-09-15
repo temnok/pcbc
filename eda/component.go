@@ -114,7 +114,7 @@ func (c *Component) Clone(n int, dx, dy float64) *Component {
 	return res
 }
 
-func (c *Component) WithLayer(layer int) *Component {
+func (c *Component) InLayer(layer int) *Component {
 	return &Component{
 		Layer: layer,
 		Inner: Components{c},
