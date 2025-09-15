@@ -56,6 +56,9 @@ func processComponent(initialConfig *config.Config, initialComponent *eda.Compon
 			stencil, e = SaveStencil(&config, component)
 			return e
 		},
+		func() error {
+			return SaveViaStencil(&config, component)
+		},
 	)
 	if err != nil {
 		return err
