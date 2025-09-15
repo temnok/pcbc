@@ -78,7 +78,7 @@ func SaveMask(config *config.Config, component *eda.Component) (*bitmap.Bitmap, 
 	}
 
 	filename := config.SavePath + "mask.lbrn"
-	silkImage := image.NewSingle(silk, color.White, color.Black)
+	silkImage := image.NewSingle(silk, color.Transparent, color.Black)
 	maskImage := image.NewSingle(mask, color.Transparent, color.Black)
 
 	p := &lbrn.LightBurnProject{

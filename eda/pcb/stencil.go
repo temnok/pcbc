@@ -43,7 +43,7 @@ func SaveStencil(config *config.Config, component *eda.Component) (*bitmap.Bitma
 		return stencil, nil
 	}
 
-	stencilImage := image.NewSingle(stencil, color.White, color.Black)
+	stencilImage := image.NewSingle(stencil, color.Transparent, color.Black)
 
 	p := lbrn.LightBurnProject{
 		UIPrefs:       lbrn.UIPrefsDefaults,
