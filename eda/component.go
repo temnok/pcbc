@@ -121,6 +121,10 @@ func (c *Component) InLayer(layer int) *Component {
 	}
 }
 
+func (c *Component) CutsDisabled() bool {
+	return c.Layer > 1
+}
+
 func ComponentGrid(cols int, dx, dy float64, comps ...*Component) *Component {
 	rows := (len(comps) + cols - 1) / cols
 

@@ -12,6 +12,7 @@ type CutSetting struct {
 	Index    *Param `xml:"index"`
 	Name     *Param `xml:"name"`
 	Priority *Param `xml:"priority"`
+	DoOutput *Param `xml:"doOutput"`
 
 	Speed        *Param `xml:"speed"`
 	NumPasses    *Param `xml:"numPasses"`
