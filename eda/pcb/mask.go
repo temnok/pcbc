@@ -64,10 +64,18 @@ func SaveMask(config *config.Config, component *eda.Component) (*bitmap.Bitmap, 
 	mask := bitmap.New(config.BitmapSizeInPixels())
 	silk := bitmap.New(config.BitmapSizeInPixels())
 
+	nonEmpty := false
+
 	component.Visit(func(c *eda.Component) {
 		cutMask1(config, c, mask)
 		addSilk(config, c, silk)
+
+		nonEmpty = nonEmpty || len(c.Pads) > 0 || len(c.Marks) > 0
 	})
+
+	if !nonEmpty {
+		return mask, silk, nil
+	}
 
 	filename := config.SavePath + "mask.lbrn"
 	silkImage := image.NewSingle(silk, color.White, color.Black)
@@ -83,15 +91,6 @@ func SaveMask(config *config.Config, component *eda.Component) (*bitmap.Bitmap, 
 	}
 
 	return mask, silk, p.SaveToFile(filename)
-}
-
-func addSilk(config *config.Config, c *eda.Component, silk *bitmap.Bitmap) {
-	t := c.Transform.Multiply(config.BitmapTransform())
-
-	// Marks:
-	brushW := font.Bold * font.WeightScale(t)
-	brush := shape.Circle(int(brushW))
-	brush.ForEachPathsPixel(c.Marks, t, silk.Set1)
 }
 
 func cutMask1(config *config.Config, c *eda.Component, mask *bitmap.Bitmap) {
@@ -110,4 +109,13 @@ func cutMask1(config *config.Config, c *eda.Component, mask *bitmap.Bitmap) {
 			brush.ForEachRowWithOffset(x, y, mask.Set1)
 		})
 	}
+}
+
+func addSilk(config *config.Config, c *eda.Component, silk *bitmap.Bitmap) {
+	t := c.Transform.Multiply(config.BitmapTransform())
+
+	// Marks:
+	brushW := font.Bold * font.WeightScale(t)
+	brush := shape.Circle(int(brushW))
+	brush.ForEachPathsPixel(c.Marks, t, silk.Set1)
 }

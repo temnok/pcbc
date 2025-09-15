@@ -38,7 +38,10 @@ var stencilCutSettings = []*lbrn.CutSetting{
 func SaveStencil(config *config.Config, component *eda.Component) (*bitmap.Bitmap, error) {
 	stencil := bitmap.New(config.BitmapSizeInPixels())
 
-	renderStencil(config, component, stencil)
+	nonEmpty := renderStencil(config, component, stencil)
+	if !nonEmpty {
+		return stencil, nil
+	}
 
 	stencilImage := image.NewSingle(stencil, color.White, color.Black)
 
@@ -53,11 +56,15 @@ func SaveStencil(config *config.Config, component *eda.Component) (*bitmap.Bitma
 	return stencil, p.SaveToFile(config.SavePath + "stencil.lbrn")
 }
 
-func renderStencil(config *config.Config, component *eda.Component, stencil *bitmap.Bitmap) {
+func renderStencil(config *config.Config, component *eda.Component, stencil *bitmap.Bitmap) bool {
 	bmT := config.BitmapTransform()
+
+	totalPadCount := 0
 
 	// Pass 1: draw pads
 	component.Visit(func(c *eda.Component) {
+		totalPadCount += len(c.Pads)
+
 		if c.CutsOuter {
 			return
 		}
@@ -109,4 +116,6 @@ func renderStencil(config *config.Config, component *eda.Component, stencil *bit
 		t := c.Transform.Multiply(bmT)
 		outerCutBrush.ForEachPathsPixel(c.Cuts, t, stencil.Set1)
 	})
+
+	return totalPadCount > 0
 }
