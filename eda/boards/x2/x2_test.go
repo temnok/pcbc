@@ -27,7 +27,7 @@ func TestBoard(t *testing.T) {
 			X2("R ", "1K0", smd.I0402).Arrange(transform.Move(0, -2.25)),
 
 			{
-				OuterCut: true,
+				CutsOuter: true,
 				Cuts: path.Paths{
 					path.RoundRect(12, 12, 1),
 

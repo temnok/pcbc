@@ -41,7 +41,7 @@ func X2(topLabel, bottomLabel string, chip *eda.Component) *eda.Component {
 			rev,
 
 			{
-				NoClear: true,
+				ClearNone: true,
 
 				Tracks: eda.Tracks(
 					eda.Track{pad[1]}.DX(-1.2),

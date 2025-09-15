@@ -12,7 +12,7 @@ import (
 )
 
 var Board = &eda.Component{
-	TrackWidth: 0.5, // more power!
+	TracksWidth: 0.5, // more power!
 
 	Cuts: path.Paths{
 		path.RoundRect(21, 14, 1),

@@ -42,7 +42,7 @@ func TestBoard(t *testing.T) {
 	}
 
 	tracks := &eda.Component{
-		TrackWidth: 0.15,
+		TracksWidth: 0.15,
 		Tracks: eda.Tracks(
 			eda.Track{{X: -2.4, Y: -0.25}}.DX(3.5),
 			eda.Track{{X: -1.2, Y: 0.25}}.DX(3.5),

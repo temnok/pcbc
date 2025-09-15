@@ -20,7 +20,7 @@ func SaveStencilGerber(config *config.Config, component *eda.Component) error {
 `)
 
 	component.Visit(func(c *eda.Component) {
-		if c.OuterCut {
+		if c.CutsOuter {
 			return
 		}
 

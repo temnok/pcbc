@@ -17,7 +17,7 @@ func init() {
 	hole := path.Circle(2.1)
 
 	Guides34x42 = &eda.Component{
-		OuterCut: true,
+		CutsOuter: true,
 
 		Cuts: path.Paths{
 			hole.Transform(transform.Move(-17, 19)),
@@ -28,7 +28,7 @@ func init() {
 	}
 
 	Guides72x42 = &eda.Component{
-		OuterCut: true,
+		CutsOuter: true,
 
 		Cuts: path.Paths{
 			hole.Transform(transform.Move(-36, 19)),

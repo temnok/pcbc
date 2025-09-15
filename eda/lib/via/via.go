@@ -1,15 +1,15 @@
 // Copyright © 2025 Alex Temnok. All rights reserved.
 
-package rivet
+package via
 
 import (
 	"temnok/pcbc/eda"
 	"temnok/pcbc/path"
 )
 
-var Rivet06mm_Layers12 = Rivet(0.6, 1.2, 1, 2)
+var Default = Via(0.6, 1.2, 1, 2)
 
-func Rivet(outerDiameter, headDiameter float64, layer1, layer2 int) *eda.Component {
+func Via(outerDiameter, headDiameter float64, layer1, layer2 int) *eda.Component {
 	side := &eda.Component{
 		NoOpening: true,
 
@@ -19,7 +19,7 @@ func Rivet(outerDiameter, headDiameter float64, layer1, layer2 int) *eda.Compone
 			{
 				ClearWidth: 0.15,
 
-				OuterCut: true,
+				CutsOuter: true,
 
 				Cuts: path.Paths{path.Circle(outerDiameter)},
 			},

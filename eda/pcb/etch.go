@@ -123,20 +123,20 @@ func SaveEtch(config *config.Config, component *eda.Component) (*bitmap.Bitmap, 
 	var cuts []*lbrn.Shape
 
 	component.Visit(func(c *eda.Component) {
-		if !c.OuterCut {
+		if !c.CutsOuter {
 			removeEtchCopper(config, c, copper)
 		}
 	})
 
 	component.Visit(func(c *eda.Component) {
-		if !c.OuterCut {
+		if !c.CutsOuter {
 			addEtchCopper(config, c, copper)
 			addEtchCuts(config, c, &cuts)
 		}
 	})
 
 	component.Visit(func(c *eda.Component) {
-		if c.OuterCut {
+		if c.CutsOuter {
 			removeEtchCopper(config, c, copper)
 			addEtchCuts(config, c, &cuts)
 		}
@@ -162,7 +162,7 @@ func SaveEtch(config *config.Config, component *eda.Component) (*bitmap.Bitmap, 
 }
 
 func removeEtchCopper(config *config.Config, component *eda.Component, copper *bitmap.Bitmap) {
-	if component.NoClear {
+	if component.ClearNone {
 		return
 	}
 
@@ -179,7 +179,7 @@ func removeEtchCopper(config *config.Config, component *eda.Component, copper *b
 	padBrush.ForEachPathsPixel(component.Pads, t, copper.Set1)
 
 	// Tracks
-	trackBrush := shape.Circle(int((component.TrackWidth + clearWidth) * config.PixelsPerMM))
+	trackBrush := shape.Circle(int((component.TracksWidth + clearWidth) * config.PixelsPerMM))
 	trackBrush.ForEachPathsPixel(component.Tracks, t, copper.Set1)
 }
 
@@ -193,7 +193,7 @@ func addEtchCopper(config *config.Config, component *eda.Component, copper *bitm
 	extraCopperBrush.ForEachPathsPixel(component.Pads, t, copper.Set0)
 
 	// Tracks
-	brush := shape.Circle(int((component.TrackWidth + config.ExtraCopperWidth) * config.PixelsPerMM))
+	brush := shape.Circle(int((component.TracksWidth + config.ExtraCopperWidth) * config.PixelsPerMM))
 	brush.ForEachPathsPixel(component.Tracks, t, copper.Set0)
 }
 

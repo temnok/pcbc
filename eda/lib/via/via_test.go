@@ -1,6 +1,6 @@
 // Copyright © 2025 Alex Temnok. All rights reserved.
 
-package rivet
+package via
 
 import (
 	"github.com/stretchr/testify/assert"
@@ -17,7 +17,7 @@ func TestBoard(t *testing.T) {
 	hole := path.Circle(1.4)
 
 	blank := &eda.Component{
-		OuterCut: true,
+		CutsOuter: true,
 
 		Cuts: path.Paths{
 			path.RoundRect(13, 13, 1.4),
@@ -31,8 +31,8 @@ func TestBoard(t *testing.T) {
 
 	rivetPair := &eda.Component{
 		Inner: eda.Components{
-			Rivet06mm_Layers12.Arrange(transform.Move(-1, 0)),
-			Rivet06mm_Layers12.Arrange(transform.Move(1, 0)),
+			Default.Arrange(transform.Move(-1, 0)),
+			Default.Arrange(transform.Move(1, 0)),
 
 			{
 				Layer: 1,

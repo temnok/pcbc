@@ -32,9 +32,9 @@ func init() {
 
 		Inner: eda.Components{
 			{
-				NoClear: true,
+				ClearNone: true,
 
-				TrackWidth: 0.25,
+				TracksWidth: 0.25,
 
 				Tracks: eda.Tracks(
 					eda.Track{{X: -1.5, Y: 1.5}, {X: 1.5, Y: -1.5}},

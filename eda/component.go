@@ -17,23 +17,19 @@ type Component struct {
 
 	Layer int
 
-	Cuts path.Paths
-
-	OuterCut bool
+	Cuts      path.Paths
+	CutsOuter bool
 
 	Marks path.Paths
 
 	Pads path.Paths
 
-	Tracks path.Paths
+	Tracks      path.Paths
+	TracksWidth float64
 
-	// zero value is replaced with parent component's value
-	TrackWidth float64
-
-	// zero value is replaced with parent component's value
 	ClearWidth float64
+	ClearNone  bool
 
-	NoClear   bool
 	NoOpening bool
 
 	Inner []*Component
@@ -55,17 +51,17 @@ func (c *Component) visit(t transform.T, parent *Component, callback func(*Compo
 	}
 
 	target := &Component{
-		Transform:  t,
-		Layer:      c.Layer,
-		Cuts:       c.Cuts,
-		OuterCut:   c.OuterCut || parent.OuterCut,
-		Pads:       c.Pads,
-		Tracks:     c.Tracks,
-		Marks:      c.Marks,
-		TrackWidth: c.TrackWidth,
-		ClearWidth: c.ClearWidth,
+		Transform:   t,
+		Layer:       c.Layer,
+		Cuts:        c.Cuts,
+		CutsOuter:   c.CutsOuter || parent.CutsOuter,
+		Pads:        c.Pads,
+		Tracks:      c.Tracks,
+		Marks:       c.Marks,
+		TracksWidth: c.TracksWidth,
+		ClearWidth:  c.ClearWidth,
 
-		NoClear:   c.NoClear || parent.NoClear,
+		ClearNone: c.ClearNone || parent.ClearNone,
 		NoOpening: c.NoOpening || parent.NoOpening,
 	}
 
@@ -73,8 +69,8 @@ func (c *Component) visit(t transform.T, parent *Component, callback func(*Compo
 		target.Layer = parent.Layer
 	}
 
-	if target.TrackWidth == 0 {
-		target.TrackWidth = parent.TrackWidth
+	if target.TracksWidth == 0 {
+		target.TracksWidth = parent.TracksWidth
 	}
 
 	if target.ClearWidth == 0 {

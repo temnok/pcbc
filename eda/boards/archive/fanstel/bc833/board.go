@@ -100,7 +100,7 @@ func board() *eda.Component {
 			eda.CenteredText("nRF52833").Arrange(transform.ScaleUniformly(1.5).Move(0, -12.2)),
 
 			{
-				NoClear: true,
+				ClearNone: true,
 
 				Tracks: eda.Tracks(
 					eda.Track{pad[7]}.DX(2.1).YX(pin[5]),

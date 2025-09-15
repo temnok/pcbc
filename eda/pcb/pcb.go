@@ -30,9 +30,9 @@ func processComponent(initialConfig *config.Config, initialComponent *eda.Compon
 	config.SavePath = strings.ReplaceAll(initialConfig.SavePath, "{}", fmt.Sprint(initialComponent.Layer))
 
 	component := &eda.Component{
-		Layer:      initialComponent.Layer,
-		TrackWidth: config.TrackWidth,
-		ClearWidth: config.ClearWidth,
+		Layer:       initialComponent.Layer,
+		TracksWidth: config.TrackWidth,
+		ClearWidth:  config.ClearWidth,
 		Inner: eda.Components{
 			initialComponent,
 		},
