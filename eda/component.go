@@ -44,22 +44,26 @@ func (c *Component) visit(t transform.T, parent *Component, callback func(*Compo
 		return
 	}
 
-	if c.Transform != (transform.T{}) {
+	if zero := (transform.T{}); c.Transform != zero {
 		t = c.Transform.Multiply(t)
 	}
 
 	target := &Component{
-		Transform:   t,
-		Layer:       c.Layer,
-		Cuts:        c.Cuts,
-		CutsOuter:   c.CutsOuter || parent.CutsOuter,
-		Pads:        c.Pads,
-		Tracks:      c.Tracks,
-		Marks:       c.Marks,
-		TracksWidth: c.TracksWidth,
-		ClearWidth:  c.ClearWidth,
+		Transform: t,
+		Layer:     c.Layer,
 
-		ClearNone: c.ClearNone || parent.ClearNone,
+		Cuts:      c.Cuts,
+		CutsOuter: c.CutsOuter || parent.CutsOuter,
+
+		Marks: c.Marks,
+
+		Pads: c.Pads,
+
+		Tracks:      c.Tracks,
+		TracksWidth: c.TracksWidth,
+
+		ClearWidth: c.ClearWidth,
+		ClearNone:  c.ClearNone || parent.ClearNone,
 	}
 
 	if target.Layer == 0 {
