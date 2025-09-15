@@ -18,6 +18,7 @@ type Config struct {
 	MaskPerforationStep   float64
 	StencilPadOffset      float64
 	StencilLinearizeDelta float64
+	ViaAblateWidth        float64
 
 	LbrnCenterX, LbrnCenterY float64
 
@@ -38,6 +39,7 @@ func Default() *Config {
 		MaskPerforationStep:   0.17,
 		StencilPadOffset:      0.0,
 		StencilLinearizeDelta: 0.01,
+		ViaAblateWidth:        1.0,
 
 		LbrnCenterX: 55,
 		LbrnCenterY: 55,

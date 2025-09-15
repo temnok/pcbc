@@ -59,11 +59,11 @@ func SaveStencil(config *config.Config, component *eda.Component) (*bitmap.Bitma
 func renderStencil(config *config.Config, component *eda.Component, stencil *bitmap.Bitmap) bool {
 	bmT := config.BitmapTransform()
 
-	totalPadCount := 0
+	hasPads := false
 
 	// Pass 1: draw pads
 	component.Visit(func(c *eda.Component) {
-		totalPadCount += len(c.Pads)
+		hasPads = hasPads || len(c.Pads) > 0
 
 		if c.CutsOuter {
 			return
@@ -117,5 +117,5 @@ func renderStencil(config *config.Config, component *eda.Component, stencil *bit
 		outerCutBrush.ForEachPathsPixel(c.Cuts, t, stencil.Set1)
 	})
 
-	return totalPadCount > 0
+	return hasPads
 }
