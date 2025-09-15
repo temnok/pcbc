@@ -30,8 +30,6 @@ type Component struct {
 	ClearWidth float64
 	ClearNone  bool
 
-	NoOpening bool
-
 	Inner []*Component
 }
 
@@ -62,7 +60,6 @@ func (c *Component) visit(t transform.T, parent *Component, callback func(*Compo
 		ClearWidth:  c.ClearWidth,
 
 		ClearNone: c.ClearNone || parent.ClearNone,
-		NoOpening: c.NoOpening || parent.NoOpening,
 	}
 
 	if target.Layer == 0 {

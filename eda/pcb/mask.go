@@ -95,10 +95,6 @@ func addSilk(config *config.Config, c *eda.Component, silk *bitmap.Bitmap) {
 }
 
 func cutMask1(config *config.Config, c *eda.Component, mask *bitmap.Bitmap) {
-	if c.NoOpening {
-		return
-	}
-
 	t := c.Transform.Multiply(config.BitmapTransform())
 
 	brush := shape.Circle(int(config.MaskCutWidth * config.PixelsPerMM))

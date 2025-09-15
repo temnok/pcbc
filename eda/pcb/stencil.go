@@ -58,7 +58,7 @@ func renderStencil(config *config.Config, component *eda.Component, stencil *bit
 
 	// Pass 1: draw pads
 	component.Visit(func(c *eda.Component) {
-		if c.CutsOuter || c.NoOpening {
+		if c.CutsOuter {
 			return
 		}
 
@@ -69,7 +69,7 @@ func renderStencil(config *config.Config, component *eda.Component, stencil *bit
 	// Pass 2
 	if config.StencilPadOffset > 0 {
 		component.Visit(func(c *eda.Component) {
-			if c.CutsOuter || c.NoOpening {
+			if c.CutsOuter {
 				return
 			}
 
@@ -85,7 +85,7 @@ func renderStencil(config *config.Config, component *eda.Component, stencil *bit
 
 	// Pass 3
 	component.Visit(func(c *eda.Component) {
-		if c.CutsOuter || c.NoOpening {
+		if c.CutsOuter {
 			return
 		}
 
@@ -102,7 +102,7 @@ func renderStencil(config *config.Config, component *eda.Component, stencil *bit
 	// Pass 5
 	outerCutBrush := shape.Circle(int(config.MaskCutWidth * config.PixelsPerMM))
 	component.Visit(func(c *eda.Component) {
-		if !c.CutsOuter || c.NoOpening {
+		if !c.CutsOuter {
 			return
 		}
 

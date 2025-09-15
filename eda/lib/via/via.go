@@ -11,8 +11,6 @@ var Default = Via(0.6, 1.2, 1, 2)
 
 func Via(outerDiameter, headDiameter float64, layer1, layer2 int) *eda.Component {
 	side := &eda.Component{
-		NoOpening: true,
-
 		Pads: path.Paths{path.Circle(headDiameter)},
 
 		Inner: eda.Components{
