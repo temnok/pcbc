@@ -22,6 +22,8 @@ func Via(layer1, layer2 int) *eda.Component {
 				Layer: layer1,
 
 				Pads: path.Paths{path.Circle(topDiameter)},
+
+				Vias: path.Paths{path.Circle(viaDiameter)},
 			},
 
 			&eda.Component{

@@ -150,6 +150,10 @@ func SaveEtch(config *config.Config, component *eda.Component) (*bitmap.Bitmap, 
 		}
 	})
 
+	component.Visit(func(c *eda.Component) {
+		removeViaCopper(config, c, copper)
+	})
+
 	filename := config.SavePath + "etch.lbrn"
 	im := image.NewSingle(copper, color.Black, color.White)
 	bm := lbrn.NewBase64Bitmap(im)
@@ -191,6 +195,13 @@ func removeEtchCopper(config *config.Config, component *eda.Component, copper *b
 	// Tracks
 	trackBrush := shape.Circle(int((component.TracksWidth + clearWidth) * config.PixelsPerMM))
 	trackBrush.ForEachPathsPixel(component.Tracks, t, copper.Set1)
+}
+
+func removeViaCopper(config *config.Config, component *eda.Component, copper *bitmap.Bitmap) {
+	t := component.Transform.Multiply(config.BitmapTransform())
+
+	// Vias
+	shape.ForEachRow(component.Vias, t, copper.Set1)
 }
 
 func addEtchCopper(config *config.Config, component *eda.Component, copper *bitmap.Bitmap) {
