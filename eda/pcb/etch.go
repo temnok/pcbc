@@ -183,10 +183,8 @@ func removeEtchCopper(config *config.Config, component *eda.Component, copper *b
 	clearWidth := 2 * (component.ClearWidth - config.ExtraCopperWidth)
 
 	// Cuts
-	if !component.CutsDisabled() {
-		cutBrush := shape.Circle(int((clearWidth / 2) * config.PixelsPerMM))
-		cutBrush.ForEachPathsPixel(component.Cuts, t, copper.Set1)
-	}
+	cutBrush := shape.Circle(int((clearWidth / 2) * config.PixelsPerMM))
+	cutBrush.ForEachPathsPixel(component.Cuts, t, copper.Set1)
 
 	// Pads
 	padBrush := shape.Circle(int(clearWidth * config.PixelsPerMM))
