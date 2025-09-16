@@ -32,17 +32,17 @@
 		<index Value="3"></index>
 		<name Value="FR4 Cut"></name>
 		<priority Value="3"></priority>
-		<speed Value="120"></speed>
+		<speed Value="1400"></speed>
 		<numPasses Value="1"></numPasses>
-		<globalRepeat Value="50"></globalRepeat>
-		<maxPower Value="90"></maxPower>
-		<QPulseWidth Value="200"></QPulseWidth>
-		<frequency Value="20000"></frequency>
+		<globalRepeat Value="200"></globalRepeat>
+		<maxPower Value="70"></maxPower>
+		<QPulseWidth Value="80"></QPulseWidth>
+		<frequency Value="40000"></frequency>
 		<SubLayer type="Cut" index="1">
-			<speed Value="24"></speed>
-			<maxPower Value="1"></maxPower>
-			<QPulseWidth Value="30"></QPulseWidth>
-			<frequency Value="3000000"></frequency>
+			<speed Value="100"></speed>
+			<maxPower Value="0.1"></maxPower>
+			<QPulseWidth Value="80"></QPulseWidth>
+			<frequency Value="40000"></frequency>
 		</SubLayer>
 	</CutSetting>
 	<CutSetting type="Scan">
