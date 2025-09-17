@@ -22,7 +22,7 @@
 		<speed Value="1400"></speed>
 		<numPasses Value="1"></numPasses>
 		<globalRepeat Value="100"></globalRepeat>
-		<maxPower Value="70"></maxPower>
+		<maxPower Value="80"></maxPower>
 		<QPulseWidth Value="80"></QPulseWidth>
 		<frequency Value="40000"></frequency>
 		<SubLayer type="Cut" index="1">
@@ -50,7 +50,7 @@
 		<name Value="Etch"></name>
 		<priority Value="1"></priority>
 		<speed Value="800"></speed>
-		<numPasses Value="12"></numPasses>
+		<numPasses Value="15"></numPasses>
 		<maxPower Value="30"></maxPower>
 		<QPulseWidth Value="80"></QPulseWidth>
 		<frequency Value="40000"></frequency>
@@ -66,7 +66,7 @@
 		<name Value="Vias"></name>
 		<priority Value="2"></priority>
 		<speed Value="800"></speed>
-		<numPasses Value="12"></numPasses>
+		<numPasses Value="10"></numPasses>
 		<maxPower Value="30"></maxPower>
 		<QPulseWidth Value="80"></QPulseWidth>
 		<frequency Value="40000"></frequency>
