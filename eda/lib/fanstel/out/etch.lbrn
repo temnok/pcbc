@@ -19,7 +19,7 @@
 		<index Value="3"></index>
 		<name Value="Cut"></name>
 		<priority Value="3"></priority>
-		<speed Value="1400"></speed>
+		<speed Value="1500"></speed>
 		<numPasses Value="1"></numPasses>
 		<globalRepeat Value="100"></globalRepeat>
 		<maxPower Value="80"></maxPower>
@@ -50,8 +50,8 @@
 		<name Value="Etch"></name>
 		<priority Value="1"></priority>
 		<speed Value="800"></speed>
-		<numPasses Value="15"></numPasses>
-		<maxPower Value="30"></maxPower>
+		<numPasses Value="10"></numPasses>
+		<maxPower Value="35"></maxPower>
 		<QPulseWidth Value="80"></QPulseWidth>
 		<frequency Value="40000"></frequency>
 		<interval Value="0.02"></interval>
@@ -67,7 +67,7 @@
 		<priority Value="2"></priority>
 		<speed Value="800"></speed>
 		<numPasses Value="10"></numPasses>
-		<maxPower Value="30"></maxPower>
+		<maxPower Value="25"></maxPower>
 		<QPulseWidth Value="80"></QPulseWidth>
 		<frequency Value="40000"></frequency>
 		<interval Value="0.02"></interval>
