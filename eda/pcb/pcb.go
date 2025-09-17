@@ -56,12 +56,6 @@ func processComponent(initialConfig *config.Config, initialComponent *eda.Compon
 			stencil, e = SaveStencil(&config, component)
 			return e
 		},
-		func() error {
-			return SaveVias(&config, component, true)
-		},
-		func() error {
-			return SaveVias(&config, component, false)
-		},
 	)
 	if err != nil {
 		return err

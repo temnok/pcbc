@@ -15,102 +15,62 @@
 		<Optimize_OptimalEntryPoint Value="1"></Optimize_OptimalEntryPoint>
 		<Optimize_OverlapDist Value="0.025"></Optimize_OverlapDist>
 	</UIPrefs>
-	<CutSetting type="Scan">
-		<index Value="1"></index>
-		<name Value="Clean 1"></name>
-		<priority Value="1"></priority>
-		<speed Value="800"></speed>
-		<numPasses Value="1"></numPasses>
-		<maxPower Value="5"></maxPower>
-		<QPulseWidth Value="200"></QPulseWidth>
-		<frequency Value="20000"></frequency>
-		<interval Value="0.02"></interval>
-		<dpi Value="1270"></dpi>
-		<crossHatch Value="1"></crossHatch>
-	</CutSetting>
 	<CutSetting type="Cut">
-		<index Value="3"></index>
-		<name Value="FR4 Cut"></name>
-		<priority Value="3"></priority>
-		<speed Value="1400"></speed>
-		<numPasses Value="1"></numPasses>
-		<globalRepeat Value="200"></globalRepeat>
-		<maxPower Value="70"></maxPower>
-		<QPulseWidth Value="80"></QPulseWidth>
-		<frequency Value="40000"></frequency>
-		<SubLayer type="Cut" index="1">
-			<speed Value="100"></speed>
-			<maxPower Value="0.1"></maxPower>
-			<QPulseWidth Value="80"></QPulseWidth>
-			<frequency Value="40000"></frequency>
-		</SubLayer>
-	</CutSetting>
-	<CutSetting type="Scan">
-		<index Value="4"></index>
-		<name Value="Clean 2"></name>
-		<priority Value="4"></priority>
-		<speed Value="800"></speed>
-		<numPasses Value="1"></numPasses>
-		<maxPower Value="5"></maxPower>
-		<QPulseWidth Value="200"></QPulseWidth>
-		<frequency Value="20000"></frequency>
-		<interval Value="0.02"></interval>
-		<dpi Value="1270"></dpi>
-		<crossHatch Value="1"></crossHatch>
-	</CutSetting>
-	<CutSetting_Img type="Image">
 		<index Value="0"></index>
-		<name Value="Remove Pi13/Si13"></name>
+		<name Value="Drill Vias"></name>
 		<priority Value="0"></priority>
 		<speed Value="400"></speed>
-		<numPasses Value="4"></numPasses>
-		<maxPower Value="30"></maxPower>
-		<QPulseWidth Value="30"></QPulseWidth>
-		<frequency Value="3000000"></frequency>
-		<interval Value="0.01"></interval>
-		<dpi Value="2540"></dpi>
-		<useDotCorrection Value="1"></useDotCorrection>
-		<dotWidth Value="0.05"></dotWidth>
-		<crossHatch Value="1"></crossHatch>
-		<angle Value="-90"></angle>
-		<negative Value="1"></negative>
-	</CutSetting_Img>
-	<CutSetting_Img type="Image">
+		<numPasses Value="100"></numPasses>
+		<globalRepeat Value="1"></globalRepeat>
+		<maxPower Value="90"></maxPower>
+		<QPulseWidth Value="200"></QPulseWidth>
+		<frequency Value="20000"></frequency>
+	</CutSetting>
+	<CutSetting type="Cut">
 		<index Value="2"></index>
-		<name Value="Clean Cu"></name>
+		<name Value="Cut Board"></name>
 		<priority Value="2"></priority>
-		<speed Value="400"></speed>
-		<numPasses Value="2"></numPasses>
-		<maxPower Value="30"></maxPower>
-		<QPulseWidth Value="2"></QPulseWidth>
-		<frequency Value="280000"></frequency>
+		<speed Value="800"></speed>
+		<numPasses Value="1"></numPasses>
+		<globalRepeat Value="300"></globalRepeat>
+		<maxPower Value="90"></maxPower>
+		<QPulseWidth Value="200"></QPulseWidth>
+		<frequency Value="20000"></frequency>
+	</CutSetting>
+	<CutSetting type="Scan">
+		<index Value="3"></index>
+		<name Value="Clean"></name>
+		<priority Value="3"></priority>
+		<speed Value="6500"></speed>
+		<numPasses Value="1"></numPasses>
+		<maxPower Value="90"></maxPower>
+		<QPulseWidth Value="1"></QPulseWidth>
+		<frequency Value="650000"></frequency>
 		<interval Value="0.01"></interval>
 		<dpi Value="2540"></dpi>
+		<crossHatch Value="1"></crossHatch>
+	</CutSetting>
+	<CutSetting_Img type="Image">
+		<index Value="1"></index>
+		<name Value="Etch Cu18"></name>
+		<priority Value="1"></priority>
+		<speed Value="800"></speed>
+		<numPasses Value="10"></numPasses>
+		<maxPower Value="30"></maxPower>
+		<QPulseWidth Value="80"></QPulseWidth>
+		<frequency Value="40000"></frequency>
+		<interval Value="0.02"></interval>
+		<dpi Value="1270"></dpi>
 		<useDotCorrection Value="1"></useDotCorrection>
 		<dotWidth Value="0.05"></dotWidth>
 		<crossHatch Value="1"></crossHatch>
 		<angle Value="-90"></angle>
 		<negative Value="1"></negative>
 	</CutSetting_Img>
-	<Shape Type="Bitmap" CutIndex="0" W="400" H="300" Data="iVBORw0KGgoAAAANSUhEUgAAAZAAAAEsAQMAAADXeXeBAAAABlBMVEUAAAD///+l2Z/dAAABK0lEQVR4nOyaMW7DQAwEI1zhMk/IU/I0+2l+Sp7g0oXhS2PrlgyDIAtJEIzZzlwMreNdteAbQgghtKaOfdZJyqPaM3EQ7zrK71K+JORDvPsof0r59vt36ZdpNX3ZFLyvZ7mF8jkg0btUJ5ROhXetTp/PH71bNZQwyR/evRpYHln0ejlHHb6HRG++mF53cpHkPS5t6nUnE8ne455b3WnfSNM3N80/Dvp6W3zK8aciZ+2UEPnToyAn7QQCAgICAgICAgICAgICAgKyCGJkF0ZCEjSQKp55Nt5nQGQg26RwGyWK26SjRmxL0qsi6f0LIekFAQEBAQEBAQEBAQEBAQF5PYSkd22EpPffiBHbGmvAxrKxsdJsLE4b69nOErixam4stCOEEEJL6jsAAP//G7RMQwrfYcYAAAAASUVORK5CYII=">
+	<Shape Type="Bitmap" CutIndex="1" W="400" H="300" Data="iVBORw0KGgoAAAANSUhEUgAAAZAAAAEsAQMAAADXeXeBAAAABlBMVEUAAAD///+l2Z/dAAABK0lEQVR4nOyaMW7DQAwEI1zhMk/IU/I0+2l+Sp7g0oXhS2PrlgyDIAtJEIzZzlwMreNdteAbQgghtKaOfdZJyqPaM3EQ7zrK71K+JORDvPsof0r59vt36ZdpNX3ZFLyvZ7mF8jkg0btUJ5ROhXetTp/PH71bNZQwyR/evRpYHln0ejlHHb6HRG++mF53cpHkPS5t6nUnE8ne455b3WnfSNM3N80/Dvp6W3zK8aciZ+2UEPnToyAn7QQCAgICAgICAgICAgICAgKyCGJkF0ZCEjSQKp55Nt5nQGQg26RwGyWK26SjRmxL0qsi6f0LIekFAQEBAQEBAQEBAQEBAQF5PYSkd22EpPffiBHbGmvAxrKxsdJsLE4b69nOErixam4stCOEEEJL6jsAAP//G7RMQwrfYcYAAAAASUVORK5CYII=">
 		<XForm>0.01 0 0 -0.01 55 55</XForm>
 	</Shape>
-	<Shape Type="Bitmap" CutIndex="2" W="400" H="300" Data="iVBORw0KGgoAAAANSUhEUgAAAZAAAAEsAQMAAADXeXeBAAAABlBMVEUAAAD///+l2Z/dAAABK0lEQVR4nOyaMW7DQAwEI1zhMk/IU/I0+2l+Sp7g0oXhS2PrlgyDIAtJEIzZzlwMreNdteAbQgghtKaOfdZJyqPaM3EQ7zrK71K+JORDvPsof0r59vt36ZdpNX3ZFLyvZ7mF8jkg0btUJ5ROhXetTp/PH71bNZQwyR/evRpYHln0ejlHHb6HRG++mF53cpHkPS5t6nUnE8ne455b3WnfSNM3N80/Dvp6W3zK8aciZ+2UEPnToyAn7QQCAgICAgICAgICAgICAgKyCGJkF0ZCEjSQKp55Nt5nQGQg26RwGyWK26SjRmxL0qsi6f0LIekFAQEBAQEBAQEBAQEBAQF5PYSkd22EpPffiBHbGmvAxrKxsdJsLE4b69nOErixam4stCOEEEJL6jsAAP//G7RMQwrfYcYAAAAASUVORK5CYII=">
-		<XForm>0.01 0 0 -0.01 55 55</XForm>
-	</Shape>
-	<Shape Type="Path" CutIndex="1">
-		<XForm>1 0 0 1 55 55</XForm>
-		<V vx="2" vy="1.5"></V>
-		<V vx="2" vy="-1.5"></V>
-		<V vx="-2" vy="-1.5"></V>
-		<V vx="-2" vy="1.5"></V>
-		<V vx="2" vy="1.5"></V>
-		<P T="L" p0="0" p1="1"></P>
-		<P T="L" p0="1" p1="2"></P>
-		<P T="L" p0="2" p1="3"></P>
-		<P T="L" p0="3" p1="4"></P>
-	</Shape>
-	<Shape Type="Path" CutIndex="4">
+	<Shape Type="Path" CutIndex="3">
 		<XForm>1 0 0 1 55 55</XForm>
 		<V vx="2" vy="1.5"></V>
 		<V vx="2" vy="-1.5"></V>

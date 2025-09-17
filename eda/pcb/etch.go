@@ -4,6 +4,7 @@ package pcb
 
 import (
 	"image/color"
+	"strconv"
 	"temnok/pcbc/bitmap"
 	"temnok/pcbc/bitmap/image"
 	"temnok/pcbc/eda"
@@ -13,43 +14,29 @@ import (
 	"temnok/pcbc/shape"
 )
 
+const (
+	viaPassIndex   = 0
+	etchPassIndex  = 1
+	cutPassIndex   = 2
+	cleanPassIndex = 3
+)
+
 var etchBitmapSettings = []*lbrn.CutSetting{
 	{
 		Type:     "Image",
-		Name:     &lbrn.Param{Value: "Remove Pi13/Si13"},
-		Index:    &lbrn.Param{Value: "0"},
-		Priority: &lbrn.Param{Value: "0"},
+		Name:     &lbrn.Param{Value: "Etch Cu18"},
+		Index:    &lbrn.Param{Value: strconv.Itoa(etchPassIndex)},
+		Priority: &lbrn.Param{Value: strconv.Itoa(etchPassIndex)},
 		Negative: &lbrn.Param{Value: "1"},
 
 		MaxPower:    &lbrn.Param{Value: "30"},
-		QPulseWidth: &lbrn.Param{Value: "30"},
-		Frequency:   &lbrn.Param{Value: "3000000"},
+		QPulseWidth: &lbrn.Param{Value: "80"},
+		Frequency:   &lbrn.Param{Value: "40000"},
 
-		NumPasses: &lbrn.Param{Value: "4"},
-		Speed:     &lbrn.Param{Value: "400"},
-		Interval:  &lbrn.Param{Value: "0.01"},
-		DPI:       &lbrn.Param{Value: "2540"},
-
-		Angle:            &lbrn.Param{Value: "-90"},
-		CrossHatch:       &lbrn.Param{Value: "1"},
-		UseDotCorrection: &lbrn.Param{Value: "1"},
-		DotWidth:         &lbrn.Param{Value: "0.05"},
-	},
-	{
-		Type:     "Image",
-		Name:     &lbrn.Param{Value: "Clean Cu"},
-		Index:    &lbrn.Param{Value: "2"},
-		Priority: &lbrn.Param{Value: "2"},
-		Negative: &lbrn.Param{Value: "1"},
-
-		MaxPower:    &lbrn.Param{Value: "30"},
-		QPulseWidth: &lbrn.Param{Value: "2"},
-		Frequency:   &lbrn.Param{Value: "280000"},
-
-		NumPasses: &lbrn.Param{Value: "2"},
-		Speed:     &lbrn.Param{Value: "400"},
-		Interval:  &lbrn.Param{Value: "0.01"},
-		DPI:       &lbrn.Param{Value: "2540"},
+		NumPasses: &lbrn.Param{Value: "10"},
+		Speed:     &lbrn.Param{Value: "800"},
+		Interval:  &lbrn.Param{Value: "0.02"},
+		DPI:       &lbrn.Param{Value: "1270"},
 
 		Angle:            &lbrn.Param{Value: "-90"},
 		CrossHatch:       &lbrn.Param{Value: "1"},
@@ -66,62 +53,61 @@ func etchCutSettings(c *eda.Component) []*lbrn.CutSetting {
 
 	return []*lbrn.CutSetting{
 		{
-			Type:     "Scan",
-			Name:     &lbrn.Param{Value: "Clean 1"},
-			Index:    &lbrn.Param{Value: "1"},
-			Priority: &lbrn.Param{Value: "1"},
+			Type:     "Cut",
+			Name:     &lbrn.Param{Value: "Drill Vias"},
+			Index:    &lbrn.Param{Value: strconv.Itoa(viaPassIndex)},
+			Priority: &lbrn.Param{Value: strconv.Itoa(viaPassIndex)},
+			DoOutput: doOutput,
 
-			MaxPower:    &lbrn.Param{Value: "5"},
+			MaxPower:    &lbrn.Param{Value: "90"},
 			QPulseWidth: &lbrn.Param{Value: "200"},
 			Frequency:   &lbrn.Param{Value: "20000"},
 
-			CrossHatch: &lbrn.Param{Value: "1"},
-			NumPasses:  &lbrn.Param{Value: "1"},
-			Speed:      &lbrn.Param{Value: "800"},
-			Interval:   &lbrn.Param{Value: "0.02"},
-			DPI:        &lbrn.Param{Value: "1270"},
+			NumPasses:    &lbrn.Param{Value: "100"},
+			GlobalRepeat: &lbrn.Param{Value: "1"},
+			Speed:        &lbrn.Param{Value: "400"},
+
+			//SubLayer: &lbrn.SubLayer{
+			//	Type:  "Cut",
+			//	Index: "1",
+			//
+			//	MaxPower: &lbrn.Param{Value: "0.1"},
+			//	Speed:    &lbrn.Param{Value: "100"},
+			//
+			//	QPulseWidth: &lbrn.Param{Value: "80"},
+			//	Frequency:   &lbrn.Param{Value: "40000"},
+			//},
 		},
 		{
 			Type:     "Cut",
-			Name:     &lbrn.Param{Value: "FR4 Cut"},
-			Index:    &lbrn.Param{Value: "3"},
-			Priority: &lbrn.Param{Value: "3"},
+			Name:     &lbrn.Param{Value: "Cut Board"},
+			Index:    &lbrn.Param{Value: strconv.Itoa(cutPassIndex)},
+			Priority: &lbrn.Param{Value: strconv.Itoa(cutPassIndex)},
 			DoOutput: doOutput,
 
-			MaxPower:    &lbrn.Param{Value: "70"},
-			QPulseWidth: &lbrn.Param{Value: "80"},
-			Frequency:   &lbrn.Param{Value: "40000"},
-
-			NumPasses:    &lbrn.Param{Value: "1"},
-			GlobalRepeat: &lbrn.Param{Value: "200"},
-			Speed:        &lbrn.Param{Value: "1400"},
-
-			SubLayer: &lbrn.SubLayer{
-				Type:  "Cut",
-				Index: "1",
-
-				MaxPower: &lbrn.Param{Value: "0.1"},
-				Speed:    &lbrn.Param{Value: "100"},
-
-				QPulseWidth: &lbrn.Param{Value: "80"},
-				Frequency:   &lbrn.Param{Value: "40000"},
-			},
-		},
-		{
-			Type:     "Scan",
-			Name:     &lbrn.Param{Value: "Clean 2"},
-			Index:    &lbrn.Param{Value: "4"},
-			Priority: &lbrn.Param{Value: "4"},
-
-			MaxPower:    &lbrn.Param{Value: "5"},
+			MaxPower:    &lbrn.Param{Value: "90"},
 			QPulseWidth: &lbrn.Param{Value: "200"},
 			Frequency:   &lbrn.Param{Value: "20000"},
 
+			NumPasses:    &lbrn.Param{Value: "1"},
+			GlobalRepeat: &lbrn.Param{Value: "300"},
+			Speed:        &lbrn.Param{Value: "800"},
+		},
+		{
+			Type:     "Scan",
+			Name:     &lbrn.Param{Value: "Clean"},
+			Index:    &lbrn.Param{Value: strconv.Itoa(cleanPassIndex)},
+			Priority: &lbrn.Param{Value: strconv.Itoa(cleanPassIndex)},
+
+			MaxPower:    &lbrn.Param{Value: "90"},
+			QPulseWidth: &lbrn.Param{Value: "1"},
+			Frequency:   &lbrn.Param{Value: "650000"},
+
 			CrossHatch: &lbrn.Param{Value: "1"},
 			NumPasses:  &lbrn.Param{Value: "1"},
-			Speed:      &lbrn.Param{Value: "800"},
-			Interval:   &lbrn.Param{Value: "0.02"},
-			DPI:        &lbrn.Param{Value: "1270"},
+			Speed:      &lbrn.Param{Value: "6500"},
+			Interval:   &lbrn.Param{Value: "0.01"},
+			DPI:        &lbrn.Param{Value: "2540"},
 		},
 	}
 }
@@ -143,12 +129,12 @@ func SaveEtch(config *config.Config, component *eda.Component) (*bitmap.Bitmap, 
 		}
 	})
 
-	component.Visit(func(c *eda.Component) {
-		if c.CutsOuter {
-			removeEtchCopper(config, c, copper)
-			addEtchCuts(config, c, &cuts)
-		}
-	})
+	//component.Visit(func(c *eda.Component) {
+	//	if c.CutsOuter {
+	//		removeEtchCopper(config, c, copper)
+	//		addEtchCuts(config, c, &cuts)
+	//	}
+	//})
 
 	component.Visit(func(c *eda.Component) {
 		removeViaCopper(config, c, copper)
@@ -163,8 +149,7 @@ func SaveEtch(config *config.Config, component *eda.Component) (*bitmap.Bitmap, 
 		CutSettingImg: etchBitmapSettings,
 		CutSetting:    etchCutSettings(component),
 		Shape: append([]*lbrn.Shape{
-			lbrn.NewBitmapShape(0, config.LbrnBitmapScale(), bm),
-			lbrn.NewBitmapShape(2, config.LbrnBitmapScale(), bm),
+			lbrn.NewBitmapShape(etchPassIndex, config.LbrnBitmapScale(), bm),
 		}, cuts...),
 	}
 
@@ -219,8 +204,12 @@ func addEtchCopper(config *config.Config, component *eda.Component, copper *bitm
 func addEtchCuts(config *config.Config, component *eda.Component, cuts *[]*lbrn.Shape) {
 	t := component.Transform.Multiply(config.LbrnCenterMove())
 
+	for _, cut := range component.Vias {
+		*cuts = append(*cuts, lbrn.NewPath(viaPassIndex, t, cut))
+	}
+
 	for _, cut := range component.Cuts {
-		*cuts = append(*cuts, lbrn.NewPath(3, t, cut))
+		*cuts = append(*cuts, lbrn.NewPath(cutPassIndex, t, cut))
 	}
 }
 
@@ -228,7 +217,6 @@ func addCleanPasses(config *config.Config, p *lbrn.LightBurnProject) {
 	t := config.LbrnCenterMove()
 	boardBounds := path.Rect(config.Width, config.Height)
 	p.Shape = append(p.Shape,
-		lbrn.NewPath(1, t, boardBounds),
-		lbrn.NewPath(4, t, boardBounds),
+		lbrn.NewPath(cleanPassIndex, t, boardBounds),
 	)
 }
