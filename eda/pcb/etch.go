@@ -16,8 +16,9 @@ import (
 
 const (
 	etchPassIndex  = 1
-	cutPassIndex   = 2
-	cleanPassIndex = 3
+	viaPassIndex   = 2
+	cutPassIndex   = 3
+	cleanPassIndex = 4
 )
 
 var etchBitmapSettings = []*lbrn.CutSetting{
@@ -33,6 +34,28 @@ var etchBitmapSettings = []*lbrn.CutSetting{
 		Frequency:   &lbrn.Param{Value: "40000"},
 
 		NumPasses: &lbrn.Param{Value: "10"},
+		Speed:     &lbrn.Param{Value: "800"},
+		Interval:  &lbrn.Param{Value: "0.02"},
+		DPI:       &lbrn.Param{Value: "1270"},
+
+		Angle:            &lbrn.Param{Value: "-90"},
+		CrossHatch:       &lbrn.Param{Value: "1"},
+		UseDotCorrection: &lbrn.Param{Value: "1"},
+		DotWidth:         &lbrn.Param{Value: "0.05"},
+	},
+
+	{
+		Type:     "Image",
+		Name:     &lbrn.Param{Value: "Expose Vias"},
+		Index:    &lbrn.Param{Value: strconv.Itoa(viaPassIndex)},
+		Priority: &lbrn.Param{Value: strconv.Itoa(viaPassIndex)},
+		Negative: &lbrn.Param{Value: "1"},
+
+		MaxPower:    &lbrn.Param{Value: "30"},
+		QPulseWidth: &lbrn.Param{Value: "80"},
+		Frequency:   &lbrn.Param{Value: "40000"},
+
+		NumPasses: &lbrn.Param{Value: "15"},
 		Speed:     &lbrn.Param{Value: "800"},
 		Interval:  &lbrn.Param{Value: "0.02"},
 		DPI:       &lbrn.Param{Value: "1270"},
@@ -171,10 +194,6 @@ func addEtchCopper(config *config.Config, component *eda.Component, copper *bitm
 
 func addEtchCuts(config *config.Config, component *eda.Component, cuts *[]*lbrn.Shape) {
 	t := component.Transform.Multiply(config.LbrnCenterMove())
-
-	for _, cut := range component.Vias {
-		*cuts = append(*cuts, lbrn.NewPath(cutPassIndex, t, cut))
-	}
 
 	for _, cut := range component.Cuts {
 		*cuts = append(*cuts, lbrn.NewPath(cutPassIndex, t, cut))

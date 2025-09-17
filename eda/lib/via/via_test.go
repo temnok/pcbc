@@ -69,6 +69,7 @@ func TestBoard(t *testing.T) {
 
 	conf := config.Default()
 	conf.Width, conf.Height = 14, 14
+	//conf.ClearWidth = 0.3
 	conf.SavePath = "out/{}-"
 
 	assert.NoError(t, pcb.Process(conf,
