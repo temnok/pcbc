@@ -24,10 +24,9 @@ const (
 var etchBitmapSettings = []*lbrn.CutSetting{
 	{
 		Type:     "Image",
-		Name:     &lbrn.Param{Value: "Etch Cu18"},
+		Name:     &lbrn.Param{Value: "Etch"},
 		Index:    &lbrn.Param{Value: strconv.Itoa(etchPassIndex)},
 		Priority: &lbrn.Param{Value: strconv.Itoa(etchPassIndex)},
-		Negative: &lbrn.Param{Value: "1"},
 
 		MaxPower:    &lbrn.Param{Value: "30"},
 		QPulseWidth: &lbrn.Param{Value: "80"},
@@ -46,10 +45,9 @@ var etchBitmapSettings = []*lbrn.CutSetting{
 
 	{
 		Type:     "Image",
-		Name:     &lbrn.Param{Value: "Expose Vias"},
+		Name:     &lbrn.Param{Value: "Vias"},
 		Index:    &lbrn.Param{Value: strconv.Itoa(viaPassIndex)},
 		Priority: &lbrn.Param{Value: strconv.Itoa(viaPassIndex)},
-		Negative: &lbrn.Param{Value: "1"},
 
 		MaxPower:    &lbrn.Param{Value: "30"},
 		QPulseWidth: &lbrn.Param{Value: "80"},
@@ -76,7 +74,7 @@ func etchCutSettings(c *eda.Component) []*lbrn.CutSetting {
 	return []*lbrn.CutSetting{
 		{
 			Type:     "Cut",
-			Name:     &lbrn.Param{Value: "Cut Board"},
+			Name:     &lbrn.Param{Value: "Cut"},
 			Index:    &lbrn.Param{Value: strconv.Itoa(cutPassIndex)},
 			Priority: &lbrn.Param{Value: strconv.Itoa(cutPassIndex)},
 			DoOutput: doOutput,
@@ -137,7 +135,7 @@ func SaveEtch(config *config.Config, component *eda.Component) (*bitmap.Bitmap, 
 	})
 
 	filename := config.SavePath + "etch.lbrn"
-	im := image.NewSingle(copper, color.Black, color.White)
+	im := image.NewSingle(copper, color.Transparent, color.Black)
 	bm := lbrn.NewBase64Bitmap(im)
 
 	p := &lbrn.LightBurnProject{
