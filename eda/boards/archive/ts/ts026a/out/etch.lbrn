@@ -19,17 +19,17 @@
 		<index Value="3"></index>
 		<name Value="Cut Board"></name>
 		<priority Value="3"></priority>
-		<speed Value="600"></speed>
+		<speed Value="1200"></speed>
 		<numPasses Value="1"></numPasses>
 		<globalRepeat Value="150"></globalRepeat>
 		<maxPower Value="90"></maxPower>
-		<QPulseWidth Value="200"></QPulseWidth>
-		<frequency Value="20000"></frequency>
+		<QPulseWidth Value="80"></QPulseWidth>
+		<frequency Value="40000"></frequency>
 		<SubLayer type="Cut" index="1">
-			<speed Value="200"></speed>
+			<speed Value="400"></speed>
 			<maxPower Value="0.1"></maxPower>
-			<QPulseWidth Value="200"></QPulseWidth>
-			<frequency Value="20000"></frequency>
+			<QPulseWidth Value="80"></QPulseWidth>
+			<frequency Value="40000"></frequency>
 		</SubLayer>
 	</CutSetting>
 	<CutSetting type="Scan">

@@ -82,22 +82,22 @@ func etchCutSettings(c *eda.Component) []*lbrn.CutSetting {
 			DoOutput: doOutput,
 
 			MaxPower:    &lbrn.Param{Value: "90"},
-			QPulseWidth: &lbrn.Param{Value: "200"},
-			Frequency:   &lbrn.Param{Value: "20000"},
+			QPulseWidth: &lbrn.Param{Value: "80"},
+			Frequency:   &lbrn.Param{Value: "40000"},
 
 			NumPasses:    &lbrn.Param{Value: "1"},
 			GlobalRepeat: &lbrn.Param{Value: "150"},
-			Speed:        &lbrn.Param{Value: "600"},
+			Speed:        &lbrn.Param{Value: "1200"},
 
 			SubLayer: &lbrn.SubLayer{
 				Type:  "Cut",
 				Index: "1",
 
 				MaxPower: &lbrn.Param{Value: "0.1"},
-				Speed:    &lbrn.Param{Value: "200"},
+				Speed:    &lbrn.Param{Value: "400"},
 
-				QPulseWidth: &lbrn.Param{Value: "200"},
-				Frequency:   &lbrn.Param{Value: "20000"},
+				QPulseWidth: &lbrn.Param{Value: "80"},
+				Frequency:   &lbrn.Param{Value: "40000"},
 			},
 		},
 		{
