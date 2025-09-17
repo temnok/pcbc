@@ -125,16 +125,10 @@ func SaveEtch(config *config.Config, component *eda.Component) (*bitmap.Bitmap, 
 	component.Visit(func(c *eda.Component) {
 		if !c.CutsOuter {
 			addEtchCopper(config, c, copper)
-			addEtchCuts(config, c, &cuts)
 		}
-	})
 
-	//component.Visit(func(c *eda.Component) {
-	//	if c.CutsOuter {
-	//		removeEtchCopper(config, c, copper)
-	//		addEtchCuts(config, c, &cuts)
-	//	}
-	//})
+		addEtchCuts(config, c, &cuts)
+	})
 
 	component.Visit(func(c *eda.Component) {
 		removeViaCopper(config, c, copper)
