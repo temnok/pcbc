@@ -13,7 +13,7 @@ func Via(layer1, layer2 int) *eda.Component {
 	const (
 		viaDiameter    = 0.6
 		topDiameter    = 1.0
-		bottomDiameter = 1.0
+		bottomDiameter = 1.2
 	)
 
 	return &eda.Component{
