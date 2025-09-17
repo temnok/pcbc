@@ -16,7 +16,7 @@ import (
 
 const (
 	etchPassIndex  = 1
-	viaPassIndex   = 2
+	viasPassIndex  = 2
 	cutPassIndex   = 3
 	cleanPassIndex = 4
 )
@@ -46,8 +46,8 @@ var etchBitmapSettings = []*lbrn.CutSetting{
 	{
 		Type:     "Image",
 		Name:     &lbrn.Param{Value: "Vias"},
-		Index:    &lbrn.Param{Value: strconv.Itoa(viaPassIndex)},
-		Priority: &lbrn.Param{Value: strconv.Itoa(viaPassIndex)},
+		Index:    &lbrn.Param{Value: strconv.Itoa(viasPassIndex)},
+		Priority: &lbrn.Param{Value: strconv.Itoa(viasPassIndex)},
 
 		MaxPower:    &lbrn.Param{Value: "30"},
 		QPulseWidth: &lbrn.Param{Value: "80"},
@@ -119,6 +119,7 @@ func etchCutSettings(c *eda.Component) []*lbrn.CutSetting {
 
 func SaveEtch(config *config.Config, component *eda.Component) (*bitmap.Bitmap, error) {
 	copper := bitmap.New(config.BitmapSizeInPixels())
+	vias := bitmap.New(config.BitmapSizeInPixels())
 	var cuts []*lbrn.Shape
 
 	component.Visit(func(c *eda.Component) {
@@ -130,21 +131,32 @@ func SaveEtch(config *config.Config, component *eda.Component) (*bitmap.Bitmap, 
 		addEtchCuts(config, c, &cuts)
 	})
 
+	hasVias := false
 	component.Visit(func(c *eda.Component) {
-		removeViaCopper(config, c, copper)
+		hasVias = hasVias || len(c.Vias) > 0
+
+		removeViaCopper(config, c, copper, vias)
 	})
 
 	filename := config.SavePath + "etch.lbrn"
-	im := image.NewSingle(copper, color.Transparent, color.Black)
-	bm := lbrn.NewBase64Bitmap(im)
+	copperImage := image.NewSingle(copper, color.Transparent, color.Black)
+	copperBitmap := lbrn.NewBase64Bitmap(copperImage)
 
 	p := &lbrn.LightBurnProject{
 		UIPrefs:       lbrn.UIPrefsDefaults,
 		CutSettingImg: etchBitmapSettings,
 		CutSetting:    etchCutSettings(component),
 		Shape: append([]*lbrn.Shape{
-			lbrn.NewBitmapShape(etchPassIndex, config.LbrnBitmapScale(), bm),
+			lbrn.NewBitmapShape(etchPassIndex, config.LbrnBitmapScale(), copperBitmap),
 		}, cuts...),
+	}
+
+	if hasVias {
+		viasImage := image.NewSingle(vias, color.Transparent, color.Black)
+		viasBitmap := lbrn.NewBase64Bitmap(viasImage)
+		p.Shape = append(p.Shape,
+			lbrn.NewBitmapShape(viasPassIndex, config.LbrnBitmapScale(), viasBitmap),
+		)
 	}
 
 	addCleanPasses(config, p)
@@ -198,11 +210,11 @@ func addEtchCuts(config *config.Config, component *eda.Component, cuts *[]*lbrn.
 	}
 }
 
-func removeViaCopper(config *config.Config, component *eda.Component, copper *bitmap.Bitmap) {
+func removeViaCopper(config *config.Config, component *eda.Component, copper, vias *bitmap.Bitmap) {
 	t := component.Transform.Multiply(config.BitmapTransform())
 
-	// Vias
 	shape.ForEachRow(component.Vias, t, copper.Set1)
+	shape.ForEachRow(component.Vias, t, vias.Set1)
 }
 
 func addCleanPasses(config *config.Config, p *lbrn.LightBurnProject) {
