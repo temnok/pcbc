@@ -15,10 +15,11 @@ import (
 )
 
 const (
-	viaPassIndex   = 0
-	etchPassIndex  = 1
-	cutPassIndex   = 2
-	cleanPassIndex = 3
+	viaPassIndex    = 0
+	etchPassIndex   = 1
+	clean1PassIndex = 2
+	cutPassIndex    = 3
+	clean2PassIndex = 4
 )
 
 var etchBitmapSettings = []*lbrn.CutSetting{
@@ -63,20 +64,9 @@ func etchCutSettings(c *eda.Component) []*lbrn.CutSetting {
 			QPulseWidth: &lbrn.Param{Value: "200"},
 			Frequency:   &lbrn.Param{Value: "20000"},
 
-			NumPasses:    &lbrn.Param{Value: "100"},
-			GlobalRepeat: &lbrn.Param{Value: "1"},
+			NumPasses:    &lbrn.Param{Value: "1"},
+			GlobalRepeat: &lbrn.Param{Value: "100"},
 			Speed:        &lbrn.Param{Value: "400"},
-
-			//SubLayer: &lbrn.SubLayer{
-			//	Type:  "Cut",
-			//	Index: "1",
-			//
-			//	MaxPower: &lbrn.Param{Value: "0.1"},
-			//	Speed:    &lbrn.Param{Value: "100"},
-			//
-			//	QPulseWidth: &lbrn.Param{Value: "80"},
-			//	Frequency:   &lbrn.Param{Value: "40000"},
-			//},
 		},
 		{
 			Type:     "Cut",
@@ -90,14 +80,41 @@ func etchCutSettings(c *eda.Component) []*lbrn.CutSetting {
 			Frequency:   &lbrn.Param{Value: "20000"},
 
 			NumPasses:    &lbrn.Param{Value: "1"},
-			GlobalRepeat: &lbrn.Param{Value: "300"},
+			GlobalRepeat: &lbrn.Param{Value: "250"},
 			Speed:        &lbrn.Param{Value: "800"},
+
+			SubLayer: &lbrn.SubLayer{
+				Type:  "Cut",
+				Index: "1",
+
+				MaxPower: &lbrn.Param{Value: "0.1"},
+				Speed:    &lbrn.Param{Value: "80"},
+
+				QPulseWidth: &lbrn.Param{Value: "200"},
+				Frequency:   &lbrn.Param{Value: "20000"},
+			},
 		},
 		{
 			Type:     "Scan",
-			Name:     &lbrn.Param{Value: "Clean"},
-			Index:    &lbrn.Param{Value: strconv.Itoa(cleanPassIndex)},
-			Priority: &lbrn.Param{Value: strconv.Itoa(cleanPassIndex)},
+			Name:     &lbrn.Param{Value: "Clean 1"},
+			Index:    &lbrn.Param{Value: strconv.Itoa(clean1PassIndex)},
+			Priority: &lbrn.Param{Value: strconv.Itoa(clean1PassIndex)},
+
+			MaxPower:    &lbrn.Param{Value: "5"},
+			QPulseWidth: &lbrn.Param{Value: "200"},
+			Frequency:   &lbrn.Param{Value: "20000"},
+
+			CrossHatch: &lbrn.Param{Value: "1"},
+			NumPasses:  &lbrn.Param{Value: "1"},
+			Speed:      &lbrn.Param{Value: "400"},
+			Interval:   &lbrn.Param{Value: "0.02"},
+			DPI:        &lbrn.Param{Value: "1270"},
+		},
+		{
+			Type:     "Scan",
+			Name:     &lbrn.Param{Value: "Clean 2"},
+			Index:    &lbrn.Param{Value: strconv.Itoa(clean2PassIndex)},
+			Priority: &lbrn.Param{Value: strconv.Itoa(clean2PassIndex)},
 
 			MaxPower:    &lbrn.Param{Value: "90"},
 			QPulseWidth: &lbrn.Param{Value: "1"},
@@ -125,9 +142,15 @@ func SaveEtch(config *config.Config, component *eda.Component) (*bitmap.Bitmap, 
 	component.Visit(func(c *eda.Component) {
 		if !c.CutsOuter {
 			addEtchCopper(config, c, copper)
+			addEtchCuts(config, c, &cuts)
 		}
+	})
 
-		addEtchCuts(config, c, &cuts)
+	component.Visit(func(c *eda.Component) {
+		if c.CutsOuter {
+			removeEtchCopper(config, c, copper)
+			addEtchCuts(config, c, &cuts)
+		}
 	})
 
 	component.Visit(func(c *eda.Component) {
@@ -211,6 +234,7 @@ func addCleanPasses(config *config.Config, p *lbrn.LightBurnProject) {
 	t := config.LbrnCenterMove()
 	boardBounds := path.Rect(config.Width, config.Height)
 	p.Shape = append(p.Shape,
-		lbrn.NewPath(cleanPassIndex, t, boardBounds),
+		lbrn.NewPath(clean1PassIndex, t, boardBounds),
+		lbrn.NewPath(clean2PassIndex, t, boardBounds),
 	)
 }

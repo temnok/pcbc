@@ -20,27 +20,46 @@
 		<name Value="Drill Vias"></name>
 		<priority Value="0"></priority>
 		<speed Value="400"></speed>
-		<numPasses Value="100"></numPasses>
-		<globalRepeat Value="1"></globalRepeat>
+		<numPasses Value="1"></numPasses>
+		<globalRepeat Value="100"></globalRepeat>
 		<maxPower Value="90"></maxPower>
 		<QPulseWidth Value="200"></QPulseWidth>
 		<frequency Value="20000"></frequency>
 	</CutSetting>
 	<CutSetting type="Cut">
-		<index Value="2"></index>
+		<index Value="3"></index>
 		<name Value="Cut Board"></name>
-		<priority Value="2"></priority>
+		<priority Value="3"></priority>
 		<speed Value="800"></speed>
 		<numPasses Value="1"></numPasses>
-		<globalRepeat Value="300"></globalRepeat>
+		<globalRepeat Value="250"></globalRepeat>
 		<maxPower Value="90"></maxPower>
 		<QPulseWidth Value="200"></QPulseWidth>
 		<frequency Value="20000"></frequency>
+		<SubLayer type="Cut" index="1">
+			<speed Value="80"></speed>
+			<maxPower Value="0.1"></maxPower>
+			<QPulseWidth Value="200"></QPulseWidth>
+			<frequency Value="20000"></frequency>
+		</SubLayer>
 	</CutSetting>
 	<CutSetting type="Scan">
-		<index Value="3"></index>
-		<name Value="Clean"></name>
-		<priority Value="3"></priority>
+		<index Value="2"></index>
+		<name Value="Clean 1"></name>
+		<priority Value="2"></priority>
+		<speed Value="400"></speed>
+		<numPasses Value="1"></numPasses>
+		<maxPower Value="5"></maxPower>
+		<QPulseWidth Value="200"></QPulseWidth>
+		<frequency Value="20000"></frequency>
+		<interval Value="0.02"></interval>
+		<dpi Value="1270"></dpi>
+		<crossHatch Value="1"></crossHatch>
+	</CutSetting>
+	<CutSetting type="Scan">
+		<index Value="4"></index>
+		<name Value="Clean 2"></name>
+		<priority Value="4"></priority>
 		<speed Value="6500"></speed>
 		<numPasses Value="1"></numPasses>
 		<maxPower Value="90"></maxPower>
@@ -70,7 +89,19 @@
 	<Shape Type="Bitmap" CutIndex="1" W="500" H="500" Data="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">
 		<XForm>0.01 0 0 -0.01 55 55</XForm>
 	</Shape>
-	<Shape Type="Path" CutIndex="3">
+	<Shape Type="Path" CutIndex="2">
+		<XForm>1 0 0 1 55 55</XForm>
+		<V vx="2.5" vy="2.5"></V>
+		<V vx="2.5" vy="-2.5"></V>
+		<V vx="-2.5" vy="-2.5"></V>
+		<V vx="-2.5" vy="2.5"></V>
+		<V vx="2.5" vy="2.5"></V>
+		<P T="L" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="L" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="4">
 		<XForm>1 0 0 1 55 55</XForm>
 		<V vx="2.5" vy="2.5"></V>
 		<V vx="2.5" vy="-2.5"></V>
