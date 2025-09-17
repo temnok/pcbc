@@ -106,7 +106,7 @@ func etchCutSettings(c *eda.Component) []*lbrn.CutSetting {
 
 			CrossHatch: &lbrn.Param{Value: "1"},
 			NumPasses:  &lbrn.Param{Value: "1"},
-			Speed:      &lbrn.Param{Value: "400"},
+			Speed:      &lbrn.Param{Value: "800"},
 			Interval:   &lbrn.Param{Value: "0.02"},
 			DPI:        &lbrn.Param{Value: "1270"},
 		},

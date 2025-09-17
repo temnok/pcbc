@@ -47,7 +47,7 @@
 		<index Value="2"></index>
 		<name Value="Clean 1"></name>
 		<priority Value="2"></priority>
-		<speed Value="400"></speed>
+		<speed Value="800"></speed>
 		<numPasses Value="1"></numPasses>
 		<maxPower Value="5"></maxPower>
 		<QPulseWidth Value="200"></QPulseWidth>
