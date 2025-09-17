@@ -65,7 +65,7 @@ func etchCutSettings(c *eda.Component) []*lbrn.CutSetting {
 			Frequency:   &lbrn.Param{Value: "20000"},
 
 			NumPasses:    &lbrn.Param{Value: "1"},
-			GlobalRepeat: &lbrn.Param{Value: "100"},
+			GlobalRepeat: &lbrn.Param{Value: "200"},
 			Speed:        &lbrn.Param{Value: "400"},
 		},
 		{
@@ -80,7 +80,7 @@ func etchCutSettings(c *eda.Component) []*lbrn.CutSetting {
 			Frequency:   &lbrn.Param{Value: "20000"},
 
 			NumPasses:    &lbrn.Param{Value: "1"},
-			GlobalRepeat: &lbrn.Param{Value: "250"},
+			GlobalRepeat: &lbrn.Param{Value: "150"},
 			Speed:        &lbrn.Param{Value: "800"},
 
 			SubLayer: &lbrn.SubLayer{
@@ -88,7 +88,7 @@ func etchCutSettings(c *eda.Component) []*lbrn.CutSetting {
 				Index: "1",
 
 				MaxPower: &lbrn.Param{Value: "0.1"},
-				Speed:    &lbrn.Param{Value: "80"},
+				Speed:    &lbrn.Param{Value: "200"},
 
 				QPulseWidth: &lbrn.Param{Value: "200"},
 				Frequency:   &lbrn.Param{Value: "20000"},
@@ -134,23 +134,12 @@ func SaveEtch(config *config.Config, component *eda.Component) (*bitmap.Bitmap, 
 	var cuts []*lbrn.Shape
 
 	component.Visit(func(c *eda.Component) {
-		if !c.CutsOuter {
-			removeEtchCopper(config, c, copper)
-		}
+		removeEtchCopper(config, c, copper)
 	})
 
 	component.Visit(func(c *eda.Component) {
-		if !c.CutsOuter {
-			addEtchCopper(config, c, copper)
-			addEtchCuts(config, c, &cuts)
-		}
-	})
-
-	component.Visit(func(c *eda.Component) {
-		if c.CutsOuter {
-			removeEtchCopper(config, c, copper)
-			addEtchCuts(config, c, &cuts)
-		}
+		addEtchCopper(config, c, copper)
+		addEtchCuts(config, c, &cuts)
 	})
 
 	component.Visit(func(c *eda.Component) {
@@ -197,13 +186,6 @@ func removeEtchCopper(config *config.Config, component *eda.Component, copper *b
 	trackBrush.ForEachPathsPixel(component.Tracks, t, copper.Set1)
 }
 
-func removeViaCopper(config *config.Config, component *eda.Component, copper *bitmap.Bitmap) {
-	t := component.Transform.Multiply(config.BitmapTransform())
-
-	// Vias
-	shape.ForEachRow(component.Vias, t, copper.Set1)
-}
-
 func addEtchCopper(config *config.Config, component *eda.Component, copper *bitmap.Bitmap) {
 	t := component.Transform.Multiply(config.BitmapTransform())
 
@@ -222,12 +204,19 @@ func addEtchCuts(config *config.Config, component *eda.Component, cuts *[]*lbrn.
 	t := component.Transform.Multiply(config.LbrnCenterMove())
 
 	for _, cut := range component.Vias {
-		*cuts = append(*cuts, lbrn.NewPath(viaPassIndex, t, cut))
+		*cuts = append(*cuts, lbrn.NewPath(cutPassIndex, t, cut))
 	}
 
 	for _, cut := range component.Cuts {
 		*cuts = append(*cuts, lbrn.NewPath(cutPassIndex, t, cut))
 	}
+}
+
+func removeViaCopper(config *config.Config, component *eda.Component, copper *bitmap.Bitmap) {
+	t := component.Transform.Multiply(config.BitmapTransform())
+
+	// Vias
+	shape.ForEachRow(component.Vias, t, copper.Set1)
 }
 
 func addCleanPasses(config *config.Config, p *lbrn.LightBurnProject) {

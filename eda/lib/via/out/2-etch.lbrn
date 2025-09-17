@@ -22,7 +22,7 @@
 		<doOutput Value="0"></doOutput>
 		<speed Value="400"></speed>
 		<numPasses Value="1"></numPasses>
-		<globalRepeat Value="100"></globalRepeat>
+		<globalRepeat Value="200"></globalRepeat>
 		<maxPower Value="90"></maxPower>
 		<QPulseWidth Value="200"></QPulseWidth>
 		<frequency Value="20000"></frequency>
@@ -34,12 +34,12 @@
 		<doOutput Value="0"></doOutput>
 		<speed Value="800"></speed>
 		<numPasses Value="1"></numPasses>
-		<globalRepeat Value="250"></globalRepeat>
+		<globalRepeat Value="150"></globalRepeat>
 		<maxPower Value="90"></maxPower>
 		<QPulseWidth Value="200"></QPulseWidth>
 		<frequency Value="20000"></frequency>
 		<SubLayer type="Cut" index="1">
-			<speed Value="80"></speed>
+			<speed Value="200"></speed>
 			<maxPower Value="0.1"></maxPower>
 			<QPulseWidth Value="200"></QPulseWidth>
 			<frequency Value="20000"></frequency>
