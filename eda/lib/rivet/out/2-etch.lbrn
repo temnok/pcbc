@@ -16,6 +16,24 @@
 		<Optimize_OverlapDist Value="0.025"></Optimize_OverlapDist>
 	</UIPrefs>
 	<CutSetting type="Cut">
+		<index Value="2"></index>
+		<name Value="Vias"></name>
+		<priority Value="2"></priority>
+		<doOutput Value="0"></doOutput>
+		<speed Value="1600"></speed>
+		<numPasses Value="1"></numPasses>
+		<globalRepeat Value="100"></globalRepeat>
+		<maxPower Value="80"></maxPower>
+		<QPulseWidth Value="80"></QPulseWidth>
+		<frequency Value="40000"></frequency>
+		<SubLayer type="Cut" index="1">
+			<speed Value="400"></speed>
+			<maxPower Value="0.1"></maxPower>
+			<QPulseWidth Value="80"></QPulseWidth>
+			<frequency Value="40000"></frequency>
+		</SubLayer>
+	</CutSetting>
+	<CutSetting type="Cut">
 		<index Value="3"></index>
 		<name Value="Cut"></name>
 		<priority Value="3"></priority>
@@ -53,22 +71,6 @@
 		<speed Value="800"></speed>
 		<numPasses Value="12"></numPasses>
 		<maxPower Value="35"></maxPower>
-		<QPulseWidth Value="80"></QPulseWidth>
-		<frequency Value="40000"></frequency>
-		<interval Value="0.02"></interval>
-		<dpi Value="1270"></dpi>
-		<useDotCorrection Value="1"></useDotCorrection>
-		<dotWidth Value="0.05"></dotWidth>
-		<crossHatch Value="1"></crossHatch>
-		<angle Value="-90"></angle>
-	</CutSetting_Img>
-	<CutSetting_Img type="Image">
-		<index Value="2"></index>
-		<name Value="Vias"></name>
-		<priority Value="2"></priority>
-		<speed Value="800"></speed>
-		<numPasses Value="10"></numPasses>
-		<maxPower Value="20"></maxPower>
 		<QPulseWidth Value="80"></QPulseWidth>
 		<frequency Value="40000"></frequency>
 		<interval Value="0.02"></interval>

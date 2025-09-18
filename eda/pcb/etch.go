@@ -42,27 +42,6 @@ var etchBitmapSettings = []*lbrn.CutSetting{
 		UseDotCorrection: &lbrn.Param{Value: "1"},
 		DotWidth:         &lbrn.Param{Value: "0.05"},
 	},
-
-	{
-		Type:     "Image",
-		Name:     &lbrn.Param{Value: "Vias"},
-		Index:    &lbrn.Param{Value: strconv.Itoa(viasPassIndex)},
-		Priority: &lbrn.Param{Value: strconv.Itoa(viasPassIndex)},
-
-		MaxPower:    &lbrn.Param{Value: "20"},
-		QPulseWidth: &lbrn.Param{Value: "80"},
-		Frequency:   &lbrn.Param{Value: "40000"},
-
-		NumPasses: &lbrn.Param{Value: "10"},
-		Speed:     &lbrn.Param{Value: "800"},
-		Interval:  &lbrn.Param{Value: "0.02"},
-		DPI:       &lbrn.Param{Value: "1270"},
-
-		Angle:            &lbrn.Param{Value: "-90"},
-		CrossHatch:       &lbrn.Param{Value: "1"},
-		UseDotCorrection: &lbrn.Param{Value: "1"},
-		DotWidth:         &lbrn.Param{Value: "0.05"},
-	},
 }
 
 func etchCutSettings(c *eda.Component) []*lbrn.CutSetting {
@@ -72,6 +51,32 @@ func etchCutSettings(c *eda.Component) []*lbrn.CutSetting {
 	}
 
 	return []*lbrn.CutSetting{
+		{
+			Type:     "Cut",
+			Name:     &lbrn.Param{Value: "Vias"},
+			Index:    &lbrn.Param{Value: strconv.Itoa(viasPassIndex)},
+			Priority: &lbrn.Param{Value: strconv.Itoa(viasPassIndex)},
+			DoOutput: doOutput,
+
+			MaxPower:    &lbrn.Param{Value: "80"},
+			QPulseWidth: &lbrn.Param{Value: "80"},
+			Frequency:   &lbrn.Param{Value: "40000"},
+
+			NumPasses:    &lbrn.Param{Value: "1"},
+			GlobalRepeat: &lbrn.Param{Value: "100"},
+			Speed:        &lbrn.Param{Value: "1600"},
+
+			SubLayer: &lbrn.SubLayer{
+				Type:  "Cut",
+				Index: "1",
+
+				MaxPower: &lbrn.Param{Value: "0.1"},
+				Speed:    &lbrn.Param{Value: "400"},
+
+				QPulseWidth: &lbrn.Param{Value: "80"},
+				Frequency:   &lbrn.Param{Value: "40000"},
+			},
+		},
 		{
 			Type:     "Cut",
 			Name:     &lbrn.Param{Value: "Cut"},
@@ -119,7 +124,6 @@ func etchCutSettings(c *eda.Component) []*lbrn.CutSetting {
 
 func SaveEtch(config *config.Config, component *eda.Component) (*bitmap.Bitmap, error) {
 	copper := bitmap.New(config.BitmapSizeInPixels())
-	vias := bitmap.New(config.BitmapSizeInPixels())
 	var cuts []*lbrn.Shape
 
 	component.Visit(func(c *eda.Component) {
@@ -131,11 +135,8 @@ func SaveEtch(config *config.Config, component *eda.Component) (*bitmap.Bitmap, 
 		addEtchCuts(config, c, &cuts)
 	})
 
-	hasVias := false
 	component.Visit(func(c *eda.Component) {
-		hasVias = hasVias || len(c.Vias) > 0
-
-		removeViaCopper(config, c, copper, vias)
+		removeViaCopper(config, c, copper, &cuts)
 	})
 
 	filename := config.SavePath + "etch.lbrn"
@@ -149,14 +150,6 @@ func SaveEtch(config *config.Config, component *eda.Component) (*bitmap.Bitmap, 
 		Shape: append([]*lbrn.Shape{
 			lbrn.NewBitmapShape(etchPassIndex, config.LbrnBitmapScale(), copperBitmap),
 		}, cuts...),
-	}
-
-	if hasVias {
-		viasImage := image.NewSingle(vias, color.Transparent, color.Black)
-		viasBitmap := lbrn.NewBase64Bitmap(viasImage)
-		p.Shape = append(p.Shape,
-			lbrn.NewBitmapShape(viasPassIndex, config.LbrnBitmapScale(), viasBitmap),
-		)
 	}
 
 	addCleanPasses(config, p)
@@ -210,11 +203,14 @@ func addEtchCuts(config *config.Config, component *eda.Component, cuts *[]*lbrn.
 	}
 }
 
-func removeViaCopper(config *config.Config, component *eda.Component, copper, vias *bitmap.Bitmap) {
+func removeViaCopper(config *config.Config, component *eda.Component, copper *bitmap.Bitmap, cuts *[]*lbrn.Shape) {
 	t := component.Transform.Multiply(config.BitmapTransform())
-
 	shape.ForEachRow(component.Vias, t, copper.Set1)
-	shape.ForEachRow(component.Vias, t, vias.Set1)
+
+	t = component.Transform.Multiply(config.LbrnCenterMove())
+	for _, cut := range component.Vias {
+		*cuts = append(*cuts, lbrn.NewPath(viasPassIndex, t, cut))
+	}
 }
 
 func addCleanPasses(config *config.Config, p *lbrn.LightBurnProject) {
