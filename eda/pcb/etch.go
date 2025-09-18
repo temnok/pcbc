@@ -91,7 +91,7 @@ func etchCutSettings(c *eda.Component) []*lbrn.CutSetting {
 
 			NumPasses:    &lbrn.Param{Value: "1"},
 			GlobalRepeat: &lbrn.Param{Value: "200"},
-			Speed:        &lbrn.Param{Value: "600"},
+			Speed:        &lbrn.Param{Value: "700"},
 
 			SubLayer: &lbrn.SubLayer{
 				Type:  "Cut",
@@ -106,7 +106,7 @@ func etchCutSettings(c *eda.Component) []*lbrn.CutSetting {
 		},
 		{
 			Type:     "Scan",
-			Name:     &lbrn.Param{Value: "Clean 1"},
+			Name:     &lbrn.Param{Value: "Pre-Clean"},
 			Index:    &lbrn.Param{Value: strconv.Itoa(clean1PassIndex)},
 			Priority: &lbrn.Param{Value: strconv.Itoa(clean1PassIndex)},
 
@@ -122,7 +122,7 @@ func etchCutSettings(c *eda.Component) []*lbrn.CutSetting {
 		},
 		{
 			Type:     "Scan",
-			Name:     &lbrn.Param{Value: "Clean 2"},
+			Name:     &lbrn.Param{Value: "Clean"},
 			Index:    &lbrn.Param{Value: strconv.Itoa(clean2PassIndex)},
 			Priority: &lbrn.Param{Value: strconv.Itoa(clean2PassIndex)},
 
@@ -226,7 +226,7 @@ func removeViaCopper(config *config.Config, component *eda.Component, copper *bi
 
 	t = component.Transform.Multiply(config.LbrnCenterMove())
 	for _, cut := range component.Vias {
-		*cuts = append(*cuts, lbrn.NewPath(viasPassIndex, t, cut))
+		*cuts = append(*cuts, lbrn.NewPath(cutPassIndex, t, cut))
 	}
 }
 
@@ -234,7 +234,7 @@ func addCleanPasses(config *config.Config, p *lbrn.LightBurnProject) {
 	t := config.LbrnCenterMove()
 	boardBounds := path.Rect(config.Width, config.Height)
 	p.Shape = append(p.Shape,
-		lbrn.NewPath(clean1PassIndex, t, boardBounds),
+		//lbrn.NewPath(clean1PassIndex, t, boardBounds),
 		lbrn.NewPath(clean2PassIndex, t, boardBounds),
 	)
 }

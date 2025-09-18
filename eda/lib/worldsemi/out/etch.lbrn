@@ -36,7 +36,7 @@
 		<index Value="3"></index>
 		<name Value="Cut"></name>
 		<priority Value="3"></priority>
-		<speed Value="600"></speed>
+		<speed Value="700"></speed>
 		<numPasses Value="1"></numPasses>
 		<globalRepeat Value="200"></globalRepeat>
 		<maxPower Value="90"></maxPower>
@@ -51,7 +51,7 @@
 	</CutSetting>
 	<CutSetting type="Scan">
 		<index Value="4"></index>
-		<name Value="Clean 1"></name>
+		<name Value="Pre-Clean"></name>
 		<priority Value="4"></priority>
 		<speed Value="800"></speed>
 		<numPasses Value="1"></numPasses>
@@ -64,7 +64,7 @@
 	</CutSetting>
 	<CutSetting type="Scan">
 		<index Value="5"></index>
-		<name Value="Clean 2"></name>
+		<name Value="Clean"></name>
 		<priority Value="5"></priority>
 		<speed Value="6500"></speed>
 		<numPasses Value="1"></numPasses>
@@ -93,18 +93,6 @@
 	</CutSetting_Img>
 	<Shape Type="Bitmap" CutIndex="1" W="400" H="300" Data="iVBORw0KGgoAAAANSUhEUgAAAZAAAAEsAQMAAADXeXeBAAAABlBMVEUAAAAAAAClZ7nPAAAAAXRSTlMAQObYZgAAAStJREFUeJzsmjFuw0AMBCNc4TJPyFPyNPtpfkqe4NKF4Utj65YMgyALSRCM2c5cDK3jXbXgG0IIIbSmjn3WScqj2jNxEO86yu9SviTkQ7z7KH9K+fb7d+mXaTV92RS8r2e5hfI5ING7VCeUToV3rU6fzx+9WzWUMMkf3r0aWB5Z9Ho5Rx2+h0Rvvphed3KR5D0ubep1JxPJ3uOeW91p30jTNzfNPw76elt8yvGnImftlBD506MgJ+0EAgICAgICAgICAgICAgICsghiZBdGQhI0kCqeeTbeZ0BkINukcBslituko0ZsS9KrIun9CyHpBQEBAQEBAQEBAQEBAQEBeT2EpHdthKT334gR2xprwMaysbHSbCxOG+vZzhK4sWpuLLQjhBBCS+o7AAD//xu0TEMK32HGAAAAAElFTkSuQmCC">
 		<XForm>0.01 0 0 -0.01 55 55</XForm>
-	</Shape>
-	<Shape Type="Path" CutIndex="4">
-		<XForm>1 0 0 1 55 55</XForm>
-		<V vx="2" vy="1.5"></V>
-		<V vx="2" vy="-1.5"></V>
-		<V vx="-2" vy="-1.5"></V>
-		<V vx="-2" vy="1.5"></V>
-		<V vx="2" vy="1.5"></V>
-		<P T="L" p0="0" p1="1"></P>
-		<P T="L" p0="1" p1="2"></P>
-		<P T="L" p0="2" p1="3"></P>
-		<P T="L" p0="3" p1="4"></P>
 	</Shape>
 	<Shape Type="Path" CutIndex="5">
 		<XForm>1 0 0 1 55 55</XForm>
