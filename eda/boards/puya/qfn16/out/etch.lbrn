@@ -36,14 +36,14 @@
 		<index Value="3"></index>
 		<name Value="Cut"></name>
 		<priority Value="3"></priority>
-		<speed Value="800"></speed>
+		<speed Value="600"></speed>
 		<numPasses Value="1"></numPasses>
 		<globalRepeat Value="200"></globalRepeat>
 		<maxPower Value="90"></maxPower>
 		<QPulseWidth Value="200"></QPulseWidth>
 		<frequency Value="20000"></frequency>
 		<SubLayer type="Cut" index="1">
-			<speed Value="200"></speed>
+			<speed Value="100"></speed>
 			<maxPower Value="0.1"></maxPower>
 			<QPulseWidth Value="200"></QPulseWidth>
 			<frequency Value="20000"></frequency>
@@ -51,8 +51,21 @@
 	</CutSetting>
 	<CutSetting type="Scan">
 		<index Value="4"></index>
-		<name Value="Clean"></name>
+		<name Value="Clean 1"></name>
 		<priority Value="4"></priority>
+		<speed Value="800"></speed>
+		<numPasses Value="1"></numPasses>
+		<maxPower Value="5"></maxPower>
+		<QPulseWidth Value="200"></QPulseWidth>
+		<frequency Value="20000"></frequency>
+		<interval Value="0.02"></interval>
+		<dpi Value="1270"></dpi>
+		<crossHatch Value="1"></crossHatch>
+	</CutSetting>
+	<CutSetting type="Scan">
+		<index Value="5"></index>
+		<name Value="Clean 2"></name>
+		<priority Value="5"></priority>
 		<speed Value="6500"></speed>
 		<numPasses Value="1"></numPasses>
 		<maxPower Value="90"></maxPower>
@@ -67,7 +80,7 @@
 		<name Value="Etch"></name>
 		<priority Value="1"></priority>
 		<speed Value="800"></speed>
-		<numPasses Value="10"></numPasses>
+		<numPasses Value="15"></numPasses>
 		<maxPower Value="30"></maxPower>
 		<QPulseWidth Value="80"></QPulseWidth>
 		<frequency Value="40000"></frequency>
@@ -114,6 +127,18 @@
 		<P T="B" p0="3" p1="4"></P>
 	</Shape>
 	<Shape Type="Path" CutIndex="4">
+		<XForm>1 0 0 1 55 55</XForm>
+		<V vx="8" vy="5.5"></V>
+		<V vx="8" vy="-5.5"></V>
+		<V vx="-8" vy="-5.5"></V>
+		<V vx="-8" vy="5.5"></V>
+		<V vx="8" vy="5.5"></V>
+		<P T="L" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="L" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="5">
 		<XForm>1 0 0 1 55 55</XForm>
 		<V vx="8" vy="5.5"></V>
 		<V vx="8" vy="-5.5"></V>
