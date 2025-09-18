@@ -24,13 +24,13 @@
 		<numPasses Value="1"></numPasses>
 		<globalRepeat Value="100"></globalRepeat>
 		<maxPower Value="90"></maxPower>
-		<QPulseWidth Value="80"></QPulseWidth>
-		<frequency Value="40000"></frequency>
+		<QPulseWidth Value="200"></QPulseWidth>
+		<frequency Value="20000"></frequency>
 		<SubLayer type="Cut" index="1">
 			<speed Value="20"></speed>
 			<maxPower Value="0.1"></maxPower>
-			<QPulseWidth Value="80"></QPulseWidth>
-			<frequency Value="40000"></frequency>
+			<QPulseWidth Value="200"></QPulseWidth>
+			<frequency Value="20000"></frequency>
 		</SubLayer>
 	</CutSetting>
 	<CutSetting type="Cut">
@@ -38,17 +38,17 @@
 		<name Value="Cut"></name>
 		<priority Value="3"></priority>
 		<doOutput Value="0"></doOutput>
-		<speed Value="1600"></speed>
+		<speed Value="800"></speed>
 		<numPasses Value="1"></numPasses>
 		<globalRepeat Value="200"></globalRepeat>
 		<maxPower Value="90"></maxPower>
-		<QPulseWidth Value="80"></QPulseWidth>
-		<frequency Value="40000"></frequency>
+		<QPulseWidth Value="200"></QPulseWidth>
+		<frequency Value="20000"></frequency>
 		<SubLayer type="Cut" index="1">
-			<speed Value="400"></speed>
+			<speed Value="200"></speed>
 			<maxPower Value="0.1"></maxPower>
-			<QPulseWidth Value="80"></QPulseWidth>
-			<frequency Value="40000"></frequency>
+			<QPulseWidth Value="200"></QPulseWidth>
+			<frequency Value="20000"></frequency>
 		</SubLayer>
 	</CutSetting>
 	<CutSetting type="Scan">
