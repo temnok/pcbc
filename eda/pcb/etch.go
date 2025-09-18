@@ -28,11 +28,11 @@ var etchBitmapSettings = []*lbrn.CutSetting{
 		Index:    &lbrn.Param{Value: strconv.Itoa(etchPassIndex)},
 		Priority: &lbrn.Param{Value: strconv.Itoa(etchPassIndex)},
 
-		MaxPower:    &lbrn.Param{Value: "35"},
+		MaxPower:    &lbrn.Param{Value: "30"},
 		QPulseWidth: &lbrn.Param{Value: "80"},
 		Frequency:   &lbrn.Param{Value: "40000"},
 
-		NumPasses: &lbrn.Param{Value: "12"},
+		NumPasses: &lbrn.Param{Value: "10"},
 		Speed:     &lbrn.Param{Value: "800"},
 		Interval:  &lbrn.Param{Value: "0.02"},
 		DPI:       &lbrn.Param{Value: "1270"},
@@ -58,20 +58,20 @@ func etchCutSettings(c *eda.Component) []*lbrn.CutSetting {
 			Priority: &lbrn.Param{Value: strconv.Itoa(viasPassIndex)},
 			DoOutput: doOutput,
 
-			MaxPower:    &lbrn.Param{Value: "80"},
+			MaxPower:    &lbrn.Param{Value: "90"},
 			QPulseWidth: &lbrn.Param{Value: "80"},
 			Frequency:   &lbrn.Param{Value: "40000"},
 
 			NumPasses:    &lbrn.Param{Value: "1"},
 			GlobalRepeat: &lbrn.Param{Value: "100"},
-			Speed:        &lbrn.Param{Value: "1600"},
+			Speed:        &lbrn.Param{Value: "400"},
 
 			SubLayer: &lbrn.SubLayer{
 				Type:  "Cut",
 				Index: "1",
 
 				MaxPower: &lbrn.Param{Value: "0.1"},
-				Speed:    &lbrn.Param{Value: "400"},
+				Speed:    &lbrn.Param{Value: "20"},
 
 				QPulseWidth: &lbrn.Param{Value: "80"},
 				Frequency:   &lbrn.Param{Value: "40000"},
@@ -84,12 +84,12 @@ func etchCutSettings(c *eda.Component) []*lbrn.CutSetting {
 			Priority: &lbrn.Param{Value: strconv.Itoa(cutPassIndex)},
 			DoOutput: doOutput,
 
-			MaxPower:    &lbrn.Param{Value: "80"},
+			MaxPower:    &lbrn.Param{Value: "90"},
 			QPulseWidth: &lbrn.Param{Value: "80"},
 			Frequency:   &lbrn.Param{Value: "40000"},
 
 			NumPasses:    &lbrn.Param{Value: "1"},
-			GlobalRepeat: &lbrn.Param{Value: "100"},
+			GlobalRepeat: &lbrn.Param{Value: "200"},
 			Speed:        &lbrn.Param{Value: "1600"},
 
 			SubLayer: &lbrn.SubLayer{
