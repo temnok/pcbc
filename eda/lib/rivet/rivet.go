@@ -1,18 +1,18 @@
 // Copyright © 2025 Alex Temnok. All rights reserved.
 
-package via
+package rivet
 
 import (
 	"temnok/pcbc/eda"
 	"temnok/pcbc/path"
 )
 
-var BetweenLayers1and2 = Via(1, 2)
+var BetweenLayers1and2 = Rivet(1, 2)
 
-func Via(layer1, layer2 int) *eda.Component {
+func Rivet(layer1, layer2 int) *eda.Component {
 	const (
-		viaDiameter    = 0.6
-		topDiameter    = 1.0
+		viaDiameter    = 0.63
+		topDiameter    = 1.2
 		bottomDiameter = 1.2
 	)
 
@@ -21,9 +21,11 @@ func Via(layer1, layer2 int) *eda.Component {
 			&eda.Component{
 				Layer: layer1,
 
-				Pads: path.Paths{path.Circle(topDiameter)},
-
 				Vias: path.Paths{path.Circle(viaDiameter)},
+
+				Tracks: path.Paths{path.Path{path.Point{}}},
+
+				TracksWidth: topDiameter,
 			},
 
 			&eda.Component{
