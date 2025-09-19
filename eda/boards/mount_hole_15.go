@@ -24,10 +24,10 @@ var (
 				ClearNone: true,
 
 				Tracks: eda.Tracks(
-					eda.Track{{X: 1.15, Y: 0}}.DX(0.5),
-					eda.Track{{X: -1.15, Y: 0}}.DX(-0.5),
-					eda.Track{{X: 0, Y: 1.15}}.DY(0.5),
-					eda.Track{{X: 0, Y: -1.15}}.DY(-0.5),
+					eda.Track{{X: 1.25, Y: 0}}.DX(0.3),
+					eda.Track{{X: -1.25, Y: 0}}.DX(-0.3),
+					eda.Track{{X: 0, Y: 1.25}}.DY(0.3),
+					eda.Track{{X: 0, Y: -1.25}}.DY(-0.3),
 				),
 			},
 		},

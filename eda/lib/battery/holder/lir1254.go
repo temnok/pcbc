@@ -13,7 +13,7 @@ var LIR1254 = &eda.Component{
 		path.Circle(5),
 	),
 
-	TracksWidth: 0.25,
+	TracksWidth: 0.5,
 
 	Marks: path.Paths{
 		path.Circle(12),

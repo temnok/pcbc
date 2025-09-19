@@ -6,7 +6,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"temnok/pcbc/eda"
 	"temnok/pcbc/eda/boards"
-	"temnok/pcbc/eda/boards/archive/bh/lir1254"
+	"temnok/pcbc/eda/boards/bh/lir1254"
 	"temnok/pcbc/eda/pcb"
 	"temnok/pcbc/eda/pcb/config"
 	"temnok/pcbc/transform"
