@@ -14,7 +14,7 @@ import (
 
 func TestBoard(t *testing.T) {
 
-	hole := path.Circle(1.4)
+	hole := path.Circle(1.45)
 
 	blank := &eda.Component{
 		CutsOuter: true,
