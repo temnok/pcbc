@@ -12,7 +12,7 @@ import (
 )
 
 var (
-	mount    = boards.MountHole15.Arrange(transform.RotateDegrees(90).Move(0, -2.75))
+	mount    = boards.MountHole15(0).Arrange(transform.RotateDegrees(90).Move(0, -2.75))
 	mountPad = mount.PadCenters()
 
 	chip = qfn.QFN16G.Arrange(transform.RotateDegrees(-45).Move(0, 1.2))

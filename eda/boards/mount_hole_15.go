@@ -8,28 +8,34 @@ import (
 	"temnok/pcbc/transform"
 )
 
-var (
-	MountHole15 = &eda.Component{
-		Pads: path.Pie(6, 1.0, 1.3, 20).Transform(transform.RotateDegrees(-30)),
-
+func MountHole15(layer int) *eda.Component {
+	return &eda.Component{
 		Cuts: path.Paths{path.Circle(1.5)},
 
 		Inner: eda.Components{
 			{
-				TracksWidth: 0.35,
-				Tracks:      path.Paths{path.Circle(2.3)},
-			},
+				Layer: layer,
 
-			{
-				ClearNone: true,
+				Pads: path.Pie(6, 1.0, 1.3, 20).Transform(transform.RotateDegrees(-30)),
 
-				Tracks: eda.Tracks(
-					eda.Track{{X: 1.25, Y: 0}}.DX(0.35),
-					eda.Track{{X: -1.25, Y: 0}}.DX(-0.35),
-					eda.Track{{X: 0, Y: 1.25}}.DY(0.35),
-					eda.Track{{X: 0, Y: -1.25}}.DY(-0.35),
-				),
+				Inner: eda.Components{
+					{
+						TracksWidth: 0.35,
+						Tracks:      path.Paths{path.Circle(2.3)},
+					},
+
+					{
+						ClearNone: true,
+
+						Tracks: eda.Tracks(
+							eda.Track{{X: 1.25, Y: 0}}.DX(0.35),
+							eda.Track{{X: -1.25, Y: 0}}.DX(-0.35),
+							eda.Track{{X: 0, Y: 1.25}}.DY(0.35),
+							eda.Track{{X: 0, Y: -1.25}}.DY(-0.35),
+						),
+					},
+				},
 			},
 		},
 	}
-)
+}

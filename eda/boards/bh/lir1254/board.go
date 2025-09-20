@@ -39,10 +39,6 @@ var boardTop = &eda.Component{
 
 		holder.LIR1254.Arrange(transform.Move(0, 2.75)),
 
-		boards.MountHole15.Arrange(transform.Move(-7.5, -2.5)),
-
-		boards.MountHole15.Arrange(transform.Move(7.5, -2.5)),
-
 		boards.Logo.Arrange(transform.Scale(1.6, 1.6).Move(-8.4, -5.3)),
 
 		boards.Firm.Arrange(transform.Scale(0.8, 0.8).Move(8.4, -5.3)),
@@ -69,5 +65,9 @@ var Board = &eda.Component{
 		},
 
 		boardTop,
+
+		boards.MountHole15(1).Arrange(transform.Move(-7.5, -2.5)),
+
+		boards.MountHole15(1).Arrange(transform.Move(7.5, -2.5)),
 	},
 }
