@@ -11,21 +11,28 @@ import (
 	"temnok/pcbc/transform"
 )
 
-var Board = &eda.Component{
-	TracksWidth: 0.5, // more power!
+var hole = path.Circle(1.45)
 
-	Cuts: path.Paths{
-		path.RoundRect(20, 16, 1).Transform(transform.Move(0, -1)),
-	},
+var boardTop = &eda.Component{
+	Layer: 1,
+
+	TracksWidth: 0.5, // more power!
+	ClearWidth:  0.4,
+
+	Tracks: eda.Tracks(
+		eda.Track{{-7.5, 2.75}}.DY(-5.5).DX(3.5).DY(-3),
+		eda.Track{{7.5, 2.75}}.DY(-5.5).DX(-3.5).DY(-3),
+		eda.Track{{-6, -6.2}, {6, -6.2}},
+	),
 
 	Inner: eda.Components{
 		{
 			Transform: transform.Move(0, -5.5),
 
 			Inner: eda.Components{
-				greenconn.CSCC118(15, true,
-					[]string{"3V7", "3V7", "3V7", "3V7", "3V7", "3V7", "3V7",
-						"3V7", "3V7", "3V7", "3V7", "3V7", "3V7", "3V7", "3V7"},
+				greenconn.CSCC118(13, false,
+					[]string{"3V7", "3V7", "3V7", "3V7", "3V7", "3V7",
+						"3V7", "3V7", "3V7", "3V7", "3V7", "3V7", "3V7"},
 				).Arrange(transform.RotateDegrees(90).Move(0, -0.7)),
 			},
 		},
@@ -36,9 +43,9 @@ var Board = &eda.Component{
 
 		boards.MountHole15.Arrange(transform.Move(7.5, -2.5)),
 
-		boards.Logo.Arrange(transform.Scale(1.6, 1.6).Move(-4.8, -2.5)),
+		boards.Logo.Arrange(transform.Scale(1.6, 1.6).Move(-8.4, -5.3)),
 
-		boards.Firm.Arrange(transform.Scale(0.8, 0.8).Move(4.8, -2.7)),
+		boards.Firm.Arrange(transform.Scale(0.8, 0.8).Move(8.4, -5.3)),
 
 		eda.CenteredText("LIR1254").Arrange(transform.Scale(1, 1.6).Move(-7.5, 6)),
 
@@ -46,14 +53,21 @@ var Board = &eda.Component{
 	},
 }
 
-func init() {
-	pad := Board.PadCenters()
+var Board = &eda.Component{
+	Inner: eda.Components{
+		{
+			CutsOuter: true,
 
-	track := eda.Track{pad[15]}.DY(-5.5).DX(3.5).DY(-3)
+			Cuts: path.Paths{
+				path.RoundRect(20, 18, 1),
 
-	Board.Tracks = eda.Tracks(
-		track,
-		track.Apply(transform.MirrorX()),
-		eda.Track{{-7, -6.2}, {7, -6.2}},
-	)
+				hole.Transform(transform.Move(-7.5, -7.5)),
+				hole.Transform(transform.Move(-7.5, 7.5)),
+				hole.Transform(transform.Move(7.5, -7.5)),
+				hole.Transform(transform.Move(7.5, 7.5)),
+			},
+		},
+
+		boardTop,
+	},
 }
