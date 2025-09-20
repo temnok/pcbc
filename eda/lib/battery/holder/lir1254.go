@@ -9,7 +9,7 @@ import (
 
 var LIR1254 = &eda.Component{
 	Pads: append(
-		path.Rect(2.5, 4.5).Clone(2, 15, 0),
+		path.RoundRect(2.5, 4.5, 0.3).Clone(2, 15, 0),
 		path.Circle(5),
 	),
 
