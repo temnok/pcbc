@@ -25,7 +25,7 @@ type Component struct {
 	Pads path.Paths
 
 	Tracks      path.Paths
-	TracksWidth *float64
+	TracksWidth float64
 
 	ClearWidth float64
 	ClearNone  bool
@@ -74,7 +74,7 @@ func (c *Component) visit(t transform.T, parent *Component, callback func(*Compo
 		target.Layer = parent.Layer
 	}
 
-	if target.TracksWidth == nil {
+	if target.TracksWidth == 0 {
 		target.TracksWidth = parent.TracksWidth
 	}
 

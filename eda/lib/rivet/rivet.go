@@ -5,7 +5,6 @@ package rivet
 import (
 	"temnok/pcbc/eda"
 	"temnok/pcbc/path"
-	"temnok/pcbc/util/ptr"
 )
 
 var BetweenLayers1and2 = Rivet(1, 2)
@@ -26,7 +25,7 @@ func Rivet(layer1, layer2 int) *eda.Component {
 
 				Tracks: path.Paths{path.Path{path.Point{}}},
 
-				TracksWidth: ptr.To(topDiameter),
+				TracksWidth: topDiameter,
 			},
 
 			&eda.Component{
@@ -34,7 +33,7 @@ func Rivet(layer1, layer2 int) *eda.Component {
 
 				Tracks: path.Paths{path.Path{path.Point{}}},
 
-				TracksWidth: ptr.To(bottomDiameter),
+				TracksWidth: bottomDiameter,
 			},
 		},
 	}
