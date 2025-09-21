@@ -13,21 +13,7 @@ import (
 )
 
 func TestBoard(t *testing.T) {
-
 	hole := path.Circle(1.45)
-
-	blank := &eda.Component{
-		CutsOuter: true,
-
-		Cuts: path.Paths{
-			path.RoundRect(13, 13, 1.4),
-
-			hole.Transform(transform.Move(-5, -5)),
-			hole.Transform(transform.Move(-5, 5)),
-			hole.Transform(transform.Move(5, -5)),
-			hole.Transform(transform.Move(5, 5)),
-		},
-	}
 
 	rivetPair := &eda.Component{
 		Nested: eda.Components{
@@ -60,7 +46,25 @@ func TestBoard(t *testing.T) {
 
 	board := &eda.Component{
 		Nested: eda.Components{
-			blank,
+			{
+				CutsOuter: true,
+
+				Cuts: path.Paths{
+					path.RoundRect(13, 13, 1.5),
+				},
+			},
+
+			{
+				CutsOuter: true,
+				CutsInner: true,
+
+				Cuts: path.Paths{
+					hole.Transform(transform.Move(-5, -5)),
+					hole.Transform(transform.Move(-5, 5)),
+					hole.Transform(transform.Move(5, -5)),
+					hole.Transform(transform.Move(5, 5)),
+				},
+			},
 
 			rivetPair.Clone(3, 0, 2).Arrange(transform.Move(0.5, 0)),
 			rivetPair.Clone(2, 0, 2).Arrange(transform.RotateDegrees(180).Move(-0.5, 0)),

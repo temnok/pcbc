@@ -94,11 +94,21 @@ func renderStencil(config *config.Config, component *eda.Component, stencil *bit
 	stencil.Xor(savedBitmap)
 
 	// Pass 5
-	outerCutBrush := shape.Circle(int(config.MaskCutWidth * config.PixelsPerMM))
+	brush := shape.Circle(int(config.MaskCutWidth * config.PixelsPerMM))
+
 	component.Visit(func(c *eda.Component) {
-		if c.CutsOuter && !c.CutsInner {
-			t := c.Transform.Multiply(bmT)
-			outerCutBrush.ForEachPathsPixel(c.Cuts, t, stencil.Set1)
+		if !c.CutsOuter {
+			return
+		}
+
+		t := c.Transform.Multiply(bmT)
+
+		if c.CutsInner {
+			brush.ForEachPathsPixel(c.Cuts, t, stencil.Set1)
+		} else {
+			c.Cuts.RasterizeIntermittently(t, config.MaskPerforationStep*config.PixelsPerMM, func(x, y int) {
+				brush.ForEachRowWithOffset(x, y, stencil.Set1)
+			})
 		}
 	})
 

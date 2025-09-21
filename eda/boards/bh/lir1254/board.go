@@ -57,16 +57,19 @@ var Board = &eda.Component{
 			CutsOuter: true,
 
 			Cuts: path.Paths{
-				hole.Transform(transform.Move(-7.5, -7.5)),
-				hole.Transform(transform.Move(-7.5, 7.5)),
-				hole.Transform(transform.Move(7.5, -7.5)),
-				hole.Transform(transform.Move(7.5, 7.5)),
+				path.RoundRect(20, 18, 2),
 			},
 		},
 
 		{
+			CutsOuter: true,
+			CutsInner: true,
+
 			Cuts: path.Paths{
-				path.RoundRect(20, 18, 2),
+				hole.Transform(transform.Move(-7.5, -7.5)),
+				hole.Transform(transform.Move(-7.5, 7.5)),
+				hole.Transform(transform.Move(7.5, -7.5)),
+				hole.Transform(transform.Move(7.5, 7.5)),
 			},
 		},
 
