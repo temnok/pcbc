@@ -6,6 +6,7 @@ import (
 	"temnok/pcbc/eda"
 	"temnok/pcbc/path"
 	"temnok/pcbc/transform"
+	"temnok/pcbc/util/ptr"
 )
 
 var QFN16G *eda.Component
@@ -34,7 +35,7 @@ func init() {
 			{
 				ClearNone: true,
 
-				TracksWidth: 0.25,
+				TracksWidth: ptr.To(0.25),
 
 				Tracks: eda.Tracks(
 					eda.Track{{X: -1.5, Y: 1.5}, {X: 1.5, Y: -1.5}},

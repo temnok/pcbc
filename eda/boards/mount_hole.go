@@ -6,6 +6,7 @@ import (
 	"temnok/pcbc/eda"
 	"temnok/pcbc/path"
 	"temnok/pcbc/transform"
+	"temnok/pcbc/util/ptr"
 )
 
 var (
@@ -16,7 +17,7 @@ var (
 
 		Inner: eda.Components{
 			{
-				TracksWidth: 0.35,
+				TracksWidth: ptr.To(0.35),
 				Tracks:      path.Paths{path.Circle(2.45)},
 			},
 

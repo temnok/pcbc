@@ -9,6 +9,7 @@ import (
 	"temnok/pcbc/eda"
 	"temnok/pcbc/eda/pcb/config"
 	"temnok/pcbc/util"
+	"temnok/pcbc/util/ptr"
 )
 
 func Process(config *config.Config, components ...*eda.Component) error {
@@ -31,7 +32,7 @@ func processComponent(initialConfig *config.Config, initialComponent *eda.Compon
 
 	component := &eda.Component{
 		Layer:       initialComponent.Layer,
-		TracksWidth: config.TrackWidth,
+		TracksWidth: ptr.To(config.TrackWidth),
 		ClearWidth:  config.ClearWidth,
 		Inner: eda.Components{
 			initialComponent,

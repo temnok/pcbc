@@ -6,6 +6,7 @@ import (
 	"temnok/pcbc/eda"
 	"temnok/pcbc/path"
 	"temnok/pcbc/transform"
+	"temnok/pcbc/util/ptr"
 )
 
 func MountHole15(layer int) *eda.Component {
@@ -20,7 +21,7 @@ func MountHole15(layer int) *eda.Component {
 
 				Inner: eda.Components{
 					{
-						TracksWidth: 0.4,
+						TracksWidth: ptr.To(0.4),
 						Tracks:      path.Paths{path.Circle(2.3)},
 					},
 

@@ -5,6 +5,7 @@ package holder
 import (
 	"temnok/pcbc/eda"
 	"temnok/pcbc/path"
+	"temnok/pcbc/util/ptr"
 )
 
 var LIR1254 = &eda.Component{
@@ -13,7 +14,7 @@ var LIR1254 = &eda.Component{
 		path.Circle(5),
 	),
 
-	TracksWidth: 0.5,
+	TracksWidth: ptr.To(0.5),
 
 	Marks: path.Paths{
 		path.Circle(12),

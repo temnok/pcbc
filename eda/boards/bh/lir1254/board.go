@@ -9,6 +9,7 @@ import (
 	"temnok/pcbc/eda/lib/header/greenconn"
 	"temnok/pcbc/path"
 	"temnok/pcbc/transform"
+	"temnok/pcbc/util/ptr"
 )
 
 var hole = path.Circle(1.45)
@@ -49,7 +50,7 @@ var boardTop = &eda.Component{
 }
 
 var Board = &eda.Component{
-	TracksWidth: 0.55, // more power!
+	TracksWidth: ptr.To(0.55), // more power!
 	ClearWidth:  0.3,
 
 	Inner: eda.Components{
