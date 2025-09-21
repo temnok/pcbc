@@ -21,7 +21,7 @@ var (
 			},
 
 			{
-				ClearNone: true,
+				ClearDisabled: true,
 
 				Tracks: eda.Tracks(
 					eda.Track{{X: 1.15, Y: 0}}.DX(0.5),

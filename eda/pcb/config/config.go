@@ -10,15 +10,11 @@ type Config struct {
 	Width, Height float64
 	PixelsPerMM   float64
 
-	TrackWidth       float64
-	ClearWidth       float64
-	ExtraCopperWidth float64
+	TrackWidth float64
+	ClearWidth float64
 
-	MaskCutWidth          float64
-	MaskPerforationStep   float64
-	StencilPadOffset      float64
-	StencilLinearizeDelta float64
-	ViaAblateWidth        float64
+	MaskCutWidth        float64
+	MaskPerforationStep float64
 
 	LbrnCenterX, LbrnCenterY float64
 

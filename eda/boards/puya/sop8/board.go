@@ -35,7 +35,7 @@ var (
 			eda.CenteredText("F002A").Arrange(transform.Scale(1.1, 2.8).Move(-5, -2.5)),
 
 			{
-				ClearNone: true,
+				ClearDisabled: true,
 
 				Tracks: eda.Tracks(
 					eda.Track{pin[7]}.DY(-1).DY(2),

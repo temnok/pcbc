@@ -32,7 +32,7 @@ func init() {
 
 		Inner: eda.Components{
 			{
-				ClearNone: true,
+				ClearDisabled: true,
 
 				TracksWidth: 0.25,
 

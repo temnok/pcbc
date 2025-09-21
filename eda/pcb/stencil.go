@@ -96,7 +96,7 @@ func renderStencil(config *config.Config, component *eda.Component, stencil *bit
 	// Pass 5
 	outerCutBrush := shape.Circle(int(config.MaskCutWidth * config.PixelsPerMM))
 	component.Visit(func(c *eda.Component) {
-		if !c.CutsOuter {
+		if c.CutsHidden || !c.CutsOuter {
 			return
 		}
 

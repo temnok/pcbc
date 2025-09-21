@@ -44,7 +44,7 @@ func init() {
 	)
 
 	Board.Inner = append(Board.Inner, &eda.Component{
-		ClearNone: true,
+		ClearDisabled: true,
 
 		Tracks: eda.Tracks(
 			eda.Track{pad[2]}.DY(0.5).XY(pad[9]),

@@ -17,8 +17,9 @@ type Component struct {
 
 	Layer int
 
-	Cuts      path.Paths
-	CutsOuter bool
+	Cuts       path.Paths
+	CutsHidden bool
+	CutsOuter  bool
 
 	Marks path.Paths
 
@@ -27,10 +28,8 @@ type Component struct {
 	Tracks      path.Paths
 	TracksWidth float64
 
-	ClearWidth float64
-	ClearNone  bool
-
-	Vias path.Paths
+	ClearWidth    float64
+	ClearDisabled bool
 
 	Inner []*Component
 }
@@ -54,8 +53,9 @@ func (c *Component) visit(t transform.T, parent *Component, callback func(*Compo
 		Transform: t,
 		Layer:     c.Layer,
 
-		Cuts:      c.Cuts,
-		CutsOuter: c.CutsOuter || parent.CutsOuter,
+		Cuts:       c.Cuts,
+		CutsHidden: c.CutsHidden || parent.CutsHidden,
+		CutsOuter:  c.CutsOuter || parent.CutsOuter,
 
 		Marks: c.Marks,
 
@@ -64,10 +64,8 @@ func (c *Component) visit(t transform.T, parent *Component, callback func(*Compo
 		Tracks:      c.Tracks,
 		TracksWidth: c.TracksWidth,
 
-		ClearWidth: c.ClearWidth,
-		ClearNone:  c.ClearNone || parent.ClearNone,
-
-		Vias: c.Vias,
+		ClearWidth:    c.ClearWidth,
+		ClearDisabled: c.ClearDisabled || parent.ClearDisabled,
 	}
 
 	if target.Layer == 0 {

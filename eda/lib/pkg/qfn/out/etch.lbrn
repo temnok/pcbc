@@ -17,25 +17,8 @@
 	</UIPrefs>
 	<CutSetting type="Cut">
 		<index Value="2"></index>
-		<name Value="Vias"></name>
-		<priority Value="2"></priority>
-		<speed Value="400"></speed>
-		<numPasses Value="1"></numPasses>
-		<globalRepeat Value="100"></globalRepeat>
-		<maxPower Value="90"></maxPower>
-		<QPulseWidth Value="200"></QPulseWidth>
-		<frequency Value="20000"></frequency>
-		<SubLayer type="Cut" index="1">
-			<speed Value="20"></speed>
-			<maxPower Value="0.1"></maxPower>
-			<QPulseWidth Value="200"></QPulseWidth>
-			<frequency Value="20000"></frequency>
-		</SubLayer>
-	</CutSetting>
-	<CutSetting type="Cut">
-		<index Value="3"></index>
 		<name Value="Cut"></name>
-		<priority Value="3"></priority>
+		<priority Value="2"></priority>
 		<speed Value="700"></speed>
 		<numPasses Value="1"></numPasses>
 		<globalRepeat Value="200"></globalRepeat>
@@ -50,22 +33,9 @@
 		</SubLayer>
 	</CutSetting>
 	<CutSetting type="Scan">
-		<index Value="4"></index>
-		<name Value="Pre-Clean"></name>
-		<priority Value="4"></priority>
-		<speed Value="800"></speed>
-		<numPasses Value="1"></numPasses>
-		<maxPower Value="5"></maxPower>
-		<QPulseWidth Value="200"></QPulseWidth>
-		<frequency Value="20000"></frequency>
-		<interval Value="0.02"></interval>
-		<dpi Value="1270"></dpi>
-		<crossHatch Value="1"></crossHatch>
-	</CutSetting>
-	<CutSetting type="Scan">
-		<index Value="5"></index>
+		<index Value="3"></index>
 		<name Value="Clean"></name>
-		<priority Value="5"></priority>
+		<priority Value="3"></priority>
 		<speed Value="6500"></speed>
 		<numPasses Value="1"></numPasses>
 		<maxPower Value="90"></maxPower>
@@ -94,7 +64,7 @@
 	<Shape Type="Bitmap" CutIndex="1" W="500" H="500" Data="iVBORw0KGgoAAAANSUhEUgAAAfQAAAH0AQMAAADxGE3JAAAABlBMVEUAAAAAAAClZ7nPAAAAAXRSTlMAQObYZgAABRZJREFUeJzsnU+S8yYQxXF5oaWOoKPoaHZOkquoKhfxLlstnYpKnVKTGQHikTY4Vr58rxczLpuf3MDjT2MkHI1Go9FoNNr/wa4i2z+RyTk3yuyc62Wx84PIw7lO5OncRWR1zt1E7mZeZPu2UTY3etncuIqoG1b3N1KUHJXs/SVt1m3k/bL9fWyOy3PLkWbDZIOSepWnXmXVq5gLYHNZ5s1lWTQvonnR2rCYftlTvVjVC/lFfGZspokX9ULUC/lN/xorQLMsq3ohv+rf3/Xv08b7LGfMWIEd4o0V2CNePsMPkLcJaIS8TUCt/A3yNgG+gZ9UA7MqcfEX/LtTMtiW+OKze1PVD3qVztoAVGi+ukZ1ulftX+384gvBS2FSQc+bSyb+og1tVC969eLqi87YAP33DOpFp15cfNXfPsY/1POndgWrr5H7liXy5MmTJ0+ePHny5MmTJ08+5M+OX1vjbxT/2xbQ2tcfWtc/0PqLjT97/Qivf9l4vH5nWz/D64c2Hq5/GtcP4fqrcf3y0sg7hFsX4JEArD8AQAEYeSgA4wI+FIBxAR8K4EML8FAA1gpEvLUCYA+AG8BXnU+uJIApTpfJshYxFkCcbrc+yiIWQA+KYgxcLAhgjtPlSuxREsAcpztm3/fxUAB/7C+jArgm7yP+z/1lpMUueR8PAd+25ovfv4+HgN1Cfkjex0PAbvds9fn38RCw25Stvn8QQGBhBabv4yFgtxnwRQHk+Sh5UQBpuoN87AJYAG8VwJKVn10AK+JRJzWU+GUvSTTKDIHXl4jv99q44VFG+SBdxH9BI57l+Z/F93QRP+2J0CilfJAu+uS+XwqNUkNYuH1YzsHFOjxKDSJROsSjUarEf3/nFQsg2oNwLfBAAGYeCMDMAwGYeSAAMw8EYOaBAMw8EICdzwvAzucFYOfzAijxkf4LvKn91PBBuy7yqP1PYaICPx2/Mu3/ijzq/4J+tcij/jfo/4t8kG7/JJ0uFHjD+PV5Pp2umHg0/lfw6XTHxIe9XA2P5l81/K2CDxONFfxkuzRMFHaSfQUfftS9zq/v5Fv9by2/1vpr1Y9U8G/Uf2v7Pbv/Obv/7WrGHxh/VI1/reNvxfgffdI6//h6edL8qXX+R578mfzZ7Yfxh3/F+MPMM/7YjfHHyzzjj+Ajxh+v84w/vo3xx9nzp7Pnj+TJt/Bntx/GH/4V4w8zz/hjN8YfL/OMP4KPGH+8zjP++DbGH2fPn86eP1r4vpHvGvlrI39p5F0rf2vkx0Z+aOT7tvgj2ptY0X7UN8Qb2r8KoCH+8HcWHb/S2v9Fm1sr4o9oc2tF/KFOm+KPnB22hRfGr5wdtoW/yD+y+6S9WbeLR/OMwvifs8O28EL8kbPDtvBC/JGzw7bwwvwray6ZQhTij6ylAijEH1lLBVCIP7KWCqAQf2QtFUDYMAK/VsQnAojih8CvBfGJAKJNwoFfT1QXiQDiTcrBfTGwLuOCjvuI4L4cWJexAOI9vsF9QbAuYwFEeHj/EuQfh/ucMhmYsBZml95nlbWf/u61ogAMVhSAwWAFoGEtMViAxucHwgo0CgD6bxQAFLBRAHz+HzKbgPj8Pz7/78d+/gR58uTJkydPnjx58uTJk/8Mf3b8yuf//cjP//v3nh/4mfW31vXDs88/aT2/5T0/ANSfX+N/AKg/P6f5/J7W84P8b/D15xe1np/Uen6Tazw/yrWeX9V6fhaNRqPRaDTaf9j+CgAA//986YrDtzrEigAAAABJRU5ErkJggg==">
 		<XForm>0.01 0 0 -0.01 55 55</XForm>
 	</Shape>
-	<Shape Type="Path" CutIndex="5">
+	<Shape Type="Path" CutIndex="3">
 		<XForm>1 0 0 1 55 55</XForm>
 		<V vx="2.5" vy="2.5"></V>
 		<V vx="2.5" vy="-2.5"></V>

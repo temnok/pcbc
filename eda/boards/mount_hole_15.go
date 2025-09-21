@@ -25,7 +25,7 @@ func MountHole15(layer int) *eda.Component {
 					},
 
 					{
-						ClearNone: true,
+						ClearDisabled: true,
 
 						Tracks: eda.Tracks(
 							eda.Track{{X: 1.25, Y: 0}}.DX(0.45),

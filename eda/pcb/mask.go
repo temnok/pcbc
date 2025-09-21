@@ -98,12 +98,14 @@ func cutMask1(config *config.Config, c *eda.Component, mask *bitmap.Bitmap) {
 	brush.ForEachPathsPixel(c.Pads, t, mask.Set1)
 
 	// Cuts
-	if c.CutsOuter {
-		brush.ForEachPathsPixel(c.Cuts, t, mask.Set1)
-	} else {
-		c.Cuts.RasterizeIntermittently(t, config.MaskPerforationStep*config.PixelsPerMM, func(x, y int) {
-			brush.ForEachRowWithOffset(x, y, mask.Set1)
-		})
+	if !c.CutsHidden {
+		if c.CutsOuter {
+			brush.ForEachPathsPixel(c.Cuts, t, mask.Set1)
+		} else {
+			c.Cuts.RasterizeIntermittently(t, config.MaskPerforationStep*config.PixelsPerMM, func(x, y int) {
+				brush.ForEachRowWithOffset(x, y, mask.Set1)
+			})
+		}
 	}
 }
 

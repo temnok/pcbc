@@ -21,7 +21,7 @@ var LIR1254 = &eda.Component{
 
 	Inner: eda.Components{
 		{
-			ClearNone: true,
+			ClearDisabled: true,
 
 			Tracks: eda.Tracks(
 				eda.Track{{X: -2, Y: -2}, {X: 2, Y: 2}},
