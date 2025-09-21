@@ -9,7 +9,6 @@ import (
 	"temnok/pcbc/eda/lib/pkg/smd"
 	"temnok/pcbc/path"
 	"temnok/pcbc/transform"
-	"temnok/pcbc/util/ptr"
 )
 
 func X2_I0402(topLabel, bottomLabel string) *eda.Component {
@@ -42,7 +41,7 @@ func X2(topLabel, bottomLabel string, chip *eda.Component) *eda.Component {
 			rev,
 
 			{
-				ClearWidth: ptr.To(0.0),
+				ClearNone: true,
 
 				Tracks: eda.Tracks(
 					eda.Track{pad[1]}.DX(-1.2),

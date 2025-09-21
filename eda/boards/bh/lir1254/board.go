@@ -51,7 +51,7 @@ var boardTop = &eda.Component{
 
 var Board = &eda.Component{
 	TracksWidth: ptr.To(0.55), // more power!
-	ClearWidth:  ptr.To(0.3),
+	ClearWidth:  0.3,
 
 	Inner: eda.Components{
 		{

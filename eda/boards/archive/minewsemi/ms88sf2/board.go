@@ -10,7 +10,6 @@ import (
 	"temnok/pcbc/font"
 	"temnok/pcbc/path"
 	"temnok/pcbc/transform"
-	"temnok/pcbc/util/ptr"
 )
 
 var (
@@ -69,7 +68,7 @@ var (
 			eda.CenteredText("nRF52840").Arrange(transform.ScaleUniformly(1.8).Move(1.3, -7.4)),
 
 			{
-				ClearWidth: ptr.To(0.0),
+				ClearNone: true,
 
 				Tracks: eda.Tracks(
 					eda.Track{pin[1]}.DX(1.5),

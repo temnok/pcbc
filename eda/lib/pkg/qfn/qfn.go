@@ -33,7 +33,7 @@ func init() {
 
 		Inner: eda.Components{
 			{
-				ClearWidth: ptr.To(0.0),
+				ClearNone: true,
 
 				TracksWidth: ptr.To(0.25),
 
@@ -43,7 +43,7 @@ func init() {
 			},
 
 			{
-				ClearWidth: ptr.To(0.3),
+				ClearWidth: 0.3,
 
 				Pads: path.Paths{
 					path.Rect(1.75, 1.75),

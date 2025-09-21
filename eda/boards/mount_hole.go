@@ -22,7 +22,7 @@ var (
 			},
 
 			{
-				ClearWidth: ptr.To(0.0),
+				ClearNone: true,
 
 				Tracks: eda.Tracks(
 					eda.Track{{X: 1.15, Y: 0}}.DX(0.5),
