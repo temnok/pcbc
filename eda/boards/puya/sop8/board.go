@@ -9,6 +9,7 @@ import (
 	"temnok/pcbc/eda/lib/pkg/sop"
 	"temnok/pcbc/path"
 	"temnok/pcbc/transform"
+	"temnok/pcbc/util/ptr"
 )
 
 var (
@@ -35,7 +36,7 @@ var (
 			eda.CenteredText("F002A").Arrange(transform.Scale(1.1, 2.8).Move(-5, -2.5)),
 
 			{
-				ClearNone: true,
+				ClearWidth: ptr.To(0.0),
 
 				Tracks: eda.Tracks(
 					eda.Track{pin[7]}.DY(-1).DY(2),

@@ -9,6 +9,7 @@ import (
 	"temnok/pcbc/eda/lib/pkg/qfn"
 	"temnok/pcbc/path"
 	"temnok/pcbc/transform"
+	"temnok/pcbc/util/ptr"
 )
 
 var (
@@ -47,7 +48,7 @@ var (
 			boards.Rev(2025, 9, 21).Arrange(transform.ScaleUniformly(0.5).Move(6, -4.55)),
 
 			{
-				ClearNone: true,
+				ClearWidth: ptr.To(0.0),
 
 				Tracks: eda.Tracks(
 					eda.Track{mountPad[2]}.YX(pad[8]).DX(-1.3),

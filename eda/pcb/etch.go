@@ -12,6 +12,7 @@ import (
 	"temnok/pcbc/lbrn"
 	"temnok/pcbc/path"
 	"temnok/pcbc/shape"
+	"temnok/pcbc/util/ptr"
 )
 
 const (
@@ -175,13 +176,13 @@ func SaveEtch(config *config.Config, component *eda.Component) (*bitmap.Bitmap, 
 }
 
 func removeEtchCopper(config *config.Config, component *eda.Component, copper *bitmap.Bitmap) {
-	if component.ClearNone {
+	if ptr.Val(component.ClearWidth) == 0 {
 		return
 	}
 
 	t := component.Transform.Multiply(config.BitmapTransform())
 
-	clearWidth := 2 * component.ClearWidth
+	clearWidth := 2 * *component.ClearWidth
 
 	// Cuts
 	if !component.CutsDisabled() {

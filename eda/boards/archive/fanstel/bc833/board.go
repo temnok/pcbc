@@ -10,6 +10,7 @@ import (
 	"temnok/pcbc/font"
 	"temnok/pcbc/path"
 	"temnok/pcbc/transform"
+	"temnok/pcbc/util/ptr"
 )
 
 var (
@@ -100,7 +101,7 @@ func board() *eda.Component {
 			eda.CenteredText("nRF52833").Arrange(transform.ScaleUniformly(1.5).Move(0, -12.2)),
 
 			{
-				ClearNone: true,
+				ClearWidth: ptr.To(0.0),
 
 				Tracks: eda.Tracks(
 					eda.Track{pad[7]}.DX(2.1).YX(pin[5]),

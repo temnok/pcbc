@@ -9,6 +9,7 @@ import (
 	"temnok/pcbc/eda/lib/worldsemi"
 	"temnok/pcbc/path"
 	"temnok/pcbc/transform"
+	"temnok/pcbc/util/ptr"
 )
 
 var Board = &eda.Component{
@@ -44,7 +45,7 @@ func init() {
 	)
 
 	Board.Inner = append(Board.Inner, &eda.Component{
-		ClearNone: true,
+		ClearWidth: ptr.To(0.0),
 
 		Tracks: eda.Tracks(
 			eda.Track{pad[2]}.DY(0.5).XY(pad[9]),
