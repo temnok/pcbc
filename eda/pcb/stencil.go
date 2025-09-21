@@ -73,20 +73,7 @@ func renderStencil(config *config.Config, component *eda.Component, stencil *bit
 		shape.ForEachRow(c.Pads, t, stencil.Set1)
 	})
 
-	// Pass 2
-	if config.StencilPadOffset > 0 {
-		component.Visit(func(c *eda.Component) {
-			if c.CutsOuter {
-				return
-			}
-
-			brushD := 2 * config.StencilPadOffset
-			brush := shape.Circle(int(brushD * config.PixelsPerMM))
-
-			t := c.Transform.Multiply(bmT)
-			brush.ForEachPathsPixel(c.Pads, t, stencil.Set0)
-		})
-	}
+	// Pass 2: removed
 
 	savedBitmap := stencil.Clone()
 
@@ -96,7 +83,7 @@ func renderStencil(config *config.Config, component *eda.Component, stencil *bit
 			return
 		}
 
-		clearWidth := 2 * (config.StencilPadOffset + config.MaskCutWidth)
+		clearWidth := 2 * config.MaskCutWidth
 		brush := shape.Circle(int(clearWidth * config.PixelsPerMM))
 
 		t := c.Transform.Multiply(bmT)

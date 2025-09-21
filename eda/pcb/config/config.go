@@ -33,13 +33,9 @@ func Default() *Config {
 
 		TrackWidth: 0.2,
 		ClearWidth: 0.2,
-		//ExtraCopperWidth: 0.07,
 
-		MaskCutWidth:          0.1,
-		MaskPerforationStep:   0.17,
-		StencilPadOffset:      0.0,
-		StencilLinearizeDelta: 0.01,
-		ViaAblateWidth:        1.0,
+		MaskCutWidth:        0.1,
+		MaskPerforationStep: 0.17,
 
 		LbrnCenterX: 55,
 		LbrnCenterY: 55,
