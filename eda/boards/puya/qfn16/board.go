@@ -44,7 +44,7 @@ var (
 			eda.CenteredText("PY32").Arrange(transform.Scale(1.4, 1.6).Move(0, 4.1)),
 			eda.CenteredText("F002A").Arrange(transform.Scale(1.2, 0.75).Move(0, -4.45)),
 
-			boards.Rev(2025, 9, 18).Arrange(transform.ScaleUniformly(0.5).Move(6, -4.55)),
+			boards.Rev(2025, 9, 21).Arrange(transform.ScaleUniformly(0.5).Move(6, -4.55)),
 
 			{
 				ClearNone: true,

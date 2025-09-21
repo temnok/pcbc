@@ -31,9 +31,9 @@ func Default() *Config {
 		Height:      1,
 		PixelsPerMM: 100,
 
-		TrackWidth:       0.2,
-		ClearWidth:       0.3,
-		ExtraCopperWidth: 0.07,
+		TrackWidth: 0.2,
+		ClearWidth: 0.2,
+		//ExtraCopperWidth: 0.07,
 
 		MaskCutWidth:          0.1,
 		MaskPerforationStep:   0.17,
