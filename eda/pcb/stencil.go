@@ -96,12 +96,10 @@ func renderStencil(config *config.Config, component *eda.Component, stencil *bit
 	// Pass 5
 	outerCutBrush := shape.Circle(int(config.MaskCutWidth * config.PixelsPerMM))
 	component.Visit(func(c *eda.Component) {
-		if c.CutsVias || !c.CutsOuter {
-			return
+		if c.CutsOuter && !c.CutsInner {
+			t := c.Transform.Multiply(bmT)
+			outerCutBrush.ForEachPathsPixel(c.Cuts, t, stencil.Set1)
 		}
-
-		t := c.Transform.Multiply(bmT)
-		outerCutBrush.ForEachPathsPixel(c.Cuts, t, stencil.Set1)
 	})
 
 	return hasPads

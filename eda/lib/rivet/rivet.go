@@ -18,17 +18,23 @@ func Rivet(layer1, layer2 int) *eda.Component {
 
 	return &eda.Component{
 		Nested: eda.Components{
-			&eda.Component{
+			{
 				Layer: layer1,
-
-				Cuts:     path.Paths{path.Circle(viaDiameter)},
-				CutsVias: true,
 
 				Tracks:      path.Paths{path.Path{path.Point{}}},
 				TracksWidth: topDiameter,
 			},
 
-			&eda.Component{
+			{
+				Layer: layer1,
+
+				Cuts:      path.Paths{path.Circle(viaDiameter)},
+				CutsInner: true,
+
+				ClearWidth: 0.1,
+			},
+
+			{
 				Layer: layer2,
 
 				Tracks:      path.Paths{path.Path{path.Point{}}},

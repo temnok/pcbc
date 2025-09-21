@@ -18,7 +18,7 @@ type Component struct {
 	Layer int
 
 	Cuts      path.Paths
-	CutsVias  bool
+	CutsInner bool
 	CutsOuter bool
 
 	Marks path.Paths
@@ -54,7 +54,7 @@ func (c *Component) visit(t transform.T, parent *Component, callback func(*Compo
 		Layer:     c.Layer,
 
 		Cuts:      c.Cuts,
-		CutsVias:  c.CutsVias || parent.CutsVias,
+		CutsInner: c.CutsInner || parent.CutsInner,
 		CutsOuter: c.CutsOuter || parent.CutsOuter,
 
 		Marks: c.Marks,

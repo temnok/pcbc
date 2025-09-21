@@ -105,11 +105,10 @@ func SaveEtch(config *config.Config, component *eda.Component) (*bitmap.Bitmap, 
 
 	component.Visit(func(c *eda.Component) {
 		addCopper(config, c, copper)
-		addCuts(config, c, &cuts)
 	})
 
 	component.Visit(func(c *eda.Component) {
-		removeViasCopper(config, c, copper)
+		addCuts(config, c, copper, &cuts)
 	})
 
 	filename := config.SavePath + "etch.lbrn"
@@ -165,18 +164,18 @@ func addCopper(config *config.Config, component *eda.Component, copper *bitmap.B
 	brush.ForEachPathsPixel(component.Tracks, t, copper.Set0)
 }
 
-func addCuts(config *config.Config, component *eda.Component, cuts *[]*lbrn.Shape) {
+func addCuts(config *config.Config, component *eda.Component, copper *bitmap.Bitmap, cuts *[]*lbrn.Shape) {
 	t := component.Transform.Multiply(config.LbrnCenterMove())
 
 	for _, cut := range component.Cuts {
 		*cuts = append(*cuts, lbrn.NewPath(cutPassIndex, t, cut))
 	}
-}
 
-func removeViasCopper(config *config.Config, component *eda.Component, copper *bitmap.Bitmap) {
-	if component.CutsVias {
-		t := component.Transform.Multiply(config.BitmapTransform())
-		shape.ForEachRow(component.Cuts, t, copper.Set1)
+	if !component.CutsDisabled() {
+		t = component.Transform.Multiply(config.BitmapTransform())
+
+		cutBrush := shape.Circle(int(component.ClearWidth * config.PixelsPerMM))
+		cutBrush.ForEachPathsPixel(component.Cuts, t, copper.Set1)
 	}
 }
 
