@@ -16,9 +16,6 @@ var hole = path.Circle(1.45)
 var boardTop = &eda.Component{
 	Layer: 1,
 
-	TracksWidth: 0.5, // more power!
-	ClearWidth:  0.4,
-
 	Tracks: eda.Tracks(
 		eda.Track{{-7.5, 2.75}}.DY(-5.5).DX(3.5).DY(-3),
 		eda.Track{{7.5, 2.75}}.DY(-5.5).DX(-3.5).DY(-3),
@@ -43,6 +40,8 @@ var boardTop = &eda.Component{
 
 		boards.Firm.Arrange(transform.Scale(0.8, 0.8).Move(8.4, -5.3)),
 
+		boards.Rev(2025, 9, 21).Arrange(transform.RotateDegrees(90).Scale(0.8, 0.8).Move(9.2, -0.4)),
+
 		eda.CenteredText("LIR1254").Arrange(transform.Scale(1, 1.6).Move(-7.5, 6)),
 
 		eda.CenteredText("3.7V").Arrange(transform.Scale(1.5, 1.5).Move(7.8, 6)),
@@ -50,6 +49,9 @@ var boardTop = &eda.Component{
 }
 
 var Board = &eda.Component{
+	TracksWidth: 0.5, // more power!
+	ClearWidth:  0.4,
+
 	Inner: eda.Components{
 		{
 			CutsOuter: true,
@@ -64,7 +66,7 @@ var Board = &eda.Component{
 
 		{
 			Cuts: path.Paths{
-				path.RoundRect(20, 18, 1),
+				path.RoundRect(20, 18, 2),
 			},
 		},
 
