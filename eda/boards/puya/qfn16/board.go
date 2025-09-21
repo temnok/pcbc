@@ -22,7 +22,7 @@ var (
 	rightLabels = []string{"PA8", "VCC", "PB0", "PA7", "PA6", "PA5", "PA4", "PA3", "GND"}
 
 	header = &eda.Component{
-		Inner: eda.Components{
+		Nested: eda.Components{
 			greenconn.CSCC118(9, true, leftLabels).Arrange(transform.Move(-4.5, 0)),
 			greenconn.CSCC118(9, false, rightLabels).Arrange(transform.Move(4.5, 0)),
 		},
@@ -34,7 +34,7 @@ var (
 			path.RoundRect(14.3, 9.8, 1),
 		},
 
-		Inner: eda.Components{
+		Nested: eda.Components{
 			mount,
 			chip,
 			header,

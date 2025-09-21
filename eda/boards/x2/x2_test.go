@@ -22,7 +22,7 @@ func TestBoard(t *testing.T) {
 	hole := path.Circle(1)
 
 	pcb.Process(conf, &eda.Component{
-		Inner: eda.Components{
+		Nested: eda.Components{
 			X2("R ", "10K", smd.I0201).Arrange(transform.Move(0, 2.25)),
 			X2("R ", "1K0", smd.I0402).Arrange(transform.Move(0, -2.25)),
 

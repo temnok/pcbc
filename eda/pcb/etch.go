@@ -109,7 +109,7 @@ func SaveEtch(config *config.Config, component *eda.Component) (*bitmap.Bitmap, 
 	})
 
 	component.Visit(func(c *eda.Component) {
-		etchHiddenCuts(config, c, copper)
+		removeViasCopper(config, c, copper)
 	})
 
 	filename := config.SavePath + "etch.lbrn"
@@ -173,8 +173,8 @@ func addCuts(config *config.Config, component *eda.Component, cuts *[]*lbrn.Shap
 	}
 }
 
-func etchHiddenCuts(config *config.Config, component *eda.Component, copper *bitmap.Bitmap) {
-	if component.CutsHidden {
+func removeViasCopper(config *config.Config, component *eda.Component, copper *bitmap.Bitmap) {
+	if component.CutsVias {
 		t := component.Transform.Multiply(config.BitmapTransform())
 		shape.ForEachRow(component.Cuts, t, copper.Set1)
 	}

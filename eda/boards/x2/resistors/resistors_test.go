@@ -21,7 +21,7 @@ func TestBoard(t *testing.T) {
 	}
 
 	assert.NoError(t, pcb.Process(conf, &eda.Component{
-		Inner: eda.Components{
+		Nested: eda.Components{
 			boards.Guides72x42,
 			eda.ComponentGrid(6, 11, 5,
 				r("33R"),

@@ -19,7 +19,7 @@ var LIR1254 = &eda.Component{
 		path.Circle(12),
 	},
 
-	Inner: eda.Components{
+	Nested: eda.Components{
 		{
 			ClearDisabled: true,
 

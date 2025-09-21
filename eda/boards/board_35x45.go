@@ -28,7 +28,7 @@ func init() {
 
 		Pads: key,
 
-		Inner: eda.Components{
+		Nested: eda.Components{
 			hole.Clone(2, 30, 0).Clone(2, 0, 40),
 		},
 	}

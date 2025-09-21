@@ -33,7 +33,7 @@ func TestBoard(t *testing.T) {
 			path.Rect(2, 0.5).Transform(transform.Move(-x, y)),
 		},
 
-		Inner: eda.Components{
+		Nested: eda.Components{
 			BC833,
 		},
 	}))

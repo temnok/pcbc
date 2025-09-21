@@ -33,7 +33,7 @@ func processComponent(initialConfig *config.Config, initialComponent *eda.Compon
 		Layer:       initialComponent.Layer,
 		TracksWidth: config.TrackWidth,
 		ClearWidth:  config.ClearWidth,
-		Inner: eda.Components{
+		Nested: eda.Components{
 			initialComponent,
 		},
 	}

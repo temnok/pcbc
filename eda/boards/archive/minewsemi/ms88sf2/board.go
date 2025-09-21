@@ -23,7 +23,7 @@ var (
 	headers = &eda.Component{
 		Transform: transform.Move(0, 3.05),
 
-		Inner: eda.Components{
+		Nested: eda.Components{
 			mph100imp40f.G_V_SP(8).Arrange(transform.RotateDegrees(-90).Move(-12.7, -1)),
 			mph100imp40f.G_V_SP(11).Arrange(transform.Move(0, -14)),
 			mph100imp40f.G_V_SP(8).Arrange(transform.RotateDegrees(90).Move(12.7, -1)),
@@ -47,7 +47,7 @@ var (
 	mountHoles = &eda.Component{
 		Transform: transform.Move(0, 3),
 
-		Inner: eda.Components{
+		Nested: eda.Components{
 			boards.MountHole.Arrange(transform.RotateDegrees(45).Move(-7.5, -9.7)),
 			boards.MountHole.Arrange(transform.RotateDegrees(-45).Move(7.5, -9.7)),
 		},
@@ -58,7 +58,7 @@ var (
 			path.RoundRect(28.4, 24.9, 1),
 		},
 
-		Inner: eda.Components{
+		Nested: eda.Components{
 			chip,
 			headers,
 			mountHoles,

@@ -16,7 +16,7 @@ func TestHeader(t *testing.T) {
 	conf.Width, conf.Height = 17, 10
 
 	assert.NoError(t, pcb.Process(conf, &eda.Component{
-		Inner: eda.Components{
+		Nested: eda.Components{
 			CSCC118(7, false, []string{"P001", "P002", "VDD", "D+", "D-", "GND", "P007"}).
 				Arrange(transform.Move(-5, 0)),
 			CSCC118(8, false, []string{"P001", "GND", "VDD", "D+", "D-", "P006", "P008", "P009"}).

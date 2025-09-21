@@ -30,7 +30,7 @@ func TestBoard(t *testing.T) {
 	}
 
 	rivetPair := &eda.Component{
-		Inner: eda.Components{
+		Nested: eda.Components{
 			BetweenLayers1and2.Arrange(transform.Move(-1, 0)),
 			BetweenLayers1and2.Arrange(transform.Move(1, 0)),
 
@@ -59,7 +59,7 @@ func TestBoard(t *testing.T) {
 	}
 
 	board := &eda.Component{
-		Inner: eda.Components{
+		Nested: eda.Components{
 			blank,
 
 			rivetPair.Clone(3, 0, 2).Arrange(transform.Move(0.5, 0)),

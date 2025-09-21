@@ -16,7 +16,7 @@ func Test_BC833(t *testing.T) {
 	conf.Width, conf.Height = 22, 51
 
 	assert.NoError(t, pcb.Process(conf, &eda.Component{
-		Inner: eda.Components{
+		Nested: eda.Components{
 			Board.Arrange(transform.Move(0, 10.5)),
 			Board.Arrange(transform.RotateDegrees(180).Move(0, -10.5)),
 		},

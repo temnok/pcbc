@@ -14,7 +14,7 @@ import (
 )
 
 var testBoard = &eda.Component{
-	Inner: eda.Components{
+	Nested: eda.Components{
 		boards.Board35x45,
 		lir1254.Board.Arrange(transform.Move(0, 8)),
 		eda.ComponentGrid(2, 11, 8,

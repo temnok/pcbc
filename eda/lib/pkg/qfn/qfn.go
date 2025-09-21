@@ -30,7 +30,7 @@ func init() {
 			path.Circle(0.2).Transform(transform.Move(-1.7, 1.4)),
 		},
 
-		Inner: eda.Components{
+		Nested: eda.Components{
 			{
 				ClearDisabled: true,
 

@@ -17,9 +17,9 @@ type Component struct {
 
 	Layer int
 
-	Cuts       path.Paths
-	CutsHidden bool
-	CutsOuter  bool
+	Cuts      path.Paths
+	CutsVias  bool
+	CutsOuter bool
 
 	Marks path.Paths
 
@@ -31,7 +31,7 @@ type Component struct {
 	ClearWidth    float64
 	ClearDisabled bool
 
-	Inner []*Component
+	Nested []*Component
 }
 
 // Visit calls provided callback for each subcomponent recursively,
@@ -53,9 +53,9 @@ func (c *Component) visit(t transform.T, parent *Component, callback func(*Compo
 		Transform: t,
 		Layer:     c.Layer,
 
-		Cuts:       c.Cuts,
-		CutsHidden: c.CutsHidden || parent.CutsHidden,
-		CutsOuter:  c.CutsOuter || parent.CutsOuter,
+		Cuts:      c.Cuts,
+		CutsVias:  c.CutsVias || parent.CutsVias,
+		CutsOuter: c.CutsOuter || parent.CutsOuter,
 
 		Marks: c.Marks,
 
@@ -82,7 +82,7 @@ func (c *Component) visit(t transform.T, parent *Component, callback func(*Compo
 
 	callback(target)
 
-	for _, sub := range c.Inner {
+	for _, sub := range c.Nested {
 		sub.visit(t, target, callback)
 	}
 }
@@ -101,7 +101,7 @@ func (c *Component) Arrange(t transform.T) *Component {
 	return &Component{
 		Transform: t,
 		Layer:     c.Layer,
-		Inner:     Components{c},
+		Nested:    Components{c},
 	}
 }
 
@@ -110,7 +110,7 @@ func (c *Component) Clone(n int, dx, dy float64) *Component {
 	for i := range n {
 		k := float64(i) - float64(n-1)/2
 		clone := c.Arrange(transform.Move(k*dx, k*dy))
-		res.Inner = append(res.Inner, clone)
+		res.Nested = append(res.Nested, clone)
 	}
 
 	return res
@@ -118,8 +118,8 @@ func (c *Component) Clone(n int, dx, dy float64) *Component {
 
 func (c *Component) InLayer(layer int) *Component {
 	return &Component{
-		Layer: layer,
-		Inner: Components{c},
+		Layer:  layer,
+		Nested: Components{c},
 	}
 }
 
@@ -136,7 +136,7 @@ func ComponentGrid(cols int, dx, dy float64, comps ...*Component) *Component {
 		c := float64(i%cols) - float64(cols-1)/2
 		r := float64(i/cols) - float64(rows-1)/2
 
-		grid.Inner = append(grid.Inner, comp.Arrange(transform.Move(c*dx, -r*dy)))
+		grid.Nested = append(grid.Nested, comp.Arrange(transform.Move(c*dx, -r*dy)))
 	}
 
 	return grid

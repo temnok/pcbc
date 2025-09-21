@@ -98,7 +98,7 @@ func cutMask1(config *config.Config, c *eda.Component, mask *bitmap.Bitmap) {
 	brush.ForEachPathsPixel(c.Pads, t, mask.Set1)
 
 	// Cuts
-	if !c.CutsHidden {
+	if !c.CutsVias {
 		if c.CutsOuter {
 			brush.ForEachPathsPixel(c.Cuts, t, mask.Set1)
 		} else {

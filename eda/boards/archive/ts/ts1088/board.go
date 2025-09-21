@@ -16,7 +16,7 @@ var Board = &eda.Component{
 		path.RoundRect(9.5, 6.5, 1),
 	},
 
-	Inner: eda.Components{
+	Nested: eda.Components{
 		xunpu.SwitchTS1088.Arrange(transform.RotateDegrees(-90).Move(3, 0)),
 		mph100imp40f.G_V_SP(2).Arrange(transform.RotateDegrees(-90).Move(-3.25, 0)),
 		boards.MountHole.Arrange(transform.Move(-0.25, 0)),

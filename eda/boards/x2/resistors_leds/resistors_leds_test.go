@@ -17,7 +17,7 @@ func TestBoard(t *testing.T) {
 	conf.Width, conf.Height = 76, 46
 
 	assert.NoError(t, pcb.Process(conf, &eda.Component{
-		Inner: eda.Components{
+		Nested: eda.Components{
 			boards.Guides72x42,
 			eda.ComponentGrid(6, 11, 5,
 				x2.X2_I0402("R ", "1R0"),

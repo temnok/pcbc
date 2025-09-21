@@ -22,11 +22,11 @@ var boardTop = &eda.Component{
 		eda.Track{{-6, -6.2}, {6, -6.2}},
 	),
 
-	Inner: eda.Components{
+	Nested: eda.Components{
 		{
 			Transform: transform.Move(0, -5.5),
 
-			Inner: eda.Components{
+			Nested: eda.Components{
 				greenconn.CSCC118(13, false,
 					[]string{"3V7", "3V7", "3V7", "3V7", "3V7", "3V7",
 						"3V7", "3V7", "3V7", "3V7", "3V7", "3V7", "3V7"},
@@ -52,7 +52,7 @@ var Board = &eda.Component{
 	TracksWidth: 0.55, // more power!
 	ClearWidth:  0.3,
 
-	Inner: eda.Components{
+	Nested: eda.Components{
 		{
 			CutsOuter: true,
 
