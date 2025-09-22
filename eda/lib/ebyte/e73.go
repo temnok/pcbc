@@ -14,31 +14,29 @@ var E73 *eda.Component
 
 func init() {
 	const (
-		padInW       = 0.7
-		padOutW      = 0.7
-		padW         = padInW + padOutW
-		padH         = 0.8
-		padStep      = 1.27
-		padGap       = padStep - padH
-		padRows      = 10
-		padBottomGap = 2.6 - padH/2
+		padInW  = 0.8
+		padOutW = 0.8
+		padW    = padInW + padOutW
+		padH    = 0.8
+		padStep = 1.27
+		padRows = 10.0
 
-		componentW = 13
-		componentH = 18
+		componentW = 13.0
+		componentH = 18.0
 
-		padHShift = (componentW - (padInW - padOutW)) / 2
-		padVShift = (componentH-(padRows*padStep-padGap))/2 - padBottomGap
+		padShift  = (padInW - padOutW) / 2
+		padVShift = (3.97 - 2.60) / 2
 	)
 
-	pad := path.RoundRect(padW, padH, 0.2)
+	pad := path.RoundRect(padW, padH, 0.25)
 
 	E73 = &eda.Component{
 		Marks: path.Paths{path.Rect(componentW, componentH)},
 
 		Pads: path.Join(
-			pad.Clone(padRows, 0, padStep).Transform(transform.RotateDegrees(180).Move(-padHShift, -padVShift)),
-			pad.Clone(8, 0, padStep).Transform(transform.RotateDegrees(-90).Move(0, -componentH/2)),
-			pad.Clone(padRows, 0, padStep).Transform(transform.Move(padHShift, -padVShift)),
+			pad.Clone(padRows, 0, padStep).Transform(transform.RotateDegrees(180).Move(-componentW/2-padShift, -padVShift)),
+			pad.Clone(8, 0, padStep).Transform(transform.RotateDegrees(-90).Move(0, -componentH/2-padShift)),
+			pad.Clone(padRows, 0, padStep).Transform(transform.Move(componentW/2+padShift, -padVShift)),
 		),
 	}
 }

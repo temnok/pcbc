@@ -12,6 +12,8 @@ func MountHole15(layer int) *eda.Component {
 	return &eda.Component{
 		Cuts: path.Paths{path.Circle(1.5)},
 
+		TracksWidth: 0.4,
+
 		Nested: eda.Components{
 			{
 				Layer: layer,
@@ -20,18 +22,17 @@ func MountHole15(layer int) *eda.Component {
 
 				Nested: eda.Components{
 					{
-						TracksWidth: 0.4,
-						Tracks:      path.Paths{path.Circle(2.3)},
+						Tracks: path.Paths{path.Circle(2.3)},
 					},
 
 					{
 						ClearDisabled: true,
 
 						Tracks: eda.Tracks(
-							eda.Track{{X: 1.25, Y: 0}}.DX(0.45),
-							eda.Track{{X: -1.25, Y: 0}}.DX(-0.45),
-							eda.Track{{X: 0, Y: 1.25}}.DY(0.45),
-							eda.Track{{X: 0, Y: -1.25}}.DY(-0.45),
+							eda.Track{{X: 1.25, Y: 0}}.DX(0.3),
+							eda.Track{{X: -1.25, Y: 0}}.DX(-0.3),
+							eda.Track{{X: 0, Y: 1.25}}.DY(0.3),
+							eda.Track{{X: 0, Y: -1.25}}.DY(-0.3),
 						),
 					},
 				},

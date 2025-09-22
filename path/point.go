@@ -11,6 +11,10 @@ type Point struct {
 	X, Y float64
 }
 
+func (p Point) XY() (x, y float64) {
+	return p.X, p.Y
+}
+
 func (p Point) Round() Point {
 	return Point{math.Round(p.X), math.Round(p.Y)}
 }
