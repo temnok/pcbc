@@ -19,6 +19,7 @@ var (
 
 	Board35x45 = &eda.Component{
 		CutsOuter: true,
+
 		Cuts: path.Paths{
 			path.RoundRect(35, 45, 2.5),
 		},

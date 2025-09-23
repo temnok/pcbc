@@ -21,7 +21,7 @@ var (
 		},
 
 		Marks: path.Paths{
-			path.Rect(2.20, 2),
+			path.Rect(2.2, 2.2),
 			path.Rect(0.3, 0.3).Transform(transform.Move(0, 0.4)),
 			path.Rect(0.05, 0.05).Transform(transform.Move(-0.3, -0.4)),
 			path.Rect(0.05, 0.05).Transform(transform.Move(0, -0.4)),

@@ -91,8 +91,8 @@ func board() *eda.Component {
 		Nested: eda.Components{
 			fanstel.BC833,
 			header,
-			boards.MountHole.Arrange(transform.RotateDegrees(45).Move(-5, -10.5)),
-			boards.MountHole.Arrange(transform.RotateDegrees(-45).Move(5, -10.5)),
+			boards.MountHole.Arrange(transform.Move(-5, -10.5)),
+			boards.MountHole.Arrange(transform.Move(5, -10.5)),
 
 			boards.Logo.Arrange(transform.ScaleUniformly(1.2).Move(0, -8.3)),
 			eda.CenteredText(revision).Arrange(transform.Scale(0.75, 1).Move(-5, -8.1)),

@@ -72,8 +72,8 @@ var Board = &eda.Component{
 
 		boardTop,
 
-		boards.MountHole15(1).Arrange(transform.Move(-7.5, -2.5)),
+		boards.MountHole.Arrange(transform.Move(-7.5, -2.5)),
 
-		boards.MountHole15(1).Arrange(transform.Move(7.5, -2.5)),
+		boards.MountHole.Arrange(transform.Move(7.5, -2.5)),
 	},
 }

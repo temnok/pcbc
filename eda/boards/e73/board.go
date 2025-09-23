@@ -56,8 +56,8 @@ var (
 		},
 
 		Nested: eda.Components{
-			boards.MountHole15(1).Arrange(transform.Move(-10, -7.2)),
-			boards.MountHole15(1).Arrange(transform.Move(10, -7.2)),
+			boards.MountHole.Arrange(transform.Move(-10, -7.2)),
+			boards.MountHole.Arrange(transform.Move(10, -7.2)),
 
 			{
 				Nested: eda.Components{

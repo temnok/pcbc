@@ -8,7 +8,7 @@ import (
 	"temnok/pcbc/transform"
 )
 
-var MountHole15 = &eda.Component{
+var MountHole = &eda.Component{
 	Cuts: path.Paths{path.Circle(1.5)},
 
 	TracksWidth: 0.4,
