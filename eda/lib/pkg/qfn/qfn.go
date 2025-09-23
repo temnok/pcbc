@@ -32,7 +32,7 @@ func init() {
 
 		Nested: eda.Components{
 			{
-				ClearDisabled: true,
+				ClearOff: true,
 
 				TracksWidth: 0.25,
 

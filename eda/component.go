@@ -28,8 +28,8 @@ type Component struct {
 	Tracks      path.Paths
 	TracksWidth float64
 
-	ClearWidth    float64
-	ClearDisabled bool
+	ClearWidth float64
+	ClearOff   bool
 
 	Nested []*Component
 }
@@ -60,8 +60,8 @@ func (c *Component) visit(t transform.T, parent *Component, callback func(*Compo
 		Tracks:      c.Tracks,
 		TracksWidth: c.TracksWidth,
 
-		ClearWidth:    c.ClearWidth,
-		ClearDisabled: c.ClearDisabled,
+		ClearWidth: c.ClearWidth,
+		ClearOff:   c.ClearOff,
 	}
 
 	if target.TracksWidth == 0 {

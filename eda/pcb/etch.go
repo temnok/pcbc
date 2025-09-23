@@ -130,7 +130,7 @@ func SaveEtch(config *config.Config, component *eda.Component, back bool) (*bitm
 }
 
 func removeCopper(config *config.Config, component *eda.Component, back bool, copper *bitmap.Bitmap) {
-	if component.ClearDisabled || component.Back != back {
+	if component.ClearOff || component.Back != back {
 		return
 	}
 

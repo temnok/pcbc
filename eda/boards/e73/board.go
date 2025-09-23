@@ -78,8 +78,8 @@ var (
 					},
 
 					{
-						ClearDisabled: true,
-						TracksWidth:   0.3,
+						ClearOff:    true,
+						TracksWidth: 0.3,
 
 						Tracks: eda.Tracks(
 							eda.TrackV2(chipPads[4], chipPads[4].Move(2, 0)),

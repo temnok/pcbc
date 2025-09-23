@@ -44,7 +44,7 @@ func init() {
 	)
 
 	Board.Nested = append(Board.Nested, &eda.Component{
-		ClearDisabled: true,
+		ClearOff: true,
 
 		Tracks: eda.Tracks(
 			eda.Track{pad[2]}.DY(0.5).XY(pad[9]),
