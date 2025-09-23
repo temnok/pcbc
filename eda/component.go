@@ -47,11 +47,11 @@ func (c *Component) visit(t transform.T, parent *Component, callback func(*Compo
 
 	target := &Component{
 		Transform: t,
-		Back:      c.Back || parent.Back,
+		Back:      c.Back,
 
 		Cuts:      c.Cuts,
-		CutsInner: c.CutsInner || parent.CutsInner,
-		CutsOuter: c.CutsOuter || parent.CutsOuter,
+		CutsInner: c.CutsInner,
+		CutsOuter: c.CutsOuter,
 
 		Marks: c.Marks,
 
@@ -61,7 +61,7 @@ func (c *Component) visit(t transform.T, parent *Component, callback func(*Compo
 		TracksWidth: c.TracksWidth,
 
 		ClearWidth:    c.ClearWidth,
-		ClearDisabled: c.ClearDisabled || parent.ClearDisabled,
+		ClearDisabled: c.ClearDisabled,
 	}
 
 	if target.TracksWidth == 0 {
