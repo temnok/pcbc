@@ -23,20 +23,27 @@ func TestBoard(t *testing.T) {
 
 	pcb.Process(conf, &eda.Component{
 		Nested: eda.Components{
-			X2("R ", "10K", smd.I0201).Arrange(transform.Move(0, 2.25)),
-			X2("R ", "1K0", smd.I0402).Arrange(transform.Move(0, -2.25)),
-
 			{
 				CutsOuter: true,
+
 				Cuts: path.Paths{
 					path.RoundRect(12, 12, 1),
+				},
+			},
 
+			{
+				CutsFull: true,
+
+				Cuts: path.Paths{
 					hole.Transform(transform.Move(-5, -5)),
 					hole.Transform(transform.Move(-5, 5)),
 					hole.Transform(transform.Move(5, -5)),
 					hole.Transform(transform.Move(5, 5)),
 				},
 			},
+
+			X2("R ", "10K", smd.I0201).Arrange(transform.Move(0, 2.25)),
+			X2("R ", "1K0", smd.I0402).Arrange(transform.Move(0, -2.25)),
 		},
 	})
 }

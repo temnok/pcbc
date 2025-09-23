@@ -17,9 +17,10 @@ type Component struct {
 
 	Back bool
 
-	Cuts      path.Paths
-	CutsInner bool
-	CutsOuter bool
+	Cuts       path.Paths // solid board cuts and dotted mask cuts
+	CutsHidden bool       // disables dotted mask cuts
+	CutsOuter  bool       // enables dotted stencil cuts
+	CutsFull   bool       // enforces solid mask and stencil cuts
 
 	Marks path.Paths
 
@@ -49,9 +50,10 @@ func (c *Component) visit(t transform.T, parent *Component, callback func(*Compo
 		Transform: t,
 		Back:      c.Back,
 
-		Cuts:      c.Cuts,
-		CutsInner: c.CutsInner,
-		CutsOuter: c.CutsOuter,
+		Cuts:       c.Cuts,
+		CutsHidden: c.CutsHidden,
+		CutsOuter:  c.CutsOuter,
+		CutsFull:   c.CutsFull,
 
 		Marks: c.Marks,
 

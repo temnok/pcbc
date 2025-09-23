@@ -65,10 +65,6 @@ func renderStencil(config *config.Config, component *eda.Component, stencil *bit
 	component.Visit(func(c *eda.Component) {
 		hasPads = hasPads || len(c.Pads) > 0
 
-		if c.CutsOuter {
-			return
-		}
-
 		t := c.Transform.Multiply(bmT)
 		shape.ForEachRow(c.Pads, t, stencil.Set1)
 	})
@@ -79,10 +75,6 @@ func renderStencil(config *config.Config, component *eda.Component, stencil *bit
 
 	// Pass 3
 	component.Visit(func(c *eda.Component) {
-		if c.CutsOuter {
-			return
-		}
-
 		clearWidth := 2 * config.MaskCutWidth
 		brush := shape.Circle(int(clearWidth * config.PixelsPerMM))
 
@@ -97,15 +89,11 @@ func renderStencil(config *config.Config, component *eda.Component, stencil *bit
 	brush := shape.Circle(int(config.MaskCutWidth * config.PixelsPerMM))
 
 	component.Visit(func(c *eda.Component) {
-		if !c.CutsOuter {
-			return
-		}
-
 		t := c.Transform.Multiply(bmT)
 
-		if c.CutsInner {
+		if c.CutsFull {
 			brush.ForEachPathsPixel(c.Cuts, t, stencil.Set1)
-		} else {
+		} else if c.CutsOuter {
 			c.Cuts.RasterizeIntermittently(t, config.MaskPerforationStep*config.PixelsPerMM, func(x, y int) {
 				brush.ForEachRowWithOffset(x, y, stencil.Set1)
 			})

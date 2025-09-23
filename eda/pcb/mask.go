@@ -101,9 +101,9 @@ func cutMask(config *config.Config, c *eda.Component, back bool, mask *bitmap.Bi
 	}
 
 	// Cuts
-	if c.CutsOuter && c.CutsInner {
+	if c.CutsFull {
 		brush.ForEachPathsPixel(c.Cuts, t, mask.Set1)
-	} else if !c.CutsInner {
+	} else if !c.CutsHidden {
 		c.Cuts.RasterizeIntermittently(t, config.MaskPerforationStep*config.PixelsPerMM, func(x, y int) {
 			brush.ForEachRowWithOffset(x, y, mask.Set1)
 		})

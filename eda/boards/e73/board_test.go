@@ -28,8 +28,7 @@ func TestBoard(t *testing.T) {
 			},
 
 			(&eda.Component{
-				CutsOuter: true,
-				CutsInner: true,
+				CutsFull: true,
 
 				Cuts: path.Paths{
 					path.Circle(1.45),
