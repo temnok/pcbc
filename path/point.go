@@ -27,3 +27,7 @@ func (p Point) Apply(t transform.T) Point {
 	x, y := t.Apply(p.X, p.Y)
 	return Point{X: x, Y: y}
 }
+
+func (p Point) Move(dx, dy float64) Point {
+	return Point{X: p.X + dx, Y: p.Y + dy}
+}

@@ -3,6 +3,7 @@
 package e73
 
 import (
+	"math"
 	"temnok/pcbc/eda"
 	"temnok/pcbc/eda/boards"
 	"temnok/pcbc/eda/lib/ebyte"
@@ -12,37 +13,39 @@ import (
 )
 
 var (
-	e73     = ebyte.E73.Arrange(transform.Move(0, 3.07))
-	e73pads = e73.PadCenters()
+	n0 = math.Copysign(0, -1)
+
+	e73      = ebyte.E73.Arrange(transform.Move(0, 3.07))
+	chipPads = e73.PadCenters()
 
 	leftConn = greenconn.CSCC118(14, false, []string{
 		"P111", "P110", "P003", " AI4", "GND ", "P113", "AI0 ", " AI5", "AI7 ", " AI6",
 		"XL1 ", " XL2", "AI3 ", "P109",
 	}).Arrange(transform.Move(-11.25, 1.6))
-	leftConnPads = leftConn.PadCenters()
+	leftPads = leftConn.PadCenters()
 
 	rightConn = greenconn.CSCC118(14, true, []string{
 		" NF2", "NF1 ", " SWC", "SWD ", "P024", "P013", "  D+", "D-  ", " VBS", "RST ",
 		" DCH", "VDH ", " GND", "VDD ",
 	}).Arrange(transform.Move(11.25, 1.6))
-	rightConnPads = rightConn.PadCenters()
+	rightPads = rightConn.PadCenters()
 
 	leftTracks = eda.Tracks(
-		eda.TrackV2(e73pads[0], -0.5, 0, 0.00, -3.5),
-		eda.TrackV2(e73pads[1], -0.5, 0, 0.27, -5.5),
-		eda.TrackV2(e73pads[2], -0.5, 0, 0.54, -3.0),
-		eda.TrackV2(e73pads[3], -0.5, 0, 0.81, -5.0),
-		eda.TrackV2(e73pads[4], -0.5, 0, 1.08, -2.5),
-		eda.TrackV2(e73pads[5], -0.5, 0, 1.35, -4.5),
-		eda.TrackV2(e73pads[6], -0.5, 0, 1.62, -2.0),
-		eda.TrackV2(e73pads[7], -0.5, 0, 1.89, -4.0),
-		eda.TrackV2(e73pads[8], -0.5, 0, 2.16, -1.5),
-		eda.TrackV2(e73pads[9], -0.5, 0, 2.43, -3.5),
+		eda.TrackV2(chipPads[0], leftPads[0]),
+		eda.TrackV2(chipPads[1], leftPads[1], -0.5, 0),
+		eda.TrackV2(chipPads[2], leftPads[2], -0.5, 0),
+		eda.TrackV2(chipPads[3], leftPads[3], -0.5, 0),
+		eda.TrackV2(chipPads[4], leftPads[4], -0.5, 0),
+		eda.TrackV2(chipPads[5], leftPads[5], -0.5, 0),
+		eda.TrackV2(chipPads[6], leftPads[6], -0.5, 0),
+		eda.TrackV2(chipPads[7], leftPads[7], -0.5, 0),
+		eda.TrackV2(chipPads[8], leftPads[8], -0.5, 0),
+		eda.TrackV2(chipPads[9], leftPads[9], -0.5, 0),
 
-		eda.TrackV2(e73pads[10], -1.2, 0, 4, -1),
-		eda.TrackV2(e73pads[11], 0, -0.7, 0.5, 1.5, 4.25, -3),
-		eda.TrackV2(e73pads[12], 0, -0.7, 1.0, 2.5, 3.75, -1),
-		eda.TrackV2(e73pads[13], 0, -0.7, 1.5, 3.5, 3.25, -3),
+		eda.TrackV2(chipPads[10], leftPads[10], -1.2, 0),
+		eda.TrackV2(chipPads[11], leftPads[11], n0, n0, -0.7, 0.5, 1.5, 0),
+		eda.TrackV2(chipPads[12], leftPads[12], n0, n0, -0.7, 1.0, 2.5, 0),
+		eda.TrackV2(chipPads[13], leftPads[13], n0, n0, -0.7, 1.5, 3.5, 0),
 	)
 
 	Board_nRF52840 = &eda.Component{
@@ -81,11 +84,11 @@ var (
 						TracksWidth:   0.3,
 
 						Tracks: eda.Tracks(
-							eda.TrackV2(e73pads[4], 2, 0),
-							eda.TrackV2(leftConnPads[4], -2, 0),
+							eda.TrackV2(chipPads[4], chipPads[4].Move(2, 0)),
+							eda.TrackV2(leftPads[4], leftPads[4].Move(-2, 0)),
 
-							eda.TrackV2(e73pads[15], 0, 2),
-							eda.TrackV2(rightConnPads[12], 2, 0),
+							eda.TrackV2(chipPads[15], chipPads[15].Move(0, 2)),
+							eda.TrackV2(rightPads[12], rightPads[12].Move(2, 0)),
 						),
 					},
 				},
