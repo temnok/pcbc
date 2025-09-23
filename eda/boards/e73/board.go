@@ -60,8 +60,6 @@ var (
 			boards.MountHole15(1).Arrange(transform.Move(10, -7.2)),
 
 			{
-				Layer: 1,
-
 				Nested: eda.Components{
 					boards.Logo.Arrange(transform.Scale(1.6, 1.6).Move(-13, -7.1)),
 					eda.CenteredText("E73-2G4M08S1C").Arrange(transform.Scale(2, 1.6).Move(0, -7.4)),

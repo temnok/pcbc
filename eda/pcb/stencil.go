@@ -53,7 +53,7 @@ func SaveStencil(config *config.Config, component *eda.Component) (*bitmap.Bitma
 		},
 	}
 
-	return stencil, p.SaveToFile(config.SavePath + "stencil.lbrn")
+	return stencil, p.SaveToFile(config.SavePath + "1-stencil.lbrn")
 }
 
 func renderStencil(config *config.Config, component *eda.Component, stencil *bitmap.Bitmap) bool {

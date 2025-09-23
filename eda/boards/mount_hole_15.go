@@ -16,8 +16,6 @@ func MountHole15(layer int) *eda.Component {
 
 		Nested: eda.Components{
 			{
-				Layer: layer,
-
 				Pads: path.Pie(6, 0.95, 1.3, 20).Transform(transform.RotateDegrees(-30)),
 
 				Nested: eda.Components{

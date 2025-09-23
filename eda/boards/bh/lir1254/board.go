@@ -14,8 +14,6 @@ import (
 var hole = path.Circle(1.45)
 
 var boardTop = &eda.Component{
-	Layer: 1,
-
 	Tracks: eda.Tracks(
 		eda.Track{{-7.5, 2.75}}.DY(-5.5).DX(3.5).DY(-3),
 		eda.Track{{7.5, 2.75}}.DY(-5.5).DX(-3.5).DY(-3),

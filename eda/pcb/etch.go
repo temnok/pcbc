@@ -43,9 +43,9 @@ var etchBitmapSettings = []*lbrn.CutSetting{
 	},
 }
 
-func etchCutSettings(c *eda.Component) []*lbrn.CutSetting {
+func etchCutSettings(back bool) []*lbrn.CutSetting {
 	var doOutput *lbrn.Param
-	if c.CutsDisabled() {
+	if back {
 		doOutput = &lbrn.Param{Value: "0"}
 	}
 
@@ -95,30 +95,30 @@ func etchCutSettings(c *eda.Component) []*lbrn.CutSetting {
 	}
 }
 
-func SaveEtch(config *config.Config, component *eda.Component) (*bitmap.Bitmap, error) {
+func SaveEtch(config *config.Config, component *eda.Component, back bool) (*bitmap.Bitmap, error) {
 	copper := bitmap.New(config.BitmapSizeInPixels())
 	var cuts []*lbrn.Shape
 
 	component.Visit(func(c *eda.Component) {
-		removeCopper(config, c, copper)
+		removeCopper(config, c, back, copper)
 	})
 
 	component.Visit(func(c *eda.Component) {
-		addCopper(config, c, copper)
+		addCopper(config, c, back, copper)
 	})
 
 	component.Visit(func(c *eda.Component) {
-		addCuts(config, c, copper, &cuts)
+		addCuts(config, c, back, copper, &cuts)
 	})
 
-	filename := config.SavePath + "etch.lbrn"
+	filename := config.SavePath + fileNamePrefix[back] + "etch.lbrn"
 	copperImage := image.NewSingle(copper, color.Transparent, color.Black)
 	copperBitmap := lbrn.NewBase64Bitmap(copperImage)
 
 	p := &lbrn.LightBurnProject{
 		UIPrefs:       lbrn.UIPrefsDefaults,
 		CutSettingImg: etchBitmapSettings,
-		CutSetting:    etchCutSettings(component),
+		CutSetting:    etchCutSettings(back),
 		Shape: append([]*lbrn.Shape{
 			lbrn.NewBitmapShape(etchPassIndex, config.LbrnBitmapScale(), copperBitmap),
 		}, cuts...),
@@ -129,8 +129,8 @@ func SaveEtch(config *config.Config, component *eda.Component) (*bitmap.Bitmap, 
 	return copper, p.SaveToFile(filename)
 }
 
-func removeCopper(config *config.Config, component *eda.Component, copper *bitmap.Bitmap) {
-	if component.ClearDisabled {
+func removeCopper(config *config.Config, component *eda.Component, back bool, copper *bitmap.Bitmap) {
+	if component.ClearDisabled || component.Back != back {
 		return
 	}
 
@@ -139,7 +139,7 @@ func removeCopper(config *config.Config, component *eda.Component, copper *bitma
 	clearWidth := 2 * component.ClearWidth
 
 	// Cuts
-	if !component.CutsDisabled() {
+	if !back {
 		cutBrush := shape.Circle(int((clearWidth / 2) * config.PixelsPerMM))
 		cutBrush.ForEachPathsPixel(component.Cuts, t, copper.Set1)
 	}
@@ -153,7 +153,11 @@ func removeCopper(config *config.Config, component *eda.Component, copper *bitma
 	trackBrush.ForEachPathsPixel(component.Tracks, t, copper.Set1)
 }
 
-func addCopper(config *config.Config, component *eda.Component, copper *bitmap.Bitmap) {
+func addCopper(config *config.Config, component *eda.Component, back bool, copper *bitmap.Bitmap) {
+	if component.Back != back {
+		return
+	}
+
 	t := component.Transform.Multiply(config.BitmapTransform())
 
 	// Pads
@@ -164,14 +168,14 @@ func addCopper(config *config.Config, component *eda.Component, copper *bitmap.B
 	brush.ForEachPathsPixel(component.Tracks, t, copper.Set0)
 }
 
-func addCuts(config *config.Config, component *eda.Component, copper *bitmap.Bitmap, cuts *[]*lbrn.Shape) {
+func addCuts(config *config.Config, component *eda.Component, back bool, copper *bitmap.Bitmap, cuts *[]*lbrn.Shape) {
 	t := component.Transform.Multiply(config.LbrnCenterMove())
 
 	for _, cut := range component.Cuts {
 		*cuts = append(*cuts, lbrn.NewPath(cutPassIndex, t, cut))
 	}
 
-	if !component.CutsDisabled() {
+	if !back {
 		t = component.Transform.Multiply(config.BitmapTransform())
 
 		cutBrush := shape.Circle(int(component.ClearWidth * config.PixelsPerMM))

@@ -7,39 +7,31 @@ import (
 	"temnok/pcbc/path"
 )
 
-var BetweenLayers1and2 = Rivet(1, 2)
+const (
+	viaDiameter    = 0.63
+	topDiameter    = 1.2
+	bottomDiameter = 1.2
+)
 
-func Rivet(layer1, layer2 int) *eda.Component {
-	const (
-		viaDiameter    = 0.63
-		topDiameter    = 1.2
-		bottomDiameter = 1.2
-	)
-
-	return &eda.Component{
-		Nested: eda.Components{
-			{
-				Layer: layer1,
-
-				Tracks:      path.Paths{path.Path{path.Point{}}},
-				TracksWidth: topDiameter,
-			},
-
-			{
-				Layer: layer1,
-
-				Cuts:      path.Paths{path.Circle(viaDiameter)},
-				CutsInner: true,
-
-				ClearWidth: 0.1,
-			},
-
-			{
-				Layer: layer2,
-
-				Tracks:      path.Paths{path.Path{path.Point{}}},
-				TracksWidth: bottomDiameter,
-			},
+var Rivet = &eda.Component{
+	Nested: eda.Components{
+		{
+			Tracks:      path.Paths{path.Path{path.Point{}}},
+			TracksWidth: topDiameter,
 		},
-	}
+
+		{
+			Cuts:      path.Paths{path.Circle(viaDiameter)},
+			CutsInner: true,
+
+			ClearWidth: 0.1,
+		},
+
+		{
+			Back: true,
+
+			Tracks:      path.Paths{path.Path{path.Point{}}},
+			TracksWidth: bottomDiameter,
+		},
+	},
 }

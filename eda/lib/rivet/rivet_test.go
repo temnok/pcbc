@@ -17,12 +17,10 @@ func TestBoard(t *testing.T) {
 
 	rivetPair := &eda.Component{
 		Nested: eda.Components{
-			BetweenLayers1and2.Arrange(transform.Move(-1, 0)),
-			BetweenLayers1and2.Arrange(transform.Move(1, 0)),
+			Rivet.Arrange(transform.Move(-1, 0)),
+			Rivet.Arrange(transform.Move(1, 0)),
 
 			{
-				Layer: 1,
-
 				Pads: path.Paths{
 					path.RoundRect(1, 0.55, 0.15).Transform(transform.Move(-4, 0)),
 					path.RoundRect(1, 0.55, 0.15).Transform(transform.Move(3, 0)),
@@ -35,7 +33,7 @@ func TestBoard(t *testing.T) {
 			},
 
 			{
-				Layer: 2,
+				Back: true,
 
 				Tracks: eda.Tracks(
 					eda.Track{{-1, 0}, {1, 0}},
@@ -73,10 +71,6 @@ func TestBoard(t *testing.T) {
 
 	conf := config.Default()
 	conf.Width, conf.Height = 14, 14
-	conf.SavePath = "out/{}-"
 
-	assert.NoError(t, pcb.Process(conf,
-		board.InLayer(1),
-		board.InLayer(2).Arrange(transform.MirrorX()),
-	))
+	assert.NoError(t, pcb.Process(conf, board))
 }

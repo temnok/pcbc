@@ -15,7 +15,7 @@ type Components = []*Component
 type Component struct {
 	Transform transform.T
 
-	Layer int
+	Back bool
 
 	Cuts      path.Paths
 	CutsInner bool
@@ -37,21 +37,17 @@ type Component struct {
 // Visit calls provided callback for each subcomponent recursively,
 // as if every component is isolated (without subcomponents)
 func (c *Component) Visit(callback func(*Component)) {
-	c.visit(transform.I, &Component{Layer: c.Layer}, callback)
+	c.visit(transform.I, &Component{}, callback)
 }
 
 func (c *Component) visit(t transform.T, parent *Component, callback func(*Component)) {
-	if c.Layer != 0 && c.Layer != parent.Layer {
-		return
-	}
-
 	if zero := (transform.T{}); c.Transform != zero {
 		t = c.Transform.Multiply(t)
 	}
 
 	target := &Component{
 		Transform: t,
-		Layer:     c.Layer,
+		Back:      c.Back || parent.Back,
 
 		Cuts:      c.Cuts,
 		CutsInner: c.CutsInner || parent.CutsInner,
@@ -66,10 +62,6 @@ func (c *Component) visit(t transform.T, parent *Component, callback func(*Compo
 
 		ClearWidth:    c.ClearWidth,
 		ClearDisabled: c.ClearDisabled || parent.ClearDisabled,
-	}
-
-	if target.Layer == 0 {
-		target.Layer = parent.Layer
 	}
 
 	if target.TracksWidth == 0 {
@@ -100,7 +92,6 @@ func (c *Component) PadCenters() []path.Point {
 func (c *Component) Arrange(t transform.T) *Component {
 	return &Component{
 		Transform: t,
-		Layer:     c.Layer,
 		Nested:    Components{c},
 	}
 }
@@ -114,17 +105,6 @@ func (c *Component) Clone(n int, dx, dy float64) *Component {
 	}
 
 	return res
-}
-
-func (c *Component) InLayer(layer int) *Component {
-	return &Component{
-		Layer:  layer,
-		Nested: Components{c},
-	}
-}
-
-func (c *Component) CutsDisabled() bool {
-	return c.Layer > 1
 }
 
 func ComponentGrid(cols int, dx, dy float64, comps ...*Component) *Component {

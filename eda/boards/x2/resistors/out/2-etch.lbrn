@@ -1,0 +1,1664 @@
+<LightBurnProject>
+	<UIPrefs>
+		<Optimize_ByLayer Value="0"></Optimize_ByLayer>
+		<Optimize_ByGroup Value="-1"></Optimize_ByGroup>
+		<Optimize_ByPriority Value="1"></Optimize_ByPriority>
+		<Optimize_WhichDirection Value="0"></Optimize_WhichDirection>
+		<Optimize_InnerToOuter Value="1"></Optimize_InnerToOuter>
+		<Optimize_ByDirection Value="0"></Optimize_ByDirection>
+		<Optimize_ReduceTravel Value="1"></Optimize_ReduceTravel>
+		<Optimize_HideBacklash Value="0"></Optimize_HideBacklash>
+		<Optimize_ReduceDirChanges Value="0"></Optimize_ReduceDirChanges>
+		<Optimize_ChooseCorners Value="0"></Optimize_ChooseCorners>
+		<Optimize_AllowReverse Value="1"></Optimize_AllowReverse>
+		<Optimize_RemoveOverlaps Value="0"></Optimize_RemoveOverlaps>
+		<Optimize_OptimalEntryPoint Value="1"></Optimize_OptimalEntryPoint>
+		<Optimize_OverlapDist Value="0.025"></Optimize_OverlapDist>
+	</UIPrefs>
+	<CutSetting type="Cut">
+		<index Value="2"></index>
+		<name Value="Cut"></name>
+		<priority Value="2"></priority>
+		<doOutput Value="0"></doOutput>
+		<speed Value="700"></speed>
+		<numPasses Value="1"></numPasses>
+		<globalRepeat Value="200"></globalRepeat>
+		<maxPower Value="90"></maxPower>
+		<QPulseWidth Value="200"></QPulseWidth>
+		<frequency Value="20000"></frequency>
+		<SubLayer type="Cut" index="1">
+			<speed Value="100"></speed>
+			<maxPower Value="0.1"></maxPower>
+			<QPulseWidth Value="200"></QPulseWidth>
+			<frequency Value="20000"></frequency>
+		</SubLayer>
+	</CutSetting>
+	<CutSetting type="Scan">
+		<index Value="3"></index>
+		<name Value="Clean"></name>
+		<priority Value="3"></priority>
+		<speed Value="6500"></speed>
+		<numPasses Value="1"></numPasses>
+		<maxPower Value="90"></maxPower>
+		<QPulseWidth Value="1"></QPulseWidth>
+		<frequency Value="650000"></frequency>
+		<interval Value="0.01"></interval>
+		<dpi Value="2540"></dpi>
+		<crossHatch Value="1"></crossHatch>
+	</CutSetting>
+	<CutSetting_Img type="Image">
+		<index Value="1"></index>
+		<name Value="Etch"></name>
+		<priority Value="1"></priority>
+		<speed Value="800"></speed>
+		<numPasses Value="15"></numPasses>
+		<maxPower Value="30"></maxPower>
+		<QPulseWidth Value="80"></QPulseWidth>
+		<frequency Value="40000"></frequency>
+		<interval Value="0.02"></interval>
+		<dpi Value="1270"></dpi>
+		<useDotCorrection Value="1"></useDotCorrection>
+		<dotWidth Value="0.05"></dotWidth>
+		<crossHatch Value="1"></crossHatch>
+		<angle Value="-90"></angle>
+	</CutSetting_Img>
+	<Shape Type="Bitmap" CutIndex="1" W="7600" H="4600" Data="iVBORw0KGgoAAAANSUhEUgAAHbAAABH4AQMAAADSueCqAAAABlBMVEUAAAAAAAClZ7nPAAAAAXRSTlMAQObYZgAAELZJREFUeJzswIEAAAAAgKD9qRepAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgNmBAxkAAAAAYf7WebQfAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGCnAAAA///EJgABI5VHtQAAAABJRU5ErkJggg==">
+		<XForm>0.01 0 0 -0.01 55 55</XForm>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 55 55</XForm>
+		<V vx="-34.95" vy="19" c0x="-34.95" c0y="19.579898987"></V>
+		<V vx="-36" vy="20.05" c0x="-36.579898987" c0y="20.05" c1x="-35.420101013" c1y="20.05"></V>
+		<V vx="-37.05" vy="19" c0x="-37.05" c0y="18.420101013" c1x="-37.05" c1y="19.579898987"></V>
+		<V vx="-36" vy="17.95" c0x="-35.420101013" c0y="17.95" c1x="-36.579898987" c1y="17.95"></V>
+		<V vx="-34.95" vy="19" c1x="-34.95" c1y="18.420101013"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 55 55</XForm>
+		<V vx="-34.95" vy="-21" c0x="-34.95" c0y="-20.420101013"></V>
+		<V vx="-36" vy="-19.95" c0x="-36.579898987" c0y="-19.95" c1x="-35.420101013" c1y="-19.95"></V>
+		<V vx="-37.05" vy="-21" c0x="-37.05" c0y="-21.579898987" c1x="-37.05" c1y="-20.420101013"></V>
+		<V vx="-36" vy="-22.05" c0x="-35.420101013" c0y="-22.05" c1x="-36.579898987" c1y="-22.05"></V>
+		<V vx="-34.95" vy="-21" c1x="-34.95" c1y="-21.579898987"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 55 55</XForm>
+		<V vx="37.05" vy="21" c0x="37.05" c0y="21.579898987"></V>
+		<V vx="36" vy="22.05" c0x="35.420101013" c0y="22.05" c1x="36.579898987" c1y="22.05"></V>
+		<V vx="34.95" vy="21" c0x="34.95" c0y="20.420101013" c1x="34.95" c1y="21.579898987"></V>
+		<V vx="36" vy="19.95" c0x="36.579898987" c0y="19.95" c1x="35.420101013" c1y="19.95"></V>
+		<V vx="37.05" vy="21" c1x="37.05" c1y="20.420101013"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 55 55</XForm>
+		<V vx="37.05" vy="-21" c0x="37.05" c0y="-20.420101013"></V>
+		<V vx="36" vy="-19.95" c0x="35.420101013" c0y="-19.95" c1x="36.579898987" c1y="-19.95"></V>
+		<V vx="34.95" vy="-21" c0x="34.95" c0y="-21.579898987" c1x="34.95" c1y="-20.420101013"></V>
+		<V vx="36" vy="-22.05" c0x="36.579898987" c0y="-22.05" c1x="35.420101013" c1y="-22.05"></V>
+		<V vx="37.05" vy="-21" c1x="37.05" c1y="-21.579898987"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 82.5 72.5</XForm>
+		<V vx="4.875" vy="1.375" c0x="4.875" c0y="1.651142375"></V>
+		<V vx="4.375" vy="1.875" c1x="4.651142375" c1y="1.875"></V>
+		<V vx="-4.375" vy="1.875" c0x="-4.651142375" c0y="1.875"></V>
+		<V vx="-4.875" vy="1.375" c1x="-4.875" c1y="1.651142375"></V>
+		<V vx="-4.875" vy="-1.375" c0x="-4.875" c0y="-1.651142375"></V>
+		<V vx="-4.375" vy="-1.875" c1x="-4.651142375" c1y="-1.875"></V>
+		<V vx="4.375" vy="-1.875" c0x="4.651142375" c0y="-1.875"></V>
+		<V vx="4.875" vy="-1.375" c1x="4.875" c1y="-1.651142375"></V>
+		<V vx="4.875" vy="1.375"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+		<P T="B" p0="4" p1="5"></P>
+		<P T="L" p0="5" p1="6"></P>
+		<P T="B" p0="6" p1="7"></P>
+		<P T="L" p0="7" p1="8"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-0.707106781 0.707106781 0.707106781 0.707106781 79.5 72.5</XForm>
+		<V vx="0.875" vy="0" c0x="0.875" c0y="0.483249156"></V>
+		<V vx="0" vy="0.875" c0x="-0.483249156" c0y="0.875" c1x="0.483249156" c1y="0.875"></V>
+		<V vx="-0.875" vy="0" c0x="-0.875" c0y="-0.483249156" c1x="-0.875" c1y="0.483249156"></V>
+		<V vx="0" vy="-0.875" c0x="0.483249156" c0y="-0.875" c1x="-0.483249156" c1y="-0.875"></V>
+		<V vx="0.875" vy="0" c1x="0.875" c1y="-0.483249156"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 71.5 72.5</XForm>
+		<V vx="4.875" vy="1.375" c0x="4.875" c0y="1.651142375"></V>
+		<V vx="4.375" vy="1.875" c1x="4.651142375" c1y="1.875"></V>
+		<V vx="-4.375" vy="1.875" c0x="-4.651142375" c0y="1.875"></V>
+		<V vx="-4.875" vy="1.375" c1x="-4.875" c1y="1.651142375"></V>
+		<V vx="-4.875" vy="-1.375" c0x="-4.875" c0y="-1.651142375"></V>
+		<V vx="-4.375" vy="-1.875" c1x="-4.651142375" c1y="-1.875"></V>
+		<V vx="4.375" vy="-1.875" c0x="4.651142375" c0y="-1.875"></V>
+		<V vx="4.875" vy="-1.375" c1x="4.875" c1y="-1.651142375"></V>
+		<V vx="4.875" vy="1.375"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+		<P T="B" p0="4" p1="5"></P>
+		<P T="L" p0="5" p1="6"></P>
+		<P T="B" p0="6" p1="7"></P>
+		<P T="L" p0="7" p1="8"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-0.707106781 0.707106781 0.707106781 0.707106781 68.5 72.5</XForm>
+		<V vx="0.875" vy="0" c0x="0.875" c0y="0.483249156"></V>
+		<V vx="0" vy="0.875" c0x="-0.483249156" c0y="0.875" c1x="0.483249156" c1y="0.875"></V>
+		<V vx="-0.875" vy="0" c0x="-0.875" c0y="-0.483249156" c1x="-0.875" c1y="0.483249156"></V>
+		<V vx="0" vy="-0.875" c0x="0.483249156" c0y="-0.875" c1x="-0.483249156" c1y="-0.875"></V>
+		<V vx="0.875" vy="0" c1x="0.875" c1y="-0.483249156"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 60.5 72.5</XForm>
+		<V vx="4.875" vy="1.375" c0x="4.875" c0y="1.651142375"></V>
+		<V vx="4.375" vy="1.875" c1x="4.651142375" c1y="1.875"></V>
+		<V vx="-4.375" vy="1.875" c0x="-4.651142375" c0y="1.875"></V>
+		<V vx="-4.875" vy="1.375" c1x="-4.875" c1y="1.651142375"></V>
+		<V vx="-4.875" vy="-1.375" c0x="-4.875" c0y="-1.651142375"></V>
+		<V vx="-4.375" vy="-1.875" c1x="-4.651142375" c1y="-1.875"></V>
+		<V vx="4.375" vy="-1.875" c0x="4.651142375" c0y="-1.875"></V>
+		<V vx="4.875" vy="-1.375" c1x="4.875" c1y="-1.651142375"></V>
+		<V vx="4.875" vy="1.375"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+		<P T="B" p0="4" p1="5"></P>
+		<P T="L" p0="5" p1="6"></P>
+		<P T="B" p0="6" p1="7"></P>
+		<P T="L" p0="7" p1="8"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-0.707106781 0.707106781 0.707106781 0.707106781 57.5 72.5</XForm>
+		<V vx="0.875" vy="0" c0x="0.875" c0y="0.483249156"></V>
+		<V vx="0" vy="0.875" c0x="-0.483249156" c0y="0.875" c1x="0.483249156" c1y="0.875"></V>
+		<V vx="-0.875" vy="0" c0x="-0.875" c0y="-0.483249156" c1x="-0.875" c1y="0.483249156"></V>
+		<V vx="0" vy="-0.875" c0x="0.483249156" c0y="-0.875" c1x="-0.483249156" c1y="-0.875"></V>
+		<V vx="0.875" vy="0" c1x="0.875" c1y="-0.483249156"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 49.5 72.5</XForm>
+		<V vx="4.875" vy="1.375" c0x="4.875" c0y="1.651142375"></V>
+		<V vx="4.375" vy="1.875" c1x="4.651142375" c1y="1.875"></V>
+		<V vx="-4.375" vy="1.875" c0x="-4.651142375" c0y="1.875"></V>
+		<V vx="-4.875" vy="1.375" c1x="-4.875" c1y="1.651142375"></V>
+		<V vx="-4.875" vy="-1.375" c0x="-4.875" c0y="-1.651142375"></V>
+		<V vx="-4.375" vy="-1.875" c1x="-4.651142375" c1y="-1.875"></V>
+		<V vx="4.375" vy="-1.875" c0x="4.651142375" c0y="-1.875"></V>
+		<V vx="4.875" vy="-1.375" c1x="4.875" c1y="-1.651142375"></V>
+		<V vx="4.875" vy="1.375"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+		<P T="B" p0="4" p1="5"></P>
+		<P T="L" p0="5" p1="6"></P>
+		<P T="B" p0="6" p1="7"></P>
+		<P T="L" p0="7" p1="8"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-0.707106781 0.707106781 0.707106781 0.707106781 46.5 72.5</XForm>
+		<V vx="0.875" vy="0" c0x="0.875" c0y="0.483249156"></V>
+		<V vx="0" vy="0.875" c0x="-0.483249156" c0y="0.875" c1x="0.483249156" c1y="0.875"></V>
+		<V vx="-0.875" vy="0" c0x="-0.875" c0y="-0.483249156" c1x="-0.875" c1y="0.483249156"></V>
+		<V vx="0" vy="-0.875" c0x="0.483249156" c0y="-0.875" c1x="-0.483249156" c1y="-0.875"></V>
+		<V vx="0.875" vy="0" c1x="0.875" c1y="-0.483249156"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 38.5 72.5</XForm>
+		<V vx="4.875" vy="1.375" c0x="4.875" c0y="1.651142375"></V>
+		<V vx="4.375" vy="1.875" c1x="4.651142375" c1y="1.875"></V>
+		<V vx="-4.375" vy="1.875" c0x="-4.651142375" c0y="1.875"></V>
+		<V vx="-4.875" vy="1.375" c1x="-4.875" c1y="1.651142375"></V>
+		<V vx="-4.875" vy="-1.375" c0x="-4.875" c0y="-1.651142375"></V>
+		<V vx="-4.375" vy="-1.875" c1x="-4.651142375" c1y="-1.875"></V>
+		<V vx="4.375" vy="-1.875" c0x="4.651142375" c0y="-1.875"></V>
+		<V vx="4.875" vy="-1.375" c1x="4.875" c1y="-1.651142375"></V>
+		<V vx="4.875" vy="1.375"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+		<P T="B" p0="4" p1="5"></P>
+		<P T="L" p0="5" p1="6"></P>
+		<P T="B" p0="6" p1="7"></P>
+		<P T="L" p0="7" p1="8"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-0.707106781 0.707106781 0.707106781 0.707106781 35.5 72.5</XForm>
+		<V vx="0.875" vy="0" c0x="0.875" c0y="0.483249156"></V>
+		<V vx="0" vy="0.875" c0x="-0.483249156" c0y="0.875" c1x="0.483249156" c1y="0.875"></V>
+		<V vx="-0.875" vy="0" c0x="-0.875" c0y="-0.483249156" c1x="-0.875" c1y="0.483249156"></V>
+		<V vx="0" vy="-0.875" c0x="0.483249156" c0y="-0.875" c1x="-0.483249156" c1y="-0.875"></V>
+		<V vx="0.875" vy="0" c1x="0.875" c1y="-0.483249156"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 27.5 72.5</XForm>
+		<V vx="4.875" vy="1.375" c0x="4.875" c0y="1.651142375"></V>
+		<V vx="4.375" vy="1.875" c1x="4.651142375" c1y="1.875"></V>
+		<V vx="-4.375" vy="1.875" c0x="-4.651142375" c0y="1.875"></V>
+		<V vx="-4.875" vy="1.375" c1x="-4.875" c1y="1.651142375"></V>
+		<V vx="-4.875" vy="-1.375" c0x="-4.875" c0y="-1.651142375"></V>
+		<V vx="-4.375" vy="-1.875" c1x="-4.651142375" c1y="-1.875"></V>
+		<V vx="4.375" vy="-1.875" c0x="4.651142375" c0y="-1.875"></V>
+		<V vx="4.875" vy="-1.375" c1x="4.875" c1y="-1.651142375"></V>
+		<V vx="4.875" vy="1.375"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+		<P T="B" p0="4" p1="5"></P>
+		<P T="L" p0="5" p1="6"></P>
+		<P T="B" p0="6" p1="7"></P>
+		<P T="L" p0="7" p1="8"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-0.707106781 0.707106781 0.707106781 0.707106781 24.5 72.5</XForm>
+		<V vx="0.875" vy="0" c0x="0.875" c0y="0.483249156"></V>
+		<V vx="0" vy="0.875" c0x="-0.483249156" c0y="0.875" c1x="0.483249156" c1y="0.875"></V>
+		<V vx="-0.875" vy="0" c0x="-0.875" c0y="-0.483249156" c1x="-0.875" c1y="0.483249156"></V>
+		<V vx="0" vy="-0.875" c0x="0.483249156" c0y="-0.875" c1x="-0.483249156" c1y="-0.875"></V>
+		<V vx="0.875" vy="0" c1x="0.875" c1y="-0.483249156"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 82.5 67.5</XForm>
+		<V vx="4.875" vy="1.375" c0x="4.875" c0y="1.651142375"></V>
+		<V vx="4.375" vy="1.875" c1x="4.651142375" c1y="1.875"></V>
+		<V vx="-4.375" vy="1.875" c0x="-4.651142375" c0y="1.875"></V>
+		<V vx="-4.875" vy="1.375" c1x="-4.875" c1y="1.651142375"></V>
+		<V vx="-4.875" vy="-1.375" c0x="-4.875" c0y="-1.651142375"></V>
+		<V vx="-4.375" vy="-1.875" c1x="-4.651142375" c1y="-1.875"></V>
+		<V vx="4.375" vy="-1.875" c0x="4.651142375" c0y="-1.875"></V>
+		<V vx="4.875" vy="-1.375" c1x="4.875" c1y="-1.651142375"></V>
+		<V vx="4.875" vy="1.375"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+		<P T="B" p0="4" p1="5"></P>
+		<P T="L" p0="5" p1="6"></P>
+		<P T="B" p0="6" p1="7"></P>
+		<P T="L" p0="7" p1="8"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-0.707106781 0.707106781 0.707106781 0.707106781 79.5 67.5</XForm>
+		<V vx="0.875" vy="0" c0x="0.875" c0y="0.483249156"></V>
+		<V vx="0" vy="0.875" c0x="-0.483249156" c0y="0.875" c1x="0.483249156" c1y="0.875"></V>
+		<V vx="-0.875" vy="0" c0x="-0.875" c0y="-0.483249156" c1x="-0.875" c1y="0.483249156"></V>
+		<V vx="0" vy="-0.875" c0x="0.483249156" c0y="-0.875" c1x="-0.483249156" c1y="-0.875"></V>
+		<V vx="0.875" vy="0" c1x="0.875" c1y="-0.483249156"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 71.5 67.5</XForm>
+		<V vx="4.875" vy="1.375" c0x="4.875" c0y="1.651142375"></V>
+		<V vx="4.375" vy="1.875" c1x="4.651142375" c1y="1.875"></V>
+		<V vx="-4.375" vy="1.875" c0x="-4.651142375" c0y="1.875"></V>
+		<V vx="-4.875" vy="1.375" c1x="-4.875" c1y="1.651142375"></V>
+		<V vx="-4.875" vy="-1.375" c0x="-4.875" c0y="-1.651142375"></V>
+		<V vx="-4.375" vy="-1.875" c1x="-4.651142375" c1y="-1.875"></V>
+		<V vx="4.375" vy="-1.875" c0x="4.651142375" c0y="-1.875"></V>
+		<V vx="4.875" vy="-1.375" c1x="4.875" c1y="-1.651142375"></V>
+		<V vx="4.875" vy="1.375"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+		<P T="B" p0="4" p1="5"></P>
+		<P T="L" p0="5" p1="6"></P>
+		<P T="B" p0="6" p1="7"></P>
+		<P T="L" p0="7" p1="8"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-0.707106781 0.707106781 0.707106781 0.707106781 68.5 67.5</XForm>
+		<V vx="0.875" vy="0" c0x="0.875" c0y="0.483249156"></V>
+		<V vx="0" vy="0.875" c0x="-0.483249156" c0y="0.875" c1x="0.483249156" c1y="0.875"></V>
+		<V vx="-0.875" vy="0" c0x="-0.875" c0y="-0.483249156" c1x="-0.875" c1y="0.483249156"></V>
+		<V vx="0" vy="-0.875" c0x="0.483249156" c0y="-0.875" c1x="-0.483249156" c1y="-0.875"></V>
+		<V vx="0.875" vy="0" c1x="0.875" c1y="-0.483249156"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 60.5 67.5</XForm>
+		<V vx="4.875" vy="1.375" c0x="4.875" c0y="1.651142375"></V>
+		<V vx="4.375" vy="1.875" c1x="4.651142375" c1y="1.875"></V>
+		<V vx="-4.375" vy="1.875" c0x="-4.651142375" c0y="1.875"></V>
+		<V vx="-4.875" vy="1.375" c1x="-4.875" c1y="1.651142375"></V>
+		<V vx="-4.875" vy="-1.375" c0x="-4.875" c0y="-1.651142375"></V>
+		<V vx="-4.375" vy="-1.875" c1x="-4.651142375" c1y="-1.875"></V>
+		<V vx="4.375" vy="-1.875" c0x="4.651142375" c0y="-1.875"></V>
+		<V vx="4.875" vy="-1.375" c1x="4.875" c1y="-1.651142375"></V>
+		<V vx="4.875" vy="1.375"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+		<P T="B" p0="4" p1="5"></P>
+		<P T="L" p0="5" p1="6"></P>
+		<P T="B" p0="6" p1="7"></P>
+		<P T="L" p0="7" p1="8"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-0.707106781 0.707106781 0.707106781 0.707106781 57.5 67.5</XForm>
+		<V vx="0.875" vy="0" c0x="0.875" c0y="0.483249156"></V>
+		<V vx="0" vy="0.875" c0x="-0.483249156" c0y="0.875" c1x="0.483249156" c1y="0.875"></V>
+		<V vx="-0.875" vy="0" c0x="-0.875" c0y="-0.483249156" c1x="-0.875" c1y="0.483249156"></V>
+		<V vx="0" vy="-0.875" c0x="0.483249156" c0y="-0.875" c1x="-0.483249156" c1y="-0.875"></V>
+		<V vx="0.875" vy="0" c1x="0.875" c1y="-0.483249156"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 49.5 67.5</XForm>
+		<V vx="4.875" vy="1.375" c0x="4.875" c0y="1.651142375"></V>
+		<V vx="4.375" vy="1.875" c1x="4.651142375" c1y="1.875"></V>
+		<V vx="-4.375" vy="1.875" c0x="-4.651142375" c0y="1.875"></V>
+		<V vx="-4.875" vy="1.375" c1x="-4.875" c1y="1.651142375"></V>
+		<V vx="-4.875" vy="-1.375" c0x="-4.875" c0y="-1.651142375"></V>
+		<V vx="-4.375" vy="-1.875" c1x="-4.651142375" c1y="-1.875"></V>
+		<V vx="4.375" vy="-1.875" c0x="4.651142375" c0y="-1.875"></V>
+		<V vx="4.875" vy="-1.375" c1x="4.875" c1y="-1.651142375"></V>
+		<V vx="4.875" vy="1.375"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+		<P T="B" p0="4" p1="5"></P>
+		<P T="L" p0="5" p1="6"></P>
+		<P T="B" p0="6" p1="7"></P>
+		<P T="L" p0="7" p1="8"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-0.707106781 0.707106781 0.707106781 0.707106781 46.5 67.5</XForm>
+		<V vx="0.875" vy="0" c0x="0.875" c0y="0.483249156"></V>
+		<V vx="0" vy="0.875" c0x="-0.483249156" c0y="0.875" c1x="0.483249156" c1y="0.875"></V>
+		<V vx="-0.875" vy="0" c0x="-0.875" c0y="-0.483249156" c1x="-0.875" c1y="0.483249156"></V>
+		<V vx="0" vy="-0.875" c0x="0.483249156" c0y="-0.875" c1x="-0.483249156" c1y="-0.875"></V>
+		<V vx="0.875" vy="0" c1x="0.875" c1y="-0.483249156"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 38.5 67.5</XForm>
+		<V vx="4.875" vy="1.375" c0x="4.875" c0y="1.651142375"></V>
+		<V vx="4.375" vy="1.875" c1x="4.651142375" c1y="1.875"></V>
+		<V vx="-4.375" vy="1.875" c0x="-4.651142375" c0y="1.875"></V>
+		<V vx="-4.875" vy="1.375" c1x="-4.875" c1y="1.651142375"></V>
+		<V vx="-4.875" vy="-1.375" c0x="-4.875" c0y="-1.651142375"></V>
+		<V vx="-4.375" vy="-1.875" c1x="-4.651142375" c1y="-1.875"></V>
+		<V vx="4.375" vy="-1.875" c0x="4.651142375" c0y="-1.875"></V>
+		<V vx="4.875" vy="-1.375" c1x="4.875" c1y="-1.651142375"></V>
+		<V vx="4.875" vy="1.375"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+		<P T="B" p0="4" p1="5"></P>
+		<P T="L" p0="5" p1="6"></P>
+		<P T="B" p0="6" p1="7"></P>
+		<P T="L" p0="7" p1="8"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-0.707106781 0.707106781 0.707106781 0.707106781 35.5 67.5</XForm>
+		<V vx="0.875" vy="0" c0x="0.875" c0y="0.483249156"></V>
+		<V vx="0" vy="0.875" c0x="-0.483249156" c0y="0.875" c1x="0.483249156" c1y="0.875"></V>
+		<V vx="-0.875" vy="0" c0x="-0.875" c0y="-0.483249156" c1x="-0.875" c1y="0.483249156"></V>
+		<V vx="0" vy="-0.875" c0x="0.483249156" c0y="-0.875" c1x="-0.483249156" c1y="-0.875"></V>
+		<V vx="0.875" vy="0" c1x="0.875" c1y="-0.483249156"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 27.5 67.5</XForm>
+		<V vx="4.875" vy="1.375" c0x="4.875" c0y="1.651142375"></V>
+		<V vx="4.375" vy="1.875" c1x="4.651142375" c1y="1.875"></V>
+		<V vx="-4.375" vy="1.875" c0x="-4.651142375" c0y="1.875"></V>
+		<V vx="-4.875" vy="1.375" c1x="-4.875" c1y="1.651142375"></V>
+		<V vx="-4.875" vy="-1.375" c0x="-4.875" c0y="-1.651142375"></V>
+		<V vx="-4.375" vy="-1.875" c1x="-4.651142375" c1y="-1.875"></V>
+		<V vx="4.375" vy="-1.875" c0x="4.651142375" c0y="-1.875"></V>
+		<V vx="4.875" vy="-1.375" c1x="4.875" c1y="-1.651142375"></V>
+		<V vx="4.875" vy="1.375"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+		<P T="B" p0="4" p1="5"></P>
+		<P T="L" p0="5" p1="6"></P>
+		<P T="B" p0="6" p1="7"></P>
+		<P T="L" p0="7" p1="8"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-0.707106781 0.707106781 0.707106781 0.707106781 24.5 67.5</XForm>
+		<V vx="0.875" vy="0" c0x="0.875" c0y="0.483249156"></V>
+		<V vx="0" vy="0.875" c0x="-0.483249156" c0y="0.875" c1x="0.483249156" c1y="0.875"></V>
+		<V vx="-0.875" vy="0" c0x="-0.875" c0y="-0.483249156" c1x="-0.875" c1y="0.483249156"></V>
+		<V vx="0" vy="-0.875" c0x="0.483249156" c0y="-0.875" c1x="-0.483249156" c1y="-0.875"></V>
+		<V vx="0.875" vy="0" c1x="0.875" c1y="-0.483249156"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 82.5 62.5</XForm>
+		<V vx="4.875" vy="1.375" c0x="4.875" c0y="1.651142375"></V>
+		<V vx="4.375" vy="1.875" c1x="4.651142375" c1y="1.875"></V>
+		<V vx="-4.375" vy="1.875" c0x="-4.651142375" c0y="1.875"></V>
+		<V vx="-4.875" vy="1.375" c1x="-4.875" c1y="1.651142375"></V>
+		<V vx="-4.875" vy="-1.375" c0x="-4.875" c0y="-1.651142375"></V>
+		<V vx="-4.375" vy="-1.875" c1x="-4.651142375" c1y="-1.875"></V>
+		<V vx="4.375" vy="-1.875" c0x="4.651142375" c0y="-1.875"></V>
+		<V vx="4.875" vy="-1.375" c1x="4.875" c1y="-1.651142375"></V>
+		<V vx="4.875" vy="1.375"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+		<P T="B" p0="4" p1="5"></P>
+		<P T="L" p0="5" p1="6"></P>
+		<P T="B" p0="6" p1="7"></P>
+		<P T="L" p0="7" p1="8"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-0.707106781 0.707106781 0.707106781 0.707106781 79.5 62.5</XForm>
+		<V vx="0.875" vy="0" c0x="0.875" c0y="0.483249156"></V>
+		<V vx="0" vy="0.875" c0x="-0.483249156" c0y="0.875" c1x="0.483249156" c1y="0.875"></V>
+		<V vx="-0.875" vy="0" c0x="-0.875" c0y="-0.483249156" c1x="-0.875" c1y="0.483249156"></V>
+		<V vx="0" vy="-0.875" c0x="0.483249156" c0y="-0.875" c1x="-0.483249156" c1y="-0.875"></V>
+		<V vx="0.875" vy="0" c1x="0.875" c1y="-0.483249156"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 71.5 62.5</XForm>
+		<V vx="4.875" vy="1.375" c0x="4.875" c0y="1.651142375"></V>
+		<V vx="4.375" vy="1.875" c1x="4.651142375" c1y="1.875"></V>
+		<V vx="-4.375" vy="1.875" c0x="-4.651142375" c0y="1.875"></V>
+		<V vx="-4.875" vy="1.375" c1x="-4.875" c1y="1.651142375"></V>
+		<V vx="-4.875" vy="-1.375" c0x="-4.875" c0y="-1.651142375"></V>
+		<V vx="-4.375" vy="-1.875" c1x="-4.651142375" c1y="-1.875"></V>
+		<V vx="4.375" vy="-1.875" c0x="4.651142375" c0y="-1.875"></V>
+		<V vx="4.875" vy="-1.375" c1x="4.875" c1y="-1.651142375"></V>
+		<V vx="4.875" vy="1.375"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+		<P T="B" p0="4" p1="5"></P>
+		<P T="L" p0="5" p1="6"></P>
+		<P T="B" p0="6" p1="7"></P>
+		<P T="L" p0="7" p1="8"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-0.707106781 0.707106781 0.707106781 0.707106781 68.5 62.5</XForm>
+		<V vx="0.875" vy="0" c0x="0.875" c0y="0.483249156"></V>
+		<V vx="0" vy="0.875" c0x="-0.483249156" c0y="0.875" c1x="0.483249156" c1y="0.875"></V>
+		<V vx="-0.875" vy="0" c0x="-0.875" c0y="-0.483249156" c1x="-0.875" c1y="0.483249156"></V>
+		<V vx="0" vy="-0.875" c0x="0.483249156" c0y="-0.875" c1x="-0.483249156" c1y="-0.875"></V>
+		<V vx="0.875" vy="0" c1x="0.875" c1y="-0.483249156"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 60.5 62.5</XForm>
+		<V vx="4.875" vy="1.375" c0x="4.875" c0y="1.651142375"></V>
+		<V vx="4.375" vy="1.875" c1x="4.651142375" c1y="1.875"></V>
+		<V vx="-4.375" vy="1.875" c0x="-4.651142375" c0y="1.875"></V>
+		<V vx="-4.875" vy="1.375" c1x="-4.875" c1y="1.651142375"></V>
+		<V vx="-4.875" vy="-1.375" c0x="-4.875" c0y="-1.651142375"></V>
+		<V vx="-4.375" vy="-1.875" c1x="-4.651142375" c1y="-1.875"></V>
+		<V vx="4.375" vy="-1.875" c0x="4.651142375" c0y="-1.875"></V>
+		<V vx="4.875" vy="-1.375" c1x="4.875" c1y="-1.651142375"></V>
+		<V vx="4.875" vy="1.375"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+		<P T="B" p0="4" p1="5"></P>
+		<P T="L" p0="5" p1="6"></P>
+		<P T="B" p0="6" p1="7"></P>
+		<P T="L" p0="7" p1="8"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-0.707106781 0.707106781 0.707106781 0.707106781 57.5 62.5</XForm>
+		<V vx="0.875" vy="0" c0x="0.875" c0y="0.483249156"></V>
+		<V vx="0" vy="0.875" c0x="-0.483249156" c0y="0.875" c1x="0.483249156" c1y="0.875"></V>
+		<V vx="-0.875" vy="0" c0x="-0.875" c0y="-0.483249156" c1x="-0.875" c1y="0.483249156"></V>
+		<V vx="0" vy="-0.875" c0x="0.483249156" c0y="-0.875" c1x="-0.483249156" c1y="-0.875"></V>
+		<V vx="0.875" vy="0" c1x="0.875" c1y="-0.483249156"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 49.5 62.5</XForm>
+		<V vx="4.875" vy="1.375" c0x="4.875" c0y="1.651142375"></V>
+		<V vx="4.375" vy="1.875" c1x="4.651142375" c1y="1.875"></V>
+		<V vx="-4.375" vy="1.875" c0x="-4.651142375" c0y="1.875"></V>
+		<V vx="-4.875" vy="1.375" c1x="-4.875" c1y="1.651142375"></V>
+		<V vx="-4.875" vy="-1.375" c0x="-4.875" c0y="-1.651142375"></V>
+		<V vx="-4.375" vy="-1.875" c1x="-4.651142375" c1y="-1.875"></V>
+		<V vx="4.375" vy="-1.875" c0x="4.651142375" c0y="-1.875"></V>
+		<V vx="4.875" vy="-1.375" c1x="4.875" c1y="-1.651142375"></V>
+		<V vx="4.875" vy="1.375"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+		<P T="B" p0="4" p1="5"></P>
+		<P T="L" p0="5" p1="6"></P>
+		<P T="B" p0="6" p1="7"></P>
+		<P T="L" p0="7" p1="8"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-0.707106781 0.707106781 0.707106781 0.707106781 46.5 62.5</XForm>
+		<V vx="0.875" vy="0" c0x="0.875" c0y="0.483249156"></V>
+		<V vx="0" vy="0.875" c0x="-0.483249156" c0y="0.875" c1x="0.483249156" c1y="0.875"></V>
+		<V vx="-0.875" vy="0" c0x="-0.875" c0y="-0.483249156" c1x="-0.875" c1y="0.483249156"></V>
+		<V vx="0" vy="-0.875" c0x="0.483249156" c0y="-0.875" c1x="-0.483249156" c1y="-0.875"></V>
+		<V vx="0.875" vy="0" c1x="0.875" c1y="-0.483249156"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 38.5 62.5</XForm>
+		<V vx="4.875" vy="1.375" c0x="4.875" c0y="1.651142375"></V>
+		<V vx="4.375" vy="1.875" c1x="4.651142375" c1y="1.875"></V>
+		<V vx="-4.375" vy="1.875" c0x="-4.651142375" c0y="1.875"></V>
+		<V vx="-4.875" vy="1.375" c1x="-4.875" c1y="1.651142375"></V>
+		<V vx="-4.875" vy="-1.375" c0x="-4.875" c0y="-1.651142375"></V>
+		<V vx="-4.375" vy="-1.875" c1x="-4.651142375" c1y="-1.875"></V>
+		<V vx="4.375" vy="-1.875" c0x="4.651142375" c0y="-1.875"></V>
+		<V vx="4.875" vy="-1.375" c1x="4.875" c1y="-1.651142375"></V>
+		<V vx="4.875" vy="1.375"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+		<P T="B" p0="4" p1="5"></P>
+		<P T="L" p0="5" p1="6"></P>
+		<P T="B" p0="6" p1="7"></P>
+		<P T="L" p0="7" p1="8"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-0.707106781 0.707106781 0.707106781 0.707106781 35.5 62.5</XForm>
+		<V vx="0.875" vy="0" c0x="0.875" c0y="0.483249156"></V>
+		<V vx="0" vy="0.875" c0x="-0.483249156" c0y="0.875" c1x="0.483249156" c1y="0.875"></V>
+		<V vx="-0.875" vy="0" c0x="-0.875" c0y="-0.483249156" c1x="-0.875" c1y="0.483249156"></V>
+		<V vx="0" vy="-0.875" c0x="0.483249156" c0y="-0.875" c1x="-0.483249156" c1y="-0.875"></V>
+		<V vx="0.875" vy="0" c1x="0.875" c1y="-0.483249156"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 27.5 62.5</XForm>
+		<V vx="4.875" vy="1.375" c0x="4.875" c0y="1.651142375"></V>
+		<V vx="4.375" vy="1.875" c1x="4.651142375" c1y="1.875"></V>
+		<V vx="-4.375" vy="1.875" c0x="-4.651142375" c0y="1.875"></V>
+		<V vx="-4.875" vy="1.375" c1x="-4.875" c1y="1.651142375"></V>
+		<V vx="-4.875" vy="-1.375" c0x="-4.875" c0y="-1.651142375"></V>
+		<V vx="-4.375" vy="-1.875" c1x="-4.651142375" c1y="-1.875"></V>
+		<V vx="4.375" vy="-1.875" c0x="4.651142375" c0y="-1.875"></V>
+		<V vx="4.875" vy="-1.375" c1x="4.875" c1y="-1.651142375"></V>
+		<V vx="4.875" vy="1.375"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+		<P T="B" p0="4" p1="5"></P>
+		<P T="L" p0="5" p1="6"></P>
+		<P T="B" p0="6" p1="7"></P>
+		<P T="L" p0="7" p1="8"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-0.707106781 0.707106781 0.707106781 0.707106781 24.5 62.5</XForm>
+		<V vx="0.875" vy="0" c0x="0.875" c0y="0.483249156"></V>
+		<V vx="0" vy="0.875" c0x="-0.483249156" c0y="0.875" c1x="0.483249156" c1y="0.875"></V>
+		<V vx="-0.875" vy="0" c0x="-0.875" c0y="-0.483249156" c1x="-0.875" c1y="0.483249156"></V>
+		<V vx="0" vy="-0.875" c0x="0.483249156" c0y="-0.875" c1x="-0.483249156" c1y="-0.875"></V>
+		<V vx="0.875" vy="0" c1x="0.875" c1y="-0.483249156"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 82.5 57.5</XForm>
+		<V vx="4.875" vy="1.375" c0x="4.875" c0y="1.651142375"></V>
+		<V vx="4.375" vy="1.875" c1x="4.651142375" c1y="1.875"></V>
+		<V vx="-4.375" vy="1.875" c0x="-4.651142375" c0y="1.875"></V>
+		<V vx="-4.875" vy="1.375" c1x="-4.875" c1y="1.651142375"></V>
+		<V vx="-4.875" vy="-1.375" c0x="-4.875" c0y="-1.651142375"></V>
+		<V vx="-4.375" vy="-1.875" c1x="-4.651142375" c1y="-1.875"></V>
+		<V vx="4.375" vy="-1.875" c0x="4.651142375" c0y="-1.875"></V>
+		<V vx="4.875" vy="-1.375" c1x="4.875" c1y="-1.651142375"></V>
+		<V vx="4.875" vy="1.375"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+		<P T="B" p0="4" p1="5"></P>
+		<P T="L" p0="5" p1="6"></P>
+		<P T="B" p0="6" p1="7"></P>
+		<P T="L" p0="7" p1="8"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-0.707106781 0.707106781 0.707106781 0.707106781 79.5 57.5</XForm>
+		<V vx="0.875" vy="0" c0x="0.875" c0y="0.483249156"></V>
+		<V vx="0" vy="0.875" c0x="-0.483249156" c0y="0.875" c1x="0.483249156" c1y="0.875"></V>
+		<V vx="-0.875" vy="0" c0x="-0.875" c0y="-0.483249156" c1x="-0.875" c1y="0.483249156"></V>
+		<V vx="0" vy="-0.875" c0x="0.483249156" c0y="-0.875" c1x="-0.483249156" c1y="-0.875"></V>
+		<V vx="0.875" vy="0" c1x="0.875" c1y="-0.483249156"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 71.5 57.5</XForm>
+		<V vx="4.875" vy="1.375" c0x="4.875" c0y="1.651142375"></V>
+		<V vx="4.375" vy="1.875" c1x="4.651142375" c1y="1.875"></V>
+		<V vx="-4.375" vy="1.875" c0x="-4.651142375" c0y="1.875"></V>
+		<V vx="-4.875" vy="1.375" c1x="-4.875" c1y="1.651142375"></V>
+		<V vx="-4.875" vy="-1.375" c0x="-4.875" c0y="-1.651142375"></V>
+		<V vx="-4.375" vy="-1.875" c1x="-4.651142375" c1y="-1.875"></V>
+		<V vx="4.375" vy="-1.875" c0x="4.651142375" c0y="-1.875"></V>
+		<V vx="4.875" vy="-1.375" c1x="4.875" c1y="-1.651142375"></V>
+		<V vx="4.875" vy="1.375"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+		<P T="B" p0="4" p1="5"></P>
+		<P T="L" p0="5" p1="6"></P>
+		<P T="B" p0="6" p1="7"></P>
+		<P T="L" p0="7" p1="8"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-0.707106781 0.707106781 0.707106781 0.707106781 68.5 57.5</XForm>
+		<V vx="0.875" vy="0" c0x="0.875" c0y="0.483249156"></V>
+		<V vx="0" vy="0.875" c0x="-0.483249156" c0y="0.875" c1x="0.483249156" c1y="0.875"></V>
+		<V vx="-0.875" vy="0" c0x="-0.875" c0y="-0.483249156" c1x="-0.875" c1y="0.483249156"></V>
+		<V vx="0" vy="-0.875" c0x="0.483249156" c0y="-0.875" c1x="-0.483249156" c1y="-0.875"></V>
+		<V vx="0.875" vy="0" c1x="0.875" c1y="-0.483249156"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 60.5 57.5</XForm>
+		<V vx="4.875" vy="1.375" c0x="4.875" c0y="1.651142375"></V>
+		<V vx="4.375" vy="1.875" c1x="4.651142375" c1y="1.875"></V>
+		<V vx="-4.375" vy="1.875" c0x="-4.651142375" c0y="1.875"></V>
+		<V vx="-4.875" vy="1.375" c1x="-4.875" c1y="1.651142375"></V>
+		<V vx="-4.875" vy="-1.375" c0x="-4.875" c0y="-1.651142375"></V>
+		<V vx="-4.375" vy="-1.875" c1x="-4.651142375" c1y="-1.875"></V>
+		<V vx="4.375" vy="-1.875" c0x="4.651142375" c0y="-1.875"></V>
+		<V vx="4.875" vy="-1.375" c1x="4.875" c1y="-1.651142375"></V>
+		<V vx="4.875" vy="1.375"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+		<P T="B" p0="4" p1="5"></P>
+		<P T="L" p0="5" p1="6"></P>
+		<P T="B" p0="6" p1="7"></P>
+		<P T="L" p0="7" p1="8"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-0.707106781 0.707106781 0.707106781 0.707106781 57.5 57.5</XForm>
+		<V vx="0.875" vy="0" c0x="0.875" c0y="0.483249156"></V>
+		<V vx="0" vy="0.875" c0x="-0.483249156" c0y="0.875" c1x="0.483249156" c1y="0.875"></V>
+		<V vx="-0.875" vy="0" c0x="-0.875" c0y="-0.483249156" c1x="-0.875" c1y="0.483249156"></V>
+		<V vx="0" vy="-0.875" c0x="0.483249156" c0y="-0.875" c1x="-0.483249156" c1y="-0.875"></V>
+		<V vx="0.875" vy="0" c1x="0.875" c1y="-0.483249156"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 49.5 57.5</XForm>
+		<V vx="4.875" vy="1.375" c0x="4.875" c0y="1.651142375"></V>
+		<V vx="4.375" vy="1.875" c1x="4.651142375" c1y="1.875"></V>
+		<V vx="-4.375" vy="1.875" c0x="-4.651142375" c0y="1.875"></V>
+		<V vx="-4.875" vy="1.375" c1x="-4.875" c1y="1.651142375"></V>
+		<V vx="-4.875" vy="-1.375" c0x="-4.875" c0y="-1.651142375"></V>
+		<V vx="-4.375" vy="-1.875" c1x="-4.651142375" c1y="-1.875"></V>
+		<V vx="4.375" vy="-1.875" c0x="4.651142375" c0y="-1.875"></V>
+		<V vx="4.875" vy="-1.375" c1x="4.875" c1y="-1.651142375"></V>
+		<V vx="4.875" vy="1.375"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+		<P T="B" p0="4" p1="5"></P>
+		<P T="L" p0="5" p1="6"></P>
+		<P T="B" p0="6" p1="7"></P>
+		<P T="L" p0="7" p1="8"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-0.707106781 0.707106781 0.707106781 0.707106781 46.5 57.5</XForm>
+		<V vx="0.875" vy="0" c0x="0.875" c0y="0.483249156"></V>
+		<V vx="0" vy="0.875" c0x="-0.483249156" c0y="0.875" c1x="0.483249156" c1y="0.875"></V>
+		<V vx="-0.875" vy="0" c0x="-0.875" c0y="-0.483249156" c1x="-0.875" c1y="0.483249156"></V>
+		<V vx="0" vy="-0.875" c0x="0.483249156" c0y="-0.875" c1x="-0.483249156" c1y="-0.875"></V>
+		<V vx="0.875" vy="0" c1x="0.875" c1y="-0.483249156"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 38.5 57.5</XForm>
+		<V vx="4.875" vy="1.375" c0x="4.875" c0y="1.651142375"></V>
+		<V vx="4.375" vy="1.875" c1x="4.651142375" c1y="1.875"></V>
+		<V vx="-4.375" vy="1.875" c0x="-4.651142375" c0y="1.875"></V>
+		<V vx="-4.875" vy="1.375" c1x="-4.875" c1y="1.651142375"></V>
+		<V vx="-4.875" vy="-1.375" c0x="-4.875" c0y="-1.651142375"></V>
+		<V vx="-4.375" vy="-1.875" c1x="-4.651142375" c1y="-1.875"></V>
+		<V vx="4.375" vy="-1.875" c0x="4.651142375" c0y="-1.875"></V>
+		<V vx="4.875" vy="-1.375" c1x="4.875" c1y="-1.651142375"></V>
+		<V vx="4.875" vy="1.375"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+		<P T="B" p0="4" p1="5"></P>
+		<P T="L" p0="5" p1="6"></P>
+		<P T="B" p0="6" p1="7"></P>
+		<P T="L" p0="7" p1="8"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-0.707106781 0.707106781 0.707106781 0.707106781 35.5 57.5</XForm>
+		<V vx="0.875" vy="0" c0x="0.875" c0y="0.483249156"></V>
+		<V vx="0" vy="0.875" c0x="-0.483249156" c0y="0.875" c1x="0.483249156" c1y="0.875"></V>
+		<V vx="-0.875" vy="0" c0x="-0.875" c0y="-0.483249156" c1x="-0.875" c1y="0.483249156"></V>
+		<V vx="0" vy="-0.875" c0x="0.483249156" c0y="-0.875" c1x="-0.483249156" c1y="-0.875"></V>
+		<V vx="0.875" vy="0" c1x="0.875" c1y="-0.483249156"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 27.5 57.5</XForm>
+		<V vx="4.875" vy="1.375" c0x="4.875" c0y="1.651142375"></V>
+		<V vx="4.375" vy="1.875" c1x="4.651142375" c1y="1.875"></V>
+		<V vx="-4.375" vy="1.875" c0x="-4.651142375" c0y="1.875"></V>
+		<V vx="-4.875" vy="1.375" c1x="-4.875" c1y="1.651142375"></V>
+		<V vx="-4.875" vy="-1.375" c0x="-4.875" c0y="-1.651142375"></V>
+		<V vx="-4.375" vy="-1.875" c1x="-4.651142375" c1y="-1.875"></V>
+		<V vx="4.375" vy="-1.875" c0x="4.651142375" c0y="-1.875"></V>
+		<V vx="4.875" vy="-1.375" c1x="4.875" c1y="-1.651142375"></V>
+		<V vx="4.875" vy="1.375"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+		<P T="B" p0="4" p1="5"></P>
+		<P T="L" p0="5" p1="6"></P>
+		<P T="B" p0="6" p1="7"></P>
+		<P T="L" p0="7" p1="8"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-0.707106781 0.707106781 0.707106781 0.707106781 24.5 57.5</XForm>
+		<V vx="0.875" vy="0" c0x="0.875" c0y="0.483249156"></V>
+		<V vx="0" vy="0.875" c0x="-0.483249156" c0y="0.875" c1x="0.483249156" c1y="0.875"></V>
+		<V vx="-0.875" vy="0" c0x="-0.875" c0y="-0.483249156" c1x="-0.875" c1y="0.483249156"></V>
+		<V vx="0" vy="-0.875" c0x="0.483249156" c0y="-0.875" c1x="-0.483249156" c1y="-0.875"></V>
+		<V vx="0.875" vy="0" c1x="0.875" c1y="-0.483249156"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 82.5 52.5</XForm>
+		<V vx="4.875" vy="1.375" c0x="4.875" c0y="1.651142375"></V>
+		<V vx="4.375" vy="1.875" c1x="4.651142375" c1y="1.875"></V>
+		<V vx="-4.375" vy="1.875" c0x="-4.651142375" c0y="1.875"></V>
+		<V vx="-4.875" vy="1.375" c1x="-4.875" c1y="1.651142375"></V>
+		<V vx="-4.875" vy="-1.375" c0x="-4.875" c0y="-1.651142375"></V>
+		<V vx="-4.375" vy="-1.875" c1x="-4.651142375" c1y="-1.875"></V>
+		<V vx="4.375" vy="-1.875" c0x="4.651142375" c0y="-1.875"></V>
+		<V vx="4.875" vy="-1.375" c1x="4.875" c1y="-1.651142375"></V>
+		<V vx="4.875" vy="1.375"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+		<P T="B" p0="4" p1="5"></P>
+		<P T="L" p0="5" p1="6"></P>
+		<P T="B" p0="6" p1="7"></P>
+		<P T="L" p0="7" p1="8"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-0.707106781 0.707106781 0.707106781 0.707106781 79.5 52.5</XForm>
+		<V vx="0.875" vy="0" c0x="0.875" c0y="0.483249156"></V>
+		<V vx="0" vy="0.875" c0x="-0.483249156" c0y="0.875" c1x="0.483249156" c1y="0.875"></V>
+		<V vx="-0.875" vy="0" c0x="-0.875" c0y="-0.483249156" c1x="-0.875" c1y="0.483249156"></V>
+		<V vx="0" vy="-0.875" c0x="0.483249156" c0y="-0.875" c1x="-0.483249156" c1y="-0.875"></V>
+		<V vx="0.875" vy="0" c1x="0.875" c1y="-0.483249156"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 71.5 52.5</XForm>
+		<V vx="4.875" vy="1.375" c0x="4.875" c0y="1.651142375"></V>
+		<V vx="4.375" vy="1.875" c1x="4.651142375" c1y="1.875"></V>
+		<V vx="-4.375" vy="1.875" c0x="-4.651142375" c0y="1.875"></V>
+		<V vx="-4.875" vy="1.375" c1x="-4.875" c1y="1.651142375"></V>
+		<V vx="-4.875" vy="-1.375" c0x="-4.875" c0y="-1.651142375"></V>
+		<V vx="-4.375" vy="-1.875" c1x="-4.651142375" c1y="-1.875"></V>
+		<V vx="4.375" vy="-1.875" c0x="4.651142375" c0y="-1.875"></V>
+		<V vx="4.875" vy="-1.375" c1x="4.875" c1y="-1.651142375"></V>
+		<V vx="4.875" vy="1.375"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+		<P T="B" p0="4" p1="5"></P>
+		<P T="L" p0="5" p1="6"></P>
+		<P T="B" p0="6" p1="7"></P>
+		<P T="L" p0="7" p1="8"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-0.707106781 0.707106781 0.707106781 0.707106781 68.5 52.5</XForm>
+		<V vx="0.875" vy="0" c0x="0.875" c0y="0.483249156"></V>
+		<V vx="0" vy="0.875" c0x="-0.483249156" c0y="0.875" c1x="0.483249156" c1y="0.875"></V>
+		<V vx="-0.875" vy="0" c0x="-0.875" c0y="-0.483249156" c1x="-0.875" c1y="0.483249156"></V>
+		<V vx="0" vy="-0.875" c0x="0.483249156" c0y="-0.875" c1x="-0.483249156" c1y="-0.875"></V>
+		<V vx="0.875" vy="0" c1x="0.875" c1y="-0.483249156"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 60.5 52.5</XForm>
+		<V vx="4.875" vy="1.375" c0x="4.875" c0y="1.651142375"></V>
+		<V vx="4.375" vy="1.875" c1x="4.651142375" c1y="1.875"></V>
+		<V vx="-4.375" vy="1.875" c0x="-4.651142375" c0y="1.875"></V>
+		<V vx="-4.875" vy="1.375" c1x="-4.875" c1y="1.651142375"></V>
+		<V vx="-4.875" vy="-1.375" c0x="-4.875" c0y="-1.651142375"></V>
+		<V vx="-4.375" vy="-1.875" c1x="-4.651142375" c1y="-1.875"></V>
+		<V vx="4.375" vy="-1.875" c0x="4.651142375" c0y="-1.875"></V>
+		<V vx="4.875" vy="-1.375" c1x="4.875" c1y="-1.651142375"></V>
+		<V vx="4.875" vy="1.375"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+		<P T="B" p0="4" p1="5"></P>
+		<P T="L" p0="5" p1="6"></P>
+		<P T="B" p0="6" p1="7"></P>
+		<P T="L" p0="7" p1="8"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-0.707106781 0.707106781 0.707106781 0.707106781 57.5 52.5</XForm>
+		<V vx="0.875" vy="0" c0x="0.875" c0y="0.483249156"></V>
+		<V vx="0" vy="0.875" c0x="-0.483249156" c0y="0.875" c1x="0.483249156" c1y="0.875"></V>
+		<V vx="-0.875" vy="0" c0x="-0.875" c0y="-0.483249156" c1x="-0.875" c1y="0.483249156"></V>
+		<V vx="0" vy="-0.875" c0x="0.483249156" c0y="-0.875" c1x="-0.483249156" c1y="-0.875"></V>
+		<V vx="0.875" vy="0" c1x="0.875" c1y="-0.483249156"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 49.5 52.5</XForm>
+		<V vx="4.875" vy="1.375" c0x="4.875" c0y="1.651142375"></V>
+		<V vx="4.375" vy="1.875" c1x="4.651142375" c1y="1.875"></V>
+		<V vx="-4.375" vy="1.875" c0x="-4.651142375" c0y="1.875"></V>
+		<V vx="-4.875" vy="1.375" c1x="-4.875" c1y="1.651142375"></V>
+		<V vx="-4.875" vy="-1.375" c0x="-4.875" c0y="-1.651142375"></V>
+		<V vx="-4.375" vy="-1.875" c1x="-4.651142375" c1y="-1.875"></V>
+		<V vx="4.375" vy="-1.875" c0x="4.651142375" c0y="-1.875"></V>
+		<V vx="4.875" vy="-1.375" c1x="4.875" c1y="-1.651142375"></V>
+		<V vx="4.875" vy="1.375"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+		<P T="B" p0="4" p1="5"></P>
+		<P T="L" p0="5" p1="6"></P>
+		<P T="B" p0="6" p1="7"></P>
+		<P T="L" p0="7" p1="8"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-0.707106781 0.707106781 0.707106781 0.707106781 46.5 52.5</XForm>
+		<V vx="0.875" vy="0" c0x="0.875" c0y="0.483249156"></V>
+		<V vx="0" vy="0.875" c0x="-0.483249156" c0y="0.875" c1x="0.483249156" c1y="0.875"></V>
+		<V vx="-0.875" vy="0" c0x="-0.875" c0y="-0.483249156" c1x="-0.875" c1y="0.483249156"></V>
+		<V vx="0" vy="-0.875" c0x="0.483249156" c0y="-0.875" c1x="-0.483249156" c1y="-0.875"></V>
+		<V vx="0.875" vy="0" c1x="0.875" c1y="-0.483249156"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 38.5 52.5</XForm>
+		<V vx="4.875" vy="1.375" c0x="4.875" c0y="1.651142375"></V>
+		<V vx="4.375" vy="1.875" c1x="4.651142375" c1y="1.875"></V>
+		<V vx="-4.375" vy="1.875" c0x="-4.651142375" c0y="1.875"></V>
+		<V vx="-4.875" vy="1.375" c1x="-4.875" c1y="1.651142375"></V>
+		<V vx="-4.875" vy="-1.375" c0x="-4.875" c0y="-1.651142375"></V>
+		<V vx="-4.375" vy="-1.875" c1x="-4.651142375" c1y="-1.875"></V>
+		<V vx="4.375" vy="-1.875" c0x="4.651142375" c0y="-1.875"></V>
+		<V vx="4.875" vy="-1.375" c1x="4.875" c1y="-1.651142375"></V>
+		<V vx="4.875" vy="1.375"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+		<P T="B" p0="4" p1="5"></P>
+		<P T="L" p0="5" p1="6"></P>
+		<P T="B" p0="6" p1="7"></P>
+		<P T="L" p0="7" p1="8"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-0.707106781 0.707106781 0.707106781 0.707106781 35.5 52.5</XForm>
+		<V vx="0.875" vy="0" c0x="0.875" c0y="0.483249156"></V>
+		<V vx="0" vy="0.875" c0x="-0.483249156" c0y="0.875" c1x="0.483249156" c1y="0.875"></V>
+		<V vx="-0.875" vy="0" c0x="-0.875" c0y="-0.483249156" c1x="-0.875" c1y="0.483249156"></V>
+		<V vx="0" vy="-0.875" c0x="0.483249156" c0y="-0.875" c1x="-0.483249156" c1y="-0.875"></V>
+		<V vx="0.875" vy="0" c1x="0.875" c1y="-0.483249156"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 27.5 52.5</XForm>
+		<V vx="4.875" vy="1.375" c0x="4.875" c0y="1.651142375"></V>
+		<V vx="4.375" vy="1.875" c1x="4.651142375" c1y="1.875"></V>
+		<V vx="-4.375" vy="1.875" c0x="-4.651142375" c0y="1.875"></V>
+		<V vx="-4.875" vy="1.375" c1x="-4.875" c1y="1.651142375"></V>
+		<V vx="-4.875" vy="-1.375" c0x="-4.875" c0y="-1.651142375"></V>
+		<V vx="-4.375" vy="-1.875" c1x="-4.651142375" c1y="-1.875"></V>
+		<V vx="4.375" vy="-1.875" c0x="4.651142375" c0y="-1.875"></V>
+		<V vx="4.875" vy="-1.375" c1x="4.875" c1y="-1.651142375"></V>
+		<V vx="4.875" vy="1.375"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+		<P T="B" p0="4" p1="5"></P>
+		<P T="L" p0="5" p1="6"></P>
+		<P T="B" p0="6" p1="7"></P>
+		<P T="L" p0="7" p1="8"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-0.707106781 0.707106781 0.707106781 0.707106781 24.5 52.5</XForm>
+		<V vx="0.875" vy="0" c0x="0.875" c0y="0.483249156"></V>
+		<V vx="0" vy="0.875" c0x="-0.483249156" c0y="0.875" c1x="0.483249156" c1y="0.875"></V>
+		<V vx="-0.875" vy="0" c0x="-0.875" c0y="-0.483249156" c1x="-0.875" c1y="0.483249156"></V>
+		<V vx="0" vy="-0.875" c0x="0.483249156" c0y="-0.875" c1x="-0.483249156" c1y="-0.875"></V>
+		<V vx="0.875" vy="0" c1x="0.875" c1y="-0.483249156"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 82.5 47.5</XForm>
+		<V vx="4.875" vy="1.375" c0x="4.875" c0y="1.651142375"></V>
+		<V vx="4.375" vy="1.875" c1x="4.651142375" c1y="1.875"></V>
+		<V vx="-4.375" vy="1.875" c0x="-4.651142375" c0y="1.875"></V>
+		<V vx="-4.875" vy="1.375" c1x="-4.875" c1y="1.651142375"></V>
+		<V vx="-4.875" vy="-1.375" c0x="-4.875" c0y="-1.651142375"></V>
+		<V vx="-4.375" vy="-1.875" c1x="-4.651142375" c1y="-1.875"></V>
+		<V vx="4.375" vy="-1.875" c0x="4.651142375" c0y="-1.875"></V>
+		<V vx="4.875" vy="-1.375" c1x="4.875" c1y="-1.651142375"></V>
+		<V vx="4.875" vy="1.375"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+		<P T="B" p0="4" p1="5"></P>
+		<P T="L" p0="5" p1="6"></P>
+		<P T="B" p0="6" p1="7"></P>
+		<P T="L" p0="7" p1="8"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-0.707106781 0.707106781 0.707106781 0.707106781 79.5 47.5</XForm>
+		<V vx="0.875" vy="0" c0x="0.875" c0y="0.483249156"></V>
+		<V vx="0" vy="0.875" c0x="-0.483249156" c0y="0.875" c1x="0.483249156" c1y="0.875"></V>
+		<V vx="-0.875" vy="0" c0x="-0.875" c0y="-0.483249156" c1x="-0.875" c1y="0.483249156"></V>
+		<V vx="0" vy="-0.875" c0x="0.483249156" c0y="-0.875" c1x="-0.483249156" c1y="-0.875"></V>
+		<V vx="0.875" vy="0" c1x="0.875" c1y="-0.483249156"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 71.5 47.5</XForm>
+		<V vx="4.875" vy="1.375" c0x="4.875" c0y="1.651142375"></V>
+		<V vx="4.375" vy="1.875" c1x="4.651142375" c1y="1.875"></V>
+		<V vx="-4.375" vy="1.875" c0x="-4.651142375" c0y="1.875"></V>
+		<V vx="-4.875" vy="1.375" c1x="-4.875" c1y="1.651142375"></V>
+		<V vx="-4.875" vy="-1.375" c0x="-4.875" c0y="-1.651142375"></V>
+		<V vx="-4.375" vy="-1.875" c1x="-4.651142375" c1y="-1.875"></V>
+		<V vx="4.375" vy="-1.875" c0x="4.651142375" c0y="-1.875"></V>
+		<V vx="4.875" vy="-1.375" c1x="4.875" c1y="-1.651142375"></V>
+		<V vx="4.875" vy="1.375"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+		<P T="B" p0="4" p1="5"></P>
+		<P T="L" p0="5" p1="6"></P>
+		<P T="B" p0="6" p1="7"></P>
+		<P T="L" p0="7" p1="8"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-0.707106781 0.707106781 0.707106781 0.707106781 68.5 47.5</XForm>
+		<V vx="0.875" vy="0" c0x="0.875" c0y="0.483249156"></V>
+		<V vx="0" vy="0.875" c0x="-0.483249156" c0y="0.875" c1x="0.483249156" c1y="0.875"></V>
+		<V vx="-0.875" vy="0" c0x="-0.875" c0y="-0.483249156" c1x="-0.875" c1y="0.483249156"></V>
+		<V vx="0" vy="-0.875" c0x="0.483249156" c0y="-0.875" c1x="-0.483249156" c1y="-0.875"></V>
+		<V vx="0.875" vy="0" c1x="0.875" c1y="-0.483249156"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 60.5 47.5</XForm>
+		<V vx="4.875" vy="1.375" c0x="4.875" c0y="1.651142375"></V>
+		<V vx="4.375" vy="1.875" c1x="4.651142375" c1y="1.875"></V>
+		<V vx="-4.375" vy="1.875" c0x="-4.651142375" c0y="1.875"></V>
+		<V vx="-4.875" vy="1.375" c1x="-4.875" c1y="1.651142375"></V>
+		<V vx="-4.875" vy="-1.375" c0x="-4.875" c0y="-1.651142375"></V>
+		<V vx="-4.375" vy="-1.875" c1x="-4.651142375" c1y="-1.875"></V>
+		<V vx="4.375" vy="-1.875" c0x="4.651142375" c0y="-1.875"></V>
+		<V vx="4.875" vy="-1.375" c1x="4.875" c1y="-1.651142375"></V>
+		<V vx="4.875" vy="1.375"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+		<P T="B" p0="4" p1="5"></P>
+		<P T="L" p0="5" p1="6"></P>
+		<P T="B" p0="6" p1="7"></P>
+		<P T="L" p0="7" p1="8"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-0.707106781 0.707106781 0.707106781 0.707106781 57.5 47.5</XForm>
+		<V vx="0.875" vy="0" c0x="0.875" c0y="0.483249156"></V>
+		<V vx="0" vy="0.875" c0x="-0.483249156" c0y="0.875" c1x="0.483249156" c1y="0.875"></V>
+		<V vx="-0.875" vy="0" c0x="-0.875" c0y="-0.483249156" c1x="-0.875" c1y="0.483249156"></V>
+		<V vx="0" vy="-0.875" c0x="0.483249156" c0y="-0.875" c1x="-0.483249156" c1y="-0.875"></V>
+		<V vx="0.875" vy="0" c1x="0.875" c1y="-0.483249156"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 49.5 47.5</XForm>
+		<V vx="4.875" vy="1.375" c0x="4.875" c0y="1.651142375"></V>
+		<V vx="4.375" vy="1.875" c1x="4.651142375" c1y="1.875"></V>
+		<V vx="-4.375" vy="1.875" c0x="-4.651142375" c0y="1.875"></V>
+		<V vx="-4.875" vy="1.375" c1x="-4.875" c1y="1.651142375"></V>
+		<V vx="-4.875" vy="-1.375" c0x="-4.875" c0y="-1.651142375"></V>
+		<V vx="-4.375" vy="-1.875" c1x="-4.651142375" c1y="-1.875"></V>
+		<V vx="4.375" vy="-1.875" c0x="4.651142375" c0y="-1.875"></V>
+		<V vx="4.875" vy="-1.375" c1x="4.875" c1y="-1.651142375"></V>
+		<V vx="4.875" vy="1.375"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+		<P T="B" p0="4" p1="5"></P>
+		<P T="L" p0="5" p1="6"></P>
+		<P T="B" p0="6" p1="7"></P>
+		<P T="L" p0="7" p1="8"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-0.707106781 0.707106781 0.707106781 0.707106781 46.5 47.5</XForm>
+		<V vx="0.875" vy="0" c0x="0.875" c0y="0.483249156"></V>
+		<V vx="0" vy="0.875" c0x="-0.483249156" c0y="0.875" c1x="0.483249156" c1y="0.875"></V>
+		<V vx="-0.875" vy="0" c0x="-0.875" c0y="-0.483249156" c1x="-0.875" c1y="0.483249156"></V>
+		<V vx="0" vy="-0.875" c0x="0.483249156" c0y="-0.875" c1x="-0.483249156" c1y="-0.875"></V>
+		<V vx="0.875" vy="0" c1x="0.875" c1y="-0.483249156"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 38.5 47.5</XForm>
+		<V vx="4.875" vy="1.375" c0x="4.875" c0y="1.651142375"></V>
+		<V vx="4.375" vy="1.875" c1x="4.651142375" c1y="1.875"></V>
+		<V vx="-4.375" vy="1.875" c0x="-4.651142375" c0y="1.875"></V>
+		<V vx="-4.875" vy="1.375" c1x="-4.875" c1y="1.651142375"></V>
+		<V vx="-4.875" vy="-1.375" c0x="-4.875" c0y="-1.651142375"></V>
+		<V vx="-4.375" vy="-1.875" c1x="-4.651142375" c1y="-1.875"></V>
+		<V vx="4.375" vy="-1.875" c0x="4.651142375" c0y="-1.875"></V>
+		<V vx="4.875" vy="-1.375" c1x="4.875" c1y="-1.651142375"></V>
+		<V vx="4.875" vy="1.375"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+		<P T="B" p0="4" p1="5"></P>
+		<P T="L" p0="5" p1="6"></P>
+		<P T="B" p0="6" p1="7"></P>
+		<P T="L" p0="7" p1="8"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-0.707106781 0.707106781 0.707106781 0.707106781 35.5 47.5</XForm>
+		<V vx="0.875" vy="0" c0x="0.875" c0y="0.483249156"></V>
+		<V vx="0" vy="0.875" c0x="-0.483249156" c0y="0.875" c1x="0.483249156" c1y="0.875"></V>
+		<V vx="-0.875" vy="0" c0x="-0.875" c0y="-0.483249156" c1x="-0.875" c1y="0.483249156"></V>
+		<V vx="0" vy="-0.875" c0x="0.483249156" c0y="-0.875" c1x="-0.483249156" c1y="-0.875"></V>
+		<V vx="0.875" vy="0" c1x="0.875" c1y="-0.483249156"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 27.5 47.5</XForm>
+		<V vx="4.875" vy="1.375" c0x="4.875" c0y="1.651142375"></V>
+		<V vx="4.375" vy="1.875" c1x="4.651142375" c1y="1.875"></V>
+		<V vx="-4.375" vy="1.875" c0x="-4.651142375" c0y="1.875"></V>
+		<V vx="-4.875" vy="1.375" c1x="-4.875" c1y="1.651142375"></V>
+		<V vx="-4.875" vy="-1.375" c0x="-4.875" c0y="-1.651142375"></V>
+		<V vx="-4.375" vy="-1.875" c1x="-4.651142375" c1y="-1.875"></V>
+		<V vx="4.375" vy="-1.875" c0x="4.651142375" c0y="-1.875"></V>
+		<V vx="4.875" vy="-1.375" c1x="4.875" c1y="-1.651142375"></V>
+		<V vx="4.875" vy="1.375"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+		<P T="B" p0="4" p1="5"></P>
+		<P T="L" p0="5" p1="6"></P>
+		<P T="B" p0="6" p1="7"></P>
+		<P T="L" p0="7" p1="8"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-0.707106781 0.707106781 0.707106781 0.707106781 24.5 47.5</XForm>
+		<V vx="0.875" vy="0" c0x="0.875" c0y="0.483249156"></V>
+		<V vx="0" vy="0.875" c0x="-0.483249156" c0y="0.875" c1x="0.483249156" c1y="0.875"></V>
+		<V vx="-0.875" vy="0" c0x="-0.875" c0y="-0.483249156" c1x="-0.875" c1y="0.483249156"></V>
+		<V vx="0" vy="-0.875" c0x="0.483249156" c0y="-0.875" c1x="-0.483249156" c1y="-0.875"></V>
+		<V vx="0.875" vy="0" c1x="0.875" c1y="-0.483249156"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 82.5 42.5</XForm>
+		<V vx="4.875" vy="1.375" c0x="4.875" c0y="1.651142375"></V>
+		<V vx="4.375" vy="1.875" c1x="4.651142375" c1y="1.875"></V>
+		<V vx="-4.375" vy="1.875" c0x="-4.651142375" c0y="1.875"></V>
+		<V vx="-4.875" vy="1.375" c1x="-4.875" c1y="1.651142375"></V>
+		<V vx="-4.875" vy="-1.375" c0x="-4.875" c0y="-1.651142375"></V>
+		<V vx="-4.375" vy="-1.875" c1x="-4.651142375" c1y="-1.875"></V>
+		<V vx="4.375" vy="-1.875" c0x="4.651142375" c0y="-1.875"></V>
+		<V vx="4.875" vy="-1.375" c1x="4.875" c1y="-1.651142375"></V>
+		<V vx="4.875" vy="1.375"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+		<P T="B" p0="4" p1="5"></P>
+		<P T="L" p0="5" p1="6"></P>
+		<P T="B" p0="6" p1="7"></P>
+		<P T="L" p0="7" p1="8"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-0.707106781 0.707106781 0.707106781 0.707106781 79.5 42.5</XForm>
+		<V vx="0.875" vy="0" c0x="0.875" c0y="0.483249156"></V>
+		<V vx="0" vy="0.875" c0x="-0.483249156" c0y="0.875" c1x="0.483249156" c1y="0.875"></V>
+		<V vx="-0.875" vy="0" c0x="-0.875" c0y="-0.483249156" c1x="-0.875" c1y="0.483249156"></V>
+		<V vx="0" vy="-0.875" c0x="0.483249156" c0y="-0.875" c1x="-0.483249156" c1y="-0.875"></V>
+		<V vx="0.875" vy="0" c1x="0.875" c1y="-0.483249156"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 71.5 42.5</XForm>
+		<V vx="4.875" vy="1.375" c0x="4.875" c0y="1.651142375"></V>
+		<V vx="4.375" vy="1.875" c1x="4.651142375" c1y="1.875"></V>
+		<V vx="-4.375" vy="1.875" c0x="-4.651142375" c0y="1.875"></V>
+		<V vx="-4.875" vy="1.375" c1x="-4.875" c1y="1.651142375"></V>
+		<V vx="-4.875" vy="-1.375" c0x="-4.875" c0y="-1.651142375"></V>
+		<V vx="-4.375" vy="-1.875" c1x="-4.651142375" c1y="-1.875"></V>
+		<V vx="4.375" vy="-1.875" c0x="4.651142375" c0y="-1.875"></V>
+		<V vx="4.875" vy="-1.375" c1x="4.875" c1y="-1.651142375"></V>
+		<V vx="4.875" vy="1.375"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+		<P T="B" p0="4" p1="5"></P>
+		<P T="L" p0="5" p1="6"></P>
+		<P T="B" p0="6" p1="7"></P>
+		<P T="L" p0="7" p1="8"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-0.707106781 0.707106781 0.707106781 0.707106781 68.5 42.5</XForm>
+		<V vx="0.875" vy="0" c0x="0.875" c0y="0.483249156"></V>
+		<V vx="0" vy="0.875" c0x="-0.483249156" c0y="0.875" c1x="0.483249156" c1y="0.875"></V>
+		<V vx="-0.875" vy="0" c0x="-0.875" c0y="-0.483249156" c1x="-0.875" c1y="0.483249156"></V>
+		<V vx="0" vy="-0.875" c0x="0.483249156" c0y="-0.875" c1x="-0.483249156" c1y="-0.875"></V>
+		<V vx="0.875" vy="0" c1x="0.875" c1y="-0.483249156"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 60.5 42.5</XForm>
+		<V vx="4.875" vy="1.375" c0x="4.875" c0y="1.651142375"></V>
+		<V vx="4.375" vy="1.875" c1x="4.651142375" c1y="1.875"></V>
+		<V vx="-4.375" vy="1.875" c0x="-4.651142375" c0y="1.875"></V>
+		<V vx="-4.875" vy="1.375" c1x="-4.875" c1y="1.651142375"></V>
+		<V vx="-4.875" vy="-1.375" c0x="-4.875" c0y="-1.651142375"></V>
+		<V vx="-4.375" vy="-1.875" c1x="-4.651142375" c1y="-1.875"></V>
+		<V vx="4.375" vy="-1.875" c0x="4.651142375" c0y="-1.875"></V>
+		<V vx="4.875" vy="-1.375" c1x="4.875" c1y="-1.651142375"></V>
+		<V vx="4.875" vy="1.375"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+		<P T="B" p0="4" p1="5"></P>
+		<P T="L" p0="5" p1="6"></P>
+		<P T="B" p0="6" p1="7"></P>
+		<P T="L" p0="7" p1="8"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-0.707106781 0.707106781 0.707106781 0.707106781 57.5 42.5</XForm>
+		<V vx="0.875" vy="0" c0x="0.875" c0y="0.483249156"></V>
+		<V vx="0" vy="0.875" c0x="-0.483249156" c0y="0.875" c1x="0.483249156" c1y="0.875"></V>
+		<V vx="-0.875" vy="0" c0x="-0.875" c0y="-0.483249156" c1x="-0.875" c1y="0.483249156"></V>
+		<V vx="0" vy="-0.875" c0x="0.483249156" c0y="-0.875" c1x="-0.483249156" c1y="-0.875"></V>
+		<V vx="0.875" vy="0" c1x="0.875" c1y="-0.483249156"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 49.5 42.5</XForm>
+		<V vx="4.875" vy="1.375" c0x="4.875" c0y="1.651142375"></V>
+		<V vx="4.375" vy="1.875" c1x="4.651142375" c1y="1.875"></V>
+		<V vx="-4.375" vy="1.875" c0x="-4.651142375" c0y="1.875"></V>
+		<V vx="-4.875" vy="1.375" c1x="-4.875" c1y="1.651142375"></V>
+		<V vx="-4.875" vy="-1.375" c0x="-4.875" c0y="-1.651142375"></V>
+		<V vx="-4.375" vy="-1.875" c1x="-4.651142375" c1y="-1.875"></V>
+		<V vx="4.375" vy="-1.875" c0x="4.651142375" c0y="-1.875"></V>
+		<V vx="4.875" vy="-1.375" c1x="4.875" c1y="-1.651142375"></V>
+		<V vx="4.875" vy="1.375"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+		<P T="B" p0="4" p1="5"></P>
+		<P T="L" p0="5" p1="6"></P>
+		<P T="B" p0="6" p1="7"></P>
+		<P T="L" p0="7" p1="8"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-0.707106781 0.707106781 0.707106781 0.707106781 46.5 42.5</XForm>
+		<V vx="0.875" vy="0" c0x="0.875" c0y="0.483249156"></V>
+		<V vx="0" vy="0.875" c0x="-0.483249156" c0y="0.875" c1x="0.483249156" c1y="0.875"></V>
+		<V vx="-0.875" vy="0" c0x="-0.875" c0y="-0.483249156" c1x="-0.875" c1y="0.483249156"></V>
+		<V vx="0" vy="-0.875" c0x="0.483249156" c0y="-0.875" c1x="-0.483249156" c1y="-0.875"></V>
+		<V vx="0.875" vy="0" c1x="0.875" c1y="-0.483249156"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 38.5 42.5</XForm>
+		<V vx="4.875" vy="1.375" c0x="4.875" c0y="1.651142375"></V>
+		<V vx="4.375" vy="1.875" c1x="4.651142375" c1y="1.875"></V>
+		<V vx="-4.375" vy="1.875" c0x="-4.651142375" c0y="1.875"></V>
+		<V vx="-4.875" vy="1.375" c1x="-4.875" c1y="1.651142375"></V>
+		<V vx="-4.875" vy="-1.375" c0x="-4.875" c0y="-1.651142375"></V>
+		<V vx="-4.375" vy="-1.875" c1x="-4.651142375" c1y="-1.875"></V>
+		<V vx="4.375" vy="-1.875" c0x="4.651142375" c0y="-1.875"></V>
+		<V vx="4.875" vy="-1.375" c1x="4.875" c1y="-1.651142375"></V>
+		<V vx="4.875" vy="1.375"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+		<P T="B" p0="4" p1="5"></P>
+		<P T="L" p0="5" p1="6"></P>
+		<P T="B" p0="6" p1="7"></P>
+		<P T="L" p0="7" p1="8"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-0.707106781 0.707106781 0.707106781 0.707106781 35.5 42.5</XForm>
+		<V vx="0.875" vy="0" c0x="0.875" c0y="0.483249156"></V>
+		<V vx="0" vy="0.875" c0x="-0.483249156" c0y="0.875" c1x="0.483249156" c1y="0.875"></V>
+		<V vx="-0.875" vy="0" c0x="-0.875" c0y="-0.483249156" c1x="-0.875" c1y="0.483249156"></V>
+		<V vx="0" vy="-0.875" c0x="0.483249156" c0y="-0.875" c1x="-0.483249156" c1y="-0.875"></V>
+		<V vx="0.875" vy="0" c1x="0.875" c1y="-0.483249156"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 27.5 42.5</XForm>
+		<V vx="4.875" vy="1.375" c0x="4.875" c0y="1.651142375"></V>
+		<V vx="4.375" vy="1.875" c1x="4.651142375" c1y="1.875"></V>
+		<V vx="-4.375" vy="1.875" c0x="-4.651142375" c0y="1.875"></V>
+		<V vx="-4.875" vy="1.375" c1x="-4.875" c1y="1.651142375"></V>
+		<V vx="-4.875" vy="-1.375" c0x="-4.875" c0y="-1.651142375"></V>
+		<V vx="-4.375" vy="-1.875" c1x="-4.651142375" c1y="-1.875"></V>
+		<V vx="4.375" vy="-1.875" c0x="4.651142375" c0y="-1.875"></V>
+		<V vx="4.875" vy="-1.375" c1x="4.875" c1y="-1.651142375"></V>
+		<V vx="4.875" vy="1.375"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+		<P T="B" p0="4" p1="5"></P>
+		<P T="L" p0="5" p1="6"></P>
+		<P T="B" p0="6" p1="7"></P>
+		<P T="L" p0="7" p1="8"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-0.707106781 0.707106781 0.707106781 0.707106781 24.5 42.5</XForm>
+		<V vx="0.875" vy="0" c0x="0.875" c0y="0.483249156"></V>
+		<V vx="0" vy="0.875" c0x="-0.483249156" c0y="0.875" c1x="0.483249156" c1y="0.875"></V>
+		<V vx="-0.875" vy="0" c0x="-0.875" c0y="-0.483249156" c1x="-0.875" c1y="0.483249156"></V>
+		<V vx="0" vy="-0.875" c0x="0.483249156" c0y="-0.875" c1x="-0.483249156" c1y="-0.875"></V>
+		<V vx="0.875" vy="0" c1x="0.875" c1y="-0.483249156"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 82.5 37.5</XForm>
+		<V vx="4.875" vy="1.375" c0x="4.875" c0y="1.651142375"></V>
+		<V vx="4.375" vy="1.875" c1x="4.651142375" c1y="1.875"></V>
+		<V vx="-4.375" vy="1.875" c0x="-4.651142375" c0y="1.875"></V>
+		<V vx="-4.875" vy="1.375" c1x="-4.875" c1y="1.651142375"></V>
+		<V vx="-4.875" vy="-1.375" c0x="-4.875" c0y="-1.651142375"></V>
+		<V vx="-4.375" vy="-1.875" c1x="-4.651142375" c1y="-1.875"></V>
+		<V vx="4.375" vy="-1.875" c0x="4.651142375" c0y="-1.875"></V>
+		<V vx="4.875" vy="-1.375" c1x="4.875" c1y="-1.651142375"></V>
+		<V vx="4.875" vy="1.375"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+		<P T="B" p0="4" p1="5"></P>
+		<P T="L" p0="5" p1="6"></P>
+		<P T="B" p0="6" p1="7"></P>
+		<P T="L" p0="7" p1="8"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-0.707106781 0.707106781 0.707106781 0.707106781 79.5 37.5</XForm>
+		<V vx="0.875" vy="0" c0x="0.875" c0y="0.483249156"></V>
+		<V vx="0" vy="0.875" c0x="-0.483249156" c0y="0.875" c1x="0.483249156" c1y="0.875"></V>
+		<V vx="-0.875" vy="0" c0x="-0.875" c0y="-0.483249156" c1x="-0.875" c1y="0.483249156"></V>
+		<V vx="0" vy="-0.875" c0x="0.483249156" c0y="-0.875" c1x="-0.483249156" c1y="-0.875"></V>
+		<V vx="0.875" vy="0" c1x="0.875" c1y="-0.483249156"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 71.5 37.5</XForm>
+		<V vx="4.875" vy="1.375" c0x="4.875" c0y="1.651142375"></V>
+		<V vx="4.375" vy="1.875" c1x="4.651142375" c1y="1.875"></V>
+		<V vx="-4.375" vy="1.875" c0x="-4.651142375" c0y="1.875"></V>
+		<V vx="-4.875" vy="1.375" c1x="-4.875" c1y="1.651142375"></V>
+		<V vx="-4.875" vy="-1.375" c0x="-4.875" c0y="-1.651142375"></V>
+		<V vx="-4.375" vy="-1.875" c1x="-4.651142375" c1y="-1.875"></V>
+		<V vx="4.375" vy="-1.875" c0x="4.651142375" c0y="-1.875"></V>
+		<V vx="4.875" vy="-1.375" c1x="4.875" c1y="-1.651142375"></V>
+		<V vx="4.875" vy="1.375"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+		<P T="B" p0="4" p1="5"></P>
+		<P T="L" p0="5" p1="6"></P>
+		<P T="B" p0="6" p1="7"></P>
+		<P T="L" p0="7" p1="8"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-0.707106781 0.707106781 0.707106781 0.707106781 68.5 37.5</XForm>
+		<V vx="0.875" vy="0" c0x="0.875" c0y="0.483249156"></V>
+		<V vx="0" vy="0.875" c0x="-0.483249156" c0y="0.875" c1x="0.483249156" c1y="0.875"></V>
+		<V vx="-0.875" vy="0" c0x="-0.875" c0y="-0.483249156" c1x="-0.875" c1y="0.483249156"></V>
+		<V vx="0" vy="-0.875" c0x="0.483249156" c0y="-0.875" c1x="-0.483249156" c1y="-0.875"></V>
+		<V vx="0.875" vy="0" c1x="0.875" c1y="-0.483249156"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 60.5 37.5</XForm>
+		<V vx="4.875" vy="1.375" c0x="4.875" c0y="1.651142375"></V>
+		<V vx="4.375" vy="1.875" c1x="4.651142375" c1y="1.875"></V>
+		<V vx="-4.375" vy="1.875" c0x="-4.651142375" c0y="1.875"></V>
+		<V vx="-4.875" vy="1.375" c1x="-4.875" c1y="1.651142375"></V>
+		<V vx="-4.875" vy="-1.375" c0x="-4.875" c0y="-1.651142375"></V>
+		<V vx="-4.375" vy="-1.875" c1x="-4.651142375" c1y="-1.875"></V>
+		<V vx="4.375" vy="-1.875" c0x="4.651142375" c0y="-1.875"></V>
+		<V vx="4.875" vy="-1.375" c1x="4.875" c1y="-1.651142375"></V>
+		<V vx="4.875" vy="1.375"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+		<P T="B" p0="4" p1="5"></P>
+		<P T="L" p0="5" p1="6"></P>
+		<P T="B" p0="6" p1="7"></P>
+		<P T="L" p0="7" p1="8"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-0.707106781 0.707106781 0.707106781 0.707106781 57.5 37.5</XForm>
+		<V vx="0.875" vy="0" c0x="0.875" c0y="0.483249156"></V>
+		<V vx="0" vy="0.875" c0x="-0.483249156" c0y="0.875" c1x="0.483249156" c1y="0.875"></V>
+		<V vx="-0.875" vy="0" c0x="-0.875" c0y="-0.483249156" c1x="-0.875" c1y="0.483249156"></V>
+		<V vx="0" vy="-0.875" c0x="0.483249156" c0y="-0.875" c1x="-0.483249156" c1y="-0.875"></V>
+		<V vx="0.875" vy="0" c1x="0.875" c1y="-0.483249156"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 49.5 37.5</XForm>
+		<V vx="4.875" vy="1.375" c0x="4.875" c0y="1.651142375"></V>
+		<V vx="4.375" vy="1.875" c1x="4.651142375" c1y="1.875"></V>
+		<V vx="-4.375" vy="1.875" c0x="-4.651142375" c0y="1.875"></V>
+		<V vx="-4.875" vy="1.375" c1x="-4.875" c1y="1.651142375"></V>
+		<V vx="-4.875" vy="-1.375" c0x="-4.875" c0y="-1.651142375"></V>
+		<V vx="-4.375" vy="-1.875" c1x="-4.651142375" c1y="-1.875"></V>
+		<V vx="4.375" vy="-1.875" c0x="4.651142375" c0y="-1.875"></V>
+		<V vx="4.875" vy="-1.375" c1x="4.875" c1y="-1.651142375"></V>
+		<V vx="4.875" vy="1.375"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+		<P T="B" p0="4" p1="5"></P>
+		<P T="L" p0="5" p1="6"></P>
+		<P T="B" p0="6" p1="7"></P>
+		<P T="L" p0="7" p1="8"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-0.707106781 0.707106781 0.707106781 0.707106781 46.5 37.5</XForm>
+		<V vx="0.875" vy="0" c0x="0.875" c0y="0.483249156"></V>
+		<V vx="0" vy="0.875" c0x="-0.483249156" c0y="0.875" c1x="0.483249156" c1y="0.875"></V>
+		<V vx="-0.875" vy="0" c0x="-0.875" c0y="-0.483249156" c1x="-0.875" c1y="0.483249156"></V>
+		<V vx="0" vy="-0.875" c0x="0.483249156" c0y="-0.875" c1x="-0.483249156" c1y="-0.875"></V>
+		<V vx="0.875" vy="0" c1x="0.875" c1y="-0.483249156"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 38.5 37.5</XForm>
+		<V vx="4.875" vy="1.375" c0x="4.875" c0y="1.651142375"></V>
+		<V vx="4.375" vy="1.875" c1x="4.651142375" c1y="1.875"></V>
+		<V vx="-4.375" vy="1.875" c0x="-4.651142375" c0y="1.875"></V>
+		<V vx="-4.875" vy="1.375" c1x="-4.875" c1y="1.651142375"></V>
+		<V vx="-4.875" vy="-1.375" c0x="-4.875" c0y="-1.651142375"></V>
+		<V vx="-4.375" vy="-1.875" c1x="-4.651142375" c1y="-1.875"></V>
+		<V vx="4.375" vy="-1.875" c0x="4.651142375" c0y="-1.875"></V>
+		<V vx="4.875" vy="-1.375" c1x="4.875" c1y="-1.651142375"></V>
+		<V vx="4.875" vy="1.375"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+		<P T="B" p0="4" p1="5"></P>
+		<P T="L" p0="5" p1="6"></P>
+		<P T="B" p0="6" p1="7"></P>
+		<P T="L" p0="7" p1="8"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-0.707106781 0.707106781 0.707106781 0.707106781 35.5 37.5</XForm>
+		<V vx="0.875" vy="0" c0x="0.875" c0y="0.483249156"></V>
+		<V vx="0" vy="0.875" c0x="-0.483249156" c0y="0.875" c1x="0.483249156" c1y="0.875"></V>
+		<V vx="-0.875" vy="0" c0x="-0.875" c0y="-0.483249156" c1x="-0.875" c1y="0.483249156"></V>
+		<V vx="0" vy="-0.875" c0x="0.483249156" c0y="-0.875" c1x="-0.483249156" c1y="-0.875"></V>
+		<V vx="0.875" vy="0" c1x="0.875" c1y="-0.483249156"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-1 0 0 1 27.5 37.5</XForm>
+		<V vx="4.875" vy="1.375" c0x="4.875" c0y="1.651142375"></V>
+		<V vx="4.375" vy="1.875" c1x="4.651142375" c1y="1.875"></V>
+		<V vx="-4.375" vy="1.875" c0x="-4.651142375" c0y="1.875"></V>
+		<V vx="-4.875" vy="1.375" c1x="-4.875" c1y="1.651142375"></V>
+		<V vx="-4.875" vy="-1.375" c0x="-4.875" c0y="-1.651142375"></V>
+		<V vx="-4.375" vy="-1.875" c1x="-4.651142375" c1y="-1.875"></V>
+		<V vx="4.375" vy="-1.875" c0x="4.651142375" c0y="-1.875"></V>
+		<V vx="4.875" vy="-1.375" c1x="4.875" c1y="-1.651142375"></V>
+		<V vx="4.875" vy="1.375"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+		<P T="B" p0="4" p1="5"></P>
+		<P T="L" p0="5" p1="6"></P>
+		<P T="B" p0="6" p1="7"></P>
+		<P T="L" p0="7" p1="8"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="2">
+		<XForm>-0.707106781 0.707106781 0.707106781 0.707106781 24.5 37.5</XForm>
+		<V vx="0.875" vy="0" c0x="0.875" c0y="0.483249156"></V>
+		<V vx="0" vy="0.875" c0x="-0.483249156" c0y="0.875" c1x="0.483249156" c1y="0.875"></V>
+		<V vx="-0.875" vy="0" c0x="-0.875" c0y="-0.483249156" c1x="-0.875" c1y="0.483249156"></V>
+		<V vx="0" vy="-0.875" c0x="0.483249156" c0y="-0.875" c1x="-0.483249156" c1y="-0.875"></V>
+		<V vx="0.875" vy="0" c1x="0.875" c1y="-0.483249156"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="3">
+		<XForm>1 0 0 1 55 55</XForm>
+		<V vx="38" vy="23"></V>
+		<V vx="38" vy="-23"></V>
+		<V vx="-38" vy="-23"></V>
+		<V vx="-38" vy="23"></V>
+		<V vx="38" vy="23"></V>
+		<P T="L" p0="0" p1="1"></P>
+		<P T="L" p0="1" p1="2"></P>
+		<P T="L" p0="2" p1="3"></P>
+		<P T="L" p0="3" p1="4"></P>
+	</Shape>
+</LightBurnProject>

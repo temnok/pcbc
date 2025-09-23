@@ -16,7 +16,6 @@ func TestBoard(t *testing.T) {
 	conf := config.Default()
 	conf.Width = 35
 	conf.Height = 45
-	conf.SavePath = "out/{}-"
 
 	board := &eda.Component{
 		Nested: eda.Components{
@@ -43,8 +42,5 @@ func TestBoard(t *testing.T) {
 		},
 	}
 
-	assert.NoError(t, pcb.Process(conf,
-		board.InLayer(1),
-		board.InLayer(2).Arrange(transform.MirrorX()),
-	))
+	assert.NoError(t, pcb.Process(conf, board))
 }
