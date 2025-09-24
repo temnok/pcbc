@@ -3,7 +3,6 @@
 package font
 
 import (
-	"math"
 	"temnok/pcbc/path"
 	"temnok/pcbc/transform"
 )
@@ -201,10 +200,6 @@ func init() {
 			symbolPaths[i] = append(symbolPaths[i], symbolPath)
 		}
 	}
-}
-
-func WeightScale(t transform.T) float64 {
-	return min(math.Sqrt(t.Ix*t.Ix+t.Iy*t.Iy), math.Sqrt(t.Jx*t.Jx+t.Jy*t.Jy))
 }
 
 func pToXY(p byte) path.Point {

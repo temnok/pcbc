@@ -4,11 +4,11 @@ package pcb
 
 import (
 	"image/color"
+	"math"
 	"temnok/pcbc/bitmap"
 	"temnok/pcbc/bitmap/image"
 	"temnok/pcbc/eda"
 	"temnok/pcbc/eda/pcb/config"
-	"temnok/pcbc/font"
 	"temnok/pcbc/lbrn"
 	"temnok/pcbc/shape"
 )
@@ -118,7 +118,8 @@ func addSilk(config *config.Config, c *eda.Component, back bool, silk *bitmap.Bi
 	t := c.Transform.Multiply(config.BitmapTransform())
 
 	// Marks:
-	brushW := font.Bold * font.WeightScale(t)
+	brushW := c.MarksWidth * math.Sqrt(math.Abs(t.Det()))
+
 	brush := shape.Circle(int(brushW))
 	brush.ForEachPathsPixel(c.Marks, t, silk.Set1)
 }
