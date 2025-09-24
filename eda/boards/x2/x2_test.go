@@ -32,7 +32,7 @@ func TestBoard(t *testing.T) {
 			},
 
 			{
-				CutsFull: true,
+				CutsFully: true,
 
 				Cuts: path.Paths{
 					hole.Transform(transform.Move(-5, -5)),

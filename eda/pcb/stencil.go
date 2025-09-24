@@ -91,7 +91,7 @@ func renderStencil(config *config.Config, component *eda.Component, stencil *bit
 	component.Visit(func(c *eda.Component) {
 		t := c.Transform.Multiply(bmT)
 
-		if c.CutsFull {
+		if c.CutsFully {
 			brush.ForEachPathsPixel(c.Cuts, t, stencil.Set1)
 		} else if c.CutsOuter {
 			c.Cuts.RasterizeIntermittently(t, c.CutsPerforationStep*config.PixelsPerMM, func(x, y int) {

@@ -11,8 +11,6 @@ import (
 	"temnok/pcbc/transform"
 )
 
-var hole = path.Circle(1.45)
-
 var boardTop = &eda.Component{
 	Tracks: eda.Tracks(
 		eda.Track{{-7.5, 2.75}}.DY(-5.5).DX(3.5).DY(-3),
@@ -59,21 +57,10 @@ var Board = &eda.Component{
 			},
 		},
 
-		{
-			CutsFull: true,
+		boards.AlignHole.Clone(2, 15, 0).Clone(2, 0, 15),
 
-			Cuts: path.Paths{
-				hole.Transform(transform.Move(-7.5, -7.5)),
-				hole.Transform(transform.Move(-7.5, 7.5)),
-				hole.Transform(transform.Move(7.5, -7.5)),
-				hole.Transform(transform.Move(7.5, 7.5)),
-			},
-		},
+		boards.MountHole.Clone(2, 15, 0).Arrange(transform.Move(0, -2.5)),
 
 		boardTop,
-
-		boards.MountHole.Arrange(transform.Move(-7.5, -2.5)),
-
-		boards.MountHole.Arrange(transform.Move(7.5, -2.5)),
 	},
 }

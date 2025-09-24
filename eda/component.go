@@ -23,7 +23,7 @@ type Component struct {
 
 	CutsHidden bool // disables dotted mask cuts
 	CutsOuter  bool // enables dotted stencil cuts
-	CutsFull   bool // enforces solid mask and stencil cuts
+	CutsFully  bool // enforces solid mask and stencil cuts
 
 	Marks      path.Paths
 	MarksWidth float64
@@ -60,7 +60,7 @@ func (c *Component) visit(t transform.T, parent *Component, callback func(*Compo
 
 		CutsHidden: c.CutsHidden,
 		CutsOuter:  c.CutsOuter,
-		CutsFull:   c.CutsFull,
+		CutsFully:  c.CutsFully,
 
 		Marks:      c.Marks,
 		MarksWidth: firstNonZero(c.MarksWidth, parent.MarksWidth),

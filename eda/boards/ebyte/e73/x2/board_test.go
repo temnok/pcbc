@@ -1,10 +1,12 @@
 // Copyright © 2025 Alex Temnok. All rights reserved.
 
-package e73
+package x2
 
 import (
 	"github.com/stretchr/testify/assert"
 	"temnok/pcbc/eda"
+	"temnok/pcbc/eda/boards"
+	"temnok/pcbc/eda/boards/ebyte/e73"
 	"temnok/pcbc/eda/pcb"
 	"temnok/pcbc/eda/pcb/config"
 	"temnok/pcbc/path"
@@ -27,17 +29,11 @@ func TestBoard(t *testing.T) {
 				},
 			},
 
-			(&eda.Component{
-				CutsFull: true,
+			boards.AlignHole.Clone(2, 30, 0).Clone(3, 0, 20),
 
-				Cuts: path.Paths{
-					path.Circle(1.45),
-				},
-			}).Clone(2, 30, 0).Clone(3, 0, 20),
+			e73.Board_nRF52840.Arrange(transform.Move(0, 10)),
 
-			Board_nRF52840.Arrange(transform.Move(0, 10)),
-
-			Board_nRF52840.Arrange(transform.RotateDegrees(180).Move(0, -10)),
+			e73.Board_nRF52840.Arrange(transform.RotateDegrees(180).Move(0, -10)),
 		},
 	}
 
