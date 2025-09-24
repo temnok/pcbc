@@ -10,12 +10,6 @@ type Config struct {
 	Width, Height float64
 	PixelsPerMM   float64
 
-	TrackWidth float64
-	ClearWidth float64
-
-	CutsWidth           float64
-	CutsPerforationStep float64
-
 	LbrnCenterX, LbrnCenterY float64
 
 	SavePath string
@@ -26,9 +20,6 @@ func Default() *Config {
 		Width:       1,
 		Height:      1,
 		PixelsPerMM: 100,
-
-		TrackWidth: 0.2,
-		ClearWidth: 0.2,
 
 		LbrnCenterX: 55,
 		LbrnCenterY: 55,

@@ -10,8 +10,8 @@ import (
 	"temnok/pcbc/util"
 )
 
-func saveOverview(config *config.Config, back bool, copper, mask, silk, stencil *bitmap.Bitmap) error {
-	filename := config.SavePath + fileNamePrefix[back] + "overview.png"
+func saveOverview(config *config.Config, fileName string, copper, mask, silk, stencil *bitmap.Bitmap) error {
+	fileName = config.SavePath + fileName
 
 	bitmaps := []*bitmap.Bitmap{
 		copper,
@@ -34,7 +34,7 @@ func saveOverview(config *config.Config, back bool, copper, mask, silk, stencil 
 		bitmaps,
 		colors,
 	)
-	if err := util.SavePNG(filename, im); err != nil {
+	if err := util.SavePNG(fileName, im); err != nil {
 		return err
 	}
 
