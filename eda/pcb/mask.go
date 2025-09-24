@@ -93,7 +93,7 @@ func SaveMask(config *config.Config, component *eda.Component, back bool) (*bitm
 func cutMask(config *config.Config, c *eda.Component, back bool, mask *bitmap.Bitmap) {
 	t := c.Transform.Multiply(config.BitmapTransform())
 
-	brush := shape.Circle(int(config.MaskCutWidth * config.PixelsPerMM))
+	brush := shape.Circle(int(c.CutsWidth * config.PixelsPerMM))
 
 	// Pads
 	if !back {
@@ -104,7 +104,7 @@ func cutMask(config *config.Config, c *eda.Component, back bool, mask *bitmap.Bi
 	if c.CutsFull {
 		brush.ForEachPathsPixel(c.Cuts, t, mask.Set1)
 	} else if !c.CutsHidden {
-		c.Cuts.RasterizeIntermittently(t, config.MaskPerforationStep*config.PixelsPerMM, func(x, y int) {
+		c.Cuts.RasterizeIntermittently(t, c.CutsPerforationStep*config.PixelsPerMM, func(x, y int) {
 			brush.ForEachRowWithOffset(x, y, mask.Set1)
 		})
 	}

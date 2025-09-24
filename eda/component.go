@@ -17,10 +17,13 @@ type Component struct {
 
 	Back bool
 
-	Cuts       path.Paths // solid board cuts and dotted mask cuts
-	CutsHidden bool       // disables dotted mask cuts
-	CutsOuter  bool       // enables dotted stencil cuts
-	CutsFull   bool       // enforces solid mask and stencil cuts
+	Cuts                path.Paths // solid board cuts and dotted mask cuts
+	CutsWidth           float64    // for mask and stencil
+	CutsPerforationStep float64    // for mask and stencil
+
+	CutsHidden bool // disables dotted mask cuts
+	CutsOuter  bool // enables dotted stencil cuts
+	CutsFull   bool // enforces solid mask and stencil cuts
 
 	Marks      path.Paths
 	MarksWidth float64
@@ -51,33 +54,24 @@ func (c *Component) visit(t transform.T, parent *Component, callback func(*Compo
 		Transform: t,
 		Back:      c.Back,
 
-		Cuts:       c.Cuts,
+		Cuts:                c.Cuts,
+		CutsWidth:           firstNonZero(c.CutsWidth, parent.CutsWidth),
+		CutsPerforationStep: firstNonZero(c.CutsPerforationStep, parent.CutsPerforationStep),
+
 		CutsHidden: c.CutsHidden,
 		CutsOuter:  c.CutsOuter,
 		CutsFull:   c.CutsFull,
 
 		Marks:      c.Marks,
-		MarksWidth: c.MarksWidth,
+		MarksWidth: firstNonZero(c.MarksWidth, parent.MarksWidth),
 
 		Pads: c.Pads,
 
 		Tracks:      c.Tracks,
-		TracksWidth: c.TracksWidth,
+		TracksWidth: firstNonZero(c.TracksWidth, parent.TracksWidth),
 
-		ClearWidth: c.ClearWidth,
+		ClearWidth: firstNonZero(c.ClearWidth, parent.ClearWidth),
 		ClearOff:   c.ClearOff,
-	}
-
-	if target.MarksWidth == 0 {
-		target.MarksWidth = parent.MarksWidth
-	}
-
-	if target.TracksWidth == 0 {
-		target.TracksWidth = parent.TracksWidth
-	}
-
-	if target.ClearWidth == 0 {
-		target.ClearWidth = parent.ClearWidth
 	}
 
 	callback(target)
@@ -128,4 +122,12 @@ func ComponentGrid(cols int, dx, dy float64, comps ...*Component) *Component {
 	}
 
 	return grid
+}
+
+func firstNonZero(a, b float64) float64 {
+	if a != 0 {
+		return a
+	}
+
+	return b
 }

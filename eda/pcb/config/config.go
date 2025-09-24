@@ -13,8 +13,8 @@ type Config struct {
 	TrackWidth float64
 	ClearWidth float64
 
-	MaskCutWidth        float64
-	MaskPerforationStep float64
+	CutsWidth           float64
+	CutsPerforationStep float64
 
 	LbrnCenterX, LbrnCenterY float64
 
@@ -29,9 +29,6 @@ func Default() *Config {
 
 		TrackWidth: 0.2,
 		ClearWidth: 0.2,
-
-		MaskCutWidth:        0.1,
-		MaskPerforationStep: 0.17,
 
 		LbrnCenterX: 55,
 		LbrnCenterY: 55,

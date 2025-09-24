@@ -33,9 +33,11 @@ func processComponent(initialConfig *config.Config, initialComponent *eda.Compon
 	config := *initialConfig
 
 	component := &eda.Component{
-		MarksWidth:  0.13,
-		TracksWidth: config.TrackWidth,
-		ClearWidth:  config.ClearWidth,
+		CutsWidth:           0.1,
+		CutsPerforationStep: 0.17,
+		MarksWidth:          0.13,
+		TracksWidth:         config.TrackWidth,
+		ClearWidth:          config.ClearWidth,
 
 		Nested: eda.Components{
 			initialComponent,
