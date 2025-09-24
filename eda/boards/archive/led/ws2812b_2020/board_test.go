@@ -6,7 +6,6 @@ import (
 	"github.com/stretchr/testify/assert"
 	"temnok/pcbc/eda"
 	"temnok/pcbc/eda/boards"
-	"temnok/pcbc/eda/boards/archive/fanstel/bc833"
 	"temnok/pcbc/eda/pcb"
 	"temnok/pcbc/eda/pcb/config"
 	"temnok/pcbc/transform"
@@ -16,7 +15,6 @@ import (
 var testBoard = &eda.Component{
 	Nested: eda.Components{
 		boards.Board35x45,
-		bc833.Board.Arrange(transform.Move(0, 3.5)),
 		eda.ComponentGrid(2, 11, 7,
 			Board,
 			Board,

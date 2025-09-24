@@ -40,9 +40,9 @@ func TrackV2(p0, p1 path.Point, steps ...float64) Track {
 		if dx != 0 && dy != 0 && dx != dy {
 			if sx != 0 && sy != 0 {
 				if dx > dy {
-					dx = sdx * dy
+					dx, dy = sdx*dy, sdy*dy
 				} else {
-					dy = sdy * dx
+					dy, dx = sdy*dx, sdx*dx
 				}
 			} else {
 				if dx > dy {

@@ -46,6 +46,9 @@ var (
 			pad.Transform(transform.Move(-0.5, 1.8)),
 		).Transform(transform.Move(0.15, 1.75-14.3/2)),
 
-		Marks: path.Paths{path.Rect(10, 14.3)},
+		Marks: path.Paths{
+			path.Rect(10, 14.3),
+			path.Linear([]path.Point{{-5, (14.3 / 2) - 4.4}, {5, (14.3 / 2) - 4.4}}),
+		},
 	}
 )

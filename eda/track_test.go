@@ -1,3 +1,5 @@
+// Copyright © 2025 Alex Temnok. All rights reserved.
+
 package eda
 
 import (
@@ -13,6 +15,11 @@ func TestTrack(t *testing.T) {
 
 		want Track
 	}{
+		{
+			p0: path.Point{0, -1}, p1: path.Point{-10, -5}, steps: []float64{},
+			want: Track{{0, -1}, {-4, -5}, {-10, -5}},
+		},
+
 		{
 			p0: path.Point{0, 0}, p1: path.Point{0, 0}, steps: []float64{1},
 			want: Track{},

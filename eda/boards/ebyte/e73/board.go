@@ -19,14 +19,14 @@ var (
 	chipPads = e73.PadCenters()
 
 	leftConn = greenconn.CSCC118(14, false, []string{
-		"P111", "P110", "P003", " AI4", "GND ", "P113", "AI0 ", " AI5", "AI7 ", " AI6",
-		"XL1 ", " XL2", "AI3 ", "P109",
+		"P111", "P110", "P003", " AI4", "GND ", "P113", "AI0 ",
+		" AI5", "AI7 ", " AI6", "XL1 ", " XL2", "AI3 ", "P109",
 	}).Arrange(transform.Move(-11.25, 1.6))
 	leftPads = leftConn.PadCenters()
 
 	rightConn = greenconn.CSCC118(14, true, []string{
-		" NF2", "NF1 ", " SWC", "SWD ", "P024", "P013", "  D+", "D-  ", " VBS", "RST ",
-		" DCH", "VDH ", " GND", "VDD ",
+		" NF2", "NF1 ", " SWC", "SWD ", "P024", "P013", " D+ ",
+		" D- ", "VBUS", "RST ", "DCCH", "VDDH", " GND", "VDD ",
 	}).Arrange(transform.Move(11.25, 1.6))
 	rightPads = rightConn.PadCenters()
 
@@ -56,8 +56,7 @@ var (
 		},
 
 		Nested: eda.Components{
-			boards.MountHole.Arrange(transform.Move(-10, -7.2)),
-			boards.MountHole.Arrange(transform.Move(10, -7.2)),
+			boards.MountHole.Clone(2, 20, 0).Arrange(transform.Move(0, -7.2)),
 
 			{
 				Nested: eda.Components{
