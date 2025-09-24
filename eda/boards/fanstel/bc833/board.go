@@ -12,7 +12,7 @@ import (
 )
 
 var (
-	chip     = fanstel.BC833.Arrange(transform.Move(0, 4.3))
+	chip     = fanstel.BC833.Arrange(transform.Move(0, 4.25))
 	chipPads = chip.PadCenters()
 
 	leftConn = greenconn.CSCC118(12, false, []string{
@@ -42,7 +42,7 @@ var (
 			eda.TrackV2(chipPads[4], leftPads[6]),
 
 			eda.TrackV2(chipPads[6], leftPads[2], 1, -0.7, -0.6, 0),
-			eda.TrackV2(chipPads[7], leftPads[1], 0, 0.7, -1.45, -1.1, -1.3, 0),
+			eda.TrackV2(chipPads[7], leftPads[1], 0, 0.7, -1.45, -1.05, -1.3, 0),
 			eda.TrackV2(chipPads[8], leftPads[0], 0, 1.4, -2, 0),
 
 			eda.TrackV2(chipPads[9], leftPads[10]),
@@ -63,7 +63,7 @@ var (
 			eda.TrackV2(chipPads[21], leftPads[8], -0.01, 2.7, 2, -0.01),
 
 			eda.TrackV2(chipPads[22], rightPads[2], -0.01, -0.7, 0.6, 0),
-			eda.TrackV2(chipPads[23], rightPads[1], -0.01, 1.25, 1.5, 0),
+			eda.TrackV2(chipPads[23], rightPads[1], -0.01, 1.2, 1.5, 0),
 			eda.TrackV2(chipPads[24], rightPads[0]),
 		),
 
