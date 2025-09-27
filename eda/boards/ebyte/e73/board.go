@@ -28,21 +28,21 @@ var (
 	rightPads = rightConn.PadCenters()
 
 	leftTracks = path.Paths{
-		eda.Track(chipPads[0], leftPads[0]),
-		eda.Track(chipPads[1], leftPads[1], 0, -0.5, 0),
-		eda.Track(chipPads[2], leftPads[2], 0, -0.5, 0),
-		eda.Track(chipPads[3], leftPads[3], 0, -0.5, 0),
-		eda.Track(chipPads[4], leftPads[4], 0, -0.5, 0),
-		eda.Track(chipPads[5], leftPads[5], 0, -0.5, 0),
-		eda.Track(chipPads[6], leftPads[6], 0, -0.5, 0),
-		eda.Track(chipPads[7], leftPads[7], 0, -0.5, 0),
-		eda.Track(chipPads[8], leftPads[8], 0, -0.5, 0),
-		eda.Track(chipPads[9], leftPads[9], 0, -0.5, 0),
+		eda.LinearTrack(chipPads[0], leftPads[0]),
+		eda.LinearTrack(chipPads[1], leftPads[1], 0, -0.5, 0),
+		eda.LinearTrack(chipPads[2], leftPads[2], 0, -0.5, 0),
+		eda.LinearTrack(chipPads[3], leftPads[3], 0, -0.5, 0),
+		eda.LinearTrack(chipPads[4], leftPads[4], 0, -0.5, 0),
+		eda.LinearTrack(chipPads[5], leftPads[5], 0, -0.5, 0),
+		eda.LinearTrack(chipPads[6], leftPads[6], 0, -0.5, 0),
+		eda.LinearTrack(chipPads[7], leftPads[7], 0, -0.5, 0),
+		eda.LinearTrack(chipPads[8], leftPads[8], 0, -0.5, 0),
+		eda.LinearTrack(chipPads[9], leftPads[9], 0, -0.5, 0),
 
-		eda.Track(chipPads[10], leftPads[10], 0, -1.2, 0),
-		eda.Track(chipPads[11], leftPads[11], 0, -1e-9, -1e-9, -0.7, 0.5, 1.5, 0),
-		eda.Track(chipPads[12], leftPads[12], 0, -1e-9, -1e-9, -0.7, 1.0, 2.5, 0),
-		eda.Track(chipPads[13], leftPads[13], 0, -1e-9, -1e-9, -0.7, 1.5, 3.5, 0),
+		eda.LinearTrack(chipPads[10], leftPads[10], 0, -1.2, 0),
+		eda.LinearTrack(chipPads[11], leftPads[11], 0, -1e-9, -1e-9, -0.7, 0.5, 1.5, 0),
+		eda.LinearTrack(chipPads[12], leftPads[12], 0, -1e-9, -1e-9, -0.7, 1.0, 2.5, 0),
+		eda.LinearTrack(chipPads[13], leftPads[13], 0, -1e-9, -1e-9, -0.7, 1.5, 3.5, 0),
 	}
 
 	Board_nRF52840 = &eda.Component{
@@ -78,11 +78,11 @@ var (
 						TracksWidth: 0.3,
 
 						Tracks: path.Paths{
-							eda.Track(chipPads[4], chipPads[4].Move(2, 0)),
-							eda.Track(leftPads[4], leftPads[4].Move(-2, 0)),
+							eda.LinearTrack(chipPads[4], chipPads[4].Move(2, 0)),
+							eda.LinearTrack(leftPads[4], leftPads[4].Move(-2, 0)),
 
-							eda.Track(chipPads[15], chipPads[15].Move(0, 2)),
-							eda.Track(rightPads[12], rightPads[12].Move(2, 0)),
+							eda.LinearTrack(chipPads[15], chipPads[15].Move(0, 2)),
+							eda.LinearTrack(rightPads[12], rightPads[12].Move(2, 0)),
 						},
 					},
 				},

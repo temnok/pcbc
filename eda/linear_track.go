@@ -7,17 +7,16 @@ import (
 	"temnok/pcbc/path"
 )
 
-func Track(p0, p1 path.Point, steps ...float64) path.Path {
+func LinearTrack(p0, p1 path.Point, steps ...float64) path.Path {
 	if p0 == p1 {
-		return path.Path{}
+		return nil
 	}
 
 	x, y := p0.XY()
 	x1, y1 := p1.XY()
 	sx, sy := sign(x1-x), sign(y1-y)
 
-	p := path.Point{x, y}
-	out := path.Path{p}
+	out := []path.Point{{x, y}}
 
 	for i, step := range steps {
 		if i > 0 {
@@ -33,9 +32,7 @@ func Track(p0, p1 path.Point, steps ...float64) path.Path {
 			x += sx * step
 			y += sy * step
 
-			out = append(out, p)
-			p = path.Point{x, y}
-			out = append(out, p, p)
+			out = append(out, path.Point{x, y})
 		}
 	}
 
@@ -60,15 +57,11 @@ func Track(p0, p1 path.Point, steps ...float64) path.Path {
 				}
 			}
 
-			out = append(out, p)
-			p = path.Point{x + dx, y + dy}
-			out = append(out, p, p)
+			out = append(out, path.Point{x + dx, y + dy})
 		}
 
-		out = append(out, p)
-		p = path.Point{x1, y1}
-		out = append(out, p, p)
+		out = append(out, path.Point{x1, y1})
 	}
 
-	return out
+	return path.Linear(out)
 }

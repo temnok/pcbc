@@ -30,14 +30,14 @@ var (
 
 	tracks = &eda.Component{
 		Tracks: path.Paths{
-			eda.Track(pin[0], pad[0]),
-			eda.Track(pin[1], pad[1]),
-			eda.Track(pin[2], pad[2], 0, 0, 0.4, -0.4, -1e-9),
-			eda.Track(pin[3], pad[3]),
-			eda.Track(pin[4], pad[4]),
-			eda.Track(pin[5], pad[5]),
-			eda.Track(pin[6], pad[6]),
-			eda.Track(pin[7], pad[7]),
+			eda.LinearTrack(pin[0], pad[0]),
+			eda.LinearTrack(pin[1], pad[1]),
+			eda.LinearTrack(pin[2], pad[2], 0, 0, 0.4, -0.4, -1e-9),
+			eda.LinearTrack(pin[3], pad[3]),
+			eda.LinearTrack(pin[4], pad[4]),
+			eda.LinearTrack(pin[5], pad[5]),
+			eda.LinearTrack(pin[6], pad[6]),
+			eda.LinearTrack(pin[7], pad[7]),
 		},
 
 		Nested: eda.Components{
@@ -46,7 +46,7 @@ var (
 				TracksWidth: 0.3,
 
 				Tracks: path.Paths{
-					eda.Track(pad[8], pad[8].Move(1.2, 0), -1.2),
+					eda.LinearTrack(pad[8], pad[8].Move(1.2, 0), -1.2),
 				},
 			},
 		},

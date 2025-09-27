@@ -7,7 +7,8 @@ func Linear(points []Point) Path {
 		return nil
 	}
 
-	path := Path{points[0]}
+	path := make(Path, 1, len(points)*3-2)
+	path[0] = points[0]
 
 	for _, p := range points[1:] {
 		path = append(path, path[len(path)-1], p, p)

@@ -26,10 +26,10 @@ var MountHole = &eda.Component{
 					ClearOff: true,
 
 					Tracks: path.Paths{
-						eda.Track(path.Point{X: 1.25, Y: 0}, path.Point{X: 1.25 + 0.35, Y: 0}),
-						eda.Track(path.Point{X: -1.25, Y: 0}, path.Point{X: -1.25 - 0.35, Y: 0}),
-						eda.Track(path.Point{X: 0, Y: 1.25}, path.Point{X: 0, Y: 1.25 + 0.35}),
-						eda.Track(path.Point{X: 0, Y: -1.25}, path.Point{X: 0, Y: -1.25 - 0.35}),
+						eda.LinearTrack(path.Point{X: 1.25, Y: 0}, path.Point{X: 1.25 + 0.35, Y: 0}),
+						eda.LinearTrack(path.Point{X: -1.25, Y: 0}, path.Point{X: -1.25 - 0.35, Y: 0}),
+						eda.LinearTrack(path.Point{X: 0, Y: 1.25}, path.Point{X: 0, Y: 1.25 + 0.35}),
+						eda.LinearTrack(path.Point{X: 0, Y: -1.25}, path.Point{X: 0, Y: -1.25 - 0.35}),
 					},
 				},
 			},

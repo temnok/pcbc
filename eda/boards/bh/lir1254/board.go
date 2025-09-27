@@ -27,9 +27,9 @@ var (
 		ClearWidth:  0.3,
 
 		Tracks: path.Paths{
-			eda.Track(holdPads[0], connPads[2], 0, 2, -1e-9),
-			eda.Track(holdPads[1], connPads[10], -1e-9, -2, 0),
-			eda.Track(connPads[0].Move(0, -1), connPads[12].Move(0, -1)),
+			eda.LinearTrack(holdPads[0], connPads[2], 0, 2, -1e-9),
+			eda.LinearTrack(holdPads[1], connPads[10], -1e-9, -2, 0),
+			eda.LinearTrack(connPads[0].Move(0, -1), connPads[12].Move(0, -1)),
 		},
 
 		Nested: eda.Components{
