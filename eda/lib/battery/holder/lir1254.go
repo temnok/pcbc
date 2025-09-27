@@ -23,9 +23,9 @@ var LIR1254 = &eda.Component{
 		{
 			ClearOff: true,
 
-			Tracks: eda.Tracks(
-				eda.Track{{X: -2, Y: -2}, {X: 2, Y: 2}},
-				eda.Track{{X: 2, Y: -2}, {X: -2, Y: 2}},
+			Tracks: eda.DeprecatedTracks(
+				eda.DeprecatedTrack{{X: -2, Y: -2}, {X: 2, Y: 2}},
+				eda.DeprecatedTrack{{X: 2, Y: -2}, {X: -2, Y: 2}},
 			),
 		},
 	},

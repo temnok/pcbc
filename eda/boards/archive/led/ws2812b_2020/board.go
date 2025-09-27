@@ -38,16 +38,16 @@ var Board = &eda.Component{
 func init() {
 	pad := Board.PadCenters()
 
-	Board.Tracks = eda.Tracks(
-		eda.Track{pad[3]}.DY(1.5).XY(pad[5]),
-		eda.Track{pad[4]}.DY(-1.5).XY(pad[6]),
+	Board.Tracks = eda.DeprecatedTracks(
+		eda.DeprecatedTrack{pad[3]}.DY(1.5).XY(pad[5]),
+		eda.DeprecatedTrack{pad[4]}.DY(-1.5).XY(pad[6]),
 	)
 
 	Board.Nested = append(Board.Nested, &eda.Component{
 		ClearOff: true,
 
-		Tracks: eda.Tracks(
-			eda.Track{pad[2]}.DY(0.5).XY(pad[9]),
+		Tracks: eda.DeprecatedTracks(
+			eda.DeprecatedTrack{pad[2]}.DY(0.5).XY(pad[9]),
 		),
 	})
 }

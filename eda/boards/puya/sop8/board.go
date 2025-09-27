@@ -37,20 +37,20 @@ var (
 			{
 				ClearOff: true,
 
-				Tracks: eda.Tracks(
-					eda.Track{pin[7]}.DY(-1).DY(2),
+				Tracks: eda.DeprecatedTracks(
+					eda.DeprecatedTrack{pin[7]}.DY(-1).DY(2),
 				),
 			},
 		},
 
-		Tracks: eda.Tracks(
-			eda.Track{pin[0]}.DY(0.8).YX(pad[3]),
-			eda.Track{pin[1]}.DY(0.8).YX(pad[4]),
-			eda.Track{pin[2]}.DY(0.8).DY(0.3).DX(2.2).YX(pad[5]),
-			eda.Track{pin[3]}.YX(pad[6]),
-			eda.Track{pin[4]}.YX(pad[0]),
-			eda.Track{pin[5]}.DY(-0.8).DY(-0.3).DX(2.2).YX(pad[1]),
-			eda.Track{pin[6]}.DY(-0.8).YX(pad[2]),
+		Tracks: eda.DeprecatedTracks(
+			eda.DeprecatedTrack{pin[0]}.DY(0.8).YX(pad[3]),
+			eda.DeprecatedTrack{pin[1]}.DY(0.8).YX(pad[4]),
+			eda.DeprecatedTrack{pin[2]}.DY(0.8).DY(0.3).DX(2.2).YX(pad[5]),
+			eda.DeprecatedTrack{pin[3]}.YX(pad[6]),
+			eda.DeprecatedTrack{pin[4]}.YX(pad[0]),
+			eda.DeprecatedTrack{pin[5]}.DY(-0.8).DY(-0.3).DX(2.2).YX(pad[1]),
+			eda.DeprecatedTrack{pin[6]}.DY(-0.8).YX(pad[2]),
 		),
 	}
 )

@@ -49,31 +49,31 @@ var (
 			{
 				ClearOff: true,
 
-				Tracks: eda.Tracks(
-					eda.Track{mountPad[2]}.YX(pad[8]).DX(-1.3),
-					eda.Track{mountPad[4]}.YX(pad[17]).DX(1.3),
+				Tracks: eda.DeprecatedTracks(
+					eda.DeprecatedTrack{mountPad[2]}.YX(pad[8]).DX(-1.3),
+					eda.DeprecatedTrack{mountPad[4]}.YX(pad[17]).DX(1.3),
 				),
 			},
 		},
 
-		Tracks: eda.Tracks(
-			eda.Track{pin[0]}.YX(pad[0]),
-			eda.Track{pin[1]}.YX(pad[1]),
-			eda.Track{pin[2]}.DY(0.3).DX(-1.3).YX(pad[2]),
-			eda.Track{pin[3]}.YX(pad[3]),
-			eda.Track{pin[4]}.YX(pad[4]),
-			eda.Track{pin[5]}.YX(pad[5]),
-			eda.Track{pin[6]}.YX(pad[6]),
-			eda.Track{pin[7]}.YX(pad[7]),
+		Tracks: eda.DeprecatedTracks(
+			eda.DeprecatedTrack{pin[0]}.YX(pad[0]),
+			eda.DeprecatedTrack{pin[1]}.YX(pad[1]),
+			eda.DeprecatedTrack{pin[2]}.DY(0.3).DX(-1.3).YX(pad[2]),
+			eda.DeprecatedTrack{pin[3]}.YX(pad[3]),
+			eda.DeprecatedTrack{pin[4]}.YX(pad[4]),
+			eda.DeprecatedTrack{pin[5]}.YX(pad[5]),
+			eda.DeprecatedTrack{pin[6]}.YX(pad[6]),
+			eda.DeprecatedTrack{pin[7]}.YX(pad[7]),
 
-			eda.Track{pin[8]}.YX(pad[16]),
-			eda.Track{pin[9]}.YX(pad[15]),
-			eda.Track{pin[10]}.YX(pad[14]),
-			eda.Track{pin[11]}.YX(pad[13]),
-			eda.Track{pin[12]}.YX(pad[12]),
-			eda.Track{pin[13]}.DY(0.3).DX(1.3).YX(pad[11]),
-			eda.Track{pin[14]}.YX(pad[10]),
-			eda.Track{pin[15]}.YX(pad[9]),
+			eda.DeprecatedTrack{pin[8]}.YX(pad[16]),
+			eda.DeprecatedTrack{pin[9]}.YX(pad[15]),
+			eda.DeprecatedTrack{pin[10]}.YX(pad[14]),
+			eda.DeprecatedTrack{pin[11]}.YX(pad[13]),
+			eda.DeprecatedTrack{pin[12]}.YX(pad[12]),
+			eda.DeprecatedTrack{pin[13]}.DY(0.3).DX(1.3).YX(pad[11]),
+			eda.DeprecatedTrack{pin[14]}.YX(pad[10]),
+			eda.DeprecatedTrack{pin[15]}.YX(pad[9]),
 		),
 	}
 )

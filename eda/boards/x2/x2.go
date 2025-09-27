@@ -43,16 +43,16 @@ func X2(topLabel, bottomLabel string, chip *eda.Component) *eda.Component {
 			{
 				ClearOff: true,
 
-				Tracks: eda.Tracks(
-					eda.Track{pad[1]}.DX(-1.2),
-					eda.Track{pad[1]}.DX(1.2),
+				Tracks: eda.DeprecatedTracks(
+					eda.DeprecatedTrack{pad[1]}.DX(-1.2),
+					eda.DeprecatedTrack{pad[1]}.DX(1.2),
 				),
 			},
 		},
 
-		Tracks: eda.Tracks(
-			eda.Track{pad[0]}.XY(pin[0]),
-			eda.Track{pad[2]}.XY(pin[1]),
+		Tracks: eda.DeprecatedTracks(
+			eda.DeprecatedTrack{pad[0]}.XY(pin[0]),
+			eda.DeprecatedTrack{pad[2]}.XY(pin[1]),
 		),
 	}
 }

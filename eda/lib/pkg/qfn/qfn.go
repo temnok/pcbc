@@ -36,8 +36,8 @@ func init() {
 
 				TracksWidth: 0.25,
 
-				Tracks: eda.Tracks(
-					eda.Track{{X: -1.5, Y: 1.5}, {X: 1.5, Y: -1.5}},
+				Tracks: eda.DeprecatedTracks(
+					eda.DeprecatedTrack{{X: -1.5, Y: 1.5}, {X: 1.5, Y: -1.5}},
 				),
 			},
 

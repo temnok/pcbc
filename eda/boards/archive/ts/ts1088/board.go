@@ -29,8 +29,8 @@ var Board = &eda.Component{
 func init() {
 	pad := Board.PadCenters()
 
-	Board.Tracks = eda.Tracks(
-		eda.Track{pad[0]}.XY(pad[2]),
-		eda.Track{pad[1]}.XY(pad[3]),
+	Board.Tracks = eda.DeprecatedTracks(
+		eda.DeprecatedTrack{pad[0]}.XY(pad[2]),
+		eda.DeprecatedTrack{pad[1]}.XY(pad[3]),
 	)
 }

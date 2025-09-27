@@ -35,37 +35,37 @@ var (
 			path.RoundRect(23, 14, 1.5),
 		},
 
-		Tracks: eda.Tracks(
-			eda.TrackV2(chipPads[1], leftPads[3]),
-			eda.TrackV2(chipPads[2], leftPads[4]),
-			eda.TrackV2(chipPads[3], leftPads[5]),
-			eda.TrackV2(chipPads[4], leftPads[6]),
+		Tracks: path.Paths{
+			eda.Track(chipPads[1], leftPads[3]),
+			eda.Track(chipPads[2], leftPads[4]),
+			eda.Track(chipPads[3], leftPads[5]),
+			eda.Track(chipPads[4], leftPads[6]),
 
-			eda.TrackV2(chipPads[6], leftPads[2], 0, 1, -0.7, -0.6, 0),
-			eda.TrackV2(chipPads[7], leftPads[1], 0, 0, 0.7, -1.45, -1.05, -1.3, 0),
-			eda.TrackV2(chipPads[8], leftPads[0], 0, 0, 1.4, -2, 0),
+			eda.Track(chipPads[6], leftPads[2], 0, 1, -0.7, -0.6, 0),
+			eda.Track(chipPads[7], leftPads[1], 0, 0, 0.7, -1.45, -1.05, -1.3, 0),
+			eda.Track(chipPads[8], leftPads[0], 0, 0, 1.4, -2, 0),
 
-			eda.TrackV2(chipPads[9], leftPads[10]),
-			eda.TrackV2(chipPads[10], leftPads[11]),
+			eda.Track(chipPads[9], leftPads[10]),
+			eda.Track(chipPads[10], leftPads[11]),
 
-			eda.TrackV2(chipPads[11], rightPads[11]),
-			eda.TrackV2(chipPads[12], rightPads[10]),
-			eda.TrackV2(chipPads[13], rightPads[9]),
-			eda.TrackV2(chipPads[14], rightPads[8]),
+			eda.Track(chipPads[11], rightPads[11]),
+			eda.Track(chipPads[12], rightPads[10]),
+			eda.Track(chipPads[13], rightPads[9]),
+			eda.Track(chipPads[14], rightPads[8]),
 
-			eda.TrackV2(chipPads[15], rightPads[6]),
-			eda.TrackV2(chipPads[16], rightPads[5]),
-			eda.TrackV2(chipPads[17], rightPads[4]),
-			eda.TrackV2(chipPads[18], rightPads[3]),
-			eda.TrackV2(chipPads[19], rightPads[7]),
+			eda.Track(chipPads[15], rightPads[6]),
+			eda.Track(chipPads[16], rightPads[5]),
+			eda.Track(chipPads[17], rightPads[4]),
+			eda.Track(chipPads[18], rightPads[3]),
+			eda.Track(chipPads[19], rightPads[7]),
 
-			eda.TrackV2(chipPads[20], leftPads[9], 2.3, 2, -1e-9),
-			eda.TrackV2(chipPads[21], leftPads[8], 2.7, 2, -1e-9),
+			eda.Track(chipPads[20], leftPads[9], 2.3, 2, -1e-9),
+			eda.Track(chipPads[21], leftPads[8], 2.7, 2, -1e-9),
 
-			eda.TrackV2(chipPads[22], rightPads[2], 0, -1e-9, -0.7, 0.6, 0),
-			eda.TrackV2(chipPads[23], rightPads[1], 1.2, 1.5, 0),
-			eda.TrackV2(chipPads[24], rightPads[0]),
-		),
+			eda.Track(chipPads[22], rightPads[2], 0, -1e-9, -0.7, 0.6, 0),
+			eda.Track(chipPads[23], rightPads[1], 1.2, 1.5, 0),
+			eda.Track(chipPads[24], rightPads[0]),
+		},
 
 		Nested: eda.Components{
 			chip,
@@ -80,15 +80,15 @@ var (
 				ClearOff:    true,
 				TracksWidth: 0.35,
 
-				Tracks: eda.Tracks(
-					eda.TrackV2(chipPads[5], chipPads[5].Move(1, 0)),
-					eda.TrackV2(chipPads[5], leftPads[7]),
-					eda.TrackV2(leftPads[7], leftPads[7].Move(-2, 0)),
+				Tracks: path.Paths{
+					eda.Track(chipPads[5], chipPads[5].Move(1, 0)),
+					eda.Track(chipPads[5], leftPads[7]),
+					eda.Track(leftPads[7], leftPads[7].Move(-2, 0)),
 
-					eda.TrackV2(chipPads[26], chipPads[26].Move(0, 2)),
-					eda.TrackV2(chipPads[26], chipPads[26].Move(-2, 0)),
-					eda.TrackV2(chipPads[26], chipPads[26].Move(-2, 2)),
-				),
+					eda.Track(chipPads[26], chipPads[26].Move(0, 2)),
+					eda.Track(chipPads[26], chipPads[26].Move(-2, 0)),
+					eda.Track(chipPads[26], chipPads[26].Move(-2, 2)),
+				},
 			},
 
 			boards.MountHole.Arrange(transform.Move(0, -4.7)),

@@ -12,10 +12,10 @@ import (
 )
 
 var boardTop = &eda.Component{
-	Tracks: eda.Tracks(
-		eda.Track{{-7.5, 2.75}}.DY(-5.5).DX(3.5).DY(-3),
-		eda.Track{{7.5, 2.75}}.DY(-5.5).DX(-3.5).DY(-3),
-		eda.Track{{-6, -6.2}, {6, -6.2}},
+	Tracks: eda.DeprecatedTracks(
+		eda.DeprecatedTrack{{-7.5, 2.75}}.DY(-5.5).DX(3.5).DY(-3),
+		eda.DeprecatedTrack{{7.5, 2.75}}.DY(-5.5).DX(-3.5).DY(-3),
+		eda.DeprecatedTrack{{-6, -6.2}, {6, -6.2}},
 	),
 
 	Nested: eda.Components{

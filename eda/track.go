@@ -5,100 +5,70 @@ package eda
 import (
 	"math"
 	"temnok/pcbc/path"
-	"temnok/pcbc/transform"
 )
 
-type Track []path.Point
-
-func Tracks(tracks ...Track) path.Paths {
-	res := make(path.Paths, len(tracks))
-
-	for i, track := range tracks {
-		res[i] = path.Linear(track)
+func Track(p0, p1 path.Point, steps ...float64) path.Path {
+	if p0 == p1 {
+		return path.Path{}
 	}
 
-	return res
-}
+	x, y := p0.XY()
+	x1, y1 := p1.XY()
+	sx, sy := sign(x1-x), sign(y1-y)
 
-func (track Track) Apply(t transform.T) Track {
-	return Track(path.Path(track).Transform(t))
-}
+	p := path.Point{x, y}
+	out := path.Path{p}
 
-func (track Track) X(x float64) Track {
-	n := len(track)
+	for i, step := range steps {
+		if i > 0 {
+			if turnLeft := math.Signbit(step); turnLeft {
+				step = -step
+				sx, sy = sign(sx-sy), sign(sy+sx)
+			} else {
+				sx, sy = sign(sx+sy), sign(sy-sx)
+			}
+		}
 
-	switch {
-	case n == 0:
-		return append(track, path.Point{X: x})
-	case n == 1:
-		return append(track, path.Point{X: x, Y: track[0].Y})
-	}
+		if step != 0 {
+			x += sx * step
+			y += sy * step
 
-	track = append(track, path.Point{X: x, Y: track[n-1].Y})
-
-	if track[n-2].X == track[n-1].X {
-		dx := track[n].X - track[n-1].X
-		dy := track[n-1].Y - track[n-2].Y
-
-		if ax, ay := math.Abs(dx), math.Abs(dy); ax <= ay {
-			track[n-1].Y -= sign(dy) * ax
-		} else {
-			track[n-1].X += sign(dx) * ay
+			out = append(out, p)
+			p = path.Point{x, y}
+			out = append(out, p, p)
 		}
 	}
 
-	return track
-}
+	if x != x1 || y != y1 {
+		dx, dy := x1-x, y1-y
+		sdx, sdy := sign(dx), sign(dy)
+		dx, dy = dx*sdx, dy*sdy
+		//fmt.Printf("dx=%v dy=%v sdx=%v sdy=%v sx=%v sy=%v\n", dx, dy, sdx, sdy, sx, sy)
 
-func (track Track) Y(y float64) Track {
-	n := len(track)
+		if dx != 0 && dy != 0 && dx != dy {
+			if sx != 0 && sy != 0 {
+				if dx > dy {
+					dx, dy = sdx*dy, sdy*dy
+				} else {
+					dy, dx = sdy*dx, sdx*dx
+				}
+			} else {
+				if dx > dy {
+					dx, dy = sdx*(dx-dy), 0
+				} else {
+					dy, dx = sdy*(dy-dx), 0
+				}
+			}
 
-	switch {
-	case n == 0:
-		return append(track, path.Point{Y: y})
-	case n == 1:
-		return append(track, path.Point{X: track[0].X, Y: y})
-	}
-
-	track = append(track, path.Point{X: track[n-1].X, Y: y})
-
-	if track[n-2].Y == track[n-1].Y {
-		dy := track[n].Y - track[n-1].Y
-		dx := track[n-1].X - track[n-2].X
-
-		if ay, ax := math.Abs(dy), math.Abs(dx); ay <= ax {
-			track[n-1].X -= sign(dx) * ay
-		} else {
-			track[n-1].Y += sign(dy) * ax
+			out = append(out, p)
+			p = path.Point{x + dx, y + dy}
+			out = append(out, p, p)
 		}
+
+		out = append(out, p)
+		p = path.Point{x1, y1}
+		out = append(out, p, p)
 	}
 
-	return track
-}
-
-func (track Track) DX(dx float64) Track {
-	return track.X(track[len(track)-1].X + dx)
-}
-
-func (track Track) DY(dy float64) Track {
-	return track.Y(track[len(track)-1].Y + dy)
-}
-
-func (track Track) XY(p path.Point) Track {
-	return track.X(p.X).Y(p.Y)
-}
-
-func (track Track) YX(p path.Point) Track {
-	return track.Y(p.Y).X(p.X)
-}
-
-func sign(val float64) float64 {
-	switch {
-	case val < 0:
-		return -1
-	case val > 0:
-		return 1
-	default:
-		return 0
-	}
+	return out
 }
