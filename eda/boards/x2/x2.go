@@ -29,7 +29,7 @@ func X2(topLabel, bottomLabel string, chip *eda.Component) *eda.Component {
 
 	return &eda.Component{
 		Cuts: path.Paths{
-			path.RoundRect(9.75, 3.75, 0.5),
+			path.RoundRect(9.75, 3.75, 0.75),
 		},
 
 		Nested: eda.Components{
