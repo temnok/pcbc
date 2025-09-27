@@ -7,6 +7,16 @@ import (
 	"temnok/pcbc/path"
 )
 
+/*
+
+3x2: 22x20
+2x2: 35x20
+3x1: 22x45
+2x1: 35x45
+1x1: 75x45
+
+*/
+
 var (
 	Board35x45 = &eda.Component{
 		CutsOuter: true,

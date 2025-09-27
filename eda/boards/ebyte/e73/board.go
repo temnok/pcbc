@@ -3,7 +3,6 @@
 package e73
 
 import (
-	"math"
 	"temnok/pcbc/eda"
 	"temnok/pcbc/eda/boards"
 	"temnok/pcbc/eda/lib/ebyte"
@@ -13,8 +12,6 @@ import (
 )
 
 var (
-	n0 = math.Copysign(0, -1)
-
 	e73      = ebyte.E73.Arrange(transform.Move(0, 3.07))
 	chipPads = e73.PadCenters()
 
@@ -32,20 +29,20 @@ var (
 
 	leftTracks = eda.Tracks(
 		eda.TrackV2(chipPads[0], leftPads[0]),
-		eda.TrackV2(chipPads[1], leftPads[1], -0.5, 0),
-		eda.TrackV2(chipPads[2], leftPads[2], -0.5, 0),
-		eda.TrackV2(chipPads[3], leftPads[3], -0.5, 0),
-		eda.TrackV2(chipPads[4], leftPads[4], -0.5, 0),
-		eda.TrackV2(chipPads[5], leftPads[5], -0.5, 0),
-		eda.TrackV2(chipPads[6], leftPads[6], -0.5, 0),
-		eda.TrackV2(chipPads[7], leftPads[7], -0.5, 0),
-		eda.TrackV2(chipPads[8], leftPads[8], -0.5, 0),
-		eda.TrackV2(chipPads[9], leftPads[9], -0.5, 0),
+		eda.TrackV2(chipPads[1], leftPads[1], 0, -0.5, 0),
+		eda.TrackV2(chipPads[2], leftPads[2], 0, -0.5, 0),
+		eda.TrackV2(chipPads[3], leftPads[3], 0, -0.5, 0),
+		eda.TrackV2(chipPads[4], leftPads[4], 0, -0.5, 0),
+		eda.TrackV2(chipPads[5], leftPads[5], 0, -0.5, 0),
+		eda.TrackV2(chipPads[6], leftPads[6], 0, -0.5, 0),
+		eda.TrackV2(chipPads[7], leftPads[7], 0, -0.5, 0),
+		eda.TrackV2(chipPads[8], leftPads[8], 0, -0.5, 0),
+		eda.TrackV2(chipPads[9], leftPads[9], 0, -0.5, 0),
 
-		eda.TrackV2(chipPads[10], leftPads[10], -1.2, 0),
-		eda.TrackV2(chipPads[11], leftPads[11], n0, n0, -0.7, 0.5, 1.5, 0),
-		eda.TrackV2(chipPads[12], leftPads[12], n0, n0, -0.7, 1.0, 2.5, 0),
-		eda.TrackV2(chipPads[13], leftPads[13], n0, n0, -0.7, 1.5, 3.5, 0),
+		eda.TrackV2(chipPads[10], leftPads[10], 0, -1.2, 0),
+		eda.TrackV2(chipPads[11], leftPads[11], 0, -1e-9, -1e-9, -0.7, 0.5, 1.5, 0),
+		eda.TrackV2(chipPads[12], leftPads[12], 0, -1e-9, -1e-9, -0.7, 1.0, 2.5, 0),
+		eda.TrackV2(chipPads[13], leftPads[13], 0, -1e-9, -1e-9, -0.7, 1.5, 3.5, 0),
 	)
 
 	Board_nRF52840 = &eda.Component{
@@ -61,8 +58,8 @@ var (
 			{
 				Nested: eda.Components{
 					boards.Logo.Arrange(transform.Scale(1.6, 1.6).Move(-13, -7.1)),
-					eda.CenteredText("E73-2G4M08S1C").Arrange(transform.Scale(2, 1.6).Move(0, -7.4)),
-					eda.CenteredText("nRF52840").Arrange(transform.Scale(2, 1.2).Move(0, -8.6)),
+					eda.CenteredText("E73-2G4M08S1C").Arrange(transform.Scale(2, 1.6).Move(0, -7.5)),
+					eda.CenteredText("nRF52840").Arrange(transform.Scale(2, 1.2).Move(0, -8.7)),
 					boards.Firm.Arrange(transform.Scale(0.9, 0.9).Move(13, -7.2)),
 
 					e73,

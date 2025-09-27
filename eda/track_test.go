@@ -36,8 +36,8 @@ func TestTrack(t *testing.T) {
 		},
 
 		{
-			p0: path.Point{0, 0}, p1: path.Point{1, 2}, steps: []float64{-1, +1},
-			want: Track{{0, 0}, {0, 1}, {1, 2}},
+			p0: path.Point{0, 0}, p1: path.Point{1, 1}, steps: []float64{1},
+			want: Track{{0, 0}, {1, 1}},
 		},
 
 		{
@@ -46,18 +46,18 @@ func TestTrack(t *testing.T) {
 		},
 
 		{
-			p0: path.Point{0, 0}, p1: path.Point{1, 2}, steps: []float64{-1},
-			want: Track{{0, 0}, {0, 1}, {1, 2}},
+			p0: path.Point{0, 0}, p1: path.Point{1, 2}, steps: []float64{1},
+			want: Track{{0, 0}, {1, 1}, {1, 2}},
 		},
 
 		{
-			p0: path.Point{0, 0}, p1: path.Point{1, 2}, steps: []float64{1},
+			p0: path.Point{0, 0}, p1: path.Point{1, 2}, steps: []float64{0, 1},
 			want: Track{{0, 0}, {1, 0}, {1, 2}},
 		},
 
 		{
-			p0: path.Point{-6, 5}, p1: path.Point{-10, 6}, steps: []float64{-1},
-			want: Track{{-6, 5}, {-7, 5}, {-9, 5}, {-10, 6}},
+			p0: path.Point{0, 0}, p1: path.Point{2, 2}, steps: []float64{0, 1, -1, -1},
+			want: Track{{0, 0}, {1, 0}, {2, 1}, {2, 2}},
 		},
 	}
 

@@ -18,17 +18,21 @@ func TrackV2(p0, p1 path.Point, steps ...float64) Track {
 
 	out := Track{{x, y}}
 
-	for _, step := range steps {
-		if turnLeft := math.Signbit(step); turnLeft {
-			step = -step
-			sx, sy = sign(sx-sy), sign(sy+sx)
-		} else {
-			sx, sy = sign(sx+sy), sign(sy-sx)
+	for i, step := range steps {
+		if i > 0 {
+			if turnLeft := math.Signbit(step); turnLeft {
+				step = -step
+				sx, sy = sign(sx-sy), sign(sy+sx)
+			} else {
+				sx, sy = sign(sx+sy), sign(sy-sx)
+			}
 		}
 
-		x += sx * step
-		y += sy * step
-		out = append(out, path.Point{x, y})
+		if step != 0 {
+			x += sx * step
+			y += sy * step
+			out = append(out, path.Point{x, y})
+		}
 	}
 
 	if x != x1 || y != y1 {

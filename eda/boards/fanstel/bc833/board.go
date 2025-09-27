@@ -41,9 +41,9 @@ var (
 			eda.TrackV2(chipPads[3], leftPads[5]),
 			eda.TrackV2(chipPads[4], leftPads[6]),
 
-			eda.TrackV2(chipPads[6], leftPads[2], 1, -0.7, -0.6, 0),
-			eda.TrackV2(chipPads[7], leftPads[1], 0, 0.7, -1.45, -1.05, -1.3, 0),
-			eda.TrackV2(chipPads[8], leftPads[0], 0, 1.4, -2, 0),
+			eda.TrackV2(chipPads[6], leftPads[2], 0, 1, -0.7, -0.6, 0),
+			eda.TrackV2(chipPads[7], leftPads[1], 0, 0, 0.7, -1.45, -1.05, -1.3, 0),
+			eda.TrackV2(chipPads[8], leftPads[0], 0, 0, 1.4, -2, 0),
 
 			eda.TrackV2(chipPads[9], leftPads[10]),
 			eda.TrackV2(chipPads[10], leftPads[11]),
@@ -59,11 +59,11 @@ var (
 			eda.TrackV2(chipPads[18], rightPads[3]),
 			eda.TrackV2(chipPads[19], rightPads[7]),
 
-			eda.TrackV2(chipPads[20], leftPads[9], -0.01, 2.3, 2, -0.01),
-			eda.TrackV2(chipPads[21], leftPads[8], -0.01, 2.7, 2, -0.01),
+			eda.TrackV2(chipPads[20], leftPads[9], 2.3, 2, -1e-9),
+			eda.TrackV2(chipPads[21], leftPads[8], 2.7, 2, -1e-9),
 
-			eda.TrackV2(chipPads[22], rightPads[2], -0.01, -0.7, 0.6, 0),
-			eda.TrackV2(chipPads[23], rightPads[1], -0.01, 1.2, 1.5, 0),
+			eda.TrackV2(chipPads[22], rightPads[2], 0, -1e-9, -0.7, 0.6, 0),
+			eda.TrackV2(chipPads[23], rightPads[1], 1.2, 1.5, 0),
 			eda.TrackV2(chipPads[24], rightPads[0]),
 		),
 
