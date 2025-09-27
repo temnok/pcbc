@@ -42,20 +42,20 @@ var (
 
 				TracksWidth: 0.3,
 
-				Tracks: eda.DeprecatedTracks(
-					eda.DeprecatedTrack{pin[7]}.DY(-1).DY(2),
-				),
+				Tracks: path.Paths{
+					eda.LinearTrack(pin[7], pin[7].Move(0, 1), -1),
+				},
 			},
 		},
 
-		Tracks: eda.DeprecatedTracks(
-			eda.DeprecatedTrack{pin[0]}.DY(0.8).YX(pad[3]),
-			eda.DeprecatedTrack{pin[1]}.DY(0.8).YX(pad[4]),
-			eda.DeprecatedTrack{pin[2]}.DY(0.8).DY(0.3).DX(2.2).YX(pad[5]),
-			eda.DeprecatedTrack{pin[3]}.YX(pad[6]),
-			eda.DeprecatedTrack{pin[4]}.YX(pad[0]),
-			eda.DeprecatedTrack{pin[5]}.DY(-0.8).DY(-0.3).DX(2.2).YX(pad[1]),
-			eda.DeprecatedTrack{pin[6]}.DY(-0.8).YX(pad[2]),
-		),
+		Tracks: path.Paths{
+			eda.LinearTrack(pin[0], pad[3]),
+			eda.LinearTrack(pin[1], pad[4]),
+			eda.LinearTrack(pin[2], pad[5], 0.9, 0.7),
+			eda.LinearTrack(pin[3], pad[6]),
+			eda.LinearTrack(pin[4], pad[0]),
+			eda.LinearTrack(pin[5], pad[1], 0.9, -0.7),
+			eda.LinearTrack(pin[6], pad[2]),
+		},
 	}
 )

@@ -17,7 +17,7 @@ func X2_I0402(topLabel, bottomLabel string) *eda.Component {
 
 func X2(topLabel, bottomLabel string, chip *eda.Component) *eda.Component {
 	logo := boards.Logo.Arrange(transform.ScaleUniformly(0.9).Move(0.8, 1.1))
-	rev := boards.Rev(2025, 6, 7).Arrange(transform.ScaleUniformly(0.5).Move(4.15, -1.5))
+	rev := boards.Rev(2025, 9, 27).Arrange(transform.ScaleUniformly(0.5).Move(4.15, -1.5))
 
 	header := greenconn.CSCC118(3, false, []string{topLabel, "GND", bottomLabel}).Arrange(transform.Move(-2, 0))
 	pad := header.PadCenters()
@@ -43,16 +43,17 @@ func X2(topLabel, bottomLabel string, chip *eda.Component) *eda.Component {
 			{
 				ClearOff: true,
 
-				Tracks: eda.DeprecatedTracks(
-					eda.DeprecatedTrack{pad[1]}.DX(-1.2),
-					eda.DeprecatedTrack{pad[1]}.DX(1.2),
-				),
+				TracksWidth: 0.3,
+
+				Tracks: path.Paths{
+					eda.LinearTrack(pad[1], pad[1].Move(1.2, 0), -1.2),
+				},
 			},
 		},
 
-		Tracks: eda.DeprecatedTracks(
-			eda.DeprecatedTrack{pad[0]}.XY(pin[0]),
-			eda.DeprecatedTrack{pad[2]}.XY(pin[1]),
-		),
+		Tracks: path.Paths{
+			eda.LinearTrack(pad[0], pin[0]),
+			eda.LinearTrack(pad[2], pin[1]),
+		},
 	}
 }
