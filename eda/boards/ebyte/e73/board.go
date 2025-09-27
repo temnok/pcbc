@@ -69,7 +69,7 @@ var (
 					{
 						Tracks: append(
 							leftTracks,
-							leftTracks.Transform(transform.MirrorX())...,
+							leftTracks.Transform(transform.MirrorX)...,
 						),
 					},
 

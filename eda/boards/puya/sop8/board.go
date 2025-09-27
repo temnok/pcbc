@@ -31,11 +31,16 @@ var (
 			chip,
 			header,
 
-			eda.CenteredText("PY32").Arrange(transform.Scale(1.3, 2.8).Move(-5, 2.5)),
-			eda.CenteredText("F002A").Arrange(transform.Scale(1.1, 2.8).Move(-5, -2.5)),
+			eda.CenteredText("PY32").Arrange(transform.ScaleUniformly(1.3).Move(-5, 3.1)),
+			eda.CenteredText("F002A").Arrange(transform.Scale(1.05, 1.3).Move(-5, 2.1)),
+			boards.Logo.Arrange(transform.ScaleUniformly(1.3).Move(-5.8, -2.6)),
+			boards.Firm.Arrange(transform.ScaleUniformly(0.5).Move(-4, -2.6)),
+			boards.Rev(2025, 9, 27).Arrange(transform.ScaleUniformly(0.7).Move(2, -3.6)),
 
 			{
 				ClearOff: true,
+
+				TracksWidth: 0.3,
 
 				Tracks: eda.DeprecatedTracks(
 					eda.DeprecatedTrack{pin[7]}.DY(-1).DY(2),

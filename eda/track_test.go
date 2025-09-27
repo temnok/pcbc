@@ -89,6 +89,15 @@ func TestTrack(t *testing.T) {
 				{2, 2}, {2, 2},
 			},
 		},
+
+		{
+			p0: path.Point{0, 0}, p1: path.Point{1, 0}, steps: []float64{-1},
+			want: path.Path{
+				{0, 0}, {0, 0},
+				{-1, 0}, {-1, 0}, {-1, 0},
+				{1, 0}, {1, 0},
+			},
+		},
 	}
 
 	for _, test := range tests {

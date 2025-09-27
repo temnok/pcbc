@@ -12,8 +12,7 @@ import (
 )
 
 var (
-	mount    = boards.MountHole.Arrange(transform.RotateDegrees(90).Move(0, -2.75))
-	mountPad = mount.PadCenters()
+	mount = boards.MountHole.Arrange(transform.RotateDegrees(90).Move(0, -2.75))
 
 	chip = qfn.QFN16G.Arrange(transform.RotateDegrees(-45).Move(0, 1.2))
 	pin  = chip.PadCenters()
@@ -28,6 +27,30 @@ var (
 		},
 	}
 	pad = header.PadCenters()
+
+	tracks = &eda.Component{
+		Tracks: path.Paths{
+			eda.Track(pin[0], pad[0]),
+			eda.Track(pin[1], pad[1]),
+			eda.Track(pin[2], pad[2], 0, 0, 0.4, -0.4, -1e-9),
+			eda.Track(pin[3], pad[3]),
+			eda.Track(pin[4], pad[4]),
+			eda.Track(pin[5], pad[5]),
+			eda.Track(pin[6], pad[6]),
+			eda.Track(pin[7], pad[7]),
+		},
+
+		Nested: eda.Components{
+			{
+				ClearOff:    true,
+				TracksWidth: 0.3,
+
+				Tracks: path.Paths{
+					eda.Track(pad[8], pad[8].Move(1.2, 0), -1.2),
+				},
+			},
+		},
+	}
 
 	Board = &eda.Component{
 		Cuts: path.Paths{
@@ -44,36 +67,10 @@ var (
 			eda.CenteredText("PY32").Arrange(transform.Scale(1.4, 1.6).Move(0, 4.1)),
 			eda.CenteredText("F002A").Arrange(transform.Scale(1.2, 0.75).Move(0, -4.45)),
 
-			boards.Rev(2025, 9, 21).Arrange(transform.ScaleUniformly(0.5).Move(6, -4.55)),
+			boards.Rev(2025, 9, 27).Arrange(transform.ScaleUniformly(0.5).Move(6, -4.55)),
 
-			{
-				ClearOff: true,
-
-				Tracks: eda.DeprecatedTracks(
-					eda.DeprecatedTrack{mountPad[2]}.YX(pad[8]).DX(-1.3),
-					eda.DeprecatedTrack{mountPad[4]}.YX(pad[17]).DX(1.3),
-				),
-			},
+			tracks,
+			tracks.Arrange(transform.MirrorX),
 		},
-
-		Tracks: eda.DeprecatedTracks(
-			eda.DeprecatedTrack{pin[0]}.YX(pad[0]),
-			eda.DeprecatedTrack{pin[1]}.YX(pad[1]),
-			eda.DeprecatedTrack{pin[2]}.DY(0.3).DX(-1.3).YX(pad[2]),
-			eda.DeprecatedTrack{pin[3]}.YX(pad[3]),
-			eda.DeprecatedTrack{pin[4]}.YX(pad[4]),
-			eda.DeprecatedTrack{pin[5]}.YX(pad[5]),
-			eda.DeprecatedTrack{pin[6]}.YX(pad[6]),
-			eda.DeprecatedTrack{pin[7]}.YX(pad[7]),
-
-			eda.DeprecatedTrack{pin[8]}.YX(pad[16]),
-			eda.DeprecatedTrack{pin[9]}.YX(pad[15]),
-			eda.DeprecatedTrack{pin[10]}.YX(pad[14]),
-			eda.DeprecatedTrack{pin[11]}.YX(pad[13]),
-			eda.DeprecatedTrack{pin[12]}.YX(pad[12]),
-			eda.DeprecatedTrack{pin[13]}.DY(0.3).DX(1.3).YX(pad[11]),
-			eda.DeprecatedTrack{pin[14]}.YX(pad[10]),
-			eda.DeprecatedTrack{pin[15]}.YX(pad[9]),
-		),
 	}
 )

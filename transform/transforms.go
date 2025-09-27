@@ -4,6 +4,11 @@ package transform
 
 import "math"
 
+var (
+	MirrorX = Scale(-1, 1)
+	MirrorY = Scale(1, -1)
+)
+
 func Apply(x, y float64, t T) (float64, float64) {
 	//            Ix Iy 0
 	//  x y 1  *  Jx Jy 0
@@ -49,12 +54,4 @@ func Scale(x, y float64) T {
 
 func ScaleUniformly(k float64) T {
 	return Scale(k, k)
-}
-
-func MirrorX() T {
-	return Scale(-1, 1)
-}
-
-func MirrorY() T {
-	return Scale(1, -1)
 }

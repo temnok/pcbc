@@ -29,7 +29,7 @@ func Process(config *config.Config, component *eda.Component) error {
 		},
 	}
 
-	componentBack := componentFront.Arrange(transform.MirrorX())
+	componentBack := componentFront.Arrange(transform.MirrorX)
 
 	var copper1, copper2, mask1, mask2, silk1, silk2, stencil *bitmap.Bitmap
 

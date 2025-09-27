@@ -11,56 +11,53 @@ import (
 	"temnok/pcbc/transform"
 )
 
-var boardTop = &eda.Component{
-	Tracks: eda.DeprecatedTracks(
-		eda.DeprecatedTrack{{-7.5, 2.75}}.DY(-5.5).DX(3.5).DY(-3),
-		eda.DeprecatedTrack{{7.5, 2.75}}.DY(-5.5).DX(-3.5).DY(-3),
-		eda.DeprecatedTrack{{-6, -6.2}, {6, -6.2}},
-	),
+var (
+	conn = greenconn.CSCC118(13, false,
+		[]string{"3V7", "3V7", "3V7", "3V7", "3V7", "3V7",
+			"3V7", "3V7", "3V7", "3V7", "3V7", "3V7", "3V7"},
+	).Arrange(transform.RotateDegrees(90).Move(0, -6.2))
 
-	Nested: eda.Components{
-		{
-			Transform: transform.Move(0, -5.5),
+	connPads = conn.PadCenters()
 
-			Nested: eda.Components{
-				greenconn.CSCC118(13, false,
-					[]string{"3V7", "3V7", "3V7", "3V7", "3V7", "3V7",
-						"3V7", "3V7", "3V7", "3V7", "3V7", "3V7", "3V7"},
-				).Arrange(transform.RotateDegrees(90).Move(0, -0.7)),
-			},
+	hold     = holder.LIR1254.Arrange(transform.Move(0, 2.75))
+	holdPads = hold.PadCenters()
+
+	Board = &eda.Component{
+		TracksWidth: 0.55, // more power!
+		ClearWidth:  0.3,
+
+		Tracks: path.Paths{
+			eda.Track(holdPads[0], connPads[2], 0, 2, -1e-9),
+			eda.Track(holdPads[1], connPads[10], -1e-9, -2, 0),
+			eda.Track(connPads[0].Move(0, -1), connPads[12].Move(0, -1)),
 		},
 
-		holder.LIR1254.Arrange(transform.Move(0, 2.75)),
+		Nested: eda.Components{
+			{
+				CutsOuter: true,
 
-		boards.Logo.Arrange(transform.Scale(1.6, 1.6).Move(-8.4, -5.3)),
-
-		boards.Firm.Arrange(transform.Scale(0.8, 0.8).Move(8.4, -5.3)),
-
-		boards.Rev(2025, 9, 21).Arrange(transform.RotateDegrees(90).Scale(0.8, 0.8).Move(9.2, -0.4)),
-
-		eda.CenteredText("LIR1254").Arrange(transform.Scale(1, 1.6).Move(-7.5, 6)),
-
-		eda.CenteredText("3.7V").Arrange(transform.Scale(1.5, 1.5).Move(7.8, 6)),
-	},
-}
-
-var Board = &eda.Component{
-	TracksWidth: 0.55, // more power!
-	ClearWidth:  0.3,
-
-	Nested: eda.Components{
-		{
-			CutsOuter: true,
-
-			Cuts: path.Paths{
-				path.RoundRect(20, 18, 2),
+				Cuts: path.Paths{
+					path.RoundRect(20, 18, 2),
+				},
 			},
+
+			boards.AlignHole.Clone(2, 15, 0).Clone(2, 0, 15),
+
+			boards.MountHole.Clone(2, 15, 0).Arrange(transform.Move(0, -2.5)),
+
+			conn,
+
+			hold,
+
+			boards.Logo.Arrange(transform.Scale(1.6, 1.6).Move(-8.4, -5.3)),
+
+			boards.Firm.Arrange(transform.Scale(0.8, 0.8).Move(8.4, -5.3)),
+
+			boards.Rev(2025, 9, 27).Arrange(transform.RotateDegrees(90).Scale(0.8, 0.8).Move(9.2, -0.4)),
+
+			eda.CenteredText("LIR1254").Arrange(transform.Scale(1, 1.6).Move(-7.5, 6)),
+
+			eda.CenteredText("3.7V").Arrange(transform.Scale(1.5, 1.5).Move(7.8, 6)),
 		},
-
-		boards.AlignHole.Clone(2, 15, 0).Clone(2, 0, 15),
-
-		boards.MountHole.Clone(2, 15, 0).Arrange(transform.Move(0, -2.5)),
-
-		boardTop,
-	},
-}
+	}
+)
