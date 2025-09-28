@@ -9,9 +9,9 @@ import (
 )
 
 var MountHole = &eda.Component{
-	Cuts: path.Paths{path.Circle(1.5)},
+	Cuts: path.Paths{path.Circle(1.45)},
 
-	TracksWidth: 0.5,
+	TracksWidth: 0.4,
 
 	Nested: eda.Components{
 		{
