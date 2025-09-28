@@ -65,3 +65,14 @@ func LinearTrack(p0, p1 path.Point, steps ...float64) path.Path {
 
 	return path.Linear(out)
 }
+
+func sign(val float64) float64 {
+	switch {
+	case val < 0:
+		return -1
+	case val > 0:
+		return 1
+	default:
+		return 0
+	}
+}

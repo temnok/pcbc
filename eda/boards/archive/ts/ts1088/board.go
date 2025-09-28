@@ -25,12 +25,3 @@ var Board = &eda.Component{
 		eda.CenteredText("SW").Arrange(transform.Scale(2, 1.5).Move(-0.25, 2.4)),
 	},
 }
-
-func init() {
-	pad := Board.PadCenters()
-
-	Board.Tracks = eda.DeprecatedTracks(
-		eda.DeprecatedTrack{pad[0]}.XY(pad[2]),
-		eda.DeprecatedTrack{pad[1]}.XY(pad[3]),
-	)
-}
