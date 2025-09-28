@@ -5,7 +5,6 @@ package ts1088
 import (
 	"github.com/stretchr/testify/assert"
 	"temnok/pcbc/eda"
-	"temnok/pcbc/eda/boards"
 	"temnok/pcbc/eda/boards/bh/lir1254"
 	"temnok/pcbc/eda/pcb"
 	"temnok/pcbc/eda/pcb/config"
@@ -15,7 +14,6 @@ import (
 
 var testBoard = &eda.Component{
 	Nested: eda.Components{
-		boards.Board35x45,
 		lir1254.Board.Arrange(transform.Move(0, 8)),
 		eda.ComponentGrid(2, 11, 8,
 			Board,

@@ -5,6 +5,7 @@ package rivet
 import (
 	"github.com/stretchr/testify/assert"
 	"temnok/pcbc/eda"
+	"temnok/pcbc/eda/boards"
 	"temnok/pcbc/eda/pcb"
 	"temnok/pcbc/eda/pcb/config"
 	"temnok/pcbc/path"
@@ -13,8 +14,6 @@ import (
 )
 
 func TestBoard(t *testing.T) {
-	hole := path.Circle(1.45)
-
 	rivetPair := &eda.Component{
 		Nested: eda.Components{
 			Rivet.Arrange(transform.Move(-1, 0)),
@@ -48,20 +47,11 @@ func TestBoard(t *testing.T) {
 				CutsOuter: true,
 
 				Cuts: path.Paths{
-					path.RoundRect(13, 13, 1.5),
+					path.RoundRect(11, 11, 1.5),
 				},
 			},
 
-			{
-				CutsFully: true,
-
-				Cuts: path.Paths{
-					hole.Transform(transform.Move(-5, -5)),
-					hole.Transform(transform.Move(-5, 5)),
-					hole.Transform(transform.Move(5, -5)),
-					hole.Transform(transform.Move(5, 5)),
-				},
-			},
+			boards.AlignHole.CloneX(2, 8).CloneY(2, 8),
 
 			rivetPair.CloneY(3, 2).Arrange(transform.Move(0.5, 0)),
 			rivetPair.CloneY(2, 2).Arrange(transform.RotateDegrees(180).Move(-0.5, 0)),
@@ -69,7 +59,7 @@ func TestBoard(t *testing.T) {
 	}
 
 	conf := config.Default()
-	conf.Width, conf.Height = 14, 14
+	conf.Width, conf.Height = 12, 12
 
 	assert.NoError(t, pcb.Process(conf, board))
 }

@@ -5,7 +5,6 @@ package resistors
 import (
 	"github.com/stretchr/testify/assert"
 	"temnok/pcbc/eda"
-	"temnok/pcbc/eda/boards"
 	"temnok/pcbc/eda/boards/x2"
 	"temnok/pcbc/eda/pcb"
 	"temnok/pcbc/eda/pcb/config"
@@ -22,7 +21,6 @@ func TestBoard(t *testing.T) {
 
 	assert.NoError(t, pcb.Process(conf, &eda.Component{
 		Nested: eda.Components{
-			boards.Guides72x42,
 			eda.ComponentGrid(6, 11, 5,
 				r("33R"),
 				r("47R"),

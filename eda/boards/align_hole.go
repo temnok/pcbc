@@ -7,6 +7,20 @@ import (
 	"temnok/pcbc/path"
 )
 
+/*
+
+1x1: 76x44
+1x2: 36x44
+1x3: 22x44
+2x2: 36x20
+2x3: 22x20
+2x4: 16x20
+3x3: 22x12
+3x4: 16x12
+3x5: 12x12
+
+*/
+
 var AlignHole = &eda.Component{
 	CutsFully: true,
 
