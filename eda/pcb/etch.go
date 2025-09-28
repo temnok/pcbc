@@ -148,7 +148,7 @@ func removeCopper(config *config.Config, component *eda.Component, back bool, co
 	padBrush := shape.Circle(int(clearWidth * config.PixelsPerMM))
 	padBrush.ForEachPathsPixel(component.Pads, t, copper.Set1)
 
-	// DeprecatedTracks
+	// Tracks
 	trackBrush := shape.Circle(int((component.TracksWidth + clearWidth) * config.PixelsPerMM))
 	trackBrush.ForEachPathsPixel(component.Tracks, t, copper.Set1)
 }
@@ -163,7 +163,7 @@ func addCopper(config *config.Config, component *eda.Component, back bool, coppe
 	// Pads
 	shape.ForEachRow(component.Pads, t, copper.Set0)
 
-	// DeprecatedTracks
+	// Tracks
 	brush := shape.Circle(int(component.TracksWidth * config.PixelsPerMM))
 	brush.ForEachPathsPixel(component.Tracks, t, copper.Set0)
 }

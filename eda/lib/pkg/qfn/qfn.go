@@ -36,9 +36,9 @@ func init() {
 
 				TracksWidth: 0.25,
 
-				Tracks: eda.DeprecatedTracks(
-					eda.DeprecatedTrack{{X: -1.5, Y: 1.5}, {X: 1.5, Y: -1.5}},
-				),
+				Tracks: path.Paths{
+					eda.LinearTrack(path.Point{X: -1.5, Y: 1.5}, path.Point{X: 1.5, Y: -1.5}),
+				},
 			},
 
 			{

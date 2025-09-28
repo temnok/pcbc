@@ -23,10 +23,10 @@ var LIR1254 = &eda.Component{
 		{
 			ClearOff: true,
 
-			Tracks: eda.DeprecatedTracks(
-				eda.DeprecatedTrack{{X: -2, Y: -2}, {X: 2, Y: 2}},
-				eda.DeprecatedTrack{{X: 2, Y: -2}, {X: -2, Y: 2}},
-			),
+			Tracks: path.Paths{
+				eda.LinearTrack(path.Point{X: -2, Y: -2}, path.Point{X: 2, Y: 2}),
+				eda.LinearTrack(path.Point{X: 2, Y: -2}, path.Point{X: -2, Y: 2}),
+			},
 		},
 	},
 }

@@ -26,18 +26,18 @@ func TestBoard(t *testing.T) {
 					path.RoundRect(1, 0.55, 0.15).Transform(transform.Move(3, 0)),
 				},
 
-				Tracks: eda.DeprecatedTracks(
-					eda.DeprecatedTrack{{-4, 0}, {-1, 0}},
-					eda.DeprecatedTrack{{1, 0}, {3, 0}},
-				),
+				Tracks: path.Paths{
+					eda.LinearTrack(path.Point{-4, 0}, path.Point{-1, 0}),
+					eda.LinearTrack(path.Point{1, 0}, path.Point{3, 0}),
+				},
 			},
 
 			{
 				Back: true,
 
-				Tracks: eda.DeprecatedTracks(
-					eda.DeprecatedTrack{{-1, 0}, {1, 0}},
-				),
+				Tracks: path.Paths{
+					eda.LinearTrack(path.Point{-1, 0}, path.Point{1, 0}),
+				},
 			},
 		},
 	}
