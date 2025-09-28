@@ -1,21 +1,20 @@
 // Copyright © 2025 Alex Temnok. All rights reserved.
 
-package x2
+package x3
 
 import (
 	"temnok/pcbc/eda"
 	"temnok/pcbc/eda/boards"
-	"temnok/pcbc/eda/lib/pkg/smd"
+	"temnok/pcbc/eda/boards/led/ws2812b_2020"
 	"temnok/pcbc/eda/pcb"
 	"temnok/pcbc/eda/pcb/config"
 	"temnok/pcbc/path"
-	"temnok/pcbc/transform"
 	"testing"
 )
 
 func TestBoard(t *testing.T) {
 	conf := config.Default()
-	conf.Width, conf.Height = 14, 14
+	conf.Width, conf.Height = 14, 19
 
 	pcb.Process(conf, &eda.Component{
 		Nested: eda.Components{
@@ -23,14 +22,13 @@ func TestBoard(t *testing.T) {
 				CutsOuter: true,
 
 				Cuts: path.Paths{
-					path.RoundRect(13, 13, 1.4),
+					path.RoundRect(13, 18, 1.4),
 				},
 			},
 
-			boards.AlignHole.Clone(2, 10, 0).Clone(2, 0, 10),
+			boards.AlignHole.Clone(2, 10, 0).Clone(2, 0, 15),
 
-			X2("R ", "10K", smd.I0402).Arrange(transform.Move(0, 2.1)),
-			X2("R ", "1K0", smd.I0402).Arrange(transform.Move(0, -2.1)),
+			ws2812b_2020.Board.Clone(3, 0, 4.4),
 		},
 	})
 }
