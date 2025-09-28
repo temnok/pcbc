@@ -14,7 +14,7 @@ import (
 
 func TestBoard(t *testing.T) {
 	conf := config.Default()
-	conf.Width, conf.Height = 14, 19
+	conf.Width, conf.Height = 16, 20
 
 	pcb.Process(conf, &eda.Component{
 		Nested: eda.Components{
@@ -22,13 +22,13 @@ func TestBoard(t *testing.T) {
 				CutsOuter: true,
 
 				Cuts: path.Paths{
-					path.RoundRect(13, 18, 1.4),
+					path.RoundRect(15, 19, 1.4),
 				},
 			},
 
-			boards.AlignHole.CloneX(2, 10).CloneY(2, 15),
+			boards.AlignHole.CloneX(2, 12).CloneY(2, 16),
 
-			ws2812b_2020.Board.CloneY(3, 4.4),
+			ws2812b_2020.Board.CloneY(3, 5),
 		},
 	})
 }
