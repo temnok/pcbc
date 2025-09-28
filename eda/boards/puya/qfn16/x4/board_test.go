@@ -20,7 +20,7 @@ func TestBoard(t *testing.T) {
 	assert.NoError(t, pcb.Process(conf, &eda.Component{
 		Nested: eda.Components{
 			boards.Guides34x42,
-			qfn16.Board.Arrange(transform.RotateDegrees(90)).Clone(2, 12.5, 0).Clone(2, 0, 17),
+			qfn16.Board.Arrange(transform.RotateDegrees(90)).CloneX(2, 12.5).CloneY(2, 17),
 		},
 	}))
 }

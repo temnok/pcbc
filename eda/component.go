@@ -98,6 +98,14 @@ func (c *Component) Arrange(t transform.T) *Component {
 	}
 }
 
+func (c *Component) CloneX(n int, dx float64) *Component {
+	return c.Clone(n, dx, 0)
+}
+
+func (c *Component) CloneY(n int, dy float64) *Component {
+	return c.Clone(n, 0, dy)
+}
+
 func (c *Component) Clone(n int, dx, dy float64) *Component {
 	res := &Component{}
 	for i := range n {

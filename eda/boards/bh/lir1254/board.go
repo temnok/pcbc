@@ -41,9 +41,9 @@ var (
 				},
 			},
 
-			boards.AlignHole.Clone(2, 15, 0).Clone(2, 0, 15),
+			boards.AlignHole.CloneX(2, 15).CloneY(2, 15),
 
-			boards.MountHole.Clone(2, 15, 0).Arrange(transform.Move(0, -2.5)),
+			boards.MountHole.CloneX(2, 15).Arrange(transform.Move(0, -2.5)),
 
 			conn,
 

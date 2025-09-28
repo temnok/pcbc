@@ -27,7 +27,7 @@ func TestBoard(t *testing.T) {
 				},
 			},
 
-			boards.AlignHole.Clone(2, 10, 0).Clone(2, 0, 10),
+			boards.AlignHole.CloneX(2, 10).CloneY(2, 10),
 
 			X2("R ", "10K", smd.I0402).Arrange(transform.Move(0, 2.1)),
 			X2("R ", "1K0", smd.I0402).Arrange(transform.Move(0, -2.1)),

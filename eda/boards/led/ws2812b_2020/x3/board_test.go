@@ -26,9 +26,9 @@ func TestBoard(t *testing.T) {
 				},
 			},
 
-			boards.AlignHole.Clone(2, 10, 0).Clone(2, 0, 15),
+			boards.AlignHole.CloneX(2, 10).CloneY(2, 15),
 
-			ws2812b_2020.Board.Clone(3, 0, 4.4),
+			ws2812b_2020.Board.CloneY(3, 4.4),
 		},
 	})
 }

@@ -28,7 +28,7 @@ func TestBoard(t *testing.T) {
 				},
 			},
 
-			boards.AlignHole.Clone(2, 25, 0).Clone(2, 0, 15),
+			boards.AlignHole.CloneX(2, 25).CloneY(2, 15),
 
 			bc833.Board,
 		},

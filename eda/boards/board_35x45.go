@@ -9,11 +9,15 @@ import (
 
 /*
 
-3x2: 22x20
-2x2: 35x20
-3x1: 22x45
-2x1: 35x45
-1x1: 75x45
+1x1: 44x76
+1x2: 44x36
+1x3: 44x22
+2x2: 20x36
+2x3: 20x22
+2x4: 20x16
+3x3: 12x22
+3x4: 12x16
+3x5: 12x12
 
 */
 
@@ -26,7 +30,7 @@ var (
 		},
 
 		Nested: eda.Components{
-			AlignHole.Clone(2, 30, 0).Clone(2, 0, 40),
+			AlignHole.CloneX(2, 30).CloneY(2, 40),
 		},
 	}
 )

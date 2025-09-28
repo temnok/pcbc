@@ -53,7 +53,7 @@ var (
 		},
 
 		Nested: eda.Components{
-			boards.MountHole.Clone(2, 20, 0).Arrange(transform.Move(0, -7.2)),
+			boards.MountHole.CloneX(2, 20).Arrange(transform.Move(0, -7.2)),
 
 			{
 				Nested: eda.Components{

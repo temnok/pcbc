@@ -63,8 +63,8 @@ func TestBoard(t *testing.T) {
 				},
 			},
 
-			rivetPair.Clone(3, 0, 2).Arrange(transform.Move(0.5, 0)),
-			rivetPair.Clone(2, 0, 2).Arrange(transform.RotateDegrees(180).Move(-0.5, 0)),
+			rivetPair.CloneY(3, 2).Arrange(transform.Move(0.5, 0)),
+			rivetPair.CloneY(2, 2).Arrange(transform.RotateDegrees(180).Move(-0.5, 0)),
 		},
 	}
 
