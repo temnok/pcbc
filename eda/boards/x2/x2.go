@@ -41,8 +41,7 @@ func X2(topLabel, bottomLabel string, chip *eda.Component) *eda.Component {
 			rev,
 
 			{
-				ClearOff: true,
-
+				ClearWidth:  eda.ClearOff,
 				TracksWidth: 0.3,
 
 				Tracks: path.Paths{

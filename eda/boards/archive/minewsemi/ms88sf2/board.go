@@ -68,7 +68,7 @@ var (
 			eda.CenteredText("nRF52840").Arrange(transform.ScaleUniformly(1.8).Move(1.3, -7.4)),
 
 			{
-				ClearOff: true,
+				ClearWidth: eda.ClearOff,
 			},
 		},
 	}

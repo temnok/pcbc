@@ -77,7 +77,7 @@ var (
 			eda.CenteredText("nRF52833").Arrange(transform.Scale(0.85, 2).Move(3.15, -5.9)),
 
 			{
-				ClearOff:    true,
+				ClearWidth:  eda.ClearOff,
 				TracksWidth: 0.35,
 
 				Tracks: path.Paths{

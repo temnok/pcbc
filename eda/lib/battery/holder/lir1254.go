@@ -21,7 +21,7 @@ var LIR1254 = &eda.Component{
 
 	Nested: eda.Components{
 		{
-			ClearOff: true,
+			ClearWidth: eda.ClearOff,
 
 			Tracks: path.Paths{
 				eda.LinearTrack(path.Point{X: -2, Y: -2}, path.Point{X: 2, Y: 2}),

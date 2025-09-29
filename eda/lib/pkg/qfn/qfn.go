@@ -32,8 +32,7 @@ func init() {
 
 		Nested: eda.Components{
 			{
-				ClearOff: true,
-
+				ClearWidth:  eda.ClearOff,
 				TracksWidth: 0.25,
 
 				Tracks: path.Paths{

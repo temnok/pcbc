@@ -31,7 +31,7 @@ var (
 
 		Nested: eda.Components{
 			{
-				ClearOff:    true,
+				ClearWidth:  eda.ClearOff,
 				TracksWidth: 0.3,
 				Tracks: path.Paths{
 					eda.LinearTrack(pins[2], pins[2].Move(0.6, 0), -0.6),

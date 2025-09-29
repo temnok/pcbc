@@ -38,8 +38,7 @@ var (
 			boards.Rev(2025, 9, 27).Arrange(transform.ScaleUniformly(0.7).Move(2, -3.6)),
 
 			{
-				ClearOff: true,
-
+				ClearWidth:  eda.ClearOff,
 				TracksWidth: 0.3,
 
 				Tracks: path.Paths{

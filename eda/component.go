@@ -34,10 +34,13 @@ type Component struct {
 	TracksWidth float64
 
 	ClearWidth float64
-	ClearOff   bool
 
 	Nested []*Component
 }
+
+const (
+	ClearOff = -1
+)
 
 // Visit calls provided callback for each subcomponent recursively,
 // as if every component is isolated (without subcomponents)
@@ -71,7 +74,6 @@ func (c *Component) visit(t transform.T, parent *Component, callback func(*Compo
 		TracksWidth: firstNonZero(c.TracksWidth, parent.TracksWidth),
 
 		ClearWidth: firstNonZero(c.ClearWidth, parent.ClearWidth),
-		ClearOff:   c.ClearOff,
 	}
 
 	callback(target)

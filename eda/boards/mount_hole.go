@@ -23,7 +23,7 @@ var MountHole = &eda.Component{
 				},
 
 				{
-					ClearOff: true,
+					ClearWidth: eda.ClearOff,
 
 					Tracks: path.Paths{
 						eda.LinearTrack(path.Point{X: 1.25, Y: 0}, path.Point{X: 1.25 + 0.35, Y: 0}),

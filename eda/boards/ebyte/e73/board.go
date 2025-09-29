@@ -74,7 +74,7 @@ var (
 					},
 
 					{
-						ClearOff:    true,
+						ClearWidth:  eda.ClearOff,
 						TracksWidth: 0.3,
 
 						Tracks: path.Paths{

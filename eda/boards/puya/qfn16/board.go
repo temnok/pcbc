@@ -42,7 +42,7 @@ var (
 
 		Nested: eda.Components{
 			{
-				ClearOff:    true,
+				ClearWidth:  eda.ClearOff,
 				TracksWidth: 0.3,
 
 				Tracks: path.Paths{
