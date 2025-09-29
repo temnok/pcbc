@@ -4,6 +4,7 @@ package pcb
 
 import (
 	"image/color"
+	"math"
 	"temnok/pcbc/bitmap"
 	"temnok/pcbc/bitmap/image"
 	"temnok/pcbc/eda"
@@ -68,12 +69,9 @@ func renderStencil(config *config.Config, component *eda.Component, stencil *bit
 		t := c.Transform.Multiply(bmT)
 		shape.ForEachRow(c.Pads, t, stencil.Set1)
 	})
-
-	// Pass 2: removed
-
 	savedBitmap := stencil.Clone()
 
-	// Pass 3
+	// Pass 2
 	component.Visit(func(c *eda.Component) {
 		clearWidth := 2 * c.CutsWidth
 		brush := shape.Circle(int(clearWidth * config.PixelsPerMM))
@@ -82,13 +80,19 @@ func renderStencil(config *config.Config, component *eda.Component, stencil *bit
 		brush.ForEachPathsPixel(c.Pads, t, stencil.Set0)
 	})
 
-	// Pass 4
+	// Pass 3
 	stencil.Xor(savedBitmap)
 
-	// Pass 5
-	brush := shape.Circle(int(component.CutsWidth * config.PixelsPerMM))
+	// Pass 4
+	cutsWidth := math.Inf(-1)
+	var brush *shape.Shape
 
 	component.Visit(func(c *eda.Component) {
+		if cutsWidth != c.CutsWidth {
+			cutsWidth = c.CutsWidth
+			brush = shape.Circle(int(cutsWidth * config.PixelsPerMM))
+		}
+
 		t := c.Transform.Multiply(bmT)
 
 		if c.CutsFully {
