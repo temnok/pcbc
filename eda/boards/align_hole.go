@@ -25,6 +25,6 @@ var AlignHole = &eda.Component{
 	CutsPerforationStep: eda.CutsFully,
 
 	Cuts: path.Paths{
-		path.Circle(1.45),
+		path.Circle(1.43),
 	},
 }
