@@ -21,10 +21,10 @@ var Rivet = &eda.Component{
 		},
 
 		{
-			Cuts:       path.Paths{path.Circle(viaDiameter)},
-			CutsHidden: true,
-
 			ClearWidth: 0.1,
+
+			CutsWidth: eda.CutsHidden,
+			Cuts:      path.Paths{path.Circle(viaDiameter)},
 		},
 
 		{

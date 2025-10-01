@@ -21,8 +21,6 @@ type Component struct {
 	CutsWidth           float64    // for mask and stencil
 	CutsPerforationStep float64    // for mask and stencil
 
-	CutsHidden bool // disables dotted mask cuts
-
 	Marks      path.Paths
 	MarksWidth float64
 
@@ -37,8 +35,9 @@ type Component struct {
 }
 
 const (
-	ClearOff  = -1
-	CutsFully = -1
+	ClearOff   = -1
+	CutsFully  = -1
+	CutsHidden = -1
 )
 
 // Visit calls provided callback for each subcomponent recursively,
@@ -59,8 +58,6 @@ func (c *Component) visit(t transform.T, parent *Component, callback func(*Compo
 		Cuts:                c.Cuts,
 		CutsWidth:           firstNonZero(c.CutsWidth, parent.CutsWidth),
 		CutsPerforationStep: firstNonZero(c.CutsPerforationStep, parent.CutsPerforationStep),
-
-		CutsHidden: c.CutsHidden,
 
 		Marks:      c.Marks,
 		MarksWidth: firstNonZero(c.MarksWidth, parent.MarksWidth),
@@ -116,8 +113,16 @@ func (c *Component) Clone(n int, dx, dy float64) *Component {
 	return res
 }
 
+func (c *Component) ClearOff() bool {
+	return c.ClearWidth <= 0
+}
+
 func (c *Component) CutsFully() bool {
-	return c.CutsPerforationStep <= 0
+	return c.CutsWidth > 0 && c.CutsPerforationStep <= 0
+}
+
+func (c *Component) CutsHidden() bool {
+	return c.CutsWidth <= 0
 }
 
 func ComponentGrid(cols int, dx, dy float64, comps ...*Component) *Component {
