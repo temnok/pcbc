@@ -95,7 +95,7 @@ func renderStencil(config *config.Config, component *eda.Component, stencil *bit
 
 		t := c.Transform.Multiply(bmT)
 
-		if c.CutsFully {
+		if c.CutsFully() {
 			brush.ForEachPathsPixel(c.Cuts, t, stencil.Set1)
 		}
 	})

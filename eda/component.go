@@ -22,7 +22,6 @@ type Component struct {
 	CutsPerforationStep float64    // for mask and stencil
 
 	CutsHidden bool // disables dotted mask cuts
-	CutsFully  bool // enforces solid mask and stencil cuts
 
 	Marks      path.Paths
 	MarksWidth float64
@@ -38,7 +37,8 @@ type Component struct {
 }
 
 const (
-	ClearOff = -1
+	ClearOff  = -1
+	CutsFully = -1
 )
 
 // Visit calls provided callback for each subcomponent recursively,
@@ -114,6 +114,10 @@ func (c *Component) Clone(n int, dx, dy float64) *Component {
 	}
 
 	return res
+}
+
+func (c *Component) CutsFully() bool {
+	return c.CutsPerforationStep <= 0
 }
 
 func ComponentGrid(cols int, dx, dy float64, comps ...*Component) *Component {
