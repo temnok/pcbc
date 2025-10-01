@@ -44,8 +44,6 @@ func TestBoard(t *testing.T) {
 	board := &eda.Component{
 		Nested: eda.Components{
 			{
-				CutsOuter: true,
-
 				Cuts: path.Paths{
 					path.RoundRect(11, 11, 1.5),
 				},

@@ -33,8 +33,6 @@ var (
 
 		Nested: eda.Components{
 			{
-				CutsOuter: true,
-
 				Cuts: path.Paths{
 					path.RoundRect(21, 16, 1.4),
 				},

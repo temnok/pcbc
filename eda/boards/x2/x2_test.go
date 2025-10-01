@@ -20,8 +20,6 @@ func TestBoard(t *testing.T) {
 	pcb.Process(conf, &eda.Component{
 		Nested: eda.Components{
 			{
-				CutsOuter: true,
-
 				Cuts: path.Paths{
 					path.RoundRect(13, 13, 1.4),
 				},

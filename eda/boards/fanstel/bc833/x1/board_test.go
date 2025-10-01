@@ -21,8 +21,6 @@ func TestBoard(t *testing.T) {
 	assert.NoError(t, pcb.Process(conf, &eda.Component{
 		Nested: eda.Components{
 			{
-				CutsOuter: true,
-
 				Cuts: path.Paths{
 					path.RoundRect(28, 18, 1.5),
 				},
