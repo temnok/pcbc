@@ -3,6 +3,7 @@
 package eda
 
 import (
+	"math"
 	"temnok/pcbc/path"
 	"temnok/pcbc/transform"
 )
@@ -94,15 +95,31 @@ func (c *Component) Arrange(t transform.T) *Component {
 	}
 }
 
+func (c *Component) Clone(n int, dT transform.T) *Component {
+	ans := &Component{}
+
+	t := transform.I
+	x0, y0, x1, y1 := math.Inf(1), math.Inf(1), math.Inf(-1), math.Inf(-1)
+	for range n {
+		t = t.Multiply(dT)
+		ans.Nested = append(ans.Nested, c.Arrange(t))
+
+		x, y := t.Apply(0, 0)
+		x0, y0, x1, y1 = min(x0, x), min(y0, y), max(x1, x), max(y1, y)
+	}
+
+	return ans.Arrange(transform.Move((x0-x1)/2, (y0-y1)/2))
+}
+
 func (c *Component) CloneX(n int, dx float64) *Component {
-	return c.Clone(n, dx, 0)
+	return c.CloneXY(n, dx, 0)
 }
 
 func (c *Component) CloneY(n int, dy float64) *Component {
-	return c.Clone(n, 0, dy)
+	return c.CloneXY(n, 0, dy)
 }
 
-func (c *Component) Clone(n int, dx, dy float64) *Component {
+func (c *Component) CloneXY(n int, dx, dy float64) *Component {
 	res := &Component{}
 	for i := range n {
 		k := float64(i) - float64(n-1)/2

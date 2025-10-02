@@ -11,7 +11,7 @@ import (
 
 func TestBoard(t *testing.T) {
 	conf := config.Default()
-	conf.Width, conf.Height = 22, 17
+	conf.Width, conf.Height = 19, 16
 
 	assert.NoError(t, pcb.Process(conf, Board))
 }
