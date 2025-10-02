@@ -20,7 +20,7 @@ func CSCC118(n int, flip bool, labels []string) *eda.Component {
 		sign, align0, align1 = -sign, align1, align0
 	}
 
-	pads := pad.Clone(n, 0, -1)
+	pads := pad.CloneXY(n, 0, -1)
 	labels0, labels1 := make([]string, (n+1)/2), make([]string, n/2)
 	for i := range n {
 		if i%2 == 0 {

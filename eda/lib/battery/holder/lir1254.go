@@ -8,12 +8,7 @@ import (
 )
 
 var LIR1254 = &eda.Component{
-	Pads: append(
-		path.RoundRect(1.5, 4.5, 0.5).Clone(2, 13.75, 0),
-		path.Circle(4.5),
-	),
-
-	TracksWidth: 0.5,
+	Pads: path.RoundRect(1.5, 4.5, 0.5).CloneXY(2, 13.75, 0),
 
 	Marks: path.Paths{
 		path.Circle(11.5),
@@ -23,9 +18,8 @@ var LIR1254 = &eda.Component{
 		{
 			ClearWidth: eda.ClearOff,
 
-			Tracks: path.Paths{
-				eda.LinearTrack(path.Point{X: -2, Y: -2}, path.Point{X: 2, Y: 2}),
-				eda.LinearTrack(path.Point{X: 2, Y: -2}, path.Point{X: -2, Y: 2}),
+			Pads: path.Paths{
+				path.Circle(4.5),
 			},
 		},
 	},

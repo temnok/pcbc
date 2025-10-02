@@ -13,7 +13,7 @@ var QFN16G *eda.Component
 func init() {
 	pad := path.RoundRect(0.7, 0.24, 0.1)
 
-	col := pad.Clone(4, 0, -0.5).Transform(transform.Move(-1.6, 0))
+	col := pad.CloneXY(4, 0, -0.5).Transform(transform.Move(-1.6, 0))
 
 	var pads path.Paths
 	for a := 0.0; a < 360; a += 90 {

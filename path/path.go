@@ -63,7 +63,7 @@ func (path Path) RasterizeIntermittently(t transform.T, dist float64, callback f
 	})
 }
 
-func (path Path) Clone(n int, dx, dy float64) Paths {
+func (path Path) CloneXY(n int, dx, dy float64) Paths {
 	res := make(Paths, 0, n)
 
 	for i := 0; i < n; i++ {

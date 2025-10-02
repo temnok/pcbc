@@ -11,7 +11,7 @@ import (
 var (
 	pad = path.RoundRect(0.5, 1.0, 0.25)
 
-	bottomPads = pad.Clone(4, 1.27, 0).Transform(transform.Move(0, -2.75))
+	bottomPads = pad.CloneXY(4, 1.27, 0).Transform(transform.Move(0, -2.75))
 
 	topPads = bottomPads.Transform(transform.RotateDegrees(180))
 
