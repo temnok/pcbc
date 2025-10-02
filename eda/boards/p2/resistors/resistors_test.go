@@ -5,7 +5,7 @@ package resistors
 import (
 	"github.com/stretchr/testify/assert"
 	"temnok/pcbc/eda"
-	"temnok/pcbc/eda/boards/x2"
+	"temnok/pcbc/eda/boards/p2"
 	"temnok/pcbc/eda/pcb"
 	"temnok/pcbc/eda/pcb/config"
 	"testing"
@@ -16,7 +16,7 @@ func TestBoard(t *testing.T) {
 	conf.Width, conf.Height = 76, 46
 
 	r := func(label string) *eda.Component {
-		return x2.X2_I0402("R ", label)
+		return p2.P2_I0402("R ", label)
 	}
 
 	assert.NoError(t, pcb.Process(conf, &eda.Component{

@@ -1,6 +1,6 @@
 // Copyright © 2025 Alex Temnok. All rights reserved.
 
-package x2
+package p2
 
 import (
 	"temnok/pcbc/eda"
@@ -15,20 +15,20 @@ import (
 
 func TestBoard(t *testing.T) {
 	conf := config.Default()
-	conf.Width, conf.Height = 14, 14
+	conf.Width, conf.Height = 12, 12
 
 	pcb.Process(conf, &eda.Component{
 		Nested: eda.Components{
 			{
 				Cuts: path.Paths{
-					path.RoundRect(13, 13, 1.4),
+					path.RoundRect(11, 11, 1),
 				},
 			},
 
-			boards.AlignHole.CloneX(2, 10).CloneY(2, 10),
+			boards.AlignHole.CloneX(2, 8.5).CloneY(2, 8.5),
 
-			X2("R ", "10K", smd.I0402).Arrange(transform.Move(0, 2.1)),
-			X2("R ", "1K0", smd.I0402).Arrange(transform.Move(0, -2.1)),
+			P2("R ", "10K", smd.I0402).Arrange(transform.Move(0, 1.7)),
+			P2("R ", "1K0", smd.I0402).Arrange(transform.Move(0, -1.7)),
 		},
 	})
 }
