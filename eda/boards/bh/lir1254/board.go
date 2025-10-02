@@ -23,12 +23,12 @@ var (
 
 	Board = &eda.Component{
 		TracksWidth: 0.5,
-		ClearWidth:  0.3,
+		ClearWidth:  0.25,
 
 		Nested: eda.Components{
 			(&eda.Component{
 				Tracks: path.Paths{
-					eda.LinearTrack(holdPads[0], connPads[5].Move(0, -1), 0, 0, 1, -6, -1e-9),
+					eda.LinearTrack(holdPads[0], connPads[5].Move(0, -1), 0, 0, 0.9, -6, -1e-9),
 				},
 			}).Clone(2, transform.MirrorX),
 

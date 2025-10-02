@@ -8,7 +8,7 @@ import (
 )
 
 var LIR1254 = &eda.Component{
-	Pads: path.RoundRect(1.5, 4.5, 0.5).CloneXY(2, 13.75, 0),
+	Pads: path.RoundRect(1.75, 4.5, 0.5).CloneXY(2, 14, 0),
 
 	Marks: path.Paths{
 		path.Circle(11.5),
