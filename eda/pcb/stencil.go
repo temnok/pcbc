@@ -38,10 +38,7 @@ var stencilCutSettings = []*lbrn.CutSetting{
 func SaveStencil(config *config.Config, component *eda.Component) (*bitmap.Bitmap, error) {
 	stencil := bitmap.New(config.BitmapSizeInPixels())
 
-	nonEmpty := renderStencil(config, component, stencil)
-	if !nonEmpty {
-		return stencil, nil
-	}
+	renderStencil(config, component, stencil)
 
 	stencilImage := image.NewSingle(stencil, color.Transparent, color.Black)
 
@@ -56,43 +53,19 @@ func SaveStencil(config *config.Config, component *eda.Component) (*bitmap.Bitma
 	return stencil, p.SaveToFile(config.SavePath + "1-stencil.lbrn")
 }
 
-func renderStencil(config *config.Config, component *eda.Component, stencil *bitmap.Bitmap) bool {
+func renderStencil(config *config.Config, component *eda.Component, stencil *bitmap.Bitmap) {
 	bmT := config.BitmapTransform()
 
-	hasPads := false
-
-	// Pass 1: draw pads
 	component.Visit(func(c *eda.Component) {
-		hasPads = hasPads || len(c.Pads) > 0
-
-		t := c.Transform.Multiply(bmT)
-		shape.ForEachRow(c.Pads, t, stencil.Set1)
-	})
-	savedBitmap := stencil.Clone()
-
-	// Pass 2
-	component.Visit(func(c *eda.Component) {
-		clearWidth := 2 * c.CutsWidth
-		brush := shape.Circle(int(clearWidth * config.PixelsPerMM))
-
-		t := c.Transform.Multiply(bmT)
-		brush.ForEachPathsPixel(c.Pads, t, stencil.Set0)
-	})
-
-	// Pass 3
-	stencil.Xor(savedBitmap)
-
-	// Pass 4
-	component.Visit(func(c *eda.Component) {
-		if !c.CutsFully() {
-			return
-		}
-
 		brush := shape.Circle(int(c.CutsWidth * config.PixelsPerMM))
+
 		t := c.Transform.Multiply(bmT)
+		brush.ForEachPathsPixel(c.Pads, t, stencil.Set1)
 
-		brush.ForEachPathsPixel(c.Cuts, t, stencil.Set1)
+		if c.CutsFully() {
+			t := c.Transform.Multiply(bmT)
+
+			brush.ForEachPathsPixel(c.Cuts, t, stencil.Set1)
+		}
 	})
-
-	return hasPads
 }
