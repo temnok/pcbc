@@ -17,6 +17,8 @@ func TestBoard(t *testing.T) {
 	conf.Width, conf.Height = 22, 20
 
 	pcb.Process(conf, &eda.Component{
+		ClearWidth: 0.3,
+
 		Nested: eda.Components{
 			{
 				Cuts: path.Paths{
