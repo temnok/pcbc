@@ -18,8 +18,8 @@ var fileNamePrefix = map[bool]string{
 func Process(config *config.Config, component *eda.Component) error {
 
 	componentFront := &eda.Component{
-		CutsWidth:           0.1,
-		CutsPerforationStep: 0.17,
+		CutsWidth:           0.12,
+		CutsPerforationStep: 0.18,
 		MarksWidth:          0.13,
 		TracksWidth:         0.2,
 		ClearWidth:          0.2,
