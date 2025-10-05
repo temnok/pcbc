@@ -1,0 +1,110 @@
+<LightBurnProject>
+	<UIPrefs>
+		<Optimize_ByLayer Value="0"></Optimize_ByLayer>
+		<Optimize_ByGroup Value="-1"></Optimize_ByGroup>
+		<Optimize_ByPriority Value="1"></Optimize_ByPriority>
+		<Optimize_WhichDirection Value="0"></Optimize_WhichDirection>
+		<Optimize_InnerToOuter Value="1"></Optimize_InnerToOuter>
+		<Optimize_ByDirection Value="0"></Optimize_ByDirection>
+		<Optimize_ReduceTravel Value="1"></Optimize_ReduceTravel>
+		<Optimize_HideBacklash Value="0"></Optimize_HideBacklash>
+		<Optimize_ReduceDirChanges Value="0"></Optimize_ReduceDirChanges>
+		<Optimize_ChooseCorners Value="0"></Optimize_ChooseCorners>
+		<Optimize_AllowReverse Value="1"></Optimize_AllowReverse>
+		<Optimize_RemoveOverlaps Value="0"></Optimize_RemoveOverlaps>
+		<Optimize_OptimalEntryPoint Value="1"></Optimize_OptimalEntryPoint>
+		<Optimize_OverlapDist Value="0.025"></Optimize_OverlapDist>
+	</UIPrefs>
+	<CutSetting type="Cut">
+		<index Value="1"></index>
+		<name Value="Cut"></name>
+		<priority Value="1"></priority>
+		<speed Value="1000"></speed>
+		<numPasses Value="1"></numPasses>
+		<globalRepeat Value="50"></globalRepeat>
+		<maxPower Value="90"></maxPower>
+		<QPulseWidth Value="200"></QPulseWidth>
+		<frequency Value="20000"></frequency>
+		<SubLayer type="Cut" index="1">
+			<speed Value="200"></speed>
+			<maxPower Value="0.1"></maxPower>
+			<QPulseWidth Value="200"></QPulseWidth>
+			<frequency Value="20000"></frequency>
+		</SubLayer>
+	</CutSetting>
+	<Shape Type="Path" CutIndex="1">
+		<XForm>1 0 0 1 40 35</XForm>
+		<V vx="1.2" vy="0" c0x="1.2" c0y="0.6627417"></V>
+		<V vx="0" vy="1.2" c0x="-0.6627417" c0y="1.2" c1x="0.6627417" c1y="1.2"></V>
+		<V vx="-1.2" vy="0" c0x="-1.2" c0y="-0.6627417" c1x="-1.2" c1y="0.6627417"></V>
+		<V vx="0" vy="-1.2" c0x="0.6627417" c0y="-1.2" c1x="-0.6627417" c1y="-1.2"></V>
+		<V vx="1.2" vy="0" c1x="1.2" c1y="-0.6627417"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="1">
+		<XForm>1 0 0 1 70 35</XForm>
+		<V vx="1.2" vy="0" c0x="1.2" c0y="0.6627417"></V>
+		<V vx="0" vy="1.2" c0x="-0.6627417" c0y="1.2" c1x="0.6627417" c1y="1.2"></V>
+		<V vx="-1.2" vy="0" c0x="-1.2" c0y="-0.6627417" c1x="-1.2" c1y="0.6627417"></V>
+		<V vx="0" vy="-1.2" c0x="0.6627417" c0y="-1.2" c1x="-0.6627417" c1y="-1.2"></V>
+		<V vx="1.2" vy="0" c1x="1.2" c1y="-0.6627417"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="1">
+		<XForm>1 0 0 1 40 55</XForm>
+		<V vx="1.2" vy="0" c0x="1.2" c0y="0.6627417"></V>
+		<V vx="0" vy="1.2" c0x="-0.6627417" c0y="1.2" c1x="0.6627417" c1y="1.2"></V>
+		<V vx="-1.2" vy="0" c0x="-1.2" c0y="-0.6627417" c1x="-1.2" c1y="0.6627417"></V>
+		<V vx="0" vy="-1.2" c0x="0.6627417" c0y="-1.2" c1x="-0.6627417" c1y="-1.2"></V>
+		<V vx="1.2" vy="0" c1x="1.2" c1y="-0.6627417"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="1">
+		<XForm>1 0 0 1 70 55</XForm>
+		<V vx="1.2" vy="0" c0x="1.2" c0y="0.6627417"></V>
+		<V vx="0" vy="1.2" c0x="-0.6627417" c0y="1.2" c1x="0.6627417" c1y="1.2"></V>
+		<V vx="-1.2" vy="0" c0x="-1.2" c0y="-0.6627417" c1x="-1.2" c1y="0.6627417"></V>
+		<V vx="0" vy="-1.2" c0x="0.6627417" c0y="-1.2" c1x="-0.6627417" c1y="-1.2"></V>
+		<V vx="1.2" vy="0" c1x="1.2" c1y="-0.6627417"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="1">
+		<XForm>1 0 0 1 40 75</XForm>
+		<V vx="1.2" vy="0" c0x="1.2" c0y="0.6627417"></V>
+		<V vx="0" vy="1.2" c0x="-0.6627417" c0y="1.2" c1x="0.6627417" c1y="1.2"></V>
+		<V vx="-1.2" vy="0" c0x="-1.2" c0y="-0.6627417" c1x="-1.2" c1y="0.6627417"></V>
+		<V vx="0" vy="-1.2" c0x="0.6627417" c0y="-1.2" c1x="-0.6627417" c1y="-1.2"></V>
+		<V vx="1.2" vy="0" c1x="1.2" c1y="-0.6627417"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Path" CutIndex="1">
+		<XForm>1 0 0 1 70 75</XForm>
+		<V vx="1.2" vy="0" c0x="1.2" c0y="0.6627417"></V>
+		<V vx="0" vy="1.2" c0x="-0.6627417" c0y="1.2" c1x="0.6627417" c1y="1.2"></V>
+		<V vx="-1.2" vy="0" c0x="-1.2" c0y="-0.6627417" c1x="-1.2" c1y="0.6627417"></V>
+		<V vx="0" vy="-1.2" c0x="0.6627417" c0y="-1.2" c1x="-0.6627417" c1y="-1.2"></V>
+		<V vx="1.2" vy="0" c1x="1.2" c1y="-0.6627417"></V>
+		<P T="B" p0="0" p1="1"></P>
+		<P T="B" p0="1" p1="2"></P>
+		<P T="B" p0="2" p1="3"></P>
+		<P T="B" p0="3" p1="4"></P>
+	</Shape>
+	<Shape Type="Rect" CutIndex="1" Cr="2" W="39" H="49">
+		<XForm>1 0 0 1 55 55</XForm>
+	</Shape>
+</LightBurnProject>

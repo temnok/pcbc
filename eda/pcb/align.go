@@ -3,6 +3,7 @@
 package pcb
 
 import (
+	"errors"
 	"image/color"
 	"strconv"
 	"temnok/pcbc/bitmap"
@@ -12,18 +13,20 @@ import (
 	"temnok/pcbc/lbrn"
 )
 
-var (
+const (
 	alignImageIndex = 0
 	alignCutIndex   = 1
+)
 
+var (
 	alignImageSettings = []*lbrn.CutSetting{
 		{
 			Type:     "Image",
-			Name:     &lbrn.Param{Value: "Silk"},
+			Name:     &lbrn.Param{Value: "Outline"},
 			Index:    &lbrn.Param{Value: strconv.Itoa(alignImageIndex)},
 			Priority: &lbrn.Param{Value: strconv.Itoa(alignImageIndex)},
 
-			MaxPower:    &lbrn.Param{Value: "5"},
+			MaxPower:    &lbrn.Param{Value: "15"},
 			QPulseWidth: &lbrn.Param{Value: "200"},
 			Frequency:   &lbrn.Param{Value: "20000"},
 
@@ -70,24 +73,57 @@ var (
 )
 
 func SaveAlign(config *config.Config, board *eda.Component, mask, silk *bitmap.Bitmap) error {
-	bm := mask.Clone()
-	bm.Or(silk)
+	var topCuts, bottomCuts []*lbrn.Shape
 
 	board.Visit(func(c *eda.Component) {
+		if len(c.AlignCuts)+len(c.AlignHiddenCuts) == 0 {
+			return
+		}
+
+		t := c.Transform.Multiply(config.LbrnCenterMove())
+
+		for _, cut := range c.AlignCuts {
+			topCuts = append(topCuts, lbrn.NewPath(alignCutIndex, t, cut))
+		}
+
+		for _, cut := range c.AlignHiddenCuts {
+			bottomCuts = append(bottomCuts, lbrn.NewPath(alignCutIndex, t, cut))
+		}
 	})
 
-	filename := config.SavePath + "0-align-top.lbrn"
-
-	bitmapImage := image.NewSingle(bm, color.Transparent, color.Black)
-
-	p := &lbrn.LightBurnProject{
-		UIPrefs:       lbrn.UIPrefsDefaults,
-		CutSettingImg: alignImageSettings,
-		CutSetting:    alignCutSettings,
-		Shape: []*lbrn.Shape{
-			lbrn.NewBitmapShapeFromImage(alignImageIndex, config.LbrnBitmapScale(), bitmapImage),
-		},
+	if len(topCuts)+len(bottomCuts) == 0 {
+		return nil
 	}
 
-	return p.SaveToFile(filename)
+	bounds := lbrn.NewRoundRect(alignCutIndex, config.LbrnCenterMove(),
+		config.Width+4, config.Height+4, 2)
+
+	bm := mask.Clone()
+	bm.Or(silk)
+	bmImage := image.NewSingle(bm, color.Transparent, color.Black)
+
+	top := &lbrn.LightBurnProject{
+		UIPrefs:       lbrn.UIPrefsDefaults,
+		CutSetting:    alignCutSettings,
+		CutSettingImg: alignImageSettings,
+		Shape: append(
+			topCuts,
+			bounds,
+			lbrn.NewBitmapShapeFromImage(alignImageIndex, config.LbrnBitmapScale(), bmImage),
+		),
+	}
+
+	bottom := &lbrn.LightBurnProject{
+		UIPrefs:    lbrn.UIPrefsDefaults,
+		CutSetting: alignCutSettings,
+		Shape: append(
+			bottomCuts,
+			bounds,
+		),
+	}
+
+	return errors.Join(
+		top.SaveToFile(config.SavePath+"0-align-top.lbrn"),
+		bottom.SaveToFile(config.SavePath+"1-align-bottom.lbrn"),
+	)
 }
