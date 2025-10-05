@@ -105,13 +105,11 @@ func cutMask(config *config.Config, c *eda.Component, back bool, mask *bitmap.Bi
 	}
 
 	// Cuts
-	if c.CutsFully() {
-		brush.ForEachPathsPixel(c.Cuts, t, mask.Set1)
-	} else {
-		c.Cuts.RasterizeIntermittently(t, c.CutsPerforationStep*config.PixelsPerMM, func(x, y int) {
-			brush.ForEachRowWithOffset(x, y, mask.Set1)
-		})
-	}
+	brush.ForEachPathsPixel(c.AlignCuts, t, mask.Set1)
+
+	c.Cuts.RasterizeIntermittently(t, c.CutsPerforationStep*config.PixelsPerMM, func(x, y int) {
+		brush.ForEachRowWithOffset(x, y, mask.Set1)
+	})
 }
 
 func addSilk(config *config.Config, c *eda.Component, back bool, silk *bitmap.Bitmap) {

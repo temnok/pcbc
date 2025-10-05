@@ -171,14 +171,21 @@ func addCopper(config *config.Config, component *eda.Component, back bool, coppe
 func addCuts(config *config.Config, component *eda.Component, back bool, copper *bitmap.Bitmap, cuts *[]*lbrn.Shape) {
 	t := component.Transform.Multiply(config.LbrnCenterMove())
 
+	for _, cut := range component.AlignCuts {
+		*cuts = append(*cuts, lbrn.NewPath(cutPassIndex, t, cut))
+	}
+
 	for _, cut := range component.Cuts {
 		*cuts = append(*cuts, lbrn.NewPath(cutPassIndex, t, cut))
 	}
 
 	if !back {
-		t = component.Transform.Multiply(config.BitmapTransform())
+		t := component.Transform.Multiply(config.BitmapTransform())
 
 		cutBrush := shape.Circle(int(component.ClearWidth * config.PixelsPerMM))
+
+		cutBrush.ForEachPathsPixel(component.AlignCuts, t, copper.Set1)
+
 		cutBrush.ForEachPathsPixel(component.Cuts, t, copper.Set1)
 	}
 }

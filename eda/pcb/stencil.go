@@ -62,10 +62,7 @@ func renderStencil(config *config.Config, component *eda.Component, stencil *bit
 		t := c.Transform.Multiply(bmT)
 		brush.ForEachPathsPixel(c.Pads, t, stencil.Set1)
 
-		if c.CutsFully() {
-			t := c.Transform.Multiply(bmT)
-
-			brush.ForEachPathsPixel(c.Cuts, t, stencil.Set1)
-		}
+		t = c.Transform.Multiply(bmT)
+		brush.ForEachPathsPixel(c.AlignCuts, t, stencil.Set1)
 	})
 }

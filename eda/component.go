@@ -17,6 +17,8 @@ type Component struct {
 
 	Back bool
 
+	AlignCuts, AlignHiddenCuts path.Paths
+
 	Cuts                path.Paths // solid board cuts and dotted mask cuts
 	CutsWidth           float64    // for mask and stencil
 	CutsPerforationStep float64    // for mask and stencil
@@ -36,7 +38,6 @@ type Component struct {
 
 const (
 	ClearOff   = -1
-	CutsFully  = -1
 	CutsHidden = -1
 )
 
@@ -53,7 +54,11 @@ func (c *Component) visit(t transform.T, parent *Component, callback func(*Compo
 
 	target := &Component{
 		Transform: t,
-		Back:      c.Back,
+
+		Back: c.Back,
+
+		AlignCuts:       c.AlignCuts,
+		AlignHiddenCuts: c.AlignHiddenCuts,
 
 		Cuts:                c.Cuts,
 		CutsWidth:           firstNonZero(c.CutsWidth, parent.CutsWidth),
@@ -121,10 +126,6 @@ func (c *Component) CloneXY(n int, dx, dy float64) *Component {
 
 func (c *Component) ClearOff() bool {
 	return c.ClearWidth <= 0
-}
-
-func (c *Component) CutsFully() bool {
-	return c.CutsWidth > 0 && c.CutsPerforationStep <= 0
 }
 
 func (c *Component) CutsHidden() bool {

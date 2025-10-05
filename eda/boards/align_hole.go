@@ -22,9 +22,17 @@ import (
 */
 
 var AlignHole = &eda.Component{
-	CutsPerforationStep: eda.CutsFully,
+	Nested: eda.Components{
+		{
+			AlignCuts: path.Paths{
+				path.Circle(1.43),
+			},
+		},
 
-	Cuts: path.Paths{
-		path.Circle(1.43),
+		{
+			AlignHiddenCuts: path.Paths{
+				path.Circle(2.4),
+			},
+		},
 	},
 }
