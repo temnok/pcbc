@@ -15,7 +15,7 @@ var MountHoleV2 = &eda.Component{
 		(&eda.Component{
 			ClearWidth: eda.ClearOff,
 			Pads: path.Paths{
-				path.RoundRect(0.25, 0.7, 0.15).Transform(transform.Move(1.1, 0)),
+				path.RoundRect(0.3, 0.7, 0.15).Transform(transform.Move(1.1, 0)),
 			},
 		}).Clone(6, transform.RotateDegrees(60)),
 	},
