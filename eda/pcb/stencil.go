@@ -9,7 +9,7 @@ import (
 	"temnok/pcbc/eda"
 	"temnok/pcbc/eda/pcb/config"
 	"temnok/pcbc/lbrn"
-	"temnok/pcbc/shape"
+	"temnok/pcbc/path"
 )
 
 var stencilCutSettings = []*lbrn.CutSetting{
@@ -54,31 +54,8 @@ func SaveStencil(config *config.Config, component *eda.Component) (*bitmap.Bitma
 }
 
 func renderStencil(config *config.Config, component *eda.Component, stencil *bitmap.Bitmap) {
-	bmT := config.BitmapTransform()
-
-	// Pass 1: draw pads
-	component.Visit(func(c *eda.Component) {
-		t := c.Transform.Multiply(bmT)
-		shape.ForEachRow(c.Pads, t, stencil.Set1)
-	})
-	savedBitmap := stencil.Clone()
-
-	// Pass 2
-	component.Visit(func(c *eda.Component) {
-		clearWidth := 2 * c.CutsWidth
-		brush := shape.Circle(int(clearWidth * config.PixelsPerMM))
-
-		t := c.Transform.Multiply(bmT)
-		brush.ForEachPathsPixel(c.Pads, t, stencil.Set0)
-	})
-
-	// Pass 3
-	stencil.Xor(savedBitmap)
-
-	component.Visit(func(c *eda.Component) {
-		brush := shape.Circle(int(c.CutsWidth * config.PixelsPerMM))
-
-		t := c.Transform.Multiply(bmT)
-		brush.ForEachPathsPixel(c.AlignCuts, t, stencil.Set1)
-	})
+	shrunkCuts := func(c *eda.Component) path.Paths {
+		return append(c.Pads, c.AlignCuts...)
+	}
+	renderShrunkCuts(config, component, shrunkCuts, stencil)
 }

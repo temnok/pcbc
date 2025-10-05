@@ -6,6 +6,8 @@ import (
 	"temnok/pcbc/bitmap"
 	"temnok/pcbc/eda"
 	"temnok/pcbc/eda/pcb/config"
+	"temnok/pcbc/path"
+	"temnok/pcbc/shape"
 	"temnok/pcbc/transform"
 	"temnok/pcbc/util"
 )
@@ -16,7 +18,6 @@ var fileNamePrefix = map[bool]string{
 }
 
 func Process(config *config.Config, component *eda.Component) error {
-
 	componentFront := &eda.Component{
 		CutsWidth:           0.12,
 		CutsPerforationStep: 0.18,
@@ -77,4 +78,31 @@ func Process(config *config.Config, component *eda.Component) error {
 			return saveOverview(config, "2-overview.png", copper2, mask2, silk2, nil)
 		},
 	)
+}
+
+func renderShrunkCuts(config *config.Config, root *eda.Component,
+	getCuts func(c *eda.Component) path.Paths, output *bitmap.Bitmap) {
+
+	bmT := config.BitmapTransform()
+	canvas := bitmap.New(output.Width(), output.Height())
+
+	// Pass 1: draw pads
+	root.Visit(func(c *eda.Component) {
+		t := c.Transform.Multiply(bmT)
+		shape.ForEachRow(getCuts(c), t, canvas.Set1)
+	})
+	tmp := canvas.Clone()
+
+	// Pass 2
+	root.Visit(func(c *eda.Component) {
+		clearWidth := 2 * c.CutsWidth
+		brush := shape.Circle(int(clearWidth * config.PixelsPerMM))
+
+		t := c.Transform.Multiply(bmT)
+		brush.ForEachPathsPixel(getCuts(c), t, canvas.Set0)
+	})
+
+	// Pass 3
+	canvas.Xor(tmp)
+	output.Or(canvas)
 }

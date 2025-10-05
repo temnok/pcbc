@@ -10,6 +10,7 @@ import (
 	"temnok/pcbc/eda"
 	"temnok/pcbc/eda/pcb/config"
 	"temnok/pcbc/lbrn"
+	"temnok/pcbc/path"
 	"temnok/pcbc/shape"
 )
 
@@ -74,6 +75,11 @@ func SaveMask(config *config.Config, component *eda.Component, back bool) (*bitm
 		nonEmpty = nonEmpty || len(c.Pads) > 0 || len(c.Marks) > 0
 	})
 
+	shrunkCuts := func(c *eda.Component) path.Paths {
+		return c.AlignCuts
+	}
+	renderShrunkCuts(config, component, shrunkCuts, mask)
+
 	filename := config.SavePath + fileNamePrefix[back] + "mask.lbrn"
 	silkImage := image.NewSingle(silk, color.Transparent, color.Black)
 	maskImage := image.NewSingle(mask, color.Transparent, color.Black)
@@ -103,9 +109,6 @@ func cutMask(config *config.Config, c *eda.Component, back bool, mask *bitmap.Bi
 	if !back {
 		brush.ForEachPathsPixel(c.Pads, t, mask.Set1)
 	}
-
-	// Cuts
-	brush.ForEachPathsPixel(c.AlignCuts, t, mask.Set1)
 
 	c.Cuts.RasterizeIntermittently(t, c.CutsPerforationStep*config.PixelsPerMM, func(x, y int) {
 		brush.ForEachRowWithOffset(x, y, mask.Set1)
