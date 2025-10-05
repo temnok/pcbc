@@ -39,8 +39,8 @@ func P2(topLabel, bottomLabel string, chip *eda.Component) *eda.Component {
 			chip,
 			mount,
 
-			//boards.Logo.Arrange(transform.ScaleUniformly(0.9).Move(0.8, 1.1)),
-			boards.Rev(2025, 9, 27).Arrange(transform.ScaleUniformly(0.5).Move(4.15, -1.5)),
+			boards.Logo.Arrange(transform.ScaleUniformly(0.6).Move(1.5, 1)),
+			boards.Rev(2025, 10, 4).Arrange(transform.ScaleUniformly(0.5).Move(-2.3, -1.1)),
 		},
 	}
 }
