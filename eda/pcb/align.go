@@ -26,7 +26,7 @@ var (
 			Index:    &lbrn.Param{Value: strconv.Itoa(alignImageIndex)},
 			Priority: &lbrn.Param{Value: strconv.Itoa(alignImageIndex)},
 
-			MaxPower:    &lbrn.Param{Value: "15"},
+			MaxPower:    &lbrn.Param{Value: "10"},
 			QPulseWidth: &lbrn.Param{Value: "200"},
 			Frequency:   &lbrn.Param{Value: "20000"},
 
@@ -56,7 +56,7 @@ var (
 
 			NumPasses:    &lbrn.Param{Value: "1"},
 			GlobalRepeat: &lbrn.Param{Value: "50"},
-			Speed:        &lbrn.Param{Value: "1000"},
+			Speed:        &lbrn.Param{Value: "1100"},
 
 			SubLayer: &lbrn.SubLayer{
 				Type:  "Cut",
@@ -96,7 +96,7 @@ func SaveAlign(config *config.Config, board *eda.Component, mask, silk *bitmap.B
 	}
 
 	bounds := lbrn.NewRoundRect(alignCutIndex, config.LbrnCenterMove(),
-		config.Width+4, config.Height+4, 2)
+		config.Width+5, config.Height+5, 2)
 
 	bm := mask.Clone()
 	bm.Or(silk)
@@ -124,6 +124,6 @@ func SaveAlign(config *config.Config, board *eda.Component, mask, silk *bitmap.B
 
 	return errors.Join(
 		top.SaveToFile(config.SavePath+"0-align-top.lbrn"),
-		bottom.SaveToFile(config.SavePath+"1-align-bottom.lbrn"),
+		bottom.SaveToFile(config.SavePath+"0-align-bottom.lbrn"),
 	)
 }
