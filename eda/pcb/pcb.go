@@ -65,6 +65,10 @@ func Process(config *config.Config, component *eda.Component) error {
 	}
 
 	return util.RunConcurrently(
+		//func() error {
+		//	return SaveAlign(config, componentFront, mask1, silk1)
+		//},
+
 		func() error {
 			return saveOverview(config, "1-overview.png", copper1, mask1, silk1, stencil)
 		},

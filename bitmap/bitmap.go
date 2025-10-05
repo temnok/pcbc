@@ -101,6 +101,13 @@ func (b *Bitmap) Xor(a *Bitmap) {
 	}
 }
 
+func (b *Bitmap) Or(a *Bitmap) {
+	n := min(len(a.words), len(b.words))
+	for i, w := range a.words[:n] {
+		b.words[i] |= w
+	}
+}
+
 func (b *Bitmap) addr(x, y int) int {
 	return ((b.width+63)/64)*y + x/64
 }
