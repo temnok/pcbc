@@ -68,8 +68,7 @@ var maskCutSettings = []*lbrn.CutSetting{
 	},
 }
 
-func SaveMask(config *config.Config, root *eda.Component, back bool) (
-	*bitmap.Bitmap, *bitmap.Bitmap, *bitmap.Bitmap, error) {
+func SaveMask(config *config.Config, root *eda.Component, back bool) (*bitmap.Bitmap, *bitmap.Bitmap, error) {
 	mask := bitmap.New(config.BitmapSizeInPixels())
 	silk := bitmap.New(config.BitmapSizeInPixels())
 	cuts := bitmap.New(config.BitmapSizeInPixels())
@@ -90,6 +89,7 @@ func SaveMask(config *config.Config, root *eda.Component, back bool) (
 	renderShrunkCuts(config, root, shrunkCuts, mask)
 
 	renderMaskCuts(config, root, back, cuts)
+	silk.Or(cuts)
 
 	maskFilename := config.SavePath + fileNamePrefix[back] + "mask.lbrn"
 	silkImage := image.NewSingle(silk, color.Transparent, color.Black)
@@ -115,7 +115,7 @@ func SaveMask(config *config.Config, root *eda.Component, back bool) (
 		},
 	}
 
-	return mask, silk, cuts, errors.Join(
+	return mask, silk, errors.Join(
 		maskProject.SaveToFile(maskFilename),
 		cutsProject.SaveToFile(cutsFilename),
 	)

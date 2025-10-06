@@ -10,21 +10,19 @@ import (
 	"temnok/pcbc/util"
 )
 
-func saveOverview(config *config.Config, fileName string, copper, mask, silk, cuts, stencil *bitmap.Bitmap) error {
+func saveOverview(config *config.Config, fileName string, copper, mask, silk, stencil *bitmap.Bitmap) error {
 	fileName = config.SavePath + fileName
 
 	bitmaps := []*bitmap.Bitmap{
 		copper,
 		mask,
 		silk,
-		cuts,
 	}
 
 	colors := [][2]color.Color{
 		{color.RGBA{R: 0xC0, G: 0x60, A: 0xFF}, color.RGBA{G: 0x40, B: 0x10, A: 0xFF}},
 		{color.RGBA{}, color.RGBA{R: 0x80, G: 0x80, B: 0xFF, A: 0x80}},
 		{color.RGBA{}, color.RGBA{R: 0xFF, G: 0xFF, B: 0xFF, A: 0xA0}},
-		{color.RGBA{}, color.RGBA{R: 0xFF, G: 0x80, B: 0xFF, A: 0x80}},
 	}
 
 	if stencil != nil {

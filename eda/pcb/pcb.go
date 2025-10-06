@@ -21,7 +21,7 @@ func Process(config *config.Config, component *eda.Component) error {
 	componentFront := &eda.Component{
 		CutsWidth:           0.12,
 		CutsPerforationStep: 0.18,
-		OuterCutsWidth:      0.3,
+		OuterCutsWidth:      0.2,
 		MarksWidth:          0.13,
 		TracksWidth:         0.2,
 		ClearWidth:          0.2,
@@ -33,7 +33,7 @@ func Process(config *config.Config, component *eda.Component) error {
 
 	componentBack := componentFront.Arrange(transform.MirrorX)
 
-	var copper1, copper2, mask1, mask2, silk1, silk2, cuts1, cuts2, stencil *bitmap.Bitmap
+	var copper1, copper2, mask1, mask2, silk1, silk2, stencil *bitmap.Bitmap
 
 	err := util.RunConcurrently(
 		func() error {
@@ -48,12 +48,12 @@ func Process(config *config.Config, component *eda.Component) error {
 		},
 		func() error {
 			var e error
-			mask1, silk1, cuts1, e = SaveMask(config, componentFront, false)
+			mask1, silk1, e = SaveMask(config, componentFront, false)
 			return e
 		},
 		func() error {
 			var e error
-			mask2, silk2, cuts2, e = SaveMask(config, componentBack, true)
+			mask2, silk2, e = SaveMask(config, componentBack, true)
 			return e
 		},
 		func() error {
@@ -72,11 +72,11 @@ func Process(config *config.Config, component *eda.Component) error {
 		},
 
 		func() error {
-			return saveOverview(config, "1-overview.png", copper1, mask1, silk1, cuts1, stencil)
+			return saveOverview(config, "1-overview.png", copper1, mask1, silk1, stencil)
 		},
 
 		func() error {
-			return saveOverview(config, "2-overview.png", copper2, mask2, silk2, cuts2, nil)
+			return saveOverview(config, "2-overview.png", copper2, mask2, silk2, nil)
 		},
 	)
 }
