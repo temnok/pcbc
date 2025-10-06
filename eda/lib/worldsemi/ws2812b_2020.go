@@ -9,7 +9,7 @@ import (
 )
 
 var (
-	padPair = path.Rect(0.7, 0.7).CloneXY(2, 0, (0.7 + 0.4)).Transform(transform.Move((0.7+1.13)/2, 0))
+	padPair = path.RoundRect(0.7, 0.7, 0.2).CloneXY(2, 0, (0.7 + 0.4)).Transform(transform.Move((0.7+1.13)/2, 0))
 
 	WS2812B_2020 = &eda.Component{
 		Pads: append(append(

@@ -12,21 +12,21 @@ import (
 )
 
 var (
-	header = greenconn.CSCC118(3, false, []string{"DI", "VDD", "DO"}).Arrange(transform.Move(-3.2, 0))
-	pads   = header.PadCenters()
-
-	chip = worldsemi.WS2812B_2020.Arrange(transform.Move(0.6, 0))
+	chip = worldsemi.WS2812B_2020.Arrange(transform.RotateDegrees(180).Move(-3.6, 0))
 	pins = chip.PadCenters()
+
+	header = greenconn.CSCC118(3, false, []string{"DO", "+V", "DI"}).Arrange(transform.Move(0.3, 0))
+	pads   = header.PadCenters()
 
 	Board = &eda.Component{
 		Cuts: path.Paths{
-			path.RoundRect(11.5, 4, 1.1),
+			path.RoundRect(11.5, 4, 0.8),
 		},
 
 		Tracks: path.Paths{
-			eda.LinearTrack(pads[0], pins[3], 0, -1, 0),
-			eda.LinearTrack(pads[1], pins[4], 0, -2.8, 0),
-			eda.LinearTrack(pads[2], pins[1], 0, 1.1, 0.3, 0),
+			eda.LinearTrack(pads[0], pins[1], 0, 1, 0.3, -1e-9),
+			eda.LinearTrack(pads[1], pins[4], 0, -1, 0),
+			eda.LinearTrack(pads[2], pins[3], -1e-9, -1e-9),
 		},
 
 		Nested: eda.Components{
@@ -42,18 +42,20 @@ var (
 
 			chip,
 
-			boards.MountHole.Arrange(transform.RotateDegrees(45).Move(3.8, 0)),
+			boards.MountHoleV2.Arrange(transform.Move(3.8, 0)),
 
 			boards.Logo.Arrange(transform.ScaleUniformly(0.7).Move(5, 1.3)),
 
-			boards.Rev(2025, 9, 27).Arrange(transform.ScaleUniformly(0.6).Move(4.5, -1.6)),
+			boards.Rev(2025, 10, 6).Arrange(transform.ScaleUniformly(0.6).Move(4.5, -1.6)),
 
 			{
+				Transform: transform.Scale(0.9, 0.7).Move(-3.5, 0),
+
 				MarksWidth: 0.17,
 
 				Nested: eda.Components{
-					eda.CenteredText("WS2812").Arrange(transform.Scale(1.4, 0.7).Move(0.5, 1.55)),
-					eda.CenteredText("B-2020").Arrange(transform.Scale(1.4, 0.7).Move(0.5, -1.55)),
+					eda.CenteredText("WS2812").Arrange(transform.Move(0, 2.1)),
+					eda.CenteredText("B-2020").Arrange(transform.Move(0, -2.1)),
 				},
 			},
 		},
