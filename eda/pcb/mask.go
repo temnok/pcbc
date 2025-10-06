@@ -3,8 +3,10 @@
 package pcb
 
 import (
+	"errors"
 	"image/color"
 	"math"
+	"strconv"
 	"temnok/pcbc/bitmap"
 	"temnok/pcbc/bitmap/image"
 	"temnok/pcbc/eda"
@@ -14,12 +16,17 @@ import (
 	"temnok/pcbc/shape"
 )
 
+const (
+	maskSilkPassIndex = 0
+	maskCutPassIndex  = 1
+)
+
 var maskCutSettings = []*lbrn.CutSetting{
 	{
 		Type:     "Image",
 		Name:     &lbrn.Param{Value: "Silk"},
-		Index:    &lbrn.Param{Value: "0"},
-		Priority: &lbrn.Param{Value: "0"},
+		Index:    &lbrn.Param{Value: strconv.Itoa(maskSilkPassIndex)},
+		Priority: &lbrn.Param{Value: strconv.Itoa(maskSilkPassIndex)},
 
 		MaxPower:    &lbrn.Param{Value: "5"},
 		QPulseWidth: &lbrn.Param{Value: "200"},
@@ -42,8 +49,8 @@ var maskCutSettings = []*lbrn.CutSetting{
 	{
 		Type:     "Image",
 		Name:     &lbrn.Param{Value: "Mask"},
-		Index:    &lbrn.Param{Value: "1"},
-		Priority: &lbrn.Param{Value: "1"},
+		Index:    &lbrn.Param{Value: strconv.Itoa(maskCutPassIndex)},
+		Priority: &lbrn.Param{Value: strconv.Itoa(maskCutPassIndex)},
 
 		MaxPower:    &lbrn.Param{Value: "10"},
 		QPulseWidth: &lbrn.Param{Value: "80"},
@@ -61,13 +68,15 @@ var maskCutSettings = []*lbrn.CutSetting{
 	},
 }
 
-func SaveMask(config *config.Config, component *eda.Component, back bool) (*bitmap.Bitmap, *bitmap.Bitmap, error) {
+func SaveMask(config *config.Config, root *eda.Component, back bool) (
+	*bitmap.Bitmap, *bitmap.Bitmap, *bitmap.Bitmap, error) {
 	mask := bitmap.New(config.BitmapSizeInPixels())
 	silk := bitmap.New(config.BitmapSizeInPixels())
+	cuts := bitmap.New(config.BitmapSizeInPixels())
 
 	nonEmpty := false
 
-	component.Visit(func(c *eda.Component) {
+	root.Visit(func(c *eda.Component) {
 		cutMask(config, c, back, mask)
 
 		addSilk(config, c, back, silk)
@@ -78,22 +87,38 @@ func SaveMask(config *config.Config, component *eda.Component, back bool) (*bitm
 	shrunkCuts := func(c *eda.Component) path.Paths {
 		return c.AlignCuts
 	}
-	renderShrunkCuts(config, component, shrunkCuts, mask)
+	renderShrunkCuts(config, root, shrunkCuts, mask)
 
-	filename := config.SavePath + fileNamePrefix[back] + "mask.lbrn"
+	renderMaskCuts(config, root, back, cuts)
+
+	maskFilename := config.SavePath + fileNamePrefix[back] + "mask.lbrn"
 	silkImage := image.NewSingle(silk, color.Transparent, color.Black)
 	maskImage := image.NewSingle(mask, color.Transparent, color.Black)
 
-	p := &lbrn.LightBurnProject{
+	cutsFilename := config.SavePath + fileNamePrefix[back] + "mask-cuts.lbrn"
+	cutsImage := image.NewSingle(cuts, color.Transparent, color.Black)
+
+	maskProject := &lbrn.LightBurnProject{
 		UIPrefs:       lbrn.UIPrefsDefaults,
 		CutSettingImg: maskCutSettings,
 		Shape: []*lbrn.Shape{
-			lbrn.NewBitmapShapeFromImage(0, config.LbrnBitmapScale(), silkImage),
-			lbrn.NewBitmapShapeFromImage(1, config.LbrnBitmapScale(), maskImage),
+			lbrn.NewBitmapShapeFromImage(maskSilkPassIndex, config.LbrnBitmapScale(), silkImage),
+			lbrn.NewBitmapShapeFromImage(maskCutPassIndex, config.LbrnBitmapScale(), maskImage),
 		},
 	}
 
-	return mask, silk, p.SaveToFile(filename)
+	cutsProject := &lbrn.LightBurnProject{
+		UIPrefs:       lbrn.UIPrefsDefaults,
+		CutSettingImg: maskCutSettings,
+		Shape: []*lbrn.Shape{
+			lbrn.NewBitmapShapeFromImage(maskCutPassIndex, config.LbrnBitmapScale(), cutsImage),
+		},
+	}
+
+	return mask, silk, cuts, errors.Join(
+		maskProject.SaveToFile(maskFilename),
+		cutsProject.SaveToFile(cutsFilename),
+	)
 }
 
 func cutMask(config *config.Config, c *eda.Component, back bool, mask *bitmap.Bitmap) {
@@ -110,9 +135,10 @@ func cutMask(config *config.Config, c *eda.Component, back bool, mask *bitmap.Bi
 		brush.ForEachPathsPixel(c.Pads, t, mask.Set1)
 	}
 
-	c.Cuts.RasterizeIntermittently(t, c.CutsPerforationStep*config.PixelsPerMM, func(x, y int) {
-		brush.ForEachRowWithOffset(x, y, mask.Set1)
-	})
+	// TODO
+	//c.Cuts.RasterizeIntermittently(t, c.CutsPerforationStep*config.PixelsPerMM, func(x, y int) {
+	//	brush.ForEachRowWithOffset(x, y, mask.Set1)
+	//})
 }
 
 func addSilk(config *config.Config, c *eda.Component, back bool, silk *bitmap.Bitmap) {
@@ -127,4 +153,16 @@ func addSilk(config *config.Config, c *eda.Component, back bool, silk *bitmap.Bi
 
 	brush := shape.Circle(int(brushW))
 	brush.ForEachPathsPixel(c.Marks, t, silk.Set1)
+}
+
+func renderMaskCuts(config *config.Config, root *eda.Component, back bool, cuts *bitmap.Bitmap) {
+	root.Visit(func(c *eda.Component) {
+		if c.CutsHidden() {
+			return
+		}
+
+		brush := shape.Circle(int(c.OuterCutsWidth * config.PixelsPerMM))
+		t := c.Transform.Multiply(config.BitmapTransform())
+		brush.ForEachPathsPixel(c.Cuts, t, cuts.Set1)
+	})
 }

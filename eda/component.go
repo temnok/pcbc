@@ -23,6 +23,8 @@ type Component struct {
 	CutsWidth           float64    // for mask and stencil
 	CutsPerforationStep float64    // for mask and stencil
 
+	OuterCutsWidth float64
+
 	Marks      path.Paths
 	MarksWidth float64
 
@@ -63,6 +65,8 @@ func (c *Component) visit(t transform.T, parent *Component, callback func(*Compo
 		Cuts:                c.Cuts,
 		CutsWidth:           firstNonZero(c.CutsWidth, parent.CutsWidth),
 		CutsPerforationStep: firstNonZero(c.CutsPerforationStep, parent.CutsPerforationStep),
+
+		OuterCutsWidth: firstNonZero(c.OuterCutsWidth, parent.OuterCutsWidth),
 
 		Marks:      c.Marks,
 		MarksWidth: firstNonZero(c.MarksWidth, parent.MarksWidth),
