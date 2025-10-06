@@ -26,7 +26,7 @@ func P2(topLabel, bottomLabel string, chip *eda.Component) *eda.Component {
 
 	return &eda.Component{
 		Cuts: path.Paths{
-			path.RoundRect(9, 3, 1),
+			path.RoundRect(9, 3, 0.6),
 		},
 
 		Tracks: path.Paths{
@@ -40,7 +40,7 @@ func P2(topLabel, bottomLabel string, chip *eda.Component) *eda.Component {
 			mount,
 
 			boards.Logo.Arrange(transform.ScaleUniformly(0.6).Move(1.5, 1)),
-			boards.Rev(2025, 10, 4).Arrange(transform.ScaleUniformly(0.5).Move(-2.3, -1.1)),
+			boards.Rev(2025, 10, 5).Arrange(transform.ScaleUniformly(0.5).Move(-2.3, -1.1)),
 		},
 	}
 }

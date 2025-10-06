@@ -21,11 +21,11 @@ func TestBoard(t *testing.T) {
 		Nested: eda.Components{
 			{
 				Cuts: path.Paths{
-					path.RoundRect(11, 11, 1),
+					path.RoundRect(11, 11, 0.6),
 				},
 			},
 
-			boards.AlignHole.CloneX(2, 8.5).CloneY(2, 8.5),
+			boards.AlignHole.CloneX(2, 8.6).CloneY(2, 8.6),
 
 			P2("R ", "10K", smd.I0402).Arrange(transform.Move(0, 1.7)),
 			P2("R ", "1K0", smd.I0402).Arrange(transform.Move(0, -1.7)),
