@@ -56,7 +56,7 @@ var maskCutSettings = []*lbrn.CutSetting{
 		QPulseWidth: &lbrn.Param{Value: "80"},
 		Frequency:   &lbrn.Param{Value: "2000000"},
 
-		NumPasses:        &lbrn.Param{Value: "8"},
+		NumPasses:        &lbrn.Param{Value: "10"},
 		Speed:            &lbrn.Param{Value: "500"},
 		Interval:         &lbrn.Param{Value: "0.01"},
 		DPI:              &lbrn.Param{Value: "2540"},

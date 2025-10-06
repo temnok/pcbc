@@ -36,7 +36,7 @@
 		<name Value="Mask"></name>
 		<priority Value="1"></priority>
 		<speed Value="500"></speed>
-		<numPasses Value="8"></numPasses>
+		<numPasses Value="10"></numPasses>
 		<maxPower Value="10"></maxPower>
 		<QPulseWidth Value="80"></QPulseWidth>
 		<frequency Value="2000000"></frequency>
