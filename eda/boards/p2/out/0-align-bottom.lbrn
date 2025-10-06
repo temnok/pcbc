@@ -33,7 +33,7 @@
 		</SubLayer>
 	</CutSetting>
 	<Shape Type="Path" CutIndex="1">
-		<XForm>1 0 0 1 50.7 50.7</XForm>
+		<XForm>1 0 0 1 49.5 47.5</XForm>
 		<V vx="1.2" vy="0" c0x="1.2" c0y="0.6627417"></V>
 		<V vx="0" vy="1.2" c0x="-0.6627417" c0y="1.2" c1x="0.6627417" c1y="1.2"></V>
 		<V vx="-1.2" vy="0" c0x="-1.2" c0y="-0.6627417" c1x="-1.2" c1y="0.6627417"></V>
@@ -45,7 +45,7 @@
 		<P T="B" p0="3" p1="4"></P>
 	</Shape>
 	<Shape Type="Path" CutIndex="1">
-		<XForm>1 0 0 1 59.3 50.7</XForm>
+		<XForm>1 0 0 1 60.5 47.5</XForm>
 		<V vx="1.2" vy="0" c0x="1.2" c0y="0.6627417"></V>
 		<V vx="0" vy="1.2" c0x="-0.6627417" c0y="1.2" c1x="0.6627417" c1y="1.2"></V>
 		<V vx="-1.2" vy="0" c0x="-1.2" c0y="-0.6627417" c1x="-1.2" c1y="0.6627417"></V>
@@ -57,7 +57,7 @@
 		<P T="B" p0="3" p1="4"></P>
 	</Shape>
 	<Shape Type="Path" CutIndex="1">
-		<XForm>1 0 0 1 50.7 59.3</XForm>
+		<XForm>1 0 0 1 49.5 62.5</XForm>
 		<V vx="1.2" vy="0" c0x="1.2" c0y="0.6627417"></V>
 		<V vx="0" vy="1.2" c0x="-0.6627417" c0y="1.2" c1x="0.6627417" c1y="1.2"></V>
 		<V vx="-1.2" vy="0" c0x="-1.2" c0y="-0.6627417" c1x="-1.2" c1y="0.6627417"></V>
@@ -69,7 +69,7 @@
 		<P T="B" p0="3" p1="4"></P>
 	</Shape>
 	<Shape Type="Path" CutIndex="1">
-		<XForm>1 0 0 1 59.3 59.3</XForm>
+		<XForm>1 0 0 1 60.5 62.5</XForm>
 		<V vx="1.2" vy="0" c0x="1.2" c0y="0.6627417"></V>
 		<V vx="0" vy="1.2" c0x="-0.6627417" c0y="1.2" c1x="0.6627417" c1y="1.2"></V>
 		<V vx="-1.2" vy="0" c0x="-1.2" c0y="-0.6627417" c1x="-1.2" c1y="0.6627417"></V>
@@ -80,7 +80,7 @@
 		<P T="B" p0="2" p1="3"></P>
 		<P T="B" p0="3" p1="4"></P>
 	</Shape>
-	<Shape Type="Rect" CutIndex="1" Cr="2" W="17" H="17">
+	<Shape Type="Rect" CutIndex="1" Cr="2" W="20" H="24">
 		<XForm>1 0 0 1 55 55</XForm>
 	</Shape>
 </LightBurnProject>

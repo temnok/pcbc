@@ -16,22 +16,22 @@ func P2_I0402(topLabel, bottomLabel string) *eda.Component {
 }
 
 func P2(topLabel, bottomLabel string, chip *eda.Component) *eda.Component {
-	chip = chip.Arrange(transform.RotateDegrees(-90).Move(-3.5, 0))
+	chip = chip.Arrange(transform.RotateDegrees(-90).Move(-3.8, 0))
 	pin := chip.PadCenters()
 
-	header := greenconn.CSCC118(2, false, []string{topLabel, bottomLabel}).Arrange(transform.Move(-0.8, 0))
+	header := greenconn.CSCC118(3, false, []string{topLabel, "GND", bottomLabel}).Arrange(transform.Move(-0.8, 0))
 	pad := header.PadCenters()
 
-	mount := boards.MountHoleV2.Arrange(transform.Move(2.9, 0))
+	mount := boards.MountHoleV2.Arrange(transform.Move(3, 0))
 
 	return &eda.Component{
 		Cuts: path.Paths{
-			path.RoundRect(9, 3, 0.6),
+			path.RoundRect(10, 4, 0.8),
 		},
 
 		Tracks: path.Paths{
 			eda.LinearTrack(pad[0], pin[0], 0, 0),
-			eda.LinearTrack(pad[1], pin[1], 0, 0),
+			eda.LinearTrack(pad[2], pin[1], 0, 0),
 		},
 
 		Nested: eda.Components{
@@ -39,8 +39,17 @@ func P2(topLabel, bottomLabel string, chip *eda.Component) *eda.Component {
 			chip,
 			mount,
 
-			boards.Logo.Arrange(transform.ScaleUniformly(0.6).Move(1.5, 1)),
-			boards.Rev(2025, 10, 5).Arrange(transform.ScaleUniformly(0.5).Move(-2.3, -1.1)),
+			{
+				ClearWidth: eda.ClearOff,
+
+				Tracks: path.Paths{
+					eda.LinearTrack(pad[1], pad[1].Move(1.2, 0), -1.2),
+				},
+			},
+
+			boards.Logo.Arrange(transform.ScaleUniformly(0.7).Move(1.7, 1.3)),
+			//boards.Firm.Arrange(transform.ScaleUniformly(0.4).Move(4.2, -1.3)),
+			boards.Rev(2025, 10, 5).Arrange(transform.ScaleUniformly(0.5).Move(1.8, -1.4)),
 		},
 	}
 }
