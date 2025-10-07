@@ -72,8 +72,8 @@ func SaveMask(config *config.Config, root *eda.Component, back bool) (*bitmap.Bi
 
 	root.Visit(func(c *eda.Component) {
 		addMaskPads(config, c, back, mask)
-
 		addMaskMarks(config, c, back, silk)
+		addMaskCuts(config, c, cuts)
 	})
 
 	shrunkCuts := func(c *eda.Component) path.Paths {
@@ -81,7 +81,6 @@ func SaveMask(config *config.Config, root *eda.Component, back bool) (*bitmap.Bi
 	}
 	renderShrunkCuts(config, root, shrunkCuts, mask)
 
-	addMaskCuts(config, root, cuts)
 	silk.Or(cuts)
 
 	maskFilename := config.SavePath + fileNamePrefix[back] + "mask.lbrn"
@@ -137,14 +136,12 @@ func addMaskMarks(config *config.Config, c *eda.Component, back bool, silk *bitm
 	brush.ForEachPathsPixel(c.Marks, t, silk.Set1)
 }
 
-func addMaskCuts(config *config.Config, root *eda.Component, cuts *bitmap.Bitmap) {
-	root.Visit(func(c *eda.Component) {
-		if c.CutsHidden() {
-			return
-		}
+func addMaskCuts(config *config.Config, c *eda.Component, cuts *bitmap.Bitmap) {
+	if c.CutsHidden() {
+		return
+	}
 
-		brush := shape.Circle(int(c.OuterCutsWidth * config.PixelsPerMM))
-		t := c.Transform.Multiply(config.BitmapTransform())
-		brush.ForEachPathsPixel(c.Cuts, t, cuts.Set1)
-	})
+	brush := shape.Circle(int(c.ClearWidth * config.PixelsPerMM))
+	t := c.Transform.Multiply(config.BitmapTransform())
+	brush.ForEachPathsPixel(c.Cuts, t, cuts.Set1)
 }

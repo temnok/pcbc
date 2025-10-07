@@ -19,11 +19,8 @@ type Component struct {
 
 	AlignCuts, AlignHiddenCuts path.Paths
 
-	Cuts                path.Paths // solid board cuts and dotted mask cuts
-	CutsWidth           float64    // for mask and stencil
-	CutsPerforationStep float64    // for mask and stencil
-
-	OuterCutsWidth float64
+	Cuts      path.Paths
+	CutsWidth float64
 
 	Marks      path.Paths
 	MarksWidth float64
@@ -62,11 +59,8 @@ func (c *Component) visit(t transform.T, parent *Component, callback func(*Compo
 		AlignCuts:       c.AlignCuts,
 		AlignHiddenCuts: c.AlignHiddenCuts,
 
-		Cuts:                c.Cuts,
-		CutsWidth:           firstNonZero(c.CutsWidth, parent.CutsWidth),
-		CutsPerforationStep: firstNonZero(c.CutsPerforationStep, parent.CutsPerforationStep),
-
-		OuterCutsWidth: firstNonZero(c.OuterCutsWidth, parent.OuterCutsWidth),
+		Cuts:      c.Cuts,
+		CutsWidth: firstNonZero(c.CutsWidth, parent.CutsWidth),
 
 		Marks:      c.Marks,
 		MarksWidth: firstNonZero(c.MarksWidth, parent.MarksWidth),
