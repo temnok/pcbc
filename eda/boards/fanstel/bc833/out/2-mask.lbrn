@@ -33,7 +33,7 @@
 	</CutSetting_Img>
 	<CutSetting_Img type="Image">
 		<index Value="1"></index>
-		<name Value="Mask"></name>
+		<name Value="Pads"></name>
 		<priority Value="1"></priority>
 		<speed Value="500"></speed>
 		<numPasses Value="10"></numPasses>

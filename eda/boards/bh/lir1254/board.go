@@ -44,11 +44,11 @@ var (
 
 			hold,
 
-			boards.Logo.Arrange(transform.Scale(1.6, 1.6).Move(-7.5, 0.5)),
+			boards.Logo.Arrange(transform.Scale(1.6, 1.6).Move(-7.5, 0.7)),
 
-			boards.Firm.Arrange(transform.Scale(0.8, 0.8).Move(7.5, 0.5)),
+			boards.Firm.Arrange(transform.Scale(0.8, 0.8).Move(7.5, 0.7)),
 
-			boards.Rev(2025, 10, 1).Arrange(transform.RotateDegrees(90).Scale(0.8, 0.8).Move(8.35, -1.5)),
+			boards.Rev(2025, 10, 7).Arrange(transform.RotateDegrees(90).Scale(0.8, 0.8).Move(8.35, -5)),
 
 			eda.CenteredText("LIR1254").Arrange(transform.Scale(2, 1.5).Move(0, -2.2)),
 		},

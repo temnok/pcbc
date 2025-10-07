@@ -17,62 +17,72 @@ import (
 )
 
 const (
-	maskSilkPassIndex = 0
+	maskMarkPassIndex = 0
 	maskCutPassIndex  = 1
 )
 
-var maskCutSettings = []*lbrn.CutSetting{
-	{
-		Type:     "Image",
-		Name:     &lbrn.Param{Value: "Silk"},
-		Index:    &lbrn.Param{Value: strconv.Itoa(maskSilkPassIndex)},
-		Priority: &lbrn.Param{Value: strconv.Itoa(maskSilkPassIndex)},
+func maskCutSettings(markName, cutsName string, cutsEnabled bool) []*lbrn.CutSetting {
+	var cutsOutput *lbrn.Param
+	if !cutsEnabled {
+		cutsOutput = &lbrn.Param{Value: "0"}
+	}
 
-		MaxPower:    &lbrn.Param{Value: "5"},
-		QPulseWidth: &lbrn.Param{Value: "200"},
-		Frequency:   &lbrn.Param{Value: "20000"},
+	return []*lbrn.CutSetting{
+		{
+			Type:     "Image",
+			Name:     &lbrn.Param{Value: markName},
+			Index:    &lbrn.Param{Value: strconv.Itoa(maskMarkPassIndex)},
+			Priority: &lbrn.Param{Value: strconv.Itoa(maskMarkPassIndex)},
 
-		NumPasses: &lbrn.Param{Value: "1"},
-		Speed:     &lbrn.Param{Value: "800"},
-		Interval:  &lbrn.Param{Value: "0.02"},
-		DPI:       &lbrn.Param{Value: "1270"},
+			MaxPower:    &lbrn.Param{Value: "5"},
+			QPulseWidth: &lbrn.Param{Value: "200"},
+			Frequency:   &lbrn.Param{Value: "20000"},
 
-		CrossHatch: &lbrn.Param{Value: "1"},
-		Angle:      &lbrn.Param{Value: "-90"},
+			NumPasses: &lbrn.Param{Value: "1"},
+			Speed:     &lbrn.Param{Value: "800"},
+			Interval:  &lbrn.Param{Value: "0.02"},
+			DPI:       &lbrn.Param{Value: "1270"},
 
-		UseDotCorrection: &lbrn.Param{Value: "1"},
-		DotWidth:         &lbrn.Param{Value: "0.05"},
-	},
-	{
-		Type:     "Image",
-		Name:     &lbrn.Param{Value: "Mask"},
-		Index:    &lbrn.Param{Value: strconv.Itoa(maskCutPassIndex)},
-		Priority: &lbrn.Param{Value: strconv.Itoa(maskCutPassIndex)},
+			CrossHatch: &lbrn.Param{Value: "1"},
+			Angle:      &lbrn.Param{Value: "-90"},
 
-		MaxPower:    &lbrn.Param{Value: "10"},
-		QPulseWidth: &lbrn.Param{Value: "80"},
-		Frequency:   &lbrn.Param{Value: "2000000"},
+			UseDotCorrection: &lbrn.Param{Value: "1"},
+			DotWidth:         &lbrn.Param{Value: "0.05"},
+		},
+		{
+			DoOutput: cutsOutput,
 
-		NumPasses:        &lbrn.Param{Value: "10"},
-		Speed:            &lbrn.Param{Value: "500"},
-		Interval:         &lbrn.Param{Value: "0.01"},
-		DPI:              &lbrn.Param{Value: "2540"},
-		UseDotCorrection: &lbrn.Param{Value: "1"},
-		DotWidth:         &lbrn.Param{Value: "0.05"},
+			Type:     "Image",
+			Name:     &lbrn.Param{Value: cutsName},
+			Index:    &lbrn.Param{Value: strconv.Itoa(maskCutPassIndex)},
+			Priority: &lbrn.Param{Value: strconv.Itoa(maskCutPassIndex)},
 
-		CrossHatch: &lbrn.Param{Value: "1"},
-		Angle:      &lbrn.Param{Value: "90"},
-	},
+			MaxPower:    &lbrn.Param{Value: "10"},
+			QPulseWidth: &lbrn.Param{Value: "80"},
+			Frequency:   &lbrn.Param{Value: "2000000"},
+
+			NumPasses:        &lbrn.Param{Value: "10"},
+			Speed:            &lbrn.Param{Value: "500"},
+			Interval:         &lbrn.Param{Value: "0.01"},
+			DPI:              &lbrn.Param{Value: "2540"},
+			UseDotCorrection: &lbrn.Param{Value: "1"},
+			DotWidth:         &lbrn.Param{Value: "0.05"},
+
+			CrossHatch: &lbrn.Param{Value: "1"},
+			Angle:      &lbrn.Param{Value: "90"},
+		},
+	}
 }
 
 func SaveMask(config *config.Config, root *eda.Component, bottom bool) (*bitmap.Bitmap, *bitmap.Bitmap, error) {
 	mask := bitmap.New(config.BitmapSizeInPixels())
 	silk := bitmap.New(config.BitmapSizeInPixels())
+	align := bitmap.New(config.BitmapSizeInPixels())
 	cuts := bitmap.New(config.BitmapSizeInPixels())
 
 	root.Visit(func(c *eda.Component) {
 		addMaskPads(config, c, bottom, mask)
-		addMaskMarks(config, c, bottom, silk)
+		addMaskMarks(config, c, bottom, silk, align)
 		addMaskCuts(config, c, cuts)
 	})
 
@@ -92,24 +102,28 @@ func SaveMask(config *config.Config, root *eda.Component, bottom bool) (*bitmap.
 	maskImage := image.NewSingle(mask, color.Transparent, color.Black)
 
 	cutsFilename := config.SavePath + fileNamePrefix[bottom] + "mask-cut.lbrn"
+	alignImage := image.NewSingle(align, color.Transparent, color.Black)
 	cutsImage := image.NewSingle(cuts, color.Transparent, color.Black)
 
 	maskProject := &lbrn.LightBurnProject{
 		UIPrefs:       lbrn.UIPrefsDefaults,
-		CutSettingImg: maskCutSettings,
+		CutSettingImg: maskCutSettings("Silk", "Pads", true),
 		Shape: []*lbrn.Shape{
-			lbrn.NewBitmapShapeFromImage(maskSilkPassIndex, config.LbrnBitmapScale(), silkImage),
+			lbrn.NewBitmapShapeFromImage(maskMarkPassIndex, config.LbrnBitmapScale(), silkImage),
 			lbrn.NewBitmapShapeFromImage(maskCutPassIndex, config.LbrnBitmapScale(), maskImage),
 		},
 	}
 
 	cutsProject := &lbrn.LightBurnProject{
 		UIPrefs:       lbrn.UIPrefsDefaults,
-		CutSettingImg: maskCutSettings,
+		CutSettingImg: maskCutSettings("Align", "Cuts", false),
 		Shape: []*lbrn.Shape{
+			lbrn.NewBitmapShapeFromImage(maskMarkPassIndex, config.LbrnBitmapScale(), alignImage),
 			lbrn.NewBitmapShapeFromImage(maskCutPassIndex, config.LbrnBitmapScale(), cutsImage),
 		},
 	}
+
+	silk.Or(align)
 
 	return mask, silk, errors.Join(
 		maskProject.SaveToFile(maskFilename),
@@ -127,7 +141,7 @@ func addMaskPads(config *config.Config, c *eda.Component, bottom bool, mask *bit
 	brush.ForEachPathsPixel(c.Pads, t, mask.Set1)
 }
 
-func addMaskMarks(config *config.Config, c *eda.Component, bottom bool, silk *bitmap.Bitmap) {
+func addMaskMarks(config *config.Config, c *eda.Component, bottom bool, silk, align *bitmap.Bitmap) {
 	if c.Bottom != bottom {
 		return
 	}
@@ -138,6 +152,8 @@ func addMaskMarks(config *config.Config, c *eda.Component, bottom bool, silk *bi
 
 	brush := shape.Circle(int(brushW))
 	brush.ForEachPathsPixel(c.Marks, t, silk.Set1)
+
+	brush.ForEachPathsPixel(c.AlignMarks, t, align.Set1)
 }
 
 func addMaskCuts(config *config.Config, c *eda.Component, cuts *bitmap.Bitmap) {

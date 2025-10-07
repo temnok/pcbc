@@ -12,6 +12,8 @@ var MountHoleV2 = &eda.Component{
 	Cuts: path.Paths{path.Circle(1.43)},
 
 	Nested: eda.Components{
+		AlignMark,
+
 		(&eda.Component{
 			ClearWidth: eda.ClearOff,
 			Pads: path.Paths{

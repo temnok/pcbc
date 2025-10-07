@@ -17,7 +17,7 @@
 	</UIPrefs>
 	<CutSetting_Img type="Image">
 		<index Value="0"></index>
-		<name Value="Silk"></name>
+		<name Value="Align"></name>
 		<priority Value="0"></priority>
 		<speed Value="800"></speed>
 		<numPasses Value="1"></numPasses>
@@ -33,8 +33,9 @@
 	</CutSetting_Img>
 	<CutSetting_Img type="Image">
 		<index Value="1"></index>
-		<name Value="Mask"></name>
+		<name Value="Cuts"></name>
 		<priority Value="1"></priority>
+		<doOutput Value="0"></doOutput>
 		<speed Value="500"></speed>
 		<numPasses Value="10"></numPasses>
 		<maxPower Value="10"></maxPower>
@@ -47,6 +48,9 @@
 		<crossHatch Value="1"></crossHatch>
 		<angle Value="90"></angle>
 	</CutSetting_Img>
+	<Shape Type="Bitmap" CutIndex="0" W="400" H="300" Data="iVBORw0KGgoAAAANSUhEUgAAAZAAAAEsAQMAAADXeXeBAAAABlBMVEUAAAAAAAClZ7nPAAAAAXRSTlMAQObYZgAAACpJREFUeJzswDEBAAAAwiD7p7bEThgAAAAAAAAAAAAAAAAAAJB6AAAA//87xAABZYySPAAAAABJRU5ErkJggg==">
+		<XForm>0.01 0 0 -0.01 55 55</XForm>
+	</Shape>
 	<Shape Type="Bitmap" CutIndex="1" W="400" H="300" Data="iVBORw0KGgoAAAANSUhEUgAAAZAAAAEsAQMAAADXeXeBAAAABlBMVEUAAAAAAAClZ7nPAAAAAXRSTlMAQObYZgAAACpJREFUeJzswDEBAAAAwiD7p7bEThgAAAAAAAAAAAAAAAAAAJB6AAAA//87xAABZYySPAAAAABJRU5ErkJggg==">
 		<XForm>0.01 0 0 -0.01 55 55</XForm>
 	</Shape>
