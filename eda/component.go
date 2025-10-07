@@ -15,9 +15,9 @@ type Components = []*Component
 type Component struct {
 	Transform transform.T
 
-	Back bool
+	Bottom bool
 
-	AlignCuts, AlignHiddenCuts path.Paths
+	AlignCuts path.Paths
 
 	Cuts      path.Paths
 	CutsWidth float64
@@ -54,10 +54,9 @@ func (c *Component) visit(t transform.T, parent *Component, callback func(*Compo
 	target := &Component{
 		Transform: t,
 
-		Back: c.Back,
+		Bottom: c.Bottom,
 
-		AlignCuts:       c.AlignCuts,
-		AlignHiddenCuts: c.AlignHiddenCuts,
+		AlignCuts: c.AlignCuts,
 
 		Cuts:      c.Cuts,
 		CutsWidth: firstNonZero(c.CutsWidth, parent.CutsWidth),

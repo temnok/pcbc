@@ -30,7 +30,9 @@ var AlignHole = &eda.Component{
 		},
 
 		{
-			AlignHiddenCuts: path.Paths{
+			Bottom: true,
+
+			AlignCuts: path.Paths{
 				path.Circle(2.4),
 			},
 		},

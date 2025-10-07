@@ -76,18 +76,18 @@ func SaveAlign(config *config.Config, board *eda.Component, mask, silk *bitmap.B
 	var topCuts, bottomCuts []*lbrn.Shape
 
 	board.Visit(func(c *eda.Component) {
-		if len(c.AlignCuts)+len(c.AlignHiddenCuts) == 0 {
+		if len(c.AlignCuts) == 0 {
 			return
 		}
 
 		t := c.Transform.Multiply(config.LbrnCenterMove())
 
 		for _, cut := range c.AlignCuts {
-			topCuts = append(topCuts, lbrn.NewPath(alignCutIndex, t, cut))
-		}
-
-		for _, cut := range c.AlignHiddenCuts {
-			bottomCuts = append(bottomCuts, lbrn.NewPath(alignCutIndex, t, cut))
+			if c.Bottom {
+				bottomCuts = append(bottomCuts, lbrn.NewPath(alignCutIndex, t, cut))
+			} else {
+				topCuts = append(topCuts, lbrn.NewPath(alignCutIndex, t, cut))
+			}
 		}
 	})
 

@@ -65,29 +65,33 @@ var maskCutSettings = []*lbrn.CutSetting{
 	},
 }
 
-func SaveMask(config *config.Config, root *eda.Component, back bool) (*bitmap.Bitmap, *bitmap.Bitmap, error) {
+func SaveMask(config *config.Config, root *eda.Component, bottom bool) (*bitmap.Bitmap, *bitmap.Bitmap, error) {
 	mask := bitmap.New(config.BitmapSizeInPixels())
 	silk := bitmap.New(config.BitmapSizeInPixels())
 	cuts := bitmap.New(config.BitmapSizeInPixels())
 
 	root.Visit(func(c *eda.Component) {
-		addMaskPads(config, c, back, mask)
-		addMaskMarks(config, c, back, silk)
+		addMaskPads(config, c, bottom, mask)
+		addMaskMarks(config, c, bottom, silk)
 		addMaskCuts(config, c, cuts)
 	})
 
 	shrunkCuts := func(c *eda.Component) path.Paths {
+		if c.Bottom {
+			return nil
+		}
+
 		return c.AlignCuts
 	}
 	renderShrunkCuts(config, root, shrunkCuts, mask)
 
 	silk.Or(cuts)
 
-	maskFilename := config.SavePath + fileNamePrefix[back] + "mask.lbrn"
+	maskFilename := config.SavePath + fileNamePrefix[bottom] + "mask.lbrn"
 	silkImage := image.NewSingle(silk, color.Transparent, color.Black)
 	maskImage := image.NewSingle(mask, color.Transparent, color.Black)
 
-	cutsFilename := config.SavePath + fileNamePrefix[back] + "mask-cut.lbrn"
+	cutsFilename := config.SavePath + fileNamePrefix[bottom] + "mask-cut.lbrn"
 	cutsImage := image.NewSingle(cuts, color.Transparent, color.Black)
 
 	maskProject := &lbrn.LightBurnProject{
@@ -113,8 +117,8 @@ func SaveMask(config *config.Config, root *eda.Component, back bool) (*bitmap.Bi
 	)
 }
 
-func addMaskPads(config *config.Config, c *eda.Component, back bool, mask *bitmap.Bitmap) {
-	if c.CutsHidden() || back {
+func addMaskPads(config *config.Config, c *eda.Component, bottom bool, mask *bitmap.Bitmap) {
+	if c.CutsHidden() || bottom {
 		return
 	}
 
@@ -123,8 +127,8 @@ func addMaskPads(config *config.Config, c *eda.Component, back bool, mask *bitma
 	brush.ForEachPathsPixel(c.Pads, t, mask.Set1)
 }
 
-func addMaskMarks(config *config.Config, c *eda.Component, back bool, silk *bitmap.Bitmap) {
-	if c.Back != back {
+func addMaskMarks(config *config.Config, c *eda.Component, bottom bool, silk *bitmap.Bitmap) {
+	if c.Bottom != bottom {
 		return
 	}
 

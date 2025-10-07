@@ -55,7 +55,11 @@ func SaveStencil(config *config.Config, component *eda.Component) (*bitmap.Bitma
 
 func renderStencil(config *config.Config, component *eda.Component, stencil *bitmap.Bitmap) {
 	shrunkCuts := func(c *eda.Component) path.Paths {
-		return append(c.Pads, c.AlignCuts...)
+		cuts := c.Pads
+		if !c.Bottom {
+			cuts = append(cuts, c.AlignCuts...)
+		}
+		return cuts
 	}
 	renderShrunkCuts(config, component, shrunkCuts, stencil)
 }

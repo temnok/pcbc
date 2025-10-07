@@ -32,7 +32,7 @@ func TestBoard(t *testing.T) {
 			},
 
 			{
-				Back: true,
+				Bottom: true,
 
 				Tracks: path.Paths{
 					eda.LinearTrack(path.Point{-1, 0}, path.Point{1, 0}),

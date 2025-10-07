@@ -28,7 +28,7 @@ var Rivet = &eda.Component{
 		},
 
 		{
-			Back: true,
+			Bottom: true,
 
 			Tracks:      path.Paths{path.Path{path.Point{}}},
 			TracksWidth: bottomDiameter,
