@@ -13,20 +13,18 @@ var (
 		eda.LinearTrack(path.Point{0, -0.5}, path.Point{0, 0.5}),
 	}
 
-	AlignTopMark = &eda.Component{
-		AlignMarks: alignLines,
-	}
-
-	AlignBottomMark = &eda.Component{
-		Bottom: true,
-
-		AlignMarks: alignLines,
-	}
-
 	AlignMark = &eda.Component{
+		MarksWidth: 0.13,
+
 		Nested: eda.Components{
-			AlignTopMark,
-			AlignBottomMark,
+			{
+				AlignMarks: alignLines,
+			},
+			{
+				Bottom: true,
+
+				AlignMarks: alignLines,
+			},
 		},
 	}
 )
