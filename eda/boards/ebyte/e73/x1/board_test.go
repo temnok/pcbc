@@ -1,6 +1,6 @@
 // Copyright © 2025 Alex Temnok. All rights reserved.
 
-package x2
+package x1
 
 import (
 	"github.com/stretchr/testify/assert"
@@ -10,28 +10,25 @@ import (
 	"temnok/pcbc/eda/pcb"
 	"temnok/pcbc/eda/pcb/config"
 	"temnok/pcbc/path"
-	"temnok/pcbc/transform"
 	"testing"
 )
 
 func TestBoard(t *testing.T) {
 	conf := config.Default()
-	conf.Width = 34
-	conf.Height = 43
+	conf.Width = 36
+	conf.Height = 20
 
 	board := &eda.Component{
 		Nested: eda.Components{
 			{
 				Cuts: path.Paths{
-					path.RoundRect(33, 42, 1.4),
+					path.RoundRect(35, 19, 1.4),
 				},
 			},
 
-			boards.AlignHole.CloneX(2, 30).CloneY(3, 19.5),
+			boards.AlignHole.CloneX(2, 32.3).CloneY(2, 16.3),
 
-			e73.Board_nRF52840.Arrange(transform.Move(0, 9.75)),
-
-			e73.Board_nRF52840.Arrange(transform.RotateDegrees(180).Move(0, -9.75)),
+			e73.Board_nRF52840,
 		},
 	}
 
