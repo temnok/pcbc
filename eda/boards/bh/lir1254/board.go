@@ -38,7 +38,7 @@ var (
 				},
 			},
 
-			boards.MountHoleV2.CloneX(2, 12).Arrange(transform.Move(0, -2.4)),
+			boards.MountHole.CloneX(2, 12).Arrange(transform.Move(0, -2.4)),
 
 			conn,
 

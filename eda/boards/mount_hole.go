@@ -11,28 +11,14 @@ import (
 var MountHole = &eda.Component{
 	Cuts: path.Paths{path.Circle(1.43)},
 
-	TracksWidth: 0.4,
-
 	Nested: eda.Components{
-		{
-			Pads: path.Pie(6, 1.0, 1.3, 20).Transform(transform.RotateDegrees(-30)),
+		alignMark,
 
-			Nested: eda.Components{
-				{
-					Tracks: path.Paths{path.Circle(2.3)},
-				},
-
-				{
-					ClearWidth: eda.ClearOff,
-
-					Tracks: path.Paths{
-						eda.LinearTrack(path.Point{X: 1.25, Y: 0}, path.Point{X: 1.25 + 0.35, Y: 0}),
-						eda.LinearTrack(path.Point{X: -1.25, Y: 0}, path.Point{X: -1.25 - 0.35, Y: 0}),
-						eda.LinearTrack(path.Point{X: 0, Y: 1.25}, path.Point{X: 0, Y: 1.25 + 0.35}),
-						eda.LinearTrack(path.Point{X: 0, Y: -1.25}, path.Point{X: 0, Y: -1.25 - 0.35}),
-					},
-				},
+		(&eda.Component{
+			ClearWidth: eda.ClearOff,
+			Pads: path.Paths{
+				path.RoundRect(0.3, 0.7, 0.15).Transform(transform.Move(1.1, 0)),
 			},
-		},
+		}).Clone(6, transform.RotateDegrees(60)),
 	},
 }

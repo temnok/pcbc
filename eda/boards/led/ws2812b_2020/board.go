@@ -42,7 +42,7 @@ var (
 
 			chip,
 
-			boards.MountHoleV2.Arrange(transform.Move(3.8, 0)),
+			boards.MountHole.Arrange(transform.Move(3.8, 0)),
 
 			boards.Logo.Arrange(transform.ScaleUniformly(0.7).Move(5, 1.3)),
 

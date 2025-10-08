@@ -22,7 +22,7 @@ func P2(topLabel, bottomLabel string, chip *eda.Component) *eda.Component {
 	header := greenconn.CSCC118(3, false, []string{topLabel, "GND", bottomLabel}).Arrange(transform.Move(-0.8, 0))
 	pad := header.PadCenters()
 
-	mount := boards.MountHoleV2.Arrange(transform.Move(3, 0))
+	mount := boards.MountHole.Arrange(transform.Move(3, 0))
 
 	return &eda.Component{
 		Cuts: path.Paths{

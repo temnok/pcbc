@@ -12,7 +12,7 @@ import (
 )
 
 var (
-	mount = boards.MountHole.Arrange(transform.RotateDegrees(90).Move(0, -2.75))
+	mount = boards.MountHole.Arrange(transform.Move(0, -2.75))
 
 	chip = qfn.QFN16G.Arrange(transform.RotateDegrees(-45).Move(0, 1.2))
 	pin  = chip.PadCenters()
@@ -67,7 +67,7 @@ var (
 			eda.CenteredText("PY32").Arrange(transform.Scale(1.4, 1.6).Move(0, 4.1)),
 			eda.CenteredText("F002A").Arrange(transform.Scale(1.2, 0.75).Move(0, -4.45)),
 
-			boards.Rev(2025, 9, 27).Arrange(transform.ScaleUniformly(0.5).Move(6, -4.55)),
+			boards.Rev(2025, 10, 7).Arrange(transform.ScaleUniformly(0.5).Move(6, -4.55)),
 
 			tracks,
 			tracks.Arrange(transform.MirrorX),

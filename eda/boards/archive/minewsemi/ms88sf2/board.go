@@ -48,8 +48,7 @@ var (
 		Transform: transform.Move(0, 3),
 
 		Nested: eda.Components{
-			boards.MountHole.Arrange(transform.RotateDegrees(45).Move(-7.5, -9.7)),
-			boards.MountHole.Arrange(transform.RotateDegrees(-45).Move(7.5, -9.7)),
+			boards.MountHole.CloneX(2, 16).Arrange(transform.Move(0, -9.7)),
 		},
 	}
 

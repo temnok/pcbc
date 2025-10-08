@@ -12,7 +12,7 @@ import (
 )
 
 var (
-	mount = boards.MountHole.Arrange(transform.RotateDegrees(90).Move(-5, 0))
+	mount = boards.MountHole.Arrange(transform.Move(-5, 0))
 
 	chip = sop.SOP8.Arrange(transform.Move(-0.6, 0))
 	pin  = chip.PadCenters()
@@ -31,11 +31,17 @@ var (
 			chip,
 			header,
 
-			eda.CenteredText("PY32").Arrange(transform.ScaleUniformly(1.3).Move(-5, 3.1)),
-			eda.CenteredText("F002A").Arrange(transform.Scale(1.05, 1.3).Move(-5, 2.1)),
+			{
+				MarksWidth: 0.15,
+				Nested: eda.Components{
+					eda.CenteredText("PY32").Arrange(transform.ScaleUniformly(1.3).Move(-5, 3.1)),
+					eda.CenteredText("F002A").Arrange(transform.Scale(1.05, 1.3).Move(-5, 2.0)),
+				},
+			},
+
 			boards.Logo.Arrange(transform.ScaleUniformly(1.3).Move(-5.8, -2.6)),
 			boards.Firm.Arrange(transform.ScaleUniformly(0.5).Move(-4, -2.6)),
-			boards.Rev(2025, 9, 27).Arrange(transform.ScaleUniformly(0.7).Move(2, -3.6)),
+			boards.Rev(2025, 10, 7).Arrange(transform.ScaleUniformly(0.7).Move(2, -3.6)),
 
 			{
 				ClearWidth:  eda.ClearOff,
