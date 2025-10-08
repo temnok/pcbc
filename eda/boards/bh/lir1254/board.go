@@ -13,7 +13,7 @@ import (
 )
 
 var (
-	conn = greenconn.CSCC118(13, true, util.Repeat("3V7", 13)).
+	conn = greenconn.CSCC118(11, true, append([]string{""}, util.Repeat("3V7", 9)...)).
 		Arrange(transform.RotateDegrees(90).Move(0, -5.2))
 
 	connPads = conn.PadCenters()
@@ -28,7 +28,7 @@ var (
 		Nested: eda.Components{
 			(&eda.Component{
 				Tracks: path.Paths{
-					eda.LinearTrack(holdPads[0], connPads[7].Move(0, -1), 0, 0, 0.9, -7, -1e-9),
+					eda.LinearTrack(holdPads[0], connPads[5].Move(0, -1), 0, 0, 0.9, -7, -1e-9),
 				},
 			}).Clone(2, transform.MirrorX),
 
@@ -38,19 +38,25 @@ var (
 				},
 			},
 
-			boards.MountHoleV2.Arrange(transform.Move(0, -1.3)).CloneX(2, 12),
+			boards.MountHoleV2.CloneX(2, 12).Arrange(transform.Move(0, -2.4)),
 
 			conn,
 
 			hold,
 
-			boards.Logo.Arrange(transform.Scale(1.6, 1.6).Move(-7.5, 0.7)),
+			boards.Logo.Arrange(transform.ScaleUniformly(1.8).Move(-7, 0.3)),
 
-			boards.Firm.Arrange(transform.Scale(0.8, 0.8).Move(7.5, 0.7)),
+			boards.Firm.Arrange(transform.ScaleUniformly(0.9).Move(7, 0.3)),
 
 			boards.Rev(2025, 10, 7).Arrange(transform.RotateDegrees(90).Scale(0.8, 0.8).Move(8.35, -5)),
 
-			eda.CenteredText("LIR1254").Arrange(transform.Scale(2, 1.5).Move(0, -2.2)),
+			{
+				MarksWidth: 0.18,
+
+				Nested: eda.Components{
+					eda.CenteredText("LIR1254").Arrange(transform.Scale(2.1, 1.3).Move(0, -2.3)),
+				},
+			},
 		},
 	}
 )
