@@ -23,7 +23,6 @@ var (
 
 	Board = &eda.Component{
 		TracksWidth: 0.5,
-		ClearWidth:  0.25,
 
 		Nested: eda.Components{
 			(&eda.Component{

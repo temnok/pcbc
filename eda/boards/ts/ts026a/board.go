@@ -38,7 +38,7 @@ var (
 				ClearWidth: eda.ClearOff,
 
 				Tracks: path.Paths{
-					eda.LinearTrack(pad[1], pad[1].Move(1.2, 0), -1.2),
+					eda.LinearTrack(pad[1], pad[1].Move(1.5, 0), -1.5),
 				},
 			},
 

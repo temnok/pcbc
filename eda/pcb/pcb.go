@@ -21,8 +21,8 @@ func Process(config *config.Config, component *eda.Component) error {
 	componentFront := &eda.Component{
 		CutsWidth:   0.12,
 		MarksWidth:  0.13,
-		TracksWidth: 0.2,
-		ClearWidth:  0.2,
+		TracksWidth: 0.25,
+		ClearWidth:  0.25,
 
 		Nested: eda.Components{
 			component,

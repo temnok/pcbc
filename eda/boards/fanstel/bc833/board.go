@@ -28,9 +28,6 @@ var (
 	rightPads = rightConn.PadCenters()
 
 	Board = &eda.Component{
-		TracksWidth: 0.25,
-		ClearWidth:  0.25,
-
 		Cuts: path.Paths{
 			path.RoundRect(23, 14, 1.5),
 		},

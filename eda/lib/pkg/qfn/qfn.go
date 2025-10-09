@@ -20,8 +20,6 @@ func init() {
 		pads = append(pads, col.Transform(transform.RotateDegrees(a))...)
 	}
 
-	//pads = append(pads, path.Rect(1.75, 1.75))
-
 	QFN16G = &eda.Component{
 		Pads: pads,
 
@@ -32,17 +30,13 @@ func init() {
 
 		Nested: eda.Components{
 			{
-				ClearWidth:  eda.ClearOff,
-				TracksWidth: 0.25,
-
+				ClearWidth: eda.ClearOff,
 				Tracks: path.Paths{
 					eda.LinearTrack(path.Point{X: -1.5, Y: 1.5}, path.Point{X: 1.5, Y: -1.5}),
 				},
 			},
 
 			{
-				ClearWidth: 0.3,
-
 				Pads: path.Paths{
 					path.Rect(1.75, 1.75),
 				},
