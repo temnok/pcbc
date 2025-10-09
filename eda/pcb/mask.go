@@ -81,9 +81,9 @@ func SaveMask(config *config.Config, root *eda.Component, bottom bool) (*bitmap.
 	cuts := bitmap.New(config.BitmapSizeInPixels())
 
 	root.Visit(func(c *eda.Component) {
-		addMaskPads(config, c, bottom, mask)
-		addMaskMarks(config, c, bottom, silk, align)
-		addMaskCuts(config, c, cuts)
+		renderPads(config, c, bottom, mask)
+		renderMarks(config, c, bottom, silk, align)
+		renderCuts(config, c, cuts)
 	})
 
 	shrunkCuts := func(c *eda.Component) path.Paths {
@@ -131,17 +131,7 @@ func SaveMask(config *config.Config, root *eda.Component, bottom bool) (*bitmap.
 	)
 }
 
-func addMaskPads(config *config.Config, c *eda.Component, bottom bool, mask *bitmap.Bitmap) {
-	if c.CutsHidden() || bottom {
-		return
-	}
-
-	t := c.Transform.Multiply(config.BitmapTransform())
-	brush := shape.Circle(int(c.CutsWidth * config.PixelsPerMM))
-	brush.ForEachPathsPixel(c.Pads, t, mask.Set1)
-}
-
-func addMaskMarks(config *config.Config, c *eda.Component, bottom bool, silk, align *bitmap.Bitmap) {
+func renderMarks(config *config.Config, c *eda.Component, bottom bool, silk, align *bitmap.Bitmap) {
 	if c.Bottom != bottom {
 		return
 	}
@@ -156,12 +146,22 @@ func addMaskMarks(config *config.Config, c *eda.Component, bottom bool, silk, al
 	brush.ForEachPathsPixel(c.AlignMarks, t, align.Set1)
 }
 
-func addMaskCuts(config *config.Config, c *eda.Component, cuts *bitmap.Bitmap) {
+func renderPads(config *config.Config, c *eda.Component, bottom bool, mask *bitmap.Bitmap) {
+	if c.CutsHidden() || bottom {
+		return
+	}
+
+	t := c.Transform.Multiply(config.BitmapTransform())
+	brush := shape.Circle(int(c.CutsWidth * config.PixelsPerMM))
+	brush.ForEachPathsPixel(c.Pads, t, mask.Set1)
+}
+
+func renderCuts(config *config.Config, c *eda.Component, cuts *bitmap.Bitmap) {
 	if c.CutsHidden() {
 		return
 	}
 
-	brush := shape.Circle(int(c.ClearWidth * config.PixelsPerMM))
+	brush := shape.Circle(int(c.CutsWidth * config.PixelsPerMM))
 	t := c.Transform.Multiply(config.BitmapTransform())
 	brush.ForEachPathsPixel(c.Cuts, t, cuts.Set1)
 }
