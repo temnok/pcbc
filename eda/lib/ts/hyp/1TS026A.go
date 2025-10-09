@@ -15,6 +15,15 @@ var Switch1TS026A = &eda.Component{
 		Transform(transform.MirrorY.RotateDegrees(90)),
 
 	Marks: path.Paths{
-		path.Rect(2.6, 1.6),
+		path.Rect(3.5, 1.6),
 	},
+}
+
+func init() {
+	pads := Switch1TS026A.PadCenters()
+
+	Switch1TS026A.Tracks = path.Paths{
+		eda.LinearTrack(pads[0], pads[1]),
+		eda.LinearTrack(pads[2], pads[3]),
+	}
 }
