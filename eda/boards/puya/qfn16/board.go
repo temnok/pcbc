@@ -62,7 +62,7 @@ var (
 			chip,
 			header,
 
-			boards.Logo.Arrange(transform.ScaleUniformly(1.2).Move(-1.5, -1.1)),
+			boards.Logo.Arrange(transform.ScaleUniformly(1.2).Move(-1.5, -1.2)),
 			boards.Firm.Arrange(transform.ScaleUniformly(0.5).Move(1.35, -1.25)),
 			eda.CenteredText("PY32").Arrange(transform.Scale(1.4, 1.6).Move(0, 4.1)),
 			eda.CenteredText("F002A").Arrange(transform.Scale(1.2, 0.75).Move(0, -4.45)),
@@ -71,6 +71,8 @@ var (
 
 			tracks,
 			tracks.Arrange(transform.MirrorX),
+
+			boards.LogoBottom.Arrange(transform.ScaleUniformly(2)),
 		},
 	}
 )

@@ -12,11 +12,19 @@ import (
 )
 
 var (
+	logoMarks = path.Join(
+		font.Centered("pc").Transform(transform.Move(0, 0.3)),
+		font.Centered("bc").Transform(transform.Move(0, -0.3)),
+	).Transform(transform.Move(0, 0.1).RotateDegrees(45))
+
 	Logo = &eda.Component{
-		Marks: path.Join(
-			font.Centered("pc").Transform(transform.Move(0, 0.3)),
-			font.Centered("bc").Transform(transform.Move(0, -0.3)),
-		).Transform(transform.RotateDegrees(45)),
+		Marks: logoMarks,
+	}
+
+	LogoBottom = &eda.Component{
+		Transform: transform.MirrorX,
+		Bottom:    true,
+		Marks:     logoMarks,
 	}
 
 	Firm = eda.CenteredTextColumn(-1,
@@ -32,4 +40,9 @@ func Rev(y, m, d int) *eda.Component {
 		strconv.FormatInt(int64(d), base)
 
 	return eda.CenteredText(strings.ToUpper(ymd))
+}
+
+func Watermarks(w, h int) *eda.Component {
+	return Logo.Arrange(transform.ScaleUniformly(2)).
+		CloneX((w+4)/4, 4).CloneY((h+4)/4, 4)
 }

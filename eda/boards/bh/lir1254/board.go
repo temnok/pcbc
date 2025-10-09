@@ -57,6 +57,8 @@ var (
 					eda.CenteredText("LIR1254").Arrange(transform.Scale(2.1, 1.3).Move(0, -2.3)),
 				},
 			},
+
+			boards.LogoBottom.Arrange(transform.ScaleUniformly(7)),
 		},
 	}
 )

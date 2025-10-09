@@ -51,6 +51,8 @@ var (
 					eda.LinearTrack(pin[7], pin[7].Move(0, 1), -1),
 				},
 			},
+
+			boards.LogoBottom.Arrange(transform.ScaleUniformly(4)),
 		},
 
 		Tracks: path.Paths{

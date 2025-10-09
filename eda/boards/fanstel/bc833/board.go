@@ -72,7 +72,7 @@ var (
 			leftConn,
 			rightConn,
 
-			boards.Logo.Arrange(transform.Scale(2, 2).Move(-3.6, -4.6)),
+			boards.Logo.Arrange(transform.ScaleUniformly(2).Move(-3.6, -4.8)),
 			eda.CenteredText("BC833").Arrange(transform.Scale(1.1, 2.5).Move(3.4, -4)),
 			eda.CenteredText("nRF52833").Arrange(transform.Scale(0.85, 2).Move(3.15, -5.9)),
 
@@ -92,6 +92,8 @@ var (
 			},
 
 			boards.MountHole.Arrange(transform.Move(0, -4.7)),
+
+			boards.LogoBottom.Arrange(transform.ScaleUniformly(5)),
 		},
 	}
 )

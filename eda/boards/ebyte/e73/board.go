@@ -73,7 +73,7 @@ var (
 
 			{
 				Nested: eda.Components{
-					boards.Logo.Arrange(transform.ScaleUniformly(2).Move(-9, -5.6)),
+					boards.Logo.Arrange(transform.ScaleUniformly(2).Move(-9, -5.8)),
 					eda.CenteredText("nRF52840").Arrange(transform.Scale(3.8, 1.6).Move(0, -8)),
 					boards.Firm.Arrange(transform.ScaleUniformly(0.9).Move(9, -6)),
 					boards.Rev(25, 10, 7).Arrange(transform.ScaleUniformly(0.9).Move(12, -8.4)),
@@ -98,6 +98,8 @@ var (
 							eda.LinearTrack(chipPads[15], chipPads[15].Move(0, 2)),
 						},
 					},
+
+					boards.LogoBottom.Arrange(transform.ScaleUniformly(10)),
 				},
 			},
 		},
