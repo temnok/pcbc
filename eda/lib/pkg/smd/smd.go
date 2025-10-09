@@ -20,15 +20,15 @@ var (
 
 	I0402 = M1005
 	M1005 = &eda.Component{
-		Pads: path.RoundRect(0.5, 0.6, 0.15).CloneXY(2, 1, 0),
+		Pads: path.RoundRect(0.6, 0.7, 0.15).CloneXY(2, 1, 0),
 		Marks: path.Paths{
-			path.Rect(1.7, 0.8),
+			path.Rect(1.85, 0.95),
 		},
 	}
 
 	I0603 = M1608
 	M1608 = &eda.Component{
-		Pads: path.RoundRect(0.6, 0.9, 0.24).CloneXY(2, 1.5, 0),
+		Pads: path.RoundRect(0.6, 0.9, 0.24).CloneXY(2, 1.6, 0),
 		Marks: path.Paths{
 			path.Rect(1.8, 1.0),
 		},
