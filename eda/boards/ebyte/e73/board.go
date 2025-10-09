@@ -65,7 +65,7 @@ var (
 		//ClearWidth: 0.25,
 
 		Cuts: path.Paths{
-			path.RoundRect(30, 18, 2),
+			path.RoundRect(29.8, 17.8, 1.4),
 		},
 
 		Nested: eda.Components{
@@ -76,7 +76,7 @@ var (
 					boards.Logo.Arrange(transform.ScaleUniformly(2).Move(-9, -5.8)),
 					eda.CenteredText("nRF52840").Arrange(transform.Scale(3.8, 1.6).Move(0, -8)),
 					boards.Firm.Arrange(transform.ScaleUniformly(0.9).Move(9, -6)),
-					boards.Rev(25, 10, 7).Arrange(transform.ScaleUniformly(0.9).Move(12, -8.4)),
+					boards.Rev(25, 10, 9).Arrange(transform.ScaleUniformly(0.9).Move(12, -8.4)),
 
 					e73,
 					leftConn,

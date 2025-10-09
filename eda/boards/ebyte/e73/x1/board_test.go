@@ -22,7 +22,7 @@ func TestBoard(t *testing.T) {
 		Nested: eda.Components{
 			{
 				Cuts: path.Paths{
-					path.RoundRect(35, 19, 1.4),
+					path.RoundRect(35, 19, 1),
 				},
 			},
 
