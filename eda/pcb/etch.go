@@ -129,43 +129,35 @@ func SaveEtch(config *config.Config, component *eda.Component, bottom bool) (*bi
 	return copper, p.SaveToFile(filename)
 }
 
-func removeCopper(config *config.Config, component *eda.Component, bottom bool, copper *bitmap.Bitmap) {
-	if component.ClearOff() || component.Bottom != bottom {
+func removeCopper(config *config.Config, c *eda.Component, bottom bool, copper *bitmap.Bitmap) {
+	if c.ClearOff() || c.Bottom != bottom {
 		return
 	}
 
-	t := component.Transform.Multiply(config.BitmapTransform())
-
-	clearWidth := 2 * component.ClearWidth
-
-	// Cuts
-	if !bottom {
-		cutBrush := shape.Circle(int((clearWidth / 2) * config.PixelsPerMM))
-		cutBrush.ForEachPathsPixel(component.Cuts, t, copper.Set1)
-	}
+	t := c.Transform.Multiply(config.BitmapTransform())
 
 	// Pads
-	padBrush := shape.Circle(int(clearWidth * config.PixelsPerMM))
-	padBrush.ForEachPathsPixel(component.Pads, t, copper.Set1)
+	padBrush := shape.Circle(int(2 * c.ClearWidth * config.PixelsPerMM))
+	padBrush.ForEachPathsPixel(c.Pads, t, copper.Set1)
 
 	// Tracks
-	trackBrush := shape.Circle(int((component.TracksWidth + clearWidth) * config.PixelsPerMM))
-	trackBrush.ForEachPathsPixel(component.Tracks, t, copper.Set1)
+	trackBrush := shape.Circle(int((c.TracksWidth + 2*c.ClearWidth) * config.PixelsPerMM))
+	trackBrush.ForEachPathsPixel(c.Tracks, t, copper.Set1)
 }
 
-func addCopper(config *config.Config, component *eda.Component, bottom bool, copper *bitmap.Bitmap) {
-	if component.Bottom != bottom {
+func addCopper(config *config.Config, c *eda.Component, bottom bool, copper *bitmap.Bitmap) {
+	if c.Bottom != bottom {
 		return
 	}
 
-	t := component.Transform.Multiply(config.BitmapTransform())
+	t := c.Transform.Multiply(config.BitmapTransform())
 
 	// Pads
-	shape.ForEachRow(component.Pads, t, copper.Set0)
+	shape.ForEachRow(c.Pads, t, copper.Set0)
 
 	// Tracks
-	brush := shape.Circle(int(component.TracksWidth * config.PixelsPerMM))
-	brush.ForEachPathsPixel(component.Tracks, t, copper.Set0)
+	brush := shape.Circle(int(c.TracksWidth * config.PixelsPerMM))
+	brush.ForEachPathsPixel(c.Tracks, t, copper.Set0)
 }
 
 func addCuts(config *config.Config, c *eda.Component, bottom bool, copper *bitmap.Bitmap, cuts *[]*lbrn.Shape) {
