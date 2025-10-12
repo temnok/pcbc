@@ -27,7 +27,7 @@ var etchBitmapSettings = []*lbrn.CutSetting{
 		Index:    &lbrn.Param{Value: strconv.Itoa(etchPassIndex)},
 		Priority: &lbrn.Param{Value: strconv.Itoa(etchPassIndex)},
 
-		MaxPower:    &lbrn.Param{Value: "30"},
+		MaxPower:    &lbrn.Param{Value: "35"},
 		QPulseWidth: &lbrn.Param{Value: "80"},
 		Frequency:   &lbrn.Param{Value: "40000"},
 
@@ -70,7 +70,7 @@ func etchCutSettings(bottom bool) []*lbrn.CutSetting {
 				Index: "1",
 
 				MaxPower: &lbrn.Param{Value: "0.1"},
-				Speed:    &lbrn.Param{Value: "100"},
+				Speed:    &lbrn.Param{Value: "140"},
 
 				QPulseWidth: &lbrn.Param{Value: "200"},
 				Frequency:   &lbrn.Param{Value: "20000"},

@@ -26,7 +26,7 @@
 		<QPulseWidth Value="200"></QPulseWidth>
 		<frequency Value="20000"></frequency>
 		<SubLayer type="Cut" index="1">
-			<speed Value="100"></speed>
+			<speed Value="140"></speed>
 			<maxPower Value="0.1"></maxPower>
 			<QPulseWidth Value="200"></QPulseWidth>
 			<frequency Value="20000"></frequency>
@@ -51,7 +51,7 @@
 		<priority Value="1"></priority>
 		<speed Value="800"></speed>
 		<numPasses Value="15"></numPasses>
-		<maxPower Value="30"></maxPower>
+		<maxPower Value="35"></maxPower>
 		<QPulseWidth Value="80"></QPulseWidth>
 		<frequency Value="40000"></frequency>
 		<interval Value="0.02"></interval>
