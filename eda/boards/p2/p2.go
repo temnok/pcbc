@@ -3,12 +3,12 @@
 package p2
 
 import (
-	"temnok/pcbc/eda"
-	"temnok/pcbc/eda/boards"
-	"temnok/pcbc/eda/lib/header/greenconn"
-	"temnok/pcbc/eda/lib/pkg/smd"
-	"temnok/pcbc/path"
-	"temnok/pcbc/transform"
+	"github.com/temnok/pcbc/eda"
+	"github.com/temnok/pcbc/eda/boards"
+	"github.com/temnok/pcbc/eda/lib/header/greenconn"
+	"github.com/temnok/pcbc/eda/lib/pkg/smd"
+	"github.com/temnok/pcbc/path"
+	"github.com/temnok/pcbc/transform"
 )
 
 func P2_I0402(topLabel, bottomLabel string) *eda.Component {

@@ -4,9 +4,9 @@ package lbrn
 
 import (
 	"fmt"
+	"github.com/temnok/pcbc/path"
+	"github.com/temnok/pcbc/transform"
 	"image"
-	"temnok/pcbc/path"
-	"temnok/pcbc/transform"
 )
 
 type Shape struct {

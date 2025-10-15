@@ -3,13 +3,13 @@
 package ms88sf2
 
 import (
-	"temnok/pcbc/eda"
-	"temnok/pcbc/eda/boards"
-	"temnok/pcbc/eda/lib/header/mph100imp40f"
-	"temnok/pcbc/eda/lib/minewsemi"
-	"temnok/pcbc/font"
-	"temnok/pcbc/path"
-	"temnok/pcbc/transform"
+	"github.com/temnok/pcbc/eda"
+	"github.com/temnok/pcbc/eda/boards"
+	"github.com/temnok/pcbc/eda/lib/header/mph100imp40f"
+	"github.com/temnok/pcbc/eda/lib/minewsemi"
+	"github.com/temnok/pcbc/font"
+	"github.com/temnok/pcbc/path"
+	"github.com/temnok/pcbc/transform"
 )
 
 var (

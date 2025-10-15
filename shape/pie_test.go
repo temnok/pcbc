@@ -4,12 +4,12 @@ package shape
 
 import (
 	"github.com/stretchr/testify/assert"
+	"github.com/temnok/pcbc/bitmap"
+	"github.com/temnok/pcbc/bitmap/image"
+	"github.com/temnok/pcbc/path"
+	"github.com/temnok/pcbc/transform"
+	"github.com/temnok/pcbc/util"
 	"image/color"
-	"temnok/pcbc/bitmap"
-	"temnok/pcbc/bitmap/image"
-	"temnok/pcbc/path"
-	"temnok/pcbc/transform"
-	"temnok/pcbc/util"
 	"testing"
 )
 

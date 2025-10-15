@@ -2,7 +2,7 @@
 
 package path
 
-import "temnok/pcbc/transform"
+import "github.com/temnok/pcbc/transform"
 
 type Bounds struct {
 	initialized bool

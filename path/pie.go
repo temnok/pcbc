@@ -3,8 +3,8 @@
 package path
 
 import (
+	"github.com/temnok/pcbc/transform"
 	"math"
-	"temnok/pcbc/transform"
 )
 
 func Pie(n int, r1, r2, a1 float64) Paths {

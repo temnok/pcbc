@@ -3,8 +3,8 @@
 package mph100imp40f
 
 import (
-	"temnok/pcbc/eda"
-	"temnok/pcbc/path"
+	"github.com/temnok/pcbc/eda"
+	"github.com/temnok/pcbc/path"
 )
 
 func G_V_SP(n int) *eda.Component {

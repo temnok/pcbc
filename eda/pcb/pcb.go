@@ -3,13 +3,13 @@
 package pcb
 
 import (
-	"temnok/pcbc/bitmap"
-	"temnok/pcbc/eda"
-	"temnok/pcbc/eda/pcb/config"
-	"temnok/pcbc/path"
-	"temnok/pcbc/shape"
-	"temnok/pcbc/transform"
-	"temnok/pcbc/util"
+	"github.com/temnok/pcbc/bitmap"
+	"github.com/temnok/pcbc/eda"
+	"github.com/temnok/pcbc/eda/pcb/config"
+	"github.com/temnok/pcbc/path"
+	"github.com/temnok/pcbc/shape"
+	"github.com/temnok/pcbc/transform"
+	"github.com/temnok/pcbc/util"
 )
 
 var fileNamePrefix = map[bool]string{

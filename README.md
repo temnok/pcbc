@@ -6,41 +6,51 @@
 ### Usage Example
 
 ```go
-func main() {
-	err := pcb.Generate(&eda.Component{
-		Components: eda.Components{
-			pcbc.Board35x45,
-			eda.ComponentGrid(3, 11, 5,
-				x2.X2("LED+", "R2V-"),
-				x2.X2("LED+", "G3V-"),
-				x2.X2("LED+", "B3V-"),
-				x2.X2("LED+", "Y2V-"),
-				x2.X2("LED+", "W3V-"),
-				x2.X2("R ", "50R"),
-				x2.X2("R ", "50R"),
-				x2.X2("R ", "K10"),
-				x2.X2("R ", "K10"),
-				x2.X2("R ", "K15"),
-				x2.X2("R ", "K15"),
-				x2.X2("R ", "K20"),
-				x2.X2("R ", "K20"),
-				x2.X2("R ", "K25"),
-				x2.X2("R ", "K25"),
-			).Arrange(transform.RotateDegrees(90)),
-		},
-	})
+import (
+    "github.com/temnok/pcbc/eda"
+    "github.com/temnok/pcbc/eda/boards/p2"
+    "github.com/temnok/pcbc/eda/pcb"
+    "github.com/temnok/pcbc/eda/pcb/config"
+    "log"
+)
 
-	if err != nil {
-		log.Fatal(err)
-	}
+func main() {
+    conf := config.Default()
+    conf.Width, conf.Height = 40, 30
+
+    err := pcb.Process(conf, &eda.Component{
+        Nested: eda.Components{
+            eda.ComponentGrid(3, 11, 5,
+                p2.P2_I0402("LED+", "R2V-"),
+                p2.P2_I0402("LED+", "G3V-"),
+                p2.P2_I0402("LED+", "B3V-"),
+                p2.P2_I0402("LED+", "Y2V-"),
+                p2.P2_I0402("LED+", "W3V-"),
+                p2.P2_I0402("R ", "50R"),
+                p2.P2_I0402("R ", "50R"),
+                p2.P2_I0402("R ", "K10"),
+                p2.P2_I0402("R ", "K10"),
+                p2.P2_I0402("R ", "K15"),
+                p2.P2_I0402("R ", "K15"),
+                p2.P2_I0402("R ", "K20"),
+                p2.P2_I0402("R ", "K20"),
+                p2.P2_I0402("R ", "K25"),
+                p2.P2_I0402("R ", "K25"),
+            ),
+        },
+    })
+
+    if err != nil {
+        log.Fatal(err)
+    }
 }
 ```
 
 ### Tiny Breakout Board Implementation Examples
 
-* PY32 QFN16: [eda/pcbc/puya/qfn16/board.go](eda/pcbc/puya/qfn16/board.go)
-* EBYTE E73: [eda/pcbc/ebyte/e73/board.go](eda/pcbc/ebyte/e73/board.go)
-* Various 0603 components: [eda/pcbc/x2/x2.go](eda/pcbc/x2/x2.go)
+* PY32 QFN16: [eda/boards/puya/qfn16/board.go](eda/boards/puya/qfn16/board.go)
+* EBYTE E73: [eda/boards/ebyte/e73/board.go](eda/boards/ebyte/e73/board.go)
+* Various 0402 components: [eda/boards/p2/p2.go](eda/boards/p2/p2.go)
 
 ### Generated LightBurn files
 

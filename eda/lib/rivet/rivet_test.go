@@ -4,12 +4,12 @@ package rivet
 
 import (
 	"github.com/stretchr/testify/assert"
-	"temnok/pcbc/eda"
-	"temnok/pcbc/eda/boards"
-	"temnok/pcbc/eda/pcb"
-	"temnok/pcbc/eda/pcb/config"
-	"temnok/pcbc/path"
-	"temnok/pcbc/transform"
+	"github.com/temnok/pcbc/eda"
+	"github.com/temnok/pcbc/eda/boards"
+	"github.com/temnok/pcbc/eda/pcb"
+	"github.com/temnok/pcbc/eda/pcb/config"
+	"github.com/temnok/pcbc/path"
+	"github.com/temnok/pcbc/transform"
 	"testing"
 )
 

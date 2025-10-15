@@ -3,12 +3,12 @@
 package qfn16
 
 import (
-	"temnok/pcbc/eda"
-	"temnok/pcbc/eda/boards"
-	"temnok/pcbc/eda/lib/header/greenconn"
-	"temnok/pcbc/eda/lib/pkg/qfn"
-	"temnok/pcbc/path"
-	"temnok/pcbc/transform"
+	"github.com/temnok/pcbc/eda"
+	"github.com/temnok/pcbc/eda/boards"
+	"github.com/temnok/pcbc/eda/lib/header/greenconn"
+	"github.com/temnok/pcbc/eda/lib/pkg/qfn"
+	"github.com/temnok/pcbc/path"
+	"github.com/temnok/pcbc/transform"
 )
 
 var (

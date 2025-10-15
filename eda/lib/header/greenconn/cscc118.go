@@ -3,10 +3,10 @@
 package greenconn
 
 import (
-	"temnok/pcbc/eda"
-	"temnok/pcbc/font"
-	"temnok/pcbc/path"
-	"temnok/pcbc/transform"
+	"github.com/temnok/pcbc/eda"
+	"github.com/temnok/pcbc/font"
+	"github.com/temnok/pcbc/path"
+	"github.com/temnok/pcbc/transform"
 )
 
 func CSCC118(n int, flip bool, labels []string) *eda.Component {

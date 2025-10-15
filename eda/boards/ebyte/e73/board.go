@@ -3,12 +3,12 @@
 package e73
 
 import (
-	"temnok/pcbc/eda"
-	"temnok/pcbc/eda/boards"
-	"temnok/pcbc/eda/lib/ebyte"
-	"temnok/pcbc/eda/lib/header/greenconn"
-	"temnok/pcbc/path"
-	"temnok/pcbc/transform"
+	"github.com/temnok/pcbc/eda"
+	"github.com/temnok/pcbc/eda/boards"
+	"github.com/temnok/pcbc/eda/lib/ebyte"
+	"github.com/temnok/pcbc/eda/lib/header/greenconn"
+	"github.com/temnok/pcbc/path"
+	"github.com/temnok/pcbc/transform"
 )
 
 var (

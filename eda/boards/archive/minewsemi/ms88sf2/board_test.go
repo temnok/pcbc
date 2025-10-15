@@ -4,9 +4,9 @@ package ms88sf2
 
 import (
 	"github.com/stretchr/testify/assert"
-	"temnok/pcbc/eda"
-	"temnok/pcbc/eda/pcb"
-	"temnok/pcbc/eda/pcb/config"
+	"github.com/temnok/pcbc/eda"
+	"github.com/temnok/pcbc/eda/pcb"
+	"github.com/temnok/pcbc/eda/pcb/config"
 	"testing"
 )
 

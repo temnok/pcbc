@@ -3,7 +3,7 @@
 package path
 
 import (
-	"temnok/pcbc/transform"
+	"github.com/temnok/pcbc/transform"
 )
 
 // Paths represent a sequence of paths.

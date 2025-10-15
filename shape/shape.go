@@ -3,8 +3,8 @@
 package shape
 
 import (
-	"temnok/pcbc/path"
-	"temnok/pcbc/transform"
+	"github.com/temnok/pcbc/path"
+	"github.com/temnok/pcbc/transform"
 )
 
 type row = struct {

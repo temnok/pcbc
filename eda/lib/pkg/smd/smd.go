@@ -3,8 +3,8 @@
 package smd
 
 import (
-	"temnok/pcbc/eda"
-	"temnok/pcbc/path"
+	"github.com/temnok/pcbc/eda"
+	"github.com/temnok/pcbc/path"
 )
 
 // https://i.ebayimg.com/images/g/ufQAAOSwazpdFvUO/s-l1600.webp

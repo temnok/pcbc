@@ -3,8 +3,8 @@
 package holder
 
 import (
-	"temnok/pcbc/eda"
-	"temnok/pcbc/path"
+	"github.com/temnok/pcbc/eda"
+	"github.com/temnok/pcbc/path"
 )
 
 var LIR1254 = &eda.Component{

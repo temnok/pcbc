@@ -3,12 +3,12 @@
 package x1
 
 import (
-	"temnok/pcbc/eda"
-	"temnok/pcbc/eda/boards"
-	"temnok/pcbc/eda/boards/bh/lir1254"
-	"temnok/pcbc/eda/pcb"
-	"temnok/pcbc/eda/pcb/config"
-	"temnok/pcbc/path"
+	"github.com/temnok/pcbc/eda"
+	"github.com/temnok/pcbc/eda/boards"
+	"github.com/temnok/pcbc/eda/boards/bh/lir1254"
+	"github.com/temnok/pcbc/eda/pcb"
+	"github.com/temnok/pcbc/eda/pcb/config"
+	"github.com/temnok/pcbc/path"
 	"testing"
 )
 

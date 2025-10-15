@@ -3,8 +3,8 @@
 package path
 
 import (
-	"temnok/pcbc/bezier"
-	"temnok/pcbc/transform"
+	"github.com/temnok/pcbc/bezier"
+	"github.com/temnok/pcbc/transform"
 )
 
 // Path consists of cubic Bézier curves as a sequence of on-path points separated by pairs of control points,

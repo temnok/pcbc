@@ -3,10 +3,10 @@
 package image
 
 import (
+	"github.com/temnok/pcbc/bitmap"
 	"image"
 	"image/color"
 	"math"
-	"temnok/pcbc/bitmap"
 )
 
 type bitmapsImage struct {

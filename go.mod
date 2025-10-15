@@ -1,4 +1,4 @@
-module temnok/pcbc
+module github.com/temnok/pcbc
 
 go 1.24
 

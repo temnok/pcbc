@@ -3,8 +3,8 @@
 package eda
 
 import (
+	"github.com/temnok/pcbc/path"
 	"math"
-	"temnok/pcbc/path"
 )
 
 func LinearTrack(p0, p1 path.Point, steps ...float64) path.Path {

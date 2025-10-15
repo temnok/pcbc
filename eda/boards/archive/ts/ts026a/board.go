@@ -3,12 +3,12 @@
 package ts026a
 
 import (
-	"temnok/pcbc/eda"
-	"temnok/pcbc/eda/boards"
-	"temnok/pcbc/eda/lib/header/mph100imp40f"
-	"temnok/pcbc/eda/lib/ts/hyp"
-	"temnok/pcbc/path"
-	"temnok/pcbc/transform"
+	"github.com/temnok/pcbc/eda"
+	"github.com/temnok/pcbc/eda/boards"
+	"github.com/temnok/pcbc/eda/lib/header/mph100imp40f"
+	"github.com/temnok/pcbc/eda/lib/ts/hyp"
+	"github.com/temnok/pcbc/path"
+	"github.com/temnok/pcbc/transform"
 )
 
 var Board = &eda.Component{

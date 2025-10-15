@@ -3,13 +3,13 @@
 package pcb
 
 import (
+	"github.com/temnok/pcbc/bitmap"
+	"github.com/temnok/pcbc/bitmap/image"
+	"github.com/temnok/pcbc/eda"
+	"github.com/temnok/pcbc/eda/pcb/config"
+	"github.com/temnok/pcbc/lbrn"
+	"github.com/temnok/pcbc/path"
 	"image/color"
-	"temnok/pcbc/bitmap"
-	"temnok/pcbc/bitmap/image"
-	"temnok/pcbc/eda"
-	"temnok/pcbc/eda/pcb/config"
-	"temnok/pcbc/lbrn"
-	"temnok/pcbc/path"
 )
 
 var stencilCutSettings = []*lbrn.CutSetting{

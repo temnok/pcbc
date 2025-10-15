@@ -3,8 +3,8 @@
 package eda
 
 import (
+	"github.com/temnok/pcbc/path"
 	"reflect"
-	"temnok/pcbc/path"
 	"testing"
 )
 

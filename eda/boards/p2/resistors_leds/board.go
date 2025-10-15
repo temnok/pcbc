@@ -3,11 +3,11 @@
 package resistors
 
 import (
-	"temnok/pcbc/eda"
-	"temnok/pcbc/eda/boards"
-	"temnok/pcbc/eda/boards/p2"
-	"temnok/pcbc/eda/boards/ts/ts026a"
-	"temnok/pcbc/path"
+	"github.com/temnok/pcbc/eda"
+	"github.com/temnok/pcbc/eda/boards"
+	"github.com/temnok/pcbc/eda/boards/p2"
+	"github.com/temnok/pcbc/eda/boards/ts/ts026a"
+	"github.com/temnok/pcbc/path"
 )
 
 var Board = &eda.Component{

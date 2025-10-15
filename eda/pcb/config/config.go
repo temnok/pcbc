@@ -3,7 +3,7 @@
 package config
 
 import (
-	"temnok/pcbc/transform"
+	"github.com/temnok/pcbc/transform"
 )
 
 type Config struct {

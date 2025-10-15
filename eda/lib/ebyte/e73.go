@@ -3,9 +3,9 @@
 package ebyte
 
 import (
-	"temnok/pcbc/eda"
-	"temnok/pcbc/path"
-	"temnok/pcbc/transform"
+	"github.com/temnok/pcbc/eda"
+	"github.com/temnok/pcbc/path"
+	"github.com/temnok/pcbc/transform"
 )
 
 // https://www.cdebyte.com/pdf-down.aspx?id=2587

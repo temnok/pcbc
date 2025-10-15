@@ -3,11 +3,11 @@
 package pcb
 
 import (
+	"github.com/temnok/pcbc/bitmap"
+	"github.com/temnok/pcbc/bitmap/image"
+	"github.com/temnok/pcbc/eda/pcb/config"
+	"github.com/temnok/pcbc/util"
 	"image/color"
-	"temnok/pcbc/bitmap"
-	"temnok/pcbc/bitmap/image"
-	"temnok/pcbc/eda/pcb/config"
-	"temnok/pcbc/util"
 )
 
 func saveOverview(config *config.Config, fileName string, copper, mask, silk, stencil *bitmap.Bitmap) error {

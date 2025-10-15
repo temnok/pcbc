@@ -3,8 +3,8 @@
 package path
 
 import (
+	"github.com/temnok/pcbc/transform"
 	"math"
-	"temnok/pcbc/transform"
 )
 
 type Point struct {

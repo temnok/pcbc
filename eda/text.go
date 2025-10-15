@@ -2,7 +2,7 @@
 
 package eda
 
-import "temnok/pcbc/font"
+import "github.com/temnok/pcbc/font"
 
 func CenteredText(line string) *Component {
 	return CenteredTextColumn(0, line)

@@ -3,8 +3,8 @@
 package ws2812b_2020
 
 import (
-	"temnok/pcbc/eda/pcb"
-	"temnok/pcbc/eda/pcb/config"
+	"github.com/temnok/pcbc/eda/pcb"
+	"github.com/temnok/pcbc/eda/pcb/config"
 	"testing"
 )
 

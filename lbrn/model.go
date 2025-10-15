@@ -4,7 +4,7 @@ package lbrn
 
 import (
 	"fmt"
-	"temnok/pcbc/transform"
+	"github.com/temnok/pcbc/transform"
 )
 
 type CutSetting struct {

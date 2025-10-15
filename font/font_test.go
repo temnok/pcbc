@@ -5,13 +5,13 @@ package font
 import (
 	"fmt"
 	"github.com/stretchr/testify/assert"
+	"github.com/temnok/pcbc/bitmap"
+	"github.com/temnok/pcbc/bitmap/image"
+	"github.com/temnok/pcbc/shape"
+	"github.com/temnok/pcbc/transform"
+	"github.com/temnok/pcbc/util"
 	"image/color"
 	"sort"
-	"temnok/pcbc/bitmap"
-	"temnok/pcbc/bitmap/image"
-	"temnok/pcbc/shape"
-	"temnok/pcbc/transform"
-	"temnok/pcbc/util"
 	"testing"
 )
 
