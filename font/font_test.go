@@ -91,3 +91,154 @@ func _TestConvertX(t *testing.T) {
 		fmt.Println("},")
 	}
 }
+
+func xTestConvertGrid(t *testing.T) {
+	for ch, dat := range data {
+		if len(dat) == 0 && ch != ' ' {
+			continue
+		}
+
+		if ch%0x10 == 0 {
+			fmt.Printf("\n// 0x%x\n", ch)
+		}
+
+		fmt.Printf("'%v': {", string(rune(ch)))
+
+		for i, stroke := range dat {
+			if i != 0 {
+				fmt.Printf(", ")
+			}
+			fmt.Printf("{")
+
+			for j, p := range stroke {
+				if j != 0 {
+					fmt.Printf(", ")
+				}
+				r, c := 10-p%10, p/10
+				fmt.Printf("%v%v", r, c)
+			}
+
+			fmt.Printf("}")
+		}
+
+		fmt.Printf("},\n")
+	}
+}
+
+func xTestCanonizeGrid(t *testing.T) {
+	for ch, dat := range data {
+		if len(dat) == 0 && ch != ' ' {
+			continue
+		}
+
+		if ch%0x10 == 0 {
+			fmt.Printf("\n// 0x%x\n", ch)
+		}
+
+		esc := ""
+		if ch == '\'' || ch == '\\' {
+			esc = "\\"
+		}
+
+		fmt.Printf("'%v%v': {", esc, string(rune(ch)))
+
+		canonizeStrokes(dat)
+
+		for i, stroke := range dat {
+			if i != 0 {
+				fmt.Printf(", ")
+			}
+			fmt.Printf("{")
+
+			for j, p := range stroke {
+				if j != 0 {
+					fmt.Printf(", ")
+				}
+				r, c := p/10, p%10
+				fmt.Printf("%v%v", r, c)
+			}
+
+			fmt.Printf("}")
+		}
+
+		fmt.Printf("},\n")
+	}
+}
+
+func canonizeStrokes(strokes [][]byte) {
+	for i, s := range strokes {
+		strokes[i] = canonizeStroke(s)
+	}
+
+	sort.Slice(strokes, func(i, j int) bool {
+		return strokeLess(strokes[i], strokes[j])
+	})
+}
+
+func canonizeStroke(stroke []byte) []byte {
+	n := len(stroke)
+
+	if n == 1 {
+		return stroke
+	}
+
+	if stroke[0] != stroke[n-1] {
+		return strokeMin(stroke, strokeRevert(stroke))
+	}
+
+	stroke = stroke[:n-1]
+
+	best := stroke
+	for i := 1; i < len(stroke); i++ {
+		if s := strokeShift(stroke, i); strokeLess(s, best) {
+			best = s
+		}
+	}
+
+	stroke = strokeRevert(stroke)
+	for i := 0; i < len(stroke); i++ {
+		if s := strokeShift(stroke, i); strokeLess(s, best) {
+			best = s
+		}
+	}
+
+	return append(best, best[0])
+}
+
+func strokeLess(a, b []byte) bool {
+	for i, x := range a {
+		if y := b[i]; x < y {
+			return true
+		} else if x > y {
+			return false
+		}
+	}
+
+	return len(a) < len(b)
+}
+
+func strokeMin(a, b []byte) []byte {
+	if strokeLess(a, b) {
+		return a
+	} else {
+		return b
+	}
+}
+
+func strokeRevert(stroke []byte) []byte {
+	s := append([]byte{}, stroke...)
+	for i, j := 0, len(s)-1; i < j; i, j = i+1, j-1 {
+		s[i], s[j] = s[j], s[i]
+	}
+
+	return s
+}
+
+func strokeShift(stroke []byte, shift int) []byte {
+	s := make([]byte, len(stroke))
+	for i := range stroke {
+		s[i] = stroke[(i+shift)%len(stroke)]
+	}
+
+	return s
+}
