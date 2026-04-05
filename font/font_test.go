@@ -46,7 +46,7 @@ func TestFont_SavePng(t *testing.T) {
 	assert.NoError(t, util.SavePNG("out/font.png", image.NewSingle(bm, color.Black, color.White)))
 }
 
-func _TestConvertX(t *testing.T) {
+func xTestConvertX(t *testing.T) {
 	for i := 0x20; i < 0x7f; i++ {
 		strokes := [][]byte{{}}
 		//for _, j := range data[i] {
