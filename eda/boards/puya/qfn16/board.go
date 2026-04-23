@@ -53,6 +53,8 @@ var (
 	}
 
 	Board = &eda.Component{
+		//TracksWidth: 0.2,
+
 		Cuts: path.Paths{
 			path.RoundRect(14.3, 9.8, 1),
 		},

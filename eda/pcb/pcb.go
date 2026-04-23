@@ -59,6 +59,11 @@ func Process(config *config.Config, component *eda.Component) error {
 			stencil, e = SaveStencil(config, componentFront)
 			return e
 		},
+		//func() error {
+		//	var e error
+		//	_, e = SavePaste(config, componentFront)
+		//	return e
+		//},
 	)
 	if err != nil {
 		return err
