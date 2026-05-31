@@ -34,7 +34,7 @@ Grid:
 	91 92 93 94 95
 */
 
-var data = [][][]byte{
+var data = [][][]int8{
 	// 0x20
 	' ':  {},
 	'!':  {{13, 53}, {73}},
@@ -206,9 +206,13 @@ func init() {
 	}
 }
 
-func pToXY(p byte) path.Point {
+func pToXY(p int8) path.Point {
 	return path.Point{
 		X: (float64(p%10) - 3) * 0.1,
 		Y: (5 - float64(p/10)) * 0.1,
 	}
+}
+
+func mix(a, b path.Point, t float64) path.Point {
+	return path.Point{X: a.X*(1-t) + b.X*t, Y: a.Y*(1-t) + b.Y*t}
 }
