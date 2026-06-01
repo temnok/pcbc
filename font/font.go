@@ -213,7 +213,7 @@ func init() {
 			}
 
 			roundedPath := slices.Clone(symbolPath)
-			//roundPath(roundedPath, symbolPath)
+			roundPath(roundedPath, symbolPath)
 
 			symbolPaths[i] = append(symbolPaths[i], roundedPath)
 		}
