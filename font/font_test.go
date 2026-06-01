@@ -103,7 +103,11 @@ func xTestConvertGrid(t *testing.T) {
 			fmt.Printf("\n// 0x%x\n", ch)
 		}
 
-		fmt.Printf("'%v': {", string(rune(ch)))
+		esc := ""
+		if ch == '\'' || ch == '\\' {
+			esc = "\\"
+		}
+		fmt.Printf("'%v%v': {", esc, string(rune(ch)))
 
 		for i, stroke := range dat {
 			if i != 0 {
@@ -115,8 +119,8 @@ func xTestConvertGrid(t *testing.T) {
 				if j != 0 {
 					fmt.Printf(", ")
 				}
-				r, c := 10-p%10, p/10
-				fmt.Printf("%v%v", r, c)
+				r, c := p/10, p%10
+				fmt.Printf("%v%v", (r-1)*2+1, (c-1)*2+1)
 			}
 
 			fmt.Printf("}")
@@ -143,7 +147,7 @@ func xTestCanonizeGrid(t *testing.T) {
 
 		fmt.Printf("'%v%v': {", esc, string(rune(ch)))
 
-		canonizeStrokes(dat)
+		//canonizeStrokes(dat)
 
 		for i, stroke := range dat {
 			if i != 0 {
