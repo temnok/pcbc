@@ -222,26 +222,29 @@ func roundPath(dst, p []path.Point) {
 	for i := 0; i+9 < len(p); i += 3 {
 		p0, p1, p2, p3 := p[i], p[i+3], p[i+6], p[i+9]
 
-		if !equal(abs(p0.X-p3.X), abs(p0.Y-p3.Y)) || !equal(abs(p1.X-p2.X), abs(p1.Y-p2.Y)) {
+		r := abs(p1.X-p2.X) + 0.05
+		if !equal(abs(p1.X-p2.X), abs(p1.Y-p2.Y)) || !equal(r, 0.05) && !equal(r, 0.1) && !equal(r, 0.15) {
 			continue
 		}
 
 		sx10, sy10, sx23, sy23 := sign(p1.X-p0.X), sign(p1.Y-p0.Y), sign(p2.X-p3.X), sign(p2.Y-p3.Y)
 
-		r := abs(p0.X - p3.X)
+		k := 0.05
+		p1.X -= k * sx10
+		p1.Y -= k * sy10
+		p2.X -= k * sx23
+		p2.Y -= k * sy23
+
 		c := r * 0.65
+		c1 := path.Point{p1.X + c*sx10, p1.Y + c*sy10}
+		c2 := path.Point{p2.X + c*sx23, p2.Y + c*sy23}
 
-		p1.X = p0.X + c*sx10
-		p1.Y = p0.Y + c*sy10
-		p2.X = p3.X + c*sx23
-		p2.Y = p3.Y + c*sy23
-
-		dst[i+2] = p0
-		dst[i+3] = p0
-		dst[i+4] = p1
-		dst[i+5] = p2
-		dst[i+6] = p3
-		dst[i+7] = p3
+		dst[i+2] = p1
+		dst[i+3] = p1
+		dst[i+4] = c1
+		dst[i+5] = c2
+		dst[i+6] = p2
+		dst[i+7] = p2
 	}
 }
 
