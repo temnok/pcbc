@@ -56,6 +56,18 @@ func TestFont_SavePng(t *testing.T) {
 	assert.NoError(t, util.SavePNG("out/font.png", image.NewSingle(bm, color.Black, color.White)))
 }
 
+func xTestDetectDups(t *testing.T) {
+	for i, d := range data {
+		for j, stroke := range d {
+			for k, v := range stroke {
+				if k > 0 && v == stroke[k-1] {
+					t.Errorf("Dup in char %q, stroke %v, pos %v", string(byte(i)), j, k)
+				}
+			}
+		}
+	}
+}
+
 func xTestConvertX(t *testing.T) {
 	for i := 0x20; i < 0x7f; i++ {
 		strokes := [][]byte{{}}
