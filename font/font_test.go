@@ -16,30 +16,39 @@ import (
 )
 
 func TestFont_SavePng(t *testing.T) {
-	const scale = 100.0
+	const scale = 200.0
 
 	const height = 1.0
-	bm := bitmap.New(16*scale*Width, 20*scale*height)
+	bm := bitmap.New(33*scale*Width, 13*scale*height)
+
+	thinBrush := shape.Circle(1)
 
 	lightBrush := shape.Circle(Light * scale)
-	//lightBrush := shape.Circle(0.01 * scale)
 
 	d := Medium * scale
 	mediumBrush := shape.Circle(int(d))
 
 	boldBrush := shape.Circle(Bold * scale)
 
+	x1, y1 := 17*Width, 7*height
+
 	for i := 0; i < 6; i++ {
 		for j := 0; j < 16; j++ {
 			c := (i+2)*16 + j
 
-			tf := transform.Move(Width/2+float64(j)*Width, height/2+float64(19-i)*height).ScaleUniformly(scale)
+			x := Width/2 + float64(j)*Width
+			y := height/2 + float64(5-i)*height
+
+			tf := transform.Move(x, y1+y).ScaleUniformly(scale)
+			thinBrush.ForEachPathsPixel(symbolPaths[c], tf, bm.Set1)
+
+			tf = transform.Move(x1+x, y1+y).ScaleUniformly(scale)
 			lightBrush.ForEachPathsPixel(symbolPaths[c], tf, bm.Set1)
 
-			tf = transform.Move(Width/2+float64(j)*Width, height/2+float64(12-i)*height).ScaleUniformly(scale)
+			tf = transform.Move(x, y).ScaleUniformly(scale)
 			mediumBrush.ForEachPathsPixel(symbolPaths[c], tf, bm.Set1)
 
-			tf = transform.Move(Width/2+float64(j)*Width, height/2+float64(5-i)*height).ScaleUniformly(scale)
+			tf = transform.Move(x1+x, y).ScaleUniformly(scale)
 			boldBrush.ForEachPathsPixel(symbolPaths[c], tf, bm.Set1)
 		}
 	}
