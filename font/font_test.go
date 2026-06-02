@@ -42,10 +42,10 @@ func TestFont_SavePng(t *testing.T) {
 			tf := transform.Move(x, y1+y).ScaleUniformly(scale)
 			thinBrush.ForEachPathsPixel(symbolPaths[c], tf, bm.Set1)
 
-			tf = transform.Move(x1+x, y1+y).ScaleUniformly(scale)
+			tf = transform.Move(x, y).ScaleUniformly(scale)
 			lightBrush.ForEachPathsPixel(symbolPaths[c], tf, bm.Set1)
 
-			tf = transform.Move(x, y).ScaleUniformly(scale)
+			tf = transform.Move(x1+x, y1+y).ScaleUniformly(scale)
 			mediumBrush.ForEachPathsPixel(symbolPaths[c], tf, bm.Set1)
 
 			tf = transform.Move(x1+x, y).ScaleUniformly(scale)
