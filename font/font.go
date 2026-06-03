@@ -15,7 +15,7 @@ const (
 
 	Light  = 0.08
 	Medium = 0.1
-	Bold   = 0.13
+	Bold   = 0.125
 
 	AlignLeft   Align = 0.0
 	AlignCenter Align = 0.5
