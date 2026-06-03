@@ -168,7 +168,7 @@ func xTestCanonizeGrid(t *testing.T) {
 
 		fmt.Printf("'%v%v': {", esc, string(rune(ch)))
 
-		//canonizeStrokes(dat)
+		canonizeStrokes(dat)
 
 		for i, stroke := range dat {
 			if i != 0 {
@@ -191,7 +191,7 @@ func xTestCanonizeGrid(t *testing.T) {
 	}
 }
 
-func canonizeStrokes(strokes [][]int8) {
+func canonizeStrokes(strokes [][]byte) {
 	for i, s := range strokes {
 		strokes[i] = canonizeStroke(s)
 	}
@@ -201,7 +201,7 @@ func canonizeStrokes(strokes [][]int8) {
 	})
 }
 
-func canonizeStroke(stroke []int8) []int8 {
+func canonizeStroke(stroke []byte) []byte {
 	n := len(stroke)
 
 	if n == 1 {
@@ -231,7 +231,7 @@ func canonizeStroke(stroke []int8) []int8 {
 	return append(best, best[0])
 }
 
-func strokeLess(a, b []int8) bool {
+func strokeLess(a, b []byte) bool {
 	for i, x := range a {
 		if y := b[i]; x < y {
 			return true
@@ -243,7 +243,7 @@ func strokeLess(a, b []int8) bool {
 	return len(a) < len(b)
 }
 
-func strokeMin(a, b []int8) []int8 {
+func strokeMin(a, b []byte) []byte {
 	if strokeLess(a, b) {
 		return a
 	} else {
@@ -251,8 +251,8 @@ func strokeMin(a, b []int8) []int8 {
 	}
 }
 
-func strokeRevert(stroke []int8) []int8 {
-	s := append([]int8{}, stroke...)
+func strokeRevert(stroke []byte) []byte {
+	s := append([]byte{}, stroke...)
 	for i, j := 0, len(s)-1; i < j; i, j = i+1, j-1 {
 		s[i], s[j] = s[j], s[i]
 	}
@@ -260,8 +260,8 @@ func strokeRevert(stroke []int8) []int8 {
 	return s
 }
 
-func strokeShift(stroke []int8, shift int) []int8 {
-	s := make([]int8, len(stroke))
+func strokeShift(stroke []byte, shift int) []byte {
+	s := make([]byte, len(stroke))
 	for i := range stroke {
 		s[i] = stroke[(i+shift)%len(stroke)]
 	}
