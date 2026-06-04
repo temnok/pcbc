@@ -11,6 +11,7 @@ import (
 	"github.com/temnok/pcbc/transform"
 	"github.com/temnok/pcbc/util"
 	"image/color"
+	"math"
 	"sort"
 	"testing"
 )
@@ -21,14 +22,14 @@ func TestFont_SavePng(t *testing.T) {
 	const height = 1.0
 	bm := bitmap.New(33*scale*Width, 13*scale*height)
 
-	thinBrush := shape.Circle(1)
+	lightBrush := shape.Circle(int(math.Round(Light * scale)))
 
-	lightBrush := shape.Circle(Light * scale)
+	mediumBrush := shape.Circle(Medium * scale)
 
-	d := Medium * scale
-	mediumBrush := shape.Circle(int(d))
+	d := Bold * scale
+	boldBrush := shape.Circle(int(d))
 
-	boldBrush := shape.Circle(Bold * scale)
+	xboldBrush := shape.Circle(XtraBold * scale)
 
 	x1, y1 := 17*Width, 7*height
 
@@ -40,20 +41,20 @@ func TestFont_SavePng(t *testing.T) {
 			y := height/2 + float64(5-i)*height
 
 			tf := transform.Move(x, y1+y).ScaleUniformly(scale)
-			thinBrush.ForEachPathsPixel(symbolPaths[c], tf, bm.Set1)
-
-			tf = transform.Move(x, y).ScaleUniformly(scale)
 			lightBrush.ForEachPathsPixel(symbolPaths[c], tf, bm.Set1)
 
 			tf = transform.Move(x1+x, y1+y).ScaleUniformly(scale)
 			mediumBrush.ForEachPathsPixel(symbolPaths[c], tf, bm.Set1)
 
-			tf = transform.Move(x1+x, y).ScaleUniformly(scale)
+			tf = transform.Move(x, y).ScaleUniformly(scale)
 			boldBrush.ForEachPathsPixel(symbolPaths[c], tf, bm.Set1)
+
+			tf = transform.Move(x1+x, y).ScaleUniformly(scale)
+			xboldBrush.ForEachPathsPixel(symbolPaths[c], tf, bm.Set1)
 		}
 	}
 
-	assert.NoError(t, util.SavePNG("out/font.png", image.NewSingle(bm, color.Black, color.White)))
+	assert.NoError(t, util.SavePNG("out/font.png", image.NewSingle(bm, color.White, color.Black)))
 }
 
 func xTestDetectDups(t *testing.T) {
