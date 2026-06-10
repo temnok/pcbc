@@ -23,6 +23,7 @@ func TestFont_SavePng(t *testing.T) {
 	bm := bitmap.New(33*scale*Width, 13*scale*height)
 
 	lightBrush := shape.Circle(int(math.Round(Light * scale)))
+	//lightBrush := shape.Circle(1)
 
 	mediumBrush := shape.Circle(Medium * scale)
 
