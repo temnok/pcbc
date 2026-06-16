@@ -80,19 +80,18 @@ func roundPath(dst, p []path.Point) {
 		}
 
 		r := math.Abs(p1.X-p2.X) + 1
-
 		p1.X -= sx10
 		p1.Y -= sy10
 		p2.X -= sx23
 		p2.Y -= sy23
 
-		c := r * 0.6
+		k := r * 0.6
 		if isTerminal := i < 0 || i+9 >= len(p); isTerminal {
-			c = r * 0.75
+			k = r * 0.75
 		}
 
-		c1 := path.Point{p1.X + c*sx10, p1.Y + c*sy10}
-		c2 := path.Point{p2.X + c*sx23, p2.Y + c*sy23}
+		c1 := path.Point{p1.X + k*sx10, p1.Y + k*sy10}
+		c2 := path.Point{p2.X + k*sx23, p2.Y + k*sy23}
 
 		if i+2 >= 0 {
 			dst[i+2] = p1
