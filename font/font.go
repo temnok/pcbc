@@ -85,7 +85,7 @@ func roundPath(dst, p []path.Point) {
 		p2.X -= sx23
 		p2.Y -= sy23
 
-		k := r * 0.6
+		k := r * 0.55
 		if isTerminal := i < 0 || i+9 >= len(p); isTerminal {
 			k = r * 0.7
 		}
