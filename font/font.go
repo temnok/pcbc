@@ -69,7 +69,7 @@ func roundPath(dst, p []path.Point) {
 			p3 = p[i+9]
 		}
 
-		if isDiagonal := math.Abs(p1.X-p2.X) == math.Abs(p1.Y-p2.Y); !isDiagonal {
+		if isDiagonal := math.Abs(math.Abs(p1.X-p2.X)-math.Abs(p1.Y-p2.Y)) <= 1; !isDiagonal {
 			continue
 		}
 
@@ -87,7 +87,7 @@ func roundPath(dst, p []path.Point) {
 
 		k := r * 0.55
 		if isTerminal := i < 0 || i+9 >= len(p); isTerminal {
-			k = r * 0.7
+			k = r * 0.75
 		}
 
 		c1 := path.Point{p1.X + k*sx10, p1.Y + k*sy10}
