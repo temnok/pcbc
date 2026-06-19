@@ -44,7 +44,7 @@ func init() {
 	for _, paths := range symbolPaths {
 		for _, pa := range paths {
 			for i, p := range pa {
-				pa[i] = path.Point{X: p.X * 0.05, Y: p.Y * 0.05}
+				pa[i] = path.Point{X: (p.X - 5) * 0.05, Y: (9 - p.Y) * 0.05}
 			}
 		}
 	}
@@ -52,8 +52,8 @@ func init() {
 
 func pToXY(p byte) path.Point {
 	return path.Point{
-		X: float64(p%10) - 5,
-		Y: 9 - float64(p/10),
+		X: float64(p % 10),
+		Y: float64(p / 10),
 	}
 }
 
@@ -69,7 +69,8 @@ func roundPath(dst, p []path.Point) {
 			p3 = p[i+9]
 		}
 
-		if isDiagonal := math.Abs(math.Abs(p1.X-p2.X)-math.Abs(p1.Y-p2.Y)) <= 1; !isDiagonal {
+		dx, dy := math.Abs(p1.X-p2.X), math.Abs(p1.Y-p2.Y)
+		if isDiagonal := ((dx != 0) == (dy != 0)) && math.Abs(dx-dy) <= 1; !isDiagonal {
 			continue
 		}
 
