@@ -113,7 +113,7 @@ func TestRasterize(t *testing.T) {
 		}
 
 		if !reflect.DeepEqual(got, test.want) {
-			t.Errorf("Rasterize(%v):\nwant %v\n got %#v", test.xy, test.want, got)
+			t.Errorf("Rasterize(%v):\nwant %v\n got %v", test.xy, test.want, got)
 		}
 	}
 }

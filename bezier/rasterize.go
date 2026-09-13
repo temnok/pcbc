@@ -10,52 +10,21 @@ import "math"
 // Cubic Bézier curve is represented by four points in xy array in form [Ax, Ay, Bx, By, Cx, Cy, Dx, Dy]
 // where A and D are start and end points of the curve and B and C are control points.
 func Rasterize(xy []float64, callback func(x, y int)) {
-	ax, ay := round(xy[0], xy[1])
-	dx, dy := round(xy[6], xy[7])
-
-	recurse(xy, 0, 1, ax, ay, dx, dy, callback)
-}
-
-func recurse(xy []float64, t0, t1 float64, x0, y0, x1, y1 int, callback func(x, y int)) {
-	if x0 == x1 && y0 == y1 {
-		return
-	}
-
-	if abs(x0-x1) <= 1 && abs(y0-y1) <= 1 {
-		callback(x1, y1)
-		return
-	}
-
-	t := (t0 + t1) / 2
-	x, y := round(cubicApprox(xy, t))
-
-	recurse(xy, t0, t, x0, y0, x, y, callback)
-	recurse(xy, t, t1, x, y, x1, y1, callback)
-}
-
-func cubicApprox(xy []float64, t float64) (x, y float64) {
 	aX, aY, bX, bY, cX, cY, dX, dY := xy[0], xy[1], xy[2], xy[3], xy[4], xy[5], xy[6], xy[7]
-	abX, abY := mix(aX, aY, bX, bY, t)
-	bcX, bcY := mix(bX, bY, cX, cY, t)
-	cdX, cdY := mix(cX, cY, dX, dY, t)
 
-	abcX, abcY := mix(abX, abY, bcX, bcY, t)
-	bcdX, bcdY := mix(bcX, bcY, cdX, cdY, t)
+	parametricCurve(func(t float64) (int, int) {
+		abX, abY := mix(t, aX, aY, bX, bY)
+		bcX, bcY := mix(t, bX, bY, cX, cY)
+		cdX, cdY := mix(t, cX, cY, dX, dY)
 
-	return mix(abcX, abcY, bcdX, bcdY, t)
+		abcX, abcY := mix(t, abX, abY, bcX, bcY)
+		bcdX, bcdY := mix(t, bcX, bcY, cdX, cdY)
+
+		x, y := mix(t, abcX, abcY, bcdX, bcdY)
+		return int(math.Round(x)), int(math.Round(y))
+	}, callback)
 }
 
-func mix(x0, y0, x1, y1, i float64) (float64, float64) {
-	return x0*(1-i) + x1*i, y0*(1-i) + y1*i
-}
-
-func abs(a int) int {
-	if a < 0 {
-		return -a
-	}
-	return a
-}
-
-func round(x, y float64) (int, int) {
-	return int(math.Round(x)), int(math.Round(y))
+func mix(t, x0, y0, x1, y1 float64) (x, y float64) {
+	return x0*(1-t) + x1*t, y0*(1-t) + y1*t
 }
